@@ -1,0 +1,128 @@
+﻿
+@using Business.ClassBusiness
+@using BuyGroup365.Models.Member
+@model  List<BuyGroup365.Models.Member.ShopCartItem>
+@{
+    Double total = 0;
+}
+<div id="contenproductCart">
+
+
+
+    @foreach (var item in Model)
+    {
+        <div class="row" id="shop_@item.ShopCart.Id ">
+            <div class="col-lg-7">
+
+                <div class="table-responsive table-checkoutlist panel panel-default">
+                    <table class="table">
+                        @*<thead>
+                                <tr class="well well-sm">
+                                    <th class="col1">
+                                        <i class="fa fa-cart-arrow-down"></i>  Thông tin đơn hàng
+                                    </th>
+                                    <th class="col2">Số lượng</th>
+                                    <th class="col3">Đơn giá</th>
+                                    <th class="col4">Tổng cộng</th>
+                                    <th class="col5">Xoá</th>
+                                </tr>
+                            </thead>*@
+                        <tbody>
+                            @foreach (var item1 in item.ListCartItems)
+                            {
+                                total += item1.Product.Price * item1.Quantity;
+                                <tr id="orderItem">
+                                    <td class="col1">
+                                        <div class="row">
+
+                                            <div class="col-sm-4">
+                                                <span class="icon-bar" @*onclick="order.removeItemCart('835809352705', '503430698302');" *@></span>
+                                                <img src="@FuntionMember.GetUrlImage(item1.Product.ProductImages.FirstOrDefault().ImgSource,"Small")" alt="@item1.Product.ProductName" width="100" />
+                                            </div>
+
+                                            <div class="col-sm-8">
+                                                <div class="g-row">
+                                                    <a class="g-title" target="_blank" href="/Home/ProductDetail/@item1.Product.Id" title="@item1.Product.ProductName">
+                                                        @item1.Product.ProductName
+                                                    </a>
+                                                </div>
+                                                <div class="g-row">
+                                                    <strong>@item1.Quantity x </strong>
+                                                </div>
+
+                                                <div class="g-row">
+                                                    <strong>Phí vận chuyển:</strong>
+                                                    <span id="shipchung">Linh hoạt theo địa chỉ người mua (@(item1.Product.Weight * item1.Quantity)<sub>gram</sub>)</span>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </td>
+                                    <td class="col2">
+                                        <div class="text-spell">
+                                            <input type="number" min="1" class="txtQuantity" style="width: 80px" data-id="@item1.Product.Id" value="@item1.Quantity" />
+                                        </div>
+                                    </td>
+                                    <td class="col3">
+                                        <b>@item1.Product.Price.ToString("N0")<sup class="price">đ</sup></b>
+                                    </td>
+                                    <td>
+                                        <a href="#" data-id="@item1.Product.Id" class="btn-"><i class="fa fa-trash-o"></i></a>
+                                    </td>
+                                </tr>
+
+                            }
+                            <tr colspan="2">
+                                <td>Tông:</td>
+                                <td style="font-weight:bold">@total.ToString("N0") <sup class="price">đ</sup></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div><!-- table-responsive -->
+
+            </div>
+            <div class="col-lg-5">
+                <h6>Shop: @item.ShopCart.ShopName</h6>
+                @if (!string.IsNullOrEmpty(item.ShopCart.ShopSupport.SupportName))
+                {
+                    <h6>Shop support name: @item.ShopCart.ShopSupport.SupportName</h6>
+                }
+                else
+                {
+                    <h6>Shop name support: Chưa xác định</h6>
+                }
+                @if (!string.IsNullOrEmpty(item.ShopCart.Phone))
+                {
+                    <h6>Shop Phone: @item.ShopCart.Phone</h6>
+                }
+                else
+                {
+                    <h6>Shop Phone: Chưa xác định</h6>
+                }
+                @if (!string.IsNullOrEmpty(item.ShopCart.ShopSupport.Skype))
+                {
+                    <h6>Shop name support: @item.ShopCart.ShopSupport.Skype</h6>
+                }
+                else
+                {
+
+                    <h6>Shop name skype: Chưa xác định</h6>
+                }
+                @{
+        LocationsBusiness locationbussines = new LocationsBusiness();
+
+
+                }
+                <h6>Shop name address: @locationbussines.SearchAddress(item.ShopCart.LocationId)</h6>
+                @if ((int)ViewBag.TotalMoney <= 0)
+                {
+                    <span><a class="btn btn-primary btn-sm" style="position: absolute; right: 5px; top: 5px; " onclick="SendFromPay(@item.ShopCart.Id)" href="/PayGoods/Payment?sp=@item.ShopCart.Id">Thanh toán</a></span>
+                }
+
+            </div>
+            <hr />
+        </div>
+
+    }
+
+</div>

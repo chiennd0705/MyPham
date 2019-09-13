@@ -1,0 +1,135 @@
+﻿using Business.ClassBusiness;
+using Common.util;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.ServiceModel;
+using System.Web;
+using MvcPaging;
+using System.Web.Mvc;
+
+namespace BuyGroup365.Areas.Manage.Controllers
+{
+    public class ShopController : Controller
+    {
+        readonly ShopsBusiness _shopsBusiness = new ShopsBusiness();
+        readonly ShopSettingsBusiness _shopSettingsBusiness = new ShopSettingsBusiness();
+
+
+        //protected override void Initialize(System.Web.Routing.RequestContext rc)
+        //{
+        //    base.Initialize(rc);
+
+        //    if (!SessionUtility.CheckLogin(Session))
+        //        Response.Redirect("/Login?returnUrl=" + rc.HttpContext.Request.Url.PathAndQuery);
+        //    else
+        //    {
+
+        //        if (!SessionUtility.CheckPermission(Session, rc.HttpContext.Request.Url.PathAndQuery))
+        //        {
+        //            Response.Redirect("/Error/NotPermissionAdmin");
+        //        }
+        //    }
+
+        //}
+
+        //
+        // GET: /Login/
+        //
+        // GET: /Manage/Shop/
+        public ActionResult Index(string key, int? page)
+        {
+            try
+            {
+                ViewData["status"] = true;
+                ViewData["key"] = key;
+                int currentPageIndex = page.HasValue ? page.Value : 1;
+
+                var list = _shopsBusiness.GetByKey(key).ToPagedList(currentPageIndex, 20);
+
+                return View(list);
+            }
+            catch (FaultException ex)
+            {
+                var exep = Function.GetExeption(ex);
+                var codeExp = exep[1];
+                string url = "Error/ErrorFunction/" + codeExp;
+                return RedirectToActionPermanent(url);
+            }
+        }
+
+        #region Create shop
+        public ActionResult CreateShop()
+        {
+
+            return View();
+        }
+        #endregion
+
+        #region Delete Shop
+        public ActionResult DeleteShop(long id = 0)
+        {
+            try
+            {
+                if (id > 0)
+                {
+                    _shopsBusiness.Remove(id);
+
+                }
+                return RedirectToAction("Index");
+            }
+            catch (FaultException ex)
+            {
+                var exep = Function.GetExeption(ex);
+                var codeExp = exep[1];
+                string url = "Error/ErrorFunction/" + codeExp;
+                return RedirectToActionPermanent(url);
+            }
+
+        }
+        #endregion
+        public ActionResult Setting(string key, int? page)
+        {
+            try
+            {
+                ViewData["status"] = true;
+                ViewData["key"] = key;
+                int currentPageIndex = page.HasValue ? page.Value : 1;
+
+                var list = _shopSettingsBusiness.GetByKey(key).ToPagedList(currentPageIndex, 20);
+
+                return View(list);
+            }
+            catch (FaultException ex)
+            {
+                var exep = Function.GetExeption(ex);
+                var codeExp = exep[1];
+                string url = "Error/ErrorFunction/" + codeExp;
+                return RedirectToActionPermanent(url);
+            }
+        }
+        [HttpPost]
+        public ActionResult CreateShopSetting(long id, long shopId, string key, string value)
+        {
+            var checkId = _shopSettingsBusiness.GetById(id);
+            if (checkId == null && ModelState.IsValid)
+            {
+                Common.ShopSetting obj = new Common.ShopSetting();
+                obj.Id = id;
+                obj.ShopId = shopId;
+                obj.Key = key;
+                obj.Value = value;
+                ShopSettingsBusiness shopsetting = new ShopSettingsBusiness();
+                shopsetting.AddNew(obj);
+
+                return View("Setting");
+            }
+            else
+            {
+                ModelState.AddModelError("","Setting is exist!!!");
+            }
+
+            return View();
+        }
+	}
+}

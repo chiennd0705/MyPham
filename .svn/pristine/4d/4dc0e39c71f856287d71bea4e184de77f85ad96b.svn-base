@@ -1,0 +1,61 @@
+﻿<div class="collapse navbar-collapse navbar-ex1-collapse">
+    <ul class="nav navbar-nav side-nav">
+        <li class="active">
+            <a href="/">
+                <i class="fa fa-home"></i>  Trang chủ
+            </a>
+        </li>
+        <li>
+
+
+            <a href="javascript:;" data-toggle="" data-target="#demo"><i class="fa fa-users"></i> Quản lý user<i class="fa fa-fw fa-caret-down"></i></a>
+            <ul id="demo" class="">
+                <li>
+                    <a href="/Manage/User/Index"><i class="fa fa-user"></i>Quản lý user</a>
+                </li>
+                <li>
+                    <a href="/Manage/User/Groups">
+                        <i class="fa fa-users"></i> Quản lý group
+                    </a>
+                </li>
+                <li>
+                    <a href="/Manage/User/Roles">
+                        <i class="fa fa-user"></i> Quản lý role
+                    </a>
+                </li>
+                <li>
+                    <a href="/Manage/User/Profile">
+                        <i class="fa fa-user-md"></i> Quản lý profile
+                    </a>
+                </li>
+            </ul>
+        </li>
+  
+   
+   
+
+        <!--Quản lý tin tức chung của trang-->
+        <li>
+            <a href="javascript:;" data-toggle="collapse" data-target="#News"><i class="glyphicon glyphicon-send"></i>  Câu hình hệ thống<i class="fa fa-fw fa-caret-down"></i></a>
+            <ul id="News" class="">
+                <li>
+                    <a href="/Manage/News/Index">
+                        <i class="glyphicon glyphicon-tag"></i> Setting
+                    </a>
+                </li>
+                <li>
+                    <a href="/Manage/GatePay/Gate">
+                        <i class="fa fa-wrench"></i>  Config GatePay
+                    </a>
+                </li>
+                <li>
+                    <a href="/Manage/User/Location">
+                        <i class="fa fa-wrench"></i>  Location
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <!---->
+        
+    </ul>
+</div>

@@ -1,0 +1,166 @@
+#gravitiDiv{display:block !important;height:96%;max-height:656px;-moz-transition:right 150ms linear 0ms;-o-transition:right 150ms linear 0ms;position:fixed;right:-450px !important;top:50%;margin-top:0 !important;-webkit-transform:translateY(-50%);-moz-transform:translateY(-50%);-ms-transform:translateY(-50%);-o-transform:translateY(-50%);transform:translateY(-50%);transition:right 150ms linear 0ms;-webkit-transition:right 150ms linear 0ms;z-index:2147483650;font-family:"Nunito","Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif}
+#hubspot-messages-iframe-container{z-index:2147483646 !important}
+#gravitiDiv.expanded{right:0 !important}
+#gravitiDiv.expanded .gravitiMainContainer{opacity:1}
+#gravitiDiv.expanded .gravitiButton{z-index:-1;left:-243px}
+#gravitiDiv.animating .gravitiButton{animation:shake 400ms;-webkit-animation:shake 400ms}
+#gravitiDiv .gravitiButton{white-space:nowrap;color:#fff;font-size:14px;height:35px;left:-241px;line-height:26px;padding:0;position:absolute;text-align:center;text-decoration:none;text-transform:none;top:50%;margin-top:-20px;transform:rotate(-90deg);-moz-transform:rotate(-90deg);-o-transform:rotate(-90deg);-webkit-transform:rotate(-90deg);filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=0);max-width:inherit;width:100%}
+#gravitiDiv .gravitiButton .filler{background:#b80000;box-shadow:1px 1px 5px -1px rgba(0,0,0,0.5);height:100%;-moz-box-shadow:1px 1px 5px -1px rgba(0,0,0,0.5);-moz-transition:width 500ms linear 0ms;-o-transition:width 500ms linear 0ms;position:absolute;transition:width 500ms linear 0ms;-webkit-box-shadow:1px 1px 5px -1px rgba(0,0,0,0.5);-webkit-transition:width 500ms linear 0ms;width:0;z-index:0;top:0;left:0}
+#gravitiDiv .gravitiButton .filler:after{content:''}
+#gravitiDiv .gravitiButton .filler:before{content:''}
+#gravitiDiv .gravitiButton .sokCounter{background:#fff;border-radius:0;box-shadow:0 0 1px 0 rgba(0,0,0,0.27) inset;color:#b80000;filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=0);float:left;font-size:12px;font-weight:bold;height:17px;line-height:16px;margin:4px 0 0 11px;-moz-box-shadow:0 0 1px 0 rgba(0,0,0,0.27) inset;-moz-transform:rotate(90deg);-ms-filter:"progid:DXImageTransform.Microsoft.BasicImage(rotation=0)";-o-transform:rotate(90deg);padding:2px;text-align:center;transform:rotate(90deg);vertical-align:middle;-webkit-box-shadow:0 0 1px 0 rgba(0,0,0,0.27) inset;-webkit-transform:rotate(90deg);width:14px}
+#gravitiDiv .gravitiButton .gravitiText{color:#f9f9f9;display:inline-block;letter-spacing:.05em;font-weight:bold;background:#00f;border:1px solid #00f;border-radius:6px 6px 0 0;padding:4px 10px;position:relative;cursor:pointer;overflow:hidden}
+#gravitiDiv .gravitiButton .gravitiText:hover{border-color:#00f;background:#00f}
+#gravitiDiv .gravitiButton.btn:hover{opacity:1 !important}
+#gravitiDiv .gravitiButton.btn{background:transparent;border-color:transparent;box-shadow:none;cursor:default;border:0}
+#gravitiDiv .gravitiButton .gravitiText .textSection{position:relative;z-index:1}
+#gravitiDiv .gravitiButton .close{display:none;float:left;height:14px;margin:6px 0 0 6px;width:14px}
+#gravitiDiv .gravitiButton .heart-icon{height:30px;left:-25px;margin:0 -4px 0 0;width:30px;display:inline-block;background:red;vertical-align:top;display:none}
+#gravitiDiv .gravitiMainContainer{background:rgba(255,255,255,0.9);box-shadow:-2px 1px 6px -1px rgba(1,1,1,0.3);-moz-box-shadow:-2px 1px 6px -1px rgba(1,1,1,0.3);-webkit-box-shadow:-2px 1px 6px -1px rgba(1,1,1,0.3);height:100%;overflow-x:hidden;overflow-y:auto;text-align:center;width:450px !important;font-size:small;padding:0 20px;opacity:0;box-sizing:border-box}
+#gravitiDiv .gravitiMainContainer .gravitiCategoryContainer{border-bottom:1px solid #e2e2e2;height:15%;max-height:50px;position:absolute;z-index:3;top:0;left:20px;right:20px}
+#gravitiDiv .gravitiMainContainer .gravitiCategoryContainer p{margin:0 !important;height:auto !important;font-size:20px;padding:14px 0;line-height:24px;color:#454545}
+#gravitiDiv .gravitiMainContainer .gravitiCategoryContainer select{background:#eee;border:0;cursor:pointer;height:29px;outline:0;width:100%}
+#gravitiDiv .gravitiMainContainer .gravitiInfoContainer{color:#666;height:120px;left:0;padding:30px 30px 19px 20px;position:absolute;top:20%;width:65%;z-index:1;text-align:center;font-size:small;display:none}
+#gravitiDiv .gravitiMainContainer .gravitiInfoContainer .heart-icon{background:url('../prod/images/new-vd-sprite-d91fd34f.png') n-o-repeat -1px -1171px;display:inline-block;height:15px;margin-left:1px;vertical-align:middle;width:17px}
+#gravitiDiv .gravitiMainContainer .gravitiErrorContainer{border-bottom:1px solid #e5e5e5;color:red;font-size:12px;left:20px;padding:10px;position:absolute;top:76px;background:#fafafa;z-index:4;right:20px}
+#gravitiDiv .gravitiProductsContainer{position:relative;z-index:3;height:100%;vertical-align:top;box-sizing:border-box;padding:60px 0 90px}
+#gravitiDiv .gravitiProductsContainer .graviti-product-thumb{position:relative;width:47.5%;height:48%;display:block;padding:10px 0;box-sizing:border-box;margin-right:5%;margin-bottom:2.25%;float:left}
+#gravitiDiv .gravitiProductsContainer .graviti-product-thumb:nth-child(even){float:right;margin-right:0}
+#gravitiDiv .gravitiProductsContainer .graviti-product-thumb.quick-view-active{box-shadow:0 0 0 3px #ffd926 inset;-moz-box-shadow:0 0 0 3px #ffd926 inset;-webkit-box-shadow:0 0 0 3px #ffd926 inset}
+#gravitiDiv .gravitiProductsContainer .graviti-product-thumb.quick-view-active .close{display:block}
+#gravitiDiv .gravitiProductsContainer .graviti-product-thumb img{vertical-align:middle;max-width:100%;max-height:100%;height:auto}
+#gravitiDiv .gravitiProductsContainer .graviti-product-thumb a.graviti-product-main{display:block;text-decoration:none !important;background:#FFF;overflow:hidden;border:solid 6px #FFF;position:relative;transition:all .3s;height:100%;cursor:pointer;box-shadow:0 0 1px rgba(0,0,0,.2)}
+#gravitiDiv .gravitiProductsContainer .graviti-product-thumb .graviti-hover-wrap{position:absolute;top:0;left:0;right:0;bottom:0;opacity:0;background:rgba(1,1,1,0.5);transition:all .3s;z-index:-1}
+#gravitiDiv .gravitiProductsContainer .graviti-product-thumb .graviti-hover-wrap .graviti-buy-btn-wrap{display:table;width:100%;height:100%}
+#gravitiDiv .gravitiProductsContainer .graviti-product-thumb .graviti-hover-wrap .graviti-buy-btn-wrap .graviti-buy-btn{display:table-cell;vertical-align:middle}
+#gravitiDiv .gravitiProductsContainer .graviti-product-thumb .graviti-hover-wrap .graviti-buy-btn-wrap .graviti-buy-btn .buy-btn{display:inline-block;padding:6px 20px;margin-bottom:0;font-size:15px;font-weight:400;line-height:1.42857143;text-align:center;white-space:nowrap;vertical-align:middle;-ms-touch-action:manipulation;touch-action:manipulation;cursor:pointer;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;background-image:none;border:1px solid transparent;border-radius:3px;color:#fff;background-color:#00f;border-color:#00f;outline:0;box-shadow:0 1px 3px rgba(1,1,1,0.5);width:auto}
+#gravitiDiv .gravitiProductsContainer .graviti-product-thumb a.graviti-product-main:hover .graviti-hover-wrap{opacity:1;z-index:1}
+#gravitiDiv .gravitiProductsContainer .graviti-product-thumb a.graviti-product-main:hover .graviti-product-info .title,#gravitiDiv .gravitiProductsContainer .graviti-product-thumb a.graviti-product-main:hover .graviti-product-info .price{color:#161616 !important}
+#gravitiDiv .gravitiProductsContainer .graviti-product-thumb a.graviti-product-main:hover .graviti-product-info .price{font-weight:600}
+#gravitiDiv .gravitiProductsContainer .graviti-product-thumb a.graviti-product-main .graviti-image-block{overflow:hidden;height:76%;max-height:183px;background:#fafafa;position:relative}
+#gravitiDiv .gravitiProductsContainer .graviti-product-thumb a.graviti-product-main:hover{text-decoration:none}
+#gravitiDiv .gravitiProductsContainer .graviti-product-thumb .close{background:url('../prod/images/new-vd-sprite-d91fd34f.png') n-o-repeat -1px -451px;display:none;filter:alpha(opactiy=30);height:13px;fill-opacity:.3;left:5px;-moz-opacity:.3;-ms-filter:"alpha(opacity=30)";opacity:.3;position:absolute;top:5px;width:13px}
+#gravitiDiv .gravitiProductsContainer .graviti-product-thumb .close:hover{filter:alpha(opactiy=100);fill-opacity:1;-moz-opacity:1;-ms-filter:"alpha(opacity=100)";opacity:1}
+#gravitiDiv .gravitiProductsContainer .graviti-product-thumb:hover .close{display:block}
+#gravitiDiv .gravitiProductsContainer .graviti-product-thumb .graviti-product-info{line-height:normal;margin:0 10px;height:24%;padding-bottom:3px;max-height:50px}
+#gravitiDiv .gravitiProductsContainer .graviti-product-thumb .graviti-product-info .title{display:block;overflow:hidden;text-transform:none;text-overflow:ellipsis;white-space:nowrap;width:100%;word-wrap:break-word;font-size:14px;padding:5px 0 2px;color:#454545 !important;margin:0}
+#gravitiDiv .gravitiProductsContainer .graviti-product-thumb .graviti-product-info .price{font-weight:400;font-size:14px;color:#454545 !important;float:none}
+#gravitiDiv .gravitiProductsContainer .graviti-product-thumb .graviti-product-info .offers{font-weight:bold;color:red;font-size:small}
+#gravitiDiv .gravitiProductsContainer .graviti-promotion-thumb{border-bottom:2px solid #e5e5e5;position:relative;width:120px;height:170px}
+#gravitiDiv .gravitiProductsContainer .graviti-promotion-thumb.quick-view-active{box-shadow:0 0 0 3px #ffd926 inset;-moz-box-shadow:0 0 0 3px #ffd926 inset;-webkit-box-shadow:0 0 0 3px #ffd926 inset}
+#gravitiDiv .gravitiProductsContainer .graviti-promotion-thumb.quick-view-active .close{display:block}
+#gravitiDiv .gravitiProductsContainer .graviti-promotion-thumb img{vertical-align:middle;width:100px;height:120px}
+#gravitiDiv .gravitiProductsContainer .graviti-promotion-thumb a.graviti-product-main{display:block;height:140px;text-decoration:none !important}
+#gravitiDiv .gravitiProductsContainer .graviti-promotion-thumb a.graviti-product-main:hover{text-decoration:none}
+#gravitiDiv .gravitiProductsContainer .graviti-promotion-thumb .close{background:url('../prod/images/new-vd-sprite-d91fd34f.png') n-o-repeat -1px -451px;display:none;filter:alpha(opactiy=30);height:13px;fill-opacity:.3;left:5px;-moz-opacity:.3;-ms-filter:"alpha(opacity=30)";opacity:.3;position:absolute;top:5px;width:13px}
+#gravitiDiv .gravitiProductsContainer .graviti-promotion-thumb .close:hover{filter:alpha(opactiy=100);fill-opacity:1;-moz-opacity:1;-ms-filter:"alpha(opacity=100)";opacity:1}
+#gravitiDiv .gravitiProductsContainer .graviti-promotion-thumb:hover .close{display:block}
+#gravitiDiv .gravitiProductsContainer .graviti-promotion-thumb .graviti-product-info{height:30px;line-height:18px;padding-top:5px}
+#gravitiDiv .gravitiProductsContainer .graviti-promotion-thumb .graviti-product-info .title{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;width:100%;word-wrap:break-word;font-size:small;padding:2px 0 0 2px;color:black !important}
+#gravitiDiv .gravitiProductsContainer .graviti-promotion-thumb .graviti-product-info .price{font-weight:bold;font-size:small;color:black !important}
+#gravitiDiv .gravitiProductsContainer .graviti-promotion-thumb .graviti-product-info .offers{font-weight:bold;color:red;font-size:small}
+#gravitiDiv .gravitiProductsContainer .os-product-list-wrap{clear:both;overflow:hidden;height:100%;padding:0;box-sizing:border-box}
+#gravitiDiv .gravitiProductsContainer .product-controls{height:36px;margin:15px 0 0;padding:2px 0;overflow:hidden;box-sizing:border-box;position:absolute;bottom:40px;width:100%}
+#gravitiDiv .gravitiProductsContainer .product-indicators{padding:0;margin:10px 0 0}
+#gravitiDiv .gravitiProductsContainer .product-indicators li{display:inline-block;width:12px;height:12px;margin:0 6px;text-indent:-999px;cursor:pointer;background-color:#e6e6e6;border-radius:10px;transition:all .3s}
+#gravitiDiv .gravitiProductsContainer .product-indicators li:hover,#gravitiDiv .gravitiProductsContainer .product-indicators li.active{background-color:#bcbcbc}
+#gravitiDiv .gravitiProductsContainer .product-controls .control-btn{float:left;height:34px;padding:0 15px;text-align:center;font-size:30px;text-decoration:none;font-family:arial !important;line-height:28px;color:#5a5a5a;background:#FFF;border-radius:3px;width:42px;box-sizing:border-box;transition:all .2s ease-out;cursor:pointer;border:solid 1px rgba(0,0,0,.075)}
+#gravitiDiv .gravitiProductsContainer .product-controls .control-btn:hover{color:#FFF;background:#3f3f3f}
+#gravitiDiv .gravitiProductsContainer .product-controls .control-btn.right-btn{float:right;padding:0 16px}
+#gravitiDiv .gravitiProductsContainer .clear-link{background-color:#d9534f;color:#fff;display:none;float:left;font-size:11px;padding:6px 0;width:100%}
+#gravitiDiv .gravitiProductsContainer .clear-link:hover{background-color:#c9302c;text-decoration:none}
+#gravitiDiv .gravitiProductsContainer .compare-link{background-color:#007fb8;color:#fff;display:none;float:left;font-size:11px;padding:6px 0;width:100%}
+#gravitiDiv .gravitiProductsContainer .compare-link:hover{background-color:#005387;text-decoration:none}
+#gravitiDiv .gravitiFooterContainer{left:0;position:absolute;bottom:11px;width:100%;z-index:3;text-align:center;display:block;padding:0;border:0;background:transparent;box-shadow:none}
+#gravitiDiv .gravitiFooterContainer .gravitiFooterInnerContainer{background:#FFF;border-radius:15px;display:inline-block;padding:0 8px 0 21px;position:relative;color:#9a9a9a}
+#gravitiDiv .gravitiFooterContainer .gravitiFooterInnerContainer a{font-size:14px;padding:2px 2px 2px;color:#9a9a9a;text-decoration:none;display:inline-block;position:relative}
+#gravitiDiv .gravitiFooterContainer .gravitiFooterInnerContainer svg{position:absolute;top:4px;width:14px;height:14px;left:10px}
+#gravitiDiv .gravitiFooterContainer .gravitiFooterInnerContainer a span{color:#0176ff;font-weight:600}
+#gravitiDiv .gravitiFooterContainer .gravitiFooterImg{display:inline-block;font-size:9px;color:#9a9a9a;text-decoration:none}
+#gravitiDiv .gravitiProductsContainer .os-product-list-wrap .os-product-list{overflow:hidden;height:0;opacity:0;transition:opacity .3s ease .15s;padding:1px}
+#gravitiDiv .gravitiProductsContainer .product-controls ol li{display:none}
+#gravitiDiv.one-col{width:165px;right:-165px !important}
+#gravitiDiv.one-col.expanded{right:0 !important}
+#gravitiDiv.one-col .gravitiButton{left:-100px}
+#gravitiDiv.one-col.expanded .gravitiMainContainer{width:165px !important}
+#gravitiDiv.one-col .gravitiMainContainer .gravitiCategoryContainer{border-color:#dadada}
+#gravitiDiv.one-col .gravitiMainContainer .gravitiCategoryContainer p{font-size:15px;line-height:18px;padding-top:20px;overflow:hidden;height:20px !important;display:inline-block;margin-left:-3px !important}
+#gravitiDiv.one-col .gravitiProductsContainer .graviti-product-thumb{width:100%;margin-right:0;height:33.33%}
+#gravitiDiv.one-col .gravitiProductsContainer .graviti-product-thumb a.graviti-product-main .graviti-image-block{max-height:173px}
+#gravitiDiv.one-col .gravitiProductsContainer .graviti-product-thumb .graviti-hover-wrap .graviti-buy-btn-wrap .graviti-buy-btn .buy-btn{padding:6px 10px;font-size:13px;font-weight:600}
+#gravitiDiv.one-col .gravitiProductsContainer .graviti-product-thumb .graviti-product-info .title{font-size:12px;padding:4px 0 0}
+#gravitiDiv.one-col .gravitiProductsContainer .graviti-product-thumb .graviti-product-info .price{font-size:12px;position:relative;top:-1px}
+#gravitiDiv.one-col .gravitiProductsContainer .product-indicators{display:none}
+#gravitiDiv .gravitiButton .gravitiText:before{-webkit-font-smoothing:antialiased;position:absolute;opacity:0;top:0;left:0;content:'';background:-moz-linear-gradient(left,rgba(255,255,255,0) 0,rgba(255,255,255,0.03) 1%,rgba(255,255,255,0.6) 30%,rgba(255,255,255,0.85) 50%,rgba(255,255,255,0.85) 70%,rgba(255,255,255,0.85) 71%,rgba(255,255,255,0) 100%);background:-webkit-gradient(linear,left top,right top,color-stop(0,rgba(255,255,255,0)),color-stop(1%,rgba(255,255,255,0.03)),color-stop(30%,rgba(255,255,255,0.85)),color-stop(50%,rgba(255,255,255,0.85)),color-stop(70%,rgba(255,255,255,0.85)),color-stop(71%,rgba(255,255,255,0.85)),color-stop(100%,rgba(255,255,255,0)));background:-webkit-linear-gradient(left,rgba(255,255,255,0) 0,rgba(255,255,255,0.03) 1%,rgba(255,255,255,0.6) 30%,rgba(255,255,255,0.85) 50%,rgba(255,255,255,0.85) 70%,rgba(255,255,255,0.85) 71%,rgba(255,255,255,0) 100%);background:-o-linear-gradient(left,rgba(255,255,255,0) 0,rgba(255,255,255,0.03) 1%,rgba(255,255,255,0.6) 30%,rgba(255,255,255,0.85) 50%,rgba(255,255,255,0.85) 70%,rgba(255,255,255,0.85) 71%,rgba(255,255,255,0) 100%);background:-ms-linear-gradient(left,rgba(255,255,255,0) 0,rgba(255,255,255,0.03) 1%,rgba(255,255,255,0.6) 30%,rgba(255,255,255,0.85) 50%,rgba(255,255,255,0.85) 70%,rgba(255,255,255,0.85) 71%,rgba(255,255,255,0) 100%);background:linear-gradient(to right,rgba(255,255,255,0) 0,rgba(255,255,255,0.03) 1%,rgba(255,255,255,0.6) 30%,rgba(255,255,255,0.85) 50%,rgba(255,255,255,0.85) 70%,rgba(255,255,255,0.85) 71%,rgba(255,255,255,0) 100%);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#00ffffff',endColorstr='#00ffffff',GradientType=1);width:15%;height:100%;transform:skew(-10deg,0);-webkit-transform:skew(-10deg,0);-moz-transform:skew(-10deg,0);-ms-transform:skew(-10deg,0);-o-transform:skew(-10deg,0);animation:shine 1.5s;animation-iteration-count:infinite;animation-delay:3s;-webkit-animation:shine 1.5s;-webkit-animation-iteration-count:infinite;-webkit-animation-delay:3s;-moz-animation:shine 1.5s;-moz-animation-iteration-count:infinite;-moz-animation-delay:3s;-ms-animation:shine 1.5s;-ms-animation-iteration-count:infinite;-ms-animation-delay:3s;-o-animation:shine 1.5s;-o-animation-iteration-count:infinite;-o-animation-delay:3s}
+@keyframes shine{0%{left:-20%;opacity:0}
+50%{opacity:.4}
+75%{opacity:.2}
+100%{left:100%;opacity:0}
+}@-webkit-keyframes shine{0%{left:-20%;opacity:0}
+50%{opacity:.4}
+75%{opacity:.2}
+100%{left:100%;opacity:0}
+}@-moz-keyframes shine{0%{left:-20%;opacity:0}
+48%{opacity:.6}
+100%{left:100%;opacity:0}
+}@-ms-keyframes shine{0%{left:-20%;opacity:0}
+48%{opacity:.6}
+100%{left:100%;opacity:0}
+}@-o-keyframes shine{0%{left:-20%;opacity:0}
+48%{opacity:.6}
+100%{left:100%;opacity:0}
+}#gravitiDiv .gravitiMobileClose{display:none}
+@media(max-width:480px){#gravitiDiv.expanded{max-width:100%}
+#gravitiDiv.expanded .gravitiMainContainer{width:100% !important}
+#gravitiDiv.expanded .gravitiMainContainer+.gravitiMobileClose{display:block;position:absolute;top:0;right:0;width:30px;height:30px;color:#3a3a3a;font-size:21px;line-height:26px;text-align:center;z-index:100;cursor:pointer;background:rgba(1,1,1,.1)}
+#gravitiDiv .gravitiProductsContainer .graviti-product-thumb a.graviti-product-main .graviti-image-block{max-height:63%}
+}#gravitiDiv .gravitiProductsContainer .graviti-product-thumb.graviti-vi-lang .graviti-product-info{height:30%;max-height:inherit;margin:0;padding:0;position:absolute;left:0;right:0;bottom:0;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#FFF}
+#gravitiDiv .gravitiProductsContainer .graviti-product-thumb.graviti-vi-lang .graviti-product-info .title{line-height:20px}
+#gravitiDiv .gravitiProductsContainer .graviti-product-thumb.graviti-vi-lang .graviti-product-info .price{font-size:13px;line-height:16px}.carousal-content-wrapper *{-webkit-box-sizing:border-box;box-sizing:border-box}
+.carousal-content-wrapper input[type="radio"]{height:0;opacity:0;width:0}
+.carousal-content-wrapper input[type="radio"]:checked ~ .slide{-webkit-transform:translate3d(100%,0,0);transform:translate3d(100%,0,0)}
+.carousal-content-wrapper input[type="radio"]:checked+.slide{opacity:1;-webkit-transform:translate3d(0,0,0);transform:translate3d(0,0,0);z-index:2}
+.carousal-content-wrapper input[type="radio"]:checked+.slide+.nav{z-index:1}
+.carousal-content-wrapper input[type="radio"]:checked:nth-of-type(1)+.slide+.nav+.dots .dot:nth-child(1){background-color:#fff}
+.carousal-content-wrapper input[type="radio"]:checked:nth-of-type(2)+.slide+.nav+.dots .dot:nth-child(2){background-color:#fff}
+.carousal-content-wrapper input[type="radio"]:checked:nth-of-type(3)+.slide+.nav+.dots .dot:nth-child(3){background-color:#fff}
+.carousal-content-wrapper input[type="radio"]:checked:nth-of-type(4)+.slide+.nav+.dots .dot:nth-child(4){background-color:#fff}
+.slider.carousal-content-wrapper{height:440px;overflow:hidden;position:relative;text-align:center;margin-top:26px;font-family:Lato;width:746px;margin:30px auto}
+.slider.carousal-content-wrapper.carousal-content-ads-wrapper{height:490px;overflow:hidden;position:relative;text-align:center;margin-top:26px;font-family:Lato;width:776px;margin:30px 0 30px -14px;font-size:0}
+.slider.carousal-without-overlay-wrapper{height:340px;overflow:hidden;position:relative;text-align:center;margin-top:26px;font-family:Lato;width:996px;margin:0 auto}
+.carousal-content-wrapper .slide{height:100%;opacity:0;position:absolute;top:0;left:30px;right:30px;z-index:0;-webkit-transform:translate3d(-100%,0,0);transform:translate3d(-100%,0,0);-webkit-transition:all 1s ease;transition:all 1s ease}
+.carousal-content-wrapper .nav{padding:5px;position:absolute;top:50%;margin-top:-16px;-webkit-transform:translate3d(0,-50%,0);transform:translate3d(0,-50%,0);width:745px;z-index:0}
+.carousal-content-wrapper.carousal-without-overlay-wrapper .nav{width:996px}
+.carousal-content-wrapper .prev{cursor:pointer;float:left}
+.carousal-content-wrapper .prev::after{border-top:2px solid #5a5a5a;border-left:2px solid #5a5a5a;border-radius:1px;content:"";display:block;height:20px;-webkit-transform:rotate(-45deg);transform:rotate(-45deg);width:20px}
+.carousal-content-wrapper .next{cursor:pointer;float:right}
+.carousal-content-wrapper .next::before{border-top:2px solid #5a5a5a;border-right:2px solid #5a5a5a;border-radius:1px;content:"";display:block;height:20px;-webkit-transform:rotate(45deg);transform:rotate(45deg);width:20px}
+.carousal-content-wrapper .carousel-caption{position:static;text-shadow:none;color:#000;font-size:12px;padding:10px 0}
+.carousal-content-wrapper.carousal-content-ads-wrapper .col-4-wrap{padding:10px 10px 0;position:relative;display:inline-block;vertical-align:top;width:255px;height:inherit;font-size:inherit}
+.carousal-content-wrapper .col-4-wrap{padding:0 15px;position:relative;display:inline-block;vertical-align:top;width:220px;height:440px}
+.carousal-content-wrapper a.overlay-click{width:100%;height:100%;text-decoration:none;display:block}
+.carousal-content-wrapper .col-4-wrap:hover .overlay-wrapper{opacity:1}
+.carousal-content-wrapper .product-desc{overflow:hidden;white-space:normal;color:#6c6c6c;box-sizing:border-box;padding-right:30px;height:36px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;margin:5px 0}
+.carousal-content-wrapper .product-name{padding-bottom:2px;font-size:16px;color:#000;border-bottom:1px solid #e2e2e2;font-weight:400}
+.carousal-content-wrapper.carousal-content-ads-wrapper .product-name{font-weight:400}
+.carousal-content-wrapper.carousal-without-overlay-wrapper .product-name,.carousal-content-wrapper.carousal-without-overlay-wrapper .product-desc{font-size:12px;border-bottom:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#000;display:block;padding:0}
+.carousal-content-wrapper .overlay-wrapper{position:absolute;top:0;left:0;opacity:0;background:transparent;width:220px;height:440px;border:1px solid #ccc;padding:0 13px}
+.carousal-content-wrapper.carousal-content-ads-wrapper .overlay-wrapper{position:absolute;top:0;left:0;opacity:0;background:transparent;width:255px;height:inherit;border:1px solid #ccc;padding:10px 10px 0}
+.carousal-content-wrapper .img-style{height:auto;width:100%}
+.carousal-content-ads-wrapper.carousal-content-wrapper .img-style{height:auto;width:100%;max-height:320px}
+.carousal-content-wrapper .product-price{color:#000;font-size:14px;font-family:Lato}
+.carousal-content-wrapper .with-discount{color:#777575}
+.carousal-content-wrapper .product-discount-price{color:#820000;margin:0}
+.carousal-content-wrapper.carousal-without-overlay-wrapper .product-price{font-size:12px}
+.carousal-content-wrapper.carousal-content-ads-wrapper .overlay-footer-block,.carousal-content-wrapper .overlay-footer-block{background-color:#dfdfdf;box-sizing:border-box;font-size:12px;text-align:left;color:#000;padding:0 5px;border-radius:3px;margin:10px 0 0 0;display:inline-block}
+.carousal-content-wrapper.carousal-content-ads-wrapper .col-4-wrap .content-wrapper{text-align:left}
+.carousal-content-wrapper .overlay-footer-block a{text-decoration:none;color:#000}
+.carousal-content-wrapper.carousal-content-ads-wrapper .overlay-footer-block span,.carousal-content-wrapper .overlay-footer-block span{margin:0}
+.slider.carousal-content-wrapper.carousal-without-overlay-wrapper{height:418px;overflow:hidden;position:relative;text-align:center;margin-top:26px;font-family:Lato;width:996px;margin:30px auto}
+.carousal-content-wrapper .col-3-wrap{padding:0 20px;position:relative;display:inline-block;vertical-align:top;width:212px;height:366px}
+.similar-items-wrapper{overflow:hidden;position:relative;margin-top:26px;font-family:Lato;width:996px;margin:0 auto;border-bottom:1px solid #ccc}
+.similar-items-txt{border-bottom:4px solid #333;width:74px;padding-bottom:5px;text-transform:uppercase;font-size:12px;font-weight:800}
+.overlay-wrap{position:absolute;top:0;left:0;right:0;bottom:0;background-color:rgba(255,255,255,0.6);z-index:1000;margin:0 auto}
+.overlay-middle{height:100%;display:table;width:100%}
+.overlay-wrap .overlay-content{display:table-cell;vertical-align:middle}
+.overlay-wrap .overlay-content img{max-width:50px;margin-top:-25px}

@@ -1,0 +1,14 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace BuyGroup365.Areas.Manage.Models
+{
+    public class PropertybyCate
+    {
+        public long PropertyId { get; set; }
+        public long PropertyValueId { get; set; }
+        public bool IsSet { get; set; }
+    }
+}

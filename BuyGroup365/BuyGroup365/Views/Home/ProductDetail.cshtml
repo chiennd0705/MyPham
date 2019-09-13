@@ -1,0 +1,529 @@
+﻿@using Business.ClassBusiness
+@using BuyGroup365.Models.Common
+@using BuyGroup365.Models.Home
+@model Common.Product
+@using Common
+@{
+    Layout = "~/Views/Shared/_LayoutIndex.cshtml";
+}
+@Html.Raw(ViewData["JSSherma"])
+<div class="product-pages">
+    <section class="breadcrumb-bg">
+        <div class="theme-container container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="site-breadcumb white-clr">
+                        <ul class="breadcrumb breadcrumb-menubar" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                            <li class="home">
+                                <a itemprop="url" href="/"><span itemprop="title">Trang chủ</span></a>
+                            </li>
+                            @Html.Raw(@ViewData["Breadcrumbs"])
+
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<section class="product account-page ptb-50 product-decktop">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 details-product">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="clearfix" data-sticky_parent="">
+                            <div class="col-xs-12 col-sm-12 col-md-7 " data-sticky_column="">
+                                <div class="large-image">
+                                    <a href="@ViewData["ImgMain"]" data-rel="prettyPhoto[product-gallery]">
+                                        <div style="height:635px;width:635px;" class="zoomWrapper"><img id="zoom_01" src="@ViewData["ImgMain"]" alt="Bộ Olive Sube Sube Mini Set SS" class="img-responsive center-block" style="position: absolute;"></div>
+                                    </a>
+                                    <div class="hidden">
+                                        <div class="item">
+                                            <a href="" data-image="" data-zoom-image="" data-rel="prettyPhoto[product-gallery]">
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="gallery_01" class="owl-carousel owl-theme thumbnail-product not-dqowl owl-loaded owl-drag">
+
+
+
+                                    @Html.Raw(@ViewData["Img1"])
+                                    <div class="owl-nav disabled">
+                                        <div class="owl-prev disabled">prev</div>
+                                        <div class="owl-next disabled">next</div>
+                                    </div>
+                                    <div class="owl-dots disabled"></div>
+                                </div>
+
+                                <div class="wrapper-sticky" style="display: none; height: 0px; width: auto; margin: auto; position: relative; float: none; left: auto; right: auto; top: auto; bottom: auto; vertical-align: top;">
+                                    <div class="hidden-lg hidden-md details-pro product-content leftsidebar-col" data-sticky_colum="" style="width: 0px; top: auto; bottom: auto; left: 0px; right: auto;">
+                                        <h1 style="padding:0px 15px;" class="title-head">Bộ Olive Sube Sube Mini Set SS</h1>
+                                        <div class="stock-brand" style="border:0;">
+                                            <ul style="padding:0px 15px;">
+                                                <li class="inventory_quantity">
+
+
+
+                                                    <span class="a-stock">Còn hàng</span>
+
+
+
+                                                </li>
+                                                <li class="social">
+                                                    <div class="info-socials-article clearfix">
+                                                        <div class="box-like-socials-article">
+                                                            <div class="fb-send" data-href="/products/bo-olive-sube-sube-mini-set-ss">
+                                                            </div>
+                                                        </div>
+                                                        <div class="box-like-socials-article">
+                                                            <div class="fb-like fb_iframe_widget" data-href="/products/bo-olive-sube-sube-mini-set-ss" data-layout="button_count" data-action="like" fb-xfbml-state="rendered" fb-iframe-plugin-query="action=like&amp;app_id=363772567412181&amp;container_width=0&amp;href=https%3A%2F%2Fdhcvietnam.com.vn%2Fproducts%2Fbo-olive-sube-sube-mini-set-ss&amp;layout=button_count&amp;locale=vi_VN&amp;sdk=joey"><span style="vertical-align: bottom; width: 0px; height: 0px;"><iframe name="f1a7dabaf6c9fc" width="1000px" height="1000px" title="fb:like Facebook Social Plugin" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" allow="encrypted-media" src="https://www.facebook.com/v3.3/plugins/like.php?action=like&amp;app_id=363772567412181&amp;channel=https%3A%2F%2Fstaticxx.facebook.com%2Fconnect%2Fxd_arbiter.php%3Fversion%3D44%23cb%3Df303bfebe94bca%26domain%3Ddhcvietnam.com.vn%26origin%3Dhttps%253A%252F%252Fdhcvietnam.com.vn%252Ff381dfb9270d91%26relation%3Dparent.parent&amp;container_width=0&amp;href=https%3A%2F%2Fdhcvietnam.com.vn%2Fproducts%2Fbo-olive-sube-sube-mini-set-ss&amp;layout=button_count&amp;locale=vi_VN&amp;sdk=joey" style="border: none; visibility: visible; width: 0px; height: 0px;" class=""></iframe></span></div>
+                                                        </div>
+                                                        <div class="box-like-socials-article">
+                                                            <div class="fb-share-button fb_iframe_widget" data-href="/products/bo-olive-sube-sube-mini-set-ss" data-layout="button_count" fb-xfbml-state="rendered" fb-iframe-plugin-query="app_id=363772567412181&amp;container_width=0&amp;href=https%3A%2F%2Fdhcvietnam.com.vn%2Fproducts%2Fbo-olive-sube-sube-mini-set-ss&amp;layout=button_count&amp;locale=vi_VN&amp;sdk=joey"><span style="vertical-align: bottom; width: 0px; height: 0px;"><iframe name="fc8b3f4eb5df4" width="1000px" height="1000px" title="fb:share_button Facebook Social Plugin" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" allow="encrypted-media" src="https://www.facebook.com/v3.3/plugins/share_button.php?app_id=363772567412181&amp;channel=https%3A%2F%2Fstaticxx.facebook.com%2Fconnect%2Fxd_arbiter.php%3Fversion%3D44%23cb%3Df2a761fb7d446f8%26domain%3Ddhcvietnam.com.vn%26origin%3Dhttps%253A%252F%252Fdhcvietnam.com.vn%252Ff381dfb9270d91%26relation%3Dparent.parent&amp;container_width=0&amp;href=https%3A%2F%2Fdhcvietnam.com.vn%2Fproducts%2Fbo-olive-sube-sube-mini-set-ss&amp;layout=button_count&amp;locale=vi_VN&amp;sdk=joey" style="border: none; visibility: visible; width: 0px; height: 0px;" class=""></iframe></span></div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+
+                                            </ul>
+                                            <ul class="products-prices">
+                                                <li class="price">
+                                                    <div class="price-box" itemscope="" itemtype="http://schema.org/Offer">
+
+                                                        <div class="special-price price-fix"><span class="price product-price" itemprop="price" content="VND">360,000₫</span> </div> <!-- Giá -->
+
+                                                    </div>
+                                                </li>
+                                                <li class="review">
+                                                    <span class="a-brand">
+                                                        <div class="haravan-product-reviews-badge" data-id="1018820719">
+
+                                                            <div class="hrv-product-reviews-star" data-score="0" data-number="5" title="Not rated yet!" style="color: rgb(236, 186, 85);"><i data-alt="1" class="star-off-png" title="Not rated yet!"></i>&nbsp;<i data-alt="2" class="star-off-png" title="Not rated yet!"></i>&nbsp;<i data-alt="3" class="star-off-png" title="Not rated yet!"></i>&nbsp;<i data-alt="4" class="star-off-png" title="Not rated yet!"></i>&nbsp;<i data-alt="5" class="star-off-png" title="Not rated yet!"></i><input name="score" type="hidden" readonly=""></div><p>(0 đánh giá)</p>
+                                                        </div>
+                                                    </span>
+
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                        <div class="form-product">
+                                            <form enctype="multipart/form-data" id="add-to-cart-form" action="/cart/add" method="post" class="form-inline clearfix has-validation-callback">
+
+                                                <div class="box-variant clearfix  hidden ">
+
+                                                    <fieldset class="form-group">
+                                                        <select id="product-selector" class="form-control form-control-lg" name="id" style="display:none">
+
+                                                            <option selected="selected" value="1037293649">Default Title - 360,000₫</option>
+
+                                                        </select>
+                                                    </fieldset>
+
+                                                </div>
+                                                <div class="form-group ">
+                                                    <div class="custom custom-btn-number form-control hidden">
+                                                        <input type="text" class="input-text qty" number-sidebar="" data-field="quantity" title="Số lượng" value="1" id="qty" name="quantity">
+                                                        <div class="gp-btn">
+                                                            <button onclick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN(qty)) result.value++;return false;" class="btn-plus btn-cts" type="button">+</button>
+                                                            <button onclick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN(qty) &amp; qty > 1 ) result.value--;return false;" class="btn-minus btn-cts" type="button">–</button>
+                                                        </div>
+                                                    </div>
+
+                                                    <a href="javascript:void(0)" class="btn btn-lg btn-gray addtocart-modal" title="Mua ngay">
+                                                        <span> Mua ngay<span class="text">Mua online - Giao tận nơi</span></span>
+                                                    </a>
+
+                                                </div>
+                                            </form>
+
+                                            <div class="map-product">
+                                                <a href="/pages/dia-chi-cua-hang-dhc">
+                                                    Xem danh sách cửa hàng tại đây <i class="fa fa-map-marker"></i>
+                                                </a>
+                                            </div>
+
+                                            <div class="clearfix"></div>
+
+                                            <div class="tag-product">
+                                                <label class="inline">Tags: </label>
+
+                                                <a href="/collections/all/xa-bong">Xà bông</a>
+
+                                                <a href="/collections/all/cham-soc-co-the">Chăm sóc cơ thể</a>
+
+                                                <a href="/collections/all/hot-sale">hot sale</a>
+
+                                                <a href="/collections/all/olive">Olive</a>
+
+                                                <a href="/collections/all/lotion">Lotion</a>
+
+                                                <a href="/collections/all/dau-tay-trang">Dầu tẩy trang</a>
+
+                                                <a href="/collections/all/duong-da">Dưỡng da</a>
+
+                                                <a href="/collections/all/cham-soc-da-mat">Chăm sóc da mặt</a>
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="product-sidebar-ant-fashion hidden-lg hidden-md">
+
+
+
+
+
+
+
+                                            <div class="box-hotlines clearfix">
+                                                <div class="box-hotlines-left">
+                                                    <h3>Bạn cần hỗ trợ?</h3>
+                                                    <p>Lời khuyên, sản phẩm...</p>
+
+                                                    <h2><a href="tel:1800 8003 ">1800 8003 </a></h2>
+
+                                                    <div class="link-contact">
+                                                        <a href="href:#">Liên hệ</a>
+                                                    </div>
+                                                </div>
+                                                <div class="box-hotlines-right">
+                                                    <a href="tel:">
+                                                        <i class="fa fa-phone" aria-hidden="true"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="margin-top-15 margin-bottom-10">
+
+
+
+
+
+
+                                    <div class="hrvproduct-tabs">
+                                        <ul class="tabs clearfix">
+
+
+                                            <li class="active"><a href="#tab1">Chi tiết sản phẩm</a></li>
+
+
+                                            <li><a href="#tab2">Thành phần</a></li>
+
+
+                                            <li><a href="#tab3">Hướng dẫn sử dụng</a></li>
+
+                                        </ul>
+
+
+                                        <div class="tabs-content active" id="tab1">
+                                            @Html.Raw(Model.Description)
+                                        </div>
+
+
+                                        <div class="tabs-content " id="tab2">
+                                            @Html.Raw(Model.LandingPage)
+                                        </div>
+
+
+                                        <div class="tabs-content " id="tab3">
+                                            @Html.Raw(@ViewData["Thongtinthem"])
+                                        </div>
+
+
+                                    </div>
+
+                                    <style>
+                                        .hrvproduct-tabs .tabs {
+                                            border-bottom: 2px solid #4e69a2;
+                                        }
+
+                                            .hrvproduct-tabs .tabs li {
+                                                display: inline-block;
+                                                float: left;
+                                                transition: all 0.5s;
+                                                -webkit-transition: background 0.5s;
+                                                font-weight: bold;
+                                                color: #4e69a2;
+                                            }
+
+                                                .hrvproduct-tabs .tabs li.active,
+                                                .hrvproduct-tabs .tabs li:hover {
+                                                    background: #16469e;
+                                                    color: #FFFFFF;
+                                                }
+
+                                                .hrvproduct-tabs .tabs li a {
+                                                    padding: 8px 12px !important;
+                                                    text-transform: uppercase;
+                                                    display: inline-block;
+                                                    color: inherit;
+                                                }
+
+                                        .hrvproduct-tabs .tabs-content {
+                                            display: none;
+                                            padding: 10px;
+                                        }
+
+                                            .hrvproduct-tabs .tabs-content.active {
+                                                display: block;
+                                            }
+                                    </style>
+                                    <script>
+                                        var menu = $('.hrvproduct-tabs .tabs li');
+                                        var menuLinks = $('.hrvproduct-tabs .tabs li a');
+                                        var tabsContent = $('.hrvproduct-tabs .tabs-content');
+                                        menuLinks.click(function (e) {
+                                            e.preventDefault();
+                                            var targetBlock = $(this).attr('href');
+                                            menu.removeClass('active');
+                                            $(this).parent('li').addClass('active');
+                                            tabsContent.hide();
+                                            $(targetBlock).fadeIn(500);
+                                        });
+                                    </script>
+                                    aqa
+
+                                    @Html.Partial("CommentProduct")
+
+                                </div>
+
+                            </div>
+                            <div class="wrapper-sticky" style="display: block; height: 386px; width: 41.6667%; margin: auto; position: relative; float: left; left: auto; right: auto; top: auto; bottom: auto; vertical-align: top;">
+                                <div class="hidden-xs hidden-sm col-sm-12 col-md-5 details-pro product-content leftsidebar-col" data-sticky_colum="" style="width: 475px; top: 0px; bottom: auto; left: 0px; right: auto; position: absolute;">
+                                    <h1 class="title-head">@Model.ProductName</h1>
+                                    <div class="stock-brand">
+                                        <ul>
+                                            <li class="inventory_quantity">
+                                                <span class="stock-brand-title">Tình trạng:</span>
+
+
+                                                @if (@Model.Status == 1)
+                                                {
+                                                    <span class="a-stock 3">Còn hàng</span>
+                                                }
+
+                                                else
+                                                {
+                                                    <span class="a-stock 3">Hết hàng</span>
+                                                }
+
+
+
+
+                                            </li>
+                                            <li>
+                                                <span class="stock-brand-title">Đánh giá:</span>
+                                                <span class="a-brand">
+                                                    <div class="haravan-product-reviews-badge" data-id="1018820719">
+
+                                                        <div class="hrv-product-reviews-star" data-score="0" data-number="5" title="Not rated yet!" style="color: rgb(236, 186, 85);">
+                                                            @Html.Raw(ViewData["rating"])
+                                                        </div><p>(@ViewData["TotalVote"] đánh giá)</p>
+                                                    </div>
+                                                </span>
+
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="price-box" itemscope="" itemtype="http://schema.org/Offer">
+
+                                        <div class="special-price"><span class="price product-price" itemprop="price" content="VND">@ViewData["Price"]₫</span> </div> <!-- Giá -->
+
+                                    </div>
+
+                                    <div class="form-product">
+                                        <form enctype="multipart/form-data" id="add-to-cart-form" action="/cart/add" method="post" class="form-inline clearfix has-validation-callback">
+
+                                            <div class="box-variant clearfix  hidden ">
+
+                                                <fieldset class="form-group">
+                                                    <select id="product-selector" class="form-control form-control-lg" name="id" style="display:none">
+
+                                                        <option selected="selected" value="1037293649">Default Title - 360,000₫</option>
+
+                                                    </select>
+                                                </fieldset>
+
+                                            </div>
+                                            <div class="form-group ">
+                                                <div class="custom custom-btn-number form-control">
+                                                    <input type="text" class="input-text qty" number-sidebar="" data-field="quantity" title="Số lượng" value="1" id="qty" name="quantity">
+                                                    <div class="gp-btn">
+                                                        <button onclick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN(qty)) result.value++;return false;" class="btn-plus btn-cts" type="button">+</button>
+                                                        <button onclick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN(qty) &amp; qty > 1 ) result.value--;return false;" class="btn-minus btn-cts" type="button">–</button>
+                                                    </div>
+                                                </div>
+
+                                                <a href="javascript:void(0)" class="btn btn-lg btn-gray addtocart-modal" title="Mua ngay">
+                                                    <span> Mua ngay<span class="text">Mua online - Giao tận nơi</span></span>
+                                                </a>
+
+                                            </div>
+                                        </form>
+
+                                        <div class="map-product">
+                                            <a href="/pages/dia-chi-cua-hang-dhc">
+                                                Xem danh sách cửa hàng tại đây <i class="fa fa-map-marker"></i>
+                                            </a>
+                                        </div>
+                                        <div class="info-socials-article clearfix">
+                                            <div class="box-like-socials-article">
+                                                <div class="fb-send" data-href="/products/bo-olive-sube-sube-mini-set-ss">
+                                                </div>
+                                            </div>
+                                            <div class="box-like-socials-article">
+                                                <div class="fb-like fb_iframe_widget" data-href="/products/bo-olive-sube-sube-mini-set-ss" data-layout="button_count" data-action="like" fb-xfbml-state="rendered" fb-iframe-plugin-query="action=like&amp;app_id=363772567412181&amp;container_width=0&amp;href=https%3A%2F%2Fdhcvietnam.com.vn%2Fproducts%2Fbo-olive-sube-sube-mini-set-ss&amp;layout=button_count&amp;locale=vi_VN&amp;sdk=joey"><span style="vertical-align: bottom; width: 80px; height: 20px;"><iframe name="f127764f788cddc" width="1000px" height="1000px" title="fb:like Facebook Social Plugin" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" allow="encrypted-media" src="https://www.facebook.com/v3.3/plugins/like.php?action=like&amp;app_id=363772567412181&amp;channel=https%3A%2F%2Fstaticxx.facebook.com%2Fconnect%2Fxd_arbiter.php%3Fversion%3D44%23cb%3Df253829878a3404%26domain%3Ddhcvietnam.com.vn%26origin%3Dhttps%253A%252F%252Fdhcvietnam.com.vn%252Ff381dfb9270d91%26relation%3Dparent.parent&amp;container_width=0&amp;href=https%3A%2F%2Fdhcvietnam.com.vn%2Fproducts%2Fbo-olive-sube-sube-mini-set-ss&amp;layout=button_count&amp;locale=vi_VN&amp;sdk=joey" style="border: none; visibility: visible; width: 80px; height: 20px;" class=""></iframe></span></div>
+                                            </div>
+                                            <div class="box-like-socials-article">
+                                                <div class="fb-share-button fb_iframe_widget" data-href="/products/bo-olive-sube-sube-mini-set-ss" data-layout="button_count" fb-xfbml-state="rendered" fb-iframe-plugin-query="app_id=363772567412181&amp;container_width=0&amp;href=https%3A%2F%2Fdhcvietnam.com.vn%2Fproducts%2Fbo-olive-sube-sube-mini-set-ss&amp;layout=button_count&amp;locale=vi_VN&amp;sdk=joey"><span style="vertical-align: bottom; width: 90px; height: 20px;"><iframe name="f1d28011ddffcc8" width="1000px" height="1000px" title="fb:share_button Facebook Social Plugin" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" allow="encrypted-media" src="https://www.facebook.com/v3.3/plugins/share_button.php?app_id=363772567412181&amp;channel=https%3A%2F%2Fstaticxx.facebook.com%2Fconnect%2Fxd_arbiter.php%3Fversion%3D44%23cb%3Df1b0926dff897c%26domain%3Ddhcvietnam.com.vn%26origin%3Dhttps%253A%252F%252Fdhcvietnam.com.vn%252Ff381dfb9270d91%26relation%3Dparent.parent&amp;container_width=0&amp;href=https%3A%2F%2Fdhcvietnam.com.vn%2Fproducts%2Fbo-olive-sube-sube-mini-set-ss&amp;layout=button_count&amp;locale=vi_VN&amp;sdk=joey" style="border: none; visibility: visible; width: 90px; height: 20px;" class=""></iframe></span></div>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+
+                                        <div class="tag-product">
+                                            <label class="inline">Tags: </label>
+
+                                            @Html.Raw(@ViewData["Tags"])
+
+                                        </div>
+
+                                    </div>
+                                    <div id="combo-popup">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <h3 class="title">
+                                                    Thường được mua cùng
+                                                </h3>
+                                                <div class="modal-body">
+                                                    <div id="combo-program" data-id="1018820719" data-title="Bộ Olive Sube Sube Mini Set SS"></div>
+                                                </div>
+                                                <a href="javascript:void(0)" class="bnt-combo clickopen">Xem tất cả</a>
+                                                <a href="javascript:void(0)" class="bnt-combo clickoff" style="display:none;">Thu gọn</a>
+                                                <div class="modal-footer">
+                                                    <span class="price">
+                                                        <strong>
+                                                            Tổng tiền:
+                                                        </strong>
+                                                        <span class="price-total" style="color:red;"></span>
+                                                    </span>
+                                                    <button type="button" id="discount-promotion-combo-add-btn" class="btn discount-promotion-btn">
+                                                        Thêm vào giỏ
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <script>
+                                                $(document).ready(function () {
+                                                    $(".clickopen").click(function () {
+                                                        $(this).hide();
+                                                        $(".modal-body").addClass('open');
+                                                        $(".clickoff").show();
+
+                                                    });
+                                                    $(".clickoff").click(function () {
+                                                        $(".modal-body").removeClass('open');
+                                                        $(".clickoff").hide();
+                                                        $(".clickopen").show();
+                                                    });
+
+                                                });
+
+                                            </script>
+                                        </div>
+                                    </div>
+                                    <div class="product-sidebar-ant-fashion hidden-lg hidden-md">
+
+
+
+
+
+
+
+                                        <div class="box-hotlines clearfix">
+                                            <div class="box-hotlines-left">
+                                                <h3>Bạn cần hỗ trợ?</h3>
+                                                <p>Lời khuyên, sản phẩm...</p>
+
+                                                <h2><a href="tel:1800 8003 ">1800 8003 </a></h2>
+
+                                                <div class="link-contact">
+                                                    <a href="href:#">Liên hệ</a>
+                                                </div>
+                                            </div>
+                                            <div class="box-hotlines-right">
+                                                <a href="tel:">
+                                                    <i class="fa fa-phone" aria-hidden="true"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="btn-position hidden-xs" style="display: none;">
+        <ul class="btn-items">
+            <li class="buy-new-pos addnow">
+                <a href="javascript:void(0);" title="Đặt mua ngay">
+                    <div class="arrow-cirle-btn">
+                        <img src="//theme.hstatic.net/1000186358/1000470071/14/arrow-btn-buy.png?v=1594">
+                    </div>
+                    <span>Mua ngay</span>
+                </a>
+            </li>
+            <li class="cart-pos" id="cart-pos-product">
+                <a href="/cart" title="Xem lại giỏ hàng">
+                    <img src="//theme.hstatic.net/1000186358/1000470071/14/icon-cart-pos.png?v=1594">
+                    <span>2 sản phẩm</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</section>
+
+@Html.Partial("ProductViewed")
+
+
+
+<script type="text/javascript">
+        function updatecart(id) {
+
+            var sl = 1;
+
+            jQuery.ajax({
+                url: '@Url.Action("ViewCart", "Ajax")',
+                data: {
+                    'id': id,
+                    'sl': sl
+                },
+                dataType: 'json',
+                Type: 'POST',
+                success: function (data) {
+
+                    window.location.replace("/gio-hang");
+                },
+                error: function () {
+
+                }
+            });
+        }
+</script>

@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<!--
+Copyright (c) 2003-2015, CKSource - Frederico Knabben. All rights reserved.
+For licensing, see LICENSE.md or http://ckeditor.com/license
+-->
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>CKEditor Sample</title>
+	<script src="../ckeditor.js"></script>
+	<script src="js/sample.js"></script>
+	<!-- <link rel="stylesheet" href="css/samples.css">
+	<link rel="stylesheet" href="toolbarconfigurator/lib/codemirror/neo.css"> -->
+</head>
+<body id="main">
+
+
+	<div class="adjoined-bottom">
+		<div class="grid-container">
+			<div class="grid-width-100">
+			
+                <textarea name="editor" id="editor" class="form-control" style="visibility: hidden;">
+                    &lt;strong&gt;Vê chúng tôi&lt;/strong&gt;&lt;br /&gt;
+                    Với tầm nhìn dài hạn và quan điểm phát triển bền vững, Vingroup đã tập trung đầu tư vào lĩnh vực du lịch và bất động sản (BĐS) với hai thương hiệu chiến lược ban đầu là Vinpearl và Vincom. Bằng những nỗ lực không ngừng, Vincom đã trở thành một trong những thương hiệu số 1 Việt Nam về BĐS với hàng loạt các tổ hợp Trung tâm thương mại (TTTM) - Văn phòng - Căn hộ đẳng cấp tại các thành phố lớn, dẫn đầu xu thế đô thị thông minh - sinh thái hạng sang tại Việt Nam. Cùng với Vincom, Vinpearl cũng trở thành cánh chim đầu đàn của ngành Du lịch với chuỗi khách sạn, khu nghỉ dưỡng, khu biệt thự biển, công viên giải trí, sân golf đẳng cấp 5 sao và trên 5 sao quốc tế. Tháng 1/2012, Công ty CP Vinpearl sáp nhập vào Công ty CP Vincom và chính thức hoạt động dưới mô hình Tập đoàn với tên gọi Tập đoàn Vingroup - Công ty CP. Trên tinh thần phát triển bền vững và chuyên nghiệp, sau khi thành lập, Vingroup đã cơ cấu lại và tập trung phát triển với nhiều nhóm thương hiệu như:
+                </textarea>
+			</div>
+		</div>
+	</div>
+
+	
+<script>
+	initSample();
+</script>
+
+</body>
+</html>

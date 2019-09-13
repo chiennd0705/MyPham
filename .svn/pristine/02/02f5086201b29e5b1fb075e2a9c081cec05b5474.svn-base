@@ -1,0 +1,181 @@
+﻿<div class="collapse navbar-collapse navbar-ex1-collapse">
+    <ul class="nav navbar-nav side-nav">
+        <li class="active">
+            <a href="/">
+                <i class="fa fa-home"></i>  Trang chủ
+            </a>
+        </li>
+        <li>
+
+
+            <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-users"></i> Quản lý user<i class="fa fa-fw fa-caret-down"></i></a>
+            <ul id="demo" class="collapse">
+                <li>
+                    <a href="/Manage/User/Index"><i class="fa fa-user"></i>Quản lý user</a>
+                </li>
+                <li>
+                    <a href="/Manage/User/Groups">
+                        <i class="fa fa-users"></i> Quản lý group
+                    </a>
+                </li>
+                <li>
+                    <a href="/Manage/User/Roles">
+                        <i class="fa fa-user"></i> Quản lý role
+                    </a>
+                </li>
+                <li>
+                    <a href="/Manage/User/Profile">
+                        <i class="fa fa-user-md"></i> Quản lý profile
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li>
+
+            <a href="javascript:;" data-toggle="collapse" data-target="#Category"><i class="fa fa-folder-open"></i> Danh Mục<i class="fa fa-fw fa-caret-down"></i></a>
+            <ul id="Category" class="collapse">
+                <li>
+                    <a href="/Manage/CategoryProduct/Index">
+                        <i class="fa fa-folder-open"></i> Ql Danh mục
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/Manage/CategoryProduct/Manufaceture">
+                        <i class="fa fa-university"></i> QL nhà sx
+                    </a>
+                </li>              
+                <li>
+                    <a href="/Manage/CategoryProduct/UpdateCache">
+                        <i class="fa fa-university"></i> Cập nhật Cache
+                    </a>
+                </li>              
+            </ul>
+        </li>
+        <li>
+            <a href="javascript:;" data-toggle="collapse" data-target="#Members"><i class="fa fa-male"></i> Quản lý Members<i class="fa fa-fw fa-caret-down"></i></a>
+            <ul id="Members" class="collapse">
+                <li>
+                    <a href="/Manage/Members/Index">
+                        <i class="fa fa-male"></i> Member
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/Manage/Members/MemberProfile">
+                        <i class="fa fa-file"></i> MemberProfile
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="javascript:;" data-toggle="collapse" data-target="#Products"><i class="fa fa-product-hunt"></i> Sản Phẩm<i class="fa fa-fw fa-caret-down"></i></a>
+            <ul id="Products" class="collapse">
+                <li>
+                    <a href="/Manage/Product/Index">
+                        <i class="fa fa-product-hunt"></i> QL sản phẩm
+                    </a>
+                </li>               
+            </ul>
+        </li>
+        <li>
+            <a href="javascript:;" data-toggle="collapse" data-target="#Orders"><i class="fa fa-shopping-cart"></i> Đơn hàng<i class="fa fa-fw fa-caret-down"></i></a>
+            <ul id="Orders" class="collapse">
+                <li>
+                    <a href="/Manage/Order/Index">
+                        <i class="fa fa-file-pdf-o"></i>  Đơn hàng
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/Manage/Order/Buyer">
+                        <i class="fa fa-male"></i> Người mua
+                    </a>
+                </li>
+                <li>
+                    <a href="/Manage/Order/Reciver">
+                        <i class="fa fa-male"></i> Người nhận
+                    </a>
+                </li>                
+            </ul>
+        </li>
+        <li>
+            <a href="javascript:;" data-toggle="collapse" data-target="#Locations"><i class="fa fa-location-arrow"></i> Vị trí<i class="fa fa-fw fa-caret-down"></i></a>
+            <ul id="Locations" class="collapse">
+                <li>
+                    <a href="/Manage/User/Location">
+                        <i class="fa fa-location-arrow"></i> Locations
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="javascript:;" data-toggle="collapse" data-target="#Shops"><i class="fa fa-shopping-basket"></i>  Quản lý Shops<i class="fa fa-fw fa-caret-down"></i></a>
+            <ul id="Shops" class="collapse">
+                <li>
+                    <a href="/Manage/Shop/Index">
+                        <i class="fa fa-th-list"></i> Danh sách
+                    </a>
+                </li>
+                <li>
+                    <a href="/Manage/Shop/Setting">
+                        <i class="fa fa-wrench"></i> Settings
+                    </a>
+                </li>
+                <li>
+                    <a href="/Manage/Shops/Supports">
+                        <i class="fa fa-phone-square"></i> Supports
+                    </a>
+                </li>
+                <li>
+                    <a href="/Manage/Shops/Policys">
+                        <i class="fa fa-bar-chart"></i> Policys
+                    </a>
+                </li>
+                <li>
+                    <a href="/Manage/Shops/NewsGroups">
+                        <i class="fa fa-bar-chart"></i> NewsGroups
+                    </a>
+                </li>
+                <li>
+                    <a href="/Manage/Shops/News">
+                        <i class="fa fa-hacker-news"></i> News
+                    </a>
+                </li>
+                <li>
+                    <a href="/Manage/Shops/Catalogs">
+                        <i class="fa fa-hacker-news"></i>Catalogs
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <!--Quản lý tin tức chung của trang-->
+        <li>
+            <a href="javascript:;" data-toggle="collapse" data-target="#News"><i class="glyphicon glyphicon-send"></i>  Quản lý Tin tức<i class="fa fa-fw fa-caret-down"></i></a>
+            <ul id="News" class="collapse">
+                <li>
+                    <a href="/Manage/News/Index">
+                        <i class="glyphicon glyphicon-tag"></i> Tin tức
+                    </a>
+                </li>
+                <li>
+                    <a href="/Manage/News/NewsGroup">
+                        <i class="fa fa-wrench"></i> Nhóm tin
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <!---->
+        <li>
+            <a href="javascript:;" data-toggle="collapse" data-target="#GatePay"><i class="fa fa-university"></i> Cổng thanh toán <i class="fa fa-fw fa-caret-down"></i></a>
+            <ul id="GatePay" class="collapse">
+                <li>
+                    <a href="/Manage/GatePay/Gate">
+                        <<i class="fa fa-wrench"></i> Config GatePay
+                    </a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>

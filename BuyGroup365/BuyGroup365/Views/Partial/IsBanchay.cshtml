@@ -1,0 +1,63 @@
+﻿@using BuyGroup365.Models.Home
+@using BuyGroup365.Models.Common
+
+<div class="widget-wrap widget-best-sell">
+    <div class="aside-title">
+        <h2 class="title-head margin-top-0 panel-box-title"><span>Sản phẩm bán chạy</span></h2>
+    </div>
+    <div class="widget-post pt-15">
+        @{
+            /**/
+
+            Business.ClassBusiness.ProductsBusiness productsBusiness = new Business.ClassBusiness.ProductsBusiness();
+            List<Common.Product> listProducts2 = productsBusiness.GetBySeller(6);
+            Business.ClassBusiness.ProductImagesBusiness productImageBusiness = new Business.ClassBusiness.ProductImagesBusiness();
+
+            foreach (Common.Product item in listProducts2)
+            {
+                int phantramKM = 0;
+                try
+                {
+                    phantramKM = Convert.ToInt32((item.Cost - item.Price) / item.Cost * 100);
+                }
+                catch { }
+                var listImg = productImageBusiness.FindProductId(item.Id);
+                var imgSource = "";
+                foreach (var img in listImg)
+                {
+                    if (img.IsAvatar == 1)
+                    {
+
+                        imgSource = Util.ReturnLinkCDN(img.ImgSource, Request.Browser.IsMobileDevice);
+
+                    }
+
+                }
+                <div class="random-prod">
+                    <div class="random-img">
+
+                        <picture>
+                            <source media="(min-width: 1200px)" srcset="@imgSource">
+                            <source media="(min-width: 992px)" srcset="@imgSource">
+                            <source media="(min-width: 480px)" srcset="@imgSource">
+                            <source media="(max-width: 479px)" srcset="@imgSource">
+                            <img src="@imgSource" alt="@item.ProductName">
+                        </picture>
+
+                    </div>
+                    <div class="random-text">
+                        <h3 class="title-1 no-margin"> <a href="@Util.ReturnLinkFull(item.FriendlyUrl)" title="@item.ProductName">@item.ProductName</a> </h3>
+                        <div class="price">
+
+
+                            <strong class="clr-txt">@(String.Format("{0:#,###}", item.Price))₫ </strong>
+
+
+                        </div>
+                    </div>
+                </div>
+
+            }
+        }
+    </div>
+</div>

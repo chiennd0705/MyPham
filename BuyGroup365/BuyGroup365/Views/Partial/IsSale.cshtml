@@ -1,0 +1,113 @@
+﻿@using BuyGroup365.Models.Home
+@using BuyGroup365.Models.Common
+
+
+
+
+<section class="awe-section-4">
+
+    <section class="naturix-goods section-product">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="title-wraps">
+                        <h2 class="section-title"><strong>#Khuyến mãi hot tuần này</strong></h2>
+                    </div>
+                    <div class="products-best-sell">
+                        <div class="products-best-sell-owl owl-carousel not-dqowl owl-loaded owl-drag">
+                            @{
+                                /**/
+
+                                Business.ClassBusiness.ProductsBusiness productsBusiness = new Business.ClassBusiness.ProductsBusiness();
+                                List<Common.Product> listProducts2 = productsBusiness.GetBySeller(6);
+                                Business.ClassBusiness.ProductImagesBusiness productImageBusiness = new Business.ClassBusiness.ProductImagesBusiness();
+
+                                foreach (Common.Product item in listProducts2)
+                                {
+                                    int phantramKM = 0;
+                                    try
+                                    {
+                                        phantramKM = Convert.ToInt32((item.Cost - item.Price) / item.Cost * 100);
+                                    }
+                                    catch { }
+                                    var listImg = productImageBusiness.FindProductId(item.Id);
+                                    var imgSource = "";
+                                    foreach (var img in listImg)
+                                    {
+                                        if (img.IsAvatar == 1)
+                                        {
+
+                                            imgSource = Util.ReturnLinkCDN(img.ImgSource, Request.Browser.IsMobileDevice);
+
+                                        }
+
+                                    }
+                                    <div class="item">
+                                        <div class="product-box">
+                                            <div class="product-media">
+
+                                                <a href="@Util.ReturnLinkFull(item.FriendlyUrl)" title="@item.ProductName">
+                                                    <picture>
+                                                        <source media="(min-width: 1200px)" srcset="@imgSource">
+                                                        <source media="(min-width: 1024px)" srcset="@imgSource">
+                                                        <source media="(min-width: 736px)" srcset="@imgSource">
+                                                        <source media="(min-width: 667px)" srcset="@imgSource">
+                                                        <source media="(min-width: 569px)" srcset="@imgSource">
+                                                        <source media="(min-width: 480px)" srcset="@imgSource">
+                                                        <img src="@imgSource" alt="" class="img-responsive center-block">
+                                                    </picture>
+                                                </a>
+
+
+                                                <span class="prod-tag tag-1">@phantramKM% </span>
+                                            </div>
+                                            <div class="product-caption">
+                                                <h3 class="product-title">
+                                                    <a href="@Util.ReturnLinkFull(item.FriendlyUrl)" title="@item.ProductName"><span class="light-font">@item.ProductName</span></a>
+                                                </h3>
+                                                <div class="price">
+
+
+                                                    <strong class="clr-txt">@(String.Format("{0:#,###}", item.Price))₫</strong>
+
+                                                    <del class="light-font">@(String.Format("{0:#,###}", item.Price))₫</del>
+
+
+
+                                                </div>
+                                                <div class="prod-action">
+                                                    <button type="button" onclick="add_item_show_modalCart(1022352640)" class="hidden-sm hidden-lg hidden-md btn buy-nows">Mua Ngay</button>
+                                                </div>
+                                                <div class="prod-icons ababababa">
+                                                    <form action="/cart/add" method="post" class="variants form-nut-grid has-validation-callback" data-id="product-actions-1011594218" enctype="multipart/form-data">
+
+
+                                                        <input type="hidden" name="id" value="1022352640">
+                                                        <a class="fa fa-shopping-basket" onclick="add_item_show_modalCart(1022352640)" title="Cho vào giỏ hàng"></a>
+
+
+                                                        <a href="/products/bo-duong-trang-dhc-age-defying-whitening" class="fa fa-expand quick-view"></a>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                            @*<div class="owl-nav">
+                                <div class="owl-prev disabled">prev</div>
+                                <div class="owl-next">next</div>
+                            </div>
+                            <div class="owl-dots disabled"></div>*@
+                        </div>
+                    </div>
+                    <div class="seemore">
+                        <a href="/collections/dhc-sale-off-chuong-trinh-giam-gia-dhc">
+                            Mời bạn <strong>xem thêm các sản phẩm</strong> đang <span>sale HOT</span> khác
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>

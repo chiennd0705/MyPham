@@ -1,0 +1,167 @@
+﻿@using Common
+@model List<Common.Product>
+@using System.Web.Caching;
+@using Business.ClassBusiness;
+@using BuyGroup365.Models.Common;
+@using System.Configuration;
+
+
+@{
+
+    List<Catalog> listLevel1;
+    CatalogsBusiness catalogBusiness = new CatalogsBusiness();
+    ProductsBusiness productBussiness = new ProductsBusiness();
+
+    listLevel1 = catalogBusiness.SearchCatalogByParentIdActive(-1);
+
+    int i = 1;
+    foreach (Catalog item in listLevel1)
+    {
+        string bannerUrl = "";
+        if (item.ImageSource != null && item.ImageSource != "")
+        {
+            bannerUrl = item.ImageSource;
+        }
+        List<Catalog> listcatasSub;
+
+        listcatasSub = catalogBusiness.SearchCatalogByParentId(item.Id);
+
+        if (i != listLevel1.Count)
+        {
+            <div class="container ads-banner">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="img-banner">
+                            @Html.Raw(item.Description)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="cate-product container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="navigate">
+                            <div class="title-cate">
+                                <h5 class="text">@item.CatalogName</h5>
+                            </div>
+                            <ul class="list-cate">
+                                <li><a href="@Util.ReturnLinkFull(item.FriendlyUrl)">Xem tất cả</a></li>
+                                @foreach (Catalog item1 in listcatasSub)
+                                {
+                                    <li><a href="@Util.ReturnLinkFull(item1.FriendlyUrl)">@item1.CatalogName</a></li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-cate">
+                    <ul class="cate-ul" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/OfferCatalog">
+                        @{
+                            List<SearchProductByType_Result> listproduct;
+                            listproduct = productBussiness.ListByProductsIdCatalogIDActiveHome((int)item.Id, 4);
+
+                            foreach (SearchProductByType_Result re in listproduct)
+                            {
+                                string probig = "";
+
+                                string imgPro = "";
+                                try
+                                {
+
+                                    imgPro = re.ImgSource;
+                                }
+                                catch { }
+                                if (re.IsProductBig)
+                                {
+                                    probig = "class=feature";
+                                    if (!Request.Browser.IsMobileDevice)
+                                    {
+                                        imgPro = re.LongImages;
+
+                                    }
+                                    else
+                                    {
+                                        imgPro = re.ImgSource;
+                                        probig = "";
+                                    }
+
+                                }
+                                <li @probig>
+                                    <a href="@Util.ReturnLinkFull(re.FriendlyUrl)">
+
+                                        <img data-src="@Util.ReturnLinkCDN(imgPro,Request.Browser.IsMobileDevice)" class="lazyload" itemprop="image" alt="@re.ProductName">
+                                        <label class="hand">
+                                            <img itemprop="image" data-src="@Util.ReturnLinkCDN("/Images/img/Vector-Smart-Object-copy-8.png",Request.Browser.IsMobileDevice)" class="lazyload"> Chính hãng
+                                        </label>
+                                        <h6 class="text" itemprop="name">@re.ProductName</h6>
+                                        <div class="price">
+                                            <h6 class="price-text">@re.Price.ToString("N0")<span class="under">đ</span></h6>
+                                        </div>
+                                    </a>
+                                </li>
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="container ads-banner">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="img-banner">
+                            @Html.Raw(item.Description)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="cate-product container gift">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="navigate">
+                            <div class="title-cate">
+                                <h5 class="text">@item.CatalogName</h5>
+                            </div>
+                            <ul class="list-cate">
+                                <li><a href="@Util.ReturnLinkFull(item.FriendlyUrl)">Xem tất cả</a></li>
+                                @foreach (Catalog item1 in listcatasSub)
+                                {
+                                    <li><a href="@Util.ReturnLinkFull(item1.FriendlyUrl)">@item1.CatalogName</a></li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-cate promotion">
+                    <div class="promotion-slider owl-carousel owl-theme" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/OfferCatalog">
+                        @{
+                            List<SearchProductByType_Result> listproduct;
+
+                            listproduct = productBussiness.ListByProductsIdCatalogIDActiveHome((int)item.Id, 4);
+
+                            foreach (SearchProductByType_Result re in listproduct)
+                            {
+                                int phantramKM = 0;
+                                try
+                                {
+                                    phantramKM = Convert.ToInt32((re.Cost - re.Price) / re.Cost * 100);
+                                }
+                                catch { }
+                                <div class="item">
+                                    <a href="@Util.ReturnLinkFull(re.FriendlyUrl)">
+                                        <img data-src='@Util.ReturnLinkCDN(re.ImgSource,Request.Browser.IsMobileDevice)' itemprop="image" class="img lazyload" />
+                                        <h6 class="discount">Giảm @phantramKM %</h6>
+                                        <h6 class="text" itemprop="name">@re.ProductName</h6>
+                                        <h6 class="price">@re.Price.ToString("N0")<span class="under">đ</span></h6>
+                                    </a>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+i++;
+    }
+}

@@ -1,0 +1,38 @@
+﻿@using Common
+@using Business.ClassBusiness;
+@using BuyGroup365.Models.Home
+
+
+
+<div class="blogs-owl owl-carousel owl-loaded owl-drag">
+    @{
+        try
+        {
+            Business.ClassBusiness.NewsBusiness newsBusiness = new Business.ClassBusiness.NewsBusiness();
+            List<Common.News> listNews = newsBusiness.ListByNews(5);
+            foreach (Common.News item in listNews)
+            {
+                <div class="blog-item">
+                    <div class="news-img">
+                        <a href="@BuyGroup365.Models.Common.Util.ReturnLinkFull(item.FriendlyUrl)">
+
+                            <img src="@item.ImageSource" alt="@item.Title">
+
+                        </a>
+                        <div class="news-caption">
+                            <a href="@BuyGroup365.Models.Common.Util.ReturnLinkFull(item.FriendlyUrl)" class="sub-title-sm">@item.Title</a>
+                            <h3 class="title-2"><a href="@BuyGroup365.Models.Common.Util.ReturnLinkFull(item.FriendlyUrl)"><span class="light-font">@item.Title</span></a></h3>
+                        </div>
+                    </div>
+                </div>
+
+            }
+        }
+        catch { }
+    }
+    <div class="owl-nav">
+        <div class="owl-prev">prev</div>
+        <div class="owl-next">next</div>
+    </div>
+    <div class="owl-dots disabled"></div>
+</div>

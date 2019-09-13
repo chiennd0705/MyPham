@@ -1,0 +1,10 @@
+﻿
+@{
+    ViewBag.Title = "VerifyMember";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+<div class="row" style="text-align: center;min-height: 550px">
+    <div style="text-align: center;margin-top: 100px">
+        @Html.Raw(ViewBag.Mes)
+    </div>
+</div>

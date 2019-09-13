@@ -1,0 +1,156 @@
+﻿@using BuyGroup365.Areas.Manage.Models
+
+@model Common.Catalog
+@{
+    ViewBag.Title = "Cập nhật danh mục";
+    Layout = "~/Areas/Manage/Views/Shared/_LayoutAdmincshtml.cshtml";
+}
+<script>
+    function BrowseServer() {
+        var finder = new CKFinder();
+        finder.BasePath = '/Content/css/ckfinder/';
+        finder.selectActionFunction = SetFileFiled;
+        // finder.SelectActionFunction = SetFileFiled;
+        //   finder.SelectFunction = SetFileFiled;
+        //   finder.SelectFunctionData = SetFileFiled;
+        finder.popup();
+    }
+    function SetFileFiled(FileUrl) {
+        document.getElementById('ImageSource').value = FileUrl;
+    }
+</script>
+<div class="container-fluid" ng-app="body">
+    @Html.Raw(AdminFunction.BindHeader("Sản phẩm", " Danh mục", "Cập nhật", null, null))
+    <!-- /.row -->
+    <!-- /.row -->
+    <!-- /.row -->
+    <div class="row" ng-controller="Index">
+        <div class="col-lg-12">
+
+            @using (Html.BeginForm("UpdateCatalog", "CategoryProduct", FormMethod.Post, new { enctype = "multipart/form-data", id = "UpdateCatalog" }))
+            {
+                <div class="modal-footer">
+                    <input id="FriendlyHD" name="FriendlyHD" type="hidden" value="@Model.FriendlyUrl" />
+                    <button type="submit" class="btn btn-primary">Cập nhật danh mục</button>
+                </div>
+                @Html.ValidationSummary(false)
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col-lg-6">
+
+                            <div class="form-group">
+                                <label>Tên danh mục<span class="required">*</span></label><br />
+                                <input class="form-control" autocomplete="off" maxlength="100" data-val-required="Mời nhập tên danh mục" required id="CatalogName" name="CatalogName" type="text" value="@Model.CatalogName">
+                                <span class="field-validation-valid" data-valmsg-for="CatalogName" data-valmsg-replace="true"></span>
+                            </div>
+                            <div class="form-group">
+                                <label>Đường dẫn</label><br />
+                                <input class="form-control" autocomplete="off" maxlength="100" disabled="true" data-val-required="Trường là bắt buộc" id="friendlyurl" name="friendlyurl" type="text" value="@Model.FriendlyUrl">
+                            </div>
+                            <div class="form-group">
+                                <label>Icon</label><br />
+                                <input class="form-control" autocomplete="off" style="width: 200px" id="Icon" name="Icon" type="file" value="@Model.Icon">
+                            </div>
+                            @*<div class="form-group">
+                                    <label>Banner</label><br />
+                                    <input class="form-control" autocomplete="off" style="width: 200px" id="Banner" name="Banner" type="file" value="@Model.Banner">
+                                </div>*@
+                            <div class="form-group">
+                                <label>Ảnh đại diện:<span class="required">*</span></label><br />
+
+                                <input id="ImageSource" name="ImageSource" data-val-required="Trường là bắt buộc" type="text" class="input-block-level" value="@Model.ImageSource" />
+                                <input type="button" value="Browse Server" onclick="BrowseServer();" class="controls" />
+                            </div>
+                            <div class="form-group">
+                                <label>Sắp xếp<span class="required">*</span></label><br />
+                                <input class="form-control" autocomplete="off" style="width: 200px" id="oder" name="oder" type="number" value="@Model.Order">
+                                <span class="field-validation-valid" data-valmsg-for="oder" data-valmsg-replace="true"></span>
+                            </div>
+
+                            <div class="form-group">
+
+                                <label>Status<span class="required">*</span></label><br />
+                                @*@Html.Raw(ViewBag.Status)*@
+                                <select class="form-control" name="Status" id="Status">
+                                    <option value="1" @(Model.Status == 1 ? "selected" : "")>Phát hành</option>
+                                    <option value="0" @(Model.Status == 0 ? "selected" : "")>Không phát hành</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+
+                                <label>Hiển thị trang chủ<span class="required">*</span></label><br />
+                                @*@Html.Raw(ViewBag.Status)*@
+                                <select class="form-control" name="IsLast" id="IsLast">
+                                    <option value="1" @(Model.IsLast == 1 ? "selected" : "")>Hiển thị nổi bật trang chủ</option>
+                                    <option value="0" @(Model.IsLast == 0 ? "selected" : "")>Không hiển thị trang chủ</option>
+                                </select>
+                            </div>
+
+                            @*<div class="form-group">
+
+                                    <label>Chương trình khuyến mãi<span class="required">*</span></label><br />
+                                    @Html.DropDownList("PromotionListID", null, new { @name = "PromotionListID" })
+                                </div>*@
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+
+                                <label>Danh mục cha<span class="required">*</span></label><br />
+                                @Html.DropDownList("parent", null, new { @height = "60px", @size = "15", @style = "width:100%", @name = "ParentId" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="form-group">
+                            <label>Thẻ tiêu đề</label><br />
+                            <textarea class="form-control" maxlength="200" id="seoTitle" name="seoTitle">@Model.SeoTitle</textarea>
+                            <span class="field-validation-valid" data-valmsg-for="seoTitle" data-valmsg-replace="true"></span>
+                        </div>
+                        <div class="form-group">
+                            <label>Thẻ từ khóa</label><br />
+                            <textarea class="form-control" maxlength="200" id="seoKeyword" name="seoKeyword">@Model.SeoKeyword</textarea>
+                            <span class="field-validation-valid" data-valmsg-for="seoKeyword" data-valmsg-replace="true"></span>
+                        </div>
+                        <div class="form-group">
+                            <label>Thẻ mô tả</label><br />
+                            <textarea class="form-control" maxlength="300" id="seoDescription" name="seoDescription">@Model.SeoDescription</textarea>
+                            <span class="field-validation-valid" data-valmsg-for="seoDescription" data-valmsg-replace="true"></span>
+                        </div>
+                        <div class="form-group">
+                            <label>Tiêu đề chia sẻ:</label><br />
+                            <input class="form-control" autocomplete="off" maxlength="200" id="ShareTitle" name="ShareTitle" type="text" value="@Model.ShareTitle" />
+                        </div>
+                        <div class="form-group">
+                            <label>Từ khóa chia sẻ:</label><br />
+                            <input class="form-control" autocomplete="off" maxlength="300" id="ShareKeyword" name="ShareKeyword" type="text" value="@Model.ShareKeyword" />
+                        </div>
+                        <div class="form-group">
+                            <label>Mô tả chia sẻ:</label><br />
+                            <textarea class="form-control" id="ShareDescription" maxlength="500" name="ShareDescription" style="height: 100px">@Model.ShareDescription</textarea>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="form-group">
+                            <label>Mô tả</label><br />
+                            <textarea class="form-control" id="Description" name="Description">@Model.Description</textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+
+                    <button type="submit" class="btn btn-primary">Cập nhật danh mục</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var Description = CKEDITOR.replace('Description', { height: 500 });
+    CKFinder.setupCKEditor(Description, '/Content/css/ckfinder/');
+
+            //jQuery(document).ready(function () {
+            @*jQuery('#Id option[value=@Model.Id]').attr('selected', 'selected');*@
+            //});
+</script>

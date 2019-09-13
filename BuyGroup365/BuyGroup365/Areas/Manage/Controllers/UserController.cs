@@ -1,0 +1,1108 @@
+﻿using Business.ClassBusiness;
+using Common;
+using Common.util;
+using MvcPaging;
+using System;
+using System.Collections.Generic;
+using System.ServiceModel;
+using System.Web;
+using System.Web.Mvc;
+
+namespace BuyGroup365.Areas.Manage.Controllers
+{
+    public class UserController : BaseController
+    {
+        private readonly UserBusiness _userBusiness = new UserBusiness();
+        private readonly UserProfileBusiness _userProfileBusiness = new UserProfileBusiness();
+        private readonly LocationsBusiness _locationsBusiness = new LocationsBusiness();
+
+        //protected override void Initialize(System.Web.Routing.RequestContext rc)
+        //{
+        //    base.Initialize(rc);
+
+        //    if (!SessionUtility.CheckLogin(Session))
+        //        Response.Redirect("/Login?returnUrl=" + rc.HttpContext.Request.Url.PathAndQuery);
+        //    else
+        //    {
+        //        if (!SessionUtility.CheckPermission(Session, rc.HttpContext.Request.Url.PathAndQuery))
+        //        {
+        //            Response.Redirect("/Error/NotPermissionAdmin");
+        //        }
+        //    }
+
+        //}
+
+        //
+        // GET: /Login/
+
+        #region QUẢN LÝ USER
+
+        public ActionResult Index(string key, int? page)
+        {
+            try
+            {
+                ViewData["status"] = true;
+                ViewData["key"] = key;
+                int currentPageIndex = page.HasValue ? page.Value : 1;
+
+                var list = _userBusiness.GetByKey(key).ToPagedList(currentPageIndex, 20);
+
+                return View(list);
+            }
+            catch (FaultException ex)
+            {
+                var exep = Function.GetExeption(ex);
+                var codeExp = exep[1];
+                string url = "Error/ErrorFunction/" + codeExp;
+                return RedirectToActionPermanent(url);
+            }
+        }
+
+        [HttpGet]
+        public ActionResult CreateUser()
+        {
+            ViewData["status"] = true;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CreateUser(string code, string userName, string userProfileName, string screenName, string email, DateTime? expiredDate, double? discountPercent, bool status, string password)
+        {
+            try
+            {
+                if (!_userBusiness.CheckExistUserName(userName))
+                {
+                    var user = new Common.User();
+                    user.CompanyId = 0;
+                    user.Createdate = DateTime.Now;
+                    user.Description = "";
+                    user.FailedLoginAttemp = 0;
+                    user.Lockout = true;
+                    user.LockoutDate = DateTime.Now;
+                    user.Logindate = DateTime.Now;
+                    user.Modifydate = DateTime.Now;
+                    user.Password = Common.util.Common.GetMd5Sum(password);
+                    user.PasswordEncrypted = true;
+                    user.PasswordEncryptedMethod = "MD5";
+                    user.PasswordModify_date = DateTime.Now;
+                    user.Screenname = screenName;
+                    user.Expireddate = expiredDate;
+
+                    if (discountPercent != null)
+                        user.DiscountPercent = (double)discountPercent;
+                    else
+                        user.DiscountPercent = 0;
+
+                    if (status)
+                        user.Status = (int)Common.util.Common.USER_STATUS.ACTIVE;
+                    else
+                        user.Status = (int)Common.util.Common.USER_STATUS.NOACTIVE;
+
+                    user.IsSuperUser = false;
+                    user.Username = userName;
+
+                    var userProfile = new UserProfile
+                    {
+                        Code = code,
+                        Name = userProfileName,
+                        Email = email,
+                        Createdate = DateTime.Now
+                    };
+                    user.UserProfile = userProfile;
+
+                    _userBusiness.AddNew(user);
+                    ViewData["ErrMessage"] = "Thêm mới thành công user";
+                    ViewData["status_"] = true;
+                }
+                else
+                {
+                }
+                return RedirectToAction("Index");
+            }
+            catch (FaultException ex)
+            {
+                var exep = Function.GetExeption(ex);
+                var codeExp = exep[1];
+                string url = "Error/ErrorFunction/" + codeExp;
+                return RedirectToActionPermanent(url);
+            }
+        }
+
+        public ActionResult Delete(long id = 0)
+        {
+            try
+            {
+                if (id > 0)
+                {
+                    _userBusiness.Remove(id);
+                }
+                return RedirectToAction("Index");
+            }
+            catch (FaultException ex)
+            {
+                var exep = Function.GetExeption(ex);
+                var codeExp = exep[1];
+                string url = "Error/ErrorFunction/" + codeExp;
+                return RedirectToActionPermanent(url);
+            }
+        }
+
+        #endregion QUẢN LÝ USER
+
+        #region QUẢN LÝ ROLES
+
+        public ActionResult Roles(string key, int? page)
+        {
+            try
+            {
+                ViewData["key"] = key;
+                int currentPageIndex = page.HasValue ? page.Value : 1;
+
+                IList<Role> list = new RoleBusiness().GetByKey(key).ToPagedList(currentPageIndex, 20);
+
+                return View((IPagedList<Role>)list);
+            }
+            catch (FaultException ex)
+            {
+                var exep = Function.GetExeption(ex);
+                var codeExp = exep[1];
+                string url = "Error/ErrorFunction/" + codeExp;
+                return RedirectToActionPermanent(url);
+            }
+        }
+
+        #region CREATE
+
+        //
+        // GET: /CMSBHDType/Create
+
+        public ActionResult CreateRole()
+        {
+            InitSelectListItemStatus();
+            return View();
+        }
+
+        //
+        // POST: /CMSBHDType/Create
+
+        [HttpPost]
+        public ActionResult CreateRole(Role record)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    RoleBusiness roleBusiness = new RoleBusiness();
+                    record.Title = record.Name;
+                    record.Createdate = DateTime.Now;
+                    record.Modifieddate = DateTime.Now;
+                    roleBusiness.AddNew(record);
+
+                    return RedirectToAction("Roles");
+                }
+
+                return View(record);
+            }
+            catch (FaultException ex)
+            {
+                var exep = Function.GetExeption(ex);
+                var codeExp = exep[1];
+                string url = "Error/ErrorFunction/" + codeExp;
+                return RedirectToActionPermanent(url);
+            }
+        }
+
+        #endregion CREATE
+
+        #region EDIT
+
+        //
+        // GET: /CMSBHDType/Create
+
+        public ActionResult EditRole(long id = 0)
+        {
+            try
+            {
+                InitSelectListItemStatus();
+                var roleBusiness = new RoleBusiness();
+
+                var record = roleBusiness.GetById(id);
+                if (record == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(record);
+            }
+            catch (FaultException ex)
+            {
+                var exep = Function.GetExeption(ex);
+                var codeExp = exep[1];
+                string url = "Error/ErrorFunction/" + codeExp;
+                return RedirectToActionPermanent(url);
+            }
+        }
+
+        //
+        // POST: /CMSBHDType/Create
+
+        [HttpPost]
+        public ActionResult EditRole(Role record)
+        {
+            try
+            {
+                if (record != null)
+                {
+                    var roleBusiness = new RoleBusiness();
+
+                    var temp = roleBusiness.GetById(record.Id);
+                    temp.Code = record.Code;
+                    temp.Modifieddate = DateTime.Now;
+                    temp.Name = record.Name;
+                    temp.Title = record.Name;
+                    temp.Status = record.Status;
+                    temp.Description = record.Description;
+                    roleBusiness.Edit(temp);
+                    return RedirectToAction("Roles");
+                }
+
+                return View();
+            }
+            catch (FaultException ex)
+            {
+                var exep = Function.GetExeption(ex);
+                var codeExp = exep[1];
+                string url = "Error/ErrorFunction/" + codeExp;
+                return RedirectToActionPermanent(url);
+            }
+        }
+
+        #endregion EDIT
+
+        #endregion QUẢN LÝ ROLES
+
+        #region MODULE FOR ROLE
+
+        [HttpGet]
+        public ActionResult ManageModulesForRole(long? id, int? page)
+        {
+            try
+            {
+                int currentPageIndex = page.HasValue ? page.Value : 1;
+
+                InitSelectListItemModule(id);
+
+                var roleModuleBusiness = new RoleModuleBusiness();
+                var roleBusiness = new RoleBusiness();
+                IList<RoleModule> roleModule = roleModuleBusiness.GetByRoleId((long)id).ToPagedList(currentPageIndex, 30);
+
+                var role = roleBusiness.GetById((long)id);
+
+                ViewData["rolename"] = role.Name;
+
+                return View((IPagedList<RoleModule>)roleModule);
+            }
+            catch (FaultException ex)
+            {
+                var exep = Function.GetExeption(ex);
+                var codeExp = exep[1];
+                string url = "Error/ErrorFunction/" + codeExp;
+                return RedirectToActionPermanent(url);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult ManageModulesForRole(long? id, long? module, string key)
+        {
+            try
+            {
+                var record = new RoleModule();
+                record.ModuleId = (long)module;
+                record.RoleId = (long)id;
+                record.Status = 1;
+
+                var roleModuleBusiness = new RoleModuleBusiness();
+
+                roleModuleBusiness.AddNew(record);
+
+                return ManageModulesForRole(id, 1);
+            }
+            catch (FaultException ex)
+            {
+                var exep = Function.GetExeption(ex);
+                var codeExp = exep[1];
+                string url = "Error/ErrorFunction/" + codeExp;
+                return RedirectToActionPermanent(url);
+            }
+        }
+
+        public ActionResult DeleteModulesForRole(long id = 0, long roleId = 0)
+        {
+            try
+            {
+                RoleModuleBusiness roleModuleBusiness = new RoleModuleBusiness();
+                roleModuleBusiness.Remove(id);//, SessionUtility.GetSessionUserID(Session), SessionUtility.GetSessionUserName(Session), SessionUtility.GetSessionLocation(Session), Common.GetHostName(Request.ServerVariables["remote_addr"]), Common.IPAdress(Request.ServerVariables["remote_addr"]));
+                return RedirectToActionPermanent("ManageModulesForRole", new { id = roleId });
+            }
+            catch (FaultException ex)
+            {
+                var exep = Function.GetExeption(ex);
+                var codeExp = exep[1];
+                string url = "Error/ErrorFunction/" + codeExp;
+                return RedirectToActionPermanent(url);
+            }
+        }
+
+        //Khởi tạo danh sách chọn Module
+        protected void InitSelectListItemModule(long? id)
+        {
+            var listItemModule = new List<SelectListItem>();
+            var listModule = new ModuleBusiness().GetModuleByNotInRole((long)id);
+
+            foreach (var record in listModule)
+                listItemModule.Add(new SelectListItem { Text = record.Name, Value = record.Id.ToString() });
+            ViewBag.ListItemModule = listItemModule;
+        }
+
+        #endregion MODULE FOR ROLE
+
+        #region QUẢN LÝ GROUPS
+
+        public ActionResult Groups(string key, int? page)
+        {
+            try
+            {
+                ViewData["key"] = key;
+                int currentPageIndex = page.HasValue ? page.Value : 1;
+
+                IList<UserGroup> list = new UserGroupBusiness().GetByKey(key).ToPagedList(currentPageIndex, 20);
+
+                return View((IPagedList<UserGroup>)list);
+            }
+            catch (FaultException ex)
+            {
+                var exep = Function.GetExeption(ex);
+                var codeExp = exep[1];
+                string url = "Error/ErrorFunction/" + codeExp;
+                return RedirectToActionPermanent(url);
+            }
+        }
+
+        #region CREATE
+
+        //
+        // GET: /CMSBHDType/Create
+
+        public ActionResult CreateGroup()
+        {
+            InitSelectListItemStatus();
+            return View();
+        }
+
+        //
+        // POST: /CMSBHDType/Create
+
+        [HttpPost]
+        public ActionResult CreateGroup(UserGroup record)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    UserGroupBusiness groupBusiness = new UserGroupBusiness();
+                    record.Createdate = DateTime.Now;
+                    record.Modifieddate = DateTime.Now;
+                    groupBusiness.AddNew(record);
+
+                    return RedirectToAction("Groups");
+                }
+
+                return View(record);
+            }
+            catch (FaultException ex)
+            {
+                var exep = Function.GetExeption(ex);
+                var codeExp = exep[1];
+                string url = "Error/ErrorFunction/" + codeExp;
+                return RedirectToActionPermanent(url);
+            }
+        }
+
+        #endregion CREATE
+
+        #region EDIT
+
+        //
+        // GET: /CMSBHDType/Create
+
+        public ActionResult EditGroup(long id = 0)
+        {
+            try
+            {
+                InitSelectListItemStatus();
+                UserGroupBusiness groupBusiness = new UserGroupBusiness();
+
+                var record = groupBusiness.GetById(id);
+                if (record == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(record);
+            }
+            catch (FaultException ex)
+            {
+                var exep = Function.GetExeption(ex);
+                var codeExp = exep[1];
+                string url = "Error/ErrorFunction/" + codeExp;
+                return RedirectToActionPermanent(url);
+            }
+        }
+
+        //
+        // POST: /CMSBHDType/Create
+
+        [HttpPost]
+        public ActionResult EditGroup(UserGroup record)
+        {
+            try
+            {
+                if (record != null)
+                {
+                    var groupBusiness = new UserGroupBusiness();
+                    var temp = groupBusiness.GetById(record.Id);
+                    temp.Code = record.Code;
+                    temp.Modifieddate = DateTime.Now;
+                    temp.Name = record.Name;
+                    temp.Status = record.Status;
+                    temp.Description = record.Description;
+                    groupBusiness.Edit(temp);
+
+                    return RedirectToAction("Groups");
+                }
+
+                return View();
+            }
+            catch (FaultException ex)
+            {
+                var exep = Function.GetExeption(ex);
+                var codeExp = exep[1];
+                string url = "Error/ErrorFunction/" + codeExp;
+                return RedirectToActionPermanent(url);
+            }
+        }
+
+        #endregion EDIT
+
+        #endregion QUẢN LÝ GROUPS
+
+        #region QUẢN LÝ PROFILE
+
+        public ActionResult Profile(string key, int? page)
+        {
+            try
+            {
+                ViewData["key"] = key;
+                int currentPageIndex = page.HasValue ? page.Value : 1;
+
+                IList<UserProfile> list = new UserProfileBusiness().GetByKey(key).ToPagedList(currentPageIndex, 20);
+
+                return View((IPagedList<UserProfile>)list);
+            }
+            catch (FaultException ex)
+            {
+                var exep = Function.GetExeption(ex);
+                var codeExp = exep[1];
+                string url = "Error/ErrorFunction/" + codeExp;
+                return RedirectToActionPermanent(url);
+            }
+        }
+
+        #region CREATE
+
+        //
+        // GET: /CMSBHDType/Create
+
+        [HttpGet]
+        public ActionResult CreateUserProfile()
+        {
+            ViewData["status"] = true;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CreateUserProfile(long? departmentId, string code, string name, string tel, string address, string email, DateTime? dob, string description)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var userProfile = new Common.UserProfile();
+                    if (!String.IsNullOrEmpty(departmentId.ToString()))
+                    {
+                        userProfile.DepartmentId = departmentId;
+                    }
+                    userProfile.Createdate = DateTime.Now;
+                    if (!String.IsNullOrEmpty(code))
+                    {
+                        userProfile.Code = code;
+                    }
+                    userProfile.Name = name;
+                    if (!String.IsNullOrEmpty(tel))
+                    {
+                        userProfile.Phone = tel;
+                    }
+                    if (!String.IsNullOrEmpty(address))
+                    {
+                        userProfile.Address = address;
+                    }
+                    if (!String.IsNullOrEmpty(email))
+                    {
+                        userProfile.Email = email;
+                    }
+                    if (!String.IsNullOrEmpty(dob.ToString()))
+                    {
+                        userProfile.Dob = dob;
+                    }
+                    if (!String.IsNullOrEmpty(description))
+                    {
+                        userProfile.Description = description;
+                    }
+
+                    try
+                    {
+                        _userProfileBusiness.AddNew(userProfile);
+                        ViewData["ErrMessage"] = "Thêm mới thành công userProfile";
+                        ViewData["status_"] = true;
+                    }
+                    catch (Exception e)
+                    {
+                        ViewData["ErrMessage"] = e.ToString();
+                    }
+                }
+                else
+                {
+                }
+                return RedirectToAction("Profile");
+            }
+            catch (FaultException ex)
+            {
+                var exep = Function.GetExeption(ex);
+                var codeExp = exep[1];
+                string url = "Error/ErrorFunction/" + codeExp;
+                return RedirectToActionPermanent(url);
+            }
+        }
+
+        #endregion CREATE
+
+        #region DELETE PROFILE
+
+        public ActionResult DeleteProfile(long id = 0)
+        {
+            try
+            {
+                if (id > 0)
+                {
+                    _userProfileBusiness.Remove(id);
+                }
+                return RedirectToAction("Profile");
+            }
+            catch (FaultException ex)
+            {
+                var exep = Function.GetExeption(ex);
+                var codeExp = exep[1];
+                string url = "Error/ErrorFunction/" + codeExp;
+                return RedirectToActionPermanent(url);
+            }
+        }
+
+        #endregion DELETE PROFILE
+
+        #endregion QUẢN LÝ PROFILE
+
+        #region ROLE FOR GROUP
+
+        [HttpGet]
+        public ActionResult ManageRolesForGroup(long? id, int? page)
+        {
+            try
+            {
+                int currentPageIndex = page.HasValue ? page.Value : 1;
+
+                InitSelectListItemRole(id);
+
+                var userGroupRoleBusiness = new UserGroupRoleBusiness();
+                var userGroupBusiness = new UserGroupBusiness();
+                if (id != null)
+                {
+                    IList<UserGroupRole> userGroupRole = userGroupRoleBusiness.GetByGroupId((long)id).ToPagedList(currentPageIndex, 30);
+
+                    var userGroup = userGroupBusiness.GetById((long)id);
+
+                    ViewData["group_name"] = userGroup.Name;
+
+                    return View((IPagedList<UserGroupRole>)userGroupRole);
+                }
+            }
+            catch (FaultException ex)
+            {
+                var exep = Function.GetExeption(ex);
+                var codeExp = exep[1];
+                string url = "Error/ErrorFunction/" + codeExp;
+                return RedirectToActionPermanent(url);
+            }
+
+            return RedirectToAction("Groups");
+        }
+
+        [HttpPost]
+        public ActionResult ManageRolesForGroup(long? id, long? role_id, string key)
+        {
+            try
+            {
+                var record = new UserGroupRole { RoleId = (long)role_id, UserGroupId = (long)id };
+
+                var userGroupRoleBusiness = new UserGroupRoleBusiness();
+
+                userGroupRoleBusiness.AddNew(record);
+
+                return ManageRolesForGroup(id, 1);
+            }
+            catch (FaultException ex)
+            {
+                var exep = Function.GetExeption(ex);
+                var codeExp = exep[1];
+                string url = "Error/ErrorFunction/" + codeExp;
+                return RedirectToActionPermanent(url);
+            }
+        }
+
+        public ActionResult DeleteRoleForGroup(long id = 0, long group_id = 0)
+        {
+            try
+            {
+                UserGroupRoleBusiness userGroupRoleBusiness = new UserGroupRoleBusiness();
+                userGroupRoleBusiness.Remove(id);//, SessionUtility.GetSessionUserID(Session), SessionUtility.GetSessionUserName(Session), SessionUtility.GetSessionLocation(Session), Common.GetHostName(Request.ServerVariables["remote_addr"]), Common.IPAdress(Request.ServerVariables["remote_addr"]));
+                return RedirectToActionPermanent("ManageRolesForGroup", new { id = group_id });
+            }
+            catch (FaultException ex)
+            {
+                var exep = Function.GetExeption(ex);
+                var codeExp = exep[1];
+                string url = "Error/ErrorFunction/" + codeExp;
+                return RedirectToActionPermanent(url);
+            }
+        }
+
+        //Khởi tạo danh sách chọn Module
+        protected void InitSelectListItemRole(long? id)
+        {
+            var listItemModule = new List<SelectListItem>();
+            var listModule = new RoleBusiness().GetRolesByNotInRroup((long)id);
+
+            foreach (var record in listModule)
+                listItemModule.Add(new SelectListItem { Text = record.Name, Value = record.Id.ToString() });
+            ViewBag.ListItemModule = listItemModule;
+        }
+
+        #endregion ROLE FOR GROUP
+
+        #region ROLE FOR GROUP
+
+        [HttpGet]
+        public ActionResult ManageGroupsForUser(long? id, int? page)
+        {
+            try
+            {
+                int currentPageIndex = page.HasValue ? page.Value : 1;
+
+                InitSelectListItemGroup(id);
+
+                var userUserGroupBusiness = new UserUserGroupBusiness();
+                var userBusiness = new UserBusiness();
+                IList<UserUsergroup> userUsergroup = userUserGroupBusiness.GetByUserId_((long)id).ToPagedList(currentPageIndex, 30);
+
+                var user_ = userBusiness.GetById((long)id);
+
+                ViewData["user_name"] = user_.Username;
+
+                return View((IPagedList<UserUsergroup>)userUsergroup);
+            }
+            catch
+            {
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult ManageGroupsForUser(long? id, long? groupId, string key)
+        {
+            try
+            {
+                UserUsergroup record = new UserUsergroup();
+                record.UserUsergroup1 = (long)groupId;
+                record.UserId = (long)id;
+
+                var userUserGroupBusiness = new UserUserGroupBusiness();
+
+                userUserGroupBusiness.AddNew(record);
+
+                return ManageGroupsForUser(id, 1);
+            }
+            catch (FaultException ex)
+            {
+                var exep = Function.GetExeption(ex);
+                var codeExp = exep[1];
+                string url = "Error/ErrorFunction/" + codeExp;
+                return RedirectToActionPermanent(url);
+            }
+        }
+
+        public ActionResult DeleteGroupForUser(long id = 0, long user_id = 0)
+        {
+            try
+            {
+                var userUserGroupBusiness = new UserUserGroupBusiness();
+
+                userUserGroupBusiness.Remove(id);//, SessionUtility.GetSessionUserID(Session), SessionUtility.GetSessionUserName(Session), SessionUtility.GetSessionLocation(Session), Common.GetHostName(Request.ServerVariables["remote_addr"]), Common.IPAdress(Request.ServerVariables["remote_addr"]));
+                return RedirectToActionPermanent("ManageGroupsForUser", new { id = user_id });
+            }
+            catch (FaultException ex)
+            {
+                var exep = Function.GetExeption(ex);
+                var codeExp = exep[1];
+                string url = "Error/ErrorFunction/" + codeExp;
+                return RedirectToActionPermanent(url);
+            }
+        }
+
+        //Khởi tạo danh sách chọn Module
+        protected void InitSelectListItemGroup(long? id)
+        {
+            var listItemGroup = new List<SelectListItem>();
+            var listGroup = new UserGroupBusiness().GetGroupByNotInUser((long)id);
+
+            foreach (var record in listGroup)
+                listItemGroup.Add(new SelectListItem { Text = record.Name, Value = record.Id.ToString() });
+            ViewBag.ListItemGroup = listItemGroup;
+        }
+
+        #endregion ROLE FOR GROUP
+
+        #region USER_MANAGER ACCOUNT
+
+        [HttpGet]
+        public ActionResult UpdateInfo()
+        {
+            var user = _userBusiness.GetById(long.Parse(SessionUtility.GetSessionUserId(Session)));
+            ViewData["code"] = user.UserProfile.Code;
+            ViewData["userProfileName"] = user.UserProfile.Name;
+            ViewData["screenName"] = user.Screenname;
+            ViewData["email"] = user.UserProfile.Email;
+            ViewData["tel"] = user.UserProfile.Phone;
+            ViewData["dob"] = user.UserProfile.Dob;
+            ViewData["address"] = user.UserProfile.Address;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult UpdateInfo(string userProfileName, string screenName, string email, string tel, DateTime? dob, string address)
+        {
+            try
+            {
+                var user = _userBusiness.GetById(long.Parse(SessionUtility.GetSessionUserId(Session)));
+                user.Screenname = screenName;
+                user.UserProfile.Name = userProfileName;
+                user.UserProfile.Phone = tel;
+                user.UserProfile.Dob = dob;
+                user.UserProfile.Address = address;
+                user.UserProfile.Modifieddate = DateTime.Now;
+
+                _userBusiness.Edit(user);
+
+                ViewData["ErrMessage"] = "Cập nhật thông tin thành công.";
+                ViewData["code"] = user.UserProfile.Code;
+                ViewData["userProfileName"] = user.UserProfile.Name;
+                ViewData["screenName"] = user.Screenname;
+                ViewData["email"] = user.UserProfile.Email;
+                ViewData["tel"] = user.UserProfile.Phone;
+                ViewData["dob"] = user.UserProfile.Dob;
+                ViewData["address"] = user.UserProfile.Address;
+            }
+            catch (FaultException ex)
+            {
+                var exep = Function.GetExeption(ex);
+                var codeExp = exep[1];
+                string url = "Error/ErrorFunction/" + codeExp;
+                return RedirectToActionPermanent(url);
+            }
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult ChangePassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ChangePassword(string pasOld, string password, string password_repeat)
+        {
+            try
+            {
+                if (password.Equals(password_repeat))
+                {
+                    bool isSuccess = _userBusiness.CheckPassword(SessionUtility.GetSessionUserName(Session), pasOld);
+
+                    if (isSuccess)
+                    {
+                        isSuccess = _userBusiness.ChangePassword(long.Parse(SessionUtility.GetSessionUserId(Session)), password);
+                        if (isSuccess)
+                        {
+                            ViewData["ErrMessage"] = "Thay đổi mật khẩu thành công.";
+                        }
+                        else
+
+                            ViewData["ErrMessage"] = "Không thay đổi được mật khẩu, mời bạn thử lại.";
+                    }
+                    else
+                    {
+                        ViewData["ErrMessage"] = "Mật khẩu cũ không chính xác.";
+                        ViewData["passwordOld"] = pasOld;
+                        ViewData["password"] = password;
+                        ViewData["password_repeat"] = password_repeat;
+                    }
+                }
+                else
+                {
+                    ViewData["ErrMessage"] = "Nhắc lại mật khẩu không chính xác.";
+                    ViewData["passwordOld"] = pasOld;
+                    ViewData["password"] = password;
+                    ViewData["password_repeat"] = password_repeat;
+                }
+                return View();
+            }
+            catch (FaultException ex)
+            {
+                var exep = Function.GetExeption(ex);
+                var codeExp = exep[1];
+                string url = "Error/ErrorFunction/" + codeExp;
+                return RedirectToActionPermanent(url);
+            }
+        }
+
+        #endregion USER_MANAGER ACCOUNT
+
+        #region ADMIN USER_MANAGER ACCOUNT
+
+        [HttpGet]
+        public ActionResult AdminUpdateInfo(long id)
+        {
+            try
+            {
+                var user_ = _userBusiness.GetById(id);
+                ViewData["code"] = user_.UserProfile.Code;
+                ViewData["userProfileName"] = user_.UserProfile.Name;
+                ViewData["screenName"] = user_.Screenname;
+                ViewData["email"] = user_.UserProfile.Email;
+                ViewData["tel"] = user_.UserProfile.Phone;
+                ViewData["dob"] = user_.UserProfile.Dob;
+                ViewData["address"] = user_.UserProfile.Address;
+                ViewData["discountPercent"] = user_.DiscountPercent;
+                return View();
+            }
+            catch
+            {
+                return RedirectToAction("Index");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult AdminUpdateInfo(long id, string code, string userProfileName, string screenName, string email, string tel, DateTime? dob, string address, double? discountPercent)
+        {
+            try
+            {
+                var user = _userBusiness.GetById(id);
+                user.UserProfile.Code = code;
+
+                user.Screenname = screenName;
+                user.UserProfile.Name = userProfileName;
+                user.UserProfile.Phone = tel;
+                user.UserProfile.Dob = dob;
+                user.UserProfile.Address = address;
+                user.UserProfile.Modifieddate = DateTime.Now;
+                user.UserProfile.Email = email;
+                if (discountPercent != null)
+                    user.DiscountPercent = (double)discountPercent;
+                else
+                    user.DiscountPercent = 0;
+
+                _userBusiness.Edit(user);
+
+                return RedirectToAction("Index");
+                //ViewData["ErrMessage"] = "Cập nhật thông tin thành công.";
+                //ViewData["code"] = user_.user_profile.code;
+                //ViewData["userProfileName"] = user_.user_profile.name;
+                //ViewData["screenName"] = user_.screenname;
+                //ViewData["email"] = user_.user_profile.email;
+                //ViewData["tel"] = user_.user_profile.phone;
+                //ViewData["dob"] = user_.user_profile.dob;
+                //ViewData["address"] = user_.user_profile.address;
+            }
+            catch (FaultException ex)
+            {
+                var exep = Function.GetExeption(ex);
+                var codeExp = exep[1];
+                string url = "Error/ErrorFunction/" + codeExp;
+                return RedirectToActionPermanent(url);
+            }
+        }
+
+        [HttpGet]
+        public ActionResult ResetPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ResetPassword(long id, string password, string password_repeat)
+        {
+            try
+            {
+                if (password.Equals(password_repeat))
+                {
+                    bool isSuccess = _userBusiness.ChangePassword(id, password);
+                    if (isSuccess)
+                    {
+                        return RedirectToAction("Index");
+                    }
+                    else
+
+                        ViewData["ErrMessage"] = "Không thay đổi được mật khẩu, mời bạn thử lại.";
+                }
+                else
+                {
+                    ViewData["ErrMessage"] = "Nhắc lại mật khẩu không chính xác.";
+                    ViewData["password"] = password;
+                    ViewData["password_repeat"] = password_repeat;
+                }
+                return View();
+            }
+            catch (FaultException ex)
+            {
+                var exep = Function.GetExeption(ex);
+                var codeExp = exep[1];
+                string url = "Error/ErrorFunction/" + codeExp;
+                return RedirectToActionPermanent(url);
+            }
+        }
+
+        #endregion ADMIN USER_MANAGER ACCOUNT
+
+        #region LOCATION
+
+        public ActionResult Location(string key, int? page)
+        {
+            try
+            {
+                //draw tree category
+                List<BuyGroup365.Models.Member.LoadDropdown.DropdowLocation> listDropdowLocation = new List<BuyGroup365.Models.Member.LoadDropdown.DropdowLocation>();
+                listDropdowLocation.Add(new BuyGroup365.Models.Member.LoadDropdown.DropdowLocation() { Id = 0, Name = "-----------------Chọn Parent----------------" });
+                ViewBag.htmlCate = new BuyGroup365.Models.Member.LoadDropdown().SearchLocationByName(ref listDropdowLocation);
+
+                ViewData["status"] = true;
+                ViewData["key"] = key;
+                int currentPageIndex = page.HasValue ? page.Value : 1;
+
+                var list = _locationsBusiness.GetByKey(key).ToPagedList(currentPageIndex, 20);
+
+                return View(list);
+            }
+            catch (FaultException ex)
+            {
+                var exep = Function.GetExeption(ex);
+                var codeExp = exep[1];
+                string url = "Error/ErrorFunction/" + codeExp;
+                return RedirectToActionPermanent(url);
+            }
+        }
+
+        #region Create Location
+
+        public ActionResult CreateLocation(long htmlCate, string name, HttpPostedFileBase icon, int order)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    Location location = new Location();
+                    location.Name = name;
+                    location.Order = order;
+                    location.ParentId = htmlCate;
+                    if (icon != null && icon.ContentLength > 0)
+                    {
+                        // TourInfo entity=new TourInfo();
+                        //Random rdImage = new Random();
+                        string randomImage = Guid.NewGuid().ToString();
+                        string fileNameImage = Common.util.Function.ConvertFileName(icon.FileName);
+                        string pathImage = HttpContext.Server.MapPath("~/FileUpload");
+                        var strurlimage = Common.util.Function.ResizeImageNew(icon, 300, 300, pathImage, randomImage);
+                        Common.util.Function.ResizeImageNew(icon, 500, 500, pathImage, randomImage);
+                        Common.util.Function.ResizeImageNew(icon, 1000, 1000, pathImage, randomImage);
+                        location.Icon = strurlimage;
+                    }
+                    _locationsBusiness.AddNew(location);
+                    return RedirectToAction("Location");
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return View();
+        }
+
+        #endregion Create Location
+
+        #region Delete Location
+
+        public ActionResult DeleteLocation(long id = 0)
+        {
+            try
+            {
+                if (id > 0)
+                {
+                    _locationsBusiness.Remove(id);
+                }
+                return RedirectToAction("Location");
+            }
+            catch (FaultException ex)
+            {
+                var exep = Function.GetExeption(ex);
+                var codeExp = exep[1];
+                string url = "Error/ErrorFunction/" + codeExp;
+                return RedirectToActionPermanent(url);
+            }
+        }
+
+        #endregion Delete Location
+
+        #endregion LOCATION
+
+        [HttpGet]
+        public ActionResult Info()
+        {
+            return View();
+        }
+
+        //Khởi tạo danh sách chọn trạng thái voucher
+        protected void InitSelectListItemStatus()
+        {
+            var listItemStatus = new List<SelectListItem>();
+            listItemStatus.Add(new SelectListItem { Text = "Activated", Value = "1" });
+            //listItemStatus.Add(new SelectListItem { Text = "Không phát hành", Value = "0" });
+            listItemStatus.Add(new SelectListItem { Text = "Khóa", Value = "2" });
+            ViewBag.ListItemStatus = listItemStatus;
+        }
+    }
+}

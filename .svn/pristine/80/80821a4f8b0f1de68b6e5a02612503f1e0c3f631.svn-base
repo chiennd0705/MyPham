@@ -1,0 +1,26 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace FluentValidationTester.Models
+{
+
+
+    public class MyRegistry : StructureMap.Configuration.DSL.Registry
+    {
+        public MyRegistry()
+        {
+            FluentValidation.AssemblyScanner.FindValidatorsInAssemblyContaining<CustomerValidator>()
+              .ForEach(result =>
+              {
+                  For(result.InterfaceType)
+                     .Singleton()
+                     .Use(result.ValidatorType);
+              });
+
+        }
+    }
+
+
+}

@@ -1,0 +1,322 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection;
+using BHDCommon;
+using Common.entity.bases;
+using Common.exception;
+
+namespace DataAccess.bases
+{
+    public abstract class AbstractBaseDao<T, TId> where T : AbstractBaseEntity<TId>, new() where TId : IEquatable<TId>
+    {
+        //protected DataContext context = null;
+        protected DbContext Context = null;
+        private Type _entityType;
+
+        //public abstract DataContext getDataContext();
+
+        public AbstractBaseDao(Type entityType)
+        {
+            _entityType = entityType;
+            //this.Context = context;
+        }
+
+        public DbContext DataContext
+        {
+            get { return Context;
+                
+            }
+            set
+            {
+                Context = value;
+            }
+        }
+
+        //public Table<T> getEntityTable()
+        public DbSet<T> GetEntityTable()
+        {
+            //Table<T> rs= null;
+            DbSet<T> rs = null;
+            if (!Equals(DataContext, null))
+            {
+                //rs = (Table<T>)getDataContext().GetTable(entityType);
+                rs = DataContext.Set<T>();
+            }
+            return rs;
+        }
+
+        public void Insert(T obj)
+        {
+            
+            if (!Equals(obj, null))
+            {
+                GetEntityTable().Add(obj);
+           
+            }
+        
+        }
+
+        public void Update(T obj)
+        {
+            if (!Equals(obj, null))
+            {
+                T origin = GetById(obj.Id);
+                if (origin != null)
+                {
+                    ObjectUtil.CopyTo(origin, obj);
+
+                }
+               
+            }
+        }
+
+        public void Delete(TId id)
+        {
+            if (!Equals(id, null))
+            {
+                T origin = GetById(id);
+                if (!Equals(origin, null))
+                {
+                    //getEntityTable().DeleteOnSubmit(origin);
+                    GetEntityTable().Remove(origin);
+                }
+                //DataContext.SaveChanges();
+            }
+        }
+
+        public T GetById(TId id)
+        {
+            T obj = default(T);
+            if (!Equals(id, null))
+            {
+                IQueryable<T> rs = GetDynamicQuery().Where(e => e.Id.Equals(id));
+                //obj = rs.FirstOrDefault<T>();
+                //var rs = from x in getEntityTable()
+                //         where object.Equals(id, x.Id)
+                //            select x;
+                obj = rs.SingleOrDefault();
+            }
+            return obj;
+        }
+
+        public  IQueryable<T> GetDynamicQuery()
+        {
+            IQueryable<T> query = GetEntityTable().AsQueryable();
+            return query;
+        }
+
+        /// <summary>
+        /// </summary>
+        /// <param name="conditions">Biêu thức điều kiện</param>
+        /// <param name="operation">Toán tử quan hệ</param>
+        /// <returns>list of row</returns>
+        public long CountByProperties(List<object[]> conditions, string operation)
+        {
+            IQueryable<T> query = GetDynamicQuery();
+            return query.Where(GetWhereLambda(conditions, operation)).Count();
+        }
+        /// <summary>
+        /// </summary>
+        /// <param name="func"></param>
+        /// <param name="orderby">
+        ///     orderby[0]: name of fields
+        ///     orderby[1]: ASC/DESC
+        /// </param>
+        /// <param name="startIndex">start index of first row</param>
+        /// <param name="pageSize">pageSize</param>
+        /// <returns>list of row</returns>
+        public List<T> FindByProperties(Func<T, bool> func,
+            List<string[]> orderby, int startIndex, int pageSize)
+        {
+            IQueryable<T> query = GetDynamicQuery();
+            List<T> listResult = query.Where(func).Skip(startIndex).Take(pageSize).ToList();
+            return listResult;
+        }
+
+
+        /// <summary>
+        /// </summary>
+        /// <param name="conditions">
+        ///     conditions[0]: string - name of fields
+        ///     conditions[1]: string - EQ/NE/LK
+        ///     conditions[2]: object - value
+        /// </param>
+        /// <param name="operation">AND/OR</param>
+        /// <param name="orderby"></param>
+        /// <param name="startIndex">start index of first row</param>
+        /// <param name="pageSize">pageSize</param>
+        /// <returns>list of row</returns>
+        public List<T> FindByPropertiesByconditions(List<object[]> conditions,
+            List<string[]> orderby, string operation, int startIndex, int pageSize)
+        {
+               IQueryable<T> query = GetDynamicQuery();
+            if (conditions != null && conditions.LongCount()>0)
+            {
+
+                return query.Where(GetWhereLambda(conditions, operation)).OrderByDescending(x => x.Id).Skip((startIndex - 1) * pageSize).Take(pageSize).ToList();
+            }
+            return query.OrderByDescending(x => x.Id).Skip((startIndex - 1)*pageSize).Take(pageSize).ToList();
+        }
+
+        #region Ham Get Expression
+        public Expression GetExpression(object[] obj, ParameterExpression param)
+        {
+            Expression ex;
+
+            if (obj[1].ToString() == "=")
+            {
+                ex = GetEqualsExpr(param, obj[0].ToString(), obj[2].ToString());
+            }
+            else if (obj[1].ToString() == ">")
+            {
+                ex = GreaterThanExpr(param, obj[0].ToString(), int.Parse(obj[2].ToString()));
+            }
+            else if (obj[1].ToString() == ">=")
+            {
+                ex = GreaterThanOrEqualExpr(param, obj[0].ToString(), int.Parse(obj[2].ToString()));
+            }
+            else if (obj[1].ToString() == "<")
+            {
+                ex = LessThanExpr(param, obj[0].ToString(), int.Parse(obj[2].ToString()));
+            }
+            else if (obj[1].ToString() == "<=")
+            {
+                ex = LessThanOrEqualExpr(param, obj[0].ToString(), int.Parse(obj[2].ToString()));
+            }
+            else if (obj[1].ToString() == "!=")
+            {
+                ex = NotEqualExpr(param, obj[0].ToString(), obj[2].ToString());
+            }
+            else//like
+            {
+                ex = LikeExpr(param, obj[0].ToString(), obj[2].ToString());
+            }
+            return ex;
+        }
+
+        public Expression<Func<T, bool>> GetWhereLambda(List<object[]> conditions, string operato)
+        {
+            Expression ex = null;
+            ParameterExpression param = Expression.Parameter(typeof(T), "s");
+            int dem = conditions.Count;
+
+            switch (dem)
+            {
+                case 1:
+                    ex = GetExpression(conditions[0], param);
+                    break;
+
+                case 2:
+                    if (operato == "AND")
+                    {
+                        ex = GetExpression(conditions[0], param);
+                        ex = Expression.And(ex, GetExpression(conditions[1], param));
+                    }
+                    else
+                    {
+                        ex = GetExpression(conditions[0], param);
+                        ex = Expression.Or(ex, GetExpression(conditions[1], param));
+                    }
+                    break;
+                case 3:
+                    if (operato == "AND")
+                    {
+                        ex = GetExpression(conditions[0], param);
+                        ex = Expression.And(ex, GetExpression(conditions[1], param));
+                        ex = Expression.And(ex, GetExpression(conditions[2], param));
+                    }
+                    else
+                    {
+                        ex = GetExpression(conditions[0], param);
+                        ex = Expression.Or(ex, GetExpression(conditions[1], param));
+                        ex = Expression.Or(ex, GetExpression(conditions[2], param));
+                    }
+                    break;
+            }
+
+            return Expression.Lambda<Func<T, bool>>(ex, param);
+        }
+        private Expression GetEqualsExpr(ParameterExpression param,
+          string property,
+          string value)
+        {
+            Expression prop = Expression.Property(param, property);
+            Expression val = Expression.Constant(value);
+            return Expression.Equal(prop, val);
+        }
+
+        private Expression GreaterThanExpr(ParameterExpression param,
+            string property,
+            int value)
+        {
+            Expression prop = Expression.Property(param, property);
+            Expression val = Expression.Constant(value);
+            return Expression.GreaterThan(prop, val);
+        }
+
+        private Expression GreaterThanOrEqualExpr(ParameterExpression param,
+            string property,
+            int value)
+        {
+            Expression prop = Expression.Property(param, property);
+            Expression val = Expression.Constant(value);
+            return Expression.GreaterThanOrEqual(prop, val);
+        }
+
+        private Expression LessThanExpr(ParameterExpression param,
+            string property,
+            int value)
+        {
+            Expression prop = Expression.Property(param, property);
+            Expression val = Expression.Constant(value);
+            return Expression.LessThan(prop, val);
+        }
+
+        private Expression LessThanOrEqualExpr(ParameterExpression param,
+            string property,
+            int value)
+        {
+            Expression prop = Expression.Property(param, property);
+            Expression val = Expression.Constant(value);
+            return Expression.LessThanOrEqual(prop, val);
+        }
+
+        private Expression NotEqualExpr(ParameterExpression param,
+            string property,
+            string value)
+        {
+            Expression prop = Expression.Property(param, property);
+            Expression val = Expression.Constant(value);
+            return Expression.NotEqual(prop, val);
+        }
+        private Expression LikeExpr(ParameterExpression param,
+           string property,
+           string value)
+        {
+            Expression prop = Expression.Property(param, property);
+            Expression val = Expression.Constant(value);
+            return Like(prop, val, param);
+        }
+        #endregion
+
+        #region
+
+        static bool Like(string a, string b)
+        {
+            return a.Contains(b); // just for illustration
+        }
+        static Expression Like(Expression lhs, Expression rhs, ParameterExpression param)
+        {
+            var body = Expression.Call(
+                typeof(T).GetMethod("Like",
+                    BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public)
+                    , lhs, rhs);
+            return Expression.Lambda<Func<T, bool>>(body, param);
+        }
+        #endregion
+
+    }
+}

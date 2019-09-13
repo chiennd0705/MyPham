@@ -1,0 +1,738 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Net.Mail;
+using System.ServiceModel;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+using System.Web;
+using System.Web.UI;
+
+
+namespace Common.util
+{
+    public class Function
+    {
+        public  static List<Catalog> ListCate=null;
+ 
+        public static DateTime ConvertDateTime(string str)
+        {
+            DateTime dt = new DateTime();
+            if (!string.IsNullOrEmpty(str))
+            {
+                var time = str.Split('/');
+                string date = time[1] + "/" + time[0] + "/" + time[2];
+                return DateTime.Parse(date);
+            }
+            else
+            {
+                return dt;
+            }
+
+        }
+
+        public static string GetSex(int id)
+        {
+            if (id == 1)
+            {
+                return "Nam";
+            }
+            else
+            {
+                return "Nữ";
+
+            }
+        }
+
+        public static string FomatDate(DateTime dt)
+        {
+            return dt.ToString("dd/MM/yyyy");
+        }
+        public static DateTime ConvertDate(string str)
+        {
+            if (!string.IsNullOrEmpty(str))
+            {
+                return DateTime.Parse(str);
+            }
+            else
+            {
+                return new DateTime();
+            }
+        }
+        public static string FomatNumber(double number)
+        {
+            return number.ToString("N0", CultureInfo.InvariantCulture);
+        }
+        public static byte[] Upload(HttpPostedFileBase file)
+        {
+            if (file != null)
+            {
+                using (Bitmap origImage = new Bitmap(file.InputStream))
+                {
+                    int maxWidth = 165;
+
+                    int newWidth = origImage.Width;
+                    int newHeight = origImage.Height;
+                    if (origImage.Width < newWidth) //Force to max width
+                    {
+                        newWidth = maxWidth;
+                        newHeight = origImage.Height * maxWidth / origImage.Width;
+                    }
+
+                    using (Bitmap newImage = new Bitmap(newWidth, newHeight))
+                    {
+                        using (Graphics gr = Graphics.FromImage(newImage))
+                        {
+                            gr.SmoothingMode = SmoothingMode.AntiAlias;
+                            gr.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                            gr.PixelOffsetMode = PixelOffsetMode.HighQuality;
+                            gr.DrawImage(origImage, new Rectangle(0, 0, newWidth, newHeight));
+
+                            MemoryStream ms = new MemoryStream();
+                            newImage.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+                            return ms.ToArray();
+                        }
+                    }
+                }
+            }
+            else
+            {
+                return null;
+            }
+
+        }
+
+        public static byte[] ConvertImageUrl(string path)
+        {
+            return System.IO.File.ReadAllBytes(HttpContext.Current.Server.MapPath(path));
+        }
+        public static bool CheckImgExtension(string nameImg, Page page)
+        {
+            string extension = System.IO.Path.GetExtension(page.Server.HtmlEncode(nameImg)).ToLower();
+
+            if ((extension == ".jpg") || (extension == ".png") || (extension == ".jpeg") || (extension == ".gif"))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public static string ReSizeImageTHAI(string path, string name, string radom, int width, int height, HttpPostedFileBase imageFileUpload)
+        {
+            string result = "";
+
+            name = radom + "_" + name;
+            System.Drawing.Image picTmp = System.Drawing.Image.FromStream(imageFileUpload.InputStream);
+
+            int srcWidth = picTmp.Width;
+            int srcHeight = picTmp.Height;
+
+            float nPercent = 0;
+            float nPercentW = 0;
+            float nPercentH = 0;
+
+            nPercentW = ((float)width / (float)srcWidth);
+            nPercentH = ((float)height / (float)srcHeight);
+
+            if (width == 0)//Auto width
+            {
+                nPercent = nPercentH;
+            }
+            else if (height == 0)//auto height
+            {
+                nPercent = nPercentW;
+            }
+            else if (nPercentW > nPercentH)
+            {
+                nPercent = nPercentH;
+            }
+            else
+            {
+                nPercent = nPercentW;
+            }
+
+            int thumb_width = 0;
+            int thumb_height = 0;
+
+            if (nPercent < 1)
+            {
+                thumb_width = (int)(srcWidth * nPercent);
+                thumb_height = (int)(srcHeight * nPercent);
+
+                Bitmap bmp = new Bitmap(thumb_width, thumb_height, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+                bmp.MakeTransparent(Color.White);
+                System.Drawing.Graphics gr = System.Drawing.Graphics.FromImage(bmp);
+                gr.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+                gr.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
+                gr.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality;
+                gr.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+
+                System.Drawing.Rectangle rectDestination = new System.Drawing.Rectangle(0, 0, thumb_width, thumb_height);
+                gr.DrawImage(picTmp, rectDestination, 0, 0, srcWidth, srcHeight, GraphicsUnit.Pixel);
+
+                bmp.Save(path + name, ImageFormat.Png);
+
+                bmp.Dispose();
+                result = path + name;
+            }
+            else //Just make a copy
+            {
+                //System.IO.File.Copy(source_file, thumb_file);
+                imageFileUpload.SaveAs(path + name);
+                result = path + name;
+            }
+
+            picTmp.Dispose();
+
+            return result;
+
+        }
+        public static string ConvertFileName(string s)
+        {
+            string stFormD = s.Normalize(NormalizationForm.FormD);
+            StringBuilder sb = new StringBuilder();
+
+            for (int ich = 0; ich < stFormD.Length; ich++)
+            {
+                UnicodeCategory uc = CharUnicodeInfo.GetUnicodeCategory(stFormD[ich]);
+                if (uc != UnicodeCategory.NonSpacingMark)
+                {
+                    sb.Append(stFormD[ich]);
+                }
+            }
+            string temp = sb.ToString().Normalize(NormalizationForm.FormC);
+            char[] chars = @"–$%#@!*?;:~`+=()[]{}|\'<>,/^&""".ToCharArray();
+            int len = chars.Length;
+            for (int i = 0; i < len; i++)
+            {
+                string strChar = chars.GetValue(i).ToString();
+                if (temp.Contains(strChar))
+                {
+                    temp = temp.Replace(strChar, string.Empty);
+                }
+
+            }
+            temp = Regex.Replace(temp, "Đ|đ|đ|Đ", "d", RegexOptions.IgnoreCase);
+
+            return temp.Replace(" ", "-").ToLower();
+        }
+        public static string ConvertFileNameNotVietNamce(string s)
+        {
+            string stFormD = s.Normalize(NormalizationForm.FormD);
+            StringBuilder sb = new StringBuilder();
+
+            for (int ich = 0; ich < stFormD.Length; ich++)
+            {
+                UnicodeCategory uc = CharUnicodeInfo.GetUnicodeCategory(stFormD[ich]);
+                if (uc != UnicodeCategory.NonSpacingMark)
+                {
+                    sb.Append(stFormD[ich]);
+                }
+            }
+            string temp = sb.ToString().Normalize(NormalizationForm.FormC);
+            char[] chars = @"–$%#@!*?;:~`+=()[]{}|\'<>,/^&""".ToCharArray();
+            int len = chars.Length;
+            for (int i = 0; i < len; i++)
+            {
+                string strChar = chars.GetValue(i).ToString();
+                if (temp.Contains(strChar))
+                {
+                    temp = temp.Replace(strChar, string.Empty);
+                }
+
+            }
+            temp = Regex.Replace(temp, "Đ|đ|đ|Đ", "d", RegexOptions.IgnoreCase);
+
+            return temp.Replace(" ", "").ToLower();
+        }
+        public static string[] GetExeption(FaultException ex)
+        {
+            var str = ex.CreateMessageFault().Reason.ToString();
+            string[] liststring = str.Split('#');
+            string[] results = { liststring[1], liststring[2] };
+            return results;
+        }
+        public static string ContentMailactive = "<div style=\"color: rgb(5,92,146);\"><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width=\"90%\" style=\"width: 90.0%; border-collapse: collapse;\"> " +
+                             "<tbody><tr style=\"height: 38.25pt;\"><td style=\"padding: 2.25pt 2.25pt 2.25pt 2.25pt; height: 38.25pt;\">" +
+                             "<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\"  width=\"100%\" style=\"width: 100.0%;\">" +
+                             "<tbody><tr><td width=\"50%\" valign=\"top\" style=\"width: 50.0%; padding: 0in 0in 0in 0in;\">" +
+                             "<p><b><span style=\"font-size: 18.0pt; color: #2E6AB9;\">BuyGroup365.vn</span></b></p>" +
+                             "</td><td width=\"50%\" valign=\"bottom\" style=\"width: 50.0%; padding: 0in 0in 0in 0in;\">" +
+                             "<p align=\"right\" style=\"text-align: right;\"><b></b></p> </td></tr></tbody> </table> </td></tr>" +
+                             "<tr style=\"height: 16.5pt;\"><td style=\"padding: 2.25pt 2.25pt 2.25pt 2.25pt; height: 16.5pt;\"></td></tr>" +
+                             "<tr style=\"height: 357.0pt;\"><td valign=\"top\" style=\"padding: 2.25pt 2.25pt 2.25pt 2.25pt; height: 357.0pt;\">" +
+                             "<p><span style=\"font-size: 10.0pt; font-family: &quot; sans-serif&quot;\">Thưa thành viên!" +
+                             "<br><br><br>Chào mừng bạn đến với Buygroup365! Để trở thành thành viên của hệ thống vui long click vào link bên đươi để xác nhật " +
+                             "<table border=\"1\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\" style=\"width: 100.0%; border-collapse: collapse; border: none;\">" +
+                             "<tbody><tr><td width=\"100%\" style=\"width: 100.0%; border: inset silver 1.0pt; background: #EEEEEE; padding: 2.25pt 2.25pt 2.25pt 2.25pt;\">" +
+                             "<p class=\"yiv1167142103MsoNormal\"> <b><span style=\"font-size: 10.0pt; font-family: &quot; sans-serif&quot; color: navy;\">Thông Tin thành viên</span></b><span style=\"font-size: 10.0pt; font-family: &quot; sans-serif&quot;\"></span>" +
+                             "</p></td> </tr>" +
+                             "<tr> <td width=\"100%\" style=\"width: 100.0%; border: inset silver 1.0pt; border-top: none; padding: 2.25pt 2.25pt 2.25pt 2.25pt;\">" +
+                             "<p class=\"yiv1167142103MsoNormal\">" +
+                             "<span style=\"font-size: 10.0pt; font-family: &quot; sans-serif&quot;\"><br>" +
+                             "- <strong>Link active</strong>: click vào  <a href=\" {0}\" target=\"_blank\">đây</a><br><br>" +
+                             "- <strong>E-mail</strong> : {1}<br>" +
+                             "- <strong>Mật khẩu</strong> : {2}<br>" +
+                              "Cảm ơn bạn một lần nữa đã lựa chọn Buygruop365.<br><br> <strong>Trân trọng!</strong><br>" +
+                                                 "<strong> Nhóm điều hành</strong><br> Buygroup365" +
+                             "</td></tr></tbody></table></td> </tr> </tbody></table> </div>";
+        public static string ContentMailDangkytaikhoang = "<div style=\"color: rgb(5,92,146);\"><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width=\"90%\" style=\"width: 90.0%; border-collapse: collapse;\"> " +
+                             "<tbody><tr style=\"height: 38.25pt;\"><td style=\"padding: 2.25pt 2.25pt 2.25pt 2.25pt; height: 38.25pt;\">" +
+                             "<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\"  width=\"100%\" style=\"width: 100.0%;\">" +
+                             "<tbody><tr><td width=\"50%\" valign=\"top\" style=\"width: 50.0%; padding: 0in 0in 0in 0in;\">" +
+                             "<p><b><span style=\"font-size: 18.0pt; color: #2E6AB9;\">thachsach.vn</span></b></p>" +
+                             "</td><td width=\"50%\" valign=\"bottom\" style=\"width: 50.0%; padding: 0in 0in 0in 0in;\">" +
+                             "<p align=\"right\" style=\"text-align: right;\"><b></b></p> </td></tr></tbody> </table> </td></tr>" +
+                             "<tr style=\"height: 16.5pt;\"><td style=\"padding: 2.25pt 2.25pt 2.25pt 2.25pt; height: 16.5pt;\"></td></tr>" +
+                             "<tr style=\"height: 357.0pt;\"><td valign=\"top\" style=\"padding: 2.25pt 2.25pt 2.25pt 2.25pt; height: 357.0pt;\">" +
+                             "<p><span style=\"font-size: 10.0pt; font-family: &quot; sans-serif&quot;\">Thưa thành viên {0}!" +
+                             "<br><br><br>Chào mừng bạn đến với Thạch sanh Group! Bây giờ bạn có quyền truy cập vào trang website: thachsanh.vn của chúng tôi và hãy dùng nó làm phương tiện quảng bá trên toàn cầu cho hành trình tìm ví thạch sanh của Bạn. Từ đây sẽ giúp Bạn triển khai kế hoạch cho cuộc đời và sự nghiệp của Bạn, nó sẽ giúp cho Bạn quản lý tài chính, quản lý tốc độ phát triển của bạn.<br><br>" +
+                             "Để bắt đầu sự nghiệp của Bạn, đây là xác nhận mua hàng của bạn và thông tin tài khoản (vui lòng kiểm tra để xác minh nó là đúng): " +
+                             "<br> Xin chúc mừng bạn đã trở thành thành viên của thạch sach group do thành viên {1} giới thiệu<br>" +
+
+
+                             "<table border=\"1\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\" style=\"width: 100.0%; border-collapse: collapse; border: none;\">" +
+                             "<tbody><tr><td width=\"100%\" style=\"width: 100.0%; border: inset silver 1.0pt; background: #EEEEEE; padding: 2.25pt 2.25pt 2.25pt 2.25pt;\">" +
+                             "<p class=\"yiv1167142103MsoNormal\"> <b><span style=\"font-size: 10.0pt; font-family: &quot; sans-serif&quot; color: navy;\">Thông Tin thành viên</span></b><span style=\"font-size: 10.0pt; font-family: &quot; sans-serif&quot;\"></span>" +
+                             "</p></td> </tr>" +
+                             "<tr> <td width=\"100%\" style=\"width: 100.0%; border: inset silver 1.0pt; border-top: none; padding: 2.25pt 2.25pt 2.25pt 2.25pt;\">" +
+                             "<p class=\"yiv1167142103MsoNormal\">" +
+                             "<span style=\"font-size: 10.0pt; font-family: &quot; sans-serif&quot;\"><br>" +
+
+                             "- <strong>Member ID#</strong> : {2}<br>" +
+                             "- <strong>Mật khẩu</strong> : {3}<br>" +
+                             "- <strong>Họ tên</strong> : {4} {5}<br>" +
+                              "<strong>Sản phẩm (s): membership</strong> </br>" +
+                              "Tài khoản của bạn sẽ cần phải được tài trợ và các giao dịch đang chờ sẽ cần phải được thanh toán đầy đủ trong vòng 2 ngày hoặc thành viên của bạn sẽ bị chấm dứt.<br><br>" +
+                              "Cảm ơn bạn một lần nữa đã lựa chọn thạch sanh group. Chúng tôi rất vui để có bạn trên bảng và chúng tôi mong muốn giúp bạn khám phá một thế giới của những công cụ hỗ trợ cho bạn thành công.<br><br> <strong>Trân trọng!</strong><br>" +
+                                                 "<strong> Nhóm điều hành</strong><br> thạch sanh Marketing " +
+                             "</td></tr></tbody></table></td> </tr> </tbody></table> </div>";
+        public static string ContentMailHoaHong = "<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width=\"90%\" style=\"width: 90.0%; border-collapse: collapse;\"> " +
+                              "<tbody><tr style=\"height: 38.25pt;\"><td style=\"padding: 2.25pt 2.25pt 2.25pt 2.25pt; height: 38.25pt;\">" +
+                              "<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\"  width=\"100%\" style=\"width: 100.0%;\">" +
+                              "<tbody><tr><td width=\"50%\" valign=\"top\" style=\"width: 50.0%; padding: 0in 0in 0in 0in;\">" +
+                              "<p><b><span style=\"font-size: 18.0pt; color: #2E6AB9;\">buygroup365.vn</span></b></p>" +
+                              "</td><td width=\"50%\" valign=\"bottom\" style=\"width: 50.0%; padding: 0in 0in 0in 0in;\">" +
+                              "<p align=\"right\" style=\"text-align: right;\"><b></b></p> </td></tr></tbody> </table> </td></tr>" +
+                              "<tr style=\"height: 16.5pt;\"><td style=\"padding: 2.25pt 2.25pt 2.25pt 2.25pt; height: 16.5pt;\"></td></tr>" +
+                              "<tr style=\"height: 357.0pt;\"><td valign=\"top\" style=\"padding: 2.25pt 2.25pt 2.25pt 2.25pt; height: 357.0pt;\">" +
+                              "<p><span style=\"font-size: 10.0pt; font-family: &quot; sans-serif&quot;\">Xin chào!" +
+                              "<br>Dểư trở thành thành viên của buygroup365 bạn click vào link bên dưới để xác nhận tài khoản<br>" +
+
+
+                              "<table border=\"1\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\" style=\"width: 100.0%; border-collapse: collapse; border: none;\">" +
+                              "<tbody><tr><td width=\"100%\" style=\"width: 100.0%; border: inset silver 1.0pt; background: #EEEEEE; padding: 2.25pt 2.25pt 2.25pt 2.25pt;\">" +
+                              "<p class=\"yiv1167142103MsoNormal\"> <b><span style=\"font-size: 10.0pt; font-family: &quot; sans-serif&quot; color: navy;\">Thông Tin thành viên</span></b><span style=\"font-size: 10.0pt; font-family: &quot; sans-serif&quot;\"></span>" +
+                              "</p></td> </tr>" +
+                              "<tr> <td width=\"100%\" style=\"width: 100.0%; border: inset silver 1.0pt; border-top: none; padding: 2.25pt 2.25pt 2.25pt 2.25pt;\">" +
+                              "<p class=\"yiv1167142103MsoNormal\">" +
+                              "<span style=\"font-size: 10.0pt; font-family: &quot; sans-serif&quot;\"><br>" +
+                              "- Link active: click vào  <a href=\" {0}\" target=\"_blank\">đây</a><br><br>" +
+                              "- Id Đăng nhập : {1}<br>" +
+                              "- Mật khẩu : {2}<br><br>" +
+                              "</td></tr></tbody></table></td> </tr> </tbody></table> </div>";
+        public static void email_send(string tomail, string subject, object body, int type)
+        {
+            var mailContentDiv = "";
+            if (type == 0)
+            {
+                var obj = (ObjSendMail)(body);
+                mailContentDiv = string.Format(ContentMailactive, obj.UrlVeryfly, obj.Mail, obj.Pass);// gửi mail active tai khoản
+            }
+            else if (type == 1)
+            {
+                var obj = (ObjSendMail)(body);
+               // mailContentDiv = string.Format(ContentMailDangkytaikhoang, obj.Member.MemberProfile.FirstName, obj.Member.MemberInfo.MemberAboutId, obj.Id, obj.Pass, obj.Member.MemberProfile.LastName, obj.Member.MemberProfile.FirstName);// gửi mail id đăng nhập
+            }
+
+            MailMessage msg = new MailMessage();
+            msg.From = new MailAddress("thailh@alupvn.com");
+            msg.To.Add(tomail); // txt la file nguoi nhan 
+            msg.Subject = subject; // txtSubject tieu de mail 
+            var contet = mailContentDiv;
+            msg.Body = contet; // txtObject noi dung mail
+            msg.IsBodyHtml = true; // xuat theo dinh dang HTML
+            //System.Net.Mail.Attachment attachment;
+            //attachment = new System.Net.Mail.Attachment(urlfile);
+            //msg.Attachments.Add(attachment);
+            SmtpClient client = new SmtpClient("smtp.gmail.com", 587); // giao thuc cua thang gmail
+            client.Credentials = new System.Net.NetworkCredential("thailh@alupvn.com", "thailh123@"); // usernam, password cua nguoi goi giong nhu dang nhap vao gmail cua nguoi goi
+            client.EnableSsl = true;
+            try
+            {
+                client.Send(msg);
+            }
+            catch (SmtpException ex)
+            {
+                throw ex;
+            }
+
+        }
+        public static void email_send(string tomail, string subject, String body)
+        {
+         
+
+            MailMessage msg = new MailMessage();
+            msg.From = new MailAddress("thailh@alupvn.com");
+            msg.To.Add(tomail); // txt la file nguoi nhan 
+            msg.Subject = subject; // txtSubject tieu de mail 
+            var contet = body;
+            msg.Body = contet; // txtObject noi dung mail
+            msg.IsBodyHtml = true; // xuat theo dinh dang HTML
+            //System.Net.Mail.Attachment attachment;
+            //attachment = new System.Net.Mail.Attachment(urlfile);
+            //msg.Attachments.Add(attachment);
+            SmtpClient client = new SmtpClient("smtp.gmail.com", 587); // giao thuc cua thang gmail
+            client.Credentials = new System.Net.NetworkCredential("thailh@alupvn.com", "thailh123@"); // usernam, password cua nguoi goi giong nhu dang nhap vao gmail cua nguoi goi
+            client.EnableSsl = true;
+            try
+            {
+                client.Send(msg);
+            }
+            catch (SmtpException ex)
+            {
+                throw ex;
+            }
+
+        }
+        #region rezzi imag
+        public static string ResizeImageNew(HttpPostedFileBase file, int width, int height, string originalDirectory, string randomImage)
+        {
+            var urlstr = "";
+            if (file != null && file.ContentLength > 0)
+            {
+                //Định nghĩa đường dẫn lưu file trên server
+                //ở đây mình lưu tại đường dẫn yourdomain.com/Uploads/
+                //   var originalDirectory = new DirectoryInfo(@"/Uploads");
+                //Lưu trữ hình ảnh theo từng tháng trong năm
+                var date = DateTime.Now;
+                var year = date.Year.ToString();
+                var mouth = date.Month;
+                var day = date.Day;
+                var foder = "";
+                if (width <= 300)
+                {
+                    foder = "Small";
+                }
+                else if (width <= 500)
+                {
+                    foder = "Medium";
+                }
+                else
+                {
+                    foder = "Large";
+                }
+                var urldetail = year + "/" + mouth + "/" + day + "/" + foder;
+                string pathString = System.IO.Path.Combine(originalDirectory.ToString(), urldetail);
+                bool isExists = System.IO.Directory.Exists(pathString);
+                if (!isExists) System.IO.Directory.CreateDirectory(pathString);
+                string newFileName = randomImage + "_" + ConvertFileName(file.FileName);
+                var path = string.Format("{0}\\{1}", pathString, newFileName);
+                urlstr = "/FileUpload/" + year + "/" + mouth + "/" + day + "/" + "?"+ newFileName;
+                //lấy đường dẫn lưu file sau khi kiểm tra tên file trên server có tồn tại hay không
+                var newPath = GetNewPathForDupes(path, ref newFileName);
+
+                string serverPath = string.Format("/{0}/{1}/{2}/{3}/{4}/{5}", "Uploads", year, mouth, day, foder,newFileName);
+                //Lưu hình ảnh Resize từ file sử dụng file.InputStream
+                SaveResizeImage(Image.FromStream(file.InputStream), width, height, newPath);
+                //   fileNames.Add("LocalPath: " + newPath + "<br/>ServerPath: " + serverPath);
+            }
+            return urlstr;
+        }
+
+        public static bool SaveResizeImage(Image img, int width, int height, string path)
+        {
+            try
+            {
+                // lấy chiều rộng và chiều cao ban đầu của ảnh
+                int originalW = img.Width;
+                int originalH = img.Height;
+                // lấy chiều rộng và chiều cao mới tương ứng với chiều rộng truyền vào của ảnh (nó sẽ giúp ảnh của chúng ta sau khi resize vần giứ được độ cân đối của tấm ảnh
+                /*int resizedW = width;
+                int resizedH = (originalH * resizedW) / originalW;*/
+                int intMaxSide;
+                int intNewWidth;
+                int intNewHeight;
+                if (originalW >= originalH)
+                {
+                    intMaxSide = originalW;
+                    double dblCoef = width / (double)intMaxSide;
+                    intNewWidth = Convert.ToInt32(dblCoef * originalW);
+                    intNewHeight = Convert.ToInt32(dblCoef * originalH);
+                }
+                else
+                {
+                    intMaxSide = originalH;
+                    double dblCoef = height / (double)intMaxSide;
+                    intNewWidth = Convert.ToInt32(dblCoef * originalW);
+                    intNewHeight = Convert.ToInt32(dblCoef * originalH);
+                }
+                /*if(intMaxSide >= width)
+                {
+                    double dblCoef = width / (double)intMaxSide;
+                    intNewWidth = Convert.ToInt32(dblCoef * originalW);
+                    intNewHeight = Convert.ToInt32(dblCoef * originalH);
+                }
+                else
+                {
+                        double dblCoef = width / (double)intMaxSide;
+                        intNewHeight = Convert.ToInt32(originalH * dblCoef);
+                        intNewWidth = Convert.ToInt32(originalW * dblCoef);                 
+                }*/
+                Bitmap b = new Bitmap(width, height);
+                Graphics g = Graphics.FromImage((Image)b);
+                g.InterpolationMode = InterpolationMode.Bicubic;    // Specify here
+                g.DrawImage(img, (width - intNewWidth) / 2, (height - intNewHeight) / 2, intNewWidth, intNewHeight);
+                g.Dispose();
+                b.Save(path);
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+
+        }
+        private static string GetNewPathForDupes(string path, ref string fn)
+        {
+            string directory = Path.GetDirectoryName(path);
+            string filename = Path.GetFileNameWithoutExtension(path);
+            string extension = Path.GetExtension(path);
+            int counter = 1;
+            string newFullPath = path;
+            string new_file_name = filename + extension;
+            while (System.IO.File.Exists(newFullPath))
+            {
+                string newFilename = string.Format("{0}({1}){2}", filename, counter, extension);
+                new_file_name = newFilename;
+                newFullPath = Path.Combine(directory, newFilename);
+                counter++;
+            };
+            fn = new_file_name;
+            return newFullPath;
+        }
+        #endregion
+        public static string InitUrl(string catUrl, long id, long mid, double priceFrom, double priceTo, string param)
+        {
+            string html = "/" + catUrl + "-dm" + id;
+
+            if (mid != 0)
+            {
+                html += "?mid=" + mid;
+                if (priceFrom != 0 || priceTo != 0)
+                {
+                    html += "&price=" + priceFrom + ":" + priceTo;
+                    if (!string.IsNullOrEmpty(param))
+                    {
+                        html += "&" + param;
+
+                    }
+                }
+                else
+                {
+                    if (!string.IsNullOrEmpty(param))
+                    {
+                        html += "&" + param;
+
+                    }
+                }
+            }
+            else
+            {
+                if (priceFrom != 0 || priceTo != 0)
+                {
+                    html += "?price=" + priceFrom + ":" + priceTo;
+                    if (!string.IsNullOrEmpty(param))
+                    {
+                        html += "&" + param;
+
+                    }
+                }
+                else
+                {
+                    if (!string.IsNullOrEmpty(param))
+                    {
+                        html += "?" + param;
+
+                    }
+                }
+
+            }
+
+            return html;
+        }
+        public static string InitUrlDetaiProduct(string url, long id)
+        {
+            return string.Format("/{0}-ct{1}", url, id);
+        }
+        #region PAGING
+        public static int[] Paging(int countRecord, object obj, int SIZE_PAGE, int SIZE_OF_PAGE, ref int page, ref int numberPage)
+        {
+            int[] arrayPage;
+            int firtPage, lastPage = 0, j = 0;
+            numberPage = 0;
+            //Tính số trang
+            if (countRecord % SIZE_OF_PAGE == 0)
+                numberPage = countRecord / SIZE_OF_PAGE;
+            else
+                numberPage = countRecord / SIZE_OF_PAGE + 1;
+
+            if (numberPage >= SIZE_PAGE * 2 + 1)
+                arrayPage = new int[SIZE_PAGE * 2 + 1];
+            else
+                arrayPage = new int[numberPage];
+
+            //Tìm trang hiện tại
+
+            if (obj != null)
+                page = Int32.Parse(obj.ToString());
+            else
+                page = 1;
+
+            if (numberPage <= SIZE_PAGE * 2 + 1)
+            {
+                firtPage = 1;
+                lastPage = numberPage;
+            }
+            else
+            {
+                if (page <= SIZE_PAGE + 1)
+                {
+                    firtPage = 1;
+                    lastPage = SIZE_PAGE * 2 + 1;
+                }
+                else
+                {
+                    if (page + SIZE_PAGE <= numberPage)
+                    {
+                        firtPage = page - SIZE_PAGE;
+                        lastPage = page + SIZE_PAGE;
+                    }
+                    else
+                    {
+                        lastPage = numberPage;
+                        firtPage = numberPage - SIZE_PAGE * 2;
+                    }
+                }
+            }
+            for (int i = firtPage; i <= lastPage; i++)
+            {
+                arrayPage[j] = i;
+                j++;
+            }
+            return arrayPage;
+        }
+        #endregion
+
+
+        public static readonly string[] VietnameseSigns = new string[]
+ 
+    {
+ 
+        "aAeEoOuUiIdDyY",
+ 
+        "áàạảãâấầậẩẫăắằặẳẵ",
+ 
+        "ÁÀẠẢÃÂẤẦẬẨẪĂẮẰẶẲẴ",
+ 
+        "éèẹẻẽêếềệểễ",
+ 
+        "ÉÈẸẺẼÊẾỀỆỂỄ",
+ 
+        "óòọỏõôốồộổỗơớờợởỡ",
+ 
+        "ÓÒỌỎÕÔỐỒỘỔỖƠỚỜỢỞỠ",
+ 
+        "úùụủũưứừựửữ",
+ 
+        "ÚÙỤỦŨƯỨỪỰỬỮ",
+ 
+        "íìịỉĩ",
+ 
+        "ÍÌỊỈĨ",
+ 
+        "đ",
+ 
+        "Đ",
+ 
+        "ýỳỵỷỹ",
+ 
+        "ÝỲỴỶỸ"
+ 
+    };
+        protected static string RemoveSign4VietnameseString(string str)
+        {
+
+            //Tiến hành thay thế , lọc bỏ dấu cho chuỗi
+
+            for (int i = 1; i < VietnameseSigns.Length; i++)
+            {
+
+                for (int j = 0; j < VietnameseSigns[i].Length; j++)
+
+                    str = str.Replace(VietnameseSigns[i][j], VietnameseSigns[0][i - 1]);
+
+            }
+
+            return str;
+
+        }
+        public static string ConvertUrlString(string s1)
+        {
+
+            string temp = RemoveSign4VietnameseString(s1);
+
+            /* string stFormD = s.Normalize(NormalizationForm.FormD);
+             StringBuilder sb = new StringBuilder();
+
+             for (int ich = 0; ich < stFormD.Length; ich++)
+             {
+                 UnicodeCategory uc = CharUnicodeInfo.GetUnicodeCategory(stFormD[ich]);
+                 if (uc != UnicodeCategory.NonSpacingMark)
+                 {
+                     sb.Append(stFormD[ich]);
+                 }
+             }*/
+            // string temp = sb.ToString().Normalize(NormalizationForm.FormC);
+            char[] chars = @"$%#@!*?;:~`+=()[]{}|\'<>,/^&"".".ToCharArray();
+
+            for (int i = 0; i < chars.Length; i++)
+            {
+                string strChar = chars.GetValue(i).ToString();
+                if (temp.Contains(strChar))
+                {
+                    temp = temp.Replace(strChar, string.Empty);
+                }
+
+            }
+            temp = Regex.Replace(temp, "Đ|đ|đ|Đ", "d", RegexOptions.IgnoreCase);
+
+            return temp.Replace(" ", "-").ToLower();
+        }
+        #region Mesebox
+
+        public static string MessengerBox(string type, string mes)
+        {
+            if (string.IsNullOrEmpty(type) || string.IsNullOrEmpty(mes))
+            {
+                return null;
+            }
+            else
+            {
+                var str = "<ul class=\"x\"><li class=\"" + type + "\">" +
+                      "<ul> <li><span>" + mes + "</span></li>" +
+                      "</ul></li></ul>";
+                return str;
+            }
+            
+        }
+        #endregion
+    }
+
+}

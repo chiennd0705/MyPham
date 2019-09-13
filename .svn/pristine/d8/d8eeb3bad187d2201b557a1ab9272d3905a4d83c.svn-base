@@ -1,0 +1,62 @@
+﻿@{
+    ViewBag.Title = "Success";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+<style>
+    #box-thanksyou {
+        margin: 30px 0;
+        margin-bottom: 50px;
+    }
+
+        #box-thanksyou .col-left {
+            margin-right: 56px;
+            margin-left: 60px;
+            background-image: url(/Content/Csspublic/images/spritesheet1.png);
+            background-repeat: no-repeat;
+            display: block;
+            width: 220px;
+            height: 223px;
+            background-position: -234px -160px;
+            margin-top: 20px;
+        }
+
+        #box-thanksyou .col-right {
+            overflow: hidden;
+            margin-top: 20px;
+        }
+
+            #box-thanksyou .col-right > h1 {
+                color: #4bad4e;
+                margin-top: 0;
+                font-size: 28px;
+                line-height: 1;
+                margin-bottom: 14px;
+            }
+</style>
+<div class="container ">
+
+    <div id="box-thanksyou" class=" clearfix">
+        <input type="hidden" value="4">
+        <div id="box-thanksyou-top" class="clearfix">
+
+            <div class="col-sm-3 col-xs-12 col-left">
+            </div>
+            <div class="col-sm-8 col-xs-12 col-right">
+                <h1>Quý khách đã đặt hàng thành công!</h1>
+                <p>Cảm ơn Quý khách đã mua hàng trên Buygroup365. Chúng tôi sẽ liên hệ với Quý khách qua số điện thoại Quý khách đã đăng ký để xác nhận đơn hàng trong thời gian sớm nhất. </p>
+                <p><i>Trong trường hợp Quý khách không phải là người trực tiếp nhận hàng, Quý khách vui lòng thông báo cho người nhận luôn bật điện thoại để nhận liên lạc từ nhân viên giao hàng của chúng tôi.</i></p>
+                @*
+                <div class="box-item">
+                    <p><span class="label">Mã đơn hàng:</span><span class="code-item">151230244</span></p>
+                    <p><span class="label">Thành tiền:</span><span class="total-price">2.150.000đ</span></p>
+                </div>
+                <a onclick="ToOrderList()" class="detail-order">Xem chi tiết đơn hàng <i class="caret"></i></a>
+
+                *@  
+            </div>
+        </div>
+
+
+    </div>
+</div>
+

@@ -1,0 +1,145 @@
+﻿using Business.bases;
+using Common;
+using Common.exception;
+using DataAccess.DAO;
+using log4net;
+using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Reflection;
+
+namespace Business.ClassBusiness
+{
+    public class RoleBusiness : AbstractBaseBusiness<Role, long>
+    {
+        private readonly ILog _logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
+        public RoleBusiness()
+            : base(new RoleDao())
+        {
+            daoLayer.DataContext = DataContext;
+        }
+
+        public override void AddNew(Role obj)
+        {
+            try
+            {
+                base.AddNew(obj);
+                DataContext.SaveChanges();
+            }
+            catch (SqlException ex)
+            {
+                _logger.Error("", ex);
+                throw ObjectUtil.CreateFaultException(CodedException.SqlExceptionUnhandler, "Sql Exeption");
+            }
+            catch (Exception ex)
+            {
+                _logger.Error("", ex);
+                throw ObjectUtil.CreateFaultException(CodedException.Unhandler, "Unhandler Exception");
+            }
+        }
+
+        public override void Edit(Role obj)
+        {
+            try
+            {
+                base.Edit(obj);
+                DataContext.SaveChanges();
+            }
+            catch (SqlException ex)
+            {
+                _logger.Error("", ex);
+                throw ObjectUtil.CreateFaultException(CodedException.SqlExceptionUnhandler, "Sql Exeption");
+            }
+            catch (Exception ex)
+            {
+                _logger.Error("", ex);
+                throw ObjectUtil.CreateFaultException(CodedException.Unhandler, "Unhandler Exception");
+            }
+        }
+
+        public override void Remove(long id)
+        {
+            try
+            {
+                base.Remove(id);
+                DataContext.SaveChanges();
+            }
+            catch (SqlException ex)
+            {
+                _logger.Error("", ex);
+                throw ObjectUtil.CreateFaultException(CodedException.SqlExceptionUnhandler, "Sql Exeption");
+            }
+            catch (Exception ex)
+            {
+                _logger.Error("", ex);
+                throw ObjectUtil.CreateFaultException(CodedException.Unhandler, "Unhandler Exception");
+            }
+        }
+
+        /// <summary>
+        /// Phương thức lọc
+        /// </summary>
+        /// <param name="key">Từ khóa cần tìm</param>
+        /// <returns>Danh sách role theo từ khóa</returns>
+        public List<Role> GetByKey(string key)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(key))
+                {
+                    key = "";
+                }
+                IQueryable<Role> query = GetDynamicQuery();
+                return query.Where(p => p.Name.Contains(key)).ToList();
+            }
+            catch (SqlException ex)
+            {
+                _logger.Error("", ex);
+                throw ObjectUtil.CreateFaultException(CodedException.SqlExceptionUnhandler, "Sql Exeption");
+            }
+            catch (Exception ex)
+            {
+                _logger.Error("", ex);
+                throw ObjectUtil.CreateFaultException(CodedException.Unhandler, "Unhandler Exception");
+            }
+        }
+
+        /// <summary>
+        /// Phương thức tìm role không thuộc group
+        /// </summary>
+        /// <param name="groupId">GroupID</param>
+        /// <returns>Danh sách role không thuộc GroupID</returns>
+        public List<Role> GetRolesByNotInRroup(long groupId)
+        {
+            try
+            {
+                var userGroupRoleBusiness = new UserGroupRoleBusiness();
+                List<UserGroupRole> listRolesInGroup = userGroupRoleBusiness.GetByGroupId(groupId);
+
+                var arrayIdRoleInGroup = new long[listRolesInGroup.Count()];
+
+                int i = 0;
+                foreach (var re in listRolesInGroup)
+                {
+                    arrayIdRoleInGroup[i] = re.RoleId;
+                    i++;
+                }
+
+                IQueryable<Role> query = GetDynamicQuery();
+                return query.Where(p => arrayIdRoleInGroup.Contains(p.Id) == false).OrderBy(p => p.Code).ToList();
+            }
+            catch (SqlException ex)
+            {
+                _logger.Error("", ex);
+                throw ObjectUtil.CreateFaultException(CodedException.SqlExceptionUnhandler, "Sql Exeption");
+            }
+            catch (Exception ex)
+            {
+                _logger.Error("", ex);
+                throw ObjectUtil.CreateFaultException(CodedException.Unhandler, "Unhandler Exception");
+            }
+        }
+    }
+}

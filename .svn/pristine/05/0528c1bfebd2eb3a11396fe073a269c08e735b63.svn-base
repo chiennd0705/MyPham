@@ -1,0 +1,143 @@
+﻿@{
+   
+   
+}
+
+<div class="quickview-main" style="width: 800px;">
+    <div style="max-height: 550px; overflow-y: scroll; overflow-x: hidden">
+        <div class="page-title title-buttons" style="border-bottom: none; padding: 0 10px; margin: 15px 0;">
+            <h2 style="font-size: 16px; font-weight: bold;">Giỏ hàng của bạn</h2>
+
+        </div>
+        <fieldset>
+            <table id="shopping-cart-table" class="data-table cart-table">
+                <colgroup>
+                    <col width="1">
+                    <col>
+                    <col width="1">
+                    <col width="1">
+                    <col width="1">
+                    <col width="1">
+                    <col width="1">
+                </colgroup>
+                <thead class="hidden-phone">
+                    <tr class="first last">
+                        <th rowspan="1"><span class="nobr" style="border-right: none;">Ảnh</span></th>
+                        <th rowspan="1"><span class="nobr">Tên sản phẩm</span></th>
+
+                        <th class="a-center" colspan="1"><span class="nobr">Giá</span></th>
+                        <th rowspan="1" class="a-center">Số lượng</th>
+                        <th class="a-center" colspan="1">Thành tiền</th>
+                        <th rowspan="1" class="a-center last">Xóa</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr class="first last">
+                        <td colspan="50" class="a-right last">
+                            <button type="button" title="Continue Shopping" class="button btn-continue" onclick="setLocation('http://alothemes.com/demo/kuteshop/index.php/')"><span><span>Tiếp tục mua hàng</span></span></button>
+                            <button type="submit" name="update_cart_action" value="update_qty" title="Update Shopping Cart" class="button btn-update"><span><span>Tiến hành thanh toán</span></span></button>
+                               
+                        </td>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    <tr class="first odd">
+                        <td><a href="http://alothemes.com/demo/kuteshop/index.php/perfect-dress.html" title="Perfect Dress" class="product-image" style="border-right: none;">
+                            <img src="http://alothemes.com/demo/kuteshop/media/catalog/product/cache/2/thumbnail/120x/9df78eab33525d08d6e5fb8d27136e95/3/3/33_1.jpg" width="120" height="120" alt="Perfect Dress"></a></td>
+                        <td style="border-right: none;">
+                            <h2 class="product-name">
+                                <a href="http://alothemes.com/demo/kuteshop/index.php/perfect-dress.html">Perfect Dress</a>
+                            </h2>
+                        </td>
+
+
+                        <td class="a-right" style="border-right: none;">
+                            <span class="cart-price">
+                                <span class="price">$95.00</span>
+                            </span>
+
+                        </td>
+                        <!-- inclusive price starts here -->
+                        <td class="a-center" style="border-right: none;">
+                            <div class="custom-qty clearfix">
+                                <a class="alo_qty alo_qty_dec" href="javascript:void(0)"><i class="fa fa-caret-down"></i></a>
+                                <input name="cart[1362][qty]" value="1" size="4" title="Qty" class="input-text qty" maxlength="12">
+                                <a class="alo_qty alo_qty_inc" href="javascript:void(0)"><i class="fa fa-caret-up"></i></a>
+                            </div>
+                        </td>
+
+                        <!--Sub total starts here -->
+                        <td class="a-right a-subtotal" style="border-right: none;">
+                            <span class="cart-price">
+
+                                <span class="price">$95.00</span>
+                            </span>
+                        </td>
+                        <td class="a-center last"><a href="http://alothemes.com/demo/kuteshop/index.php/checkout/cart/delete/id/1362/uenc/aHR0cDovL2Fsb3RoZW1lcy5jb20vZGVtby9rdXRlc2hvcC9pbmRleC5waHAvY2hlY2tvdXQvY2FydC8,/" title="Remove item" class="btn-remove btn-remove2"><i class="fa fa-times-circle icons"></i></a></td>
+                    </tr>
+                    <tr class="last even">
+                        <td><a href="http://alothemes.com/demo/kuteshop/index.php/sexy-lady.html" title="Sexy Lady" class="product-image">
+                            <img src="http://alothemes.com/demo/kuteshop/media/catalog/product/cache/2/thumbnail/120x/9df78eab33525d08d6e5fb8d27136e95/3/6/36.jpg" width="120" height="120" alt="Sexy Lady"></a></td>
+                        <td>
+                            <h2 class="product-name">
+                                <a href="http://alothemes.com/demo/kuteshop/index.php/sexy-lady.html">Sexy Lady</a>
+                            </h2>
+                        </td>
+
+
+                        <td class="a-right">
+                            <span class="cart-price">
+                                <span class="price">$38.95</span>
+                            </span>
+
+                        </td>
+                        <!-- inclusive price starts here -->
+                        <td class="a-center">
+                            <div class="custom-qty clearfix">
+                                <a class="alo_qty alo_qty_dec" href="javascript:void(0)"><i class="fa fa-caret-down"></i></a>
+                                <input name="cart[1363][qty]" value="1" size="4" title="Qty" class="input-text qty" maxlength="12">
+                                <a class="alo_qty alo_qty_inc" href="javascript:void(0)"><i class="fa fa-caret-up"></i></a>
+                            </div>
+                        </td>
+
+                        <!--Sub total starts here -->
+                        <td class="a-right a-subtotal">
+                            <span class="cart-price">
+
+                                <span class="price">$38.95</span>
+                            </span>
+                        </td>
+                        <td class="a-center last"><a href="http://alothemes.com/demo/kuteshop/index.php/checkout/cart/delete/id/1363/uenc/aHR0cDovL2Fsb3RoZW1lcy5jb20vZGVtby9rdXRlc2hvcC9pbmRleC5waHAvY2hlY2tvdXQvY2FydC8,/" title="Remove item" class="btn-remove btn-remove2"><i class="fa fa-times-circle icons"></i></a></td>
+                    </tr>
+                   
+                </tbody>
+            </table>
+            <script type="text/javascript">decorateTable('shopping-cart-table')</script>
+        </fieldset>
+    </div>
+</div>
+<style>
+    .product-image img {
+        max-width: inherit;
+    }
+
+    .fancybox-opened .fancybox-skin {
+        border-radius: 5px;
+    }
+
+    .cart-table td {
+        padding: 5px;
+        border: none !important;
+        border-bottom: 1px dotted #ccc !important;
+    }
+
+    .data-table thead th {
+        border-top: none;
+        border-bottom: none;
+        border-right: 1px solid #FFF !important;
+    }
+
+    .data-table thead th {
+        padding: 5px 8px;
+    }
+</style>

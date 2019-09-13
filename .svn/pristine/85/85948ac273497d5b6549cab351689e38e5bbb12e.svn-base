@@ -1,0 +1,359 @@
+﻿@using MvcPaging
+@model IPagedList<Common.OrderBuyer>
+
+@{
+    ViewBag.Title = "Quản lý người mua";
+}
+@{Layout = "~/Areas/Manage/Views/Shared/_LayoutAdmincshtml.cshtml";}
+
+
+<div class="container-fluid" ng-app="body">
+    <!-- Page Heading -->
+    <div class="row" ng-controller="header">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                Quản lý người mua
+            </h1>
+            <hr />
+            <div>{{quanlyorderBuyer}}</div>
+        </div>
+    </div>
+    <!-- /.row -->
+    <!-- /.row -->
+    <!-- /.row -->
+    <div class="row" ng-controller="Index">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <i class="fa fa-bar-chart-o fa-fw"></i> Danh sách người mua
+                        <span style="float: right">
+                            @*<a class="glyphicon glyphicon-plus-sign" data-toggle="modal" data-target="#myModal">
+
+                                </a>*@
+                            @*@Html.ActionLink(" ", "CreateUser", null, new { @class = "glyphicon glyphicon-plus-sign" })*@
+                        </span>
+
+
+                    </h3>
+
+                </div>
+                <div class="panel-body">
+                    @using (Ajax.BeginForm("Buyer", "Order",
+                        new AjaxOptions { UpdateTargetId = "grid-list", HttpMethod = "get", LoadingElementId = "loading", OnBegin = "beginPaging", OnSuccess = "successPaging", OnFailure = "failurePaging" },
+                        new { id = "frm-search" }))
+                    {
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group input-group">
+                                    <input type="text" value="@ViewData["key"]" class="form-control" id="appendedInputButton" name="key" placeholder="Nhập từ khóa tìm kiếm" style="width:80%">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="submit">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+
+                                    </span>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover table-striped" id="dataTables" aria-describedby="dataTables-example_info">
+                                <thead>
+                                    <tr role="row">
+
+                                        <th>
+                                            Tên
+                                        </th>
+                                        <th>
+                                            Số điện thoại
+                                        </th>
+                                        <th>
+                                            Email
+                                        </th>
+                                        <th>
+                                            LocationId
+                                        </th>
+                                        <th>
+                                            Address
+                                        </th>
+                                        <th>
+                                            Ghi chú
+                                        </th>
+                                        <th>
+                                            IdMember
+                                        </th>
+                                        <th style="width: auto">Chức năng</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>                                           
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Name)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.PhoneNumber)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Email)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.LocationId)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Address)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.NoteAboutBuyer)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.IdMember)
+                                            </td>                                         
+                                            <td style="text-align: center">
+                                                <a class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#EditModal" data-ng-click="GetInforBuyer(@item.Id)"> Edit
+                                                </a> | 
+                                                @Html.ActionLink(" ", "" + "" + "DeleteBuyer", new { id = item.Id }, new { @class = "glyphicon glyphicon-trash", onclick = "return confirm('Bạn muốn xóa bản ghi này?');" })
+                                            </td>
+                                        </tr>
+                                    }
+
+                                </tbody>
+                            </table>
+
+                            <div class="row">
+                                <div class="">
+                                    <div class="dataTables_info" id="dataTables-example_info" role="alert" aria-live="polite" aria-relevant="all">Hiển thị từ @Model.ItemStart đến @Model.ItemEnd của @Model.TotalItemCount bản ghi</div>
+                                </div>
+                                <div class="">
+                                    <div class="dataTables_paginate " id="dataTables-example_paginate">
+
+                                        @Html.Raw(Ajax.Pager(
+                                            new Options
+                                            {
+                                                PageSize = Model.PageSize,
+                                                TotalItemCount = Model.TotalItemCount,
+                                                CurrentPage = Model.PageNumber,
+                                                ItemTexts = new ItemTexts() { Next = "Next", Previous = "Previous", Page = "P" },
+                                                ItemIcon = new ItemIcon() { First = "icon-backward", Previous = "icon-chevron-left", Next = "icon-chevron-right", Last = "icon-forward" },
+                                                TooltipTitles = new TooltipTitles() { Next = "Next page", Previous = "Previous page", Page = "Page {0}." },
+                                                Size = Size.normal,
+                                                Alignment = Alignment.centered,
+                                                IsShowControls = true,
+                                                IsShowFirstLast = true,
+                                                CssClass = ""
+                                            },
+                                            new AjaxOptions
+                                            {
+                                                UpdateTargetId = "grid-list",
+                                                HttpMethod = "get",
+                                                LoadingElementId = "loading",
+                                                OnBegin = "beginPaging",
+                                                OnSuccess = "successPaging",
+                                                OnFailure = "failurePaging"
+                                            }, new { controller = "Order", action = "Buyer", key = ViewData["key"] }))
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- /.row -->
+        <!-- /.row -->
+        @*Eddi user*@
+        <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="EditModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Cập nhật Người mua</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <input ng-model="emp.Id" style="display: none" />
+                                <div class="form-group">
+
+                                    <label class=" ">Name</label><br />
+                                    <input class="form-control" autocomplete="off" maxlength="50" required data-val="true" data-val-required="Tên không được để trống" id="name" name="name" type="text" data-ng-model="emp.Name">
+                                    <span class="field-validation-valid" data-valmsg-for="name" data-valmsg-replace="true"></span>
+                                    <div class="clear"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label class=" ">Số điện thoại</label><br />
+                                    <input class="form-control" autocomplete="off" ng-trim="true" required maxlength="20"  id="phone" name="phone" type="tel" data-ng-model="emp.Phone">
+                                    <span class="field-validation-valid" data-valmsg-for="phone" data-valmsg-replace="true"></span>
+                                    <div class="clear"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Hộp thư</label><br />
+                                    <input class="form-control" data-val="true" data-val-required="Email." autocomplete="off" maxlength="50" required id="email" name="email" type="email" data-ng-model="emp.Email">
+                                    <span class="field-validation-valid" data-valmsg-for="email" data-valmsg-replace="true"></span>
+                                </div>                              
+                                
+                            </div>
+                            <div class="col-lg-6">
+
+                                <div class="form-group">
+
+                                    <label class=" ">LocationId</label><br />
+                                    <input class="form-control" autocomplete="off" maxlength="50" data-val="true" id="locationId" name="locationId" type="number" data-ng-model="emp.LocationId">
+                                    <span class="field-validation-valid" data-valmsg-for="locationId" data-valmsg-replace="true"></span>
+                                    <div class="clear"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label class=" ">Địa chỉ</label><br />
+                                    <input class="form-control" autocomplete="off" required maxlength="300" id="address" name="address" type="text" data-ng-model="emp.Address">
+                                    <span class="field-validation-valid" data-valmsg-for="address" data-valmsg-replace="true"></span>
+                                    <div class="clear"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label class=" ">Ghi chú</label><br />
+                                    <input class="form-control" autocomplete="off" id="note" name="note"  type="text" data-ng-model="emp.Note">
+                                    <span class="field-validation-valid" data-valmsg-for="note" data-valmsg-replace="true"></span>
+                                    <div class="clear"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label class=" ">IdMember</label><br />
+                                    <input class="form-control" autocomplete="off" id="IdMember" name="IdMember" type="text" data-ng-model="emp.IdMember">
+                                    <span class="field-validation-valid" data-valmsg-for="IdMember" data-valmsg-replace="true"></span>
+                                    <div class="clear"></div>
+                                </div>
+                                                               
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" ng-click="UpdateChange()">Save changes</button>
+                    </div>
+                </div>
+            </div>
+            @*Kêt thúc cập nhật*@
+
+        </div>
+
+        @*End*@
+    </div>
+</div>
+@*Kêt thúc cập nhật*@
+<script>
+    angular.module("body", []).controller("header", function ($scope) {
+        //   $scope.quanlyuser = "Câp nhật thái";
+    }).controller("Index", function ($scope) {
+
+        $scope.emp = {
+            Name: '',
+            Phone: '',
+            Email: '',
+            LocationId: '',
+            Address: '',
+            Note: '',
+            IdMember: ''          
+        };
+        $scope.GetInforBuyer = function (id) {
+
+            $('#overbackgroud').show();
+            //   $scope.emplist = [];
+            //   $scope.emailthai = "tháiisigsjghj";
+            $.ajax({
+                url: '@Url.Action("GetOrderBuyerById","Json")',
+                data: {
+                    'id': id
+                },
+                type: 'GET',
+                contentType: 'application/json; charset=utf-8',
+
+                success: function (data) {
+                    $scope.emp.Id = data.Id;
+                    $scope.emp.Name = data.Name;
+                    $scope.emp.Phone = data.PhoneNumber;
+                    $scope.emp.Email = data.Email;
+                    $scope.emp.LocationId = data.LocationId;
+                    $scope.emp.Address = data.Address;
+                    $scope.emp.Note = data.NoteAboutBuyer;
+                    $scope.emp.IdMember = data.IdMember;                  
+                    $scope.$apply();
+                    $('#overbackgroud').hide();
+                },
+                error: function () {
+
+                }
+            });
+            // alert(mail);
+
+            //       $scope.valuetest = mail;
+            //  $scope.emailthai = mail;
+            //  alert(id);
+        };
+        $scope.UpdateChange = function () {
+            $('#overbackgroud').show();
+            $.ajax({
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify($scope.emp),
+                url: '@Url.Action("UpdateOrderBuyer","Json")',
+                success: function (data) {
+                    if (data == 1) {
+                        alert("Cập nhật thành công");
+                        window.location.href = "/Manage/Order/Buyer";
+                        //     $scope.GetInfoOrder();
+                    }
+
+                },
+                error: function (status) { }
+            });
+        };
+
+    });
+</script>
+
+<script type="text/javascript">
+    function beginPaging(args) {
+        // Animatek
+        $('#grid-list').fadeOut('normal');
+    }
+
+    function successPaging() {
+        // Animate
+        $('#grid-list').fadeIn('normal');
+        $('a').tooltip();
+    }
+
+    function failurePaging() {
+        alert("Could not retrieve list.");
+    }
+
+</script>
+
+<script type="text/javascript">
+    $(function () {
+        $("#datepicker1").datepicker();
+        $("#createDate").datepicker(
+
+            {
+                changeMonth: true,
+                changeYear: true,
+                showButtonPanel: true,
+                yearRange: "-0:+15"
+            });
+        $("#dateDeliver").datepicker(
+
+           {
+               changeMonth: true,
+               changeYear: true,
+               showButtonPanel: true,
+               yearRange: "-0:+15"
+           });
+
+    });
+</script>
+

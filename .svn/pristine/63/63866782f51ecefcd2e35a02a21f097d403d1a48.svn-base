@@ -1,0 +1,349 @@
+﻿var cal = {
+    //thuoc tinh km chuyen hang cua cal
+    'kmRoadToTranspot': 0,
+    'totalMoneyHang': 0,
+    'gramHang': 0,
+    'feeTranspotGood': 0,
+    'selectionGramGood': 2,
+
+    init: function() {
+        cal.regEvents();
+    },
+    regEvents: function() {
+        $('#formTranspot').change(function() {
+            var selection = this.value; //grab the value selected
+
+            cal.selectionGramGood = selection;
+            if (selection == 2) {
+                //alert("Nguoi mua va nguoi ban tu thuong luong voi nhau");
+                $('#addhtml').html("");
+                $('#addhtml').append("Thông tin chưa đúng mời nhập lại thông tin");
+
+                var btnClose = "<button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Close</button>";
+                $('#addBtnPayGoods').html("");
+                $('#addBtnPayGoods').append(btnClose);
+
+                //$('html, body').animate({
+                //    scrollTop: $("#scrollHere").offset().top
+                //}, 2000);
+
+            } else if (selection == 1) {
+                alert("nguoi ban va nguoi mua tu thuong luong");
+            } else {
+                var check = $("#formPost").valid();
+                if (check) {
+                    cal.calcRoute();
+
+                    var reciverAddress = $('#receiverAddress').val();
+                    alert(reciverAddress);
+                    window.setTimeout(function() {
+                        var kmRoad = $('#distanceRoad').val();
+                        var gramGoods = selection;
+                        var location = cal.checkLocation(reciverAddress);
+                        // set gia tri cho thuoc tinh 
+                        //cal.kmRoadToTranspot = kmRoad;
+                        //cal.gramHang = selection;
+
+                        var fee = cal.calFee(kmRoad, gramGoods, location) * 1000;
+                        //cal.feeTranspotGood = fee;
+
+                        var tMoney = $('#tMoney').val();
+                        var total = (fee + parseFloat(tMoney)) / 1000;
+                        //tổng tiền phải trả (phí vận chuyển + tiền hàng)
+                        //cal.totalMoneyHang = total;
+
+                        //alert("Phi van chuyen: " + total);
+
+                        var html = "<b>" + total + " nghìn<sup>đ</sup><b>";
+                        $('#totalMP').html(html);
+
+                        //alert("Phi van chuyen: " + fee);
+                    }, 500);
+                } else {
+                    $('#addhtml').html("");
+                    $('#addhtml').append("Thông tin chưa đúng mời nhập lại thông tin");
+
+                    var btnClose = "<button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Close</button>";
+                    $('#addBtnPayGoods').html("");
+                    $('#addBtnPayGoods').append(btnClose);
+                }
+            }
+        });
+
+
+        $('#btnConfirm').off('click').on('click', function() {
+            var check = $("#formPost").valid();
+            if (check) {
+                var selections = cal.selectionGramGood; //grab
+                if (selections == 2) {
+                    //xử lý nếu người dùng ko chọn phương thức vận chuyển
+                    $('#addhtml').html("");
+                    $('#addhtml').append("Bạn chưa chọn hình thức vận chuyển hàng");
+
+                    var btnClose = "<button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Close</button>";
+                    $('#addBtnPayGoods').html("");
+                    $('#addBtnPayGoods').append(btnClose);
+
+                    $('html, body').animate({
+                        scrollTop: $("#scrollHere").offset().top
+                    }, 2000);
+                } else if (selections == 1) {
+                    $('#addhtml').html("");
+                    $('#addhtml').append("Người mua và bán tự thương lượng");
+
+                    var btnClose = "<button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Close</button>";
+                    $('#addBtnPayGoods').html("");
+                    $('#addBtnPayGoods').append(btnClose);
+                } else {
+                    $(this).button("loading").delay(300).queue(function() {
+                        $(this).button("reset");
+                        $(this).dequeue();
+                        //window.location.href = "/";
+                        if ($('#checkLincense').prop("checked")) {
+
+                            cal.calReneral();
+
+                            window.setTimeout(function() {
+                                var formPayGood = 0;
+                                //$('#formPays').change(function () {
+                                //    formPayGood = this.value;
+                                //    alert("value: " + formPayGood);
+                                //});   
+
+                                $('#formPays input').on('change', function() {
+                                    formPayGood = $('input[name="formPay"]:checked', '#formPays').val();
+                                });
+                                //general   
+
+                                var gramGoods = cal.gramHang;
+                                var kmRoad = cal.kmRoadToTranspot;
+                                var totalMoneyPay = cal.totalMoneyHang;
+                                var feeTranspotGood = cal.feeTranspotGood;
+                                //infomation of buyer
+                                var nameOfBuyer = $('#buyerName').val();
+                                var buyerPhone = $('#buyerPhone').val();
+                                var buyerEmail = $('#buyerEmail').val();
+                                var buyerAddress = $('#buyerAddress').val();
+                                //information of reciver
+                                var receiverName = $('#receiverName').val();
+                                var receiverPhone = $('#receiverPhone').val();
+                                var receiverEmail = $('#receiverEmail').val();
+                                var receiverAddress = $('#receiverAddress').val();
+                                alert(receiverAddress);
+                                var shopid = $('#shopid').val();
+                                alert(shopid);
+                                var receiverTown = ("#receiverTown option:selected").text();
+                                alert(receiverTown);
+                                var receiverPhuong = $("#receiverPhuong option:selected").text();
+                                alert(receiverPhuong);
+                                var note = $('#note').val();
+                                alert(note);
+
+                                $.ajax({
+                                    //url: '@Url.Action("Payment", "PayGoods")',
+                                    url: '/PayGoods/Payment',
+                                    data: {
+                                        'kmRoad': kmRoad,
+                                        'gramGoods': gramGoods,
+                                        'totalMoneyPay': totalMoneyPay,
+                                        'feeTranspotGood': feeTranspotGood,
+                                        'nameOfBuyer': nameOfBuyer,
+                                        'buyerPhone': buyerPhone,
+                                        'buyerEmail': buyerEmail,
+                                        'buyerAddress': buyerAddress,
+                                        'receiverName': receiverName,
+                                        'receiverPhone': receiverPhone,
+                                        'receiverEmail': receiverEmail,
+                                        'receiverAddress': receiverAddress,
+                                        'formPayGood': formPayGood,
+                                        'receiverTown': receiverTown,
+                                        'receiverPhuong': receiverPhuong,
+                                        'note': note,
+                                        'shopid': shopid                                        
+                                    },
+                                    dataType: "json",
+                                    type: "POST",
+                                    traditional: true,
+
+                                    success: function(data) {
+                                        var html = '<h4> Tên người mua: ' + nameOfBuyer + '</h4>';
+                                        html += '<br/>';
+                                        html = '<p> Tiền vận chuyển dự tính: ' + (data.FeeOfTranspot / 1000) + ' nghìn vnđ</p>';
+                                        html += '<br/>';
+                                        html += '<p> Tổng khối lượng hàng: ' + data.GramGood + ' Gram</p>';
+                                        html += '<br/>';
+                                        html += '<p> Tổng tiền phải trả: ' + (data.TotalMoney / 1000) + ' nghìn vnđ</p>';
+
+                                        $('#addhtml').html("");
+                                        $('#addhtml').append(html);
+                                        //alert(data.FeeOfTranspot + ", " + data.GramGood);
+
+
+                                        var addBtnHtml = "<a  href=\"" + data.UrlBtnPayNL + "\"><img src=\"https://www.nganluong.vn/data/images/buttons/11.gif\" border=\"0\" /></a>";
+                                        $('#addBtnPayGoods').html("");
+                                        $('#addBtnPayGoods').append(addBtnHtml);
+                                    },
+                                    error: function() {
+                                        var html = "Thông tin nhập chưa đúng mời kiểm tra lại thông tin trước khi xác nhận";
+                                        $('#addhtml').html("");
+                                        $('#addhtml').append(html);
+
+                                        //truong hop thong tin bi loi
+                                        var btnClose = "<button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Close</button>";
+                                        $('#addBtnPayGoods').html("");
+                                        $('#addaddBtnPayGoodshtml').append(btnClose);
+                                    }
+                                });
+                            }, 500);
+                        } else {
+                            alert("Ban chua xac nhan dieu khoan mua hang");
+                        }
+                    });
+
+                }
+            } else {
+                $('#addhtml').html("");
+                $('#addhtml').append("Thông tin chưa đúng mời nhập lại thông tin");
+
+                var btnClose = "<button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Close</button>";
+                $('#addBtnPayGoods').html("");
+                $('#addBtnPayGoods').append(btnClose);
+            }
+        });
+
+
+    },
+    calReneral: function() {
+        cal.calcRoute();
+
+        var reciverAddress = $('#receiverAddress').val();
+        window.setTimeout(function() {
+            var kmRoad = $('#distanceRoad').val();
+            var gramGoods = cal.selectionGramGood;
+            var location = cal.checkLocation(reciverAddress);
+
+            // set gia tri cho thuoc tinh 
+            cal.kmRoadToTranspot = kmRoad;
+            cal.gramHang = cal.selectionGramGood;
+
+            var fee = cal.calFee(kmRoad, gramGoods, location) * 1000;
+            cal.feeTranspotGood = fee;
+
+            var tMoney = $('#tMoney').val();
+
+
+            var total = (fee + parseFloat(tMoney));
+            //tổng tiền phải trả (phí vận chuyển + tiền hàng)
+            cal.totalMoneyHang = total;
+        }, 500);
+    },
+
+    checkLocation: function(reciverAddress) {
+        if (reciverAddress == "Hà Nội") {
+            return "Nội thành HN";
+        }
+        return "Liên tỉnh";
+        //var location = reciverAddress.split(",");
+        //for (var i = 0; i < location.length; i++) {
+        //    if (location[i].trim() == "ha noi" || location[i].trim() == "Hà Nội" || location[i].trim() == "Hà nội" || location[i].trim() == "hà nội" || location[i].trim() == "Ha noi" || location[i].trim() == "Ha Noi") {
+        //        return "Nội thành HN";
+        //    }
+        //}
+        //return "Liên tỉnh";
+    },
+    calcRoute: function() {
+        var directionsService = new google.maps.DirectionsService();
+        //var start = document.getElementById("start").value;
+        //var end = document.getElementById("end").value;
+        var start = "Ha Noi";
+        var end = $('#receiverAddress').val();
+
+        var request = {
+            origin: start,
+            destination: end,
+            travelMode: google.maps.DirectionsTravelMode.DRIVING
+        };
+        var distanceInput = $('#distanceRoad').val();
+
+        directionsService.route(request, function(response, status) {
+            if (status == google.maps.DirectionsStatus.OK) {
+                //directionsDisplay.setDirections(response);
+                distanceInput = response.routes[0].legs[0].distance.value / 1000;
+                $('#distanceRoad').val(distanceInput);
+            }
+        });
+
+    },
+    calFee: function(kmRoad, gramGoods, location) {
+
+        if (location == "Nội thành HN") {
+            if (gramGoods <= 5000) {
+                return 15;
+            } else if (gramGoods > 5000) {
+                return ((gramGoods - 5000) / 500) * 5 + 15;
+            }
+        } else if (location == "Nội thành HCM") {
+            if (gramGoods < 2000) {
+                return 20;
+            } else if (gramGoods > 5000) {
+                return ((gramGoods - 5000) / 500) * 5 + 20;
+            }
+        }
+            //Tinh phi chuyen hang lien tinh
+        else {
+            if (gramGoods <= 250) {
+                if (kmRoad < 100) {
+                    return 21.780;
+                } else if (kmRoad >= 100 && kmRoad < 300) {
+                    return 24.024;
+                } else {
+                    return 30.360;
+                }
+            } else if (gramGoods > 250 && gramGoods <= 500) {
+                if (kmRoad < 100) {
+                    return 31.548;
+                } else if (kmRoad >= 100 && kmRoad < 300) {
+                    return 33.396;
+                } else {
+                    return 39.468;
+                }
+            } else if (gramGoods > 500 && gramGoods <= 1000) {
+                if (kmRoad < 100) {
+                    return 43.824;
+                } else if (kmRoad >= 100 && kmRoad < 300) {
+                    return 44.880;
+                } else {
+                    return 57.684;
+                }
+            } else if (gramGoods > 1000 && gramGoods <= 1500) {
+                if (kmRoad < 100) {
+                    return 52.800;
+                } else if (kmRoad >= 100 && kmRoad < 300) {
+                    return 55.176;
+                } else {
+                    return 74.448;
+                }
+            } else if (gramGoods > 1500 && gramGoods <= 2000) {
+                if (kmRoad < 100) {
+                    return 63.888;
+                } else if (kmRoad >= 100 && kmRoad < 300) {
+                    return 68.244;
+                } else {
+                    return 90.420;
+                }
+            } else if (gramGoods > 2000 && gramGoods <= 5000) {
+                return 0;
+            } else if (gramGoods > 5000) {
+                if (kmRoad < 100) {
+                    return 63.888 + ((gramGoods - 5000) / 500) * 4.620;
+                } else if (kmRoad >= 100 && kmRoad < 300) {
+                    return 68.244 + ((gramGoods - 5000) / 500) * 5.676;
+                } else {
+                    return 90.420 + ((gramGoods - 5000) / 500) * 11.220;
+                }
+            }
+        }
+    }
+}
+cal.init();
+

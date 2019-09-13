@@ -1,0 +1,79 @@
+﻿@using BuyGroup365.Models.Common;
+@using BuyGroup365.Models.Member;
+@using Common;
+@using Common.util;
+@{
+    ViewBag.Title = "Success";
+
+    Layout = "~/Views/Shared/_LayoutCartSuccess.cshtml";
+    OrderReciver orderReciver = new OrderReciver();
+    orderReciver = SessionUtility.GetSessionOrderReciver(Session);
+
+
+    List<OrderDetail> listCartItems = new List<OrderDetail>();
+    listCartItems = NlCheckout.GetSessionOrderDetail(Session);
+}
+
+<div class="wapper">
+    <div class="container cart-success">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="success-content">
+                    <div class="head">
+                        <h6 class="title"><i class="fa fa-check" aria-hidden="true"></i> đặt hàng thành công</h6>
+                    </div>
+                    @Html.Action("GetByCodeHtml", "Partial", new { Code = "Cart_Success" })
+
+                    <div class="info-customer">
+                        <h6 class="title-box">Thông tin đặt hàng mã đơn hàng:#@Session["Madonhang"]</h6>
+                        @{
+                            <ul class="add-ul">
+                                <li>Tên người nhận: <strong>@orderReciver.Name</strong></li>
+                                <li>Địa chỉ nhận hàng: <span class="color">@orderReciver.Address</span></li>
+                                <li>Số điện thoại nhận hàng: <span class="color">@orderReciver.PhoneNumber</span></li>
+                                <li><strong>Thanh toán trực tiếp tại cửa hàng.</strong></li>
+                                <li>Tổng tiền: <span class="price">@Decimal.Parse(@Session["TotalMoney"].ToString()).ToString("N0")<span class="under"> đ</span></span></li>
+                            </ul>
+                        }
+
+                        <h6 class="title-box">SẢN PHẨM ĐÃ MUA</h6>
+                        <div class="product-list">
+                            @foreach (var item1 in listCartItems)
+                            {
+                                <div class="img-product">
+                                    <a href="@Function.ConvertFileName(item1.NameProduct)"><img data-src="@Util.ReturnLinkCDN(item1.PathImage,Request.Browser.IsMobileDevice)" class="lazyload" alt=""></a>
+                                </div>
+                                <div class="product-info">
+                                    <div class="name-number">
+                                        <div class="name-product">
+                                            <h6 class="title">@item1.NameProduct</h6>
+                                        </div>
+                                        <div class="number-product">
+                                            <p class="price">@item1.Price.Value.ToString("N0")<span class="under"> đ</span></p>
+                                            <p class="number">Số lượng: @item1.Quantity</p>
+                                        </div>
+                                    </div>
+                                    <div class="info">
+                                        @Html.Raw(item1.Description)
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                        <div class="send-final">
+                            <button class="btn-send">thanh toán khi nhận hàng</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="required-allow">
+                    <p class="text">Bằng cách đặt hàng, bạn đồng ý với Điều khoản sử dụng của Vinaplaza</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="list-page">
+
+                    @Html.Action("GetByCodeHtml", "Partial", new { Code = "LeftMenuCart" })
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

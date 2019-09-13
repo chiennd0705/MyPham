@@ -1,0 +1,55 @@
+﻿@using Common
+@using Business.ClassBusiness;
+
+<script>
+
+    function funcsendmail() {
+
+        var Email = document.getElementById('Email').value;
+       
+        $.ajax({
+            url: "@Url.Action("SendBaoGia", "Ajax")",
+            type: 'POST',
+            data: {
+                'Email': Email
+            },
+            dataType: 'json',
+            //contentType: 'application/json',
+            traditional: true,
+            success: function (response) {
+                if (response.data) {
+                    alert('Cảm ơn quý khách đã đăng ký nhận thông tin, Chúng tôi sẽ liên hệ với quý khách trong thời gian sớm nhất.');
+
+                } else {
+                    alert('Lỗi: Không thể gửi phản hồi.');
+                }
+            },
+            error: function (err) {
+                alert('Đã xảy ra lỗi. ' + err);
+            }
+        });
+        return true;
+
+    }
+</script>
+
+
+
+<div class="support-item">
+    <span class="title-support">ĐĂNG KÝ NHẬN THÔNG TIN MỚI TỪ DHC</span>
+    <div class="contact-form has-validation-callback">
+        <input name="form_type" type="hidden" value="customer">
+        <input name="utf8" type="hidden" value="✓">
+
+
+        <span class="text">Đừng bỏ lỡ các chương trình khuyến mãi hấp dẫn từ DHC Việt Nam!</span>
+        <div class="input-group">
+            <input type="email" value="" placeholder="Nhập email của bạn" name="contact[email]" id="Email" class="input-group-field" aria-label="general.newsletter_form.newsletter_email">
+         
+            <span class="input-group-btn">
+                <input type="submit" class="btn" name="subscribe" id="subscribe" value="Đăng ký" onclick="funcsendmail();">
+            </span>
+        </div>
+
+    </div>
+</div>

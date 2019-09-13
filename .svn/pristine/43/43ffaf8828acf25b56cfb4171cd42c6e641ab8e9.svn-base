@@ -1,0 +1,355 @@
+﻿@using MvcPaging
+@model IPagedList<Common.Location>
+
+@{
+    ViewBag.Title = "Quản lý Location";
+}
+@{   Layout = "~/Areas/Manage/Views/Shared/_LayoutUser.cshtml";}
+
+
+<div class="container-fluid" ng-app="body">
+    <!-- Page Heading -->
+    <div class="row" ng-controller="header">
+        @Html.Raw(BuyGroup365.Areas.Manage.Models.AdminFunction.BindHeader("Quản lý Location",null,null,null,null))
+        <div>{{quanlylocation}}</div>
+    </div>
+    <!-- /.row -->
+    <!-- /.row -->
+    <!-- /.row -->
+    <div class="row" ng-controller="Index">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    @using (Ajax.BeginForm("Location", "User",
+                        new AjaxOptions { UpdateTargetId = "grid-list", HttpMethod = "get", LoadingElementId = "loading", OnBegin = "beginPaging", OnSuccess = "successPaging", OnFailure = "failurePaging" },
+                        new { id = "frm-search" }))
+                    {
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group input-group">
+                                    <input type="text" value="@ViewData["key"]" class="form-control" id="appendedInputButton" name="key" placeholder="Nhập từ khóa tìm kiếm" style="width:80%">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="submit">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+
+                                    </span>
+                                </div>
+
+                            </div>
+                            <div>
+                                <span style="float: right ;margin-right: 20px;font-size: 20px">
+                                    <a class="glyphicon glyphicon-plus-sign" data-toggle="modal" data-target="#myModal">
+
+                                    </a>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover table-striped" id="dataTables" aria-describedby="dataTables-example_info">
+                                <thead>
+                                    <tr role="row">
+
+                                        <th>
+                                            Id
+                                        </th>
+                                        <th>
+                                            ParentId
+                                        </th>
+                                        <th>
+                                            Name
+                                        </th>
+                                        <th>
+                                            Icon
+                                        </th>
+                                        <th>
+                                            Order
+                                        </th>
+                                        <th style="width: auto">Chức năng</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Id)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.ParentId)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Name)
+                                            </td>
+                                           <td>                                               
+                                                <img width="30" src="/FileUpload/Image/thumb/@item.Icon" />
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Order)
+                                            </td>
+                                            <td style="text-align: center">
+                                                <a class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#EditModal" data-ng-click="GetInforLocation(@item.Id)">
+                                                    Edit
+                                                </a>|
+                                                @Html.ActionLink(" ", "" + "" + "DeleteLocation", new { id = item.Id }, new { @class = "glyphicon glyphicon-trash", onclick = "return confirm('Bạn có muốn xóa bản ghi này?');" })
+                                            </td>
+                                        </tr>
+                                    }
+
+                                </tbody>
+                            </table>
+
+                            <div class="row">
+                                <div class="">
+                                    <div class="dataTables_info" id="dataTables-example_info" role="alert" aria-live="polite" aria-relevant="all">Hiển thị từ @Model.ItemStart đến @Model.ItemEnd của @Model.TotalItemCount bản ghi</div>
+                                </div>
+                                <div class="">
+                                    <div class="dataTables_paginate " id="dataTables-example_paginate">
+
+                                        @Html.Raw(Ajax.Pager(
+                                            new Options
+                                            {
+                                                PageSize = Model.PageSize,
+                                                TotalItemCount = Model.TotalItemCount,
+                                                CurrentPage = Model.PageNumber,
+                                                ItemTexts = new ItemTexts() { Next = "Next", Previous = "Previous", Page = "P" },
+                                                ItemIcon = new ItemIcon() { First = "icon-backward", Previous = "icon-chevron-left", Next = "icon-chevron-right", Last = "icon-forward" },
+                                                TooltipTitles = new TooltipTitles() { Next = "Next page", Previous = "Previous page", Page = "Page {0}." },
+                                                Size = Size.normal,
+                                                Alignment = Alignment.centered,
+                                                IsShowControls = true,
+                                                IsShowFirstLast = true,
+                                                CssClass = ""
+                                            },
+                                            new AjaxOptions
+                                            {
+                                                UpdateTargetId = "grid-list",
+                                                HttpMethod = "get",
+                                                LoadingElementId = "loading",
+                                                OnBegin = "beginPaging",
+                                                OnSuccess = "successPaging",
+                                                OnFailure = "failurePaging"
+                                            }, new { controller = "User", action = "Location", key = ViewData["key"] }))
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- /.row -->
+        <!-- /.row -->
+        @*Create*@
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                @using (Html.BeginForm("CreateLocation", "User", FormMethod.Post, new { enctype = "multipart/form-data", id = "CreateLocation" }))
+                {
+                    @Html.ValidationSummary(true)
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Create Location</h4>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="row">
+                                <div class="col-lg-5">
+                                    <div class="form-group">
+                                        <div class="bg-error-infocus">
+                                            @ViewData["ErrMessage"]
+                                        </div>
+
+                                        <input ng-model="emp.Id" style="display: none" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label class=" ">Name<span class="required">*</span></label><br />
+                                        <input class="form-control" autocomplete="off" required maxlength="50" id="name" name="name" type="text" data-ng-model="emp.name">
+                                        <span class="field-validation-valid" data-valmsg-for="name" data-valmsg-replace="true"></span>
+                                        <div class="clear"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Icon</label><br />
+                                        <input class="form-control" autocomplete="off" style="width: 200px"  id="icon" name="icon" type="file" value=" ">
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label class=" ">Order<span class="required">*</span></label><br />
+                                        <input class="form-control" autocomplete="off" maxlength="50"  required id="order" name="order" type="number" data-ng-model="emp.order">
+                                        <span class="field-validation-valid" data-valmsg-for="order" data-valmsg-replace="true"></span>
+                                        <div class="clear"></div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-7">
+                                    <div class="form-group">
+                                        <label>Parent<span class="required">*</span></label><br />
+                                        <div class="css-treeview">
+                                            @Html.DropDownList("htmlCate", null, new { @width = "100%" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        @*Endcreate*@
+
+
+        @*Eddi user*@
+        <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="EditModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Cập nhật Location</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-5">
+                                <input ng-model="emp.Id" style="display: none" />
+                                <div class="form-group">
+                                    <label class=" ">Name<span class="required">*</span></label><br />
+                                    <input class="form-control" autocomplete="off" required maxlength="50" id="name" name="name" type="text" data-ng-model="emp.Name">
+                                    <span class="field-validation-valid" data-valmsg-for="name" data-valmsg-replace="true"></span>
+                                    <div class="clear"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Icon</label><br />
+                                    <input class="form-control" autocomplete="off" style="width: 200px" id="icon" name="icon" type="file">
+
+                                </div>
+                                <div class="form-group">
+                                    <label class=" ">Order<span class="required">*</span></label><br />
+                                    <input class="form-control" autocomplete="off" required id="order" name="order" type="number" data-ng-model="emp.Order">
+                                    <span class="field-validation-valid" data-valmsg-for="order" data-valmsg-replace="true"></span>
+                                    <div class="clear"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-7">
+                                <div class="abc">
+                                    <label>Parent<span class="required">*</span></label><br />
+                                    <div class="css-treeview">
+                                        @Html.DropDownList("htmlCate", null, new { @width = "100%" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" ng-click="UpdateChange()">Save changes</button>
+                    </div>
+                </div>
+            </div>
+            @*Kêt thúc cập nhật*@
+
+        </div>
+    </div>
+    @*End*@
+</div>
+
+
+@*Kêt thúc cập nhật*@
+<script>
+    angular.module("body", []).controller("header", function ($scope) {
+        //   $scope.quanlyuser = "Câp nhật thái";
+    }).controller("Index", function ($scope) {
+
+        $scope.emp = {
+            Id: '',
+            ParentId: '',
+            Name: '',
+            Icon: '',
+            Order: ''
+        };
+
+        $scope.GetInforLocation = function (id) {
+
+            $('#overbackgroud').show();
+            //   $scope.emplist = [];
+            //   $scope.emailthai = "tháiisigsjghj";
+            $.ajax({
+                url: '@Url.Action("GetLocationById","Json")',
+                data: {
+                    'id': id
+                },
+                type: 'GET',
+                contentType: 'application/json; charset=utf-8',
+
+                success: function (data) {
+                    $scope.emp.Id = data.Id;
+                    $scope.emp.ParentId = data.ParentId;
+                    $scope.emp.Name = data.Name;
+                    $scope.emp.Icon = data.Icon;
+                    $scope.emp.Order = data.Order;
+                    $scope.$apply();
+                    $('#overbackgroud').hide();
+                },
+                error: function () {
+
+                }
+            });
+            // alert(mail);
+
+            //       $scope.valuetest = mail;
+            //  $scope.emailthai = mail;
+            //  alert(id);
+        };
+        $scope.GetPass = function (id) {
+
+            $scope.objpass.UserId = id;
+        };
+        $scope.UpdateChange = function () {
+            $('#overbackgroud').show();
+            $.ajax({
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify($scope.emp),
+                url: '@Url.Action("UpdateLocation","Json")',
+                success: function (data) {
+                    if (data == 1) {
+                        alert("Cập nhật thành công");
+                        window.location.href = "/Manage/User/Location";
+                        //     $scope.GetInfoUser();
+                    }
+
+                },
+                error: function (status) { }
+            });
+        };
+    });
+</script>
+
+<script type="text/javascript">
+
+    function beginPaging(args) {
+        // Animatek
+        $('#grid-list').fadeOut('normal');
+    }
+
+    function successPaging() {
+        // Animate
+        $('#grid-list').fadeIn('normal');
+        $('a').tooltip();
+    }
+
+    function failurePaging() {
+        alert("Could not retrieve list.");
+    }
+
+</script>
+

@@ -1,0 +1,13 @@
+﻿using Common;
+using DataAccess.bases;
+
+namespace DataAccess.DAO
+{
+    public class CardListsDao : AbstractBaseDao<CardList, string>
+    {
+        public CardListsDao()
+            : base(typeof(CardList))
+        {
+        }
+    }
+}

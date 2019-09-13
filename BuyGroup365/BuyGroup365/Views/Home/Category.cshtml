@@ -1,0 +1,331 @@
+﻿@using MvcPaging
+@model List<Common.SearchProductByType_Result>
+@using Common
+@using BuyGroup365.Models.Home
+@using BuyGroup365.Models.Common;
+@using Business.ClassBusiness;
+
+@{
+    /**/
+
+    Layout = "~/Views/Shared/_LayoutIndex.cshtml";
+
+}
+
+
+@*@Html.Raw(@ViewData["ListCatalog"])*@
+<section class="breadcrumb-bg">
+    <div class="theme-container container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="site-breadcumb white-clr">
+                    <ul class="breadcrumb breadcrumb-menubar" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                        <li class="home">
+                            <a itemprop="url" href="/"><span itemprop="title">Trang chủ</span></a>
+                        </li>
+                        @Html.Raw(@ViewData["Breadcrumbs"])
+
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="account-page ptb-50">
+    <div class="container">
+        <div class="row">
+            <h1 class="title-head margin-top-0">@ViewData["CatalogName"]</h1>
+            <div class="col-md-12">
+                @Html.Action("GetFilter", "Partial")
+                @*<aside class="sidebar side-ipad category-mobile left left-content">
+                        <div class="category-mobiles">
+                            <script>
+                                var colName = "Chăm sóc da mặt";
+                                var colId = 1001722682;
+                                var selectedViewData = "data";
+                            </script>
+
+                            <script src="//theme.hstatic.net/1000186358/1000470071/14/search_filter.js?v=1594" type="text/javascript"></script>
+                            <div class="aside-filter">
+                                <div class="aside-hidden-mobile">
+                                    <div class="filter-container">
+                                        <div class="filter-container__selected-filter" style="display: none;">
+                                            <div class="filter-container__selected-filter-header clearfix">
+                                                <span class="filter-container__selected-filter-header-title"><i class="fa fa-arrow-left hidden-sm-up"></i> Bạn chọn</span>
+                                                <a href="javascript:void(0)" onclick="clearAllFiltered()" class="filter-container__clear-all">Bỏ hết <i class="fa fa-angle-right"></i></a>
+                                            </div>
+                                            <div class="filter-container__selected-filter-list">
+                                                <ul></ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <aside class="aside-item filter-vendor hidden-xs">
+                                        <div class="aside-title">
+                                            <h2 class="title-head margin-top-0 "><span>Thương hiệu</span></h2>
+                                        </div>
+                                        <div class="aside-content filter-group">
+                                            <div class="field-search input-group " style="display:none;">
+                                                <input type="text" placeholder="Tìm Thương hiệu" class="form-control filter-vendor-list" onkeyup="filterItemInList(jQuery('.filter-vendor-list'))">
+                                                <span class="input-group-btn">
+                                                    <button class="btn btn-default"><i class="fa fa-search" aria-hidden="true"></i></button>
+                                                </span>
+                                            </div>
+                                            <ul class="filter-vendor">
+
+
+                                                <li class="filter-item filter-item--check-box filter-item--green ">
+                                                    <label data-filter="dhc" for="filter-dhc" class="dhc">
+                                                        <input type="checkbox" id="filter-dhc" data-group="Hãng" data-field="vendor" data-text="DHC" value="(vendor:product**DHC)" data-operator="OR">
+                                                        <i class="fa"></i>
+                                                        DHC
+                                                    </label>
+                                                </li>
+
+
+                                            </ul>
+                                        </div>
+                                    </aside>
+
+
+                                    <aside class="aside-item filter-price">
+                                        <div class="aside-title">
+                                            <h2 class="title-head margin-top-0 "><span>Giá sản phẩm</span></h2>
+                                        </div>
+                                        <div class="aside-content filter-group">
+                                            <ul>
+
+
+
+
+
+                                                <li class="filter-item filter-item--check-box filter-item--green">
+                                                    <span>
+                                                        <label for="filter-duoi-100-000d">
+                                                            <input type="checkbox" id="filter-duoi-100-000d" data-group="Khoảng giá" data-field="price_min" data-text="Dưới 100.000đ" value="(price:product<100000)" data-operator="OR">
+                                                            <i class="fa"></i>
+                                                            Giá dưới 100.000đ
+                                                        </label>
+                                                    </span>
+                                                </li>
+
+
+
+
+
+
+
+                                                <li class="filter-item filter-item--check-box filter-item--green">
+                                                    <span>
+                                                        <label for="filter-100-000d-200-000d">
+                                                            <input type="checkbox" id="filter-100-000d-200-000d" data-group="Khoảng giá" data-field="price_min" data-text="100.000đ - 200.000đ" value="(price:product>100000 AND price:product<200000)" data-operator="OR">
+                                                            <i class="fa"></i>
+                                                            100.000đ - 200.000đ
+                                                        </label>
+                                                    </span>
+                                                </li>
+
+
+
+
+
+
+                                                <li class="filter-item filter-item--check-box filter-item--green">
+                                                    <span>
+                                                        <label for="filter-200-000d-300-000d">
+                                                            <input type="checkbox" id="filter-200-000d-300-000d" data-group="Khoảng giá" data-field="price_min" data-text="200.000đ - 300.000đ" value="(price:product>200000 AND price:product<300000)" data-operator="OR">
+                                                            <i class="fa"></i>
+                                                            200.000đ - 300.000đ
+                                                        </label>
+                                                    </span>
+                                                </li>
+
+
+
+
+
+
+                                                <li class="filter-item filter-item--check-box filter-item--green">
+                                                    <span>
+                                                        <label for="filter-300-000d-500-000d">
+                                                            <input type="checkbox" id="filter-300-000d-500-000d" data-group="Khoảng giá" data-field="price_min" data-text="300.000đ - 500.000đ" value="(price:product>300000 AND price:product<500000)" data-operator="OR">
+                                                            <i class="fa"></i>
+                                                            300.000đ - 500.000đ
+                                                        </label>
+                                                    </span>
+                                                </li>
+
+
+
+
+
+
+                                                <li class="filter-item filter-item--check-box filter-item--green">
+                                                    <span>
+                                                        <label for="filter-500-000d-1-000-000d">
+                                                            <input type="checkbox" id="filter-500-000d-1-000-000d" data-group="Khoảng giá" data-field="price_min" data-text="500.000đ - 1.000.000đ" value="(price:product>500000 AND price:product<1000000)" data-operator="OR">
+                                                            <i class="fa"></i>
+                                                            500.000đ - 1.000.000đ
+                                                        </label>
+                                                    </span>
+                                                </li>
+                                                <li class="filter-item filter-item--check-box filter-item--green">
+                                                    <span>
+                                                        <label for="filter-tren1-000-000d">
+                                                            <input type="checkbox" id="filter-tren1-000-000d" data-group="Khoảng giá" data-field="price_min" data-text="Trên 1.000.000đ" value="(>1000000)" data-operator="OR">
+                                                            <i class="fa"></i>
+                                                            Giá trên 1.000.000đ
+                                                        </label>
+                                                    </span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </aside>
+                                </div>
+                            </div>
+                        </div>
+                    </aside>*@
+
+            </div>
+
+            <section class="main_container right-content col-md-12 collection">
+                <div class="category-products products" id="pd_collection">
+
+                    @*<div class="sortPagiBar">
+                            <div class="row">
+                                <div class="col-xs-1 col-sm-1">
+                                    <div class="view-mode">
+                                        <a href="javascript:;" class="btn button-view-mode view-mode-grid active " data-view="grid">
+                                            <i class="fa fa-th" aria-hidden="true"></i>
+                                        </a>
+                                        <a href="javascript:;" class="btn button-view-mode view-mode-list " data-view="list" onclick="switchView('list')">
+                                            <i class="fa fa-th-list" aria-hidden="true"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-xs-11 col-sm-11 text-xs-left text-sm-right">
+                                    <div id="sort-by">
+                                        <label class="left hidden-xs">Sắp xếp: </label>
+                                        <ul>
+                                            <li>
+                                                <span>Thứ tự</span>
+                                                <ul>
+                                                    <li class="hidden"><a href="javascript:;" onclick="sortby('default')">Mặc định</a></li>
+                                                    <li><a href="javascript:;" onclick="sortby('alpha-asc')">A → Z</a></li>
+                                                    <li><a href="javascript:;" onclick="sortby('alpha-desc')">Z → A</a></li>
+                                                    <li><a href="javascript:;" onclick="sortby('price-asc')">Giá tăng dần</a></li>
+                                                    <li><a href="javascript:;" onclick="sortby('price-desc')">Giá giảm dần</a></li>
+                                                    <li><a href="javascript:;" onclick="sortby('created-desc')">Hàng mới nhất</a></li>
+                                                    <li><a href="javascript:;" onclick="sortby('created-asc')">Hàng cũ nhất</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>*@
+
+                    <section class="products-view products-view-grid">
+                        <div class="row hidden-sm hidden-xs">
+
+
+                            @{
+
+                                foreach (SearchProductByType_Result re in Model)
+                                {
+                                    string probig = "";
+
+                                    string imgPro = "";
+                                    try
+                                    {
+
+                                        imgPro = re.ImgSource;
+                                    }
+                                    catch { }
+                                    if (re.IsProductBig)
+                                    {
+
+                                        if (!Request.Browser.IsMobileDevice)
+                                        {
+                                            imgPro = re.LongImages;
+                                            probig = "class=feature";
+                                        }
+                                        else
+                                        {
+                                            imgPro = re.ImgSource;
+                                            probig = "";
+                                        }
+                                    }
+                                    <div class="col-xs-6 col-sm-3 col-lg-3">
+                                        <div class="product-box">
+                                            <div class="product-media">
+
+                                                <a href="@Util.ReturnLinkFull(@re.FriendlyUrl)" title="@re.ProductName">
+                                                    <picture>
+                                                        <source media="(min-width: 1200px)" srcset="@Util.ReturnLinkCDN(imgPro,Request.Browser.IsMobileDevice)">
+                                                        <source media="(min-width: 1024px)" srcset="@Util.ReturnLinkCDN(imgPro,Request.Browser.IsMobileDevice)">
+                                                        <source media="(min-width: 736px)" srcset="@Util.ReturnLinkCDN(imgPro,Request.Browser.IsMobileDevice)">
+                                                        <source media="(min-width: 667px)" srcset="@Util.ReturnLinkCDN(imgPro,Request.Browser.IsMobileDevice)">
+                                                        <source media="(min-width: 569px)" srcset="@Util.ReturnLinkCDN(imgPro,Request.Browser.IsMobileDevice)">
+                                                        <source media="(min-width: 480px)" srcset="@Util.ReturnLinkCDN(imgPro,Request.Browser.IsMobileDevice)">
+                                                        <img src="@Util.ReturnLinkCDN(imgPro,Request.Browser.IsMobileDevice)" alt="" class="img-responsive center-block">
+                                                    </picture>
+                                                </a>
+                                            </div>
+                                            <div class="product-caption">
+                                                <h3 class="product-title">
+                                                    <a href="/products/xa-bong-rua-mat-dang-bot-dhc-morning-face-wash-180ml" title="Sữa rửa mặt dạng bọt DHC Morning Face Wash 180ml"><span class="light-font">Sữa rửa mặt dạng bọt DHC Morning Face Wash 180ml</span></a>
+                                                </h3>
+                                                <div class="price">
+
+
+                                                    <strong class="clr-txt">@re.Price.ToString("N0")₫</strong>
+
+
+                                                </div>
+                                                <div class="prod-action">
+                                                    <button type="button" onclick="add_item_show_modalCart(1041263120)" class="hidden-sm hidden-lg hidden-md btn buy-nows">Mua Ngay</button>
+                                                </div>
+                                                <div class="prod-icons ababababa">
+                                                    <form action="/cart/add" method="post" class="variants form-nut-grid has-validation-callback" data-id="product-actions-1020700756" enctype="multipart/form-data">
+
+
+                                                        <input type="hidden" name="id" value="1041263120">
+                                                        <a class="fa fa-shopping-basket " onclick="add_item_show_modalCart(1041263120)" title="Cho vào giỏ hàng"></a>
+
+
+                                                        <a href="/products/xa-bong-rua-mat-dang-bot-dhc-morning-face-wash-180ml" class="fa fa-expand quick-view"></a>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                }
+                            }
+
+                        </div>
+
+                        <div class="text-xs-right">
+
+                            <div class="pagination-wrap">
+                                <div class="divider-full-1"></div>
+                                @Html.Raw(ViewData["Paging"])
+
+
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+
+                </div>
+            </section>
+        </div>
+    </div>
+</section>
+@Html.Partial("ProductViewed")

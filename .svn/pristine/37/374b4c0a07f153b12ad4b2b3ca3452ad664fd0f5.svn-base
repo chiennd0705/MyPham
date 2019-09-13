@@ -1,0 +1,233 @@
+﻿@using BuyGroup365.Models.Member
+@using Common.util
+<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 slidebar-left">
+    <div class="widget-menu-user clearfix">
+        <div class="drop-shadow"></div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne0">
+                        <span class="icon-header-panel"></span>Thông tin <b class="caret"></b>
+                    </a>
+
+                </h4>
+            </div>
+            <div id="collapseOne0" class="panel-collapse collapse in" style="height: auto;">
+                <div class="panel-body">
+                    <img src="@FuntionMember.GetUrlImage(@SessionUtility.GetSessionMember(Session).MemberProfile.Photo,"Medium")" alt="avatar" class="img-circle pull-left" width="60" height="60">
+                    <div class="user-info-widget">
+                        <a href="/Member/Profile" title="Thông tin cá nhân">
+                            @SessionUtility.GetSessionMember(Session).UserName
+                        </a>
+                        <div>@SessionUtility.GetSessionMember(Session).MemberProfile.Emaill</div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+           
+        </div><!--User info-->
+        <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                            <span class="icon-header-panel"></span>
+                            Mua hàng
+                            <b class="caret"></b>
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse in" style="height: auto;">
+                    <div class="panel-body">
+                        <div class="menu-panel">
+                            <h4><a href="/Member/OderProduct"><i class="fa fa-star"></i> Đơn hàng của tôi</a></h4>
+                        </div>
+                        <div class="menu-panel">
+                            <h4><a href="#"><i class="fa fa-thumbs-up"></i> Quan tâm của tôi</a></h4>
+                        </div>
+                    </div>
+                </div>
+            </div><!--Menu mua hàng-->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne1">
+                            <span class="icon-header-panel"></span>Bán hàng <b class="caret"></b>
+                        </a>
+
+                    </h4>
+                </div>
+                <div id="collapseOne1" class="panel-collapse collapse in" style="height: auto;">
+                    <div class="panel-body">
+                        <div class="menu-panel">
+                            <h4><a href="/Member/Postsale"><i class="fa fa-download"></i> Đăng bán</a></h4>
+                        </div>
+                        <div class="menu-panel">
+                            <h4><a href="/Member/Productlist"><i class="fa fa-list"></i> Danh sách sản phẩm</a></h4>
+                        </div>
+                        <div class="menu-panel">
+                            <h4><a href="/Member/Invoice"><i class="fa fa-car"></i> Hoá đơn bán hàng & Vận đơn </a></h4>
+                        </div>
+                     
+                    </div>
+                </div>
+            </div><!--Menu bán hàng-->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse-user">
+                            <span class="icon-header-panel"></span>Quản lý cá nhân <b class="caret"></b>
+                        </a>
+
+                    </h4>
+
+                </div>
+                <div id="collapse-user" class="panel-collapse" style="height: auto;">
+                    <div class="panel-body">
+                        <div class="menu-panel active">
+                            <h4><a href="/Member/Profile"><i class="fa fa-user"></i> Thông tin cá nhân</a></h4>
+                        </div>
+                        <div class="menu-panel">
+                            <h4><a href="#"><i class="fa fa-bell-o"></i> Tin nhắn & Thông báo</a></h4>
+                        </div>
+               
+                    </div>
+                </div>
+            </div><!--Menu Quản lý cá nhân-->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#Cauhinhshop">
+                            <span class="icon-header-panel"></span>Quản trị shop<b class="caret"></b>
+                        </a>
+
+                    </h4>
+
+                </div>
+                <div id="Cauhinhshop" class="panel-collapse  collapse in" style="height: auto;">
+                    <div class="panel-body">
+                        <div class="menu-panel">
+                            <h4><a href="#"><i class="fa fa-caret-right"></i> Cấu hình thanh toán &amp; vận chuyển</a></h4>
+                        </div>
+                        <div class="menu-panel">
+                            <h4><a href="/Member/ShopPolicy"><i class="fa fa-caret-right"></i> Chính sách bán hàng</a></h4>
+                        </div>
+                        <div class="menu-panel">
+                            <h4><a href="/Member/Shop"><i class="fa fa-caret-right"></i> Thông tin Shop</a></h4>
+                        </div>
+                        <div class="menu-panel">
+                            <h4><a href="/Member/ShopSetting"><i class="fa fa-caret-right"></i> Cấu hình Shop</a></h4>
+                        </div>
+                        <div class="menu-panel">
+                            <h4><a href="#"><i class="fa fa-caret-right"></i> Quản trị nội dung</a></h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!--Panel menu user-->
+       @* <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne3">
+                        <span class="icon-header-panel"></span>Có thể bạn chưa biết<b class="caret"></b>
+                    </a>
+
+                </h4>
+            </div>
+            <div id="collapseOne3" class="panel-collapse collapse in" style="height: auto;">
+                <div class="panel-body">
+                    <div class="widget-content">
+                        <ul class="question-block">
+                            <li class="clearfix">
+                                <h4 class="clr-org">Vì sao nên chấp nhận thanh toán qua NgânLượng</h4>
+                                <ul class="list-question-item">
+                                    <li>
+                                        <h5>Miễn phí </h5>
+                                        <p>Trừ trường hợp người mua thanh toán qua thẻ tín dụng</p>
+                                    </li>
+                                    <li>
+                                        <h5>Tăng doanh số</h5>
+                                        <p>Không chấp nhận thanh toán Online là từ chối khách hàng chuộng sự tiện lợi.</p>
+                                    </li>
+                                    <li>
+                                        <h5>Giảm chi phí</h5>
+                                        <p>Tỷ lệ người mua hủy đơn hàng và trả hàng rất thấp</p>
+                                    </li>
+                                    <li>
+                                        <h5>Nhận NGAY tiền hàng</h5>
+                                        <p>Ngay sau khi Khách hàng thanh toán</p>
+                                    </li>
+                                    <li>
+                                        <h5>Tiện lợi &amp; Đơn giản</h5>
+                                        <p>Trên 30 phương thức thu tiền</p>
+                                    </li>
+                                    <li>
+                                        <h5>Người mua tin tưởng hơn</h5>
+                                        <p>Ngân Lượng bảo hiểm 100%</p>
+                                    </li>
+                                    <li>
+                                        <h5>Bảo vệ người bán</h5>
+                                        <p>Hạn chế rủi ro charge back</p>
+                                    </li>
+                                </ul>
+                                <p class="pull-right small">» Đăng ký <a href="#">tại đây</a></p>
+                            </li>
+                            <li class="clearfix">
+                                <h4 class="clr-org">Vì sao nên chấp nhận hình thức Giao hàng - Thu tiền</h4>
+                                <ul class="list-question-item">
+                                    <li>
+                                        <h5>Kích thích mua hàng: </h5>
+                                        <p>100% người mua thích CoD. Người bán có thể giảm doanh số nếu không chấp nhận hình thức này.</p>
+                                    </li>
+                                    <li>
+                                        <h5>Miễn phí</h5>
+                                        <p>Miễn phí CoD toàn quốc &amp; Miễn phí chuyển hoàn nếu người mua từ chối nhận hàng</p>
+                                    </li>
+                                    <li>
+                                        <h5>Thời gian tạm giữ tiền ngắn</h5>
+                                        <p>Thanh toán tiền hàng 2 lần/tuần vào thứ 3 &amp; thứ 6</p>
+                                    </li>
+                                    <li>
+                                        <h5>Mạng lưới vận chuyển hàng rộng khắp</h5>
+                                        <p>Tới từng quận/huyện trên 63 tỉnh/thành cả nước</p>
+                                    </li>
+                                    <li>
+                                        <h5>Tiện dụng</h5>
+                                        <p>Kiểm tra hoặc tra cứu hành trình hàng Online</p>
+                                    </li>
+                                </ul>
+                                <p class="pull-right small">» Đăng ký <a href="#">tại đây</a></p>
+                            </li>
+                            <li class="clearfix">
+                                <h4 class="clr-org">Vì sao nên sử dụng dịch vụ vận chuyển của ShipChung</h4>
+                                <ul class="list-question-item">
+                                    <li>
+                                        <h5>Phí vận chuyển thấp</h5>
+                                        <p>Nhờ liên kết với nhiều đối tác vận chuyển</p>
+                                    </li>
+                                    <li>
+                                        <h5>Nhiều phương thức giao hàng</h5>
+                                        <p>Giao hàng hỏa tốc, Giao hàng nhanh, Giao hàng tiết kiệm</p>
+                                    </li>
+                                    <li>
+                                        <h5>Mạng lưới vận chuyển hàng rộng khắp </h5>
+                                        <p>Tới từng quận/huyện trên 63 tỉnh/thành cả nước</p>
+                                    </li>
+                                    <li>
+                                        <h5>Tiện dụng</h5>
+                                        <p>Kiểm tra hoặc tra cứu hành trình hàng Online</p>
+                                    </li>
+                                </ul>
+                                <p class="pull-right small">» Đăng ký <a href="#">tại đây</a></p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>*@
+    
+    </div>
+
+</div>

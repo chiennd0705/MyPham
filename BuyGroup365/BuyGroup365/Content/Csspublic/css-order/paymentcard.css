@@ -1,0 +1,151 @@
+body {
+    /* background: url(../img/bg.jpg) repeat top left; */
+    background-color: #eaeaea;
+    font-family: "Roboto Condensed Regular","Myriad Pro","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 22px;
+    color: #333;
+    -webkit-text-size-adjust: none;
+    min-height: 100%;
+}
+.subHeader, .subFooter {
+    background-color: #fff;
+    font-size: 11px;
+    color: #fff;
+    text-align: center;
+    line-height: 70px;
+    height: 70px;
+    padding: 0 10px;
+    position: relative;
+    box-shadow: 0 0 3px #ccc;
+}
+p {
+    font-family: inherit;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 17px;
+}
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, p, blockquote, th, td {
+    margin: 0;
+    padding: 0;
+    font-size: 12px;
+    direction: ltr;
+}
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, p, blockquote, th, td, textarea, input {
+    font-weight: normal;
+}
+.subHeader {
+    font-size: 14px !important;
+    font-weight: bold;
+}
+
+.head-top {
+    position: relative;
+}
+.subHeader img.left-img {
+    float: left;
+    height: 50px;
+}
+#content, .content {
+    padding: 10px;
+}
+.corner {
+    position: absolute;
+    right: -4px;
+    top: 0;
+    width: 20px;
+    height: 20px;
+    z-index: 1001;
+}
+.td1 {
+    width: 20%;
+    float: left;
+    font-size: 11px !important;
+    padding-left: 20px;
+}
+.td2 {
+    width: 52%;
+    float: left;
+    padding: 0 20px;
+    margin-right: 20px;
+    border-right: 1px #ccc dashed;
+    border-left: 1px #ccc dashed;
+    font-size: 11px !important;
+}
+.td3 {
+    /* width: 20%; */
+    float: left;
+    font-size: 11px !important;
+}
+.tab-content
+{
+    padding:10px;
+    background:#fff;
+}
+.head-top img
+{
+    width:98px !important;
+    height:55px !important;
+}
+.footer{
+    margin-bottom:20px;
+}
+.boxcheckout {
+        float: left;
+    width: 100%;
+    height: auto;
+    /* background: #DCF8F9 none repeat-x scroll center bottom; */
+    /* padding: 15px; */
+    border: 10px solid #FFF;
+}
+#footer {
+    width: 100%;
+    float: left;
+        margin: 20px 0 20px 0;
+    display: block;
+}
+.footer p {
+    display: block;
+    width: 50%;
+    float: left;
+    font-size: 12px;
+}
+strong, b {
+    font-weight: bold;
+    line-height: inherit;
+}
+.footer {
+    display: block;
+    padding: 20px 0 0 0;
+    background: url(../images/dot-line.png) repeat-x top;
+}
+.boxhd {
+    float: left;
+    width: 100%;
+    height: auto;
+    background: #fff url(../images/line.png) bottom repeat-x;
+    padding: 10px;
+    margin: 0 0 10px 0;
+    position: relative;
+}
+@media only screen and (min-width: 1280px) {
+    .head-top {
+        width: 720px;
+        margin: auto;
+        padding-top: 10px;
+    }
+    #content {
+    width: 720px;
+    margin: auto;
+}
+}
+
+@media only screen and (min-width: 1280px) {
+    .head-top {
+        width: 720px;
+        margin: auto;
+        padding-top: 10px;
+            text-align: left;
+    }
+}

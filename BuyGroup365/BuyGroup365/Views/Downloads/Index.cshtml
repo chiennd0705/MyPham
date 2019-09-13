@@ -1,0 +1,143 @@
+﻿@model List<Common.Downloads>
+@using Business.ClassBusiness;
+@using BuyGroup365.Models.Home
+@using Common
+@{
+    Layout = "~/Views/Shared/_LayoutProduct.cshtml";
+}
+
+<div class="breadcrumbs" style="margin-top:10px;">
+    <div class="container">
+        <nav class="woocommerce-breadcrumb breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+            <a href="/" title="" itemprop="url">Trang chủ</a><span class="divider"><i class="fa fa-angle-double-right"></i></span><a href="/download.html"> Download</a>
+        </nav>
+    </div>
+</div>
+<div id="row-351281483" itemprop="hasOfferCatalog" itemscope="" itemtype="http://schema.org/OfferCatalog" class="row large-columns-1 medium-columns- small-columns-1 row-masonry" data-packery-options="{&quot;itemSelector&quot;: &quot;.col&quot;, &quot;gutter&quot;: 0, &quot;presentageWidth&quot; : true}" style="position: relative; padding-top: 7px;">
+    <div class="col large-12">
+        <div class="download-content">
+            <div class="item01 clearfix">
+                <div class="left">
+                    <!-- <div class="title">Quick Search</div> -->
+                    <input type="text" id="Searchtext" placeholder="Please input keyword">
+                    <input type="button" id="search" value="Search">
+                </div>
+            </div>
+            <div class="item02">
+                <div class="down-nav clearfix" id="tab_file">
+                    <a cid="0" href="javascript:void(0)" class="on" id="all12">All</a>
+                    @{
+                        CatalogDownloadsBusiness _catalogDownloadsBussiness = new CatalogDownloadsBusiness();
+                        List<CatalogDownloads> listcatalogDownload = new List<CatalogDownloads>();
+                        listcatalogDownload = _catalogDownloadsBussiness.GetList("");
+                        foreach (var a in listcatalogDownload)
+                        {
+                            <a class="" cid="@a.Id" href="javascript:void(0)">@a.CatalogDownloadName</a>
+                        }
+                    }
+                </div>
+                <div class="down-wrap" id="file_content">
+                    @foreach (var item in Model)
+                    {
+                        <div class="list clearfix">
+                            <div class="img fl"><img src="~/Content/thietbichamcong/img/pdf-icon.png" alt="ZKAIO2000 Brochure"></div>
+                            <div class="con">
+                                <div class="tit">@item.FileName</div>
+                                <div class="ms">
+                                </div>
+                                <div class="size">Size：@item.Size MB</div>
+                            </div>
+                            <div class="right">
+                                <a target="_blank" href="@item.SoureFile"><img src="~/Content/thietbichamcong/img/download-icon-png-5.png" alt="Download">Download</a>
+                                <div class="clear"></div>
+                                <div class="date">Ngày đăng：@item.Modifydate.ToString("dd/M/yyyy")</div>
+                            </div>
+                        </div>
+
+                    }
+                    @if(Model.Count>10)
+                    {
+                        <input class="more" type="button" id="loadmore" href="javascript:void(0)" value="loadmore">
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+    $(function () {
+        cid = 41;
+        time = 0;
+        size = 1;
+        var search = '';
+
+        $(".download-content .item02 .down-nav a").on("click", function () {
+
+            $(this).addClass('on').siblings().removeClass('on');
+            cid = $(this).attr('cid');
+            time = 0;
+            $("#file_content div").remove();
+            $("#file_content").empty();
+            get_cate_list(cid, "", size);
+        })
+        $("#search").on('click', function () {
+            time = 0;
+            var Searchtext = document.getElementById('Searchtext').value;
+            $("#file_content").empty();
+            $("#tab_file a").parent().find('a').removeClass("on");
+            $("#all12").addClass('on');
+
+            $("#file_content div").remove();
+            get_cate_list(0, Searchtext, size);
+        })
+        $("#loadmore").click(function () {
+            cid = $(this).attr('cid');
+            size = size + 10;
+            get_cate_list(cid, "", size);
+
+        })
+        function get_cate_list(cid, Searchtext,size){
+
+          jQuery.ajax({
+            url: '@Url.Action("ListDownload", "Ajax")',
+            data: {
+                'id': cid,
+                'Searchtext': Searchtext,
+                'size': size
+                   },
+            dataType: 'json',
+            Type: 'POST',
+            success: function (data) {
+
+                var html = "";
+
+                jQuery.each(data, function (key, value) {
+
+                    html += "<div class=\"list clearfix\">" +
+                        "<div class=\"img fl\"><img src=\"/Content/thietbichamcong/img/pdf-icon.png\" alt=\"ZKAIO2000 Brochure\"></div>" +
+                        "<div class=\"con\">" +
+                        "<div class=\"tit\">" + value.FileName + "</div>" +
+                        "<div class=\"ms\">" +
+                        "</div>" +
+                        "<div class=\"size\">Size：" + value.Size + " MB</div>" +
+                        "</div>" +
+                        "<div class=\"right\">" +
+                        "<a target=\"_blank\" href=\"" + value.SoureFile + "\"><img src=\"/Content/thietbichamcong/img/download-icon-png-5.png\" alt=\"Download\">Download</a>" +
+                        "<div class=\"clear\"></div>" +
+                        "<div class=\"date\">Ngày đăng：" + value.Modifydate + "</div>" +
+                        "</div>" +
+                        "</div>";
+                });
+                if (data.length > size)
+                html += "<a class=\"more\" id=\"loadmore\" href=\"javascript:void(0)\">Load more</a>";
+                jQuery('#file_content').append(html);
+
+            },
+            error: function () {
+
+            }
+        });
+        }
+    })
+</script>

@@ -1,0 +1,8 @@
+﻿@model Common.role
+
+@{
+    ViewBag.Title = "Xóa module trong role";
+}
+@{Layout = "~/Areas/Manage/Views/Shared/_LayoutAdmincshtml.cshtml";}
+
+

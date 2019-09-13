@@ -1,0 +1,762 @@
+﻿@using MvcPaging
+@model IPagedList<Common.Member>
+
+@{
+    ViewBag.Title = "Quản lý Members";
+}
+@{Layout = "~/Areas/Manage/Views/Shared/_LayoutAdmincshtml.cshtml";}
+
+
+<div class="container-fluid" ng-app="body">
+    <!-- Page Heading -->
+    <div class="row" ng-controller="header">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                Quản lý Members
+            </h1>
+            <hr />
+            <div>{{quanlyuser}}</div>
+        </div>
+    </div>
+    <!-- /.row -->
+    <!-- /.row -->
+    <!-- /.row -->
+    <div class="row" ng-controller="Index">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <i class="fa fa-bar-chart-o fa-fw"></i> Danh sách Members
+                    </h3>
+                     
+                </div>
+                <div class="panel-body">
+                    @using (Ajax.BeginForm("Index", "Members",
+                        new AjaxOptions { UpdateTargetId = "grid-list", HttpMethod = "get", LoadingElementId = "loading", OnBegin = "beginPaging", OnSuccess = "successPaging", OnFailure = "failurePaging" },
+                        new { id = "frm-search" }))
+                    {
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="row">
+                                    <div class="col-lg-5">
+                                        <input type="text" value="@ViewData["key"]" class="form-control" id="appendedInputButton" name="key" placeholder="Nhập từ khóa tìm kiếm" style="width:80%">
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <input type="text" value="@ViewData["fromDate"]" placeholder="Từ ngày..." id="fromDateSearch" name="fromDateSearch" />
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <input type="text" value="@ViewData["toDate"]" placeholder="Đến ngày..." id="toDateSearch" name="toDateSearch" />
+                                    </div>
+                                    <div class="col-lg-1">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-default" type="submit">
+                                                <i class="fa fa-search"></i>
+                                            </button>
+
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover table-striped" id="dataTables" aria-describedby="dataTables-example_info">
+                                <thead>
+                                    <tr role="row">
+
+                                        <th>
+                                            Tên Member
+                                        </th>
+                                        <th>
+                                            Trạng thái
+                                        </th>
+                                        <th>
+                                            Ngày Active
+                                        </th>
+                                        <th style="width: auto">Chức năng</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.UserName)
+                                            </td>
+                                            <td>
+                                                <a href="#" class="btn-active" data-id="@item.Id">@Html.Raw(item.Status == 0 ? "<strong style=\"color:blue\">Kích hoạt</strong>" : "<strong style=\"color:red\">Khóa</strong>")</a>
+                                            </td>
+                                            <td>
+                                                @item.ActiveDate.ToString("dd/MM/yyyy HH:mm:ss")
+                                            </td>
+                                            <td style="text-align: center">
+                                                <a class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#ViewProfile" data-ng-click="GetInforMemberProfile(@item.Id)">
+                                                    Profile
+                                                </a> |
+                                                <a class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#EditModal" data-ng-click="GetInforMember(@item.Id)">
+                                                    Edit
+                                                </a> |
+                                                <a class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#Changepass" data-ng-click="GetPass(@item.Id)">
+                                                    ChangePass
+                                                </a> |
+                                                <a class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#ChangepassTransaction" data-ng-click="GetPassTrans(@item.Id)">
+                                                    ChangePassTrans
+                                                </a> |
+                                                @Html.ActionLink(" ", "" + "" + "DeleteMember", new { id = item.Id }, new { @class = "glyphicon glyphicon-trash", onclick = "return confirm('Bạn có muốn xóa member này?');" })
+                                            </td>
+                                        </tr>
+                                    }
+
+                                </tbody>
+                            </table>
+
+                            <div class="row">
+                                <div class="">
+                                    <div class="dataTables_info" id="dataTables-example_info" role="alert" aria-live="polite" aria-relevant="all">Hiển thị từ @Model.ItemStart đến @Model.ItemEnd của @Model.TotalItemCount bản ghi</div>
+                                </div>
+                                <div class="">
+                                    <div class="dataTables_paginate " id="dataTables-example_paginate">
+
+                                        @Html.Raw(Ajax.Pager(
+                                            new Options
+                                            {
+                                                PageSize = Model.PageSize,
+                                                TotalItemCount = Model.TotalItemCount,
+                                                CurrentPage = Model.PageNumber,
+                                                ItemTexts = new ItemTexts() { Next = "Next", Previous = "Previous", Page = "P" },
+                                                ItemIcon = new ItemIcon() { First = "icon-backward", Previous = "icon-chevron-left", Next = "icon-chevron-right", Last = "icon-forward" },
+                                                TooltipTitles = new TooltipTitles() { Next = "Next page", Previous = "Previous page", Page = "Page {0}." },
+                                                Size = Size.normal,
+                                                Alignment = Alignment.centered,
+                                                IsShowControls = true,
+                                                IsShowFirstLast = true,
+                                                CssClass = ""
+                                            },
+                                            new AjaxOptions
+                                            {
+                                                UpdateTargetId = "grid-list",
+                                                HttpMethod = "get",
+                                                LoadingElementId = "loading",
+                                                OnBegin = "beginPaging",
+                                                OnSuccess = "successPaging",
+                                                OnFailure = "failurePaging"
+                                            }, new { controller = "Members", action = "Index", key = ViewData["key"] }))
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- /.row -->
+        <!-- /.row -->
+        @*Eddi user*@
+        <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="EditModalLabel" aria-hidden="true">
+            <div class="modal-dialog popupDisplay-small">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Cập nhật member</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <input ng-model="emp.Id" style="display: none" />
+                                <div class="form-group">
+                                    <label class=" ">Username<span class="required">*</span></label><br />
+                                    <input class="form-control" autocomplete="off" ng-trim="true" maxlength="50" required id="username" name="username" type="text" data-ng-model="emp.UserName">
+                                    <span class="field-validation-valid" data-valmsg-for="username" data-valmsg-replace="true"></span>
+                                    <div class="clear"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label class=" ">Verify<span class="required">*</span></label><br />
+                                    <input class="form-control" autocomplete="off" ng-trim="true" maxlength="100" required id="verify" name="verify" type="text" data-ng-model="emp.Verify">
+                                    <span class="field-validation-valid" data-valmsg-for="verify" data-valmsg-replace="true"></span>
+                                    <div class="clear"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label class=" ">Trạng thái<span class="required">*</span></label><br />
+                                    <input class="form-control" autocomplete="off" maxlength="100" id="status" name="status" type="number" data-ng-model="emp.Status">
+                                    <span class="field-validation-valid" data-valmsg-for="status" data-valmsg-replace="true"></span>
+                                    <div class="clear"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label class=" ">ActiveDate<span class="required">*</span></label><br />
+                                    <input class="form-control" autocomplete="off" maxlength="50" data-val="true" id="activeDate" name="activeDate" type="text" data-ng-model="emp.ActiveDate | jsonDate: 'dd/MM/yyyy'">
+                                    <span class="field-validation-valid" data-valmsg-for="activeDate" data-valmsg-replace="true"></span>
+                                    <div class="clear"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>Câu hỏi</label><br />
+                                    <textarea class="form-control" cols="5" rows="6" style="width: 100%" id="question" name="question" data-ng-model="emp.Question"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Câu trả lời</label><br />
+                                    <textarea class="form-control" cols="5" rows="6" style="width: 100%" id="answer" name="answer" data-ng-model="emp.Answer"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" ng-click="UpdateChange()">Save changes</button>
+                    </div>
+                </div>
+            </div>
+            @*Kêt thúc cập nhật*@
+        </div>
+
+
+        @*Member Profile*@
+        <div class="modal fade" id="ViewProfile" tabindex="-1" role="dialog" aria-labelledby="DeatailModalLabel" aria-hidden="true">
+           <div class="modal-dialog modal-lg popupDisplay-large" >
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Member Profile</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-hover table-striped" id="dataTables" aria-describedby="dataTables-example_info">
+                                    <thead>
+                                        <tr role="row">
+                                            <th>
+                                                Tên
+                                            </th>
+                                            <th>
+                                                Địa chỉ
+                                            </th>
+                                            <th>
+                                                Email
+                                            </th>
+                                            <th>
+                                                Số điện thoại
+                                            </th>
+                                            <th>
+                                                Ngày sinh
+                                            </th>
+                                            <th>
+                                                Chứng minh thư
+                                            </th>
+                                            <th>
+                                                ảnh
+                                            </th>
+                                            <th style="width: auto">Chức năng</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td> {{memberProfile.FirstName}}</td>
+                                            <td> {{memberProfile.Address}}</td>
+                                            <td> {{memberProfile.Emaill}}</td>
+                                            <td> {{memberProfile.Phone}}</td>
+                                            <td> {{memberProfile.Dob | jsonDate :'MM/dd/yyyy'}}</td>
+                                            <td> {{memberProfile.Pid}}</td>
+                                            <td>
+                                                @{
+                                                    var values = "{{ memberProfile.Photo }}";
+                                                    string url = BuyGroup365.Areas.Manage.Models.AdminFunction.GetUrlImage(values, "Small");
+                                                }
+                                                <img src="@url" width="25" height="25" />
+                                            </td>
+
+                                            <td>
+                                                <a class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#EditModalMemberProfile">
+                                                    Sửa
+                                                </a>
+                                            </td>
+                                        </tr>
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @*Member Profile*@
+
+        @*Member View memberProfile edit*@
+        <div class="modal fade" id="EditModalMemberProfile" tabindex="-1" role="dialog" aria-labelledby="EditModalLabel" aria-hidden="true">
+            <div class="modal-dialog popupDisplay-small">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Cập nhật MemberProfile</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <input data-ng-model="memberProfile.Id" style="display: none" />
+
+                                <div class="form-group">
+                                    <label class=" ">FirstName<span class="required">*</span></label><br />
+                                    <input class="form-control" autocomplete="off" maxlength="50" required id="firstName" name="firstName" type="text" data-ng-model="memberProfile.FirstName">
+                                    <span class="field-validation-valid" data-valmsg-for="firstName" data-valmsg-replace="true"></span>
+                                    <div class="clear"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label class=" ">LatName<span class="required">*</span></label><br />
+                                    <input class="form-control" autocomplete="off" maxlength="50" required id="lastName" name="lastName" type="text" data-ng-model="memberProfile.LastName">
+                                    <span class="field-validation-valid" data-valmsg-for="lastName" data-valmsg-replace="true"></span>
+                                    <div class="clear"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label class=" ">Địa chỉ<span class="required">*</span></label><br />
+                                    <input class="form-control" autocomplete="off" maxlength="200" required id="address" name="address" type="text" data-ng-model="memberProfile.Address">
+                                    <span class="field-validation-valid" data-valmsg-for="address" data-valmsg-replace="true"></span>
+                                    <div class="clear"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Hộp thư</label><br />
+                                    <input class="form-control" data-val-required="Mail." autocomplete="off" maxlength="50" id="emaill" name="emaill" type="email" data-ng-model="memberProfile.Emaill">
+                                    <span class="field-validation-valid" data-valmsg-for="emaill" data-valmsg-replace="true"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label class=" ">Mã vùng</label><br />
+                                    <input class="form-control" autocomplete="off" maxlength="20" data-val="true" id="zipCode" name="zipCode" type="text" data-ng-model="memberProfile.ZipCode">
+                                    <span class="field-validation-valid" data-valmsg-for="zipCode" data-valmsg-replace="true"></span>
+                                    <div class="clear"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class=" ">Điện thoại</label><br />
+                                    <input class="form-control" autocomplete="off" maxlength="50" data-val="true" data-val-regex="Số điện thoại không hợp lệ." data-val-regex-pattern="[0-9]{9,15}$" id="tel" name="tel" type="text" data-ng-model="memberProfile.Phone">
+                                    <span class="field-validation-valid" data-valmsg-for="tel" data-valmsg-replace="true"></span>
+                                    <div class="clear"></div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class=" ">Dob</label><br />
+                                    <input class="form-control" autocomplete="off" maxlength="50" data-val="true" id="Dob" name="Dob" type="datetime" data-ng-model="memberProfile.Dob">
+                                    <span class="field-validation-valid" data-valmsg-for="Dob" data-valmsg-replace="true"></span>
+                                    <div class="clear"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label class=" ">Giới tính</label><br />
+                                    <input class="form-control" autocomplete="off" maxlength="10" id="sex" name="sex" type="text" data-ng-model="memberProfile.Sex">
+                                    <span class="field-validation-valid" data-valmsg-for="sex" data-valmsg-replace="true"></span>
+                                    <div class="clear"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label class=" ">Chứng minh thư</label><br />
+                                    <input class="form-control" autocomplete="off" maxlength="50" data-val="true" id="pid" name="pid" type="text" data-ng-model="memberProfile.Pid">
+                                    <span class="field-validation-valid" data-valmsg-for="pid" data-valmsg-replace="true"></span>
+                                    <div class="clear"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Icon</label><br />
+                                    <input class="form-control" autocomplete="off" maxlength="200" style="width: 200px" id="icon" name="icon" type="file" value=" ">
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" ng-click="UpdateChangeMemberProfile()">Save changes</button>
+                    </div>
+                </div>
+            </div>
+            @*Kêt thúc cập nhật*@
+        </div>
+
+        @*Changepass*@
+
+        <div class="modal fade" id="Changepass" tabindex="-1" role="dialog" aria-labelledby="EditModalLabel" aria-hidden="true">
+            <div class="modal-dialog popupDisplay-small">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Đổi mật khẩu</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+
+                            <input data-ng-model="objpass.UserId" type="hidden" />
+                            <div class="form-group">
+                                <label class=" ">Mật khẩu mới<span class="required">*</span></label><br />
+                                <input class="form-control" autocomplete="off" maxlength="50" required id="user_profile_name" name="user_profile_name" type="password" data-ng-model="objpass.NewPass">
+
+                                <div class="clear"></div>
+                            </div>
+                            <div class="form-group">
+                                <label class=" ">Nhập lại mật khẩu mới<span class="required">*</span></label><br />
+                                <input class="form-control" autocomplete="off" maxlength="50" required id="screen_name" name="screen_name" type="password" data-ng-model="objpass.RepeatPass">
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" ng-click="UpdateChangePass()">Save changes</button>
+                    </div>
+                </div>
+            </div>
+            @*Kêt thúc cập nhật*@
+        </div>
+
+        @*End*@
+
+        @*ChangepassTransaction*@
+
+        <div class="modal fade" id="ChangepassTransaction" tabindex="-1" role="dialog" aria-labelledby="EditModalLabel" aria-hidden="true">
+            <div class="modal-dialog popupDisplay-small">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Đổi mật khẩu giao dịch</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <input data-ng-model="objpass.UserId" type="hidden" />
+                            <div class="form-group">
+                                <label class=" ">Mật khẩu mới<span class="required">*</span></label><br />
+                                <input class="form-control" autocomplete="off" maxlength="50" required id="user_profile_name" name="user_profile_name" type="text" data-ng-model="objpass.NewPass">
+
+                                <div class="clear"></div>
+                            </div>
+                            <div class="form-group">
+                                <label class=" ">Nhập lại mật khẩu mới<span class="required">*</span></label><br />
+                                <input class="form-control" autocomplete="off" maxlength="50" required id="screen_name" name="screen_name" type="text" data-ng-model="objpass.RepeatPass">
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" ng-click="UpdateChangePassTrans()">Save changes</button>
+                    </div>
+                </div>
+            </div>
+            @*Kêt thúc cập nhật*@
+        </div>
+
+        @*End*@
+    </div>
+</div>
+@*Kêt thúc cập nhật*@
+<script>
+    var appTestDatte = angular.module("body", []).controller("header", function ($scope) {
+        //   $scope.quanlyuser = "Câp nhật thái";
+    }).controller("Index", function ($scope) {
+
+        $scope.emp = {
+            Id: '',
+            UserName: '',
+            Password: '',
+            PasswordTransaction: '',
+            Verify: '',
+            Status: '',
+            ActiveDate: '',
+            Question: '',
+            Answer: ''
+        };
+        $scope.objpass = {
+            NewPass: '',
+            RepeatPass: '',
+            MemberId: ''
+        };
+
+        $scope.memberProfile = {
+            Id: '',
+            FirstName: '',
+            LastName: '',
+            LocationId: '',
+            Address: '',
+            Emaill: '',
+            Phone: '',
+            Dob: '',
+            Sex: '',
+            Pid: '',
+            ZipCode: '',
+            Photo: ''
+        };
+
+        $scope.GetInforMemberProfile = function (id_val) {
+            $('#overbackgroud').show();
+            $.ajax({
+                url: '@Url.Action("GetMemberProfileById", "Json")',
+                data: {
+                    'Id': id_val
+                },
+                type: 'GET',
+                contentType: 'application/json; charset=utf-8',
+
+                success: function (data) {
+                    $scope.memberProfile.Id = data.Id;
+                    $scope.memberProfile.FirstName = data.FirstName;
+                    $scope.memberProfile.LastName = data.LastName;
+                    $scope.memberProfile.LocationId = data.LocationId;
+                    $scope.memberProfile.Address = data.Address;
+                    $scope.memberProfile.Emaill = data.Emaill;
+                    $scope.memberProfile.Phone = data.Phone;
+                    $scope.memberProfile.Dob = data.Dob;
+                    $scope.memberProfile.Sex = data.Sex;
+                    $scope.memberProfile.Pid = data.Pid;
+                    $scope.memberProfile.ZipCode = data.ZipCode;
+                    $scope.memberProfile.Photo = data.Photo;
+
+                    $scope.$apply();
+
+                    $('#overbackgroud').hide();
+                },
+                error: function () {
+
+                }
+            });
+        };
+
+        $scope.UpdateChangeMemberProfile = function () {
+            $('#overbackgroud').show();
+            $.ajax({
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify($scope.memberProfile),
+                url: '@Url.Action("UpdateMemberProfile","Json")',
+                success: function (data) {
+                    if (data == 1) {
+                        alert("Cập nhật thành công" + $scope.memberProfile.Id);
+                        window.location.href = "/Manage/Members/Index";
+                        //     $scope.GetInfoUser();
+                    }
+
+                },
+                error: function (status) { }
+            });
+        };
+
+        $scope.GetInforMember = function (id) {
+
+            $('#overbackgroud').show();
+            //   $scope.emplist = [];
+            //   $scope.emailthai = "tháiisigsjghj";
+            $.ajax({
+                url: '@Url.Action("GetMemberById","Json")',
+                data: {
+                    'id': id
+                },
+                type: 'GET',
+                contentType: 'application/json; charset=utf-8',
+
+                success: function (data) {
+                    $scope.emp.Id = data.Id;
+                    $scope.emp.UserName = data.UserName;
+                    $scope.emp.Password = data.Password;
+                    $scope.emp.PasswordTransaction = data.PasswordTransaction;
+                    $scope.emp.Verify = data.Verify;
+                    $scope.emp.Status = data.Status;
+                    $scope.emp.ActiveDate = data.ActiveDate;
+                    $scope.emp.Question = data.Question;
+                    $scope.emp.Answer = data.Answer;
+
+                    $scope.$apply();
+                    $('#overbackgroud').hide();
+                },
+                error: function () {
+
+                }
+            });
+            // alert(mail);
+
+            //       $scope.valuetest = mail;
+            //  $scope.emailthai = mail;
+            //  alert(id);
+        };
+        $scope.GetPass = function (id) {
+
+            $scope.objpass.MemberId = id;
+        };
+        $scope.GetPassTrans = function (id) {
+
+            $scope.objpass.MemberId = id;
+        }
+        $scope.UpdateChange = function () {
+            $('#overbackgroud').show();
+            $.ajax({
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify($scope.emp),
+                url: '@Url.Action("UpdateMember","Json")',
+                success: function (data) {
+                    if (data == 1) {
+                        alert("Cập nhật thành công");
+                        window.location.href = "/Manage/Members/Index";
+                        //     $scope.GetInfoUser();
+                    }
+
+                },
+                error: function (status) { }
+            });
+        };
+        $scope.UpdateChangePass = function () {
+            $.ajax({
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify($scope.objpass),
+                url: '@Url.Action("ChangePasssMember", "Json")',
+                success: function (data) {
+                    if (data == 1) {
+                        alert("Cập nhật thành công");
+
+                    }
+                    else if (data == 2) {
+                        alert('Nhập lại pass sai');
+                    }
+                },
+                error: function (status) {
+                }
+            });
+        };
+
+        $scope.UpdateChangePassTrans = function () {
+            $.ajax({
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify($scope.objpass),
+                url: '@Url.Action("ChangePasssTransMember","Json")',
+                success: function (data) {
+                    if (data == 1) {
+                        alert("Cập nhật thành công");
+
+                    }
+                    else if (data == 2) {
+                        alert('Nhập lại pass sai');
+                    }
+                },
+                error: function (status) {
+                }
+            });
+        };
+    });
+
+    appTestDatte.filter('jsonDate', ['$filter', function ($filter) {
+        return function (input, format) {
+            return (input) ? $filter('date')(parseInt(input.substr(6)), format) : '';
+        };
+    }]);
+</script>
+
+<script type="text/javascript">
+
+    function beginPaging(args) {
+        // Animatek
+        $('#grid-list').fadeOut('normal');
+    }
+
+    function successPaging() {
+        // Animate
+        $('#grid-list').fadeIn('normal');
+        $('a').tooltip();
+    }
+
+    function failurePaging() {
+        alert("Could not retrieve list.");
+    }
+
+</script>
+
+<script type="text/javascript">
+    $(function () {
+        $("#datepicker1").datepicker();
+        $("#dob").datepicker(
+
+            {
+                changeMonth: true,
+                changeYear: true,
+                showButtonPanel: true,
+                yearRange: "-0:+15"
+            });
+        $("#activeDate").datepicker(
+
+           {
+               changeMonth: true,
+               changeYear: true,
+               showButtonPanel: true,
+               yearRange: "-0:+15"
+           });
+        $("#Dob").datepicker(
+
+           {
+               changeMonth: true,
+               changeYear: true,
+               showButtonPanel: true,
+               yearRange: "-0:+15"
+           });
+        $("#fromDateSearch").datepicker(
+
+          {
+              changeMonth: true,
+              changeYear: true,
+              showButtonPanel: true,
+              yearRange: "-0:+15"
+          });
+        $("#toDateSearch").datepicker(
+
+          {
+              changeMonth: true,
+              changeYear: true,
+              showButtonPanel: true,
+              yearRange: "-0:+15"
+          });
+    });
+</script>
+
+<script type="text/javascript">
+    var user = {
+        init: function () {
+            user.registerEvents();
+        },
+        registerEvents: function () {
+            $('.btn-active').off('click').on('click', function (e) {
+                e.preventDefault();
+                var btn = $(this);
+                var id = btn.data('id');
+                $.ajax({
+                    url: '@Url.Action("ChangeStatusMember", "Json")',
+                    data: { id: id },
+                    dataType: "json",
+                    type: "POST",
+                    success: function (response) {
+                        console.log(response);
+                        if (response.status == 1) {
+                            btn.text('Kích hoạt');
+                        }
+                        else {
+                            btn.text('Khoá');
+                        }
+                    }
+                });
+            });
+        }
+    }
+    user.init();
+</script>
+
+<style type="text/css">
+    .popupDisplay-large {
+        left: 117px;
+        top: 100px;
+    }
+
+    .popupDisplay-small {
+        left: 100px;
+        top: 30px;
+    } 
+</style>

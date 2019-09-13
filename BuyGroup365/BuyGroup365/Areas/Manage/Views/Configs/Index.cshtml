@@ -1,0 +1,150 @@
+﻿@using BuyGroup365.Areas.Manage.Models
+@using MvcPaging
+@model MvcPaging.IPagedList<Common.ConfigRedirectUrl>
+@using Common
+@using Business.ClassBusiness;
+@{
+    ViewBag.Title = "Cập nhật Link chuyển hướng";
+    Layout = "~/Areas/Manage/Views/Shared/_LayoutAdmincshtml.cshtml";
+}
+
+<div class="container-fluid" ng-app="body">
+    @Html.Raw(AdminFunction.BindHeader("Configs", " Thêm mới", null, null, null))
+    <!-- /.row -->
+    <!-- /.row -->
+    <!-- /.row -->
+    <div class="row" ng-controller="Index">
+
+<div class="col-lg-6">
+@{
+    ConfigRedirectUrl configRedirectUrl;
+ long id=0;
+if(Request.QueryString["id"]!=null)
+{
+     id = long.Parse(Request.QueryString["id"].ToString());
+configRedirectUrl = new ConfigRedirectUrlBusiness().GetById(id);
+}else{
+ configRedirectUrl = new ConfigRedirectUrl();
+}
+
+}
+  @using (Html.BeginForm("Update", "Configs", FormMethod.Post, new { enctype = "multipart/form-data", id = "Update" }))
+                {
+                <input type="hidden" value="@configRedirectUrl.Id" id="Id" name="id" />
+
+                    @Html.ValidationSummary(true)
+
+                    <div class="form-group">
+                        <label>Url:<span class="required">*</span></label><br />
+                        <input class="form-control" autocomplete="off" maxlength="200"  id="TagName" required id="url" name="url" type="text" value="@configRedirectUrl.Url" />
+                    </div>
+
+                       <div class="form-group">
+                        <label>Url chuyển hướng:<span class="required">*</span></label><br />
+                        <input class="form-control" autocomplete="off" maxlength="200"  id="TagName" required id="urlRedirect" name="urlRedirect" type="text" value="@configRedirectUrl.RedirectUrl" />
+                    </div>
+
+ <div class="form-group">
+                         <button type="submit" class="btn btn-primary" name="btnSubmit" value="Thêm">Thêm</button>
+
+@if(Request.QueryString["id"]!=null)
+{
+ <button type="submit" class="btn btn-primary" name="btnSubmit" value="Cập nhật">Cập nhật</button>
+}
+                    </div>
+}
+
+        <script type="text/javascript">
+
+            var setVAL = CKEDITOR.replace('Description', { height: 300 });
+
+            setVAL.CKFinder.setupCKEditor(setVAL, '/Content/css/ckfinder/');
+        </script>
+    </div>
+  <div class="col-lg-6"> @using (Ajax.BeginForm("Index", "Configs",
+                        new AjaxOptions { UpdateTargetId = "grid-list", HttpMethod = "get", LoadingElementId = "loading", OnBegin = "beginPaging", OnSuccess = "successPaging", OnFailure = "failurePaging" },
+                        new { id = "frm-search" }))
+                    {
+
+           <div class="table-responsive">
+                            <table class="table table-bordered table-hover table-striped" id="dataTables" aria-describedby="dataTables-example_info">
+                                <thead>
+                                    <tr role="row">
+                                        <th style="width:80px">
+                                            STT
+                                        </th>
+                                        <th>
+                                        </th>
+
+                                        <th style="width: 120px;">Chức Năng</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+@{
+int i=Model.ItemStart;
+}
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td style="text-align:center">
+                                                @(i)
+                                            </td>
+                                            <td>
+<div>
+                                  <b>Url:</b>              @Html.DisplayFor(modelItem => item.Url)
+</div>
+<div>
+                              <b>    Url chuyển:   </b>           @Html.DisplayFor(modelItem => item.RedirectUrl)
+</div>
+                                            </td>
+
+                                            <td style="text-align: center">
+
+                                                <a href="/Manage/configs/Index/?id=@item.Id">
+                                                    <img src="~/img/IconMain/edit.png" width="19" title="Sửa" />
+                                                </a>
+                                                 <a href="/Manage/configs/Delete/@item.Id" title="Xóa" onclick = "return confirm('Bạn có chắc chắn?');">
+                                                    <img src="~/img/IconMain/remove.png" width="19" title="Xóa" />
+                                                </a>
+                                            </td>
+                                        </tr>
+i++;
+                                    }
+                                </tbody>
+                            </table>
+ <div class="">
+                                    <div class="dataTables_info" id="dataTables-example_info" role="alert" aria-live="polite" aria-relevant="all">Hiển thị từ @Model.ItemStart đến @Model.ItemEnd của @Model.TotalItemCount bản ghi</div>
+                                </div>
+                                <div class="">
+                                    <div class="dataTables_paginate " id="dataTables-example_paginate">
+
+                                        @Html.Raw(Ajax.Pager(
+                                            new Options
+                                            {
+                                                PageSize = Model.PageSize,
+                                                TotalItemCount = Model.TotalItemCount,
+                                                CurrentPage = Model.PageNumber,
+                                                ItemTexts = new ItemTexts() { Next = "Next", Previous = "Previous", Page = "P" },
+                                                ItemIcon = new ItemIcon() { First = "icon-backward", Previous = "icon-chevron-left", Next = "icon-chevron-right", Last = "icon-forward" },
+                                                TooltipTitles = new TooltipTitles() { Next = "Next page", Previous = "Previous page", Page = "Page {0}." },
+                                                Size = Size.normal,
+                                                Alignment = Alignment.centered,
+                                                IsShowControls = true,
+                                                IsShowFirstLast = true,
+                                                CssClass = ""
+                                            },
+                                            new AjaxOptions
+                                            {
+                                                UpdateTargetId = "grid-list",
+                                                HttpMethod = "get",
+                                                LoadingElementId = "loading",
+                                                OnBegin = "beginPaging",
+                                                OnSuccess = "successPaging",
+                                                OnFailure = "failurePaging"
+                                            }, new { controller = "Configs", action = "Index"}))
+                                    </div>
+                                </div>
+             </div>
+}
+        </div>
+</div>

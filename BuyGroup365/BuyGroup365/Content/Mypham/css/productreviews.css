@@ -1,0 +1,147 @@
+﻿
+
+.hrv-product-reviews-summary {
+    float: left;
+    width: 20%;
+    padding: 10px;
+}
+
+.product-reviews-summary-actions {
+    float: right;
+}
+
+.hrv-product-reviews-form {
+    float: left;
+    border: none;
+    width: 80%;
+    padding-left: 10px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+    .hrv-product-reviews-form input, .hrv-product-reviews-form textarea {
+        padding: 10px;
+        width: 100%;
+        border: 1px solid #E0E0E0;
+    }
+
+#btnSubmitReview {
+    display: inline-block;
+    margin-top: 10px;
+    border: 0;
+    background: #53A1CC;
+    color: #fff;
+    width: auto;
+    float: right;
+}
+
+.hrv-product-reviews-form textarea {
+    width: 100%;
+    margin: 0;
+    padding: 5px;
+}
+
+.hrv-product-reviews-form fieldset {
+    padding: 5px;
+}
+
+
+#dvRating {
+    float: none;
+}
+
+#hrv-product-reviews-list {
+    float: none;
+    border: none;
+    width: 100%;
+    clear: both;
+}
+
+    #hrv-product-reviews-list p {
+        margin-bottom: 10px;
+    }
+
+    #hrv-product-reviews-list > div {
+        border-top: 1px solid #E0E0E0;
+        padding: 15px;
+    }
+
+.hrv-prv-detail-rate {
+    display: inline-block;
+    padding: 5px;
+}
+
+#dvMoreReview {
+    float: right;
+    width: 80%;
+    padding-left: 10px;
+}
+
+#btnMoreReview {
+    /*width: 250px;
+    position: relative;
+    float: right;
+    padding: 10px;
+    margin-top: 10px;*/
+
+    padding: 10px;
+    float: right;
+    margin-top: 10px;
+    border: 0;
+    background: #53A1CC;
+    color: #fff;
+}
+
+.btnPaging {
+    padding: 5px 12px;
+    margin-top: 10px;
+    margin-left: 5px;
+    border: 0;
+    background: #53A1CC;
+    color: #fff;
+}
+
+input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
+    background-color: white !important;
+}
+
+.has-error label {
+    color: red;
+    font-weight: bold;
+}
+
+.error {
+    color: red;
+    font-weight: bold;
+    text-align: center;
+}
+
+#btnnewreview {
+    padding: 10px;
+    width: 100%;
+    margin-top: 10px;
+    border: 0;
+    background: #53A1CC;
+    color: #fff;
+}
+
+#dvhrv-prv-reply {
+    background-color: yellow;
+    padding: 50px;
+}
+
+hr {
+    width: 100%;
+}
+
+#hrv-product-reviews-frm:after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.dvhrv-prv-reply {
+    margin-left: 50px;
+    border-top: 1px dashed #E0E0E0;
+    padding-top: 10px;
+}

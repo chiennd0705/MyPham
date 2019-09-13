@@ -1,0 +1,179 @@
+﻿@using MvcPaging
+@model List<common.searchproductbytype_result>
+@{
+   
+    Layout = "~/Views/Shared/_LayoutIndex.cshtml";
+}
+
+ <link rel="stylesheet" type="text/css" href="/Content/Csspublic/css/customer.css" media="all">
+   
+<div class="main-container col2-left-layout ">
+    <div class="breadcrumbs">
+        <div class="container">
+            <ul>
+                <li class="home" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <a href="/" title="Go to Home Page" itemprop="url"><span itemprop="title">Trang chủ</span></a>
+
+                </li>
+              @Html.Raw(ViewData["Breadcrumbs"])
+            </ul>
+        </div>
+    </div>
+    <div class="container">
+        <div class="main">
+            <div class="row">
+                <div class="col-main col-lg-9 col-md-9 col-sm-9 col-xs-12 content-color color f-right">
+                    <div class="page-title category-title" style="margin-top: 0">
+                        <h1 style="padding-left: 0">@ViewData["CatalogName"]</h1>
+                        <div class="toolbar" style="float: right;">
+                            <div class="sorter">
+                                <div class="sort-by">
+
+                                    <select onchange="setLocation(this.value)" style="vertical-align: middle; border: 0; font-size: 14px;">
+                                           @Html.Raw(ViewData["ListOrder"])
+                                        
+                                    </select>
+
+                                </div>
+
+
+
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="category-products">
+                        <ul class="products-grid row products-grid--max-3-col first last odd">
+                        @foreach (var item in Model)
+                                        {
+                                <li class=" col-mobile-6 col-mobile-plus-6 col-xs-3 col-sm-6 col-md-3 col-lg-3 item">
+                                    <div class="category-products-grid">
+                                        <div class="images-container">
+                                            <div class="product-hover">
+                                                <span class="sticker top-left"><span class="labelnew">New</span></span>	 <a href="/@(item.FriendlyUrl)-ct@(item.Id)" title="@(item.ProductName)" class="product-image">
+                                                    <img id="product-collection-image-21" class="img-responsive" src="@(item.ImgSource.Split('?')[0])Small/@(item.ImgSource.Split('?')[1])"  alt="@Html.DisplayFor(modelItem => item.ProductName)">
+
+                                                    
+                                                </a>
+                                            </div>
+                                            <div class="actions-no hover-box">
+                                                <a class="detail_links" href="/@(item.FriendlyUrl)-ct@(item.Id)"></a>
+                                                <div class="actions">
+                                                    <ul class="add-to-links pull-left-none">
+                                                        <li class="pull-left-none"><a href="" title="Add to Wishlist" class="link-wishlist"><i class="fa fa-heart-o icons"></i>Add to Wishlist</a></li>
+                                                        <li class="pull-left-none"><a href="" title="Add to Compare" class="link-compare"><i class="fa fa-signal icons"></i>Add to Compare</a></li>
+                                                        <li class="link-view pull-left-none">
+                                                            <a title="Quick View" href="@System.Configuration.ConfigurationManager.AppSettings["HostUrl"]Ajax/QuickView/@(item.Id)" class="link-quickview"><i class="fa fa-search icons"></i>Quick View</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="product-info products-textlink clearfix" style="min-height: 53px;">
+                                            <h2 class="product-name"><a href="/@(item.FriendlyUrl)-ct@(item.Id)" title="@Html.DisplayFor(modelItem => item.ProductName)"> @Html.DisplayFor(modelItem => item.ProductName)</a></h2>
+
+
+
+                                            <div class="price-box">
+                                                <span class="regular-price" id="product-price-21">
+                                                    <span class="price" itemprop="price" content="@(item.Price.ToString("N0"))">@(item.Price.ToString("N0"))<sup class="u-price">đ</sup></span></span>
+
+                                            </div>
+
+                                            <div class="ratings">
+                                                <div class="rating-box">
+                                                    <div class="rating" style="width: 70%"></div>
+                                                </div>
+                                            
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+
+                        </ul>
+                        <script type="text/javascript">decorateGeneric($$('ul.products-grid'), ['odd', 'even', 'first', 'last'])</script>
+
+                        <div class="toolbar-bottom">
+                            <div class="toolbar">
+                                <div class="sorter">
+
+                                 
+                                     @Html.Raw(ViewData["Paging"])
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+                <div class="col-left sidebar col-lg-3 col-md-3 col-sm-3 col-xs-12 left-color color f-left">
+                    <div class="megashop load-area area-category">
+                         <div class="ajax_loading" style="display: none" data-url="@System.Configuration.ConfigurationManager.AppSettings["HostUrl"]Partial/GetCategory" data-info="@ViewData["Id"]" date-type="category">
+                                <img src="/Content/Csspublic/images/loading.gif" alt="Loading...">
+                          </div>                    
+                          <div class="content-area">
+                        </div>
+                    </div>
+                     <script type="text/javascript">
+                         jQuery(document).ready(function () {
+                             jQuery(".area-category").loadcontent({
+                                 selector: ".area-category", // Selector product grid
+                             });
+                         });
+                        </script>
+
+                    <script type="text/javascript">
+                        jQuery(document).ready(function ($) {
+                            $(".nav-accordion").magicaccordion({
+                                accordion: true,
+                                speed: 400,
+                                closedSign: 'collapse',
+                                openedSign: 'expand',
+                                easing: 'easeInOutQuad'
+                            });
+                        });
+                    </script>
+
+                    <div class="block block-layered-nav block-layered-nav--no-filters">
+                        <div class="load-area area-filter">
+                         <div class="ajax_loading" style="display: none" data-url="@System.Configuration.ConfigurationManager.AppSettings["HostUrl"]Partial/GetFilter" data-info="@ViewData["Info_Manu"]" date-type="fillter">
+                                <img src="/Content/Csspublic/images/loading.gif" alt="Loading...">
+                          </div>                    
+                          <div class="content-area">
+                        </div>
+                        </div>
+                     <script type="text/javascript">
+                         jQuery(document).ready(function () {
+                             jQuery(".area-filter").loadcontent({
+                                 selector: ".area-filter", // Selector product grid
+                             });
+                         });
+                        </script>
+                      
+                    </div>
+
+
+                   
+                @*    <div class="block block-list block-compare">
+                        <div class="block-title">
+                            <strong><span>Compare Products                    </span></strong>
+                        </div>
+                        <div class="block-content">
+                            <p class="empty">You have no items to compare.</p>
+                        </div>
+                    </div>
+                    *@
+                    
+                         
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

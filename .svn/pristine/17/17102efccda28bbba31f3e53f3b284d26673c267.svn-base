@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "Error";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+<style>
+    .cart-error .icon-cart {
+        border-radius: 50%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 10px;
+        background-image: url(/Content/Csspublic/images/cart-error.png);
+        background-repeat: no-repeat;
+        display: block;
+        width: 250px;
+        height: 172px;
+        /*background-position: -47px -378px;*/
+    }
+
+    .cart-body {
+        text-align: center;
+        margin: 50px 0;
+    }
+
+    .cart-error h2 {
+        font-size: 18px;
+        font-family: sans-serif;
+        margin-top: 0;
+        margin-bottom: 3px;
+    }
+
+    .cart-error p {
+        margin-bottom: 30px;
+    }
+</style>
+<div class="container ">
+
+    <div class="cart-body">
+        <div class="cart-error">
+            <i class="icon-cart"></i>
+            <h2>Giao dịch không thành công</h2>
+            <p>Có lỗi xảy ra trong quá trình giao dịch, hãy nhanh tay sở hữu những sản phẩm yêu thích của bạn</p>
+            <a class="btn btn-primary" href="/">Tiếp tục mua hàng</a>
+        </div>
+    </div>
+</div>

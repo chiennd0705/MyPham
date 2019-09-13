@@ -1,0 +1,534 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using DataAccess;
+using Common;
+using MvcPaging;
+using Business;
+using Business.ClassBusiness;
+namespace BuyGroup365.Controllers
+{
+    public class HomeController : Controller
+    {
+        const int Page_Size = 40;
+        const int Page_Block = 4;
+
+        //
+        // GET: /Home/
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        public ActionResult Contact()
+        {
+            return View();
+        }
+
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        public ActionResult Category(long? id, long? mid, string price, string order, int? page, string k)
+        {
+            ViewData["id"] = id;
+
+            //try
+            {
+                Catalog catalog = new Catalog();
+                if (id > 0)
+                {
+                    catalog = new CatalogsBusiness().GetById((long)id);
+
+                }
+                else
+                {
+                    catalog.Id = -1;
+                    catalog.ParentId = -1;
+                    catalog.FriendlyUrl = "tim-kiem";
+                    catalog.CatalogName = "Tìm kiếm";
+                    catalog.SeoTitle = "Tìm kiếm: " + k;
+                    catalog.SeoDescription = "Tìm kiếm: " + k;
+                    catalog.SeoKeyword = "Tìm kiếm: " + k;
+                }
+                ViewData["CatalogName"] = catalog.CatalogName;
+
+                ViewData["Title"] = catalog.SeoTitle;
+                ViewBag.Description = catalog.SeoDescription;
+                ViewBag.Keywords = catalog.SeoKeyword;
+
+                InitBreadcrumbs(catalog);
+
+                if (id == null) id = 0;
+                if (mid == null) mid = 0;
+                if (page == null) page = 1;
+                if (order == null) order = "new";
+                double? priceForm = 0, priceTo = 0;
+
+                if (!string.IsNullOrEmpty(price))
+                {
+                    priceForm = double.Parse(price.Split(':')[0]);
+                    priceTo = double.Parse(price.Split(':')[1]);
+                }
+
+
+                NameValueCollection n = Request.QueryString;
+                string urlParam = string.Empty;
+                string urlParam1 = string.Empty;
+                if (n.HasKeys())
+                {
+
+                    for (int i = 0; i < n.Count; i++)
+                    {
+                        string k1 = n.GetKey(i);
+                        string v = n.Get(i);
+
+                        if (!string.IsNullOrEmpty(k1))
+                        {
+                            if (k1 != "id" && k1 != "mid" && k1 != "page" && k1 != "price" && k1 != "order" && k1 != "k")
+                            {
+
+                                urlParam += string.Format("	AND (ProductProperties.[Key]='{0}' AND ProductProperties.Value='{1}') ", k1, v);
+                                urlParam1 += string.Format("{0}={1}&", k1, v);
+                            }
+                        }
+                    }
+                }
+
+                string strQuery = BuildQuery(id, mid, priceForm, priceTo, order, page, urlParam, k);
+
+                BuyGroup365Entities entitis = new BuyGroup365Entities();
+                var result = entitis.Database.SqlQuery<SearchProductByType_Result>(strQuery).ToList();
+
+                //IList<SearchProductByType_Result> list = entitis.SearchProductByType().ToPagedList(currentPageIndex, 20);
+
+
+                if (!string.IsNullOrEmpty(urlParam1))
+
+                    urlParam1 = urlParam1.Substring(0, urlParam1.Length - 1);
+
+                if (string.IsNullOrEmpty(price)) price = "0:0";
+
+                ViewData["Info_Manu"] = string.Format("{0};{1};{2};{3};{4};{5}", id, mid, price, catalog.FriendlyUrl, urlParam1, k);
+
+                ViewData["ListOrder"] = InitDropdownlistSort((long)id, catalog.FriendlyUrl, (long)mid, (double)priceForm, (double)priceTo, urlParam1);
+
+                strQuery = BuildQueryCount(id, mid, priceForm, priceTo, urlParam, k);
+
+                int count = entitis.Database.SqlQuery<int>(strQuery).Single();
+
+
+                Paging(count, Page_Block, Page_Size, page, (int)page, Common.util.Function.InitUrl(catalog.FriendlyUrl, (long)id, (long)mid, (double)priceForm, (double)priceTo, urlParam));
+
+                return View(result);
+
+            }
+            // catch
+            {
+
+                //    return Redirect("/");
+
+            }
+
+
+        }
+
+
+
+        protected string BuildQuery(long? id, long? mid, double? priceFrom, double? priceTo, string order, int? page, string param, string k)
+        {
+
+            string query = "", buildQuery = "";
+
+            if (id != 0)
+            {
+                query = @"BEGIN
+				            WITH temp(id)  
+			                as (  
+
+					                Select Id  
+					                From Catalogs  
+					                Where Id ={0}  
+					                Union All   
+					                Select b.Id
+					                From temp as a, Catalogs as b  
+					                Where a.Id = b.ParentId 
+			       
+			                ) 
+			                 SELECT *
+				                FROM(
+				                select *
+				                , ROW_NUMBER() OVER(ORDER BY  {7} ) RN
+								FROM (
+								SELECT  distinct Products.Id, ProductName, FriendlyUrl, [dbo].[FindAvatar](Products.Id) AS ImgSource, Code,Price, Cost, IsNew, IsAttractive, IsVip, TotalView, [dbo].[CaculatorRate](Products.Id) AS Rate
+
+				                
+				                       from temp JOIN  Products on Products.CatalogId=temp.id 
+				                           LEFT JOIN ProductProperties ON Products.Id=ProductProperties.ProductId
+				                WHERE (Status = 0 OR Status=1) 
+				                AND ({1}=0 OR ManufacturerId = {1})
+				                AND ({2}=0 OR {2} <=Price)
+				                AND ({3}=0 OR {3} >=Price) 
+                                AND (ProductName Like '%{9}%' OR Tags Like '%{9}%') 
+				               {4})b
+			                  ) a 
+				                WHERE RN BETWEEN ({5}-1)*{8}+1 AND {5}*{8}
+				                ORDER BY {7}
+		                END";
+                if (order.Equals("new"))//Mới nhất
+                    buildQuery = string.Format(query, id, mid, priceFrom, priceTo, param, page, "Products.Id desc", "Id desc", Page_Size, k);
+                else if (order.Equals("name"))
+                    buildQuery = string.Format(query, id, mid, priceFrom, priceTo, param, page, "ProductName desc", "ProductName desc", Page_Size, k);
+                else if (order.Equals("view"))
+                    buildQuery = string.Format(query, id, mid, priceFrom, priceTo, param, page, "TotalView desc", "TotalView desc", Page_Size, k);
+                else if (order.Equals("price_asc"))
+                    buildQuery = string.Format(query, id, mid, priceFrom, priceTo, param, page, "Price asc", "Price asc", Page_Size, k);
+                else if (order.Equals("price_desc"))
+                    buildQuery = string.Format(query, id, mid, priceFrom, priceTo, param, page, "Price desc", "Price desc", Page_Size, k);
+
+            }
+            else
+            {
+
+                query = @"BEGIN
+				           
+			                 SELECT *
+				                FROM(
+				                select *
+				                , ROW_NUMBER() OVER(ORDER BY  {7} ) RN
+								FROM (
+								SELECT  distinct Products.Id, ProductName, FriendlyUrl, [dbo].[FindAvatar](Products.Id) AS ImgSource, Code,Price, Cost, IsNew, IsAttractive, IsVip, TotalView, [dbo].[CaculatorRate](Products.Id) AS Rate
+
+				                from  Products  LEFT JOIN ProductProperties ON Products.Id=ProductProperties.ProductId
+				                WHERE (Status = 0 OR Status=1) 
+				                AND ({1}=0 OR ManufacturerId = {1})
+				                AND ({2}=0 OR {2} <=Price)
+				                AND ({3}=0 OR {3} >=Price) 
+                                AND (ProductName Like '%{9}%' OR Tags Like '%{9}%') 
+				               {4})b
+			                  ) a 
+				                WHERE RN BETWEEN ({5}-1)*{8}+1 AND {5}*{8}
+				                ORDER BY {7} {0}
+		                END";
+                if (order.Equals("new"))//Mới nhất
+                    buildQuery = string.Format(query, "", mid, priceFrom, priceTo, param, page, "Products.Id desc", "Id desc", Page_Size, k);
+                else if (order.Equals("name"))
+                    buildQuery = string.Format(query, "", mid, priceFrom, priceTo, param, page, "ProductName desc", "ProductName desc", Page_Size, k);
+                else if (order.Equals("view"))
+                    buildQuery = string.Format(query, "", mid, priceFrom, priceTo, param, page, "TotalView desc", "TotalView desc", Page_Size, k);
+                else if (order.Equals("price_asc"))
+                    buildQuery = string.Format(query, "", mid, priceFrom, priceTo, param, page, "Price asc", "Price asc", Page_Size, k);
+                else if (order.Equals("price_desc"))
+                    buildQuery = string.Format(query, "", mid, priceFrom, priceTo, param, page, "Price desc", "Price desc", Page_Size, k);
+
+            }
+
+            return buildQuery;
+        }
+
+        protected string BuildQueryCount(long? id, long? mid, double? priceFrom, double? priceTo, string param, string k)
+        {
+
+            string query = "", buildQuery = "";
+
+            if (id != 0)
+            {
+                query = @"BEGIN
+				            WITH temp(id)  
+			                as (  
+
+					                Select Id  
+					                From Catalogs  
+					                Where Id ={0}  
+					                Union All   
+					                Select b.Id
+					                From temp as a, Catalogs as b  
+					                Where a.Id = b.ParentId 
+			       
+			                ) 
+			                
+				                select  COUNT(DISTINCT  Products.Id) AS Total
+				               
+				                 from temp JOIN  Products on Products.CatalogId=temp.id 
+				                           LEFT JOIN ProductProperties ON Products.Id=ProductProperties.ProductId
+				                WHERE (Status = 0 OR Status=1) 
+				                AND ({1}=0 OR ManufacturerId = {1})
+				                AND ({2}=0 OR {2} <=Price)
+				                AND ({3}=0 OR {3} >=Price)
+                                AND (ProductName Like '%{5}%' OR Tags Like '%{5}%') 
+				               {4}
+			                 
+		                END";
+
+                buildQuery = string.Format(query, id, mid, priceFrom, priceTo, param, k);
+
+            }
+            else
+            {
+                query = @"BEGIN
+				            
+			                
+				                select  COUNT(DISTINCT  Products.Id) AS Total
+				               
+				                 from  Products 
+				                           LEFT JOIN ProductProperties ON Products.Id=ProductProperties.ProductId
+				                WHERE (Status = 0 OR Status=1) 
+				                AND ({1}=0 OR ManufacturerId = {1})
+				                AND ({2}=0 OR {2} <=Price)
+				                AND ({3}=0 OR {3} >=Price)
+                                AND (ProductName Like '%{5}%' OR Tags Like '%{5}%') 
+				               {4} {0}
+			                 
+		                END";
+
+                buildQuery = string.Format(query, "", mid, priceFrom, priceTo, param, k);
+            }
+
+            return buildQuery;
+        }
+
+
+        public string InitDropdownlistSort(long id, string catalogUrl, long mid, double priceFrom, double priceTo, string param)
+        {
+
+            string url = Common.util.Function.InitUrl(catalogUrl, id, mid, priceFrom, priceTo, param);
+            if (url.Contains("?")) url += "&";
+            else url += "?";
+            string selected = "new";
+            if (Request.QueryString["order"] != null)
+            {
+                selected = Request.QueryString["order"];
+            }
+            string html = "";
+            if (selected.Equals("new"))
+                html = string.Format("<option value='{0}' {1}>Sắp xếp theo</option>", url + "order=new", "selected=\"selected\"");
+            else
+                html = string.Format("<option value='{0}'>Sắp xếp theo</option>", url + "order=new");
+
+            if (selected.Equals("name"))
+
+                html += string.Format("<option value='{0}' {1}>Theo tên </option>", url + "order=name", "selected=\"selected\"");
+            else
+                html += string.Format("<option value='{0}'>Theo tên </option>", url + "order=name");
+
+            if (selected.Equals("view"))
+
+                html += string.Format("<option value='{0}' {1}>Xem nhiều</option>", url + "order=view", "selected=\"selected\"");
+            else
+                html += string.Format("<option value='{0}' {1}>Xem nhiều</option>", url + "order=view", "");
+
+
+            if (selected.Equals("price_asc"))
+
+                html += string.Format("<option value='{0}' {1}>Giá tăng dần</option>", url + "order=price_asc", "selected=\"selected\"");
+            else
+                html += string.Format("<option value='{0}' {1}>Giá tăng dần</option>", url + "order=price_asc", "");
+
+
+            if (selected.Equals("price_desc"))
+
+                html += string.Format("<option value='{0}' {1}>Giá giảm dần</option>", url + "order=price_desc", "selected=\"selected\"");
+            else
+                html += string.Format("<option value='{0}' {1}>Giá giảm dần</option>", url + "order=price_desc", "");
+
+            return html;
+        }
+
+        protected void InitBreadcrumbs(Catalog catalog)
+        {
+            string html = string.Format("<li class=\"category9\"> <strong>{0}</strong></li>", catalog.CatalogName);
+            CatalogsBusiness catalogBusiness = new CatalogsBusiness();
+
+            while (catalog.ParentId != -1)
+            {
+                catalog = catalogBusiness.GetById(catalog.ParentId);
+                html = string.Format("<li itemscope=\"\" itemtype=\"http://data-vocabulary.org/Breadcrumb\"><a href=\"{1}\" title=\"\" itemprop=\"url\"><span itemprop=\"title\">{0}</span></a></li>", catalog.CatalogName, "/" + catalog.FriendlyUrl + "-dm" + catalog.Id) + html;
+
+            }
+
+            ViewData["Breadcrumbs"] = html;
+
+        }
+
+        #region PAGING
+        protected void Paging(int recordNumber, int SIZE_PAGE, int SIZE_OF_PAGE, object obj, int page, string url)
+        {
+            int numberPage = 0;
+            //Tạo mảng các trang: 1 2 3 ...
+            int[] arayPage = Common.util.Function.Paging(recordNumber, obj, SIZE_PAGE, SIZE_OF_PAGE, ref page, ref numberPage);
+            // stt = (page - 1) * SIZE_OF_PAGE + 1;
+            string html = "";
+
+            if (url.Contains("?")) url += "&page=";
+            else
+                url += "?page=";
+
+            if (page > 1)
+            {
+                html += "<li class=\"bor-none\"><a class=\"previous i-previous\" href=\"" + url + (page - 1) + "\" title=\"Trang trước\"><i class=\"fa fa-angle-double-left\">&nbsp;</i> Trước</a></li>";
+
+            }
+            int index = 0;
+            foreach (int i in arayPage)
+            {
+                if (i > 0)
+                {
+                    if (!i.Equals(page))
+                        html += string.Format("<li><a href=\"{0}\">{1}</a></li>", url + i, i);
+                    else
+                        html += string.Format("<li class=\"current\">{0}</li>", i);
+                }
+            }
+
+            if (page < numberPage)
+            {
+                html += "<li class=\"bor-none\"><a class=\"previous i-next\" href=\"" + url + (page + 1) + "\" title=\"Trang sau\"><i class=\"fa fa-angle-double-right\">&nbsp;</i> Tiếp</a></li>";
+
+            }
+
+
+            ViewData["Paging"] = string.Format("<div class=\"pager\"><div class=\"pages\"><strong>Page:</strong><ol>{0}</ol></div></div>", html);
+        }
+
+
+        #endregion
+
+        #region PRODUCT DETAIL
+
+        public ActionResult ProductDetail(long id)
+        {
+            ProductsBusiness productBusiness = new ProductsBusiness();
+            Product item = productBusiness.GetById(id);
+
+            ViewData["ProductName"] = item.ProductName;
+
+            InitBreadcrumbs(item.CatalogId);
+            #region METATAGS
+            if (!string.IsNullOrEmpty(item.SeoTitle))
+                ViewData["Title"] = item.SeoTitle;
+            else
+                ViewData["Title"] = item.ProductName;
+
+            if (!string.IsNullOrEmpty(item.SeoDescription))
+
+                ViewBag.Description = item.SeoDescription;
+            else
+                ViewBag.Description = item.ProductName;
+
+
+            if (!string.IsNullOrEmpty(item.SeoKeyword))
+                ViewBag.Keywords = item.SeoKeyword;
+            else
+                ViewBag.Keywords = item.ProductName;
+
+            #endregion
+
+            CommentsBusiness commentBusiness = new CommentsBusiness();
+            int count = 0, rate;
+            rate = commentBusiness.CalculatorByProductId(id, ref count);
+            ViewData["rating"] = "<div class=\"rating\" style=\"width: " + InitStar(rate) + "%\"></div>";
+            @ViewData["count"] = count;
+
+            #region PRICE_STATUS
+            if (item.Cost > item.Price)
+                ViewData["OldPrice"] = item.Cost.ToString("N0") + "<sup class=\"u-price\">đ</sup>";
+
+            ViewData["Price"] = item.Price.ToString("N0") + "<sup class=\"u-price\">đ</sup>";
+
+            if (item.State == 1) ViewData["State"] = "Còn hàng";
+            else ViewData["State"] = "Hết hàng";
+            #endregion
+
+            ViewData["Summary"] = item.Summary;
+            ViewData["RawUrl"] = "http://" + Request.Url.Host + Request.RawUrl;
+            try
+            {
+                ViewData["Manufacturer"] = string.Format("<a class=\"text-danger\" href=\"/search-dm0?mid={0}\">{1}</a>", /*Common.util.Function.ConvertUrlString(item.Manufacturer.ManufacturerName), */item.ManufacturerId, item.Manufacturer.ManufacturerName);
+            }
+            catch { }
+
+            ViewData["TotalView"] = item.TotalView.ToString("N0");
+            ViewData["LastUpdate"] = item.ModifyDate.ToString("dd/MM/yyyy");
+            ViewData["Description"] = item.Description;
+
+            #region IMAGES
+            ProductImagesBusiness productImageBusiness = new ProductImagesBusiness();
+
+            var listImg = productImageBusiness.FindProductId(id);
+            string strImg1 = string.Empty, strImg2 = string.Empty;
+            int dem = 0;
+            foreach (ProductImage img in listImg)
+            {
+                if (img.IsAvatar == 1)
+                {
+
+                    ViewData["ImgMain"] = img.ImgSource.Split('?')[0] + "medium_" + img.ImgSource.Split('?')[1];
+                    ViewData["ImgMainBig"] = img.ImgSource.Split('?')[0] + "big_" + img.ImgSource.Split('?')[1];
+
+                }
+
+                strImg1 += " <img id=\"image-" + dem + "\" class=\"gallery-image\" src=\"" + img.ImgSource.Split('?')[0] + "medium_" + img.ImgSource.Split('?')[1] + "\" data-zoom-image=\"" + img.ImgSource.Split('?')[0] + "big_" + img.ImgSource.Split('?')[1] + "\">";
+                strImg2 += "<li><a class=\"thumb-link\" href=\"#\" title=\"\" data-image-index=\"" + dem + "\">  <img class=\"img-responsive\" src=\"" + img.ImgSource.Split('?')[0] + "small_" + img.ImgSource.Split('?')[1] + "\" alt=\"\"></a></li>";
+                dem++;
+
+            }
+            ViewData["Img1"] = strImg1;
+            ViewData["Img2"] = strImg2;
+
+
+
+
+            #endregion
+
+
+
+            #region SELLER
+
+            ShopsBusiness shopsBusiness = new ShopsBusiness();
+            LocationsBusiness locationBusiness = new LocationsBusiness();
+            Shop shopInfo = shopsBusiness.GetById(item.MemberId);
+
+            ViewData["ShopName"] = shopInfo.ShopName;
+            ViewData["ShopId"] = shopInfo.Id;
+            ViewData["ShopUrl"] = Common.util.Function.ConvertUrlString(shopInfo.ShopName);
+            ViewData["ShopAddress"] = shopInfo.Address + " - " + locationBusiness.SearchAddress(shopInfo.LocationId);
+            ViewData["ShopPhone"] = shopInfo.Phone;
+            #endregion
+
+            return View();
+
+        }
+
+        protected void InitBreadcrumbs(long catalogId)
+        {
+            CatalogsBusiness catalogBusiness = new CatalogsBusiness();
+
+            Catalog catalog = catalogBusiness.GetById(catalogId);
+
+            string html = string.Format("<li itemscope=\"\" itemtype=\"http://data-vocabulary.org/Breadcrumb\"><a href=\"{1}\" title=\"\" itemprop=\"url\"><span itemprop=\"title\">{0}</span></a></li>", catalog.CatalogName, "/" + catalog.FriendlyUrl + "-dm" + catalog.Id);
+            while (catalog.ParentId != -1)
+            {
+                catalog = catalogBusiness.GetById(catalog.ParentId);
+                html = string.Format("<li itemscope=\"\" itemtype=\"http://data-vocabulary.org/Breadcrumb\"><a href=\"{1}\" title=\"\" itemprop=\"url\"><span itemprop=\"title\">{0}</span></a></li>", catalog.CatalogName, "/" + catalog.FriendlyUrl + "-dm" + catalog.Id) + html;
+
+            }
+
+            ViewData["Breadcrumbs"] = html;
+
+        }
+        protected string InitStar(double? diem)
+        {
+            if (diem == 1) return "20";
+            if (diem == 2) return "40";
+            if (diem == 3) return "60";
+            if (diem == 4) return "80";
+            return "100";
+        }
+        #endregion
+
+    }
+}

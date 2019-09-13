@@ -1,0 +1,117 @@
+﻿@{
+    ViewBag.Title = "Xác thực tài khoản";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+
+<style>
+    .cart-error .icon-cart {
+        border-radius: 50%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 10px;
+        background-image: url(/Content/Csspublic/images/cart-error.png);
+        background-repeat: no-repeat;
+        display: block;
+        width: 250px;
+        height: 172px;
+        /*background-position: -47px -378px;*/
+    }
+
+    .cart-body {
+        text-align: center;
+        margin: 50px 0;
+    }
+
+    .cart-error h2 {
+        font-size: 18px;
+        font-family: sans-serif;
+        margin-top: 0;
+        margin-bottom: 3px;
+    }
+
+    .cart-error p {
+        margin-bottom: 30px;
+    }
+</style>
+
+<style>
+    #box-thanksyou {
+        margin: 30px 0;
+        margin-bottom: 50px;
+    }
+
+        #box-thanksyou .col-left {
+            margin-right: 56px;
+            margin-left: 60px;
+            background-image: url(/Content/Csspublic/images/spritesheet1.png);
+            background-repeat: no-repeat;
+            display: block;
+            width: 220px;
+            height: 223px;
+            background-position: -234px -160px;
+            margin-top: 20px;
+        }
+
+        #box-thanksyou .col-right {
+            overflow: hidden;
+            margin-top: 20px;
+        }
+
+            #box-thanksyou .col-right > h1 {
+                color: #4bad4e;
+                margin-top: 0;
+                font-size: 28px;
+                line-height: 1;
+                margin-bottom: 14px;
+            }
+</style>
+<div class="container ">
+    @if (ViewBag.Mes == "0")
+    {
+         <div id="box-thanksyou" class=" clearfix">
+        <input type="hidden" value="4">
+        <div id="box-thanksyou-top" class="clearfix">
+
+            <div class="col-sm-3 col-xs-12 col-left">
+            </div>
+            <div class="col-sm-8 col-xs-12 col-right">
+                <h1>Xác thực tài khoản thành công!</h1>
+                <p>Chúc mừng bạn, bạn đã xác thực tài khoản thành công, chúng tôi đã gửi thông tin đăng nhập vào mail của bạn. Từ bây giờ bạn sẽ có thể kiểm soát các quy trình nhanh hơn, lưu trữ nhiều địa chỉ gửi hàng, xem và theo dõi đơn đặt hàng của bạn trong tài khoản của bạn và nhiều hơn nữa.</p>
+                <p><i>Để bảo mật, bạn lên thay đổi mật khẩu thường xuyên. Chiều dài từ 6-32 ký tự,không gõ tiếng việt có dấu. Để an toàn hơn, bạn nên sử dụng: chữ cái, số, hoa và thường lẫn lộn, ký tự đặc biệt (*,%,...).</i></p>
+                <a class="btn btn-primary" href="/login/login">Đăng nhập ngay</a>
+            </div>
+        </div>
+
+
+    </div>
+    }
+    else if (ViewBag.Mes == "1")
+    {
+         <div class="cart-body">
+        <div class="cart-error">
+            <i class="icon-cart"></i>
+            <h2>Xác thực không thành công!</h2>
+            <p>Thông tin xác thực không chính xác, Quý khách hãy kiểm tra lại.</p>
+            <a class="btn btn-primary" href="/">Trở về trang chủ</a>
+        </div>
+    </div>
+    }
+    else
+    {
+  <div class="cart-body">
+        <div class="cart-error">
+            <i class="icon-cart"></i>
+            <h2>Xác thực không thành công!</h2>
+            <p>Link xác thực chỉ dc sử dụng 1 lần, Quý khách hãy kiểm tra lại.</p>
+            <a class="btn btn-primary" href="/">Trở về trang chủ</a>
+        </div>
+    </div>
+    }
+    
+   
+   
+
+</div>
+
+  
+   

@@ -1,0 +1,219 @@
+/*footer*/
+.footer, .contact {
+    background: #820f00;
+}
+
+.copyright {
+    background: #5f0b00;
+    padding: 10px 0;
+}
+
+.support .sign-mail {
+    margin-top: 42px;
+}
+
+.sign-mail .text {
+    color: #fff;
+    margin-top: 0px;
+    font-size: 24px;
+}
+
+.sign-mail .form-sign {
+    display: table;
+    width: 100%;
+}
+
+    .sign-mail .form-sign .input-mail {
+        border: none;
+        border-radius: 3px;
+        width: calc(100% - 25% - 10px);
+        padding: 7px 10px;
+        outline: none;
+    }
+
+    .sign-mail .form-sign .btn-sign {
+        border: none;
+        background: #e6e7e8;
+        color: #af1607;
+        border-radius: 4px;
+        padding: 7px 12px;
+        margin-left: 10px;
+        width: 25%;
+    }
+
+.support .title {
+    display: table;
+    width: 100%;
+    margin-bottom: 20px;
+    margin-top: 30px;
+}
+
+    .support .title img {
+        float: left;
+        width: 56px;
+    }
+
+    .support .title .text {
+        width: calc(100% - 66px);
+        margin-left: 10px;
+        float: left;
+        font-weight: 700;
+        font-size: 24px;
+        color: #fff;
+        margin-top: 15px;
+    }
+
+.support p {
+    color: white;
+}
+
+.img-question img {
+    width: 100%;
+    box-shadow: 4px 4px 2px 1px rgba(0, 0, 0, 0.18);
+}
+
+.contact {
+    border-top: 1px solid #fff;
+}
+
+    .contact .address {
+        margin-top: 15px;
+    }
+
+        .contact .address .logo-ft {
+            width: 207px;
+            margin-bottom: 20px;
+        }
+
+        .contact .address .address-ul {
+            list-style: none;
+        }
+
+.address .address-ul li {
+    display: table;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.address .address-ul img {
+    width: 40px;
+    float: left;
+}
+
+.address .address-ul .text {
+    color: white;
+    margin-left: 10px;
+    float: left;
+    width: calc(100% - 50px);
+}
+
+    .address .address-ul .text strong {
+        font-family: "BebasNeue";
+        font-weight: 700;
+        font-size: 23px;
+    }
+
+.contact .col-md-9 {
+    border-left: 1px solid #fff;
+}
+
+.page-footer {
+    display: table;
+    width: 100%;
+    margin-top: 50px;
+    padding-left: 20px;
+}
+
+    .page-footer .page-list {
+        float: left;
+        width: calc(100% - 75% - 20px);
+        margin-right: 20px;
+    }
+
+    .page-footer .title-page {
+        color: white;
+        text-transform: uppercase;
+        font-size: 15px;
+        margin-bottom: 30px;
+        margin-top: 0px;
+    }
+
+    .page-footer .page-ul {
+        list-style: none;
+    }
+
+        .page-footer .page-ul li {
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+            .page-footer .page-ul li:before {
+                content: "\f0da";
+                position: absolute;
+                color: #fff;
+                font-size: 14px;
+                top: 0px;
+                font-family: 'FontAwesome';
+                left: -13px;
+            }
+
+            .page-footer .page-ul li a {
+                color: white;
+                font-size: 15px;
+            }
+
+.footer-social {
+    position: relative;
+    display: table;
+    width: 100%;
+    padding: 20px 0;
+}
+
+    .footer-social:before {
+        content: '';
+        width: calc(100% + 15px);
+        height: 1px;
+        top: 0px;
+        left: -15px;
+        background: #fff;
+        position: absolute;
+    }
+
+    .footer-social .social-ul {
+        float: right;
+        display: table;
+        list-style: none;
+        margin-bottom: 0px;
+    }
+
+        .footer-social .social-ul li {
+            float: left;
+            margin-left: 15px;
+        }
+
+            .footer-social .social-ul li a {
+                color: white;
+                padding: 8px 9px;
+                display: flex;
+                border: 1px solid #fff;
+            }
+
+            .footer-social .social-ul li:hover a {
+                text-decoration: none;
+            }
+
+            .footer-social .social-ul li a i {
+                width: 20px;
+                font-size: 20px;
+                height: 20px;
+                text-align: center;
+            }
+
+.copyright .text p {
+    margin-bottom: 0px;
+    color: #fff;
+}
+
+.copyright .text a {
+    color: #fff;
+}

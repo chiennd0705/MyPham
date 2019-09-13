@@ -1,0 +1,16 @@
+﻿@model FluentValidationTester.Models.Customer
+
+@using (Html.BeginForm("Create","Home")) {
+    
+    @Html.LabelFor(m => m.FirstName)@:: 
+    @Html.TextBoxFor(m => m.FirstName)
+    <br /><br />
+    @Html.LabelFor(m => m.LastName)@:: 
+    @Html.TextBoxFor(m => m.LastName)
+
+    <br /><br />
+    <input type="submit" value="Submit" />
+    
+    <br /><br />
+    @Html.ValidationSummary(false, "Please fix these errors:");
+}

@@ -1,0 +1,173 @@
+﻿@using BuyGroup365.Areas.Manage.Models
+@model Common.News
+@{
+    ViewBag.Title = "Tạo mới Bản tin";
+    Layout = "~/Areas/Manage/Views/Shared/_LayoutAdmincshtml.cshtml";
+}
+<script>
+    function BrowseServer() {
+        var finder = new CKFinder();
+        finder.BasePath = '/Content/css/ckfinder/';
+        finder.selectActionFunction = SetFileFiled;
+        // finder.SelectActionFunction = SetFileFiled;
+        //   finder.SelectFunction = SetFileFiled;
+        //   finder.SelectFunctionData = SetFileFiled;
+        finder.popup();
+    }
+    function SetFileFiled(FileUrl) {
+        document.getElementById('ImageSource').value = FileUrl;
+    }
+</script>
+<script>
+    $(document).ready(function () {
+        $("#ModifyDate").datepicker({ dateFormat: 'dd-mm-yy' }).val();
+        $('#ModifyDate').datepicker('setDate', 'today');
+    });
+</script>
+<div class="container-fluid">
+    @Html.Raw(AdminFunction.BindHeader("Tin tức", "Bản Tin", "Thêm mới", null, null))
+    <!-- /.row -->
+    <!-- /.row -->
+    <!-- /.row -->
+    <div class="row" ng-controller="Index">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                @using (Html.BeginForm("AddNews", "News", FormMethod.Post, new { enctype = "multipart/form-data", id = "AddNews" }))
+                {
+                    @Html.ValidationSummary(true)
+
+                    <div class="modal-top">
+                        <a type="button" class="btn btn-default" onclick="window.history.back();">Trở về</a>
+
+                        <button type="submit" class="btn btn-primary">Thêm mới</button>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="row">
+                            <div class="row">
+
+                                <div class="col-lg-6">
+
+                                    <input ng-model="emp.Id" id="id" name="id" style="display: none" />
+                                    <div class="form-group">
+                                        <label>Tiêu đề tin:<span class="required">*</span></label><br />
+                                        <input class="form-control" autocomplete="off" maxlength="200" data-val-required="Trường là bắt buộc" required id="title" name="Title" type="text">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Đường dẫn tin tức:</label><br />
+                                        <input class="form-control" autocomplete="off" maxlength="200" disabled="true" id="FriendlyUrl" name="FriendlyUrl" type="text">
+                                    </div>
+                                    <div class="form-group">
+
+                                        <label>Nhóm tin:<span class="required">*</span></label><br />
+                                        @Html.DropDownList("NewsGroupId", null, new { @height = "60px", @size = "15", style = "width:100%", @name = "NewsGroupId" })
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Ảnh đại diện:<span class="required">*</span></label><br />
+                                        <input id="ImageSource" name="ImageSource" required data-val-required="Trường là bắt buộc" type="text" class="input-block-level" />
+                                        <input type="button" value="Browse Server" onclick="BrowseServer();" class="controls" />
+                                    </div>
+                                    <div class="form-group">
+
+                                        <div class="input">
+                                            <label>Hiển thị:</label>
+                                            <input id="IsPublic" value="1" name="IsPublic" type="checkbox" checked />
+                                        </div>
+                                        <div class="input">
+                                            <label>Tin nổi bật:</label>
+                                            <input id="IsActive" value="1" name="IsActive" type="checkbox" checked />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="firstname" class="">Sắp xếp theo ngày:</label>
+                                        <div class="input-box">
+                                            <input class="form-control __plannerInput" id="ModifyDate" name="ModifyDate" type="text" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+
+                                    @*<div class="form-group">
+                                            <label>Tags:</label><br />
+                                            <input class="form-control" autocomplete="off" maxlength="200" id="Tags" name="Tags" type="text" />
+                                        </div>*@
+                                    <div class="form-group">
+                                        <label>Thẻ tiêu đề:</label><br />
+                                        <input class="form-control" autocomplete="off" maxlength="200" id="SeoTitle" name="SeoTitle" type="text" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Thẻ từ khóa:</label><br />
+                                        <input class="form-control" autocomplete="off" maxlength="300" id="SeoKeyword" name="SeoKeyword" type="text" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Thẻ mô tả:</label><br />
+                                        <textarea class="form-control" id="SeoDescription" maxlength="500" name="SeoDescription" style="height: 100px"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Tiêu đề chia sẻ:</label><br />
+                                        <input class="form-control" autocomplete="off" maxlength="200" id="ShareTitle" name="ShareTitle" type="text" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Từ khóa chia sẻ:</label><br />
+                                        <input class="form-control" autocomplete="off" maxlength="300" id="ShareKeyword" name="ShareKeyword" type="text" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Mô tả chia sẻ:</label><br />
+                                        <textarea class="form-control" id="ShareDescription" maxlength="500" name="ShareDescription" style="height: 100px"></textarea>
+                                    </div>
+                                    <style>
+                                        #area-tags .checkbox-inline {
+                                            width: 24%;
+                                        }
+                                    </style>
+
+                                    <div class="form-group">
+                                        <label>Thẻ Tags:</label><br />
+                                        <div class="input-box" id="area-tags">
+
+                                            @Html.Raw(ViewBag.Tags)
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Author:</label><br />
+                                        <div class="input-box" id="area-tags">
+
+                                            @Html.Raw(ViewBag.Author)
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <label>Tóm tắt nội dung:</label><span class="required">*</span><br />
+                                <textarea class="form-control" rows="5" maxlength="2000" id="Summary" name="Summary"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Nội dung chính:</label><span class="required">*</span><br />
+                                <textarea class="form-control" required id="Descriptions" name="Descriptions"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="clear"></div>
+
+                    <div class="modal-footer">
+                        <a type="button" class="btn btn-default" onclick="window.history.back();">Trở về</a>
+
+                        <button type="submit" class="btn btn-primary">Thêm mới</button>
+                    </div>
+
+                }
+            </div>
+        </div>
+        <script type="text/javascript">
+            var Descriptions = CKEDITOR.replace('Descriptions', { height: 600 });
+            CKFinder.setupCKEditor(Descriptions, '/Content/css/ckfinder/');
+
+            //var Summary = CKEDITOR.replace('Summary', { height: 200 });
+            //CKFinder.setupCKEditor(Summary, '/Content/css/ckfinder/');
+        </script>
+    </div>
+</div>

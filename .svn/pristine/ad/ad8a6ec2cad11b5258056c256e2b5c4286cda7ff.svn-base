@@ -1,0 +1,72 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Reflection;
+using Business.bases;
+using Common;
+using Common.exception;
+using DataAccess.DAO;
+using log4net;
+
+namespace Business.ClassBusiness
+{
+    public class NewsGroupBusiness : AbstractBaseBusiness<NewsGroup, long>
+    {
+        private readonly ILog _logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        /// <summary>
+        /// Hàm tạo
+        /// </summary>
+        public NewsGroupBusiness()
+            : base(new NewsGroupDao())
+        {
+            daoLayer.DataContext = DataContext;
+        }
+
+        public override void AddNew(NewsGroup obj)
+        {
+            base.AddNew(obj);
+            DataContext.SaveChanges();
+        }
+
+        public override void Edit(NewsGroup obj)
+        {
+            base.Edit(obj);
+            DataContext.SaveChanges();
+        }
+
+        public override void Remove(long id)
+        {
+            base.Remove(id);
+            DataContext.SaveChanges();
+        }
+
+        /// <summary>
+        /// Phương thức tìm tất cả các module trong role
+        /// </summary>
+        /// <param name="roleId">ID role cần tìm</param>
+        /// <returns>Danh sách các module nằm trong group</returns>
+
+        public List<NewsGroup> GetListNewsGroup()
+        {           
+            IQueryable<NewsGroup> list = GetDynamicQuery();
+            return list.ToList();
+        }
+
+        public List<Common.NewsGroup> GetByKey(string key)
+        {
+            if (string.IsNullOrEmpty(key))
+            {
+                key = "";
+            }
+            IQueryable<Common.NewsGroup> query = GetDynamicQuery();
+            return query.Where(p => p.NewsGroupName.Contains(key)).ToList();
+        }
+
+        public NewsGroup GetNewsGroupById(long id)
+        {
+            var newsGroup = base.GetById(id);
+            return newsGroup;
+        }
+    }
+}

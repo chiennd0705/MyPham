@@ -1,0 +1,240 @@
+﻿@using Common.util
+@model BuyGroup365.Models.Member.Register
+
+@{
+    ViewBag.Title = "Đăng ký thành viên";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+
+
+
+
+<div class="main-container col1-layout content-color color">
+
+
+    <div class="container">
+        @if (ViewBag.Mes == "1")
+        {
+            <div id="box-thanksyou" class=" clearfix" style="margin-bottom: 50px">
+                <input type="hidden" value="4">
+                <div id="box-thanksyou-top" class="clearfix">
+
+                    <div class="col-sm-3 col-xs-12 col-left">
+                    </div>
+                    <div class="col-sm-8 col-xs-12 col-right">
+                        <h1>Đăng ký  thành công!</h1>
+                        <p>Chúc mừng bạn, bạn đã đăng ký  thành công, chúng tôi đã gửi thông tin đăng nhập vào mail của bạn, <span style="color: red">vui lòng check mail để kích hoạt tài khoản </span>. Từ bây giờ bạn sẽ có thể kiểm soát các quy trình nhanh hơn, lưu trữ nhiều địa chỉ gửi hàng, xem và theo dõi đơn đặt hàng của bạn trong tài khoản của bạn và nhiều hơn nữa.</p>
+                        <p><i>Để bảo mật, bạn lên thay đổi mật khẩu thường xuyên. Chiều dài từ 6-32 ký tự,không gõ tiếng việt có dấu. Để an toàn hơn, bạn nên sử dụng: chữ cái, số, hoa và thường lẫn lộn, ký tự đặc biệt (*,%,...).</i></p>
+                        <a class="btn btn-primary" href="/">Trang chủ</a>
+                    </div>
+                </div>
+
+
+            </div>
+        }
+        else
+        {
+              <div class="main">
+            <div class="row">
+                <div class="col-main col-lg-12">
+                    <div class="account-create">
+                        <div class="page-title">
+                            <h1>Đăng ký tài khoản</h1>
+                        </div>
+                        @Html.Raw(Function.MessengerBox("success-msg", ViewBag.Mes))
+
+                        <div class="col2-set">
+                            <div class="col-1 new-users">
+                                <div class="content">
+                                    <div class="account-login-title new-users-title">
+                                        <h2>Thành viên mới</h2>
+                                    </div>
+                                    <p>Bằng cách tạo một tài khoản trên hệ thống, bạn sẽ có thể kiểm soát các quy trình nhanh hơn, lưu trữ nhiều địa chỉ gửi hàng, xem và theo dõi đơn đặt hàng của bạn trong tài khoản của bạn và nhiều hơn nữa:</p>
+                                    <div class="">
+                                        <h3>
+                                            Mua hàng online
+                                        </h3>
+                                        <p>
+                                            An toàn, tiện lợi, giao hàng tận nơi, tiết kiệm chi phí nhất cho khách hàng.
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <h3>
+                                            Đảm bảo về chất lượng và dịch vụ
+                                        </h3>
+                                        <p>
+                                            Đảm bảo 100% đổi hoặc trả hàng linh hoạt khi khách hàng không hài lòng về sản phẩm.
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <h3>
+                                            Luôn luôn kết nối
+                                        </h3>
+                                        <p>Luôn giải quyết mọi yêu cầu của khách hàng một cách nhanh chóng nhất.</p>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <div class="col-2 registered-users">
+                                <div class="content">
+
+                                    <form method="post" id="login-form">
+
+
+                                        <input type="hidden" name="success_url" value="">
+                                        <input type="hidden" name="error_url" value="">
+                                        <h2 class="legend">Đăng ký thành viên</h2>
+                                        <ul class="form-list no-display-err">
+                                            <li class="">
+                                                <div class="customer-name-middlename">
+                                                    <div class="field name-firstname">
+                                                        <label for="firstname" class="required"><em>*</em>Họ tên</label>
+                                                        <div class="input-box ">
+                                                            @*   <input type="text" id="lastname" name="lastname" value="" title="Last Name" maxlength="50" class="last-name-width input-text required-entry " placeholder="Họ">*@
+                                                            @Html.TextBoxFor(model => model.LastName, new { @class = "last-name-width input-text required-entry ", @maxlength = "50", @placeholder = "Họ" })
+                                                            @*<input type="text" id="firstname" name="firstname" value="" title="First Name" maxlength="50" class="first-name-width input-text required-entry " placeholder="Tên">*@
+                                                            @Html.TextBoxFor(model => model.FirstName, new { @class = "last-name-width input-text required-entry ", @maxlength = "50", @placeholder = "Tên" })
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <label for="email_address" class="required"><em>*</em>Địa chỉ email</label>
+                                                <div class="input-box">
+                                                    @*        <input type="text" name="email" id="email_address" value="" title="Email Address" class="input-text validate-email required-entry" placeholder="Ex: thanhtu@buygroup365.com">*@
+                                                    @Html.TextBoxFor(model => model.Email, new { @class = "last-name-width input-text required-entry ", @placeholder = "Ex: thanhtu@buygroup365.com" })
+                                                </div>
+                                            </li>
+                                            @*<li class="control">
+                                                    <div class="input-box">
+                                                        <input type="checkbox" name="is_subscribed" title="Sign Up for Newsletter" value="1" id="is_subscribed" class="checkbox">
+                                                    </div>
+                                                    <label for="is_subscribed">Sign Up for Newsletter</label>
+                                                </li>
+                                            *@
+                                        </ul>
+
+                                        <ul class="form-list">
+                                            <li class="fields">
+                                                <div class="field">
+                                                    <label for="password" class="required"><em>*</em>Tên đăng nhập</label>
+                                                    <div class="input-box">
+                                                        @*<input type="text" name="username" id="username" title="Username" class="input-text required-entry" onclick="CheckUserName()">*@
+                                                        @Html.TextBoxFor(model => model.Username, new { @class = "input-text required-entry", @onclick = "CheckUserName()" })
+                                                    </div>
+                                                </div>
+                                                <div class="field">
+                                                    <label for="password" class="required"><em>*</em>Mật khẩu</label>
+                                                    <div class="input-box">
+                                                        @*<input type="password" name="password" id="password" title="Password" class="input-text required-entry validate-password">*@
+                                                        @Html.TextBoxFor(model => model.Pass, new { @class = "input-text required-entry validate-password",@type="password" })
+                                                    </div>
+                                                </div>
+                                                <div class="field">
+                                                    <label for="confirmation" class="required"><em>*</em>Nhập lại mật khẩu</label>
+                                                    <div class="input-box">
+                                                        @*<input type="password" name="confirmation" title="Confirm Password" id="confirmation" class="input-text required-entry ">*@
+                                                        @Html.TextBoxFor(model => model.Rpass, new { @class = "input-text required-entry", @type = "password" })
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+
+
+
+
+                                        <div class="buttons-set">
+                                            <button type="submit" title="Submit" class="button" onclick="register()"><span><span>Đăng ký</span></span></button>
+                                        </div>
+                                    </form>
+                                    <script type="text/javascript">
+                                        //<![CDATA[
+                                        var dataForm = new VarienForm('login-form', true);
+                                        //]]>
+                                        function register() {
+                                            $('#login-form').submit();
+                                        }
+                                    </script>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+        </div>
+        }
+      
+    </div>
+
+</div>
+
+
+
+<style>
+    .cart-error .icon-cart {
+        border-radius: 50%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 10px;
+        background-image: url(/Content/Csspublic/images/cart-error.png);
+        background-repeat: no-repeat;
+        display: block;
+        width: 250px;
+        height: 172px;
+        /*background-position: -47px -378px;*/
+    }
+
+    .cart-body {
+        text-align: center;
+        margin: 50px 0;
+    }
+
+    .cart-error h2 {
+        font-size: 18px;
+        font-family: sans-serif;
+        margin-top: 0;
+        margin-bottom: 3px;
+    }
+
+    .cart-error p {
+        margin-bottom: 30px;
+    }
+   #box-thanksyou {
+        margin: 30px 0;
+        margin-bottom: 50px;
+    }
+
+    #box-thanksyou .col-left {
+        margin-right: 56px;
+        margin-left: 60px;
+        background-image: url(/Content/Csspublic/images/spritesheet1.png);
+        background-repeat: no-repeat;
+        display: block;
+        width: 220px;
+        height: 223px;
+        background-position: -234px -160px;
+        margin-top: 20px;
+    }
+
+    #box-thanksyou .col-right {
+        overflow: hidden;
+        margin-top: 20px;
+    }
+
+        #box-thanksyou .col-right > h1 {
+            color: #4bad4e;
+            margin-top: 0;
+            font-size: 28px;
+            line-height: 1;
+            margin-bottom: 14px;
+        }
+
+   
+</style>

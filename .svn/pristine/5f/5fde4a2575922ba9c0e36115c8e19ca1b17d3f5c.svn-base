@@ -1,0 +1,1127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="bhd_cinemaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Distributor">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="CompanyMobile" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="Fax" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="ContactName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ContactPhone" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="PostCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AccountNumber" Type="Int32" Nullable="false" />
+    <Property Name="AccountName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DomainName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Int32" Nullable="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Description" Type="String" MaxLength="200" FixedLength="true" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Film">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DistributorId" Type="Int64" Nullable="false" />
+    <Property Name="Code" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Title" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ShortTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Language" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Duration" Type="Int32" Nullable="false" />
+    <Property Name="Rating" Type="Int32" />
+    <Property Name="TotalNumber" Type="Int32" Nullable="false" />
+    <Property Name="SubTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DateIn" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="DateOut" Type="DateTime" Precision="0" />
+    <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="ReleaseDate" Type="DateTime" Precision="0" />
+    <Property Name="MainActor" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Director" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Avartar" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="TrailerIid" Type="Int64" />
+    <Property Name="TypeId" Type="Int64" Nullable="false" />
+    <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="Grossing" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Policy" Type="Int32" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="FilmGroupId" Type="Int32" />
+  </EntityType>
+  <EntityType Name="FilmGroup">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="FilmSchedulePrice">
+    <Key>
+      <PropertyRef Name="FilmScheduleId" />
+      <PropertyRef Name="TicketTypeId" />
+      <PropertyRef Name="SeatTypeId" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FilmScheduleId" Type="Int64" Nullable="false" />
+    <Property Name="TicketTypeId" Type="Int64" Nullable="false" />
+    <Property Name="SeatTypeId" Type="Int64" Nullable="false" />
+    <Property Name="Code" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Price" Type="Double" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifyDate" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="FilmScheduleSeat">
+    <Key>
+      <PropertyRef Name="FilmScheduleId" />
+      <PropertyRef Name="SeatId" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoomId" Type="Int64" Nullable="false" />
+    <Property Name="FilmScheduleId" Type="Int64" Nullable="false" />
+    <Property Name="SeatId" Type="Int64" Nullable="false" />
+    <Property Name="SeatX" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SeatY" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PayMentOnlineStatus" Type="Int32" />
+    <Property Name="ReserveStatus" Type="Int32" />
+    <Property Name="SoldStatus" Type="Int32" />
+    <Property Name="TicketId" Type="Int64" />
+    <Property Name="SectionId" Type="Int64" />
+    <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SeatTypeId" Type="Int64" Nullable="false" />
+    <Property Name="Status" Type="Int32" />
+    <Property Name="Descripsion" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="LocationId" Type="Int64" Nullable="false" />
+    <Property Name="GroupSeat" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="FilmType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Description" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Location">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" />
+    <Property Name="CompanyId" Type="Int64" Nullable="false" />
+    <Property Name="LocName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LocAddress" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LocPhone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="LocFax" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="LocMail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LocRepresentative" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LocBankName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LocDomainName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LocAccountNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LocStatus" Type="Int32" Nullable="false" />
+    <Property Name="LocLogo" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="LocTotalSeat" Type="Int64" Nullable="false" />
+    <Property Name="LocDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="PaymentMenthod">
+    <Key>
+      <PropertyRef Name="PaymentCode" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PaymentCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PaymentName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Int32" />
+    <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifyDate" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="PricePolicyConf">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="FilmTypeId" Type="Int64" Nullable="false" />
+    <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EndDate" Type="DateTime" Precision="3" />
+    <Property Name="Priority" Type="Int32" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="StartFilmTime" Type="DateTime" Precision="3" />
+    <Property Name="EndFilmTime" Type="DateTime" Precision="3" />
+    <Property Name="Day" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CronExpression" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="NextFireTime" Type="DateTime" Precision="3" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifyDate" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="PricePolicyConfDetail">
+    <Key>
+      <PropertyRef Name="PricePolicyConfId" />
+      <PropertyRef Name="TicketTypeId" />
+      <PropertyRef Name="SeatTypeId" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PricePolicyConfId" Type="Int64" Nullable="false" />
+    <Property Name="TicketTypeId" Type="Int64" Nullable="false" />
+    <Property Name="SeatTypeId" Type="Int64" Nullable="false" />
+    <Property Name="Code" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Price" Type="Double" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifyDate" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="Promotion">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" />
+    <Property Name="Code" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Method" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Money" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Room">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LocationId" Type="Int64" Nullable="false" />
+    <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Area" Type="Double" />
+    <Property Name="SeatNumber" Type="Int32" />
+    <Property Name="ValueScreen" Type="Int32" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="Description" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="SeatMatrix" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ToalColum" Type="Int32" Nullable="false" />
+    <Property Name="ToalRow" Type="Int32" Nullable="false" />
+    <Property Name="WayColum" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="WayRow" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="DisableSeat" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Seat">
+    <Key>
+      <PropertyRef Name="RoomId" />
+      <PropertyRef Name="SeatX" />
+      <PropertyRef Name="SeatY" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoomId" Type="Int64" Nullable="false" />
+    <Property Name="SeatX" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SeatY" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SectionId" Type="Int64" />
+    <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SeatTypeId" Type="Int64" Nullable="false" />
+    <Property Name="Status" Type="Int32" />
+    <Property Name="Descripsion" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="LocationId" Type="Int64" Nullable="false" />
+    <Property Name="GroupSeat" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="PayMentOnlineStatus" Type="Int32" />
+    <Property Name="ReserveStatus" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Section">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SectionNo" Type="Int32" Nullable="false" />
+    <Property Name="KeySeat" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TotalRows" Type="Int32" Nullable="false" />
+    <Property Name="TotalCols" Type="Int32" Nullable="false" />
+    <Property Name="RoomId" Type="Int64" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="ShiftSale">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ShiftNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ShiftName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="StartTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EndTime" Type="DateTime" Precision="3" />
+    <Property Name="ShiftUserid" Type="Int64" Nullable="false" />
+    <Property Name="ShiftUserName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ActiveUserId" Type="Int64" />
+    <Property Name="ActiveUserName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="ShiftDescription" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="TotalInitMoney" Type="Double" />
+    <Property Name="TotalMoneyUserInput" Type="Double" />
+    <Property Name="TotalMoneyReal" Type="Double" />
+    <Property Name="Status" Type="Int32" />
+    <Property Name="CashierUserId" Type="Int64" />
+    <Property Name="CashierUserName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifyDate" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="SoundSystem">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" />
+    <Property Name="RoomId" Type="Int64" Nullable="false" />
+    <Property Name="CompanyProviderId" Type="Int64" Nullable="false" />
+    <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Type" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UseDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="WarrantyTime" Type="Int32" Nullable="false" />
+    <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="TaxType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Status" Type="Int32" Nullable="false" />
+    <Property Name="Rate" Type="Int32" Nullable="false" />
+    <Property Name="Amount" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifileDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EndDate" Type="DateTime" Precision="3" />
+    <Property Name="Description" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="TemplateTicket">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" />
+    <Property Name="Code" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Description" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Ticket">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FilmshiftId" Type="Int64" Nullable="false" />
+    <Property Name="BookingId" Type="Int64" Nullable="false" />
+    <Property Name="SeatId" Type="Int64" Nullable="false" />
+    <Property Name="ScheduleFilmId" Type="Int64" />
+    <Property Name="XRow" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="XColumn" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SeatType" Type="Int64" Nullable="false" />
+    <Property Name="PriceType" Type="Int64" Nullable="false" />
+    <Property Name="StandardValue" Type="Double" Nullable="false" />
+    <Property Name="ChildValue" Type="Double" Nullable="false" />
+    <Property Name="DiscountAmount" Type="Double" Nullable="false" />
+    <Property Name="TaxAmount" Type="Double" Nullable="false" />
+    <Property Name="Total" Type="Double" />
+    <Property Name="BookStatus" Type="Int32" Nullable="false" />
+    <Property Name="RefundFlag" Type="Int32" Nullable="false" />
+    <Property Name="MemberId" Type="Int32" />
+    <Property Name="MemberUsername" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SoldUserid" Type="Int64" Nullable="false" />
+    <Property Name="PrintedCount" Type="Int32" Nullable="false" />
+    <Property Name="DeletedUserId" Type="Int64" />
+    <Property Name="DiscountApprUserId" Type="Int64" />
+    <Property Name="PaymentMethod" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PromotionId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="TemplateTicketId" Type="Int64" Nullable="false" />
+    <Property Name="PaymentShiftId" Type="Int64" Nullable="false" />
+    <Property Name="ChekPrice" Type="Boolean" />
+    <Property Name="CheckStatus" Type="Int32" />
+  </EntityType>
+  <EntityType Name="TicketType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="Trailer">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" />
+    <Property Name="Code" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Link" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Lengh" Type="Int64" Nullable="false" />
+    <Property Name="Size" Type="Int64" Nullable="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="WorkStation">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" />
+    <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IpAddress" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Type" Type="Int32" Nullable="false" />
+    <Property Name="Enabled" Type="Boolean" Nullable="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Description" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="View_Film">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="code" />
+      <PropertyRef Name="title" />
+      <PropertyRef Name="language" />
+      <PropertyRef Name="duration" />
+      <PropertyRef Name="total_number" />
+      <PropertyRef Name="date_in" />
+      <PropertyRef Name="modified_date" />
+      <PropertyRef Name="main_actor" />
+      <PropertyRef Name="director" />
+      <PropertyRef Name="TypeId" />
+      <PropertyRef Name="price" />
+      <PropertyRef Name="policy" />
+      <PropertyRef Name="FilmTypeName" />
+      <PropertyRef Name="DistributorName" />
+    </Key>
+    <Property Name="id" Type="Int64" Nullable="false" />
+    <Property Name="code" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="title" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="short_title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="language" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="duration" Type="Int32" Nullable="false" />
+    <Property Name="rating" Type="Int32" />
+    <Property Name="total_number" Type="Int32" Nullable="false" />
+    <Property Name="subtitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="date_in" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="date_out" Type="DateTime" Precision="0" />
+    <Property Name="modified_date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="release_date" Type="DateTime" Precision="0" />
+    <Property Name="main_actor" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="director" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="avartar" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="trailer_id" Type="Int64" />
+    <Property Name="TypeId" Type="Int64" Nullable="false" />
+    <Property Name="price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="grossing" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="policy" Type="Int32" Nullable="false" />
+    <Property Name="description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="film_GroupID" Type="Int32" />
+    <Property Name="GroupName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="FilmTypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DistributorName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="View_FilmFilmSchedule">
+    <Key>
+      <PropertyRef Name="FilmId" />
+      <PropertyRef Name="Code" />
+      <PropertyRef Name="Title" />
+      <PropertyRef Name="Language" />
+      <PropertyRef Name="Duration" />
+      <PropertyRef Name="RoomId" />
+      <PropertyRef Name="FromDate" />
+      <PropertyRef Name="StartFilmTime" />
+      <PropertyRef Name="EndFilmTime" />
+      <PropertyRef Name="PricePolicyConfId" />
+      <PropertyRef Name="FilmScheduleId" />
+    </Key>
+    <Property Name="FilmId" Type="Int64" Nullable="false" />
+    <Property Name="Code" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Title" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Language" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ShortTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Duration" Type="Int32" Nullable="false" />
+    <Property Name="RoomId" Type="Int64" Nullable="false" />
+    <Property Name="FromDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="StartFilmTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EndFilmTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="BosOffline" Type="Boolean" />
+    <Property Name="Cds" Type="Boolean" />
+    <Property Name="PricePolicyConfId" Type="Int64" Nullable="false" />
+    <Property Name="FilmScheduleId" Type="Int64" Nullable="false" />
+  </EntityType>
+  <EntityType Name="View_PricePolicyConfFilmType">
+    <Key>
+      <PropertyRef Name="PricePolicyId" />
+      <PropertyRef Name="NameFilmType" />
+      <PropertyRef Name="StartDate" />
+      <PropertyRef Name="Priority" />
+      <PropertyRef Name="CreateDate" />
+      <PropertyRef Name="ModifyDate" />
+      <PropertyRef Name="FilmTypeId" />
+    </Key>
+    <Property Name="PricePolicyId" Type="Int64" Nullable="false" />
+    <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="NameFilmType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EndDate" Type="DateTime" Precision="3" />
+    <Property Name="Priority" Type="Int32" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="StartFilmTime" Type="DateTime" Precision="3" />
+    <Property Name="EndFilmTime" Type="DateTime" Precision="3" />
+    <Property Name="Day" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CronExpression" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="NextFireTime" Type="DateTime" Precision="3" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifyDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="FilmTypeId" Type="Int64" Nullable="false" />
+  </EntityType>
+  <EntityType Name="View_SeatPriceBySeatIdAndTicketTypeId">
+    <Key>
+      <PropertyRef Name="SeatId" />
+      <PropertyRef Name="TicketTypeId" />
+      <PropertyRef Name="FilmScheduleId" />
+      <PropertyRef Name="Price" />
+      <PropertyRef Name="SeatTypeId" />
+    </Key>
+    <Property Name="SeatId" Type="Int64" Nullable="false" />
+    <Property Name="TicketTypeId" Type="Int64" Nullable="false" />
+    <Property Name="FilmScheduleId" Type="Int64" Nullable="false" />
+    <Property Name="Price" Type="Double" Nullable="false" />
+    <Property Name="SeatTypeId" Type="Int64" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ViewSeat_SeatType_Image">
+    <Key>
+      <PropertyRef Name="seatTypeId" />
+      <PropertyRef Name="location_id" />
+      <PropertyRef Name="room_id" />
+      <PropertyRef Name="SeatTypeCode" />
+      <PropertyRef Name="SeatTypeName" />
+      <PropertyRef Name="SeatId" />
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="seatTypeId" Type="Int64" Nullable="false" />
+    <Property Name="location_id" Type="Int64" Nullable="false" />
+    <Property Name="room_id" Type="Int64" Nullable="false" />
+    <Property Name="section_id" Type="Int64" />
+    <Property Name="seat_x" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+    <Property Name="seat_y" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+    <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Int32" />
+    <Property Name="descripsion" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="GroupSeat" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="SeatTypeCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SeatTypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SeatId" Type="Int64" Nullable="false" />
+    <Property Name="Icon" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="ID" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="bhd_cinemaEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Distributor" EntityType="Self.Distributor" />
+    <EntitySet Name="Film" EntityType="Self.Film" />
+    <EntitySet Name="FilmGroup" EntityType="Self.FilmGroup" />
+    <EntitySet Name="FilmSchedulePrice" EntityType="Self.FilmSchedulePrice" />
+    <EntitySet Name="FilmScheduleSeat" EntityType="Self.FilmScheduleSeat" />
+    <EntitySet Name="FilmType" EntityType="Self.FilmType" />
+    <EntitySet Name="Location" EntityType="Self.Location" />
+    <EntitySet Name="PaymentMenthod" EntityType="Self.PaymentMenthod" />
+    <EntitySet Name="PricePolicyConf" EntityType="Self.PricePolicyConf" />
+    <EntitySet Name="PricePolicyConfDetail" EntityType="Self.PricePolicyConfDetail" />
+    <EntitySet Name="Promotion" EntityType="Self.Promotion" />
+    <EntitySet Name="Room" EntityType="Self.Room" />
+    <EntitySet Name="Seat" EntityType="Self.Seat" />
+    <EntitySet Name="Section" EntityType="Self.Section" />
+    <EntitySet Name="ShiftSale" EntityType="Self.ShiftSale" />
+    <EntitySet Name="SoundSystem" EntityType="Self.SoundSystem" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="TaxType" EntityType="Self.TaxType" />
+    <EntitySet Name="TemplateTicket" EntityType="Self.TemplateTicket" />
+    <EntitySet Name="Ticket" EntityType="Self.Ticket" />
+    <EntitySet Name="TicketType" EntityType="Self.TicketType" />
+    <EntitySet Name="Trailer" EntityType="Self.Trailer" />
+    <EntitySet Name="WorkStation" EntityType="Self.WorkStation" />
+    <EntitySet Name="View_Film" EntityType="Self.View_Film" />
+    <EntitySet Name="View_FilmFilmSchedule" EntityType="Self.View_FilmFilmSchedule" />
+    <EntitySet Name="View_PricePolicyConfFilmType" EntityType="Self.View_PricePolicyConfFilmType" />
+    <EntitySet Name="View_SeatPriceBySeatIdAndTicketTypeId" EntityType="Self.View_SeatPriceBySeatIdAndTicketTypeId" />
+    <EntitySet Name="ViewSeat_SeatType_Image" EntityType="Self.ViewSeat_SeatType_Image" />
+    <FunctionImport Name="SP_GetFilmScheduleByDate" ReturnType="Collection(bhd_cinemaModel.SP_GetFilmScheduleByDate_Result)">
+      <Parameter Name="datetime" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="SP_GetInfoTicketByBooking" ReturnType="Collection(bhd_cinemaModel.SP_GetInfoTicketByBooking_Result)">
+      <Parameter Name="bookingId" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SP_GetListHourFilmByScheduleId" ReturnType="Collection(bhd_cinemaModel.SP_GetListHourFilmByScheduleId_Result)">
+      <Parameter Name="idFilm" Mode="In" Type="Int64" />
+      <Parameter Name="fromDate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="SP_ViewTicketTypePricePolicyConfDetail" ReturnType="Collection(bhd_cinemaModel.SP_ViewTicketTypePricePolicyConfDetail_Result)">
+      <Parameter Name="pricePolicyConfId" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="SP_NamePolicyConfDetail" ReturnType="Collection(bhd_cinemaModel.SP_NamePolicyConfDetail_Result)">
+      <Parameter Name="pricePolicyConfId" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="SP_NameTicketAndTypePolicyConfDetail" ReturnType="Collection(bhd_cinemaModel.SP_NameTicketAndTypePolicyConfDetail_Result)">
+      <Parameter Name="pricePolicyConfId" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <EntitySet Name="Booking" EntityType="bhd_cinemaModel.Booking" />
+    <FunctionImport Name="SP_GetInfoTicketByBookingId" ReturnType="Collection(bhd_cinemaModel.SP_GetInfoTicketByBookingId_Result)">
+      <Parameter Name="bookingId" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SP_GetInfoTicketByABooking" ReturnType="Collection(bhd_cinemaModel.SP_GetInfoTicketByABooking_Result)">
+      <Parameter Name="bookingId" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SP_GetInfoTicketBookingCode" ReturnType="Collection(bhd_cinemaModel.SP_GetInfoTicketBookingCode_Result)">
+      <Parameter Name="bookingId" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SP_GetTicketByBooking" ReturnType="Collection(bhd_cinemaModel.SP_GetTicketByBooking_Result)">
+      <Parameter Name="bookingCode" Mode="In" Type="String" />
+    </FunctionImport>
+    <EntitySet Name="BookingInfo" EntityType="bhd_cinemaModel.BookingInfo" />
+    <FunctionImport Name="SP_GetDetailBookingByReserve" ReturnType="Collection(bhd_cinemaModel.SP_GetDetailBookingByReserve_Result)">
+      <Parameter Name="bookingId" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SP_GetDetailByBookingReserve" ReturnType="Collection(bhd_cinemaModel.SP_GetDetailByBookingReserve_Result)">
+      <Parameter Name="bookingId" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SP_DetailPacket" ReturnType="Collection(bhd_cinemaModel.SP_DetailPacket_Result)">
+      <Parameter Name="quantity" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <EntitySet Name="SystemSetting" EntityType="bhd_cinemaModel.SystemSetting" />
+    <FunctionImport Name="SP_ListPacket" ReturnType="Collection(bhd_cinemaModel.SP_ListPacket_Result)">
+      <Parameter Name="TickTypeId" Mode="In" Type="Int64" />
+      <Parameter Name="Quantity" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="SP_ListPacketByTicketType" ReturnType="Collection(bhd_cinemaModel.SP_ListPacketByTicketType_Result)">
+      <Parameter Name="TickTypeId" Mode="In" Type="Int64" />
+      <Parameter Name="Quantity" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <EntitySet Name="BookingPacketDetail" EntityType="bhd_cinemaModel.BookingPacketDetail" />
+    <EntitySet Name="Packet" EntityType="bhd_cinemaModel.Packet" />
+    <EntitySet Name="SeatType" EntityType="bhd_cinemaModel.SeatType" />
+    <EntitySet Name="SeatTypeImage" EntityType="bhd_cinemaModel.SeatTypeImage" />
+    <EntitySet Name="FilmScheduleTitle" EntityType="bhd_cinemaModel.FilmScheduleTitle" />
+    <EntitySet Name="View_BookingReserve" EntityType="bhd_cinemaModel.View_BookingReserve" />
+    <EntitySet Name="FilmScheduleRoom" EntityType="bhd_cinemaModel.FilmScheduleRoom" />
+    <EntitySet Name="ImgGallery" EntityType="bhd_cinemaModel.ImgGallery" />
+    <EntitySet Name="BookingVoucher" EntityType="bhd_cinemaModel.BookingVoucher" />
+    <EntitySet Name="FilmSchedule" EntityType="bhd_cinemaModel.FilmSchedule" />
+  </EntityContainer>
+  <ComplexType Name="SP_GetFilmScheduleByDate_Result">
+    <Property Type="Int64" Name="FilmId" Nullable="false" />
+    <Property Type="String" Name="Title" Nullable="false" MaxLength="150" />
+    <Property Type="String" Name="Code" Nullable="false" MaxLength="20" />
+  </ComplexType>
+  <ComplexType Name="SP_GetInfoTicketByBooking_Result">
+    <Property Type="Int64" Name="BookingId" Nullable="false" />
+    <Property Type="Int64" Name="SeatId" Nullable="false" />
+    <Property Type="Int64" Name="ScheduleFilmId" Nullable="true" />
+    <Property Type="Double" Name="Total" Nullable="true" />
+    <Property Type="String" Name="SoGhe" Nullable="true" MaxLength="50" />
+    <Property Type="Int64" Name="RoomId" Nullable="false" />
+    <Property Type="String" Name="RoomName" Nullable="false" MaxLength="50" />
+    <Property Type="DateTime" Name="FromDate" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="StartFilmTime" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="EndFilmTime" Nullable="false" Precision="23" />
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Title" Nullable="false" MaxLength="150" />
+    <Property Type="Int32" Name="Duration" Nullable="false" />
+    <Property Type="Int32" Name="Rating" Nullable="true" />
+    <Property Type="String" Name="MainActor" Nullable="false" MaxLength="200" />
+    <Property Type="String" Name="Director" Nullable="false" MaxLength="200" />
+  </ComplexType>
+  <ComplexType Name="SP_GetListHourFilmByScheduleId_Result">
+    <Property Type="DateTime" Name="StartFilmTime" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="EndFilmTime" Nullable="false" Precision="23" />
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="Int64" Name="RoomId" Nullable="false" />
+    <Property Type="String" Name="code" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="RoomName" Nullable="false" MaxLength="50" />
+    <Property Type="Int64" Name="FilmId" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="SP_ViewTicketTypePricePolicyConfDetail_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="Int64" Name="PricePolicyConfId" Nullable="false" />
+    <Property Type="Int64" Name="TicketTypeId" Nullable="false" />
+    <Property Type="Int64" Name="SeatTypeId" Nullable="false" />
+    <Property Type="Double" Name="Price" Nullable="false" />
+    <Property Type="Int32" Name="Quantity" Nullable="false" />
+    <Property Type="String" Name="Description" Nullable="true" MaxLength="150" />
+    <Property Type="String" Name="NameTicketType" Nullable="true" MaxLength="500" />
+  </ComplexType>
+  <ComplexType Name="SP_NamePolicyConfDetail_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="Int64" Name="PricePolicyConfId" Nullable="false" />
+    <Property Type="Double" Name="Price" Nullable="false" />
+    <Property Type="Int32" Name="Quantity" Nullable="false" />
+    <Property Type="String" Name="Description" Nullable="true" MaxLength="150" />
+    <Property Type="String" Name="NameTicketType" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="NameSeatType" Nullable="false" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="SP_NameTicketAndTypePolicyConfDetail_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="Int64" Name="PricePolicyConfId" Nullable="false" />
+    <Property Type="Double" Name="Price" Nullable="false" />
+    <Property Type="Int32" Name="Quantity" Nullable="false" />
+    <Property Type="String" Name="Description" Nullable="true" MaxLength="150" />
+    <Property Type="String" Name="NameTicketType" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="NameSeatType" Nullable="false" MaxLength="50" />
+    <Property Type="Int64" Name="TicketTypeId" Nullable="false" />
+    <Property Type="Int64" Name="SeatTypeId" Nullable="false" />
+  </ComplexType>
+  <EntityType Name="Booking">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BookingCode" Type="String" Nullable="false" MaxLength="75" FixedLength="false" Unicode="true" />
+    <Property Name="BookingType" Type="String" Nullable="false" MaxLength="75" FixedLength="false" Unicode="true" />
+    <Property Name="LocationId" Type="Int64" Nullable="false" />
+    <Property Name="TicketCount" Type="Int32" Nullable="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ExpiredDate" Type="DateTime" Precision="3" />
+    <Property Name="Status" Type="Int32" Nullable="false" />
+    <Property Name="PaymentMethod" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TicketQuantity" Type="Int32" Nullable="false" />
+    <Property Name="BookingGrosslAmount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="BookingTaxAmount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="BookingNetAmount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="DiscountAmount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="CommAmount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="TaxIds" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="PaymentDate" Type="DateTime" Precision="3" />
+    <Property Name="DeleteUserId" Type="Int64" />
+    <Property Name="DiscountApprUserId" Type="Int64" />
+    <Property Name="EmplBookingUserId" Type="Int64" Nullable="false" />
+    <Property Name="PaymentShiftId" Type="Int64" />
+  </EntityType>
+  <ComplexType Name="SP_GetInfoTicketByBookingId_Result">
+    <Property Type="Int64" Name="BookingId" Nullable="false" />
+    <Property Type="Int64" Name="SeatId" Nullable="false" />
+    <Property Type="Int64" Name="ScheduleFilmId" Nullable="true" />
+    <Property Type="Double" Name="Total" Nullable="true" />
+    <Property Type="String" Name="SoGhe" Nullable="true" MaxLength="50" />
+    <Property Type="Int64" Name="RoomId" Nullable="false" />
+    <Property Type="String" Name="RoomName" Nullable="false" MaxLength="50" />
+    <Property Type="DateTime" Name="FromDate" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="StartFilmTime" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="EndFilmTime" Nullable="false" Precision="23" />
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Title" Nullable="false" MaxLength="150" />
+    <Property Type="Int32" Name="Duration" Nullable="false" />
+    <Property Type="Int32" Name="Rating" Nullable="true" />
+    <Property Type="String" Name="MainActor" Nullable="false" MaxLength="200" />
+    <Property Type="String" Name="Director" Nullable="false" MaxLength="200" />
+    <Property Type="Int64" Name="SeatTypeId" Nullable="false" />
+    <Property Type="Int32" Name="TotalSeat" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="SP_GetInfoTicketByABooking_Result">
+    <Property Type="Int64" Name="BookingId" Nullable="false" />
+    <Property Type="Int64" Name="SeatId" Nullable="false" />
+    <Property Type="Int64" Name="ScheduleFilmId" Nullable="true" />
+    <Property Type="Double" Name="Total" Nullable="true" />
+    <Property Type="String" Name="SoGhe" Nullable="true" MaxLength="50" />
+    <Property Type="Int64" Name="RoomId" Nullable="false" />
+    <Property Type="String" Name="RoomName" Nullable="false" MaxLength="50" />
+    <Property Type="DateTime" Name="FromDate" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="StartFilmTime" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="EndFilmTime" Nullable="false" Precision="23" />
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Title" Nullable="false" MaxLength="150" />
+    <Property Type="Int32" Name="Duration" Nullable="false" />
+    <Property Type="Int32" Name="Rating" Nullable="true" />
+    <Property Type="String" Name="MainActor" Nullable="false" MaxLength="200" />
+    <Property Type="String" Name="Director" Nullable="false" MaxLength="200" />
+    <Property Type="Int64" Name="SeatTypeId" Nullable="false" />
+    <Property Type="Int32" Name="TotalSeat" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="SP_GetInfoTicketBookingCode_Result">
+    <Property Type="Int64" Name="BookingId" Nullable="false" />
+    <Property Type="Int64" Name="ScheduleFilmId" Nullable="true" />
+    <Property Type="Double" Name="Total" Nullable="true" />
+    <Property Type="String" Name="SoGhe" Nullable="true" MaxLength="50" />
+    <Property Type="Int64" Name="RoomId" Nullable="false" />
+    <Property Type="String" Name="RoomName" Nullable="false" MaxLength="50" />
+    <Property Type="DateTime" Name="FromDate" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="StartFilmTime" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="EndFilmTime" Nullable="false" Precision="23" />
+    <Property Type="String" Name="Title" Nullable="false" MaxLength="150" />
+    <Property Type="Int32" Name="Duration" Nullable="false" />
+    <Property Type="Int32" Name="Rating" Nullable="true" />
+    <Property Type="String" Name="MainActor" Nullable="false" MaxLength="200" />
+    <Property Type="String" Name="Director" Nullable="false" MaxLength="200" />
+    <Property Type="Int64" Name="SeatTypeId" Nullable="false" />
+    <Property Type="Int32" Name="TotalSeat" Nullable="true" />
+    <Property Type="Int64" Name="TicketId" Nullable="false" />
+    <Property Type="String" Name="BookingCode" Nullable="false" MaxLength="75" />
+    <Property Type="Int64" Name="SeatId" Nullable="false" />
+    <Property Type="Int64" Name="Id" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="SP_GetTicketByBooking_Result">
+    <Property Type="Int64" Name="BookingId" Nullable="false" />
+    <Property Type="Int64" Name="ScheduleFilmId" Nullable="true" />
+    <Property Type="Double" Name="Total" Nullable="true" />
+    <Property Type="String" Name="SoGhe" Nullable="true" MaxLength="50" />
+    <Property Type="Int64" Name="RoomId" Nullable="false" />
+    <Property Type="Int64" Name="SeatTypeId" Nullable="false" />
+    <Property Type="Int64" Name="TicketId" Nullable="false" />
+    <Property Type="String" Name="BookingCode" Nullable="false" MaxLength="75" />
+    <Property Type="Int64" Name="SeatId" Nullable="false" />
+    <Property Type="Int32" Name="TotalSeat" Nullable="true" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="RefundFlag" Nullable="false" />
+  </ComplexType>
+  <EntityType Name="BookingInfo">
+    <Key>
+      <PropertyRef Name="BookingId" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BookingId" Type="Int64" Nullable="false" />
+    <Property Name="BookingCode" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="NumberPhone" Type="String" Nullable="false" MaxLength="15" FixedLength="true" Unicode="true" />
+    <Property Name="CustomersName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <ComplexType Name="SP_GetDetailBookingByReserve_Result">
+    <Property Type="Int64" Name="BookingId" Nullable="false" />
+    <Property Type="Int64" Name="ScheduleFilmId" Nullable="true" />
+    <Property Type="Double" Name="Total" Nullable="true" />
+    <Property Type="String" Name="SoGhe" Nullable="true" MaxLength="50" />
+    <Property Type="Int64" Name="RoomId" Nullable="false" />
+    <Property Type="String" Name="RoomName" Nullable="false" MaxLength="50" />
+    <Property Type="DateTime" Name="FromDate" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="StartFilmTime" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="EndFilmTime" Nullable="false" Precision="23" />
+    <Property Type="String" Name="Title" Nullable="false" MaxLength="150" />
+    <Property Type="Int32" Name="Duration" Nullable="false" />
+    <Property Type="Int32" Name="Rating" Nullable="true" />
+    <Property Type="String" Name="MainActor" Nullable="false" MaxLength="200" />
+    <Property Type="String" Name="Director" Nullable="false" MaxLength="200" />
+    <Property Type="Int64" Name="SeatTypeId" Nullable="false" />
+    <Property Type="Int32" Name="TotalSeat" Nullable="true" />
+    <Property Type="Int64" Name="TicketId" Nullable="false" />
+    <Property Type="String" Name="BookingCode" Nullable="false" MaxLength="75" />
+    <Property Type="Int64" Name="SeatId" Nullable="false" />
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="String" Name="SeatX" Nullable="false" MaxLength="5" />
+    <Property Type="String" Name="SeatY" Nullable="false" MaxLength="5" />
+  </ComplexType>
+  <ComplexType Name="SP_GetDetailByBookingReserve_Result">
+    <Property Type="Int64" Name="BookingId" Nullable="false" />
+    <Property Type="Int64" Name="ScheduleFilmId" Nullable="true" />
+    <Property Type="Double" Name="Total" Nullable="true" />
+    <Property Type="String" Name="SoGhe" Nullable="true" MaxLength="50" />
+    <Property Type="Int64" Name="RoomId" Nullable="false" />
+    <Property Type="String" Name="RoomName" Nullable="false" MaxLength="50" />
+    <Property Type="DateTime" Name="FromDate" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="StartFilmTime" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="EndFilmTime" Nullable="false" Precision="23" />
+    <Property Type="String" Name="Title" Nullable="false" MaxLength="150" />
+    <Property Type="Int32" Name="Duration" Nullable="false" />
+    <Property Type="Int32" Name="Rating" Nullable="true" />
+    <Property Type="String" Name="MainActor" Nullable="false" MaxLength="200" />
+    <Property Type="String" Name="Director" Nullable="false" MaxLength="200" />
+    <Property Type="Int64" Name="SeatTypeId" Nullable="false" />
+    <Property Type="Int32" Name="TotalSeat" Nullable="true" />
+    <Property Type="Int64" Name="TicketId" Nullable="false" />
+    <Property Type="String" Name="BookingCode" Nullable="false" MaxLength="75" />
+    <Property Type="Int64" Name="SeatId" Nullable="false" />
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="String" Name="SeatX" Nullable="false" MaxLength="5" />
+    <Property Type="String" Name="SeatY" Nullable="false" MaxLength="5" />
+    <Property Type="String" Name="GroupSeat" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="SP_DetailPacket_Result">
+    <Property Type="Int64" Name="PacketId" Nullable="false" />
+    <Property Type="String" Name="Code" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="100" />
+    <Property Type="Double" Name="Price" Nullable="true" />
+    <Property Type="Int64" Name="CatalogId" Nullable="false" />
+    <Property Type="String" Name="Description" Nullable="true" MaxLength="500" />
+    <Property Type="Boolean" Name="Status" Nullable="true" />
+    <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="ModifiDate" Nullable="false" Precision="23" />
+    <Property Type="Int64" Name="Quantity" Nullable="true" />
+    <Property Type="Int64" Name="CatalogName" Nullable="false" />
+  </ComplexType>
+  <EntityType Name="SystemSetting">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SettingKey" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="SettingValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Boolean" />
+    <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifyDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <ComplexType Name="SP_ListPacket_Result">
+    <Property Type="Int64" Name="CatalogId" Nullable="false" />
+    <Property Type="String" Name="Code" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="Description" Nullable="true" MaxLength="500" />
+    <Property Type="Boolean" Name="Status" Nullable="true" />
+    <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="ModifiDate" Nullable="false" Precision="23" />
+    <Property Type="String" Name="NameCatalog" Nullable="false" MaxLength="10" />
+    <Property Type="Int64" Name="TickTypeId" Nullable="false" />
+    <Property Type="Int32" Name="Quantity" Nullable="false" />
+    <Property Type="Double" Name="PercentAmount" Nullable="true" />
+    <Property Type="Double" Name="DiscountAmount" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="SP_ListPacketByTicketType_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="Int64" Name="CatalogId" Nullable="false" />
+    <Property Type="String" Name="Code" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="Description" Nullable="true" MaxLength="500" />
+    <Property Type="Boolean" Name="Status" Nullable="true" />
+    <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="ModifiDate" Nullable="false" Precision="23" />
+    <Property Type="String" Name="NameCatalog" Nullable="false" MaxLength="10" />
+    <Property Type="Int64" Name="TickTypeId" Nullable="false" />
+    <Property Type="Int32" Name="Quantity" Nullable="false" />
+    <Property Type="Double" Name="PercentAmount" Nullable="true" />
+    <Property Type="Double" Name="DiscountAmount" Nullable="true" />
+  </ComplexType>
+  <EntityType Name="BookingPacketDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BookingId" Type="Int64" Nullable="false" />
+    <Property Name="PacketId" Type="Int64" Nullable="false" />
+    <Property Name="PacketName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="PacketPrice" Type="Double" Nullable="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiDate" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="Packet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Code" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Price" Type="Double" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Boolean" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiDate" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="SeatType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Price" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="TotalSeat" Type="Int32" />
+    <Property Name="Icon" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="GalleryCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="SeatTypeImage">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SeatTypeId" Type="Int64" Nullable="false" />
+    <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="GalleryCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifyDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="FilmScheduleTitle">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DistributorId" Type="Int64" Nullable="false" />
+    <Property Name="NameDistrbutor" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="RoomId" Type="Int64" Nullable="false" />
+    <Property Name="FilmScheduleId" Type="Int64" Nullable="false" />
+    <Property Name="FilmName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="StartFilmTime" Type="DateTime" Precision="3" />
+    <Property Name="EndFilmTime" Type="DateTime" Precision="3" />
+    <Property Name="FreeSeating" Type="Int32" />
+    <Property Name="SeatSold" Type="Int32" />
+    <Property Name="SeatLeft" Type="Int32" />
+    <Property Name="SeatTotal" Type="Int32" />
+    <Property Name="Code" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="ShortTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Language" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Duration" Type="Int32" Nullable="false" />
+    <Property Name="Rating" Type="Int32" />
+    <Property Name="SubTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DateIn" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="DateOut" Type="DateTime" Precision="0" />
+    <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="ReleaseDate" Type="DateTime" Precision="0" />
+    <Property Name="MainActor" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Director" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="TrailerIid" Type="Int64" />
+    <Property Name="TypeId" Type="Int64" Nullable="false" />
+    <Property Name="NameTypeId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Policy" Type="Int32" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="FilmGroupId" Type="Int32" />
+  </EntityType>
+  <EntityType Name="View_BookingReserve">
+    <Key>
+      <PropertyRef Name="BookingId" />
+      <PropertyRef Name="RoomId" />
+      <PropertyRef Name="RoomName" />
+      <PropertyRef Name="FromDate" />
+      <PropertyRef Name="StartFilmTime" />
+      <PropertyRef Name="EndFilmTime" />
+      <PropertyRef Name="FilmId" />
+      <PropertyRef Name="Title" />
+      <PropertyRef Name="Duration" />
+      <PropertyRef Name="MainActor" />
+      <PropertyRef Name="Director" />
+      <PropertyRef Name="SeatTypeId" />
+      <PropertyRef Name="TicketId" />
+      <PropertyRef Name="BookingCode" />
+      <PropertyRef Name="SeatId" />
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="SeatX" />
+      <PropertyRef Name="SeatY" />
+      <PropertyRef Name="PricePolicyConfId" />
+    </Key>
+    <Property Name="BookingId" Type="Int64" Nullable="false" />
+    <Property Name="ScheduleFilmId" Type="Int64" />
+    <Property Name="Total" Type="Double" />
+    <Property Name="SoGhe" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="RoomId" Type="Int64" Nullable="false" />
+    <Property Name="RoomName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="FromDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="StartFilmTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EndFilmTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="FilmId" Type="Int64" Nullable="false" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Duration" Type="Int32" Nullable="false" />
+    <Property Name="Rating" Type="Int32" />
+    <Property Name="MainActor" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Director" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="SeatTypeId" Type="Int64" Nullable="false" />
+    <Property Name="TotalSeat" Type="Int32" />
+    <Property Name="TicketId" Type="Int64" Nullable="false" />
+    <Property Name="BookingCode" Type="String" Nullable="false" MaxLength="75" FixedLength="false" Unicode="true" />
+    <Property Name="SeatId" Type="Int64" Nullable="false" />
+    <Property Name="Id" Type="Int64" Nullable="false" />
+    <Property Name="SeatX" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+    <Property Name="SeatY" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+    <Property Name="GroupSeat" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PricePolicyConfId" Type="Int64" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FilmScheduleRoom">
+    <Key>
+      <PropertyRef Name="FilmScheduleId" />
+      <PropertyRef Name="RoomId" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FilmScheduleId" Type="Int64" Nullable="false" />
+    <Property Name="RoomId" Type="Int64" Nullable="false" />
+    <Property Name="LocationId" Type="Int64" Nullable="false" />
+    <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Area" Type="Double" />
+    <Property Name="SeatNumber" Type="Int32" />
+    <Property Name="ValueScreen" Type="Int32" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="Description" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="SeatMatrix" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ToalColum" Type="Int32" Nullable="false" />
+    <Property Name="ToalRow" Type="Int32" Nullable="false" />
+    <Property Name="WayColum" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="WayRow" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="DisableSeat" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="ImgGallery">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="DataImg" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="ScrImg" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="ModifiDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="BookingVoucher">
+    <Key>
+      <PropertyRef Name="BookingId" />
+      <PropertyRef Name="VoucherCode" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" />
+    <Property Name="BookingId" Type="Int64" Nullable="false" />
+    <Property Name="VoucherCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Status" Type="Int32" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="FilmSchedule">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FilmId" Type="Int64" Nullable="false" />
+    <Property Name="RoomId" Type="Int64" Nullable="false" />
+    <Property Name="PricePolicyConfId" Type="Int64" Nullable="false" />
+    <Property Name="Title" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="FromDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="StartFilmTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EndFilmTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="BosOffline" Type="Boolean" />
+    <Property Name="Cds" Type="Boolean" />
+    <Property Name="Status" Type="Boolean" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifyDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ApproveStatus" Type="Int32" />
+  </EntityType>
+</Schema>

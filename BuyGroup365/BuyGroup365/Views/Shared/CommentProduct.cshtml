@@ -1,0 +1,122 @@
+﻿@using Business.ClassBusiness;
+@using BuyGroup365.Models.Common
+
+
+<style>
+
+    .fixed_xemthem {
+        position: fixed;
+        top: 20px;
+        width: 360px;
+        z-index: 1;
+    }
+</style>
+<script>
+
+        function guibinhluansanpham(id) {
+                                var Name = document.getElementById('name').value;
+                                var Phone = document.getElementById('Phone').value;
+                                var Email = document.getElementById('Email').value;
+                                var Content = document.getElementById('content').value;
+                                var Star = document.getElementById('starValue').value;
+
+                                $.ajax({
+                                    url: "@Url.Action("CommentProduct", "Home")",
+                                    type: 'POST',
+                                    data: {
+                                        'id': id,
+                                        'Name': Name,
+                                        'Phone': Phone,
+                                        'Email': Email,
+                                        'Content': Content,
+                                        'Star': Star,
+                                    },
+                                    dataType: 'json',
+                                    //contentType: 'application/json',
+                                    traditional: true,
+                                    success: function (response) {
+                                        if (response.data) {
+                                            alert('Cảm ơn bạn đã bình luận, bình luận của bạn sẽ được kiểm duyệt trước khi đăng tải.');
+
+                                        } else {
+                                            alert('Lỗi: Không thể gửi phản hồi.');
+                                        }
+                                    },
+                                    error: function (err) {
+                                        alert('Đã xảy ra lỗi. ' + err);
+                                    }
+                                });
+                                return true;
+
+                            }
+</script>
+
+
+
+
+<div id="hrv-product-reviews" class="hrv-product-reviews" data-id="1018820719">
+    <div class="title-bl">
+        <h2>ĐÁNH GIÁ SẢN PHẨM</h2>
+    </div>
+    <div id="hrv-product-reviews-sub" style="width:100%">
+        <div class="hrv-product-reviews-summary" id="hrv-product-reviews-summary">
+
+            <div style="text-align: center">
+                <div class="hrv-product-reviews-star" data-score="0" data-number="5" title="Not rated yet!" style="color: rgb(236, 186, 85);"><i data-alt="1" class="star-off-png" title="Not rated yet!"></i>&nbsp;<i data-alt="2" class="star-off-png" title="Not rated yet!"></i>&nbsp;<i data-alt="3" class="star-off-png" title="Not rated yet!"></i>&nbsp;<i data-alt="4" class="star-off-png" title="Not rated yet!"></i>&nbsp;<i data-alt="5" class="star-off-png" title="Not rated yet!"></i><input name="score" type="hidden" readonly=""></div><span>(0 đánh giá)</span>
+            </div>
+        </div>
+        <span class="product-reviews-summary-actions"><input type="button" id="btnnewreview" value="Viết đánh giá"></span><div class="hrv-product-reviews-form" id="hrv-product-reviews-form" style="display:none">
+            <h3>Viết đánh giá mới</h3>
+            <div id="hrv-product-reviews-frm" name="hrv-product-reviews-frm">
+                <fieldset>
+                    <div id="dvName">
+                        <label>Tên</label>
+                        <input id="name" type="text" placeholder="Tên của bạn (>3 ký tự và < 20 ký tự)" autocomplete="off">
+                    </div>
+                </fieldset><fieldset>
+                    <div id="dvEmail">
+                        <label>Email</label><input id="Email" type="text" placeholder="john.smith@example.com" autocomplete="off">
+                    </div>
+                </fieldset>
+                <fieldset id="hrv_product_reviews_form_fieldset_rate">
+                    <label>Đánh giá</label>
+                    <div id="starValue" style="cursor: pointer; color: rgb(236, 186, 85);">
+                        <i data-alt="1" class="star-on-png" title="bad"></i>&nbsp;
+                        <i data-alt="2" class="star-on-png" title="poor"></i>&nbsp;
+                        <i data-alt="3" class="star-on-png" title="regular"></i>&nbsp;
+                        <i data-alt="4" class="star-on-png" title="good"></i>&nbsp;
+                        <i data-alt="5" class="star-on-png" title="gorgeous"></i>
+                        <input name="score" type="hidden" id="starValue" value="5">
+                    </div>
+                  
+                </fieldset>
+                <fieldset>
+                    <div id="dvTitle">
+                        <label>Tiêu đề</label>
+                        <input id="Name1" type="text" placeholder="Hãy cho một tiêu đề (>3 ký tự và < 50 ký tự)" autocomplete="off">
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div id="dvBody">
+                        <label>Nội dung</label>
+                        <label id="dvBody_character"></label>
+                        <textarea id="Content" rows="10" placeholder="Viết nội dung đánh giá ở đây (>3 ký tự và < 1000 ký tự)"></textarea>
+                    </div>
+                </fieldset><p class="error"></p>
+                <input type="submit" id="btnSubmitReview" onclick="guibinhluansanpham(@ViewBag.PID);" value="Gửi đánh giá" width="80">
+            </div><br>
+        </div>
+        <div class="hrv-product-reviews-form" id="hrv-product-reviews-thanks" style="display:none; padding-top:20px"><center><b>Cám ơn bạn đã đánh giá sản phẩm!</b><center></center></center></div><br><div class="hrv-product-reviews-list" id="hrv-product-reviews-list">
+
+
+
+
+
+
+
+
+
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,148 @@
+﻿@using Business.ClassBusiness
+@using BuyGroup365.Models.Member
+@using Common.util
+@model IPagedList<global::Common.Order>
+<table class="table table-striped table-bordered table-hover dataTable no-footer list-product">
+
+    <thead>
+        <tr style="background-color: ghostwhite; ">
+            <th>Thông tin đơn hàng</th>
+            <th>Thông tin người mua</th>
+            <th>Trạng thái</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+
+            var id = "tr" + item.Id;
+
+            <tr id="@id">
+                <td style="padding: 0px">
+                    <table class="table  table-condensed" style="width: 100%; margin-bottom:0">
+
+                        <tr style="background-color: ghostwhite; ">
+                            <td colspan="3">
+                                <strong>Mã đơn hàng: #@item.Id</strong>
+                            </td>
+
+                        </tr>
+                        @foreach (var item1 in item.OrderDetails)
+                        {
+
+                            <tr>
+                                <td><img src="@FuntionMember.GetUrlImage(item1.PathImage,"Small")" width="70" /></td>
+                                <td>@item1.NameProduct</td>
+                                <td class="list-price">
+                                    @{
+                            var pi = (Double)item1.Price;
+                                    }
+                                    @pi.ToString("N0") <sup class="u-price">đ</sup>
+                                </td>
+                            </tr>
+
+                        }
+                        <tr>
+                            <td colspan="3" style="padding: 10px;">
+                                @{
+                        var tatol = (Double)item.OrderDetails.Sum(x => x.Price) + (Double)item.FeeOfTranspot;
+                        var fee = (Double)item.FeeOfTranspot;
+                                }
+                                <strong style="float: right;">Phí vận chuyển: <span class="" style="font-size: 15px;color: red">@fee.ToString("N0") đ</span></strong><br />
+                                <strong style="float: right;">Tổng đơn hàng: <span class="" style="font-size: 15px; color: red">@tatol.ToString("N0") đ</span></strong>
+                            </td>
+
+                        </tr>
+                    </table>
+
+                </td>
+                <td style="text-align: center">
+                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" onclick="GetInforBuyer(@item.Id)" data-target="#OderBuyer">
+                        Chi tiết
+                    </button>
+                </td>
+                <td style="text-align: center">
+                    @{
+                                 var paymentmethod = new PayFormBusiness().GetById((long)item.IdPayForm);
+                                 var namepayment = "Chưa xác định hình thức thanh toán";
+                                 if (paymentmethod != null)
+                                 {
+                                     namepayment = paymentmethod.Name;
+                                 }
+                    }
+                    <p>@namepayment</p>
+                    <hr />
+                    @if (item.Paid == 0)
+                    {
+                        <p>Đơn hàng chưa thanh toán</p>
+                    }
+                    else
+                    {
+                        <p>Đơn hàng đã thanh toán</p>
+                    }
+                    <hr />
+                    @if (item.Status == 0)
+                    {
+                        <span> Đơn hàng mới</span>
+                    }
+                    else if (item.Status == 1)
+                    {
+                        <span>Đang chờ giao dịch</span>
+                    }
+                    else if (item.Status == 2)
+                    {
+                        <span> Đang chờ chuyển hàng</span>
+                    }
+                    else if (item.Status == 3)
+                    {
+                        <span> Đã hoàn tất</span>
+                    }
+                    else
+                    {
+                        <span> Đã hủy</span>
+                    }
+                </td>
+
+            </tr>
+        }
+
+
+    </tbody>
+
+</table>
+<div class="">
+    <div class="">
+        <div class="dataTables_info" id="dataTables-example_info" role="alert" aria-live="polite" aria-relevant="all">Display from @Model.ItemStart to @Model.ItemEnd of @Model.TotalItemCount records</div>
+    </div>
+    <div class="">
+        <div class="dataTables_paginate paging_simple_numbers" id="dataTables-example_paginate">
+
+            @Html.Raw(Ajax.Pager(
+                                                new Options
+                                                {
+                                                    PageSize = Model.PageSize,
+                                                    TotalItemCount = Model.TotalItemCount,
+                                                    CurrentPage = Model.PageNumber,
+                                                    ItemTexts = new ItemTexts() { Next = "Next", Previous = "Previous", Page = "P" },
+                                                    ItemIcon = new ItemIcon() { First = "icon-backward", Previous = "icon-chevron-left", Next = "icon-chevron-right", Last = "icon-forward" },
+                                                    TooltipTitles = new TooltipTitles() { Next = "Next page", Previous = "Previous page", Page = "Page {0}." },
+                                                    Size = Size.normal,
+                                                    Alignment = Alignment.centered,
+                                                    IsShowControls = true,
+                                                    IsShowFirstLast = true,
+                                                    CssClass = ""
+                                                },
+                                                new AjaxOptions
+                                                {
+                                                    UpdateTargetId = "grid-list",
+                                                    HttpMethod = "get",
+                                                    LoadingElementId = "loading",
+                                                    OnBegin = "beginPaging",
+                                                    OnSuccess = "successPaging",
+                                                    OnFailure = "failurePaging"
+                                                }, new { controller = "Member", action = "Invoice", key = ViewData["key"], st = ViewBag.Id, grade_card = ViewData["grade_card"] }))
+
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,1377 @@
+﻿
+@{
+    ViewBag.Title = "Contact";
+    Layout = "~/Views/Shared/_LayoutIndex.cshtml";
+}
+<div class="wrapper">
+    <noscript>
+        &lt;div class="global-site-notice noscript"&gt;
+        &lt;div class="notice-inner"&gt;
+        &lt;p&gt;
+        &lt;strong&gt;JavaScript seems to be disabled in your browser.&lt;/strong&gt;&lt;br /&gt;
+        You must have JavaScript enabled in your browser to utilize the functionality of this website.                &lt;/p&gt;
+        &lt;/div&gt;
+        &lt;/div&gt;
+    </noscript>
+    <div class="page">
+        <div class="header-container header-color color">
+            <div class="header_full">
+                <div class="header">
+                    <div class="header-top">
+                        <div class="container">
+                            <div class="row">
+                                <div class="top-left col-md-6 col-sm-6 col-xs-12">
+                                    <div class="nav-top-links">
+                                        <span class="first-item"><span class="fa fa-phone"><span class="hidden">hidden</span></span>00-62-658-658</span>
+                                        <a href="images/Contact.html"><span class="fa fa-envelope"><span class="hidden">hidden</span></span>Contact us today!</a>
+                                    </div>					    	<div class="header-setting">
+                                        <div class="settting-switcher">
+                                            <div class="dropdown-toggle">
+                                                <div class="text-setting">USD</div>
+                                            </div>
+                                            <div class="dropdown-switcher">
+                                                <div class="currency_top">
+
+
+                                                    <div class="currency-switcher">
+                                                        <div class="label-title">Currency</div>
+                                                        <ul class="currency-switcher dropdown"><li><a href="http://alothemes.com/demo/kuteshop/index.php/directory/currency/switch/currency/EUR/uenc/aHR0cDovL2Fsb3RoZW1lcy5jb20vZGVtby9rdXRlc2hvcC9pbmRleC5waHAvY29udGFjdHMv/">EUR</a></li><li class="current">USD</li></ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="header-setting">
+                                        <div class="settting-switcher">
+                                            <div class="top-form-language">
+
+                                                <div class="lang-switcher">
+                                                    <ul class="label-title"><li class="current"><span class="label dropdown-icon" style="background-image:url(http://alothemes.com/demo/kuteshop/skin/frontend/alokuteshop/default/images/flags/default.jpg);">English</span></li></ul>
+                                                    <ul class="language-switcher dropdown"><li class="current"><span class="label dropdown-icon" style="background-image:url(http://alothemes.com/demo/kuteshop/skin/frontend/alokuteshop/default/images/flags/default.jpg);">English</span></li><li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/?___store=french&___from_store=default"><span class="label dropdown-icon" style="background-image:url(http://alothemes.com/demo/kuteshop/skin/frontend/alokuteshop/default/images/flags/french.jpg);">French</span></a></li><li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/?___store=german&___from_store=default"><span class="label dropdown-icon" style="background-image:url(http://alothemes.com/demo/kuteshop/skin/frontend/alokuteshop/default/images/flags/german.jpg);">German</span></a></li></ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="top-right col-md-6 col-sm-6 col-xs-12">
+                                    <div class="header-setting">
+                                        <div class="settting-switcher">
+                                            <div class="dropdown-toggle">
+                                                <div class="text-setting">My Account</div>
+                                            </div>
+                                            <div class="dropdown-switcher">
+                                                <div class="top-links-alo">
+                                                    <div class="header-top-link">
+                                                        <ul class="links">
+                                                            <li class="first"><a href="http://alothemes.com/demo/kuteshop/index.php/customer/account/" title="My Account">My Account</a></li>
+                                                            <li><a href="http://alothemes.com/demo/kuteshop/index.php/wishlist/" title="My Wishlist">My Wishlist</a></li>
+                                                            <li><a href="http://alothemes.com/demo/kuteshop/index.php/checkout/" title="Checkout" class="top-link-checkout">Checkout</a></li>
+                                                            <li><a href="http://alothemes.com/demo/kuteshop/index.php/testimonial/" title="Testimonial">Testimonial</a></li>
+                                                            <li class=" last"><a href="http://alothemes.com/demo/kuteshop/index.php/customer/account/login/" title="Log In">Log In</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="support-link">
+                                            <a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Services</a>
+                                            <a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Support</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="header-content">
+                        <div class="container">
+                            <div class="row">
+                                <div class="content-logo col-md-3 col-sm-3 col-xs-12">
+                                    <div class="header-logo">
+                                        <a href="http://alothemes.com/demo/kuteshop/index.php/" title="ALO Themes" class="logo"><strong>ALO Themes</strong><img class="img-responsive" src="images/logo.png" alt="ALO Themes"></a>
+                                    </div>
+                                </div>
+                                <div class="content-seach col-md-7 col-sm-7 col-xs-12">
+                                    <div class="header-search">
+                                        <form id="search_mini_form" action="http://alothemes.com/demo/kuteshop/index.php/catalogsearch/result/" method="get">
+                                            <div class="form-search clearfix">
+                                                <input id="catsearch" type="hidden" name="cat" value="">
+                                                <div id="cat" class="dd-container" style="width: 160px;"><div class="dd-select" style="width: 160px; background: rgb(238, 238, 238);"><input class="dd-selected-value" type="hidden" value=""><a class="dd-selected"><label class="dd-selected-text">All Categories</label></a><span class="dd-pointer dd-pointer-down"></span></div><ul class="dd-options dd-click-off-close" style="width: 160px;"><li><a class="dd-option dd-option-selected"> <label class="dd-option-text">All Categories</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="3"> <label class="dd-option-text">Fashion</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="5"> <label class="dd-option-text">-Men's</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="41"> <label class="dd-option-text">-&nbsp;-Skirts</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="42"> <label class="dd-option-text">-&nbsp;-Jackets</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="43"> <label class="dd-option-text">-&nbsp;-Tops</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="44"> <label class="dd-option-text">-&nbsp;-Scarves</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="45"> <label class="dd-option-text">-&nbsp;-Pants</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="6"> <label class="dd-option-text">-Women's</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="46"> <label class="dd-option-text">-&nbsp;-Skirts</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="47"> <label class="dd-option-text">-&nbsp;-Jackets</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="48"> <label class="dd-option-text">-&nbsp;-Tops</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="49"> <label class="dd-option-text">-&nbsp;-Scarves</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="50"> <label class="dd-option-text">-&nbsp;-Pants</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="7"> <label class="dd-option-text">-Kids</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="51"> <label class="dd-option-text">-&nbsp;-Shoes</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="52"> <label class="dd-option-text">-&nbsp;-Clothing</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="53"> <label class="dd-option-text">-&nbsp;-Tops</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="54"> <label class="dd-option-text">-&nbsp;-Scarves</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="55"> <label class="dd-option-text">-&nbsp;-Accessories</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="8"> <label class="dd-option-text">-Trending</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="56"> <label class="dd-option-text">-&nbsp;-Men's Clothing</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="57"> <label class="dd-option-text">-&nbsp;-Kid's Clothing</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="58"> <label class="dd-option-text">-&nbsp;-Women's Clothing</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="59"> <label class="dd-option-text">-&nbsp;-Accessories</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="4"> <label class="dd-option-text">Sports</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="13"> <label class="dd-option-text">-Tennis</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="69"> <label class="dd-option-text">-&nbsp;-Scarves</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="70"> <label class="dd-option-text">-&nbsp;-Pants</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="71"> <label class="dd-option-text">-&nbsp;-Skirts</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="72"> <label class="dd-option-text">-&nbsp;-Jackets</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="14"> <label class="dd-option-text">-Football</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="118"> <label class="dd-option-text">-&nbsp;-Coats &amp; Jackets</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="119"> <label class="dd-option-text">-&nbsp;-Blouses &amp; Shirts</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="120"> <label class="dd-option-text">-&nbsp;-Tops &amp; Tees</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="124"> <label class="dd-option-text">-&nbsp;-Intimates</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="15"> <label class="dd-option-text">-Swimming</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="73"> <label class="dd-option-text">-&nbsp;-Accessories</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="74"> <label class="dd-option-text">-&nbsp;-Men's Clothing</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="75"> <label class="dd-option-text">-&nbsp;-Kid's Clothing</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="76"> <label class="dd-option-text">-&nbsp;-Women's Clothing</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="16"> <label class="dd-option-text">-Climbing</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="121"> <label class="dd-option-text">-&nbsp;-Dresses</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="122"> <label class="dd-option-text">-&nbsp;-Coats &amp; Jackets</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="123"> <label class="dd-option-text">-&nbsp;-Blouses &amp; Shirts</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="60"> <label class="dd-option-text">-Asian</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="61"> <label class="dd-option-text">-&nbsp;-Vietnamese Pho</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="62"> <label class="dd-option-text">-&nbsp;-Noodles</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="63"> <label class="dd-option-text">-&nbsp;-Seafood</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="64"> <label class="dd-option-text">-Sausages</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="65"> <label class="dd-option-text">-&nbsp;-Meat Dishes</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="66"> <label class="dd-option-text">-&nbsp;-Desserts</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="67"> <label class="dd-option-text">-&nbsp;-Tops</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="9"> <label class="dd-option-text">Electronics</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="17"> <label class="dd-option-text">-Television</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="18"> <label class="dd-option-text">-Air Conditional</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="19"> <label class="dd-option-text">-ARM</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="20"> <label class="dd-option-text">-Theater</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="21"> <label class="dd-option-text">-Chicken</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="23"> <label class="dd-option-text">-&nbsp;-Italian Pizza</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="24"> <label class="dd-option-text">-&nbsp;-French Cakes</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="22"> <label class="dd-option-text">-Sandwich</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="25"> <label class="dd-option-text">-&nbsp;-Salad</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="26"> <label class="dd-option-text">-&nbsp;-Paste</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="10"> <label class="dd-option-text">Digital</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="31"> <label class="dd-option-text">-Accessories</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="27"> <label class="dd-option-text">-&nbsp;-Mobile</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="28"> <label class="dd-option-text">-&nbsp;-Tablets</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="30"> <label class="dd-option-text">-&nbsp;-Memory Cards</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="129"> <label class="dd-option-text">-Swimming</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="130"> <label class="dd-option-text">-Computers &amp; Networking</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="131"> <label class="dd-option-text">-Flashlights &amp; Lamps</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="11"> <label class="dd-option-text">Furniture</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="35"> <label class="dd-option-text">-Accessories</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="32"> <label class="dd-option-text">-&nbsp;-Television</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="33"> <label class="dd-option-text">-&nbsp;-Air Conditional</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="34"> <label class="dd-option-text">-&nbsp;-Theater</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="12"> <label class="dd-option-text">Jewelry</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="36"> <label class="dd-option-text">-Accessories</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="37"> <label class="dd-option-text">-&nbsp;-Sweaters</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="38"> <label class="dd-option-text">-&nbsp;-Heels &amp; Sandals</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="39"> <label class="dd-option-text">-&nbsp;-Jeans &amp; Shorts</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="40"> <label class="dd-option-text">-&nbsp;-Boats</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="78"> <label class="dd-option-text">Smartphone &amp; Tablets</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="77"> <label class="dd-option-text">Sports &amp; Outdoors</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="97"> <label class="dd-option-text">-Tennis</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="112"> <label class="dd-option-text">-&nbsp;-Tennis</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="113"> <label class="dd-option-text">-&nbsp;-Coats &amp; Jackets</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="114"> <label class="dd-option-text">-&nbsp;-Blouses &amp; Shirts</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="115"> <label class="dd-option-text">-&nbsp;-Tops &amp; Tees</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="116"> <label class="dd-option-text">-&nbsp;-Hoodies &amp; Sweatshirts</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="117"> <label class="dd-option-text">-&nbsp;-Intimates</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="98"> <label class="dd-option-text">-Swimming</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="106"> <label class="dd-option-text">-&nbsp;-Dresses</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="107"> <label class="dd-option-text">-&nbsp;-Coats &amp; Jackets</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="108"> <label class="dd-option-text">-&nbsp;-Blouses &amp; Shirts</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="109"> <label class="dd-option-text">-&nbsp;-Tops &amp; Tees</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="110"> <label class="dd-option-text">-&nbsp;-Hoodies &amp; Sweatshirts</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="111"> <label class="dd-option-text">-&nbsp;-Intimates</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="99"> <label class="dd-option-text">-Shoes</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="100"> <label class="dd-option-text">-&nbsp;-Dresses</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="101"> <label class="dd-option-text">-&nbsp;-Coats &amp; Jackets</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="102"> <label class="dd-option-text">-&nbsp;-Blouses &amp; Shirts</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="103"> <label class="dd-option-text">-&nbsp;-Tops &amp; Tees</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="104"> <label class="dd-option-text">-&nbsp;-Hoodies &amp; Sweatshirts</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="105"> <label class="dd-option-text">-&nbsp;-Intimates</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="79"> <label class="dd-option-text">Health &amp; Beauty Bags</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="80"> <label class="dd-option-text">Shoes &amp; Accessories</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="81"> <label class="dd-option-text">Toys &amp; Hobbies</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="82"> <label class="dd-option-text">Computers &amp; Networking</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="83"> <label class="dd-option-text">Laptops &amp; Accessories</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="84"> <label class="dd-option-text">Jewelry &amp; Watches</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="85"> <label class="dd-option-text">Flashlights &amp; Lamps</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="96"> <label class="dd-option-text">Television</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="95"> <label class="dd-option-text">Cameras &amp; Photo</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="133"> <label class="dd-option-text">Computers &amp; Networking</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="134"> <label class="dd-option-text">Toys &amp; Hobbies</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="135"> <label class="dd-option-text">Jewelry &amp; Watches</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="141"> <label class="dd-option-text">Sale Off</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="136"> <label class="dd-option-text">-Up To 40% Off</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="137"> <label class="dd-option-text">-Up To 50% Off</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="138"> <label class="dd-option-text">-Up To 60% Off</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="139"> <label class="dd-option-text">-Up To 70% Off</label></a></li><li><a class="dd-option"> <input class="dd-option-value" type="hidden" value="140"> <label class="dd-option-text">-Up To 80% Off</label></a></li></ul></div>
+                                                <div class="form-imput-serach">
+                                                    <input id="search" type="text" name="q" class="input-text" placeholder="Search ..." autocomplete="off">
+                                                </div>
+                                                <button type="submit" title="Search" class="button"><span><span><i class="fa fa-search"></i></span></span></button>
+                                                <div id="search_autocomplete" class="search-autocomplete" style="display: none;"></div>
+                                            </div>
+                                        </form>
+                                        <script type="text/javascript">
+                                            //<![CDATA[
+                                            var searchForm = new Varien.searchForm('search_mini_form', 'search', 'Search ...');
+                                            searchForm.initAutocomplete('http://alothemes.com/demo/kuteshop/index.php/catalogsearch/ajax/suggest/', 'search_autocomplete');
+                                            jQuery('#search_mini_form .ddslick').ddslick({
+                                                width: 160,
+                                                onSelected: function (opt) {
+                                                    jQuery('#search_mini_form #catsearch').val(opt.selectedData.value)
+                                                }
+                                            });
+                                            //]]>
+                                        </script>
+                                    </div>
+                                </div>
+
+                                <div class="content-cart col-md-2 col-sm-5 col-xs-12">
+                                    <div class="miniCartWrap">
+                                        <div class="mini-maincart">
+                                            <div class="cartSummary">
+                                                <div class="crat-icon">
+                                                    <span class="zero">0 </span>
+                                                    <p class="mt-cart-title">Shopping cart</p>
+                                                </div>
+                                                <div class="cart-header">
+                                                    <p class="cart-tolatl">
+                                                        <!--<span class="toltal"></span>-->
+                                                        <span class="zero">0 items - </span>
+                                                        <span><span class="price">$0.00</span></span>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="mini-contentCart" style="display: none;">
+                                                <div class="block-content">
+                                                    <p class="empty">You have no items in your shopping cart.</p>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="header-bottom">
+                        <div class="header-sticker">
+                            <div class="container">
+                                <div class="border-bottom menu-mobile">
+                                    <div class="row menu-mobile-none">
+                                        <div class="header-config-bg col-xs-12 col-sm-12 col-md-12">
+                                            <div class="header-wrapper-bottom">
+                                                <div class="custom-menu">
+
+                                                    <div class="vmagicmenu clearfix">
+                                                        <div class="block-title block-title-vmagicmenu">
+                                                            <strong>
+                                                                <span class="fa fa-bars"></span>
+                                                                <span class="vmagicmenu-subtitle">Categories</span>
+                                                            </strong>
+                                                        </div>
+                                                        <div class="block-vmagicmenu-content">
+                                                            <ul class="vmagicmenu-narrow clearfix">
+                                                                <li class="level0 cat  hasChild dropdown">
+                                                                    <a class="level-top" href="http://alothemes.com/demo/kuteshop/index.php/electronics.html"><img class="img-responsive" alt="Electronics" src="images/12_1.png"><span>Electronics</span><span class="boder-menu"></span></a><ul class="level0">
+                                                                        <li class="level1">
+                                                                            <a href="http://alothemes.com/demo/kuteshop/index.php/electronics/television.html"><span>Television</span></a>
+                                                                        </li>
+                                                                        <li class="level1">
+                                                                            <a href="http://alothemes.com/demo/kuteshop/index.php/electronics/air-conditional.html"><span>Air Conditional</span></a>
+                                                                        </li>
+                                                                        <li class="level1">
+                                                                            <a href="http://alothemes.com/demo/kuteshop/index.php/electronics/arm.html"><span>ARM</span></a>
+                                                                        </li>
+                                                                        <li class="level1">
+                                                                            <a href="http://alothemes.com/demo/kuteshop/index.php/electronics/theater.html"><span>Theater</span></a>
+                                                                        </li>
+                                                                        <li class="level1 hasChild">
+                                                                            <a href="http://alothemes.com/demo/kuteshop/index.php/electronics/chicken.html"><span>Chicken</span></a>
+                                                                            <ul class="level1">
+                                                                                <li class="level2">
+                                                                                    <a href="http://alothemes.com/demo/kuteshop/index.php/electronics/chicken/italian-pizza.html"><span>Italian Pizza</span></a>
+                                                                                </li>
+                                                                                <li class="level2">
+                                                                                    <a href="http://alothemes.com/demo/kuteshop/index.php/electronics/chicken/french-cakes.html"><span>French Cakes</span></a>
+                                                                                </li>
+                                                                            </ul>
+                                                                        </li>
+                                                                        <li class="level1 hasChild">
+                                                                            <a href="http://alothemes.com/demo/kuteshop/index.php/electronics/sandwich.html"><span>Sandwich</span></a>
+                                                                            <ul class="level1">
+                                                                                <li class="level2">
+                                                                                    <a href="http://alothemes.com/demo/kuteshop/index.php/electronics/sandwich/salad.html"><span>Salad</span></a>
+                                                                                </li>
+                                                                                <li class="level2">
+                                                                                    <a href="http://alothemes.com/demo/kuteshop/index.php/electronics/sandwich/paste.html"><span>Paste</span></a>
+                                                                                </li>
+                                                                            </ul>
+                                                                        </li>
+                                                                    </ul>
+                                                                </li>
+                                                                <li class="level0 cat "><a class="level-top" href="http://alothemes.com/demo/kuteshop/index.php/smartphone-tablets.html"><img class="img-responsive" alt="Smartphone &amp; Tablets" src="images/14.png"><span>Smartphone &amp; Tablets</span><span class="boder-menu"></span></a></li>
+                                                                <li class="level0 cat  hasChild" data-options="{&quot;menu_id&quot;:&quot;2&quot;,&quot;cat_columns&quot;:&quot;3&quot;,&quot;cat_proportions&quot;:&quot;3&quot;,&quot;right_proportions&quot;:null,&quot;left_proportions&quot;:null}">
+                                                                    <a class="level-top" href="http://alothemes.com/demo/kuteshop/index.php/sports-outdoors.html"><img class="img-responsive" alt="Sports &amp; Outdoors" src="images/13.png"><span>Sports &amp; Outdoors</span><span class="boder-menu"></span></a><div class="level-top-mega">
+                                                                        <div class="content-mega">
+                                                                            <div class="content-mega-horizontal" style="width: 750px;">
+                                                                                <ul class="level0 mage-column cat-mega" style="width: 100%;">
+                                                                                    <li class="children level1">
+                                                                                        <a href="http://alothemes.com/demo/kuteshop/index.php/sports-outdoors/tennis.html"><span>Tennis</span></a><ul class="level1">
+                                                                                            <li class="level2">
+                                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/sports-outdoors/tennis/tennis.html"><span>Tennis</span></a>
+                                                                                            </li>
+                                                                                            <li class="level2">
+                                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/sports-outdoors/tennis/coats-jackets.html"><span>Coats &amp; Jackets</span></a>
+                                                                                            </li>
+                                                                                            <li class="level2">
+                                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/sports-outdoors/tennis/blouses-shirts.html"><span>Blouses &amp; Shirts</span></a>
+                                                                                            </li>
+                                                                                            <li class="level2">
+                                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/sports-outdoors/tennis/tops-tees.html"><span>Tops &amp; Tees</span></a>
+                                                                                            </li>
+                                                                                            <li class="level2">
+                                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/sports-outdoors/tennis/hoodies-sweatshirts.html"><span>Hoodies &amp; Sweatshirts</span></a>
+                                                                                            </li>
+                                                                                            <li class="level2">
+                                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/sports-outdoors/tennis/intimates.html"><span>Intimates</span></a>
+                                                                                            </li>
+                                                                                        </ul>
+                                                                                    </li>
+                                                                                    <li class="children level1">
+                                                                                        <a href="http://alothemes.com/demo/kuteshop/index.php/sports-outdoors/swimming.html"><span>Swimming</span></a><ul class="level1">
+                                                                                            <li class="level2">
+                                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/sports-outdoors/swimming/dresses.html"><span>Dresses</span></a>
+                                                                                            </li>
+                                                                                            <li class="level2">
+                                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/sports-outdoors/swimming/coats-jackets.html"><span>Coats &amp; Jackets</span></a>
+                                                                                            </li>
+                                                                                            <li class="level2">
+                                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/sports-outdoors/swimming/blouses-shirts.html"><span>Blouses &amp; Shirts</span></a>
+                                                                                            </li>
+                                                                                            <li class="level2">
+                                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/sports-outdoors/swimming/tops-tees.html"><span>Tops &amp; Tees</span></a>
+                                                                                            </li>
+                                                                                            <li class="level2">
+                                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/sports-outdoors/swimming/hoodies-sweatshirts.html"><span>Hoodies &amp; Sweatshirts</span></a>
+                                                                                            </li>
+                                                                                            <li class="level2">
+                                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/sports-outdoors/swimming/intimates.html"><span>Intimates</span></a>
+                                                                                            </li>
+                                                                                        </ul>
+                                                                                    </li>
+                                                                                    <li class="children level1">
+                                                                                        <a href="http://alothemes.com/demo/kuteshop/index.php/sports-outdoors/shoes.html"><span>Shoes</span></a><ul class="level1">
+                                                                                            <li class="level2">
+                                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/sports-outdoors/shoes/dresses.html"><span>Dresses</span></a>
+                                                                                            </li>
+                                                                                            <li class="level2">
+                                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/sports-outdoors/shoes/coats-jackets.html"><span>Coats &amp; Jackets</span></a>
+                                                                                            </li>
+                                                                                            <li class="level2">
+                                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/sports-outdoors/shoes/blouses-shirts.html"><span>Blouses &amp; Shirts</span></a>
+                                                                                            </li>
+                                                                                            <li class="level2">
+                                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/sports-outdoors/shoes/tops-tees.html"><span>Tops &amp; Tees</span></a>
+                                                                                            </li>
+                                                                                            <li class="level2">
+                                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/sports-outdoors/shoes/hoodies-sweatshirts.html"><span>Hoodies &amp; Sweatshirts</span></a>
+                                                                                            </li>
+                                                                                            <li class="level2">
+                                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/sports-outdoors/shoes/intimates.html"><span>Intimates</span></a>
+                                                                                            </li>
+                                                                                        </ul>
+                                                                                    </li>
+                                                                                    <li><div class="mage-column mega-block-bottom"><div class="mega-custom-html"><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#"><img alt="" src="images/banner-megamenu.jpg"></a></div></div></li>
+                                                                                </ul>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </li>
+                                                                <li class="level0 cat "><a class="level-top" href="http://alothemes.com/demo/kuteshop/index.php/health-beauty-bags.html"><img class="img-responsive" alt="Health &amp; Beauty Bags" src="images/15.png"><span>Health &amp; Beauty Bags</span><span class="boder-menu"></span></a></li>
+                                                                <li class="level0 cat "><a class="level-top" href="http://alothemes.com/demo/kuteshop/index.php/shoes-accessories.html"><img class="img-responsive" alt="Shoes &amp; Accessories" src="images/16.png"><span>Shoes &amp; Accessories</span><span class="boder-menu"></span></a></li>
+                                                                <li class="level0 cat "><a class="level-top" href="http://alothemes.com/demo/kuteshop/index.php/toys-hobbies.html"><img class="img-responsive" alt="Toys &amp; Hobbies" src="images/17.png"><span>Toys &amp; Hobbies</span><span class="boder-menu"></span></a></li>
+                                                                <li class="level0 cat "><a class="level-top" href="http://alothemes.com/demo/kuteshop/index.php/computers-networking.html"><img class="img-responsive" alt="Computers &amp; Networking" src="images/18.png"><span>Computers &amp; Networking</span><span class="boder-menu"></span></a></li>
+                                                                <li class="level0 cat "><a class="level-top" href="http://alothemes.com/demo/kuteshop/index.php/laptops-accessories.html"><img class="img-responsive" alt="Laptops &amp; Accessories" src="images/19.png"><span>Laptops &amp; Accessories</span><span class="boder-menu"></span></a></li>
+                                                                <li class="level0 cat "><a class="level-top" href="http://alothemes.com/demo/kuteshop/index.php/jewelry-watches.html"><img class="img-responsive" alt="Jewelry &amp; Watches" src="images/20.png"><span>Jewelry &amp; Watches</span><span class="boder-menu"></span></a></li>
+                                                                <li class="level0 cat "><a class="level-top" href="http://alothemes.com/demo/kuteshop/index.php/flashlights-lamps.html"><img class="img-responsive" alt="Flashlights &amp; Lamps" src="images/21.png"><span>Flashlights &amp; Lamps</span><span class="boder-menu"></span></a></li>
+                                                                <li class="level0 cat "><a class="level-top" href="http://alothemes.com/demo/kuteshop/index.php/cameras-photo.html"><img class="img-responsive" alt="Cameras &amp; Photo" src="images/22.png"><span>Cameras &amp; Photo</span><span class="boder-menu"></span></a></li>
+                                                                <li class="level0 cat "><a class="level-top" href="http://alothemes.com/demo/kuteshop/index.php/computers-networking-9.html"><img class="img-responsive" alt="Computers &amp; Networking" src="images/18_1.png"><span>Computers &amp; Networking</span><span class="boder-menu"></span></a></li>
+                                                                <li class="level0 cat "><a class="level-top" href="http://alothemes.com/demo/kuteshop/index.php/toys-hobbies-9.html"><img class="img-responsive" alt="Toys &amp; Hobbies" src="images/17_1.png"><span>Toys &amp; Hobbies</span><span class="boder-menu"></span></a></li>
+                                                                <li class="level0 cat "><a class="level-top" href="http://alothemes.com/demo/kuteshop/index.php/jewelry-watches-9.html"><img class="img-responsive" alt="Jewelry &amp; Watches" src="images/20_1.png"><span>Jewelry &amp; Watches</span><span class="boder-menu"></span></a></li>
+                                                            </ul>
+                                                            <div class="all-cat"><span>All Categories</span><span style="display:none">Close</span></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="magicmenu clearfix">
+                                                        <ul class="nav-desktop sticker">
+                                                            <li class="level0 home active"><a class="level-top" href="http://alothemes.com/demo/kuteshop/index.php/"><span class="icon-home fa fa-home"></span><span class="icon-text">Home</span></a><div class="level-top-mega" style="left: 270px;"><div><a href="http://alothemes.com/demo/kuteshop/index.php/"><span class="demo-home">Demo 01</span></a></div><div><a href="http://alothemes.com/demo/kuteshop/index.php/?___store=english_2"><span class="demo-home">Demo 02</span></a></div><div><a href="http://alothemes.com/demo/kuteshop/index.php/?___store=english_3"><span class="demo-home">Demo 03</span></a></div><div><a href="http://alothemes.com/demo/kuteshop/index.php/?___store=english_4"><span class="demo-home">Demo 04</span></a></div><div><a href="http://alothemes.com/demo/kuteshop/index.php/?___store=english_5"><span class="demo-home">Demo 05</span></a></div><div><a href="http://alothemes.com/demo/kuteshop/index.php/?___store=english_6"><span class="demo-home">Demo 06</span></a></div><div><a href="http://alothemes.com/demo/kuteshop/index.php/?___store=english_7"><span class="demo-home">Demo 07</span></a></div></div></li>
+                                                            <li class="level0 cat first hasChild">
+                                                                <a class="level-top" href="http://alothemes.com/demo/kuteshop/index.php/fashion.html"><span>Fashion</span><span class="boder-menu"></span></a><div class="level-top-mega" style="left: 338px;">
+                                                                    <div class="content-mega">
+                                                                        <div class="content-mega-horizontal" style="width: 800px;">
+                                                                            <ul class="level0 mage-column cat-mega">
+                                                                                <li class="children level1">
+                                                                                    <a class="a-image" href="http://alothemes.com/demo/kuteshop/index.php/fashion/men-s.html"><img class="img-responsive" alt="Men&#39;s" src="images/men.png"></a><a href="http://alothemes.com/demo/kuteshop/index.php/fashion/men-s.html"><span>Men's</span></a><ul class="level1">
+                                                                                        <li class="level2 hasChild">
+                                                                                            <a href="http://alothemes.com/demo/kuteshop/index.php/fashion/men-s/skirts.html"><span>Skirts</span></a>
+                                                                                            <ul class="level2">
+                                                                                                <li class="level3">
+                                                                                                    <a href="http://alothemes.com/demo/kuteshop/index.php/fashion/men-s/skirts/t-shirts.html"><span>T-Shirts</span></a>
+                                                                                                </li>
+                                                                                                <li class="level3">
+                                                                                                    <a href="http://alothemes.com/demo/kuteshop/index.php/fashion/men-s/skirts/tops.html"><span>Tops</span></a>
+                                                                                                </li>
+                                                                                                <li class="level3">
+                                                                                                    <a href="http://alothemes.com/demo/kuteshop/index.php/fashion/men-s/skirts/new-in.html"><span>New In</span></a>
+                                                                                                </li>
+                                                                                            </ul>
+                                                                                        </li>
+                                                                                        <li class="level2">
+                                                                                            <a href="http://alothemes.com/demo/kuteshop/index.php/fashion/men-s/jackets.html"><span>Jackets</span></a>
+                                                                                        </li>
+                                                                                        <li class="level2">
+                                                                                            <a href="http://alothemes.com/demo/kuteshop/index.php/fashion/men-s/tops.html"><span>Tops</span></a>
+                                                                                        </li>
+                                                                                        <li class="level2">
+                                                                                            <a href="http://alothemes.com/demo/kuteshop/index.php/fashion/men-s/scarves.html"><span>Scarves</span></a>
+                                                                                        </li>
+                                                                                        <li class="level2">
+                                                                                            <a href="http://alothemes.com/demo/kuteshop/index.php/fashion/men-s/pants.html"><span>Pants</span></a>
+                                                                                        </li>
+                                                                                    </ul>
+                                                                                </li>
+                                                                                <li class="children level1">
+                                                                                    <a class="a-image" href="http://alothemes.com/demo/kuteshop/index.php/fashion/women-s.html"><img class="img-responsive" alt="Women&#39;s" src="images/women.png"></a><a href="http://alothemes.com/demo/kuteshop/index.php/fashion/women-s.html"><span>Women's</span></a><ul class="level1">
+                                                                                        <li class="level2">
+                                                                                            <a href="http://alothemes.com/demo/kuteshop/index.php/fashion/women-s/skirts.html"><span>Skirts</span></a>
+                                                                                        </li>
+                                                                                        <li class="level2">
+                                                                                            <a href="http://alothemes.com/demo/kuteshop/index.php/fashion/women-s/jackets.html"><span>Jackets</span></a>
+                                                                                        </li>
+                                                                                        <li class="level2">
+                                                                                            <a href="http://alothemes.com/demo/kuteshop/index.php/fashion/women-s/tops.html"><span>Tops</span></a>
+                                                                                        </li>
+                                                                                        <li class="level2">
+                                                                                            <a href="http://alothemes.com/demo/kuteshop/index.php/fashion/women-s/scarves.html"><span>Scarves</span></a>
+                                                                                        </li>
+                                                                                        <li class="level2">
+                                                                                            <a href="http://alothemes.com/demo/kuteshop/index.php/fashion/women-s/pants.html"><span>Pants</span></a>
+                                                                                        </li>
+                                                                                    </ul>
+                                                                                </li>
+                                                                                <li class="children level1">
+                                                                                    <a class="a-image" href="http://alothemes.com/demo/kuteshop/index.php/fashion/kids.html"><img class="img-responsive" alt="Kids" src="images/kid.png"></a><a href="http://alothemes.com/demo/kuteshop/index.php/fashion/kids.html"><span>Kids</span></a><ul class="level1">
+                                                                                        <li class="level2">
+                                                                                            <a href="http://alothemes.com/demo/kuteshop/index.php/fashion/kids/shoes.html"><span>Shoes</span></a>
+                                                                                        </li>
+                                                                                        <li class="level2">
+                                                                                            <a href="http://alothemes.com/demo/kuteshop/index.php/fashion/kids/clothing.html"><span>Clothing</span></a>
+                                                                                        </li>
+                                                                                        <li class="level2">
+                                                                                            <a href="http://alothemes.com/demo/kuteshop/index.php/fashion/kids/tops.html"><span>Tops</span></a>
+                                                                                        </li>
+                                                                                        <li class="level2">
+                                                                                            <a href="http://alothemes.com/demo/kuteshop/index.php/fashion/kids/scarves.html"><span>Scarves</span></a>
+                                                                                        </li>
+                                                                                        <li class="level2">
+                                                                                            <a href="http://alothemes.com/demo/kuteshop/index.php/fashion/kids/accessories.html"><span>Accessories</span></a>
+                                                                                        </li>
+                                                                                    </ul>
+                                                                                </li>
+                                                                                <li class="children level1">
+                                                                                    <a class="a-image" href="http://alothemes.com/demo/kuteshop/index.php/fashion/trending.html"><img class="img-responsive" alt="Trending" src="images/trending.png"></a><a href="http://alothemes.com/demo/kuteshop/index.php/fashion/trending.html"><span>Trending</span></a><ul class="level1">
+                                                                                        <li class="level2">
+                                                                                            <a href="http://alothemes.com/demo/kuteshop/index.php/fashion/trending/men-s-clothing.html"><span>Men's Clothing</span></a>
+                                                                                        </li>
+                                                                                        <li class="level2">
+                                                                                            <a href="http://alothemes.com/demo/kuteshop/index.php/fashion/trending/kid-s-clothing.html"><span>Kid's Clothing</span></a>
+                                                                                        </li>
+                                                                                        <li class="level2">
+                                                                                            <a href="http://alothemes.com/demo/kuteshop/index.php/fashion/trending/women-s-clothing.html"><span>Women's Clothing</span></a>
+                                                                                        </li>
+                                                                                        <li class="level2">
+                                                                                            <a href="http://alothemes.com/demo/kuteshop/index.php/fashion/trending/accessories.html"><span>Accessories</span></a>
+                                                                                        </li>
+                                                                                    </ul>
+                                                                                </li>
+                                                                                <li></li>
+                                                                            </ul>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                            <li class="level0 cat  hasChild" data-options="{&quot;menu_id&quot;:&quot;1&quot;,&quot;cat_columns&quot;:&quot;3&quot;,&quot;cat_proportions&quot;:&quot;3&quot;,&quot;right_proportions&quot;:&quot;1&quot;,&quot;left_proportions&quot;:null}" style="clear: both;">
+                                                                <a class="level-top" href="http://alothemes.com/demo/kuteshop/index.php/sports.html"><span>Sports<span class="cat_label New">New</span></span><span class="boder-menu"></span></a><div class="level-top-mega" style="left: 338px;">
+                                                                    <div class="content-mega">
+                                                                        <div class="content-mega-horizontal" style="width: 800px;">
+                                                                            <ul class="level0 mage-column cat-mega" style="width: 75%;">
+                                                                                <li class="children level1">
+                                                                                    <a href="http://alothemes.com/demo/kuteshop/index.php/sports/tennis.html"><span>Tennis</span></a><ul class="level1">
+                                                                                        <li class="level2">
+                                                                                            <a href="http://alothemes.com/demo/kuteshop/index.php/sports/tennis/scarves.html"><span>Scarves</span></a>
+                                                                                        </li>
+                                                                                        <li class="level2">
+                                                                                            <a href="http://alothemes.com/demo/kuteshop/index.php/sports/tennis/pants.html"><span>Pants</span></a>
+                                                                                        </li>
+                                                                                        <li class="level2">
+                                                                                            <a href="http://alothemes.com/demo/kuteshop/index.php/sports/tennis/skirts.html"><span>Skirts</span></a>
+                                                                                        </li>
+                                                                                        <li class="level2">
+                                                                                            <a href="http://alothemes.com/demo/kuteshop/index.php/sports/tennis/jackets.html"><span>Jackets</span></a>
+                                                                                        </li>
+                                                                                    </ul>
+                                                                                </li>
+                                                                                <li class="children level1">
+                                                                                    <a href="http://alothemes.com/demo/kuteshop/index.php/sports/football.html"><span>Football</span></a><ul class="level1">
+                                                                                        <li class="level2">
+                                                                                            <a href="http://alothemes.com/demo/kuteshop/index.php/sports/football/coats-jackets.html"><span>Coats &amp; Jackets</span></a>
+                                                                                        </li>
+                                                                                        <li class="level2">
+                                                                                            <a href="http://alothemes.com/demo/kuteshop/index.php/sports/football/blouses-shirts.html"><span>Blouses &amp; Shirts</span></a>
+                                                                                        </li>
+                                                                                        <li class="level2">
+                                                                                            <a href="http://alothemes.com/demo/kuteshop/index.php/sports/football/tops-tees.html"><span>Tops &amp; Tees</span></a>
+                                                                                        </li>
+                                                                                        <li class="level2">
+                                                                                            <a href="http://alothemes.com/demo/kuteshop/index.php/sports/football/intimates.html"><span>Intimates</span></a>
+                                                                                        </li>
+                                                                                    </ul>
+                                                                                </li>
+                                                                                <li class="children level1">
+                                                                                    <a href="http://alothemes.com/demo/kuteshop/index.php/sports/swimming.html"><span>Swimming</span></a><ul class="level1">
+                                                                                        <li class="level2">
+                                                                                            <a href="http://alothemes.com/demo/kuteshop/index.php/sports/swimming/accessories.html"><span>Accessories</span></a>
+                                                                                        </li>
+                                                                                        <li class="level2">
+                                                                                            <a href="http://alothemes.com/demo/kuteshop/index.php/sports/swimming/men-s-clothing.html"><span>Men's Clothing</span></a>
+                                                                                        </li>
+                                                                                        <li class="level2">
+                                                                                            <a href="http://alothemes.com/demo/kuteshop/index.php/sports/swimming/kid-s-clothing.html"><span>Kid's Clothing</span></a>
+                                                                                        </li>
+                                                                                        <li class="level2">
+                                                                                            <a href="http://alothemes.com/demo/kuteshop/index.php/sports/swimming/women-s-clothing.html"><span>Women's Clothing</span></a>
+                                                                                        </li>
+                                                                                    </ul>
+                                                                                </li>
+                                                                                <li class="children level1">
+                                                                                    <a href="http://alothemes.com/demo/kuteshop/index.php/sports/climbing.html"><span>Climbing</span></a><ul class="level1">
+                                                                                        <li class="level2">
+                                                                                            <a href="http://alothemes.com/demo/kuteshop/index.php/sports/climbing/dresses.html"><span>Dresses</span></a>
+                                                                                        </li>
+                                                                                        <li class="level2">
+                                                                                            <a href="http://alothemes.com/demo/kuteshop/index.php/sports/climbing/coats-jackets.html"><span>Coats &amp; Jackets</span></a>
+                                                                                        </li>
+                                                                                        <li class="level2">
+                                                                                            <a href="http://alothemes.com/demo/kuteshop/index.php/sports/climbing/blouses-shirts.html"><span>Blouses &amp; Shirts</span></a>
+                                                                                        </li>
+                                                                                    </ul>
+                                                                                </li>
+                                                                                <li class="children level1">
+                                                                                    <a href="http://alothemes.com/demo/kuteshop/index.php/sports/asian.html"><span>Asian</span></a><ul class="level1">
+                                                                                        <li class="level2">
+                                                                                            <a href="http://alothemes.com/demo/kuteshop/index.php/sports/asian/vietnamese-pho.html"><span>Vietnamese Pho</span></a>
+                                                                                        </li>
+                                                                                        <li class="level2">
+                                                                                            <a href="http://alothemes.com/demo/kuteshop/index.php/sports/asian/noodles.html"><span>Noodles</span></a>
+                                                                                        </li>
+                                                                                        <li class="level2">
+                                                                                            <a href="http://alothemes.com/demo/kuteshop/index.php/sports/asian/seafood.html"><span>Seafood</span></a>
+                                                                                        </li>
+                                                                                    </ul>
+                                                                                </li>
+                                                                                <li class="children level1">
+                                                                                    <a href="http://alothemes.com/demo/kuteshop/index.php/sports/sausages.html"><span>Sausages</span></a><ul class="level1">
+                                                                                        <li class="level2">
+                                                                                            <a href="http://alothemes.com/demo/kuteshop/index.php/sports/sausages/meat-dishes.html"><span>Meat Dishes</span></a>
+                                                                                        </li>
+                                                                                        <li class="level2">
+                                                                                            <a href="http://alothemes.com/demo/kuteshop/index.php/sports/sausages/desserts.html"><span>Desserts</span></a>
+                                                                                        </li>
+                                                                                        <li class="level2">
+                                                                                            <a href="http://alothemes.com/demo/kuteshop/index.php/sports/sausages/tops.html"><span>Tops</span></a>
+                                                                                        </li>
+                                                                                    </ul>
+                                                                                </li>
+                                                                                <li></li>
+                                                                            </ul><div class="mage-column mega-block-right" style="width: 25%;"><div class="banner-top-menu"><img class="img-responsive" src="images/banner-topmenu.jpg" alt=""></div></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                            <li class="level0 cat  hasChild dropdown">
+                                                                <a class="level-top" href="http://alothemes.com/demo/kuteshop/index.php/digital.html"><span>Digital</span><span class="boder-menu"></span></a><ul class="level0">
+                                                                    <li class="level1 hasChild">
+                                                                        <a href="http://alothemes.com/demo/kuteshop/index.php/digital/accessories.html"><span>Accessories</span></a>
+                                                                        <ul class="level1">
+                                                                            <li class="level2">
+                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/digital/accessories/mobile.html"><span>Mobile</span></a>
+                                                                            </li>
+                                                                            <li class="level2">
+                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/digital/accessories/tablets.html"><span>Tablets</span></a>
+                                                                            </li>
+                                                                            <li class="level2">
+                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/digital/accessories/memory-cards.html"><span>Memory Cards</span></a>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </li>
+                                                                    <li class="level1">
+                                                                        <a href="http://alothemes.com/demo/kuteshop/index.php/digital/swimming.html"><span>Swimming</span></a>
+                                                                    </li>
+                                                                    <li class="level1">
+                                                                        <a href="http://alothemes.com/demo/kuteshop/index.php/digital/computers-networking.html"><span>Computers &amp; Networking</span></a>
+                                                                    </li>
+                                                                    <li class="level1">
+                                                                        <a href="http://alothemes.com/demo/kuteshop/index.php/digital/flashlights-lamps.html"><span>Flashlights &amp; Lamps</span></a>
+                                                                    </li>
+                                                                </ul>
+                                                            </li>
+                                                            <li class="level0 cat  hasChild">
+                                                                <a class="level-top" href="http://alothemes.com/demo/kuteshop/index.php/furniture.html"><span>Furniture </span><span class="boder-menu"></span></a><div class="level-top-mega" style="left: 703px;">
+                                                                    <div class="content-mega">
+                                                                        <div class="content-mega-horizontal" style="width: 200px;">
+                                                                            <ul class="level0 mage-column cat-mega">
+                                                                                <li class="children level1">
+                                                                                    <a href="http://alothemes.com/demo/kuteshop/index.php/furniture/accessories.html"><span>Accessories</span></a><ul class="level1">
+                                                                                        <li class="level2">
+                                                                                            <a href="http://alothemes.com/demo/kuteshop/index.php/furniture/accessories/television.html"><span>Television</span></a>
+                                                                                        </li>
+                                                                                        <li class="level2">
+                                                                                            <a href="http://alothemes.com/demo/kuteshop/index.php/furniture/accessories/air-conditional.html"><span>Air Conditional</span></a>
+                                                                                        </li>
+                                                                                        <li class="level2">
+                                                                                            <a href="http://alothemes.com/demo/kuteshop/index.php/furniture/accessories/theater.html"><span>Theater</span></a>
+                                                                                        </li>
+                                                                                    </ul>
+                                                                                </li>
+                                                                                <li></li>
+                                                                            </ul>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                            <li class="level0 cat "><a class="level-top" href="http://alothemes.com/demo/kuteshop/index.php/television.html"><span>Television</span><span class="boder-menu"></span></a></li>
+                                                            <li class="level0 ext  first"><a class="level-top" href="http://alothemes.com/demo/kuteshop/index.php/blog/"><span>Blog</span></a></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="nav-mobile" style="display: none;">
+                                                        <h3 class="mobi-title">Categories</h3>
+                                                        <ul>
+                                                            <li class="level0">
+                                                                <a class="level-top" href="http://alothemes.com/demo/kuteshop/index.php/fashion.html"><span>Fashion</span><span class="boder-menu"></span></a><ul>
+                                                                    <li>
+                                                                        <a href="http://alothemes.com/demo/kuteshop/index.php/fashion/men-s.html"><span>Men's</span></a><ul class="level1">
+                                                                            <li class="level2 hasChild">
+                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/fashion/men-s/skirts.html"><span>Skirts</span></a>
+                                                                                <ul class="level2">
+                                                                                    <li class="level3">
+                                                                                        <a href="http://alothemes.com/demo/kuteshop/index.php/fashion/men-s/skirts/t-shirts.html"><span>T-Shirts</span></a>
+                                                                                    </li>
+                                                                                    <li class="level3">
+                                                                                        <a href="http://alothemes.com/demo/kuteshop/index.php/fashion/men-s/skirts/tops.html"><span>Tops</span></a>
+                                                                                    </li>
+                                                                                    <li class="level3">
+                                                                                        <a href="http://alothemes.com/demo/kuteshop/index.php/fashion/men-s/skirts/new-in.html"><span>New In</span></a>
+                                                                                    </li>
+                                                                                </ul>
+                                                                            </li>
+                                                                            <li class="level2">
+                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/fashion/men-s/jackets.html"><span>Jackets</span></a>
+                                                                            </li>
+                                                                            <li class="level2">
+                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/fashion/men-s/tops.html"><span>Tops</span></a>
+                                                                            </li>
+                                                                            <li class="level2">
+                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/fashion/men-s/scarves.html"><span>Scarves</span></a>
+                                                                            </li>
+                                                                            <li class="level2">
+                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/fashion/men-s/pants.html"><span>Pants</span></a>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="http://alothemes.com/demo/kuteshop/index.php/fashion/women-s.html"><span>Women's</span></a><ul class="level1">
+                                                                            <li class="level2">
+                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/fashion/women-s/skirts.html"><span>Skirts</span></a>
+                                                                            </li>
+                                                                            <li class="level2">
+                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/fashion/women-s/jackets.html"><span>Jackets</span></a>
+                                                                            </li>
+                                                                            <li class="level2">
+                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/fashion/women-s/tops.html"><span>Tops</span></a>
+                                                                            </li>
+                                                                            <li class="level2">
+                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/fashion/women-s/scarves.html"><span>Scarves</span></a>
+                                                                            </li>
+                                                                            <li class="level2">
+                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/fashion/women-s/pants.html"><span>Pants</span></a>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="http://alothemes.com/demo/kuteshop/index.php/fashion/kids.html"><span>Kids</span></a><ul class="level1">
+                                                                            <li class="level2">
+                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/fashion/kids/shoes.html"><span>Shoes</span></a>
+                                                                            </li>
+                                                                            <li class="level2">
+                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/fashion/kids/clothing.html"><span>Clothing</span></a>
+                                                                            </li>
+                                                                            <li class="level2">
+                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/fashion/kids/tops.html"><span>Tops</span></a>
+                                                                            </li>
+                                                                            <li class="level2">
+                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/fashion/kids/scarves.html"><span>Scarves</span></a>
+                                                                            </li>
+                                                                            <li class="level2">
+                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/fashion/kids/accessories.html"><span>Accessories</span></a>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="http://alothemes.com/demo/kuteshop/index.php/fashion/trending.html"><span>Trending</span></a><ul class="level1">
+                                                                            <li class="level2">
+                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/fashion/trending/men-s-clothing.html"><span>Men's Clothing</span></a>
+                                                                            </li>
+                                                                            <li class="level2">
+                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/fashion/trending/kid-s-clothing.html"><span>Kid's Clothing</span></a>
+                                                                            </li>
+                                                                            <li class="level2">
+                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/fashion/trending/women-s-clothing.html"><span>Women's Clothing</span></a>
+                                                                            </li>
+                                                                            <li class="level2">
+                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/fashion/trending/accessories.html"><span>Accessories</span></a>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </li>
+                                                                </ul>
+                                                            </li>
+                                                            <li class="level0">
+                                                                <a class="level-top" href="http://alothemes.com/demo/kuteshop/index.php/sports.html"><span>Sports<span class="cat_label New">New</span></span><span class="boder-menu"></span></a><ul>
+                                                                    <li>
+                                                                        <a href="http://alothemes.com/demo/kuteshop/index.php/sports/tennis.html"><span>Tennis</span></a><ul class="level1">
+                                                                            <li class="level2">
+                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/sports/tennis/scarves.html"><span>Scarves</span></a>
+                                                                            </li>
+                                                                            <li class="level2">
+                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/sports/tennis/pants.html"><span>Pants</span></a>
+                                                                            </li>
+                                                                            <li class="level2">
+                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/sports/tennis/skirts.html"><span>Skirts</span></a>
+                                                                            </li>
+                                                                            <li class="level2">
+                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/sports/tennis/jackets.html"><span>Jackets</span></a>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="http://alothemes.com/demo/kuteshop/index.php/sports/football.html"><span>Football</span></a><ul class="level1">
+                                                                            <li class="level2">
+                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/sports/football/coats-jackets.html"><span>Coats &amp; Jackets</span></a>
+                                                                            </li>
+                                                                            <li class="level2">
+                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/sports/football/blouses-shirts.html"><span>Blouses &amp; Shirts</span></a>
+                                                                            </li>
+                                                                            <li class="level2">
+                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/sports/football/tops-tees.html"><span>Tops &amp; Tees</span></a>
+                                                                            </li>
+                                                                            <li class="level2">
+                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/sports/football/intimates.html"><span>Intimates</span></a>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="http://alothemes.com/demo/kuteshop/index.php/sports/swimming.html"><span>Swimming</span></a><ul class="level1">
+                                                                            <li class="level2">
+                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/sports/swimming/accessories.html"><span>Accessories</span></a>
+                                                                            </li>
+                                                                            <li class="level2">
+                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/sports/swimming/men-s-clothing.html"><span>Men's Clothing</span></a>
+                                                                            </li>
+                                                                            <li class="level2">
+                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/sports/swimming/kid-s-clothing.html"><span>Kid's Clothing</span></a>
+                                                                            </li>
+                                                                            <li class="level2">
+                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/sports/swimming/women-s-clothing.html"><span>Women's Clothing</span></a>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="http://alothemes.com/demo/kuteshop/index.php/sports/climbing.html"><span>Climbing</span></a><ul class="level1">
+                                                                            <li class="level2">
+                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/sports/climbing/dresses.html"><span>Dresses</span></a>
+                                                                            </li>
+                                                                            <li class="level2">
+                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/sports/climbing/coats-jackets.html"><span>Coats &amp; Jackets</span></a>
+                                                                            </li>
+                                                                            <li class="level2">
+                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/sports/climbing/blouses-shirts.html"><span>Blouses &amp; Shirts</span></a>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="http://alothemes.com/demo/kuteshop/index.php/sports/asian.html"><span>Asian</span></a><ul class="level1">
+                                                                            <li class="level2">
+                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/sports/asian/vietnamese-pho.html"><span>Vietnamese Pho</span></a>
+                                                                            </li>
+                                                                            <li class="level2">
+                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/sports/asian/noodles.html"><span>Noodles</span></a>
+                                                                            </li>
+                                                                            <li class="level2">
+                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/sports/asian/seafood.html"><span>Seafood</span></a>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="http://alothemes.com/demo/kuteshop/index.php/sports/sausages.html"><span>Sausages</span></a><ul class="level1">
+                                                                            <li class="level2">
+                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/sports/sausages/meat-dishes.html"><span>Meat Dishes</span></a>
+                                                                            </li>
+                                                                            <li class="level2">
+                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/sports/sausages/desserts.html"><span>Desserts</span></a>
+                                                                            </li>
+                                                                            <li class="level2">
+                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/sports/sausages/tops.html"><span>Tops</span></a>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </li>
+                                                                </ul>
+                                                            </li>
+                                                            <li class="level0">
+                                                                <a class="level-top" href="http://alothemes.com/demo/kuteshop/index.php/electronics.html"><img class="img-responsive" alt="Electronics" src="images/12_1.png"><span>Electronics</span><span class="boder-menu"></span></a><ul class="level0">
+                                                                    <li class="level1">
+                                                                        <a href="http://alothemes.com/demo/kuteshop/index.php/electronics/television.html"><span>Television</span></a>
+                                                                    </li>
+                                                                    <li class="level1">
+                                                                        <a href="http://alothemes.com/demo/kuteshop/index.php/electronics/air-conditional.html"><span>Air Conditional</span></a>
+                                                                    </li>
+                                                                    <li class="level1">
+                                                                        <a href="http://alothemes.com/demo/kuteshop/index.php/electronics/arm.html"><span>ARM</span></a>
+                                                                    </li>
+                                                                    <li class="level1">
+                                                                        <a href="http://alothemes.com/demo/kuteshop/index.php/electronics/theater.html"><span>Theater</span></a>
+                                                                    </li>
+                                                                    <li class="level1 hasChild">
+                                                                        <a href="http://alothemes.com/demo/kuteshop/index.php/electronics/chicken.html"><span>Chicken</span></a>
+                                                                        <ul class="level1">
+                                                                            <li class="level2">
+                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/electronics/chicken/italian-pizza.html"><span>Italian Pizza</span></a>
+                                                                            </li>
+                                                                            <li class="level2">
+                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/electronics/chicken/french-cakes.html"><span>French Cakes</span></a>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </li>
+                                                                    <li class="level1 hasChild">
+                                                                        <a href="http://alothemes.com/demo/kuteshop/index.php/electronics/sandwich.html"><span>Sandwich</span></a>
+                                                                        <ul class="level1">
+                                                                            <li class="level2">
+                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/electronics/sandwich/salad.html"><span>Salad</span></a>
+                                                                            </li>
+                                                                            <li class="level2">
+                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/electronics/sandwich/paste.html"><span>Paste</span></a>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </li>
+                                                                </ul>
+                                                            </li>
+                                                            <li class="level0">
+                                                                <a class="level-top" href="http://alothemes.com/demo/kuteshop/index.php/digital.html"><span>Digital</span><span class="boder-menu"></span></a><ul class="level0">
+                                                                    <li class="level1 hasChild">
+                                                                        <a href="http://alothemes.com/demo/kuteshop/index.php/digital/accessories.html"><span>Accessories</span></a>
+                                                                        <ul class="level1">
+                                                                            <li class="level2">
+                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/digital/accessories/mobile.html"><span>Mobile</span></a>
+                                                                            </li>
+                                                                            <li class="level2">
+                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/digital/accessories/tablets.html"><span>Tablets</span></a>
+                                                                            </li>
+                                                                            <li class="level2">
+                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/digital/accessories/memory-cards.html"><span>Memory Cards</span></a>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </li>
+                                                                    <li class="level1">
+                                                                        <a href="http://alothemes.com/demo/kuteshop/index.php/digital/swimming.html"><span>Swimming</span></a>
+                                                                    </li>
+                                                                    <li class="level1">
+                                                                        <a href="http://alothemes.com/demo/kuteshop/index.php/digital/computers-networking.html"><span>Computers &amp; Networking</span></a>
+                                                                    </li>
+                                                                    <li class="level1">
+                                                                        <a href="http://alothemes.com/demo/kuteshop/index.php/digital/flashlights-lamps.html"><span>Flashlights &amp; Lamps</span></a>
+                                                                    </li>
+                                                                </ul>
+                                                            </li>
+                                                            <li class="level0">
+                                                                <a class="level-top" href="http://alothemes.com/demo/kuteshop/index.php/furniture.html"><span>Furniture </span><span class="boder-menu"></span></a><ul>
+                                                                    <li>
+                                                                        <a href="http://alothemes.com/demo/kuteshop/index.php/furniture/accessories.html"><span>Accessories</span></a><ul class="level1">
+                                                                            <li class="level2">
+                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/furniture/accessories/television.html"><span>Television</span></a>
+                                                                            </li>
+                                                                            <li class="level2">
+                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/furniture/accessories/air-conditional.html"><span>Air Conditional</span></a>
+                                                                            </li>
+                                                                            <li class="level2">
+                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/furniture/accessories/theater.html"><span>Theater</span></a>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </li>
+                                                                </ul>
+                                                            </li>
+                                                            <li class="level0">
+                                                                <a class="level-top" href="http://alothemes.com/demo/kuteshop/index.php/jewelry.html"><span>Jewelry</span><span class="boder-menu"></span></a><ul>
+                                                                    <li>
+                                                                        <a href="http://alothemes.com/demo/kuteshop/index.php/jewelry/accessories.html"><span>Accessories</span></a><ul class="level1">
+                                                                            <li class="level2">
+                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/jewelry/accessories/sweaters.html"><span>Sweaters</span></a>
+                                                                            </li>
+                                                                            <li class="level2">
+                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/jewelry/accessories/heels-sandals.html"><span>Heels &amp; Sandals</span></a>
+                                                                            </li>
+                                                                            <li class="level2">
+                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/jewelry/accessories/jeans-shorts.html"><span>Jeans &amp; Shorts</span></a>
+                                                                            </li>
+                                                                            <li class="level2">
+                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/jewelry/accessories/boats.html"><span>Boats</span></a>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </li>
+                                                                </ul>
+                                                            </li>
+                                                            <li class="level0"><a class="level-top" href="http://alothemes.com/demo/kuteshop/index.php/smartphone-tablets.html"><img class="img-responsive" alt="Smartphone &amp; Tablets" src="images/14.png"><span>Smartphone &amp; Tablets</span><span class="boder-menu"></span></a></li>
+                                                            <li class="level0">
+                                                                <a class="level-top" href="http://alothemes.com/demo/kuteshop/index.php/sports-outdoors.html"><img class="img-responsive" alt="Sports &amp; Outdoors" src="images/13.png"><span>Sports &amp; Outdoors</span><span class="boder-menu"></span></a><ul>
+                                                                    <li>
+                                                                        <a href="http://alothemes.com/demo/kuteshop/index.php/sports-outdoors/tennis.html"><span>Tennis</span></a><ul class="level1">
+                                                                            <li class="level2">
+                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/sports-outdoors/tennis/tennis.html"><span>Tennis</span></a>
+                                                                            </li>
+                                                                            <li class="level2">
+                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/sports-outdoors/tennis/coats-jackets.html"><span>Coats &amp; Jackets</span></a>
+                                                                            </li>
+                                                                            <li class="level2">
+                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/sports-outdoors/tennis/blouses-shirts.html"><span>Blouses &amp; Shirts</span></a>
+                                                                            </li>
+                                                                            <li class="level2">
+                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/sports-outdoors/tennis/tops-tees.html"><span>Tops &amp; Tees</span></a>
+                                                                            </li>
+                                                                            <li class="level2">
+                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/sports-outdoors/tennis/hoodies-sweatshirts.html"><span>Hoodies &amp; Sweatshirts</span></a>
+                                                                            </li>
+                                                                            <li class="level2">
+                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/sports-outdoors/tennis/intimates.html"><span>Intimates</span></a>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="http://alothemes.com/demo/kuteshop/index.php/sports-outdoors/swimming.html"><span>Swimming</span></a><ul class="level1">
+                                                                            <li class="level2">
+                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/sports-outdoors/swimming/dresses.html"><span>Dresses</span></a>
+                                                                            </li>
+                                                                            <li class="level2">
+                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/sports-outdoors/swimming/coats-jackets.html"><span>Coats &amp; Jackets</span></a>
+                                                                            </li>
+                                                                            <li class="level2">
+                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/sports-outdoors/swimming/blouses-shirts.html"><span>Blouses &amp; Shirts</span></a>
+                                                                            </li>
+                                                                            <li class="level2">
+                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/sports-outdoors/swimming/tops-tees.html"><span>Tops &amp; Tees</span></a>
+                                                                            </li>
+                                                                            <li class="level2">
+                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/sports-outdoors/swimming/hoodies-sweatshirts.html"><span>Hoodies &amp; Sweatshirts</span></a>
+                                                                            </li>
+                                                                            <li class="level2">
+                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/sports-outdoors/swimming/intimates.html"><span>Intimates</span></a>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="http://alothemes.com/demo/kuteshop/index.php/sports-outdoors/shoes.html"><span>Shoes</span></a><ul class="level1">
+                                                                            <li class="level2">
+                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/sports-outdoors/shoes/dresses.html"><span>Dresses</span></a>
+                                                                            </li>
+                                                                            <li class="level2">
+                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/sports-outdoors/shoes/coats-jackets.html"><span>Coats &amp; Jackets</span></a>
+                                                                            </li>
+                                                                            <li class="level2">
+                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/sports-outdoors/shoes/blouses-shirts.html"><span>Blouses &amp; Shirts</span></a>
+                                                                            </li>
+                                                                            <li class="level2">
+                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/sports-outdoors/shoes/tops-tees.html"><span>Tops &amp; Tees</span></a>
+                                                                            </li>
+                                                                            <li class="level2">
+                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/sports-outdoors/shoes/hoodies-sweatshirts.html"><span>Hoodies &amp; Sweatshirts</span></a>
+                                                                            </li>
+                                                                            <li class="level2">
+                                                                                <a href="http://alothemes.com/demo/kuteshop/index.php/sports-outdoors/shoes/intimates.html"><span>Intimates</span></a>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </li>
+                                                                </ul>
+                                                            </li>
+                                                            <li class="level0"><a class="level-top" href="http://alothemes.com/demo/kuteshop/index.php/health-beauty-bags.html"><img class="img-responsive" alt="Health &amp; Beauty Bags" src="images/15.png"><span>Health &amp; Beauty Bags</span><span class="boder-menu"></span></a></li>
+                                                            <li class="level0"><a class="level-top" href="http://alothemes.com/demo/kuteshop/index.php/shoes-accessories.html"><img class="img-responsive" alt="Shoes &amp; Accessories" src="images/16.png"><span>Shoes &amp; Accessories</span><span class="boder-menu"></span></a></li>
+                                                            <li class="level0"><a class="level-top" href="http://alothemes.com/demo/kuteshop/index.php/toys-hobbies.html"><img class="img-responsive" alt="Toys &amp; Hobbies" src="images/17.png"><span>Toys &amp; Hobbies</span><span class="boder-menu"></span></a></li>
+                                                            <li class="level0"><a class="level-top" href="http://alothemes.com/demo/kuteshop/index.php/computers-networking.html"><img class="img-responsive" alt="Computers &amp; Networking" src="images/18.png"><span>Computers &amp; Networking</span><span class="boder-menu"></span></a></li>
+                                                            <li class="level0"><a class="level-top" href="http://alothemes.com/demo/kuteshop/index.php/laptops-accessories.html"><img class="img-responsive" alt="Laptops &amp; Accessories" src="images/19.png"><span>Laptops &amp; Accessories</span><span class="boder-menu"></span></a></li>
+                                                            <li class="level0"><a class="level-top" href="http://alothemes.com/demo/kuteshop/index.php/jewelry-watches.html"><img class="img-responsive" alt="Jewelry &amp; Watches" src="images/20.png"><span>Jewelry &amp; Watches</span><span class="boder-menu"></span></a></li>
+                                                            <li class="level0"><a class="level-top" href="http://alothemes.com/demo/kuteshop/index.php/flashlights-lamps.html"><img class="img-responsive" alt="Flashlights &amp; Lamps" src="images/21.png"><span>Flashlights &amp; Lamps</span><span class="boder-menu"></span></a></li>
+                                                            <li class="level0"><a class="level-top" href="http://alothemes.com/demo/kuteshop/index.php/television.html"><span>Television</span><span class="boder-menu"></span></a></li>
+                                                            <li class="level0"><a class="level-top" href="http://alothemes.com/demo/kuteshop/index.php/cameras-photo.html"><img class="img-responsive" alt="Cameras &amp; Photo" src="images/22.png"><span>Cameras &amp; Photo</span><span class="boder-menu"></span></a></li>
+                                                            <li class="level0"><a class="level-top" href="http://alothemes.com/demo/kuteshop/index.php/computers-networking-9.html"><img class="img-responsive" alt="Computers &amp; Networking" src="images/18_1.png"><span>Computers &amp; Networking</span><span class="boder-menu"></span></a></li>
+                                                            <li class="level0"><a class="level-top" href="http://alothemes.com/demo/kuteshop/index.php/toys-hobbies-9.html"><img class="img-responsive" alt="Toys &amp; Hobbies" src="images/17_1.png"><span>Toys &amp; Hobbies</span><span class="boder-menu"></span></a></li>
+                                                            <li class="level0"><a class="level-top" href="http://alothemes.com/demo/kuteshop/index.php/jewelry-watches-9.html"><img class="img-responsive" alt="Jewelry &amp; Watches" src="images/20_1.png"><span>Jewelry &amp; Watches</span><span class="boder-menu"></span></a></li>
+                                                            <li class="level0"><a class="level-top" href="http://alothemes.com/demo/kuteshop/index.php/sale-off.html"><span>Sale Off</span><span class="boder-menu"></span></a><ul><li><a href="http://alothemes.com/demo/kuteshop/index.php/sale-off/up-to-40-off.html"><span>Up To 40% Off</span></a></li><li><a href="http://alothemes.com/demo/kuteshop/index.php/sale-off/up-to-50-off.html"><span>Up To 50% Off</span></a></li><li><a href="http://alothemes.com/demo/kuteshop/index.php/sale-off/up-to-60-off.html"><span>Up To 60% Off</span></a></li><li><a href="http://alothemes.com/demo/kuteshop/index.php/sale-off/up-to-70-off.html"><span>Up To 70% Off</span></a></li><li><a href="http://alothemes.com/demo/kuteshop/index.php/sale-off/up-to-80-off.html"><span>Up To 80% Off</span></a></li></ul></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="header-setting header-setting-icon">
+                                        <div class="settting-switcher">
+                                            <div class="dropdown-toggle">
+                                                <div class="text-setting">Links</div>
+                                            </div>
+                                            <div class="dropdown-switcher">
+                                                <div class="top-links-alo">
+                                                    <div class="header-top-link">
+                                                        <ul class="links">
+                                                            <li class="first"><a href="http://alothemes.com/demo/kuteshop/index.php/customer/account/" title="My Account">My Account</a></li>
+                                                            <li><a href="http://alothemes.com/demo/kuteshop/index.php/wishlist/" title="My Wishlist">My Wishlist</a></li>
+                                                            <li><a href="http://alothemes.com/demo/kuteshop/index.php/checkout/" title="Checkout" class="top-link-checkout">Checkout</a></li>
+                                                            <li><a href="http://alothemes.com/demo/kuteshop/index.php/testimonial/" title="Testimonial">Testimonial</a></li>
+                                                            <li class=" last"><a href="http://alothemes.com/demo/kuteshop/index.php/customer/account/login/" title="Log In">Log In</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- CART ICON ON MMENU -->
+                                    <div class="shopping-cart-box-ontop">
+                                        <div class="miniCartWrap shopping-cart-box-ontop-content">
+                                            <div class="mini-maincart">
+                                                <div class="cartSummary">
+                                                    <div class="crat-icon">
+                                                        <span class="zero">0 </span>
+                                                        <p class="mt-cart-title">Shopping cart</p>
+                                                    </div>
+                                                    <div class="cart-header">
+                                                        <p class="cart-tolatl">
+                                                            <!--<span class="toltal"></span>-->
+                                                            <span class="zero">0 items - </span>
+                                                            <span><span class="price">$0.00</span></span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="mini-contentCart" style="display: none;">
+                                                    <div class="block-content">
+                                                        <p class="empty">You have no items in your shopping cart.</p>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="main-container col1-layout content-color color">
+            <div class="breadcrumbs">
+                <div class="container">
+                    <ul>
+                        <li class="home" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                            <a href="http://alothemes.com/home" title="Home" itemprop="url"><span itemprop="title">Home</span></a>
+
+                        </li>
+                        <li class="Contacts">
+                            <strong>Contact Us</strong>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="main">
+                    <div class="row">
+                        <div class="col-main col-lg-12">
+                            <div id="messages_product_view"></div>
+                            <div class="page-title">
+                                <h1>Contact Us</h1>
+                            </div>
+                            <form action="http://alothemes.com/demo/kuteshop/index.php/contacts/index/post/" id="contactForm" method="post">
+                                <div class="contact-content row">
+                                    <div class="col-xs-12 col-sm-6 col-md-6">
+                                        <h3 class="page-subheading">Contact From</h3>
+                                        <ul class="form-list">
+                                            <li>
+                                                <label for="name" class="required"><em>*</em>Name</label>
+                                                <div class="input-box">
+                                                    <input name="name" id="name" title="Name" value="" class="input-text required-entry" type="text">
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <label for="email" class="required"><em>*</em>Email</label>
+                                                <div class="input-box">
+                                                    <input name="email" id="email" title="Email" value="" class="input-text required-entry validate-email" type="text">
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <label for="telephone">Telephone</label>
+                                                <div class="input-box">
+                                                    <input name="telephone" id="telephone" title="Telephone" value="" class="input-text" type="text">
+                                                </div>
+                                            </li>
+                                            <li class="wide">
+                                                <label for="comment" class="required"><em>*</em>Comment</label>
+                                                <div class="input-box">
+                                                    <textarea name="comment" id="comment" title="Comment" class="required-entry input-text" cols="5" rows="3"></textarea>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 col-md-6">
+                                        <div class="map-conttact">
+                                            <h3 class="page-subheading">Information</h3>
+                                            <p>Lorem ipsum dolor sit amet onsectetuer adipiscing elit. Mauris fermentum dictum magna. Sed laoreet aliquam leo. Ut tellus dolor dapibus eget. Mauris tincidunt aliquam lectus sed vestibulum. Vestibulum bibendum suscipit mattis.</p>
+                                            <br>
+                                            <ul>
+                                                <li>Praesent nec tincidunt turpis.</li>
+                                                <li>Aliquam et nisi risus.&nbsp;Cras ut varius ante.</li>
+                                                <li>Ut congue gravida dolor, vitae viverra dolor.</li>
+                                            </ul>
+                                            <br>
+                                            <ul class="store_info">
+                                                <li><i class="fa fa-home"></i>Our business address is 1063 Freelon Street San Francisco, CA 95108</li>
+                                                <li><i class="fa fa-phone"></i><span>+ 021.343.7575</span></li>
+                                                <li><i class="fa fa-phone"></i><span>+ 020.566.6666</span></li>
+                                                <li><i class="fa fa-envelope"></i>Email: <span><a href="mailto:suport@alothemes.com">suport@alothemes.com</a></span></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="buttons-set buttons-set-contact col-md-12">
+                                        <p class="required">* Required Fields</p>
+                                        <input type="text" name="hideit" id="hideit" value="" style="display:none !important;">
+                                        <button type="submit" title="Submit" class="button"><span><span>Submit</span></span></button>
+                                    </div>
+                                </div>
+
+                            </form>
+                            <script type="text/javascript">
+                                //<![CDATA[
+                                var contactForm = new VarienForm('contactForm', true);
+                                //]]>
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+        <div class="footer-container footer-color color">
+            <div class="block-footer-top">
+                <div class="container">
+                    <div class="main">
+                        <div class="footer">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3  col-xs-12">
+                                    <div class="collapsible mobile-collapsible">
+                                        <div class="block1 block-content-statick">
+                                            <a class="introduce-logo" href="http://alothemes.com/demo/kuteshop/index.php/contacts/#"> <img class="img-responsive logo1" alt="" src="images/introduce-logo.png"> <img class="img-responsive logo2" alt="" src="images/logo2.png"> <img class="img-responsive logo5" alt="" src="images/logo5.png"><img class="img-responsive logo6" alt="" src="images/logo6.png"></a>
+                                            <ul class="address-list">
+                                                <li class="feature-icon first">
+                                                    <p class="no-margin"><span class="tit-name">Address:</span><span class="tit-contain">Example Street 68, Mahattan, New York, USA.</span></p>
+                                                </li>
+                                                <li class="feature-icon">
+                                                    <p><span class="tit-name">Phone:</span><span class="tit-contain">+84 912. 345. 678</span></p>
+                                                </li>
+                                                <li class="feature-icon">
+                                                    <p><span class="tit-name">Email:</span><span class="tit-contain">suport@alothemes.com</span></p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-xs-12">
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                            <div class="collapsible mobile-collapsible">
+                                                <h3 class="block-title heading">Company</h3>
+                                                <span class="toggle-tab mobile" style="display: none;"><span class="hidden">facebook</span></span>
+                                                <div class="block-content block-content-statick toggle-content">
+                                                    <ul class="bullet">
+                                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Help</a></li>
+                                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Gift Cards</a></li>
+                                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Order Status</a></li>
+                                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Returns &amp; Exchanges</a></li>
+                                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">International</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                            <div class="collapsible mobile-collapsible">
+                                                <h3 class="block-title heading">My Account</h3>
+                                                <span class="toggle-tab mobile" style="display: none;"><span class="hidden">facebook</span></span>
+                                                <div class="block-content block-content-statick toggle-content">
+                                                    <ul class="bullet">
+                                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/about-magento-demo-store/">About Us</a></li>
+                                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Jobs</a></li>
+                                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Affiliates</a></li>
+                                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Meet The Maker</a></li>
+                                                        <li><a href="images/Contact.html">Contact</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                            <div class="collapsible mobile-collapsible">
+                                                <h3 class="block-title heading">Support</h3>
+                                                <span class="toggle-tab mobile" style="display: none;"><span class="hidden">facebook</span></span>
+                                                <div class="block-content block-content-statick toggle-content">
+                                                    <ul class="bullet">
+                                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Security</a></li>
+                                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Privacy</a></li>
+                                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Text Messaging</a></li>
+                                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Legal</a></li>
+                                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Supply chain</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3  col-xs-12">
+                                    <div class="collapsible mobile-collapsible">
+                                        <h3 class="block-title heading">Newsletter</h3>
+                                        <span class="toggle-tab mobile" style="display: none;"><span class="hidden">facebook</span></span>
+                                        <div class="block1 block-content-statick toggle-content">
+                                            <div class="block-newletter">
+                                                <div class="block block-subscribe">
+                                                    <div class="block-title">
+                                                        <strong><span>Newsletter</span></strong>
+                                                    </div>
+                                                    <form action="http://alothemes.com/demo/kuteshop/index.php/newsletter/subscriber/new/" method="post" id="newsletter-validate-detail">
+                                                        <div class="block-content">
+                                                            <div class="form-subscribe-header">
+                                                                <p>newsletter!</p>
+                                                            </div>
+                                                            <div class="input-box">
+                                                                <input type="text" name="email" id="newsletter" title="Sign up for our newsletter" class="input-text required-entry validate-email" placeholder="Your email adress ...">
+                                                                <div class="actions">
+                                                                    <button type="submit" title="ok" class="button">
+                                                                        <span><span>ok</span></span>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                    <script type="text/javascript">
+                                                        //<![CDATA[
+                                                        var newsletterSubscriberFormDetail = new VarienForm('newsletter-validate-detail');
+                                                        //]]>
+                                                    </script>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="collapsible mobile-collapsible">
+                                        <h3 class="block-title heading introduce-title">Let's Socialize</h3>
+                                        <span class="toggle-tab mobile" style="display: none;"><span class="hidden">facebook</span></span>
+                                        <ul class="list-inline toggle-content">
+                                            <li><a class="social-link facebook" href="http://alothemes.com/demo/kuteshop/index.php/contacts/#"><i class="fa fa-facebook"><span class="hidden">facebook</span></i></a></li>
+                                            <li><a class="social-link pinterest-p" href="http://alothemes.com/demo/kuteshop/index.php/contacts/#"><i class="fa fa-pinterest-p"><span class="hidden">pinterest</span></i></a></li>
+                                            <li><a class="social-link vk" href="http://alothemes.com/demo/kuteshop/index.php/contacts/#"><i class="fa fa-vk"><span class="hidden">fa-vk</span></i></a></li>
+                                            <li><a class="social-link twitter" href="http://alothemes.com/demo/kuteshop/index.php/contacts/#"><i class="fa fa-twitter"><span class="hidden">twitter</span></i></a></li>
+                                            <li><a class="social-link google-plus" href="http://alothemes.com/demo/kuteshop/index.php/contacts/#"><i class="fa fa-google-plus"><span class="hidden">google-plus</span></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="block-footer-bottom">
+                <div class="container">
+                    <div class="main">
+                        <div class="footer">
+                            <div class="row trademark-box">
+                                <div class="col-sm-12">
+                                    <ul class="trademark-list-top">
+                                        <li id="payment-methods">Accepted Payment Methods</li>
+                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#"><img class="img-responsive" alt="ups" src="images/trademark-ups.jpg"></a></li>
+                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#"><img class="img-responsive" alt="ups" src="images/trademark-qiwi.jpg"></a></li>
+                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#"><img class="img-responsive" alt="ups" src="images/trademark-wu.jpg"></a></li>
+                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#"><img class="img-responsive" alt="ups" src="images/trademark-cn.jpg"> </a></li>
+                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#"><img class="img-responsive" alt="ups" src="images/trademark-visa.jpg"></a></li>
+                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#"><img class="img-responsive" alt="ups" src="images/trademark-mc.jpg"></a></li>
+                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#"><img class="img-responsive" alt="ups" src="images/trademark-ems.jpg"></a></li>
+                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#"><img class="img-responsive" alt="ups" src="images/trademark-dhl.jpg"></a></li>
+                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#"><img class="img-responsive" alt="ups" src="images/trademark-fe.jpg"></a></li>
+                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#"><img class="img-responsive" alt="ups" src="images/trademark-wm.jpg"></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="row trademark-text-box">
+                                <div class="col-sm-12">
+                                    <ul class="trademark-search-list trademark-list">
+                                        <li class="trademark-text-tit">HOT SEARCHED KEYWORDS:</li>
+                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Xiaomio Mi3</a></li>
+                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Digiflipo Pro XT 712 Tablet</a></li>
+                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Mi 3 Phones</a></li>
+                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Iphoneo 6 Plus</a></li>
+                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Women's Messenger Bags</a></li>
+                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Wallets</a></li>
+                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Women's Clutches</a></li>
+                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Backpacks Totes</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-sm-12">
+                                    <ul class="trademark-tv-list trademark-list">
+                                        <li class="trademark-text-tit">TVS:</li>
+                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Sonyo TV</a></li>
+                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Samsing TV</a></li>
+                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">LGG TV</a></li>
+                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Onidai TV</a></li>
+                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Toshibao TV</a></li>
+                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Philipsi TV</a></li>
+                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Micromaxo TV</a></li>
+                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">LED TV</a></li>
+                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">LCD TV</a></li>
+                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Plasma TV</a></li>
+                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">3D TV</a></li>
+                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Smart TV</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-sm-12">
+                                    <ul class="trademark-mobile-list trademark-list">
+                                        <li class="trademark-text-tit">MOBILES:</li>
+                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Moto E</a></li>
+                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Samsing Mobile</a></li>
+                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Micromaxi Mobile</a></li>
+                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Nokian Mobile</a></li>
+                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">HTCi Mobile</a></li>
+                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Sonyo Mobile</a></li>
+                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Appleo Mobile</a></li>
+                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">LGG Mobile</a></li>
+                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Karbonni Mobile</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-sm-12">
+                                    <ul class="trademark-laptop-list trademark-list">
+                                        <li class="trademark-text-tit">LAPTOPS::</li>
+                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Appleo Laptop</a></li>
+                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Acer Laptop</a></li>
+                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Samsing Laptop</a></li>
+                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Lenov Laptop</a></li>
+                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Sonyo Laptop</a></li>
+                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Delli Laptop</a></li>
+                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Asuso Laptop</a></li>
+                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Toshibao Laptop</a></li>
+                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">LGG Laptop</a></li>
+                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">HPo Laptop</a></li>
+                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Notebook</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-sm-12">
+                                    <ul class="trademark-watches-list trademark-list">
+                                        <li class="trademark-text-tit">WATCHES:</li>
+                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">FCUKo Watches</a></li>
+                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Titan Watches</a></li>
+                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Casioo Watches</a></li>
+                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Fastrack Watches</a></li>
+                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Timexi Watches</a></li>
+                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Fossili Watches</a></li>
+                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Dieselo Watches</a></li>
+                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Toshibao Laptop</a></li>
+                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Luxury Watches</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-sm-12">
+                                    <ul class="trademark-shoes-lis trademark-list">
+                                        <li class="trademark-text-tit">FOOTWEAR:</li>
+                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Shoes</a></li>
+                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Casual Shoes</a></li>
+                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Sports Shoes</a></li>
+                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Adidasi Shoes</a></li>
+                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Gas Shoes</a></li>
+                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Pumai Shoes</a></li>
+                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Reeboki Shoes</a></li>
+                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Woodlandi Shoes</a></li>
+                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Red tape Shoes</a></li>
+                                        <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Nikeo Shoes</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="block-footer-copyright">
+                <div class="container">
+                    <div class="footer">
+                        <div class="main">
+                            <div class="row">
+                                <div class="footer-menu-box">
+                                    <div class="col-sm-12">
+                                        <ul class="footer-menu-list">
+                                            <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Company Info - Partnerships</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <ul class="footer-menu-list">
+                                            <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Online Shopping</a></li>
+                                            <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Promotions</a></li>
+                                            <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">My Orders</a></li>
+                                            <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Help</a></li>
+                                            <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Site Map</a></li>
+                                            <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Customer Service</a></li>
+                                            <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Support</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <ul class="footer-menu-list">
+                                            <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Most Populars</a></li>
+                                            <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Best Sellers</a></li>
+                                            <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">New Arrivals</a></li>
+                                            <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Special Products</a></li>
+                                            <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Manufacturers</a></li>
+                                            <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Our Stores</a></li>
+                                            <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Shipping</a></li>
+                                            <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Payments</a></li>
+                                            <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Warantee</a></li>
+                                            <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Refunds</a></li>
+                                            <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Checkout</a></li>
+                                            <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Discount</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <ul class="footer-menu-list">
+                                            <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Terms &amp; Conditions</a></li>
+                                            <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Policy</a></li>
+                                            <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Shipping</a></li>
+                                            <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Payments</a></li>
+                                            <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Returns</a></li>
+                                            <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Refunds</a></li>
+                                            <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Warrantee</a></li>
+                                            <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">FAQ</a></li>
+                                            <li><a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#">Contact</a></li>
+                                        </ul>
+                                    </div>
+                                </div>                         <address>Copyright © 2015  KuteShop by <a class="active" href="http://alothemes.com/" title="Alothemes">Alothemes.com.</a> All rights reserved.</address>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a href="http://alothemes.com/demo/kuteshop/index.php/contacts/#" id="backtotop" style="display: none;"><span class="fa fa-angle-up"></span><span class="back-to-top">Back to Top</span></a>
+        </div>
+
+    </div>
+</div>
+
+<a id="magicshop_quickview_handler" href="http://alothemes.com/demo/kuteshop/index.php/contacts/#" style="visibility:hidden;position:absolute;top:0;left:0"></a><div id="popupAjaxcart" style="display: none"><div id="toPopup" style="top: 0px; position: absolute;"></div><div class="loading"></div><div class="overlay"></div><div></div></div>
+

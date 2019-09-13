@@ -1,0 +1,233 @@
+﻿@using BuyGroup365.Models.Member
+@using Common
+@using Common.util
+@model IPagedList<global::Common.Product>
+
+@{
+    ViewBag.Title = "Danh sách sản phẩm đăng bán";
+    Layout = "~/Views/Shared/_LayoutMember.cshtml";
+}
+@{
+    var objlist = (List<Product>)ViewBag.Number;
+}
+<div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 ">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+
+                <ol class="breadcrumb">
+                    <li><span class="glyphicon glyphicon-home"></span><a href="/"> Trang chủ</a></li>
+                    <li>
+                        <a href="/Member/Profile">
+                            @SessionUtility.GetSessionMember(Session).UserName
+                        </a>
+                    </li>
+                    <li class="active">Tài khoản</li>
+                </ol>
+            </h4>
+        </div>
+        <div id="collapseOne0" class="panel-collapse collapse in" style="height: auto;">
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <div id="dataTables-example_wrapper" class="dataTables_wrapper form-inline" role="grid">
+                        @using (Ajax.BeginForm("ProductList", "Member", new { st = ViewBag.Id },
+                            new AjaxOptions { UpdateTargetId = "grid-list", HttpMethod = "get", LoadingElementId = "loading", OnBegin = "beginPaging", OnSuccess = "successPaging", OnFailure = "failurePaging" },
+                            new { id = "frm-search" }))
+                        {
+                            <div class="row " style="margin-left: 0px;margin-bottom: 20px">
+
+                                @*<div class="form-group input-group">*@
+                                    <input type="text" name="key" placeholder="Tìm kiếm theo tên" style="width: 150px" class="form-control" />
+                                    @Html.DropDownList("parent", null, new { @width = "150px", @class = "input-text required-entry" })
+                                    @Html.DropDownList("stateProduct", null, new { @style = "width: 150px", @class = "input-text required-entry" })
+                                    @Html.DropDownList("statusProduct", null, new { @style = "width: 150px", @class = "input-text required-entry" })
+
+                                    <button type="submit" class="btn btn-primary"><i class="fa fa-search">Tìm kiếm</i></button>
+                                @*</div>*@
+                                <div>   <span class="label label-danger">@ViewBag.Mes</span> </div>
+                            </div>
+                            <div id="grid-list">
+
+                                <hr />
+                                <div class="" style="margin-bottom: 10px">
+                                    <div class="form-inline">
+                                        <div class="form-group">
+                                            <a class="btn btn-primary" href="/Member/Postsale"> <span class="glyphicon glyphicon-open"></span> Up tin </a>
+                                        </div>
+                                        @*<div class="form-group">
+                                            <button type="button" class="btn btn-warning" onclick="vipitem.upVipItem();"><span class="glyphicon glyphicon-star"></span> Mua tin VIP</button>
+                                        </div>*@
+                                        <div class="form-group">
+                                            <button type="button" class="btn btn-success" onclick="item.refreshs();"><span class="glyphicon glyphicon-refresh"></span> Làm mới</button>
+                                        </div>
+                                        <div class="form-group">
+                                            <button type="button" class="btn btn-info" onclick="item.stopSelling();"><span class="glyphicon glyphicon-time"></span> Ngừng bán</button>
+                                        </div>
+                                        <div class="form-group">
+                                            <button type="button" class="btn btn-danger" onclick="DeleteInbox()"><span class="glyphicon glyphicon-trash"></span> Xóa</button>
+                                        </div>
+                                       @* <div class="form-group" style="display: none">
+                                            <button type="button" class="btn btn-primary" onclick="item.detailHis();"><span class="fa fa-facebook"></span> FB</button>
+                                        </div>*@
+                                    </div>
+                                </div>
+                                <div class="row"></div>
+                                <table class="table table-striped table-bordered table-hover dataTable no-footer list-product" id="dataTables" aria-describedby="dataTables-example_info">
+                                    <thead>
+                                        <tr style="background-color: ghostwhite;">
+
+                                            <th style="width: 75px">
+
+                                                <span class=""><input type="checkbox" value="" onclick="checkAllowed()" id="checkall"></span>
+                                              @*  <button type="button" class="btn btn-danger" onclick="DeleteInbox()"><span class="glyphicon glyphicon-trash"></span> Chọn tất cả <input type="checkbox" value="" onclick="checkAllowed()" id="checkall"></button>*@
+                                            </th>
+                                            <th>Hình ảnh</th>
+                                            <th>Tên</th>
+                                            <th>Giá bán</th>
+
+                                            <th>Lượt xem</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr>
+
+                                                <td>
+
+                                                        @Html.ActionLink("Sửa", "EditProduct", new { id = item.Id }, new { @class = "fa fa-pencil-square-o link-edit", @title = "Sửa thông tin sản phẩm" })
+
+                                                    <input type="checkbox" name="checkproduct" value="@item.Id" title="Tích chọn xóa sản phẩm" />
+                                                </td>
+
+                                                <td>
+                                                    @{
+                                                        var objurl = item.ProductImages.Where(x => x.IsAvatar == 1).ToList();
+                                                    }
+                                                    <img src="@FuntionMember.GetUrlImage(objurl.First().ImgSource,"Small")" width="100px" />
+                                                </td>
+                                                <td>
+                                                    <div class="nameproduct">
+                                                        @item.ProductName
+                                                    </div>
+
+                                                        <div>@Html.Raw(item.Summary)</div>
+
+                                                    <div>Cập nhật: @item.Catalog.CreateDate.ToString(" dd/MM/yyyy HH:mm:ss")    </div>
+                                                    <div class="">
+                                                        <ul class="breadcrumb">
+                                                        @Html.Raw(FuntionMember.HtmlBreadcrumb(item.CatalogId))
+                                                        </ul>
+                                                    </div>
+                                                </td>
+                                                <td  class="list-price">
+                                                    @item.Price.ToString("N0")<sup class="u-price">đ</sup>
+                                                </td>
+
+                                                <td class="list-totalview">
+                                                    @item.TotalView.ToString("N0")
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+
+                                <div class="">
+                                    <div class="">
+                                        <div class="dataTables_info" id="dataTables-example_info" role="alert" aria-live="polite" aria-relevant="all">Display from @Model.ItemStart to @Model.ItemEnd of @Model.TotalItemCount records</div>
+                                    </div>
+                                    <div class="">
+                                        <div class="dataTables_paginate paging_simple_numbers" id="dataTables-example_paginate">
+
+                                            @Html.Raw(Ajax.Pager(
+                                                new Options
+                                                {
+                                                    PageSize = Model.PageSize,
+                                                    TotalItemCount = Model.TotalItemCount,
+                                                    CurrentPage = Model.PageNumber,
+                                                    ItemTexts = new ItemTexts() { Next = "Next", Previous = "Previous", Page = "P" },
+                                                    ItemIcon = new ItemIcon() { First = "icon-backward", Previous = "icon-chevron-left", Next = "icon-chevron-right", Last = "icon-forward" },
+                                                    TooltipTitles = new TooltipTitles() { Next = "Next page", Previous = "Previous page", Page = "Page {0}." },
+                                                    Size = Size.normal,
+                                                    Alignment = Alignment.centered,
+                                                    IsShowControls = true,
+                                                    IsShowFirstLast = true,
+                                                    CssClass = ""
+                                                },
+                                                new AjaxOptions
+                                                {
+                                                    UpdateTargetId = "grid-list",
+                                                    HttpMethod = "get",
+                                                    LoadingElementId = "loading",
+                                                    OnBegin = "beginPaging",
+                                                    OnSuccess = "successPaging",
+                                                    OnFailure = "failurePaging"
+                                                }, new { controller = "Member", action = "ProductList", key = ViewData["key"], st = ViewBag.Id, grade_card = ViewData["grade_card"] }))
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function DeleteInbox() {
+        $('#overbackgroud').show();
+        var cat = $('#hidecate').val();
+        var yourArray = new Array();
+
+        $("input:checkbox[name=checkproduct]:checked").each(function () {
+            yourArray.push($(this).val());
+        });
+        debugger;
+        if (yourArray.count < 0) {
+            alert('Vui lòng chọn thư cần xóa !');
+        } else {
+            $.ajax({
+                url: '@Url.Action("DeleteProduct", "Member")',
+                data: {
+                    'array': yourArray
+                },
+                dataType: "json",
+                type: "POST",
+                traditional: true,
+
+                success: function (data) {
+                    if (data == 0) {
+                        alert("Hệ thống đang cập nhật");
+                        $('#overbackgroud').hide();
+                    } else if (data == 2) {
+                        alert("Vui lòng tích chọn");
+                        $('#overbackgroud').hide();
+                    } else if (data == 3) {
+                    alert("Bạn không có quyền xóa sản phẩm này");
+                    $('#overbackgroud').hide();
+                }
+                    else {
+                        window.location.href = "/Member/ProductList";
+                    }
+                },
+                error: function () {
+                    alert("Xin lỗi ! Hệ thống đang cập nhật vui long thực hiện lại sau.");
+                    $('#overbackgroud').hide();
+                }
+            });
+        }
+
+    }
+    function checkAllowed() {
+        //checkall
+        $("#checkall").change(function () {
+            $("input:checkbox").prop('checked', $(this).prop("checked"));
+        });
+    }
+</script>
+<style>
+    #parent {
+        width: 150px;
+    }
+</style>

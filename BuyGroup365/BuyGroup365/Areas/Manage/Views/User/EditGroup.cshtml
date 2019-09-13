@@ -1,0 +1,66 @@
+﻿@model Common.UserGroup
+
+@{
+    ViewBag.Title = "Cập nhật group";
+}
+@{   Layout = "~/Areas/Manage/Views/Shared/_LayoutUser.cshtml";}
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                Cập nhật group
+            </h1>
+            <hr />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            @using (Html.BeginForm())
+            {
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            <i class="fa fa-bar-chart-o fa-fw"></i> Cập nhật group
+                            <span style="float: right">
+                                @Html.ActionLink("Trở về", "Groups", null, new { @class = "glyphicon glyphicon-refresh" })
+                            </span>
+                        </h3>
+                    </div>
+
+                    <div class="panel-body">
+                        @Html.ValidationSummary(true)
+                        @Html.HiddenFor(model => model.Id)
+
+                        <div class="st-form-line">
+                            <span class="st-labeltext">Mã group<span class="required">*</span></span>
+                            @Html.TextBoxFor(model => model.Code, new { @class = "st-forminput", @maxlength = "20" })
+                            <div class="clear"></div>
+                        </div>
+                        <div class="st-form-line">
+                            <span class="st-labeltext">Tên group<span class="required">*</span></span>
+                            @Html.TextBoxFor(model => model.Name, new { @class = "st-forminput", @maxlength = "150" })
+                            <div class="clear"></div>
+                        </div>
+                        <div class="st-form-line">
+                            <span class="st-labeltext">Trạng thái</span>
+                            @Html.DropDownListFor(model => model.Status, (IEnumerable<SelectListItem>)ViewBag.ListItemStatus, new { @class = "uniform" })
+                            <div class="clear"></div>
+                        </div>
+                        <div class="st-form-line">
+                            <span class="st-labeltext">Mô tả</span>
+                            @Html.TextAreaFor(model => model.Description, new { @class = "st-forminput", @rows = "3", @cols = "47", @maxlength = "4000" })
+
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                    </div>
+                <div class="button-box">
+                    <input type="submit" name="button" id="button" value="Update" class="btn btn-primary btn-sm" />
+                    @Html.ActionLink("Trở về", "Groups", null, new { @class = "btn btn-primary btn-sm" })
+                </div>
+            }
+        </div>
+    </div>
+</div>

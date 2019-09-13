@@ -1,0 +1,178 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="@ViewBag.Description">
+    <meta name="keywords" content="@ViewBag.Keywords">
+    <meta name="robots" content="INDEX,FOLLOW">
+    <link rel="SHORTCUT ICON" href="/Content/Csspublic/images/favicon.ico" />
+    <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'/>-->
+    <link href="/Content/Csspublic/css/css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="/Content/Csspublic/css/calendar-win2k-1.css">
+    <link rel="stylesheet" type="text/css" href="/Content/Csspublic/font-awesome-4.4.0/css/font-awesome.min.css" media="all">
+    <link rel="stylesheet" type="text/css" href="/Content/Csspublic/css/simple-line-icons.css" media="all">
+    <link rel="stylesheet" type="text/css" href="/Content/Csspublic/css/elegantfont.css" media="all">
+    <link rel="stylesheet" type="text/css" href="/Content/Csspublic/css/bootstrap.min.css" media="all">
+    <link rel="stylesheet" type="text/css" href="/Content/Csspublic/css/jquery.bxslider.css" media="all">
+    <link rel="stylesheet" type="text/css" href="/Content/Csspublic/css/styles.css" media="all">
+    <link rel="stylesheet" type="text/css" href="/Content/Csspublic/css/widgets.css" media="all">
+    <link rel="stylesheet" type="text/css" href="/Content/Csspublic/css/blog.css" media="all">
+    <link rel="stylesheet" type="text/css" href="/Content/Csspublic/css/magicaccordion.css" media="all">
+    <link rel="stylesheet" type="text/css" href="/Content/Csspublic/css/magicmenu.css" media="all">
+    <link rel="stylesheet" type="text/css" href="/Content/Csspublic/css/jquery.fancybox.css" media="all">
+    <link rel="stylesheet" type="text/css" href="/Content/Csspublic/css/ajaxcart.css" media="all">
+    <link rel="stylesheet" type="text/css" href="/Content/Csspublic/css/quickview.css" media="all">
+    <link rel="stylesheet" type="text/css" href="/Content/Csspublic/css/magicsocial.css" media="all">
+    <link rel="stylesheet" type="text/css" href="/Content/Csspublic/css/animate.css" media="all">
+    <link rel="stylesheet" type="text/css" href="/Content/Csspublic/css/magicslider.css" media="all">
+   
+    <link href="~/Content/Csspublic/css/StyleExt.css" rel="stylesheet" />
+    <script type="text/javascript" src="/Content/Csspublic/js/prototype.js"></script>
+    @*<script type="text/javascript" src="/Content/Csspublic/js/ccard.js"></script>*@
+    <script type="text/javascript" src="/Content/Csspublic/js/validation.js"></script>
+    <script type="text/javascript" src="/Content/Csspublic/js/builder.js"></script>
+    <script type="text/javascript" src="/Content/Csspublic/js/effects.js"></script>
+    <script type="text/javascript" src="/Content/Csspublic/js/dragdrop.js"></script>
+    <script type="text/javascript" src="/Content/Csspublic/js/controls.js"></script>
+    <script type="text/javascript" src="/Content/Csspublic/js/slider.js"></script>
+    <script type="text/javascript" src="/Content/Csspublic/js/js.js"></script>
+    <script type="text/javascript" src="/Content/Csspublic/js/form.js"></script>
+    <script type="text/javascript" src="/Content/Csspublic/js/menu.js"></script>
+    <script type="text/javascript" src="/Content/Csspublic/js/translate.js"></script>
+    <script type="text/javascript" src="/Content/Csspublic/js/cookies.js"></script>
+    <script type="text/javascript" src="/Content/Csspublic/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/Content/Csspublic/js/jquery.noconflict.js"></script>
+    <script type="text/javascript" src="/Content/Csspublic/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/Content/Csspublic/js/jquery.bxslider.js"></script>
+    <script type="text/javascript" src="/Content/Csspublic/js/jquery.ddslick.js"></script>
+    @*<script src="~/Scripts/jquery-1.9.1.min.js"></script>*@
+    <link rel="stylesheet" type="text/css" href="/Content/Csspublic/css/responsive.css" media="all">
+    <script type="text/javascript">
+        //<![CDATA[
+        Mage.Cookies.path = '/demo/kuteshop';
+        Mage.Cookies.domain = '.localhost';
+        //]]>
+    </script>
+    <script type="text/javascript">
+        //<![CDATA[
+        optionalZipCountries = ["HK", "IE", "MO", "PA"];
+        //]]>
+    </script>
+    <script type="text/javascript" src="/Content/Csspublic/js/jquery.easing.min.js"></script>
+    <script type="text/javascript" src="/Content/Csspublic/js/jquery.alothemes.js"></script>
+    <script type="text/javascript" src="/Content/Csspublic/js/magicproduct.js"></script>
+    <script type="text/javascript" src="/Content/Csspublic/js/jquery.meanmenu.hack.js"></script>
+    <script type="text/javascript" src="/Content/Csspublic/js/magicaccordion.js"></script>
+    <script type="text/javascript" src="/Content/Csspublic/js/magicmenu.js"></script>
+    <script type="text/javascript" src="/Content/Csspublic/js/jquery.fancybox.pack.js"></script>
+    <script type="text/javascript" src="/Content/Csspublic/js/quickview.js"></script>
+    <script type="text/javascript" src="/Content/Csspublic/js/ajaxcart.js"></script>
+    <script type="text/javascript" src="/Content/Csspublic/js/product.js"></script>
+    <script type="text/javascript" src="/Content/Csspublic/js/configurable.js"></script>
+    <script type="text/javascript" src="/Content/Csspublic/js/calendar.js"></script>
+    <script type="text/javascript" src="/Content/Csspublic/js/calendar-setup.js"></script>
+    <script type="text/javascript" src="/Content/Csspublic/js/modernizr.custom.min.js"></script>
+    <script type="text/javascript" src="/Content/Csspublic/js/selectivizr.js"></script>
+    <script type="text/javascript" src="/Content/Csspublic/js/matchMedia.js"></script>
+    <script type="text/javascript" src="/Content/Csspublic/js/matchMedia.addListener.js"></script>
+    <script type="text/javascript" src="/Content/Csspublic/js/enquire.js"></script>
+    <script type="text/javascript" src="/Content/Csspublic/js/app.js"></script>
+    <script type="text/javascript" src="/Content/Csspublic/js/imagesloaded.js"></script>
+    <script type="text/javascript" src="/Content/Csspublic/js/product-media.js"></script>
+    <script type="text/javascript" src="/Content/Csspublic/js/swatches-list.js"></script>
+    <script type="text/javascript" src="/Content/Csspublic/js/swatches-product.js"></script>
+    <script type="text/javascript" src="/Content/Csspublic/js/jquery.elevateZoom-3.0.8.min.js"></script>
+    <script type="text/javascript" src="/Content/Csspublic/js/bundle.js"></script>
+
+    <script type="text/javascript" src="/Content/Csspublic/js/loadContent.js"></script>
+
+    <!--[if lt IE 9]>
+        <script type="text/javascript" src="http://localhost/demo/kuteshop/js/magiccart/bootstrap/html5shiv.js"></script>
+        <script type="text/javascript" src="http://localhost/demo/kuteshop/js/magiccart/bootstrap/respond.min.js"></script>
+    <![endif]-->
+    <!--[if lt IE 7]>
+        <script type="text/javascript" src="http://localhost/demo/kuteshop/js/magiccart/elegantfont/lte-ie7.js"></script>
+        <script type="text/javascript" src="http://localhost/demo/kuteshop/js/lib/ds-sleight.js"></script>
+        <script type="text/javascript" src="http://localhost/demo/kuteshop/skin/frontend/base/default/js/ie6.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+        <link rel="stylesheet" type="text/css" href="http://localhost/demo/kuteshop/skin/frontend/alokuteshop/default/css/styles-ie.css" media="all" />
+    <![endif]-->
+
+    <style type="text/css">
+    </style>
+    <script type="text/javascript"> Themecfg = { "general": { "enabled": "1", "jquery": "1", "ajaxloading": "http:\/\/localhost\/demo\/kuteshop\/skin\/frontend\/alokuteshop\/default\/images\/opc-ajax-loader.gif", "baseUrl": "http:\/\/localhost\/" }, "home": "\n            ", "list": { "portrait": "2", "landscape": "2", "tablet": "3", "desktop": "2", "visibleItems": "3", "widthImages": "300", "heightImages": "366", "height_images": "250", "width_images": "200" }, "detail": { "imageWidth": "800", "zoomWidth": "500", "zoomHeight": "700", "zoomInner": "1", "lightBox": "1", "slide": "1", "vertical": "0", "auto": "0", "controls": "1", "pager": "0", "slideMargin": "20", "slideWidth": "100", "portrait": "3", "landscape": "3", "tablet": "3", "desktop": "3", "visibleItems": "3", "relatedSlide": "horizontal", "relatedLimit": "10", "upsellSlide": "horizontal", "upsellLimit": "10", "inforTabs": "1", "activeTab": "box-description", "showTitle": "1", "adjustX": "10", "adjustY": "0", "thumbWidth": "100", "thumbHeight": "122", "imageHeight": "", "thumbSlide": "horizontal", "speed": "1000", "pause": "100" }, "related": { "slide": "1", "vertical": "0", "auto": "0", "controls": "1", "pager": "0", "speed": "1000", "pause": "100", "slideMargin": "20", "slideWidth": "278", "portrait": "1", "landscape": "2", "tablet": "2", "desktop": "3", "visibleItems": "3" }, "upsell": { "slide": "1", "vertical": "0", "auto": "0", "controls": "1", "pager": "0", "speed": "1000", "pause": "100", "slideMargin": "20", "slideWidth": "278", "portrait": "1", "landscape": "2", "tablet": "2", "desktop": "3", "visibleItems": "3" }, "crosssell": { "slide": "1", "vertical": "0", "auto": "0", "controls": "1", "pager": "0", "speed": "1000", "pause": "100", "slideMargin": "20", "slideWidth": "278", "portrait": "1", "landscape": "2", "tablet": "3", "desktop": "4", "visibleItems": "4" }, "labels": { "newLabel": "1", "newText": "New", "saleLabel": "1", "saleText": "Sale", "salePercent": "1" }, "timer": { "enabled": "1", "titleColor": "", "timerColor": "", "caption": "1", "captionColor": "" }, "color": { "page_color": "#777777", "page_background": "#ffffff", "link_color": "#777777", "link_color_hover": "#ffa800", "link_color_active": "#ffa800", "button_color": "#ffffff", "button_color_hover": "#ffffff", "button_background": "#434343", "button_background_hover": "#ffa800", "labelnew_color": "#ffffff", "labelnew_background": "#ffa800", "labelsale_color": "#ffffff", "labelsale_background": "#ee3434" }, "newsletter": { "enabled": "1", "firstOnly": "0", "timeDelay": "5000", "autoClose": "0", "timeClose": "10000", "width": "800", "height": "500", "overlayColor": "#353535", "background_color": "#ffffff", "background_image": "default\/popup.jpg" }, "categorysearch": { "enabled": "1", "select_category_on_category_pages": "0", "show_subcategories": "1", "subcategories_level": "3", "indentation_text": "-" }, "checkout": { "crosssellsSlide": "1" } }</script>
+    <script type="text/javascript">
+        var DisplayFormat = "<div class='timer-day box'><span class='day'>%%D%%</span><span class='title'>Days</span></div><div class='timer-hour box'><span class='hour'>%%H%%</span><span class='title'>Hrs</span></div><div class='timer-min box'><span class='min'>%%M%%</span><span class='title'>Mins</span></div><div class='timer-sec box'><span class='sec'>%%S%%</span><span class='title'>Secs</span></div>";
+        var startMcTimer = "10/15/15 07:53:33 PM";
+    </script>
+
+    <script type="text/javascript">
+        //<![CDATA[
+        if (typeof MC == 'undefined') MC = {};
+        MC.Quickview = { "dialogWidth": "800", "zoomWidth": "265", "zoomHeight": "265", "vertical": "1" };
+
+
+        jQuery(document).ready(function ($) {
+            jQuery(document).magiccart({ "url": "http:\/\/localhost\/Ajax\/Insert\/", "updateUrl": "http:\/\/localhost\/demo\/Ajax\/updatePost\/", "src_image_progress": "http:\/\/localhost\/demo\/kuteshop\/skin\/frontend\/alokuteshop\/default\/magiccart\/magicshop\/images\/loading.gif", "error": " \u2191 This is a required field.", "isProductView": 0 });
+        });
+        //]]
+    </script>
+    <script type="text/javascript">
+        //<![CDATA[
+        var Translator = new Translate([]);
+        //]]></script>
+</head>
+
+<body class=" cms-index-index cms-kute-shop">
+    <div class="social-icons right" style="margin-top: 100px">
+    </div>
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            $('.social-icons .social-icon').mouseenter(function () {
+                $(this).stop();
+                $(this).animate({ width: '160' }, 500, 'swing', function () {
+                });
+            });
+            $('.social-icons .social-icon').mouseleave(function () {
+                $(this).stop();
+                $(this).animate({ width: '43' }, 500, 'swing', function () {
+                });
+            });
+        });
+    </script>
+    <div class="wrapper">
+        <noscript>
+            &lt;div class="global-site-notice noscript"&gt;
+            &lt;div class="notice-inner"&gt;
+            &lt;p&gt;
+            &lt;strong&gt;JavaScript seems to be disabled in your browser.&lt;/strong&gt;&lt;br /&gt;
+            You must have JavaScript enabled in your browser to utilize the functionality of this website.                &lt;/p&gt;
+            &lt;/div&gt;
+            &lt;/div&gt;
+        </noscript>
+        <div class="page">
+            @Html.Partial("_PartialHeader")
+            @*header*@
+            <div class="main-container col1-layout content-color color">
+                @RenderBody()
+                @*Content*@
+
+            </div>
+            <div class="footer-container footer-color color">
+                @Html.Partial("_PartialFooter")
+                @*Footer*@
+            </div>
+
+        </div>
+    </div>
+
+
+   
+   
+  
+</body>
+</html>

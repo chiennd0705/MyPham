@@ -1,0 +1,266 @@
+﻿@using Business.ClassBusiness
+@using MvcPaging
+@model MvcPaging.IPagedList<Common.Product>
+
+@{
+    /**/
+
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Manage/Views/Shared/_LayoutAdmincshtml.cshtml";
+
+}
+<link href="~/Content/css/StyleTree.css" rel="stylesheet" />
+<div class="container-fluid" ng-app="body">
+
+    @Html.Raw(BuyGroup365.Areas.Manage.Models.AdminFunction.BindHeader("Danh sách sản phẩm", null, null, null, null))
+    <!-- /.row -->
+    <!-- /.row -->
+    <!-- /.row -->
+    <div class="row" ng-controller="Index">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+
+                <div class="panel-body">
+                    @using (Ajax.BeginForm("Comment", null,
+                        new AjaxOptions { UpdateTargetId = "grid-list", HttpMethod = "get", LoadingElementId = "loading", OnBegin = "beginPaging", OnSuccess = "successPaging", OnFailure = "failurePaging" },
+                        new { id = "frm-search" }))
+                    {
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group input-group">
+                                    <div class="row">
+
+                                        <div class="col-lg-2">
+                                            Tên sản phẩm
+                                            <input type="text" value="@ViewData["key"]" class="form-control" id="appendedInputButton" name="key" placeholder="Nhập từ khóa tìm kiếm" style="width:100%">
+                                        </div>
+
+                                        <div class="col-lg-2">
+                                            <button class="btn btn-primary btn-sm" type="submit" style="margin-top: 18px;">
+                                                <i class="fa fa-search">Tìm kiếm</i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover table-striped" id="dataTables" aria-describedby="dataTables-example_info">
+                                <thead>
+                                    <tr role="row">
+                                        <th style="text-align: center">STT</th>
+                                        <th>
+                                            Tên sản phẩm
+                                        </th>
+
+                                        <th>
+                                            Số lượt đánh giá
+                                        </th>
+
+                                        <th style="width: auto">Chức năng</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{
+                                        var index = 0;
+                                    }
+                                    @foreach (var item in Model)
+                                    {
+                                        index++;
+                                        <tr>
+                                            <td style="text-align: center">@index</td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.ProductName)
+                                            </td>
+
+                                            <td>
+                                                @{ var count = new CommentsBusiness().GetDynamicQuery().Count(x => x.ProductId == item.Id);}
+                                                @count
+                                            </td>
+
+                                            <td style="text-align: center">
+                                                @*<a href="@Html.Action("ContentComment","Product")" ><i class="fa fa-pencil-square-o"></i> Xem đánh giá</a>*@
+                                                <a href="javascript:void(0)" onclick="PreviewCommnet(@item.Id,'@item.ProductName')" data-toggle="modal" data-target="#myModal"><i class="fa fa-pencil-square-o"></i> Xem đánh giá</a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                            <script>
+                            </script>
+                            <div class="row">
+                                <div class="">
+                                    <div class="dataTables_info" id="dataTables-example_info" role="alert" aria-live="polite" aria-relevant="all">Hiển thị từ @Model.ItemStart đến @Model.ItemEnd của @Model.TotalItemCount bản ghi</div>
+                                </div>
+                                <div class="">
+                                    <div class="dataTables_paginate " id="dataTables-example_paginate">
+
+                                        @Html.Raw(Ajax.Pager(
+                                            new Options
+                                            {
+                                                PageSize = Model.PageSize,
+                                                TotalItemCount = Model.TotalItemCount,
+                                                CurrentPage = Model.PageNumber,
+                                                ItemTexts = new ItemTexts() { Next = "Next", Previous = "Previous", Page = "P" },
+                                                ItemIcon = new ItemIcon() { First = "icon-backward", Previous = "icon-chevron-left", Next = "icon-chevron-right", Last = "icon-forward" },
+                                                TooltipTitles = new TooltipTitles() { Next = "Next page", Previous = "Previous page", Page = "Page {0}." },
+                                                Size = Size.normal,
+                                                Alignment = Alignment.centered,
+                                                IsShowControls = true,
+                                                IsShowFirstLast = true,
+                                                CssClass = ""
+                                            },
+                                            new AjaxOptions
+                                            {
+                                                UpdateTargetId = "grid-list",
+                                                HttpMethod = "get",
+                                                LoadingElementId = "loading",
+                                                OnBegin = "beginPaging",
+                                                OnSuccess = "successPaging",
+                                                OnFailure = "failurePaging"
+                                            }, new { controller = "Product", action = "Comment", key = ViewData["key"] }))
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    @*End*@
+</div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width: 60%">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel"><span id="name"></span></h4>
+            </div>
+            <div class="modal-body" id="contentcm">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    select {
+        width: 100%;
+    }
+
+    /*.panel {
+        margin: auto;
+        width: 90%;
+    }*/
+</style>
+<script>
+    function PreviewCommnet(id,name) {
+        $('#name').html("");
+        $('#name').append(name);
+
+        $.ajax({
+            url: '@Url.Action("PreviewCommnet", "Product")',
+            data:
+            {
+                productid:id
+            },
+            type:'POST',
+            dataType: 'json',
+            success: function(data) {
+                if (data != 0) {
+                    $('#contentcm').html("");
+                    $('#contentcm').append(data);
+
+                } else {
+                    alert('đang cập nhật!');
+                }
+            },
+            error:function() {
+                alert('Lỗi rồi e');
+            }
+        });
+    }
+    function deletecoment(id) {
+        $.ajax({
+            url: '@Url.Action("DeleteComent", "Product")',
+            data:
+            {
+                id: id
+            },
+            type: 'POST',
+            dataType: 'json',
+            success: function (data) {
+                if (data != 0) {
+                    var idelement = "#cmt" + id;
+                    alert("Xóa thàng công!");
+                    $(idelement).empty();
+
+                } else {
+                    alert('Không thể xóa binh luận!');
+                }
+            },
+            error: function () {
+                alert('Lỗi rồi e');
+            }
+        });
+    }
+    function Duyet(id) {
+        var r = confirm("Bạn thật sự chắc chắn?");
+        if (r) {
+            $('#overbackgroud').show();
+            $.ajax({
+                url: '@Url.Action("ApprovedComment", "Product")',
+                data:
+                {
+                    commentid: id,
+                    status:2
+                },
+                Type:'POST',
+                dataType:'json',
+                success:function(data) {
+                    if (data == 1) {
+                        alert('Duyệt thành công!');
+                        window.location.href = document.URL;
+                    } else {
+                        alert('Hệ thống đang cập nhật, vui lòng thực hiện lại sau.');
+                        $('#overbackgroud').hide();
+                    }
+                },
+                error:function() {
+
+                }
+            });
+        }  }
+    function TraLoiComment(id,productid) {
+        var r = confirm("Bạn thật sự chắc chắn?");
+        var TraLoicontent = document.getElementById('TraLoicontent').value;
+        if (r) {
+            $('#overbackgroud').show();
+            $.ajax({
+                url: '@Url.Action("ReplyComment", "Product")',
+                data:
+                {
+                    productid:productid,
+                    commentid: id,
+                    status: 2,
+                    TraLoicontent: TraLoicontent
+                },
+                Type: 'POST',
+                dataType: 'json',
+                success: function (data) {
+                        alert('Trả lời thành công!');
+                        $('#tl' + id).value=data;
+                        window.location.href = document.URL;
+                },
+                error: function () {
+                    alert('Hệ thống đang cập nhật, vui lòng thực hiện lại sau.');
+                    $('#overbackgroud').hide();
+                }
+            });
+
+        }
+    }
+</script>

@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "Thanh toán thẻ";
+    Layout = Request.Browser.IsMobileDevice ? "~/Views/Shared/_LayoutPaymentCard.cshtml"
+                : "~/Views/Shared/_LayoutPaymentCard.cshtml";
+
+}
+@using Common.util
+@using Common;
+@using Business;
+@using Business.ClassBusiness;
+
+@{
+    TextHtmlBusiness textHtmlBusiness = new TextHtmlBusiness();
+
+    TextHtml Noidungchuyenkhoan = textHtmlBusiness.GetByCode("Noidungchuyenkhoan");
+    var Madonhang = Session["Madonhang"];
+    var totalMoneyOfGoods = Session["TotalMoney"];
+
+}
+
+<div id="notifyerror" class="notifications hidden" style="text-align:center;"><i></i></div>
+
+<div class="boxhd">
+    <div class="corner"><img src="../Content/Csspublic/images/cor.png"></div>
+    <div class="td1">
+        <p class="text-gray-label"><strong>Đơn vị</strong></p>
+        <p class="text-gray-label"><strong>Điện máy miền bắc</strong></p>
+    </div>
+    <div class="td2">
+        <p class="text-gray-label"><strong>Đơn hàng</strong></p>
+        <p class="text-gray">Thanh toán đơn hàng: <b> @Madonhang</b></p>
+    </div>
+    <div class="td3 showprice">
+        <p class="text-gray-label"><strong>Tổng tiền</strong></p>
+        <p style=" color:#F60; font-weight:bold; font-size:16px;"> @(String.Format("{0:#,###}", totalMoneyOfGoods)) VND</p>
+    </div>
+</div>
+<form method="POST" id="frm_selectbank">
+    <input type="hidden" id="bankCode" name="bankCode" value="">
+    <div class="boxcheckout">
+
+        <div class="tab-content">
+            @Html.Raw(Noidungchuyenkhoan.Content)
+        </div>
+    </div>
+</form>

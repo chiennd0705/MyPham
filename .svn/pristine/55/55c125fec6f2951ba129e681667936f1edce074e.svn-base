@@ -1,0 +1,32 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using FluentValidationTester.Models;
+
+namespace FluentValidationTester.Controllers
+{
+    public class HomeController : Controller
+    {
+        public ActionResult Index(int? id)
+        {
+
+            CustomerRepository repository = new CustomerRepository();
+            string name = string.Empty;
+            string company = string.Empty;
+
+            return View(repository.Get(id));
+        }
+
+
+        public ActionResult Create()
+        {
+            if (!ModelState.IsValid)
+            {
+                return Content("Model is invalid.");
+            }
+            return Content("Submission successful.");
+        }
+    }
+}

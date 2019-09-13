@@ -1,0 +1,288 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using BuyGroup365.Models.Member;
+using DataAccess;
+using Common;
+using Business.ClassBusiness;
+namespace BuyGroup365.Controllers
+{
+    public class AjaxController : Controller
+    {
+        //
+        // GET: /Home/
+        public ActionResult Index()
+        {
+            return View();
+        }
+        public ActionResult GetProduct(string type, string info)
+        {
+
+            BuyGroup365Entities entitis = new BuyGroup365Entities();
+            string priceDis;
+            string[] splitImg;
+            int intType = 1;
+            if (type.Equals("featured")) intType = 1;
+            else if (type.Equals("newproduct")) intType = 2;
+            else if (type.Equals("saleproduct")) intType = 5;
+            long CatalogId = 0;
+            try
+            {
+                CatalogId = long.Parse(info);
+            }
+            catch { }
+
+            var listProduct = entitis.SearchProductByType(intType, CatalogId, 1, 12);
+
+            String html = "<div class=\"mage-magictabs mc-" + type + "\">" +
+
+                                          "<ul class=\"flexisel-content products-grid featured zoomOut play\">";
+            foreach (var item in listProduct)
+            {
+
+                html += "<li class=\"item item-animate\">" +
+                         "<div class=\"per-product\">" +
+                             "<div class=\"images-container\">" +
+                                 "<div class=\"product-hover\">";
+                if (item.IsVip) html += "<span class=\"sticker top-left\"><span class=\"labelvip\">Vip</span></span>";
+                else if (item.IsAttractive) html += "<span class=\"sticker top-left\"><span class=\"labelnew\">Hot</span></span>";
+
+                html += "<a href=\"" + Common.util.Function.InitUrlDetaiProduct(item.FriendlyUrl, item.Id) + "\" title=\"\" class=\"product-image\">" +
+                                         "<img class=\"img-responsive\" src=\"";
+                splitImg = item.ImgSource.Split('?');
+
+                html += splitImg[0] + "Small/" + splitImg[1] + "\" alt=\"" + item.ProductName + "\">" +
+
+                         "</a>" +
+                     "</div>" +
+                     "<div class=\"actions-no hover-box\">" +
+                         "<a class=\"detail_links\" href=\"" + Common.util.Function.InitUrlDetaiProduct(item.FriendlyUrl, item.Id) + "\"></a>" +
+                         "<div class=\"actions\">" +
+                             "<ul class=\"add-to-links pull-left-none\">" +
+                                 "<li class=\"pull-left-none\"><a href=\"\" title=\"Add to Wishlist\" class=\"link-wishlist\"><i class=\"fa fa-heart-o icons\"></i>Add to Wishlist</a></li>" +
+
+                                 "<li class=\"pull-left-none\"><span class=\"separator\">|</span> <a href=\"\" title=\"Add to Compare\" class=\"link-compare\"><i class=\"fa fa-signal icons\"></i>Add to Compare</a></li>" +
+                                 "<li class=\"link-view pull-left-none\">" +
+                                     "<a title=\"Quick View\" href=\"http://localhost/Ajax/QuickView/" + item.Id + "\" class=\"link-quickview\"><i class=\"fa fa-search icons\"></i>Quick View</a>" +
+                                 "</li>" +
+                             "</ul>" +
+                         "</div>" +
+                    // "<div class=\"actions-cart\">" +
+                    //     "<button type=\"button\" title=\"Add to Cart\" class=\"button btn-cart pull-left-none\" onclick=\"\" magiccartevent=\"http://localhost/Ajax/QuickView/4\"><span><span>Add to Cart</span></span></button>" +
+                    // "</div>" +
+                     "</div>" +
+                 "</div>" +
+                 "<div class=\"products-textlink clearfix\">" +
+                     "<h2 class=\"product-name\">" +
+                         "<a href=\"" + Common.util.Function.InitUrlDetaiProduct(item.FriendlyUrl, item.Id) + "\" title=\"\">" + item.ProductName + "</a>" +
+                     "</h2>";
+
+                priceDis = string.Empty;
+                if (item.Cost > item.Price) priceDis = "<p class=\"old-price\"><span class=\"price\">" + item.Cost.ToString("N0") + "<sup class=\"u-price\">đ</sup></span></p>";
+                html += "<div class=\"price-box\">" + priceDis + "<p class=\"special-price\"><span class=\"price\" itemprop=\"price\">" + item.Price.ToString("N0") + "<sup class=\"u-price\">đ</sup></span></p></div>" +
+                        "<div class=\"ratings\"><div class=\"rating-box\"><div class=\"rating\" style=\"width:" + InitStar(item.Rate) + "%\"></div></div></div>" +
+                        "</div></div> </li>";
+            }
+            html += "</ul></div></div>";
+            Response.Write(html.ToString());
+            return null;
+
+        }
+
+
+        protected string InitStar(double? diem)
+        {
+            if (diem == 1) return "20";
+            if (diem == 2) return "40";
+            if (diem == 3) return "60";
+            if (diem == 4) return "80";
+            return "100";
+        }
+
+
+        public ActionResult QuickView(long id)
+        {
+            ProductsBusiness productBusiness = new ProductsBusiness();
+            Product item = productBusiness.GetById(id);
+            ViewData["ProductName"] = item.ProductName;
+
+            CommentsBusiness commentBusiness = new CommentsBusiness();
+            int count = 0, rate;
+            rate = commentBusiness.CalculatorByProductId(id, ref count);
+            ViewData["rating"] = "<div class=\"rating\" style=\"width: " + InitStar(rate) + "%\"></div>";
+            @ViewData["count"] = count;
+            if (item.Cost > item.Price)
+                ViewData["OldPrice"] = item.Cost.ToString("N0") + "<sup class=\"u-price\">đ</sup>";
+
+            ViewData["Price"] = item.Price.ToString("N0") + "<sup class=\"u-price\">đ</sup>";
+
+            if (item.State == 1) ViewData["State"] = "Còn hàng";
+            else ViewData["State"] = "Hết hàng";
+
+            ViewData["Summary"] = item.Summary;
+
+            ProductImagesBusiness productImageBusiness = new ProductImagesBusiness();
+
+            var listImg = productImageBusiness.FindProductId(id);
+            string strImg1 = string.Empty, strImg2 = string.Empty;
+            int dem = 0;
+            foreach (ProductImage img in listImg)
+            {
+                if (img.IsAvatar == 1)
+                {
+
+                    ViewData["ImgMain"] = img.ImgSource.Split('?')[0] + "Medium/" + img.ImgSource.Split('?')[1];
+                    ViewData["ImgMainBig"] = img.ImgSource.Split('?')[0] + "Large/" + img.ImgSource.Split('?')[1];
+
+                }
+
+                strImg1 += " <img id=\"image-" + dem + "\" class=\"gallery-image\" src=\"" + img.ImgSource.Split('?')[0] + "Medium/" + img.ImgSource.Split('?')[1] + "\" data-zoom-image=\"" + img.ImgSource.Split('?')[0] + "big_" + img.ImgSource.Split('?')[1] + "\">";
+                strImg2 += "<li><a class=\"thumb-link\" href=\"#\" title=\"\" data-image-index=\"" + dem + "\">  <img class=\"img-responsive\" src=\"" + img.ImgSource.Split('?')[0] + "small_" + img.ImgSource.Split('?')[1] + "\" alt=\"\"></a></li>";
+                dem++;
+
+            }
+            ViewData["Img1"] = strImg1;
+            ViewData["Img2"] = strImg2;
+            return PartialView();
+        }
+      
+        public JsonResult ViewCart(long id,int sl)
+        {
+            var entity = NlCheckout.GetSessionCard(Session);
+            List<CartItem>  listitems=new List<CartItem>();
+            if (entity != null)
+            {
+                var booll= entity.Any(x => x.Product.Id == id);
+                if (booll)
+                {
+                    foreach (var item in entity)
+                    {
+                        if (item.Product.Id == id)
+                        {
+                            item.Quantity = item.Quantity + sl;
+                            listitems.Add(item);
+                        }
+                        else
+                        {
+                            listitems.Add(item);
+                        }
+                      
+                    }
+               //     listitems.AddRange(entity);
+                }
+                else
+                {
+                    CartItem cart = new CartItem();
+                    cart.Quantity = sl;
+                    var product = new ProductsBusiness().GetById(id);
+                    cart.Product = product;
+                    listitems.Add(cart);
+                    listitems.AddRange(entity);
+                }
+          
+                //  listitems.AddRange(entity);
+            }
+            else
+            {
+                CartItem cart = new CartItem();
+                cart.Quantity = sl;
+                var product = new ProductsBusiness().GetById(id);
+                cart.Product = product;
+                listitems.Add(cart);
+            }
+            //var objlist = listitems.Where(x => x.Product.Id == id);
+            //if (objlist.Any())
+            //{
+                
+            //}
+            //CartItem cart =new CartItem();
+            //cart.Quantity = sl;
+            //var product = new ProductsBusiness().GetById(id);
+            //cart.Product = product;
+            //listitems.Add(cart);
+            NlCheckout.SetSessionCard(listitems,Session);
+            List<ProductCart> listpProductCarts=new List<ProductCart>();
+            foreach (var item in listitems)
+            {
+                ProductCart productCart=new ProductCart();
+                productCart.Id = item.Product.Id;
+                   productCart.Model= item.Product.Model;
+        productCart.MemberId = item.Product.MemberId;
+        productCart.ShopCatalogId = item.Product.CatalogId;
+         productCart.ProductName = item.Product.ProductName;
+       productCart.Code= item.Product.Code;
+       productCart.FriendlyUrl = item.Product.FriendlyUrl;
+        productCart.Summary = item.Product.Summary;
+         productCart.Description = item.Product.Description;
+         productCart.Price = item.Product.Price;
+         productCart.Cost = item.Product.Cost;
+         productCart.Weight= item.Product.Weight;
+         productCart.Quantity = item.Quantity;
+         listpProductCarts.Add(productCart);
+            }
+            return Json(listpProductCarts, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult GetBrandShowcase(string type, string info)
+        {
+
+            string priceDis;
+            string[] splitImg;
+            long brandId = long.Parse(type);
+
+
+            ManufacturersBusiness manufacturersBusiness = new ManufacturersBusiness();
+
+            Manufacturer brand = manufacturersBusiness.GetById(brandId);
+
+            BuyGroup365Entities entitis = new BuyGroup365Entities();
+
+            List<SearchProductByBrand_Result> listProduct = entitis.SearchProductByBrand(brandId, 1, 4).ToList();
+
+            String html = "<div class=\"mage-magictabs mc-" + type + "\">" +
+                          "<div class=\"row\"><div class=\"col-xs-12 col-sm-4 trademark-info\">" +
+                          "<div class=\"brand-info\"><div class=\"brand-description\"><div class=\"trademark-logo\">" +
+                           "<img alt=\"\" src=\"" + brand.Icon + "\"></div>" +
+                           "<div class=\"trademark-desc\">" + brand.Description + "</div></div>" +
+                           "<a class=\"trademark-link\" href=\"/search-dm0?mid=" + brandId + "\">Xem toàn bộ sản phẩm</a></div> </div> <div class=\"col-xs-12 col-sm-8 trademark-product\">" +
+                           "<ul class=\"flexisel-content products-grid featured zoomOut play\">";
+            foreach (var item in listProduct)
+            {
+                html += "<li class=\"item item-animate\">" +
+                        "<div class=\"per-product\">" +
+                            "<div class=\"images-container\">" +
+                                "<div class=\"product-hover\">";
+                if (item.IsVip) html += "<span class=\"sticker top-left\"><span class=\"labelvip\">Vip</span></span>";
+                else if (item.IsAttractive) html += "<span class=\"sticker top-left\"><span class=\"labelnew\">Hot</span></span>";
+
+                html += "<a href=\"" + Common.util.Function.InitUrlDetaiProduct(item.FriendlyUrl, item.Id) + "\" title=\"\" class=\"product-image\">" +
+                                         "<img class=\"img-responsive\" src=\"";
+
+                splitImg = item.ImgSource.Split('?');
+
+                html += splitImg[0] + "Medium/" + splitImg[1] + "\" width=\"300\" height=\"366\" alt=\"\">" +
+
+                         "</a>" +
+                     "</div>" +
+
+                 "</div>" +
+                 "<div class=\"products-textlink clearfix\">" +
+                     "<h2 class=\"product-name\">" +
+                         "<a href=\"" + Common.util.Function.InitUrlDetaiProduct(item.FriendlyUrl, item.Id) + "\" title=\"\">" + item.ProductName + "</a>" +
+                     "</h2>";
+
+                priceDis = string.Empty;
+                if (item.Cost > item.Price) priceDis = "<p class=\"old-price\"><span class=\"price\">" + item.Cost.ToString("N0") + "<sup class=\"u-price\">đ</sup></span></p>";
+                html += "<div class=\"price-box\">" + priceDis + "<p class=\"special-price\"><span class=\"price\" itemprop=\"price\">" + item.Price.ToString("N0") + "<sup class=\"u-price\">đ</sup></span></p></div>" +
+                        "<div class=\"ratings\"><div class=\"rating-box\"><div class=\"rating\" style=\"width:" + InitStar(item.Rate) + "%\"></div></div></div>" +
+                        "</div></div> </li>";
+            }
+
+
+            Response.Write(html.ToString());
+            return null;
+        }
+    }
+}

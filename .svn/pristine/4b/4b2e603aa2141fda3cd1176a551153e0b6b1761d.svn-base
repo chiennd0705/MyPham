@@ -1,0 +1,156 @@
+﻿@using Common.util
+@model global::Common.Shop
+
+@{
+    ViewBag.Title = "Shop";
+    Layout = "~/Views/Shared/_LayoutMember.cshtml";
+}
+<div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 ">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+
+                <ol class="breadcrumb">
+                    <li><span class="glyphicon glyphicon-home"></span><a href="/"> Trang chủ</a></li>
+                    <li>
+                        <a href="/Member/Profile">
+                            @SessionUtility.GetSessionMember(Session).UserName
+                        </a>
+                    </li>
+                    <li class="active">Shop</li>
+                </ol>
+            </h4>
+        </div>
+      
+            <div class="panel-body">
+                <div class="table-responsive">
+              
+
+                                        <div class="col-main col-lg-12">
+                                            <div class="account-create">
+                                                <div class="">
+                                                    <h1 style="font-weight: bold;color:red">@ViewBag.Mes</h1>
+                                                </div>
+                                                <form method="post" id="shop-form" action="/Member/Shop">
+                                                    @Html.HiddenFor(x => x.Id)
+                                               
+                                                    <div class="fieldset">
+                                                        <input type="hidden" name="success_url" value="">
+                                                        <input type="hidden" name="error_url" value="">
+                                                        <h2 class="legend">Thông tin shop</h2>
+                                                        <ul class="form-list">
+                                                            <li class="">
+                                                                <div class="customer-name-middlename">
+                                                                    <div class="field name-firstname">
+                                                                        <label for="firstname" class="required"><em>*</em>Tên shop</label>
+                                                                        <div class="input-box">
+                                                                            @Html.TextBoxFor(model => model.ShopName, new { @class = "input-text required-entry", @autocomplete = "off", @maxlength = "200", @style = "width: 50%", @size = "25", @placeholder = "Tên shop", @disabled = "disabled" })
+                                                                            @Html.ValidationMessageFor(model => model.ShopName)
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="field name-lastname">
+                                                                        <label for="lastname" class="required">Địa chỉ</label>
+                                                                        <div class="input-box">
+                                                                            @Html.TextBoxFor(model => model.Address, new { @class = "input-text required-entry", @autocomplete = "off", @maxlength = "200", @style = "width: 50%", @size = "25" })
+                                                                            @Html.ValidationMessageFor(model => model.Address)
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="field name-lastname">
+                                                                        <label for="lastname" class="required">Số điện thoại</label>
+                                                                        <div class="input-box">
+                                                                            @Html.TextBoxFor(model => model.Phone, new { @class = "input-text required-entry", @autocomplete = "off", @maxlength = "20", @style = "width: 50%", @size = "25" })
+                                                                            @Html.ValidationMessageFor(model => model.Phone)
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+
+                                                        </ul>
+                                                    </div>
+                                                    <div class="fieldset">
+                                                        <h2 class="legend">Liên hệ shop</h2>
+                                                        <ul class="form-list">
+                                                            <li class="fields">
+                                                                <div class="col-sm-6">
+                                                                    <div class="field">
+                                                                        <label for="password" class="required"><em>*</em>Tên hổ trợ</label>
+                                                                        <div class="input-box">
+                                                                            @Html.TextBoxFor(model => model.ShopSupport.SupportName, new { @class = "input-text required-entry", @autocomplete = "off", @maxlength = "200", @style = "width: 100%", @size = "25" })
+                                                                            @Html.ValidationMessageFor(model => model.ShopSupport.SupportName)
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="field">
+                                                                        <label for="password" class="required"><em>*</em>Email</label>
+                                                                        <div class="input-box">
+                                                                            @Html.TextBoxFor(model => model.ShopSupport.Email, new { @class = "input-text required-entry", @autocomplete = "off", @maxlength = "100", @style = "width: 100%", @size = "25" })
+                                                                            @Html.ValidationMessageFor(model => model.ShopSupport.Email)
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="field">
+                                                                        <label for="confirmation" class="required"><em>*</em>Số điện thoai</label>
+                                                                        <div class="input-box">
+                                                                            @Html.TextBoxFor(model => model.ShopSupport.Phone, new { @class = "input-text required-entry", @autocomplete = "off", @maxlength = "20", @style = "width: 100%", @size = "25" })
+                                                                            @Html.ValidationMessageFor(model => model.ShopSupport.Phone)
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="field">
+                                                                        <label for="confirmation" class="required"><em>*</em>Di động</label>
+                                                                        <div class="input-box">
+                                                                            @Html.TextBoxFor(model => model.ShopSupport.Mobile, new { @class = "input-text required-entry", @autocomplete = "off", @maxlength = "20", @style = "width: 100%", @size = "25" })
+                                                                            @Html.ValidationMessageFor(model => model.ShopSupport.Mobile)
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-6">
+
+                                                                    <div class="field">
+                                                                        <label for="confirmation" class="required"><em>*</em>Skype</label>
+                                                                        <div class="input-box">
+                                                                            @Html.TextBoxFor(model => model.ShopSupport.Skype, new { @class = "input-text required-entry", @autocomplete = "off", @maxlength = "100", @style = "width: 100%", @size = "25" })
+                                                                            @Html.ValidationMessageFor(model => model.ShopSupport.Skype)
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="field">
+                                                                        <label for="confirmation" class="required"><em>*</em>Facebook</label>
+                                                                        <div class="input-box">
+                                                                            @Html.TextBoxFor(model => model.ShopSupport.Facebook, new { @class = "input-text required-entry", @autocomplete = "off", @maxlength = "100", @style = "width: 100%", @size = "25" })
+                                                                            @Html.ValidationMessageFor(model => model.ShopSupport.Facebook)
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="field">
+                                                                        <label for="confirmation" class="required"><em>*</em>Yahoo</label>
+                                                                        <div class="input-box">
+                                                                            @Html.TextBoxFor(model => model.ShopSupport.Yahoo, new { @class = "input-text required-entry", @autocomplete = "off", @maxlength = "100", @style = "width: 100%", @size = "25" })
+                                                                            @Html.ValidationMessageFor(model => model.ShopSupport.Yahoo)
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                     
+                                                            </li>
+                                                        </ul>
+
+
+
+                                                    </div>
+                                                    <div class="buttons-set">
+                                                        <button type="submit" title="Submit" class="button" onclick="register()"><span><span>Submit</span></span></button>
+                                                    </div>
+                                                </form>
+                                                <script type="text/javascript">
+                                                    //<![CDATA[
+                                                    var dataForm = new VarienForm('login-form', true);
+                                                    //]]>
+                                                    function register() {
+                                                        $('#login-form').submit();
+                                                    }
+                                                </script>
+
+                                            </div>
+                                        </div>
+                               
+                
+                </div>
+
+            </div>
+    </div>
+</div>

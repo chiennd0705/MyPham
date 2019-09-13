@@ -1,0 +1,29 @@
+﻿@using Common
+@using Business.ClassBusiness;
+@using BuyGroup365.Models.Common;
+
+
+<section class="awe-section-1">
+    <section class="main-slide">
+        <div class="home-slider owl-carousel not-dqowl owl-loaded owl-drag">
+            @{
+                Business.ClassBusiness.AlbumImagesBusiness albumImagesBusiness = new Business.ClassBusiness.AlbumImagesBusiness();
+                List<Common.AlbumImage> listImages = albumImagesBusiness.GetListByAlbum("slider");
+                foreach (Common.AlbumImage item in listImages)
+                {
+            <div class="item">
+                <a href="@item.Link">    <img src="@Util.ReturnLinkCDN(@item.ImageSource,Request.Browser.IsMobileDevice)" alt="" class="img-responsive center-block"></a>
+            </div>
+                }
+            }
+
+           
+
+
+            @*<div class="owl-nav">
+                <div class="owl-prev">prev</div>
+                <div class="owl-next">next</div>
+            </div><div class="owl-dots disabled"></div>*@
+        </div>
+    </section>
+</section>

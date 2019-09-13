@@ -1,0 +1,866 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Arua2Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="Arua2ModelStoreContainer">
+    <EntitySet Name="module" EntityType="Arua2Model.Store.module" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="QLKhachHang_QuanLyGiaoDich" EntityType="Arua2Model.Store.QLKhachHang_QuanLyGiaoDich" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="QLKhachHang_QuanLyKhachHang" EntityType="Arua2Model.Store.QLKhachHang_QuanLyKhachHang" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="QLKhachHang_QuanLyNganhNghe" EntityType="Arua2Model.Store.QLKhachHang_QuanLyNganhNghe" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="QLNS_QuanLyChamCong" EntityType="Arua2Model.Store.QLNS_QuanLyChamCong" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="QLNS_QuanLyChucVu" EntityType="Arua2Model.Store.QLNS_QuanLyChucVu" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="QLNS_QuanLyHopDong" EntityType="Arua2Model.Store.QLNS_QuanLyHopDong" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="QLNS_QuanLyKhenThuong" EntityType="Arua2Model.Store.QLNS_QuanLyKhenThuong" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="QLNS_QuanLyNhanVien" EntityType="Arua2Model.Store.QLNS_QuanLyNhanVien" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="QLNS_QuanLyPhongBan" EntityType="Arua2Model.Store.QLNS_QuanLyPhongBan" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="QLNS_QuanLyThoiGianHopDong" EntityType="Arua2Model.Store.QLNS_QuanLyThoiGianHopDong" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="QLNS_QuanLyTrinhDo" EntityType="Arua2Model.Store.QLNS_QuanLyTrinhDo" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="QLTaiChinh_ChuyenKhoan" EntityType="Arua2Model.Store.QLTaiChinh_ChuyenKhoan" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="QLTaiChinh_DanhMucChi" EntityType="Arua2Model.Store.QLTaiChinh_DanhMucChi" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="QLTaiChinh_QuanLychi" EntityType="Arua2Model.Store.QLTaiChinh_QuanLychi" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="QLTaiChinh_QuanLyDanhMucThu" EntityType="Arua2Model.Store.QLTaiChinh_QuanLyDanhMucThu" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="QLTaiChinh_QuanLyTaiKhoan" EntityType="Arua2Model.Store.QLTaiChinh_QuanLyTaiKhoan" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="QLTaiChinh_QuanLyThu" EntityType="Arua2Model.Store.QLTaiChinh_QuanLyThu" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="QLTaiSan_QuanLyLDanhMuc" EntityType="Arua2Model.Store.QLTaiSan_QuanLyLDanhMuc" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="QLTaiSan_QuanLyThongTinTaiSan" EntityType="Arua2Model.Store.QLTaiSan_QuanLyThongTinTaiSan" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="QLTaiSan_QuanLyTinhTrang" EntityType="Arua2Model.Store.QLTaiSan_QuanLyTinhTrang" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="role" EntityType="Arua2Model.Store.role" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="role_module" EntityType="Arua2Model.Store.role_module" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="sysdiagrams" EntityType="Arua2Model.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="user" EntityType="Arua2Model.Store.user" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="user_group" EntityType="Arua2Model.Store.user_group" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="user_group_role" EntityType="Arua2Model.Store.user_group_role" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="user_profile" EntityType="Arua2Model.Store.user_profile" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="user_usergroup" EntityType="Arua2Model.Store.user_usergroup" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_QLKhachHang_QuanLyGiaoDich_QLKhachHang_QuanLyKhachHang1" Association="Arua2Model.Store.FK_QLKhachHang_QuanLyGiaoDich_QLKhachHang_QuanLyKhachHang1">
+      <End Role="QLKhachHang_QuanLyKhachHang" EntitySet="QLKhachHang_QuanLyKhachHang" />
+      <End Role="QLKhachHang_QuanLyGiaoDich" EntitySet="QLKhachHang_QuanLyGiaoDich" />
+    </AssociationSet>
+    <AssociationSet Name="FK_QLKhachHang_QuanLyKhachHang_QLKhachHang_QuanLyNganhNghe1" Association="Arua2Model.Store.FK_QLKhachHang_QuanLyKhachHang_QLKhachHang_QuanLyNganhNghe1">
+      <End Role="QLKhachHang_QuanLyNganhNghe" EntitySet="QLKhachHang_QuanLyNganhNghe" />
+      <End Role="QLKhachHang_QuanLyKhachHang" EntitySet="QLKhachHang_QuanLyKhachHang" />
+    </AssociationSet>
+    <AssociationSet Name="FK_QLNS_QuanLyChamCong_QLNS_QuanLyNhanVien1" Association="Arua2Model.Store.FK_QLNS_QuanLyChamCong_QLNS_QuanLyNhanVien1">
+      <End Role="QLNS_QuanLyNhanVien" EntitySet="QLNS_QuanLyNhanVien" />
+      <End Role="QLNS_QuanLyChamCong" EntitySet="QLNS_QuanLyChamCong" />
+    </AssociationSet>
+    <AssociationSet Name="FK_QLNS_QuanLyHopDong_QLNS_QuanLyNhanVien" Association="Arua2Model.Store.FK_QLNS_QuanLyHopDong_QLNS_QuanLyNhanVien">
+      <End Role="QLNS_QuanLyNhanVien" EntitySet="QLNS_QuanLyNhanVien" />
+      <End Role="QLNS_QuanLyHopDong" EntitySet="QLNS_QuanLyHopDong" />
+    </AssociationSet>
+    <AssociationSet Name="FK_QLNS_QuanLyHopDong_QLNS_QuanLyThoiGianHopDong1" Association="Arua2Model.Store.FK_QLNS_QuanLyHopDong_QLNS_QuanLyThoiGianHopDong1">
+      <End Role="QLNS_QuanLyThoiGianHopDong" EntitySet="QLNS_QuanLyThoiGianHopDong" />
+      <End Role="QLNS_QuanLyHopDong" EntitySet="QLNS_QuanLyHopDong" />
+    </AssociationSet>
+    <AssociationSet Name="FK_QLNS_QuanLyKhenThuong_QLNS_QuanLyNhanVien1" Association="Arua2Model.Store.FK_QLNS_QuanLyKhenThuong_QLNS_QuanLyNhanVien1">
+      <End Role="QLNS_QuanLyNhanVien" EntitySet="QLNS_QuanLyNhanVien" />
+      <End Role="QLNS_QuanLyKhenThuong" EntitySet="QLNS_QuanLyKhenThuong" />
+    </AssociationSet>
+    <AssociationSet Name="FK_QLNS_QuanLyNhanVien_QLNS_QuanLyChucVu1" Association="Arua2Model.Store.FK_QLNS_QuanLyNhanVien_QLNS_QuanLyChucVu1">
+      <End Role="QLNS_QuanLyChucVu" EntitySet="QLNS_QuanLyChucVu" />
+      <End Role="QLNS_QuanLyNhanVien" EntitySet="QLNS_QuanLyNhanVien" />
+    </AssociationSet>
+    <AssociationSet Name="FK_QLNS_QuanLyNhanVien_QLNS_QuanLyPhongBan1" Association="Arua2Model.Store.FK_QLNS_QuanLyNhanVien_QLNS_QuanLyPhongBan1">
+      <End Role="QLNS_QuanLyPhongBan" EntitySet="QLNS_QuanLyPhongBan" />
+      <End Role="QLNS_QuanLyNhanVien" EntitySet="QLNS_QuanLyNhanVien" />
+    </AssociationSet>
+    <AssociationSet Name="FK_QLNS_QuanLyNhanVien_QLNS_QuanLyTrinhDo1" Association="Arua2Model.Store.FK_QLNS_QuanLyNhanVien_QLNS_QuanLyTrinhDo1">
+      <End Role="QLNS_QuanLyTrinhDo" EntitySet="QLNS_QuanLyTrinhDo" />
+      <End Role="QLNS_QuanLyNhanVien" EntitySet="QLNS_QuanLyNhanVien" />
+    </AssociationSet>
+    <AssociationSet Name="FK_QLTaiChinh_ChuyenKhoan_QLTaiChinh_QuanLyTaiKhoan3" Association="Arua2Model.Store.FK_QLTaiChinh_ChuyenKhoan_QLTaiChinh_QuanLyTaiKhoan3">
+      <End Role="QLTaiChinh_QuanLyTaiKhoan" EntitySet="QLTaiChinh_QuanLyTaiKhoan" />
+      <End Role="QLTaiChinh_ChuyenKhoan" EntitySet="QLTaiChinh_ChuyenKhoan" />
+    </AssociationSet>
+    <AssociationSet Name="FK_QLTaiChinh_QuanLychi_QLTaiChinh_DanhMucChi1" Association="Arua2Model.Store.FK_QLTaiChinh_QuanLychi_QLTaiChinh_DanhMucChi1">
+      <End Role="QLTaiChinh_DanhMucChi" EntitySet="QLTaiChinh_DanhMucChi" />
+      <End Role="QLTaiChinh_QuanLychi" EntitySet="QLTaiChinh_QuanLychi" />
+    </AssociationSet>
+    <AssociationSet Name="FK_QLTaiChinh_QuanLychi_QLTaiChinh_QuanLyTaiKhoan1" Association="Arua2Model.Store.FK_QLTaiChinh_QuanLychi_QLTaiChinh_QuanLyTaiKhoan1">
+      <End Role="QLTaiChinh_QuanLyTaiKhoan" EntitySet="QLTaiChinh_QuanLyTaiKhoan" />
+      <End Role="QLTaiChinh_QuanLychi" EntitySet="QLTaiChinh_QuanLychi" />
+    </AssociationSet>
+    <AssociationSet Name="FK_QLTaiChinh_QuanLyThu_QLTaiChinh_QuanLyDanhMucThu1" Association="Arua2Model.Store.FK_QLTaiChinh_QuanLyThu_QLTaiChinh_QuanLyDanhMucThu1">
+      <End Role="QLTaiChinh_QuanLyDanhMucThu" EntitySet="QLTaiChinh_QuanLyDanhMucThu" />
+      <End Role="QLTaiChinh_QuanLyThu" EntitySet="QLTaiChinh_QuanLyThu" />
+    </AssociationSet>
+    <AssociationSet Name="FK_QLTaiChinh_QuanLyThu_QLTaiChinh_QuanLyTaiKhoan1" Association="Arua2Model.Store.FK_QLTaiChinh_QuanLyThu_QLTaiChinh_QuanLyTaiKhoan1">
+      <End Role="QLTaiChinh_QuanLyTaiKhoan" EntitySet="QLTaiChinh_QuanLyTaiKhoan" />
+      <End Role="QLTaiChinh_QuanLyThu" EntitySet="QLTaiChinh_QuanLyThu" />
+    </AssociationSet>
+    <AssociationSet Name="FK_QLTaiSan_QuanLyThongTinTaiSan_QLNS_QuanLyPhongBan1" Association="Arua2Model.Store.FK_QLTaiSan_QuanLyThongTinTaiSan_QLNS_QuanLyPhongBan1">
+      <End Role="QLNS_QuanLyPhongBan" EntitySet="QLNS_QuanLyPhongBan" />
+      <End Role="QLTaiSan_QuanLyThongTinTaiSan" EntitySet="QLTaiSan_QuanLyThongTinTaiSan" />
+    </AssociationSet>
+    <AssociationSet Name="FK_QLTaiSan_QuanLyThongTinTaiSan_QLTaiSan_QuanLyLDanhMuc1" Association="Arua2Model.Store.FK_QLTaiSan_QuanLyThongTinTaiSan_QLTaiSan_QuanLyLDanhMuc1">
+      <End Role="QLTaiSan_QuanLyLDanhMuc" EntitySet="QLTaiSan_QuanLyLDanhMuc" />
+      <End Role="QLTaiSan_QuanLyThongTinTaiSan" EntitySet="QLTaiSan_QuanLyThongTinTaiSan" />
+    </AssociationSet>
+    <AssociationSet Name="FK_QLTaiSan_QuanLyThongTinTaiSan_QLTaiSan_QuanLyTinhTrang1" Association="Arua2Model.Store.FK_QLTaiSan_QuanLyThongTinTaiSan_QLTaiSan_QuanLyTinhTrang1">
+      <End Role="QLTaiSan_QuanLyTinhTrang" EntitySet="QLTaiSan_QuanLyTinhTrang" />
+      <End Role="QLTaiSan_QuanLyThongTinTaiSan" EntitySet="QLTaiSan_QuanLyThongTinTaiSan" />
+    </AssociationSet>
+    <AssociationSet Name="FK_role_module_module" Association="Arua2Model.Store.FK_role_module_module">
+      <End Role="module" EntitySet="module" />
+      <End Role="role_module" EntitySet="role_module" />
+    </AssociationSet>
+    <AssociationSet Name="FK_role_module_role" Association="Arua2Model.Store.FK_role_module_role">
+      <End Role="role" EntitySet="role" />
+      <End Role="role_module" EntitySet="role_module" />
+    </AssociationSet>
+    <AssociationSet Name="FK_user_group_role_role" Association="Arua2Model.Store.FK_user_group_role_role">
+      <End Role="role" EntitySet="role" />
+      <End Role="user_group_role" EntitySet="user_group_role" />
+    </AssociationSet>
+    <AssociationSet Name="FK_user_group_role_user_group" Association="Arua2Model.Store.FK_user_group_role_user_group">
+      <End Role="user_group" EntitySet="user_group" />
+      <End Role="user_group_role" EntitySet="user_group_role" />
+    </AssociationSet>
+    <AssociationSet Name="FK_user_profile_user" Association="Arua2Model.Store.FK_user_profile_user">
+      <End Role="user" EntitySet="user" />
+      <End Role="user_profile" EntitySet="user_profile" />
+    </AssociationSet>
+    <AssociationSet Name="FK_user_usergroup_user" Association="Arua2Model.Store.FK_user_usergroup_user">
+      <End Role="user" EntitySet="user" />
+      <End Role="user_usergroup" EntitySet="user_usergroup" />
+    </AssociationSet>
+    <AssociationSet Name="FK_user_usergroup_user_group" Association="Arua2Model.Store.FK_user_usergroup_user_group">
+      <End Role="user_group" EntitySet="user_group" />
+      <End Role="user_usergroup" EntitySet="user_usergroup" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="module">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="code" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="name" Type="nvarchar" MaxLength="500" />
+    <Property Name="ws_method" Type="nvarchar" MaxLength="500" />
+    <Property Name="web_method" Type="nvarchar" />
+    <Property Name="order" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="QLKhachHang_QuanLyGiaoDich">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="TenGiaoDich" Type="nvarchar" MaxLength="100" />
+    <Property Name="NgayGiaoDich" Type="datetime" />
+    <Property Name="KhachHangID" Type="bigint" />
+    <Property Name="DiaDiemGiaoDich" Type="nvarchar" MaxLength="200" />
+    <Property Name="HinhThucGiaoDich" Type="nvarchar" MaxLength="100" />
+    <Property Name="MoTa" Type="nvarchar(max)" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="UserID" Type="bigint" />
+    <Property Name="PortalID" Type="bigint" />
+  </EntityType>
+  <EntityType Name="QLKhachHang_QuanLyKhachHang">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="TenCoQuan" Type="nvarchar" MaxLength="100" />
+    <Property Name="TenDayDu" Type="nvarchar" MaxLength="200" />
+    <Property Name="Diachi" Type="nvarchar" MaxLength="200" />
+    <Property Name="DienThoai" Type="nchar" MaxLength="12" />
+    <Property Name="Fax" Type="nchar" MaxLength="12" />
+    <Property Name="Email" Type="nchar" MaxLength="20" />
+    <Property Name="Website" Type="nchar" MaxLength="40" />
+    <Property Name="Masothue" Type="nchar" MaxLength="15" />
+    <Property Name="NganhNgheID" Type="bigint" />
+    <Property Name="DanhGia" Type="nvarchar" MaxLength="300" />
+    <Property Name="ThongtinGioiThieu" Type="nvarchar(max)" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="UserID" Type="bigint" />
+    <Property Name="PortalID" Type="bigint" />
+  </EntityType>
+  <EntityType Name="QLKhachHang_QuanLyNganhNghe">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" />
+    <Property Name="TenNganhNghe" Type="nvarchar" MaxLength="200" />
+    <Property Name="MoTa" Type="nvarchar(max)" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="UserID" Type="bigint" />
+    <Property Name="PortalID" Type="bigint" />
+  </EntityType>
+  <EntityType Name="QLNS_QuanLyChamCong">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="NhanvienID" Type="bigint" />
+    <Property Name="TongCongTrongThang" Type="nchar" MaxLength="10" />
+    <Property Name="SoNgayNghiLe" Type="float" />
+    <Property Name="SoNgayNghiPhep" Type="float" />
+    <Property Name="soNgayKhongPhep" Type="float" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="MoTa" Type="nvarchar(max)" />
+    <Property Name="UserID" Type="bigint" />
+    <Property Name="PortalID" Type="bigint" />
+  </EntityType>
+  <EntityType Name="QLNS_QuanLyChucVu">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="MaChucVu" Type="nchar" MaxLength="50" />
+    <Property Name="TenChucVu" Type="nvarchar" MaxLength="200" />
+    <Property Name="Mota" Type="nvarchar(max)" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="UserID" Type="bigint" />
+    <Property Name="PortalID" Type="bigint" />
+  </EntityType>
+  <EntityType Name="QLNS_QuanLyHopDong">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="MaHopDong" Type="nchar" MaxLength="50" />
+    <Property Name="NhanVienID" Type="bigint" />
+    <Property Name="TenHopDong" Type="nvarchar" MaxLength="200" />
+    <Property Name="NgayKyHD" Type="datetime" />
+    <Property Name="NgayKetThuc" Type="datetime" />
+    <Property Name="Luong" Type="bigint" />
+    <Property Name="PhuCap" Type="bigint" />
+    <Property Name="ThoigianHopDongID" Type="bigint" />
+    <Property Name="NguoiKyID" Type="bigint" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="Mota" Type="nvarchar(max)" />
+    <Property Name="HinhThucTraLuong" Type="nvarchar" MaxLength="200" />
+    <Property Name="UserID" Type="bigint" />
+    <Property Name="PortalID" Type="bigint" />
+  </EntityType>
+  <EntityType Name="QLNS_QuanLyKhenThuong">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="NhanVienID" Type="bigint" />
+    <Property Name="LyDo" Type="nvarchar(max)" />
+    <Property Name="MoTa" Type="nvarchar(max)" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="UserID" Type="bigint" />
+    <Property Name="PortalID" Type="bigint" />
+  </EntityType>
+  <EntityType Name="QLNS_QuanLyNhanVien">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="MaNV" Type="nchar" MaxLength="50" />
+    <Property Name="PhongBanID" Type="bigint" />
+    <Property Name="TenNV" Type="nvarchar" MaxLength="200" />
+    <Property Name="NgaySinh" Type="datetime" />
+    <Property Name="GioiTinh" Type="char" MaxLength="1" />
+    <Property Name="SoCMND" Type="nchar" MaxLength="20" />
+    <Property Name="NgayCapCMND" Type="datetime" />
+    <Property Name="NoiCapCMND" Type="nvarchar" MaxLength="200" />
+    <Property Name="AnhDaiDien" Type="nvarchar" MaxLength="200" />
+    <Property Name="DiaChi" Type="nvarchar" MaxLength="200" />
+    <Property Name="NguyenQuan" Type="nvarchar" MaxLength="200" />
+    <Property Name="SoDienThoai" Type="nchar" MaxLength="12" />
+    <Property Name="TTHonNhan" Type="bit" />
+    <Property Name="MaSoBHXH" Type="nchar" MaxLength="20" />
+    <Property Name="NgayCapBHXH" Type="datetime" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="ChucvuID" Type="bigint" />
+    <Property Name="TrinhDoID" Type="bigint" />
+    <Property Name="NgayDiLam" Type="datetime" />
+    <Property Name="NgayNghiViec" Type="datetime" />
+    <Property Name="TinhTrangNghiViec" Type="bit" />
+    <Property Name="ThongtinCaNhan" Type="nvarchar(max)" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="UserID" Type="bigint" />
+    <Property Name="PortalID" Type="bigint" />
+  </EntityType>
+  <EntityType Name="QLNS_QuanLyPhongBan">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" />
+    <Property Name="MaPhongBan" Type="nchar" MaxLength="50" />
+    <Property Name="TenPhongBan" Type="nvarchar" MaxLength="200" />
+    <Property Name="MoTa" Type="nvarchar(max)" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="UserID" Type="bigint" />
+    <Property Name="PortalID" Type="bigint" />
+  </EntityType>
+  <EntityType Name="QLNS_QuanLyThoiGianHopDong">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ThoiGianHopDong" Type="nvarchar" MaxLength="50" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="Mota" Type="nvarchar(max)" />
+    <Property Name="UserID" Type="bigint" />
+    <Property Name="PortalID" Type="bigint" />
+  </EntityType>
+  <EntityType Name="QLNS_QuanLyTrinhDo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="MaTrinhDo" Type="nchar" MaxLength="50" />
+    <Property Name="TenTrinhDo" Type="nvarchar" MaxLength="200" />
+    <Property Name="Mota" Type="nvarchar(max)" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="UserID" Type="bigint" />
+    <Property Name="PortalID" Type="bigint" />
+  </EntityType>
+  <EntityType Name="QLTaiChinh_ChuyenKhoan">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="TaiKhoanChuyenID" Type="bigint" />
+    <Property Name="TaiKhoanNhanID" Type="bigint" />
+    <Property Name="Sotien" Type="float" />
+    <Property Name="NgayChuyen" Type="datetime" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="UserID" Type="bigint" />
+    <Property Name="PortalID" Type="bigint" />
+    <Property Name="MoTa" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="QLTaiChinh_DanhMucChi">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="TenDanhMucChi" Type="nvarchar" MaxLength="100" />
+    <Property Name="MoTa" Type="nvarchar(max)" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="UserID" Type="bigint" />
+    <Property Name="PortalID" Type="bigint" />
+  </EntityType>
+  <EntityType Name="QLTaiChinh_QuanLychi">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="DanhMucChiID" Type="bigint" />
+    <Property Name="SoTienChi" Type="float" />
+    <Property Name="TaiKhoanID" Type="bigint" />
+    <Property Name="NgayChi" Type="datetime" />
+    <Property Name="ChiChoAi" Type="nvarchar" MaxLength="100" />
+    <Property Name="MoTa" Type="nvarchar(max)" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="UserID" Type="bigint" />
+    <Property Name="PortalID" Type="bigint" />
+  </EntityType>
+  <EntityType Name="QLTaiChinh_QuanLyDanhMucThu">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="TenDanhMucThu" Type="nvarchar" MaxLength="100" />
+    <Property Name="MoTa" Type="nvarchar(max)" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="UserID" Type="bigint" />
+    <Property Name="PortalID" Type="bigint" />
+  </EntityType>
+  <EntityType Name="QLTaiChinh_QuanLyTaiKhoan">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="TenTaiKhoan" Type="nvarchar" MaxLength="100" />
+    <Property Name="SoTien" Type="float" />
+    <Property Name="MoTa" Type="nvarchar(max)" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="UserID" Type="bigint" />
+    <Property Name="PortalID" Type="bigint" />
+    <Property Name="DanhMucID" Type="bigint" />
+  </EntityType>
+  <EntityType Name="QLTaiChinh_QuanLyThu">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="DanhMucThuID" Type="bigint" />
+    <Property Name="SoTienThu" Type="float" />
+    <Property Name="TaiKhoanID" Type="bigint" />
+    <Property Name="NgayChi" Type="datetime" />
+    <Property Name="ThuNguonNao" Type="nvarchar" MaxLength="100" />
+    <Property Name="MoTa" Type="nvarchar(max)" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="UserID" Type="bigint" />
+    <Property Name="PortalID" Type="bigint" />
+  </EntityType>
+  <EntityType Name="QLTaiSan_QuanLyLDanhMuc">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="MaDanhMuc" Type="nchar" MaxLength="50" />
+    <Property Name="TenDanhMuc" Type="nvarchar" MaxLength="200" />
+    <Property Name="MoTa" Type="nchar" MaxLength="10" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="UserID" Type="bigint" />
+    <Property Name="PortalID" Type="bigint" />
+  </EntityType>
+  <EntityType Name="QLTaiSan_QuanLyThongTinTaiSan">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="MaTaiSan" Type="nchar" MaxLength="50" />
+    <Property Name="TenTaiSan" Type="nvarchar" MaxLength="200" />
+    <Property Name="NhaSanXuat" Type="nvarchar" MaxLength="200" />
+    <Property Name="TriGiaTaiSan" Type="bigint" />
+    <Property Name="DanhMucID" Type="bigint" />
+    <Property Name="PhongBanID" Type="bigint" />
+    <Property Name="NgayMua" Type="datetime" />
+    <Property Name="BaoHanh" Type="nvarchar" MaxLength="50" />
+    <Property Name="TinhTrangID" Type="bigint" />
+    <Property Name="HinhAnh" Type="nvarchar(max)" />
+    <Property Name="Mota" Type="nvarchar(max)" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="UserID" Type="bigint" />
+    <Property Name="PortalID" Type="bigint" />
+  </EntityType>
+  <EntityType Name="QLTaiSan_QuanLyTinhTrang">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="TenTinhTrang" Type="nvarchar" MaxLength="50" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="UserID" Type="bigint" />
+    <Property Name="PortalID" Type="bigint" />
+  </EntityType>
+  <EntityType Name="role">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="code" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="150" />
+    <Property Name="title" Type="nvarchar" Nullable="false" MaxLength="200" />
+    <Property Name="status" Type="int" Nullable="false" />
+    <Property Name="type" Type="int" />
+    <Property Name="create_date" Type="datetime" Nullable="false" />
+    <Property Name="modified_date" Type="datetime" Nullable="false" />
+    <Property Name="description" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="role_module">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="role_Id" Type="bigint" Nullable="false" />
+    <Property Name="module_Id" Type="bigint" Nullable="false" />
+    <Property Name="status" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="user">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="username" Type="nvarchar" Nullable="false" MaxLength="75" />
+    <Property Name="password" Type="nvarchar" Nullable="false" MaxLength="75" />
+    <Property Name="company_Id" Type="bigint" Nullable="false" />
+    <Property Name="is_super_user" Type="bit" Nullable="false" />
+    <Property Name="create_date" Type="datetime" Nullable="false" />
+    <Property Name="modify_date" Type="datetime" Nullable="false" />
+    <Property Name="expired_date" Type="datetime" />
+    <Property Name="password_encrypted" Type="bit" Nullable="false" />
+    <Property Name="password_modify_date" Type="datetime" Nullable="false" />
+    <Property Name="password_encrypted_method" Type="nvarchar" Nullable="false" MaxLength="30" />
+    <Property Name="screenname" Type="nvarchar" Nullable="false" MaxLength="75" />
+    <Property Name="login_date" Type="datetime" Nullable="false" />
+    <Property Name="last_failed_login_date" Type="datetime" />
+    <Property Name="failed_login_attemp" Type="int" Nullable="false" />
+    <Property Name="lockout" Type="bit" Nullable="false" />
+    <Property Name="lockout_date" Type="datetime" Nullable="false" />
+    <Property Name="status" Type="int" Nullable="false" />
+    <Property Name="description" Type="nvarchar" MaxLength="200" />
+    <Property Name="discount_percent" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="user_group">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="code" Type="nvarchar" Nullable="false" MaxLength="150" />
+    <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="150" />
+    <Property Name="description" Type="nvarchar" MaxLength="150" />
+    <Property Name="create_date" Type="datetime" Nullable="false" />
+    <Property Name="modified_date" Type="datetime" Nullable="false" />
+    <Property Name="status" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="user_group_role">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="user_group_Id" Type="bigint" Nullable="false" />
+    <Property Name="role_Id" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="user_profile">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="User_Id" Type="bigint" />
+    <Property Name="code" Type="nvarchar" MaxLength="20" />
+    <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="phone" Type="nvarchar" MaxLength="20" />
+    <Property Name="address" Type="nvarchar" MaxLength="200" />
+    <Property Name="email" Type="nvarchar" MaxLength="50" />
+    <Property Name="create_date" Type="datetime" Nullable="false" />
+    <Property Name="dob" Type="date" />
+    <Property Name="modified_date" Type="datetime" />
+    <Property Name="description" Type="nvarchar" MaxLength="150" />
+  </EntityType>
+  <EntityType Name="user_usergroup">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="user_Id" Type="bigint" Nullable="false" />
+    <Property Name="user_usergroup" Type="bigint" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_QLKhachHang_QuanLyGiaoDich_QLKhachHang_QuanLyKhachHang1">
+    <End Role="QLKhachHang_QuanLyKhachHang" Type="Arua2Model.Store.QLKhachHang_QuanLyKhachHang" Multiplicity="0..1" />
+    <End Role="QLKhachHang_QuanLyGiaoDich" Type="Arua2Model.Store.QLKhachHang_QuanLyGiaoDich" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QLKhachHang_QuanLyKhachHang">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="QLKhachHang_QuanLyGiaoDich">
+        <PropertyRef Name="KhachHangID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_QLKhachHang_QuanLyKhachHang_QLKhachHang_QuanLyNganhNghe1">
+    <End Role="QLKhachHang_QuanLyNganhNghe" Type="Arua2Model.Store.QLKhachHang_QuanLyNganhNghe" Multiplicity="0..1" />
+    <End Role="QLKhachHang_QuanLyKhachHang" Type="Arua2Model.Store.QLKhachHang_QuanLyKhachHang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QLKhachHang_QuanLyNganhNghe">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="QLKhachHang_QuanLyKhachHang">
+        <PropertyRef Name="NganhNgheID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_QLNS_QuanLyChamCong_QLNS_QuanLyNhanVien1">
+    <End Role="QLNS_QuanLyNhanVien" Type="Arua2Model.Store.QLNS_QuanLyNhanVien" Multiplicity="0..1" />
+    <End Role="QLNS_QuanLyChamCong" Type="Arua2Model.Store.QLNS_QuanLyChamCong" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QLNS_QuanLyNhanVien">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="QLNS_QuanLyChamCong">
+        <PropertyRef Name="NhanvienID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_QLNS_QuanLyHopDong_QLNS_QuanLyNhanVien">
+    <End Role="QLNS_QuanLyNhanVien" Type="Arua2Model.Store.QLNS_QuanLyNhanVien" Multiplicity="0..1" />
+    <End Role="QLNS_QuanLyHopDong" Type="Arua2Model.Store.QLNS_QuanLyHopDong" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QLNS_QuanLyNhanVien">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="QLNS_QuanLyHopDong">
+        <PropertyRef Name="NhanVienID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_QLNS_QuanLyHopDong_QLNS_QuanLyThoiGianHopDong1">
+    <End Role="QLNS_QuanLyThoiGianHopDong" Type="Arua2Model.Store.QLNS_QuanLyThoiGianHopDong" Multiplicity="0..1" />
+    <End Role="QLNS_QuanLyHopDong" Type="Arua2Model.Store.QLNS_QuanLyHopDong" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QLNS_QuanLyThoiGianHopDong">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="QLNS_QuanLyHopDong">
+        <PropertyRef Name="ThoigianHopDongID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_QLNS_QuanLyKhenThuong_QLNS_QuanLyNhanVien1">
+    <End Role="QLNS_QuanLyNhanVien" Type="Arua2Model.Store.QLNS_QuanLyNhanVien" Multiplicity="0..1" />
+    <End Role="QLNS_QuanLyKhenThuong" Type="Arua2Model.Store.QLNS_QuanLyKhenThuong" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QLNS_QuanLyNhanVien">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="QLNS_QuanLyKhenThuong">
+        <PropertyRef Name="NhanVienID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_QLNS_QuanLyNhanVien_QLNS_QuanLyChucVu1">
+    <End Role="QLNS_QuanLyChucVu" Type="Arua2Model.Store.QLNS_QuanLyChucVu" Multiplicity="0..1" />
+    <End Role="QLNS_QuanLyNhanVien" Type="Arua2Model.Store.QLNS_QuanLyNhanVien" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QLNS_QuanLyChucVu">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="QLNS_QuanLyNhanVien">
+        <PropertyRef Name="ChucvuID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_QLNS_QuanLyNhanVien_QLNS_QuanLyPhongBan1">
+    <End Role="QLNS_QuanLyPhongBan" Type="Arua2Model.Store.QLNS_QuanLyPhongBan" Multiplicity="0..1" />
+    <End Role="QLNS_QuanLyNhanVien" Type="Arua2Model.Store.QLNS_QuanLyNhanVien" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QLNS_QuanLyPhongBan">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="QLNS_QuanLyNhanVien">
+        <PropertyRef Name="PhongBanID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_QLNS_QuanLyNhanVien_QLNS_QuanLyTrinhDo1">
+    <End Role="QLNS_QuanLyTrinhDo" Type="Arua2Model.Store.QLNS_QuanLyTrinhDo" Multiplicity="0..1" />
+    <End Role="QLNS_QuanLyNhanVien" Type="Arua2Model.Store.QLNS_QuanLyNhanVien" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QLNS_QuanLyTrinhDo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="QLNS_QuanLyNhanVien">
+        <PropertyRef Name="TrinhDoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_QLTaiChinh_ChuyenKhoan_QLTaiChinh_QuanLyTaiKhoan3">
+    <End Role="QLTaiChinh_QuanLyTaiKhoan" Type="Arua2Model.Store.QLTaiChinh_QuanLyTaiKhoan" Multiplicity="0..1" />
+    <End Role="QLTaiChinh_ChuyenKhoan" Type="Arua2Model.Store.QLTaiChinh_ChuyenKhoan" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QLTaiChinh_QuanLyTaiKhoan">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="QLTaiChinh_ChuyenKhoan">
+        <PropertyRef Name="TaiKhoanNhanID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_QLTaiChinh_QuanLychi_QLTaiChinh_DanhMucChi1">
+    <End Role="QLTaiChinh_DanhMucChi" Type="Arua2Model.Store.QLTaiChinh_DanhMucChi" Multiplicity="0..1" />
+    <End Role="QLTaiChinh_QuanLychi" Type="Arua2Model.Store.QLTaiChinh_QuanLychi" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QLTaiChinh_DanhMucChi">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="QLTaiChinh_QuanLychi">
+        <PropertyRef Name="DanhMucChiID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_QLTaiChinh_QuanLychi_QLTaiChinh_QuanLyTaiKhoan1">
+    <End Role="QLTaiChinh_QuanLyTaiKhoan" Type="Arua2Model.Store.QLTaiChinh_QuanLyTaiKhoan" Multiplicity="0..1" />
+    <End Role="QLTaiChinh_QuanLychi" Type="Arua2Model.Store.QLTaiChinh_QuanLychi" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QLTaiChinh_QuanLyTaiKhoan">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="QLTaiChinh_QuanLychi">
+        <PropertyRef Name="TaiKhoanID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_QLTaiChinh_QuanLyThu_QLTaiChinh_QuanLyDanhMucThu1">
+    <End Role="QLTaiChinh_QuanLyDanhMucThu" Type="Arua2Model.Store.QLTaiChinh_QuanLyDanhMucThu" Multiplicity="0..1" />
+    <End Role="QLTaiChinh_QuanLyThu" Type="Arua2Model.Store.QLTaiChinh_QuanLyThu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QLTaiChinh_QuanLyDanhMucThu">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="QLTaiChinh_QuanLyThu">
+        <PropertyRef Name="DanhMucThuID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_QLTaiChinh_QuanLyThu_QLTaiChinh_QuanLyTaiKhoan1">
+    <End Role="QLTaiChinh_QuanLyTaiKhoan" Type="Arua2Model.Store.QLTaiChinh_QuanLyTaiKhoan" Multiplicity="0..1" />
+    <End Role="QLTaiChinh_QuanLyThu" Type="Arua2Model.Store.QLTaiChinh_QuanLyThu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QLTaiChinh_QuanLyTaiKhoan">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="QLTaiChinh_QuanLyThu">
+        <PropertyRef Name="TaiKhoanID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_QLTaiSan_QuanLyThongTinTaiSan_QLNS_QuanLyPhongBan1">
+    <End Role="QLNS_QuanLyPhongBan" Type="Arua2Model.Store.QLNS_QuanLyPhongBan" Multiplicity="0..1" />
+    <End Role="QLTaiSan_QuanLyThongTinTaiSan" Type="Arua2Model.Store.QLTaiSan_QuanLyThongTinTaiSan" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QLNS_QuanLyPhongBan">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="QLTaiSan_QuanLyThongTinTaiSan">
+        <PropertyRef Name="PhongBanID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_QLTaiSan_QuanLyThongTinTaiSan_QLTaiSan_QuanLyLDanhMuc1">
+    <End Role="QLTaiSan_QuanLyLDanhMuc" Type="Arua2Model.Store.QLTaiSan_QuanLyLDanhMuc" Multiplicity="0..1" />
+    <End Role="QLTaiSan_QuanLyThongTinTaiSan" Type="Arua2Model.Store.QLTaiSan_QuanLyThongTinTaiSan" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QLTaiSan_QuanLyLDanhMuc">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="QLTaiSan_QuanLyThongTinTaiSan">
+        <PropertyRef Name="DanhMucID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_QLTaiSan_QuanLyThongTinTaiSan_QLTaiSan_QuanLyTinhTrang1">
+    <End Role="QLTaiSan_QuanLyTinhTrang" Type="Arua2Model.Store.QLTaiSan_QuanLyTinhTrang" Multiplicity="0..1" />
+    <End Role="QLTaiSan_QuanLyThongTinTaiSan" Type="Arua2Model.Store.QLTaiSan_QuanLyThongTinTaiSan" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QLTaiSan_QuanLyTinhTrang">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="QLTaiSan_QuanLyThongTinTaiSan">
+        <PropertyRef Name="TinhTrangID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_role_module_module">
+    <End Role="module" Type="Arua2Model.Store.module" Multiplicity="1" />
+    <End Role="role_module" Type="Arua2Model.Store.role_module" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="module">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="role_module">
+        <PropertyRef Name="module_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_role_module_role">
+    <End Role="role" Type="Arua2Model.Store.role" Multiplicity="1" />
+    <End Role="role_module" Type="Arua2Model.Store.role_module" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="role">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="role_module">
+        <PropertyRef Name="role_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_user_group_role_role">
+    <End Role="role" Type="Arua2Model.Store.role" Multiplicity="1" />
+    <End Role="user_group_role" Type="Arua2Model.Store.user_group_role" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="role">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="user_group_role">
+        <PropertyRef Name="role_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_user_group_role_user_group">
+    <End Role="user_group" Type="Arua2Model.Store.user_group" Multiplicity="1" />
+    <End Role="user_group_role" Type="Arua2Model.Store.user_group_role" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user_group">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="user_group_role">
+        <PropertyRef Name="user_group_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_user_profile_user">
+    <End Role="user" Type="Arua2Model.Store.user" Multiplicity="0..1" />
+    <End Role="user_profile" Type="Arua2Model.Store.user_profile" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="user_profile">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_user_usergroup_user">
+    <End Role="user" Type="Arua2Model.Store.user" Multiplicity="1" />
+    <End Role="user_usergroup" Type="Arua2Model.Store.user_usergroup" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="user_usergroup">
+        <PropertyRef Name="user_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_user_usergroup_user_group">
+    <End Role="user_group" Type="Arua2Model.Store.user_group" Multiplicity="1" />
+    <End Role="user_usergroup" Type="Arua2Model.Store.user_usergroup" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user_group">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="user_usergroup">
+        <PropertyRef Name="user_usergroup" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="GetAllModuleByUserId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="GetAllRolesByUserId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="GetUserByUserName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserName" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="GetUserByUserNameAndPassword" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserName" Type="nvarchar" Mode="In" />
+    <Parameter Name="Password" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="SearchVoucherByKey" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="key" Type="nvarchar" Mode="In" />
+    <Parameter Name="voucher_type" Type="bigint" Mode="In" />
+    <Parameter Name="location" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="SearchVoucherByKey1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="key" Type="nvarchar" Mode="In" />
+    <Parameter Name="voucher_type" Type="bigint" Mode="In" />
+    <Parameter Name="location" Type="bigint" Mode="In" />
+  </Function>
+</Schema>

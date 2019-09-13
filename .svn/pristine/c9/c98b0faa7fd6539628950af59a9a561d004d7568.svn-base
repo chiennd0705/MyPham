@@ -1,0 +1,200 @@
+﻿
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel"><strong><i class="fa fa-user"></i> Đăng nhập</strong></h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-main col-lg-12">
+                        <div class="account-login">
+                            <form method="post" id="login-form" action="/Login/Login">
+                                <div class="row">
+                                    <div class="col-lg-6 new-users account-login-title new-users-title">
+                                        <div class="content">
+                                            <div class="account-login-title registered-users-title">
+                                                <h2>Tài khoản đã đăng ký</h2>
+                                            </div>
+                                            <p>Nếu bạn đã có tài khoản, vui lòng đăng nhập.</p>
+                                            <ul class="form-list">
+                                                <li>
+                                                    <label for="email" class="required"><em>*</em>Tên đăng nhập hoặc hộp thư</label>
+                                                    <div class="input-box">
+                                                        <input type="text" name="email" value="" id="email" class="input-text required-entry " title="Tên đăng nhập hoặc hộp thư">
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <label for="pass" class="required"><em>*</em>Mật khẩu</label>
+                                                    <div class="input-box">
+                                                        <input type="password" name="pass" class="input-text required-entry validate-password" id="pass" title="Mật khẩu">
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                            <a href="#" class="f-left">Quên mật khẩu?</a>
+
+
+
+                                        </div>
+                                        <div class="buttons-set">
+                                            <button type="submit" class="button" title="Login" name="send" id="send2" onclick="login()"><span><span>Đăng nhập</span></span></button>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 new-users account-login-title new-users-title">
+                                        <div class="content">
+                                            <div class="account-login-title new-users-title">
+                                                <h2>Thành viên mới</h2>
+                                            </div>
+                                            <p class="form-list">Bằng cách tạo một tài khoản trên buygroup365, bạn sẽ có thể quản lý thông qua các quy trình kiểm tra nhanh hơn, lưu trữ nhiều địa chỉ gửi hàng, xem và theo dõi đơn đặt hàng của bạn trong tài khoản của bạn và nhiều hơn nữa.</p>
+                                        </div>
+                                        <div class="buttons-set">
+                                            @*<a type="button" title="Create an Account" class="button" href="/Member/Register"><span><span>Create an Account</span></span></a>*@
+                                            <button type="button" class="button" title="Create an Account" data-toggle="modal" data-target="#CreateAcount" data-dismiss="modal"><span><span>Tạo tài khoản</span></span></button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </form>
+                            <script type="text/javascript">
+                                //<![CDATA[
+                                var dataForm = new VarienForm('login-form', true);
+                                //]]>
+                                function login() {
+                                    $('#login-form').submit();
+                                }
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="CreateAcount" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel"><i class="fa fa-user"></i> Đăng ký tài khoản</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-main col-lg-12">
+
+                        <form method="post" id="register-form" action="/Login/Register">
+
+                            <div class="fieldset">
+                                <input type="hidden" name="success_url" value="">
+                                <input type="hidden" name="error_url" value="">
+                                <h2 class="legend">Thông tin người dùng</h2>
+                                <ul class="form-list">
+                                    <li class="">
+                                        <div class="customer-name-middlename">
+                                            <div class="field name-firstname">
+                                                <label for="firstname" class="required"><em>*</em>First Name</label>
+                                                <div class="input-box">
+                                                    <input type="text" id="firstname" name="firstname" value="" title="First Name" maxlength="255" class="input-text required-entry">
+                                                </div>
+                                            </div>
+                                            <div class="field name-lastname">
+                                                <label for="lastname" class="required"><em>*</em>Last Name</label>
+                                                <div class="input-box">
+                                                    <input type="text" id="lastname" name="lastname" value="" title="Last Name" maxlength="255" class="input-text required-entry">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <label for="email_address" class="required"><em>*</em>Hộp thư</label>
+                                        <div class="input-box">
+                                            <input type="text" name="email" id="email_address" value="" title="Hộp thư" class="input-text validate-email required-entry">
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="fieldset">
+                                <h2 class="legend">Thông tin đăng nhập</h2>
+                                <ul class="form-list">
+                                    <li class="fields">
+                                        <div class="field">
+                                            <label for="password" class="required"><em>*</em>Tên đang nhập</label>
+                                            <div class="input-box">
+                                                <input type="password" name="username" id="username" title="Tên đang nhập" class="input-text required-entry" onclick="CheckUserName()">
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label for="password" class="required"><em>*</em>Mật khẩu</label>
+                                            <div class="input-box">
+                                                <input type="password" name="password" id="password" title="Mật khẩu" class="input-text required-entry validate-password">
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label for="confirmation" class="required"><em>*</em>Nhập lại mật khẩu</label>
+                                            <div class="input-box">
+                                                <input type="password" name="confirmation" title="Nhập lại mật khẩu" id="confirmation" class="input-text required-entry validate-cpassword">
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+
+
+
+                            </div>
+                            <div class="buttons-set">
+                                <button type="submit" title="Submit" class="button" onclick="register()"><span><span>Đăng ký</span></span></button>
+                            </div>
+                        </form>
+                        <script type="text/javascript">
+                            //<![CDATA[
+                            var dataForm = new VarienForm('register-form', true);
+                            //]]>
+                            function register() {
+                                $('#register-form').submit();
+                            }
+                        </script>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    a.button {
+        background-color: #666666;
+        border-color: #eaeaea;
+        color: #ffffff;
+    }
+
+        a.button:hover {
+            background-color: #ff3366;
+            border-color: #ff3366;
+            color: #ffffff;
+        }
+
+        a.button span {
+            font-size: 14px;
+            height: 40px;
+            line-height: 40px;
+            padding: 0 20px;
+            text-align: center;
+            text-transform: capitalize;
+            white-space: nowrap;
+        }
+
+    .breadcrumb {
+        margin-bottom: 0 !important;
+        padding: 0 !important;
+    }
+
+    .panel {
+        border-radius: 0 !important;
+    }
+
+    .panel-default > .panel-heading, .breadcrumb {
+        background-color: ghostwhite !important;
+    }
+</style>
+

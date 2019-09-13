@@ -1,0 +1,96 @@
+﻿using Business.ClassBusiness;
+using Common.util;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.ServiceModel;
+using System.Web;
+using System.Web.Mvc;
+using MvcPaging;
+
+namespace BuyGroup365.Areas.Manage.Controllers
+{
+    public class MembersController : BaseController
+    {
+
+        readonly MembersBusiness _memberBusiness = new MembersBusiness();
+        readonly MemberProfileBusiness _memberProfileBusiness = new MemberProfileBusiness();
+        //
+        // GET: /Manage/Member/
+        #region QUẢN LÝ MEMBER
+
+
+        public ActionResult Index(string key, string fromDateSearch, string toDateSearch, int? page)
+        {
+            try
+            {
+                ViewData["status"] = true;
+                ViewData["key"] = key;
+                ViewData["fromDate"] = fromDateSearch;
+                ViewData["toDate"] = toDateSearch;
+
+                int currentPageIndex = page.HasValue ? page.Value : 1;
+
+                var list = _memberBusiness.GetByKey(key, fromDateSearch, toDateSearch).OrderByDescending(x => x.CreateDate).ToPagedList(currentPageIndex, 20);
+                return View(list);
+            }
+            catch (FaultException ex)
+            {
+                var exep = Function.GetExeption(ex);
+                var codeExp = exep[1];
+                string url = "Error/ErrorFunction/" + codeExp;
+                return RedirectToActionPermanent(url);
+            }
+        }
+
+        #region Delete member
+        public ActionResult DeleteMember(long id = 0)
+        {
+            try
+            {
+                if (id > 0)
+                {
+                    _memberBusiness.Remove(id);
+
+                }
+                return RedirectToAction("Index");
+            }
+            catch (FaultException ex)
+            {
+                var exep = Function.GetExeption(ex);
+                var codeExp = exep[1];
+                string url = "Error/ErrorFunction/" + codeExp;
+                return RedirectToActionPermanent(url);
+            }
+
+        }
+        #endregion
+        #endregion
+
+        #region Member Profile
+
+        #region Delete MemberProfile
+        public ActionResult DeleteMemberProfile(long id = 0)
+        {
+            try
+            {
+                if (id > 0)
+                {
+                    _memberProfileBusiness.Remove(id);
+
+                }
+                return RedirectToAction("MemberProfile");
+            }
+            catch (FaultException ex)
+            {
+                var exep = Function.GetExeption(ex);
+                var codeExp = exep[1];
+                string url = "Error/ErrorFunction/" + codeExp;
+                return RedirectToActionPermanent(url);
+            }
+
+        }
+        #endregion
+        #endregion
+    }
+}

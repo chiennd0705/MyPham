@@ -1,0 +1,65 @@
+﻿<div class="header-bottom">
+    <div class="header-sticker">
+        <div class="container">
+            <div class="border-bottom menu-mobile">
+                <div class="row menu-mobile-none">
+                    <div class="header-config-bg col-xs-12 col-sm-12 col-md-12">
+                        <div class="header-wrapper-bottom">
+                            <div class="custom-menu">
+
+                                @Html.Action("MenuCategory", "Partial")
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="header-setting header-setting-icon">
+                    <div class="settting-switcher">
+                        <div class="dropdown-toggle">
+                            <div class="text-setting">Links</div>
+                        </div>
+                        <div class="dropdown-switcher">
+                            <div class="top-links-alo">
+                                <div class="header-top-link">
+                                    <ul class="links">
+                                        <li class="first"><a href="/customer/account/" title="My Account">My Account</a></li>
+                                        <li><a href="/wishlist/" title="My Wishlist">My Wishlist</a></li>
+                                        <li><a href="/checkout/" title="Checkout" class="top-link-checkout">Checkout</a></li>
+                                        <li><a href="/testimonial/" title="Testimonial">Testimonial</a></li>
+                                        <li class=" last"><a href="/customer/account/login/" title="Log In">Log In</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- CART ICON ON MMENU -->
+                <div class="shopping-cart-box-ontop">
+                    <div class="miniCartWrap shopping-cart-box-ontop-content">
+                        <div class="mini-maincart">
+                            <div class="cartSummary">
+                                <div class="crat-icon">
+                                    <span class="zero">0 </span>
+                                    <p class="mt-cart-title">Shopping cart</p>
+                                </div>
+                                <div class="cart-header">
+                                    <p class="cart-tolatl">
+                                        <!--<span class="toltal"></span>-->
+                                        <span class="zero">0 items - </span>
+                                        <span><span class="price">$0.00</span></span>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="mini-contentCart" style="display: none">
+                                <div class="block-content">
+                                    <p class="empty">You have no items in your shopping cart.</p>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

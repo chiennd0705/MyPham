@@ -1,0 +1,46 @@
+﻿<div class="vmagicmenu clearfix">
+    <div class="block-title block-title-vmagicmenu">
+        <strong>
+            <span class="fa fa-bars"></span>
+            <span class="vmagicmenu-subtitle">Danh mục</span>
+        </strong>
+    </div>
+    <div class="block-vmagicmenu-content">
+        <ul class="vmagicmenu-narrow clearfix">
+            @Html.Raw(ViewData["StrMenu"])
+               
+        </ul>
+        <div class="all-cat"><span>Xem toàn bộ danh mục</span>@*<span style="display: none">Close</span>*@</div>
+    </div>
+</div>
+<div class="magicmenu clearfix">
+    <ul class="nav-desktop sticker">
+        <li class="level0 cat">
+            <a class="level-top" href="/"><span>Bao tử trường sinh <i class="icon-hot"></i></span><span class="boder-menu"></span></a>
+
+        </li>
+        <li class="level0 cat first">
+            <a class="level-top" href="http://vertu.vn/" target="_blank"><span>Điện thoại Vertu <i class="icon-hot"></i></span><span class="boder-menu"></span></a>
+
+        </li>
+        <li class="level0 cat">
+            <a class="level-top" href="/the-thao-van-hoa-pham-dm936"><span>Thể thao<span class="cat_label New">Mới</span></span><span class="boder-menu"></span></a>
+
+        </li>
+        <li class="level0 cat">
+            <a class="level-top" href="/may-tinh-may-anh-ky-thuat-so-dm588"><span>Kỹ thuật số</span><span class="boder-menu"></span></a>
+
+        </li>
+        <li class="level0 cat">
+            <a class="level-top" href="/nha-cua-do-gia-dung-dm364"><span>Đồ gia dụng </span><span class="boder-menu"></span></a>
+
+        </li>
+        <li class="level0 ext  first"><a class="level-top" href="/blog/"><span>Tin tức</span></a></li>
+    </ul>
+</div>
+<div class="nav-mobile" style="display: none;">
+    <h3 class="mobi-title">Danh mục</h3>
+    <ul>
+        @Html.Raw(ViewData["StrMenuMobile"])
+    </ul>
+</div>

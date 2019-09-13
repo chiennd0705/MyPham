@@ -1,0 +1,54 @@
+﻿@model Common.Order
+
+<div class="row">
+    <div class="col-sm-6">
+        <div class="fieldset" style=" min-height: 260px; ">
+            <h2 class="legend">Thông tin người nhận</h2>
+            <ul class="form-list">
+                <li class="fields">
+                    <div class="field">
+                        <label for="password" class="required">Họ tên: @Model.OrderReciver.Name</label>
+                    </div>
+                    <div class="field">
+                        <label for="password" class="required">Điện thoại: @Model.OrderReciver.PhoneNumber</label>
+                    </div>
+                    <div class="field">
+                        <label for="confirmation" class="required">Hộp thư: @Model.OrderReciver.Email</label>
+                    </div>
+                    <div class="field">
+                        <label for="confirmation" class="required">Địa chỉ: @Model.OrderReciver.Address</label>
+                    </div>
+                    <div class="field">
+                        @{ var date = (DateTime)Model.CreateDate;}
+                        <label for="confirmation" class="required">Ngày thực hiện: @date.ToString("dd/MM/yyyy")</label>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="fieldset" style=" min-height: 260px; ">
+            <h2 class="legend">Thông tin xuất hóa đơn</h2>
+            <ul class="form-list">
+                <li class="fields">
+                    <div class="field">
+                        <label for="password" class="required">Tên công ty: @Model.OrderBuyer.Name</label>
+                    </div>
+                    @*<div class="field">
+                        <label for="password" class="required">Điện thoại: @Model.OrderBuyer.PhoneNumber</label>
+                    </div>*@
+                    <div class="field">
+                        <label for="confirmation" class="required">Mã số thuế: @Model.OrderBuyer.CMTND</label>
+                    </div>
+                    <div class="field">
+                        <label for="confirmation" class="required">Địa chỉ: @Model.OrderBuyer.Address</label>
+                    </div>
+                    @*<div class="field">
+                        @{ var date1 = (DateTime)Model.CreateDate;}
+                        <label for="confirmation" class="required">Ngày thực hiện: @date1.ToString("dd/MM/yyyy")</label>
+                    </div>*@
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

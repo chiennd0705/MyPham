@@ -1,0 +1,20 @@
+﻿@using Business.ClassBusiness;
+
+@{
+    var listNewsGroup = new NewsGroupBusiness().GetListNewsGroup();
+}
+<div class="anav-container">
+    <div class="block block-anav">
+        <div class="block-title">
+            <strong><span>Danh mục tin</span></strong>
+        </div>
+        <ul class="nav-accordion">
+            @foreach (var items in listNewsGroup)
+            {
+                <li class="level0 nav-1 first level-top parent"><a href="/News/Index?rq=@items.Id" class="level-top"><span>@items.NewsGroupName</span></a></li>
+            }
+        </ul>
+        <div class="all-cat"><span>All Categories</span><span style="display:none">Close</span></div>
+    </div>
+</div>
+

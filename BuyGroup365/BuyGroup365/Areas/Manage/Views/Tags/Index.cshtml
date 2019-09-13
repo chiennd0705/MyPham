@@ -1,0 +1,222 @@
+﻿@using BuyGroup365.Areas.Manage.Models
+@using MvcPaging
+@model MvcPaging.IPagedList<Common.Tag>
+@using Common
+@using Business.ClassBusiness;
+@{
+    ViewBag.Title = "Cập nhật Tags";
+    Layout = "~/Areas/Manage/Views/Shared/_LayoutAdmincshtml.cshtml";
+}
+<script>
+    function BrowseServer() {
+        var finder = new CKFinder();
+        finder.BasePath = '/Content/css/ckfinder/';
+        finder.selectActionFunction = SetFileFiled;
+        // finder.SelectActionFunction = SetFileFiled;
+        //   finder.SelectFunction = SetFileFiled;
+        //   finder.SelectFunctionData = SetFileFiled;
+        finder.popup();
+    }
+    function SetFileFiled(FileUrl) {
+        document.getElementById('ImageSource').value = FileUrl;
+    }
+</script>
+<div class="container-fluid" ng-app="body">
+    @Html.Raw(AdminFunction.BindHeader("Albums", " Thêm mới", null, null, null))
+    <!-- /.row -->
+    <!-- /.row -->
+    <!-- /.row -->
+    <div class="row" ng-controller="Index">
+
+        <div class="col-lg-6">
+            @{
+                Tag tag;
+                long id = 0;
+                if (Request.QueryString["id"] != null)
+                {
+                    id = long.Parse(Request.QueryString["id"].ToString());
+                    tag = new TagsBusiness().GetById(id);
+                }
+                else
+                {
+                    tag = new Tag();
+                }
+
+            }
+            @using (Html.BeginForm("Update", "Tags", FormMethod.Post, new { enctype = "multipart/form-data", id = "Update" }))
+            {
+                <input type="hidden" value="@tag.Id" id="Id" name="id" />
+
+                <input type="hidden" value="@tag.TagUrl" id="TagNamecu" name="TagNamecu" />
+                @Html.ValidationSummary(true)
+
+                <div class="form-group">
+                    <label>Tiêu đề:<span class="required">*</span></label><br />
+                    <input class="form-control" autocomplete="off" maxlength="200" data-val-required="Mời nhập tiêu đề" id="TagName" required id="TagName" name="TagName" type="text" value="@tag.TagName" />
+                </div>
+                <div class="form-group">
+                    <label>Link Tag:</label><br />
+                    <input class="form-control" autocomplete="off" disabled="true" maxlength="200" data-val-required="Mời nhập tiêu đề" id="TagUrl" name="TagUrl" type="text" value="@tag.TagUrl" />
+                </div>
+                <div class="form-group">
+                    <label>Ảnh đại diện:<span class="required">*</span></label><br />
+                    <input id="ImageSource" name="ImageSource" required data-val-required="Trường là bắt buộc" value="@tag.ImageSource" type="text" class="input-block-level" />
+                    <input type="button" value="Browse Server" onclick="BrowseServer();" class="controls" />
+                </div>
+                <div class="form-group">
+                    <label>Loại</label><br />
+                    <select class="form-control" name="Type" id="Type">
+                        <option value="1" @(tag.Type == 1 ? "selected" : "")>Sản phẩm</option>
+                        <option value="2" @(tag.Type == 2 ? "selected" : "")>Tin tức</option>
+                        <option value="3" @(tag.Type == 3 ? "selected" : "")>Author</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Mô tả</label><br />
+                    <textarea class="form-control" id="Desctiption" name="Description" style="height:100px">@tag.Description</textarea>
+                </div>
+                <div class="form-group">
+                    <label>Thẻ tiêu đề:</label><br />
+                    <input class="form-control" autocomplete="off" maxlength="200" id="SeoTitle" name="SeoTitle" type="text" value="@tag.SeoTitle" />
+                </div>
+                <div class="form-group">
+                    <label>Thẻ từ khóa:</label><br />
+                    <input class="form-control" autocomplete="off" maxlength="200" id="SeoKeyword" name="SeoKeyword" type="text" value="@tag.SeoKeyword" />
+                </div>
+                <div class="form-group">
+                    <label>Mô tả</label><br />
+                    <textarea class="form-control" id="SeoDescription" name="SeoDescription" style="height:200px">@tag.SeoDescription</textarea>
+                </div>
+                <div class="form-group">
+                    <label>Tiêu đề chia sẻ:</label><br />
+                    <input class="form-control" autocomplete="off" maxlength="200" id="ShareTitle" name="ShareTitle" type="text" value="@tag.ShareTitle" />
+                </div>
+                <div class="form-group">
+                    <label>Từ khóa chia sẻ:</label><br />
+                    <input class="form-control" autocomplete="off" maxlength="300" id="ShareKeyword" name="ShareKeyword" type="text" value="@tag.ShareKeyword" />
+                </div>
+                <div class="form-group">
+                    <label>Mô tả chia sẻ:</label><br />
+                    <input class="form-control" id="ShareDescription" maxlength="500" name="ShareDescription" value="@tag.ShareDescription" />
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary" name="btnSubmit" value="Thêm">Thêm</button>
+
+                    @if (Request.QueryString["id"] != null)
+                    {
+                        <button type="submit" class="btn btn-primary" name="btnSubmit" value="Cập nhật">Cập nhật</button>
+                    }
+                </div>
+            }
+
+            <script type="text/javascript">
+
+                var setVAL = CKEDITOR.replace('Description', { height: 300 });
+
+                setVAL.CKFinder.setupCKEditor(setVAL, '/Content/css/ckfinder/');
+            </script>
+        </div>
+        <div class="col-lg-6">
+            @using (Ajax.BeginForm("Index", "CategoryProduct",
+           new AjaxOptions { UpdateTargetId = "grid-list", HttpMethod = "get", LoadingElementId = "loading", OnBegin = "beginPaging", OnSuccess = "successPaging", OnFailure = "failurePaging" },
+           new { id = "frm-search" }))
+            {
+                <div class="form-group input-group">
+                    <input type="text" value="@ViewData["key"]" class="form-control" id="key" name="key" placeholder="Nhập từ khóa tìm kiếm">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="submit">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </span>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover table-striped" id="dataTables" aria-describedby="dataTables-example_info">
+                        <thead>
+                            <tr role="row">
+                                <th style="width:80px">
+                                    STT
+                                </th>
+                                <th>
+                                    Tiêu đề tag
+                                </th>
+                                <th>
+                                    Loại tag
+                                </th>
+                                <th>
+                                    Link Tag
+                                </th>
+
+                                <th style="width: 120px;">Chức Năng</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                int i = Model.ItemStart;
+                            }
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td style="text-align:center">
+                                        @(i)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.TagName)
+                                    </td>
+                                    <td>
+                                        @(item.Type == 1 ? "Sản phẩm" : item.Type == 2 ? " tin tức" : item.Type == 3 ? "Tác giả" : "")
+                                    </td>
+                                    <td>
+                                        /@item.TagUrl
+                                    </td>
+
+                                    <td style="text-align: center">
+
+                                        <a href="/Manage/Tags/Index/?id=@item.Id">
+                                            <img src="~/img/IconMain/edit.png" width="19" title="Sửa" />
+                                        </a>
+                                        <a href="/Manage/Tags/Delete/@item.Id" title="Xóa" onclick="return confirm('Bạn có chắc chắn?');">
+                                            <img src="~/img/IconMain/remove.png" width="19" title="Xóa" />
+                                        </a>
+                                    </td>
+                                </tr>
+                                i++;
+                            }
+                        </tbody>
+                    </table>
+                    <div class="">
+                        <div class="dataTables_info" id="dataTables-example_info" role="alert" aria-live="polite" aria-relevant="all">Hiển thị từ @Model.ItemStart đến @Model.ItemEnd của @Model.TotalItemCount bản ghi</div>
+                    </div>
+                    <div class="">
+                        <div class="dataTables_paginate " id="dataTables-example_paginate">
+
+                            @Html.Raw(Ajax.Pager(
+                                new Options
+                                {
+                                    PageSize = Model.PageSize,
+                                    TotalItemCount = Model.TotalItemCount,
+                                    CurrentPage = Model.PageNumber,
+                                    ItemTexts = new ItemTexts() { Next = "Next", Previous = "Previous", Page = "P" },
+                                    ItemIcon = new ItemIcon() { First = "icon-backward", Previous = "icon-chevron-left", Next = "icon-chevron-right", Last = "icon-forward" },
+                                    TooltipTitles = new TooltipTitles() { Next = "Next page", Previous = "Previous page", Page = "Page {0}." },
+                                    Size = Size.normal,
+                                    Alignment = Alignment.centered,
+                                    IsShowControls = true,
+                                    IsShowFirstLast = true,
+                                    CssClass = ""
+                                },
+                                new AjaxOptions
+                                {
+                                    UpdateTargetId = "grid-list",
+                                    HttpMethod = "get",
+                                    LoadingElementId = "loading",
+                                    OnBegin = "beginPaging",
+                                    OnSuccess = "successPaging",
+                                    OnFailure = "failurePaging"
+                                }, new { controller = "Tags", action = "Index", name = ViewBag.TagName}))
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>

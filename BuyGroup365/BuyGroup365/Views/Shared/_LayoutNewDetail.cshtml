@@ -1,0 +1,104 @@
+﻿@using System.Web.Optimization
+@using BuyGroup365.Models.Common;
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>@Html.Raw(@ViewBag.Title)</title>
+    <meta property="og:locale" content="vi_VN">
+    <meta name="description" content="@Html.Raw(@ViewBag.Description)">
+    <meta name="keywords" content="@Html.Raw(@ViewBag.Keywords)">
+    <meta property="og:title" content="@Html.Raw(@ViewBag.ShareTitle)" />
+    <meta property="og:description" content="@Html.Raw(@ViewBag.ShareDescription)" />
+    <meta property="og:keyword" content="@Html.Raw(@ViewBag.ShareKeyword)" />
+    <meta property="og:url" content="@Util.ReturnLinkFull(@Request.RawUrl)" />
+    <meta property="og:site_name" content="vinaplaza.vn" />
+    <meta property="og:image" content="@Util.ReturnLinkCDN(@ViewBag.image,Request.Browser.IsMobileDevice)" />
+    <meta property="og:image:secure_url" content="@Util.ReturnLinkCDN(@ViewBag.image,Request.Browser.IsMobileDevice)" />
+    <meta property="og:image:alt" content="@Html.Raw(@ViewBag.Title)" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:description" content="@Html.Raw(@ViewBag.ShareDescription)" />
+    <meta name="twitter:title" content="@Html.Raw(@ViewBag.ShareTitle)" />
+    <meta name="twitter:image" content="@Util.ReturnLinkCDN(@ViewBag.image,Request.Browser.IsMobileDevice)" />
+    <meta name="author" content="@ViewBag.author" />
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+    <link rel="canonical" href="@Util.ReturnLinkFull(@Request.RawUrl)" />
+    <link rel="dns-prefetch" href="https://cdn.vinaplaza.vn/">
+    <link rel="dns-prefetch" href="https://ajax.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+
+    @Scripts.RenderFormat(SiteKeys.ScriptNoDeferVersion, "~/bundles/jqueryui")
+    @Styles.RenderFormat(SiteKeys.StyleVersion, "~/bundles/NewDetailcss")
+    @Scripts.RenderFormat(SiteKeys.ScriptVersion, "~/bundles/jqueryheader")
+</head>
+<body>
+    @Html.Partial("_PartialHeader")
+
+    <!--menu-->
+
+    @RenderBody()
+
+    @Html.Partial("_PartialFooter")
+    @Html.Action("GetByCodeHtml", "Partial", new { Code = "F_Home_HotlineFix" })
+
+
+    <!-- Nếu có class active thì sẽ hiện lên ở customer buy, ko thì sẽ ko hiện lên. Mỗi lần có khách mua chỉ cần thêm class active -->
+    <div style="display: block;" class="fade-in fade-out customized" id="someone-purchased">
+        <div style="display: block;">
+
+            <a href="/">
+                <img src="https://cdn.vinaplaza.vn/Images/img/custom-buy.png" alt="order">
+                <p>Khách hàng <span class="people">Anh Dũng</span> số điện thoại: <span class="phone-order">092342xxx</span><br><font>tại <span class="country">Hà Nội</span> vừa đặt hàng cách đây <span class="timeAgo">10 giây trước</span></font></p>
+            </a>
+
+        </div>
+        <div style="display: none;">
+            <a href="/">
+                <img src="https://cdn.vinaplaza.vn/Images/img/custom-buy.png" alt="order">
+                <p>Khách hàng <span class="people">Anh Dũng</span> số điện thoại: <span class="phone-order">092342xxx</span><br><font>tại <span class="country">Hải Phòng</span> vừa đặt hàng cách đây <span class="timeAgo">5 phút  trước</span></font></p>
+            </a>
+        </div>
+    </div>
+    <script>
+        window.addEventListener('DOMContentLoaded', function () {
+            (function ($) {
+                var sync1 = $("#sync1"); var sync2 = $("#sync2"); var productShow = $(".product-show"); var promotionSlider = $(".promotion-slider"); $('.sync1').owlCarousel({ singleItem: !0, slideSpeed: 500, lazyLoad: !0, autoPlay: 5000, navigation: !0, navigationText: ['‹', '›'], pagination: !1, afterAction: syncPosition, responsiveRefreshRate: 200, })
+                $('.sync2').owlCarousel({ items: 4, pagination: !1, responsiveRefreshRate: 100, afterInit: function (el) { el.find(".owl-item").eq(0).addClass("synced") } })
+                $('.product-show').owlCarousel({ items: 6, lazyLoad: !0, autoPlay: !1, })
+                $('.promotion-slider').owlCarousel({ items: 5, lazyLoad: !0, autoPlay: 3000, pagination: !1, navigation: !0, navigationText: ['‹', '›'], })
+                $('.sync-menu').owlCarousel({ items: 1, lazyLoad: !0, autoPlay: 5000, pagination: !1, navigation: !0, navigationText: ['‹', '›'], })
+                function syncPosition(el) {
+                    var current = this.currentItem; $("#sync2").find(".owl-item").removeClass("synced").eq(current).addClass("synced")
+                    if ($("#sync2").data("owlCarousel") !== undefined) { center(current) }
+                }
+                $("#sync2").on("click", ".owl-item", function (e) { e.preventDefault(); var number = $(this).data("owlItem"); sync1.trigger("owl.goTo", number) }); function center(number) {
+                    var sync2visible = sync2.data("owlCarousel").owl.visibleItems; var num = number; var found = !1; for (var i in sync2visible) { if (num === sync2visible[i]) { var found = !0 } }
+                    if (found === !1) {
+                        if (num > sync2visible[sync2visible.length - 1]) { sync2.trigger("owl.goTo", num - sync2visible.length + 2) } else {
+                            if (num - 1 === -1) { num = 0 }
+                            sync2.trigger("owl.goTo", num)
+                        }
+                    } else if (num === sync2visible[sync2visible.length - 1]) { sync2.trigger("owl.goTo", sync2visible[1]) } else if (num === sync2visible[0]) { sync2.trigger("owl.goTo", num - 1) }
+                }
+                var sourceSwap = function () { var $this = $(this); var img = $this.find('img'); var newSource = img.data('alt-src'); img.data('alt-src', img.attr('src')); img.attr('src', newSource) }
+                $(function () { $('.change-img').hover(sourceSwap, sourceSwap) })
+                  @Html.Raw(Util.JSSitting());
+            })(jQuery)
+        })
+    </script>
+    <script src="/Content/Vinaplaza/js/Controller/BaseController.js"></script>
+    <script type="text/javascript">
+        WebFontConfig = {
+            google: { families: ['Roboto:100,300,400,700'] }
+        };
+        (function () {
+            var wf = document.createElement('script');
+            wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+            wf.type = 'text/javascript';
+            wf.async = 'true';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(wf, s);
+        })();</script>
+</body>
+</html>

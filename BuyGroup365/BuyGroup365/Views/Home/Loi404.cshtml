@@ -1,0 +1,55 @@
+﻿@using Common
+@using Business.ClassBusiness;
+@{
+    ViewBag.Title = "Quà Biếu Cao Cấp - Đẳng cấp - Sang trọng - Ý nghĩa 2018";
+    ViewBag.Description = "Showroom trưng bày các loại quà biếu 2018 cao cấp đẳng cấp như : Đông Trùng Hạ Thảo , Rượu nhân sâm, nhân sâm hàn quốc , yến sào khánh hòa , nấm linh chi,…";
+    ViewBag.Keywords = "Quà biếu cao cấp, quà biếu sếp, quà biếu bố mẹ vợ chồng, quà biếu tết, quà tết 2018, sang trọng, ý nghĩa";
+    Layout = "~/Views/Shared/_Layout404.cshtml";
+}
+
+@{
+    TextHtmlBusiness textHtmlBusiness = new TextHtmlBusiness();
+
+    TextHtml Loi404 = textHtmlBusiness.GetByCode("Loi404");
+
+}
+
+
+<div class="trang404">
+    <div class="hinh404 col-md-6"><p><span style="font-size:120px;">404</span></p>
+        <p><span style="text-transform:uppercase;">Rất tiếc, trang bạn tìm kiếm không tồn tại </span></p>
+    </div>
+    <div class="hinh404_1 col-md-6">
+
+        @Html.Action("GetByCodeHtml", "Partial", new { Code = "Loi404" })
+        <p><a href="/">Trang chủ</a><a href="/lien-he">Báo lỗi</a></p>
+        <div id="search_mini_form">
+            <div class="form-search clearfix">
+                <input id="catsearch" type="hidden" name="cat" value="">
+                <div class="search">
+                    <input type="text" name="search" id="txtKeyword" placeholder="" />
+                    @Html.Action("GetByCodeHtml", "Partial", new { Code = "TextUndexSearch" })
+
+                    <div class="round search-round"><button type="submit" id="btnSearch" style="background: none;border: none;" onclick="search()"><img src="/Images/img/Vector-Smart-Object10.png" alt=""></button></div>
+                </div>
+            </div>
+
+            <script type="text/javascript">
+                        //$("#txtKeyword").keydown(function (event) {
+                        //    $('#txtKeyword').keypress(function (e) {
+                        //        if (e.keyCode == 13) {
+                        //            event.preventDefault();
+                        //            search();
+                        //        }
+
+                        //    });
+                        //});
+                        function search() {
+                            //   if (jQuery('#txtKeyword').val().length > 2)
+                            window.location.href = '/search.html' + "?k=" + jQuery('#txtKeyword').val();
+                            //  else alert('Từ khóa tìm kiếm phải trên 2 ký tự');
+                        }
+            </script>
+        </div>
+    </div>
+</div>

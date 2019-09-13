@@ -1,0 +1,101 @@
+﻿using Business.bases;
+using Common;
+using Common.exception;
+using Common.util;
+using DataAccess.DAO;
+using log4net;
+using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Reflection;
+
+namespace Business.ClassBusiness
+{
+    public class UserUserGroupBusiness : AbstractBaseBusiness<UserUsergroup, long>
+    {
+        private readonly ILog _logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
+        public UserUserGroupBusiness()
+            : base(new UserUsergroupDao())
+        {
+            daoLayer.DataContext = DataContext;
+        }
+
+        public override void AddNew(UserUsergroup obj)
+        {
+            base.AddNew(obj);
+            DataContext.SaveChanges();
+        }
+
+        public override void Edit(UserUsergroup obj)
+        {
+            base.Edit(obj);
+            DataContext.SaveChanges();
+        }
+
+        public override void Remove(long id)
+        {
+            base.Remove(id);
+            DataContext.SaveChanges();
+        }
+
+        public List<UserUsergroup> GetByUserId_(long userId)
+        {
+            try
+            {
+                IQueryable<UserUsergroup> query = GetDynamicQuery();
+                return query.Where(p => p.UserId == userId).ToList();
+            }
+            catch (SqlException ex)
+            {
+                _logger.Error("", ex);
+                throw ObjectUtil.CreateFaultException(CodedException.SqlExceptionUnhandler, "Sql Exeption");
+            }
+            catch (Exception ex)
+            {
+                _logger.Error("", ex);
+                throw ObjectUtil.CreateFaultException(CodedException.Unhandler, "Unhandler Exception");
+            }
+        }
+
+        /// <summary>
+        /// Phương thức tìm xem user thuộc những nhóm nào
+
+        /// </summary>
+        /// <param name="userId">UserID</param>
+        /// <returns>Thông tin các nhóm</returns>
+        public List<GroupInfo> GetByUserId(long userId)
+        {
+            try
+            {
+                IQueryable<UserUsergroup> query = GetDynamicQuery();
+                var temp = query.Where(p => p.Id == userId && p.UserGroup.Status == 1).Distinct();
+
+                var listResult = new List<GroupInfo>();
+
+                foreach (var re in temp)
+                {
+                    var groupInfo = new GroupInfo
+                    {
+                        GroupId = re.UserUsergroup1,
+                        Code = re.UserGroup.Code,
+                        GroupName = re.UserGroup.Name
+                    };
+                    listResult.Add(groupInfo);
+                }
+                return listResult;
+            }
+            catch (SqlException ex)
+            {
+                _logger.Error("", ex);
+                throw ObjectUtil.CreateFaultException(CodedException.SqlExceptionUnhandler, "Sql Exeption");
+            }
+            catch (Exception ex)
+            {
+                _logger.Error("", ex);
+                throw ObjectUtil.CreateFaultException(CodedException.Unhandler, "Unhandler Exception");
+            }
+        }
+    }
+}

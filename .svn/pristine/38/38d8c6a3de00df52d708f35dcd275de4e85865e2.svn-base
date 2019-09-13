@@ -1,0 +1,912 @@
+﻿@using BuyGroup365.Areas.Manage.Models
+@using MvcPaging
+@model IPagedList<Common.Catalog>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Manage/Views/Shared/_LayoutAdmincshtml.cshtml";
+}
+<div class="container-fluid" ng-app="body">
+    <!-- Page Heading -->
+    <div class="row" ng-controller="header">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                Quản lý danh mục sản phẩm
+            </h1>
+        </div>
+    </div>
+    <!-- /.row -->
+    <!-- /.row -->
+    <!-- /.row -->
+    <div class="row" ng-controller="Index">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <i class="fa fa-bar-chart-o fa-fw"></i> Danh mục sản phẩm
+                        <span style="float: right">
+                            <a class="glyphicon glyphicon-plus-sign" data-toggle="modal" data-target="#myModal">
+
+                            </a>
+                        </span>
+
+
+                    </h3>
+
+                </div>
+                <div class="panel-body">
+                    @using (Ajax.BeginForm("Index", "CategoryProduct",
+                        new AjaxOptions { UpdateTargetId = "grid-list", HttpMethod = "get", LoadingElementId = "loading", OnBegin = "beginPaging", OnSuccess = "successPaging", OnFailure = "failurePaging" },
+                        new { id = "frm-search" }))
+                    {
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group input-group">
+                                    <input type="text" value="@ViewData["key"]" class="form-control" id="appendedInputButton" name="key" placeholder="Nhập từ khóa tìm kiếm" style="width:80%">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="submit">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+
+                                    </span>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover table-striped" id="dataTables" aria-describedby="dataTables-example_info">
+                                <thead>
+                                    <tr role="row">
+                                        <th>
+                                            STT
+                                        </th>
+                                        <th>
+                                            Category name
+                                        </th>
+                                        <th>
+                                            Code
+                                        </th>
+
+                                        <th>
+                                            Friendly Url
+                                        </th>
+                                        <th>
+                                            Icon
+                                        </th>
+                                        <th>
+                                            Date create
+                                        </th>
+                                        <th style="width: auto">Chức năng</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Stt)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.NameChild)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Code)
+                                            </td>
+
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.FriendlyUrl)
+                                            </td>
+                                            <td>
+                                                <img src="@AdminFunction.GetUrlImage(item.Icon,"Small")" width="25" height="25" />
+                                            </td>
+                                            <td>
+                                                @item.CreateDate.ToString("dd/MM/yyyy HH:mm:ss")
+                                            </td>
+
+                                            <td style="text-align: center">
+                                                <a class="" href="javarscript:;" data-toggle="modal" data-target="#Manufacture" data-ng-click="ManageManuface(@item.Id)">
+                                                    <img src="~/img/IconMain/manufacture.png" width="20" />  Manufacture
+                                                </a>|
+                                                <a class="" href="javarscript:;" data-toggle="modal" data-target="#Properties" data-ng-click="ManageProperties(@item.Id)">
+                                                    <img src="~/img/IconMain/properties.ico" width="20" /> Properties
+                                                </a>|
+                                                <a href="javarscript:;" data-toggle="modal" data-target="#EditModal" data-ng-click="GetInforCategory(@item.Id)">
+                                                    <img src="~/img/IconMain/edit.ico" width="20" />  Edit
+                                                </a>|
+                                                @*@Html.ActionLink(" ", "" + "" + "DeleteCategory", new { id = item.Id }, new { @class = "glyphicon glyphicon-trash", onclick = "return confirm('Are you ready?');" })*@
+                                                <a href="#" class="glyphicon glyphicon-trash" data-ng-click="ChangeStatusCategory(@item.Id)">Xóa</a>
+                                            </td>
+                                        </tr>
+                                    }
+
+                                </tbody>
+                            </table>                        
+                            <div class="row">
+                                <div class="">
+                                    <div class="dataTables_info" id="dataTables-example_info" role="alert" aria-live="polite" aria-relevant="all">Hiển thị từ @Model.ItemStart đến @Model.ItemEnd của @Model.TotalItemCount bản ghi</div>
+                                </div>
+                                <div class="">
+                                    <div class="dataTables_paginate " id="dataTables-example_paginate">
+
+                                        @Html.Raw(Ajax.Pager(
+                                            new Options
+                                            {
+                                                PageSize = Model.PageSize,
+                                                TotalItemCount = Model.TotalItemCount,
+                                                CurrentPage = Model.PageNumber,
+                                                ItemTexts = new ItemTexts() { Next = "Next", Previous = "Previous", Page = "P" },
+                                                ItemIcon = new ItemIcon() { First = "icon-backward", Previous = "icon-chevron-left", Next = "icon-chevron-right", Last = "icon-forward" },
+                                                TooltipTitles = new TooltipTitles() { Next = "Next page", Previous = "Previous page", Page = "Page {0}." },
+                                                Size = Size.normal,
+                                                Alignment = Alignment.centered,
+                                                IsShowControls = true,
+                                                IsShowFirstLast = true,
+                                                CssClass = ""
+                                            },
+                                            new AjaxOptions
+                                            {
+                                                UpdateTargetId = "grid-list",
+                                                HttpMethod = "get",
+                                                LoadingElementId = "loading",
+                                                OnBegin = "beginPaging",
+                                                OnSuccess = "successPaging",
+                                                OnFailure = "failurePaging"
+                                            }, new { controller = "CategoryProduct", action = "Index", key = ViewData["key"] }))
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- /.row -->
+        <!-- /.row -->
+        @*Create*@
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                @using (Html.BeginForm("CreateCate", "CategoryProduct", FormMethod.Post, new { enctype = "multipart/form-data", id = "CreateCate" }))
+                {
+                    @Html.ValidationSummary(true)
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Tạo danh mục</h4>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Tên danh mục<span class="required">*</span></label><br />
+                                        <input class="form-control" autocomplete="off" maxlength="100" data-val-required="Mời nhập tên danh mục" required id=" categoryname" name="categoryname" type="text" data-ng-model="emp.categoryname">
+                                        <span class="field-validation-valid" data-valmsg-for="categoryname" data-valmsg-replace="true"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Icon</label><br />
+                                        <input class="form-control" autocomplete="off" style="width: 200px"  id="icon" name="icon" type="file" data-ng-model="emp.icon">
+
+                                    </div>
+                                
+                                    <div class="form-group">
+                                        <label>Status<span class="required">*</span></label><br />
+                                        @Html.DropDownList("statusCatg", null, new { @width = "100%" })
+                                    </div>
+                                    <div class="form-group">
+                                        <label>SeoTitle<span class="required">*</span></label><br />
+                                        <textarea class="form-control" required maxlength="200" data-val-required="SeoTitle không được để trống" id="seoTitle" name="seoTitle" data-ng-model="emp.seoTitle"></textarea>
+                                        <span class="field-validation-valid" data-valmsg-for="seoTitle" data-valmsg-replace="true"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>SeoKeyword<span class="required">*</span></label><br />
+                                        <textarea class="form-control" required maxlength="200" data-val-required="SeoKeyword không được để trống" id="seoKeyword" name="seoKeyword" data-ng-model="emp.seoKeyword"></textarea>
+                                        <span class="field-validation-valid" data-valmsg-for="seoKeyword" data-valmsg-replace="true"></span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Danh mục cha<span class="required">*</span></label><br />
+                                        @Html.DropDownList("parent", null, new { @height = "100px", @size = "25", @width = "100%" })
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                               
+                                <div class="form-group">
+                                    <label>SeoDescription<span class="required">*</span></label><br />
+                                    <textarea class="form-control" required maxlength="300" data-val-required="SeoDescription không được để trống" id="seoDescription" name="seoDescription" data-ng-model="emp.seoDescription"></textarea>
+                                    <span class="field-validation-valid" data-valmsg-for="seoDescription" data-valmsg-replace="true"></span>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="form-group">
+                                    <label>Mô tả</label><br />
+                                    <textarea class="form-control" maxlength="500" id="description" name="description" data-ng-model="emp.description"></textarea>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        @*Endcreate*@
+
+
+        @*Edit Category*@
+        <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="EditModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Cập nhật Danh mục</h4>
+                    </div>
+                    <div class="modal-body">
+
+
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <input ng-model="emp.Id" id="id" name="id" style="display: none" />
+                                <div class="form-group">
+                                    <label>Code</label><br />
+                                    <input class="form-control" autocomplete="off" maxlength="20" id="code" name="code" type="text" value="" data-ng-model="emp.Code">
+
+                                </div>
+                                <div class="form-group">
+                                    <label>Tên danh mục<span class="required">*</span></label><br />
+                                    <input class="form-control" autocomplete="off" maxlength="100" data-val-required="Mời nhập tên danh mục" required id=" categoryname" name="categoryname" type="text" data-ng-model="emp.CatalogName">
+                                    <span class="field-validation-valid" data-valmsg-for="categoryname" data-valmsg-replace="true"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label>Friendly Url<span class="required">*</span></label><br />
+                                    <input class="form-control" autocomplete="off" maxlength="100" data-val-required="Trường là bắt buộc" required id="friendlyurl" name="friendlyurl" type="text" data-ng-model="emp.FriendlyUrl">
+
+                                </div>
+                                <div class="form-group">
+                                    <label>Icon</label><br />
+                                    <input class="form-control" autocomplete="off" style="width: 200px" id="icon" name="icon" type="file" data-ng-model="emp.Icon">
+
+                                </div>
+                                <div class="form-group">
+                                    <label>Order<span class="required">*</span></label><br />
+                                    <input class="form-control" autocomplete="off" style="width: 200px" required id="oder" name="oder" type="number" data-ng-model="emp.Order">
+                                    <span class="field-validation-valid" data-valmsg-for="oder" data-valmsg-replace="true"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label>IsLast<span class="required">*</span></label><br />
+                                    <input class="form-control" autocomplete="off" style="width: 200px" required id="isLast" name="isLast" type="number" data-ng-model="emp.IsLast">
+                                    <span class="field-validation-valid" data-valmsg-for="isLast" data-valmsg-replace="true"></span>
+                                </div>
+                                <div class="form-group">
+
+                                    <label>Status<span class="required">*</span></label><br />
+                                    @Html.DropDownList("statusCatg", null, new { @width = "100%" })
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+
+                                    <label>Danh mục cha<span class="required">*</span></label><br />
+                                    @Html.DropDownList("parent", null, new { @height = "100px", @size = "25", @width = "100%" })
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="form-group">
+                                <label>SeoTitle<span class="required">*</span></label><br />
+                                <textarea class="form-control" required maxlength="200" data-val-required="SeoTitle không được để trống" id="seoTitle" name="seoTitle" data-ng-model="emp.SeoTitle"></textarea>
+                                <span class="field-validation-valid" data-valmsg-for="seoTitle" data-valmsg-replace="true"></span>
+                            </div>
+                            <div class="form-group">
+                                <label>SeoKeyword<span class="required">*</span></label><br />
+                                <textarea class="form-control" required maxlength="200" data-val-required="SeoKeyword không được để trống" id="seoKeyword" name="seoKeyword" data-ng-model="emp.SeoKeyword"></textarea>
+                                <span class="field-validation-valid" data-valmsg-for="seoKeyword" data-valmsg-replace="true"></span>
+                            </div>
+                            <div class="form-group">
+                                <label>SeoDescription<span class="required">*</span></label><br />
+                                <textarea class="form-control" required maxlength="300" data-val-required="SeoDescription không được để trống" id="seoDescription" name="seoDescription" data-ng-model="emp.SeoDescription"></textarea>
+                                <span class="field-validation-valid" data-valmsg-for="seoDescription" data-valmsg-replace="true"></span>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="form-group">
+                                <label>Mô tả</label><br />
+                                <textarea class="form-control" maxlength="500" id="description" name="description" data-ng-model="emp.Description"></textarea>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" ng-click="UpdateChange()">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @*Kêt thúc cập nhật*@
+
+        @*manage Manuface*@
+
+        <div class="modal fade" id="Manufacture" tabindex="-1" role="dialog" aria-labelledby="ManufactureModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">
+                            <img src="~/img/IconMain/manufacture.png" width="20" /> Manage Manufacture
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+
+                            <input id="hidecate" type="hidden" />
+                            <div class="col-lg-5">
+
+                                <div class="form-group">
+                                    <label>List manufaceture<span class="required"></span></label><br />
+                                    @Html.DropDownList("manuface", null, new { @height = "100px", @size = "25", @width = "100%", @onclick = "GetValueManuface()" })
+                                </div>
+                            </div>
+                            <div class="col-lg-7">
+                                <label>List manufaceture of category<span class="required"></span></label><br />
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-hover table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 50px">Index</th>
+                                                <th>Name</th>
+                                                <th style="width: 50px;text-align: center"><a onclick="DeleteInbox()" class="glyphicon glyphicon-trash" title="Delete"></a></th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody id="catemanuface"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        @*Kêt thúc cập nhật*@
+        @*Properties*@
+
+        <div class="modal fade" id="Properties" tabindex="-1" role="dialog" aria-labelledby="PropertiesModalLabel" aria-hidden="true" style="overflow-y: scroll">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">
+                            <img src="~/img/IconMain/properties.ico" width="20" /> Manage Properties
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <input id="hidecateProperty" type="hidden" />
+                        <div class="row" id="oldcontentproperty">
+
+                        </div>
+                        <div class="row" id="contentproperty">
+
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <a class="btn btn-default" data-toggle="modal" data-target="#AddProperties" onclick="OnfowadId()">
+                            Add Properties
+                        </a>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        <script>
+            function OnfowadId() {
+                var vl = $('#hidecateProperty').val();
+                $('#catlg').val(vl);
+            }
+        </script>
+        @*Add Properties*@
+        <div class="modal fade" id="AddProperties" tabindex="-1" role="dialog" aria-labelledby="AddPropertiesModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">    Add Properties</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <input type="hidden" id="catlg" />
+                            <div class="form-group col-lg-4">
+                                <label>Name<span class="required">*</span></label><br />
+                                <input class="form-control" autocomplete="off" maxlength="50" required id="nameproperty" name="nameproperty" type="text" value="">
+
+                            </div>
+                            <div class="form-group col-lg-4">
+                                <label>Key<span class="required">*</span></label><br />
+                                <input class="form-control" autocomplete="off" maxlength="50" required id="keyproperty" name="keyproperty" type="text">
+
+                            </div>
+                            <div class="form-group col-lg-4">
+                                <label>Type<span class="required">*</span></label><br />
+                                <input type="checkbox" id="typevalue" value="2" onclick="SetCheck()" checked="checked"> IsMutile
+
+                            </div>
+
+                        </div>
+                        <hr />
+                        <div class="row">
+                            <div id="value"></div>
+                            <div style="float:right"><a onclick="Addvalue()" class="btn btn-primary btn-sm">Add value</a></div>
+                            <input type="hidden" id="allvalue" />
+                            <input id="index" value="1" type="hidden" />
+                        </div>
+                        <script>
+                            var index = 1;
+                            function Addvalue() {
+
+                                var html = "";
+                                html += "<p>+" + index + " <input id='value" + index + "' onchange=\"SendValue(" + index + ")\"></p>";
+                                $("#value").append(html);
+                                index++;
+                                $('#index').val(index);
+                            }
+                            function SetCheck() {
+                                var a = $('#typevalue').is(":checked");
+                                if (!a) {
+                                    $('#typevalue').val(1);
+                                } else { $('#typevalue').val(2); }
+
+                            }
+                        </script>
+                    </div>
+                    <div class="modal-footer">
+                        <a class="btn btn-default" data-toggle="modal" data-target="#AddProperties" onclick="Addproperty()">
+                            Save change
+                        </a>
+                        <script>
+                            function Addproperty() {
+                                $('#overbackgroud').show();
+                                var cat = $('#catlg').val();
+
+                                var name = $('#nameproperty').val();
+                                var key = $('#keyproperty').val();
+                                var type = $('#typevalue').val();
+                                var value = $('#allvalue').val();
+                                var objval = value.split('|');
+                                var htmlval = "";
+                                for (var i = 0; i < objval.length - 1; i++) {
+                                    htmlval += "<p>+" + objval[i] + "</p>";
+                                }
+
+                                var html = "";
+                                if (type == "1") {
+                                    html = "<div class=\"panel panel-default\">" +
+                                        "<div class=\"panel-heading\">" +
+                                        "<h3 class=\"panel-title\">" +
+                                        "  <input type=\"text\" value=\"" + name + "\" />" +
+                                        " <input type=\"text\" value=\"" + key + "\" />" +
+                                        "<label><input type=\"checkbox\" id =\"typeproperty\" value=\"1\">Is mumtile? </label></h3> </div>" +
+                                        "<div class=\"panel-body\">" + htmlval + " </div></div>";
+                                    $('#contentproperty').append(html);
+                                } else {
+                                    html = "<div class=\"panel panel-default\">" +
+                                        "<div class=\"panel-heading\">" +
+                                        "<h3 class=\"panel-title\">" +
+                                        "  <input type=\"text\" value=\"" + name + "\" />" +
+                                        " <input type=\"text\" value=\"" + key + "\" />" +
+                                        "<label><input type=\"checkbox\" id =\"typeproperty\" value=\"2\" checked=\"checked\">Is mumtile? </label></h3> </div>" +
+                                        "<div class=\"panel-body\">" + htmlval + " </div></div>";
+                                    $('#contentproperty').append(html);
+                                }
+                                $.ajax({
+                                    url: '@Url.Action("AddProperty","CategoryProduct")',
+                                    data: {
+                                        'nameproperty': name,
+                                        'keyproperty': key,
+                                        'typevalue': type,
+                                        'cate': cat,
+                                        'allvalue': value
+                                    },
+                                    dataType: "json",
+                                    type: "POST",
+                                    traditional: true,
+                                    success: function (data, status) {
+                                        if (data == "1") {
+                                            $('#overbackgroud').hide();
+                                        }
+                                        else {
+                                            alert("Lỗi");
+                                            $('#overbackgroud').hide();
+                                        }
+                                    },
+                                    error: function () {
+
+                                    }
+
+                                });
+                            }
+                            function SendValue(id) {
+                                var index = $('#index').val();
+                                var ix = parseInt(index);
+                                var htm = "";
+                                for (var i = 1; i < ix; i++) {
+                                    var vl = $('#value' + i).val();
+                                    if (vl != "") {
+                                        htm += vl + "|";
+                                    }
+                                }
+                                //var a = $('#allvalue').val();
+                                //var b = $('#value' + id).val();
+                                //var ctx = a + b + '|';
+                                $('#allvalue').val(htm);
+
+                            }
+                        </script>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        @*Add Value*@
+        <div class="modal fade" id="AddValue" tabindex="-1" role="dialog" aria-labelledby="AddPropertiesModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">    Add AddValue</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="form-group">
+                                <label>Value<span class="required">*</span></label><br />
+                                <input class="form-control" autocomplete="off" maxlength="50" required id="valueproperty" name="valueproperty" type="text" value="">
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <a class="btn btn-default" data-dismiss="modal" onclick="AddValue()">
+                            AddValue
+                        </a>
+                        <script>
+                            function AddValue() {
+
+                                var a = $('#valueproperty').val();
+                                var htm = "<p>+" + a + "</p>";
+                                $('#vl001').append(htm);
+                            }
+                        </script>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    @*End*@
+</div>
+
+@*Kêt thúc cập nhật*@
+<script>
+    angular.module("body", []).controller("header", function ($scope) {
+        //   $scope.quanlyuser = "Câp nhật thái";
+    }).controller("Index", function ($scope) {
+
+        $scope.emp = {
+            Id: '',
+            ParentId: '',
+            Code: '',
+            CatalogName: '',
+            FriendlyUrl: '',
+            Icon: '',
+            Description: '',
+            Order: '',
+            Status: '',
+            CreateDate: '',
+            ModifyDate: '',
+            IsLast: '',
+            SeoTitle: '',
+            SeoKeyword: '',
+            SeoDescription:''
+        };
+        
+        $scope.GetInforCategory = function (id) {
+
+            $('#overbackgroud').show();
+            //   $scope.emplist = [];
+            //   $scope.emailthai = "tháiisigsjghj";
+            $.ajax({
+                url: '@Url.Action("GetCatalogProuctById", "Json")',
+                data: {
+                    'id': id
+                },
+                type: 'GET',
+                contentType: 'application/json; charset=utf-8',
+
+                success: function (data) {
+                    $scope.emp.Id = data.Id;
+                    $scope.emp.ParentId = data.ParentId;
+                    $scope.emp.Code = data.Code;
+                    $scope.emp.CatalogName = data.CatalogName;
+                    $scope.emp.FriendlyUrl = data.FriendlyUrl;
+                    $scope.emp.Icon = data.Icon;
+                    $scope.emp.Description = data.Description;
+                    $scope.emp.Order = data.Order;
+                    $scope.emp.Status = data.Status;
+                    $scope.emp.CreateDate = data.CreateDate;
+                    $scope.emp.ModifyDate = data.ModifyDate;
+                    $scope.emp.IsLast = data.IsLast;
+                    $scope.emp.SeoTitle = data.SeoTitle;
+                    $scope.emp.SeoKeyword = data.SeoKeyword;
+                    $scope.emp.SeoDescription = data.SeoDescription;
+
+                    $scope.$apply();
+                    $('#overbackgroud').hide();
+                },
+                error: function () {
+
+                }
+            });
+            // alert(mail);
+
+            //       $scope.valuetest = mail;
+            //  $scope.emailthai = mail;
+            //  alert(id);
+        };
+        $scope.ManageManuface = function (id) {
+            $('#hidecate').val(id);
+            //  $('#overbackgroud').show();
+            loadtabl(id);
+
+        };
+        $scope.UpdateChange = function () {
+            $('#overbackgroud').show();
+            $.ajax({
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify($scope.emp),
+                url: '@Url.Action("UpdateCatalog", "Json")',
+                success: function (data) {
+                    if (data == 1) {
+                        alert("Cập nhật thành công");
+                        window.location.href = "/Manage/CategoryProduct/Index";
+                        //     $scope.GetInfoUser();
+                    }
+
+                },
+                error: function (status) { }
+            });
+        };
+        $scope.ManageProperties = function (id) {
+
+            $('#hidecateProperty').val(id);
+
+            $.ajax({
+                url: '@Url.Action("GetProperty","CategoryProduct")',
+                data: {
+                    'cateId': id
+                },
+                dataType: "json",
+                type: "POST",
+                traditional: true,
+                success: function (data, status) {
+                    if (data == "0") {
+                        alert("Lỗi");
+                        $('#overbackgroud').hide();
+                    }
+                    else {
+
+                        $('#oldcontentproperty').html("");
+                        $('#oldcontentproperty').append(data);
+                        $('#overbackgroud').hide();
+                    }
+                },
+                error: function () {
+
+                }
+
+            });
+        };        
+
+        //khi bấm delete chạy tới hàm này
+        $scope.ChangeStatusCategory = function (id) {
+            $('#overbackgroud').show();
+            $.ajax({               
+                url: '@Url.Action("ChangeStatusCatalog", "Json")',
+                data: {
+                    id: id
+                },
+                type: 'POST',
+                dataType: "json",              
+                success: function (status) {
+                    if (status == 1) {
+                        window.alert("Catalog được Active");
+                        window.location.href = "/Manage/CategoryProduct/Index";
+                        //     $scope.GetInfoUser();
+                    } else {
+                        window.alert("Catalog đã bị log");
+                        window.location.href = "/Manage/CategoryProduct/Index";
+                    }
+                },
+                error: function (status) {
+                    window.alert("Thay đổi trạng thái không thành công : " + status);
+                    $('#overbackgroud').hide();
+                }
+            });
+        };
+    });
+
+    
+   
+</script>
+
+<script type="text/javascript">
+    function GetValueManuface() {
+        $('#overbackgroud').show();
+        var cat = $('#hidecate').val();
+        var mnuid = $("#manuface option:selected").val();
+        $.ajax({
+            url: '@Url.Action("AddManuToCategory","CategoryProduct")',
+            data: {
+                'cateId': cat,
+                'manufaceid': mnuid
+            },
+            dataType: "json",
+            type: "POST",
+            traditional: true,
+            success: function (data, status) {
+                if (data == "1") {
+                    loadtabl(cat);
+                    $('#overbackgroud').hide();
+                }
+                else {
+                    alert("Lỗi");
+                    $('#overbackgroud').hide();
+                }
+            },
+            error: function () {
+
+            }
+
+        });
+
+    }
+    // gọi khi thêm sưa xoa ơ danh phân add nhà sản xuât vào danh mục
+    function loadtabl(id) {
+        $.ajax({
+            url: '@Url.Action("GetManuface", "CategoryProduct")',
+            data: {
+                'id': id
+            },
+            dataType: "json",
+            type: "POST",
+            traditional: true,
+            success: function (data2, status2) {
+                if (data2 == "0") {
+                    alert("Hệ thống đang cập nhật");
+                    $('#overbackgroud').hide();
+                }
+                else if (data2 == 2) {
+
+                    $('#catemanuface').html("");
+                    $('#catemanuface').append("<tr><td>0</td><td>Not results!</td><td></td></tr>");
+                    $('#overbackgroud').hide();
+                }
+                else {
+                    $('#catemanuface').html("");
+                    $('#catemanuface').append(data2);
+                    $('#overbackgroud').hide();
+                }
+            },
+            error: function () {
+
+            }
+        });
+    }
+    function DeleteInbox() {
+        $('#overbackgroud').show();
+        var cat = $('#hidecate').val();
+        var yourArray = new Array();
+
+        $("input:checkbox[name=inbox]:checked").each(function () {
+            yourArray.push($(this).val());
+        });
+        if (yourArray.count < 0) {
+            alert('Vui lòng chọn thư cần xóa !');
+        } else {
+            $.ajax({
+                url: '@Url.Action("DeleteCateManu", "CategoryProduct")',
+                data: {
+                    'array': yourArray
+                },
+                dataType: "json",
+                type: "POST",
+                traditional: true,
+
+                success: function (data) {
+                    if (data == 0) {
+                        alert("Hệ thống đang cập nhật");
+                        $('#overbackgroud').hide();
+                    }
+                    else if (data == 2) {
+                        alert("Vui lòng tích chọn");
+                        $('#overbackgroud').hide();
+                    }
+                    else {
+                        loadtabl(cat);
+                        $('#overbackgroud').hide();
+                    }
+                },
+                error: function () {
+                    alert("Xin lỗi ! Hệ thống đang cập nhật vui long thực hiện lại sau.");
+                    $('#overbackgroud').hide();
+                }
+            });
+        }
+
+    }
+    function beginPaging(args) {
+        // Animatek
+        $('#grid-list').fadeOut('normal');
+    }
+
+    function successPaging() {
+        // Animate
+        $('#grid-list').fadeIn('normal');
+        $('a').tooltip();
+    }
+
+    function failurePaging() {
+        alert("Could not retrieve list.");
+    }
+
+</script>
+
+<script type="text/javascript">
+    $(function () {
+        $("#datepicker1").datepicker();
+        $("#dob").datepicker(
+
+            {
+                changeMonth: true,
+                changeYear: true,
+                showButtonPanel: true,
+                yearRange: "-0:+15"
+            });
+
+    });
+</script>
+<style>
+    select {
+        width: 100%;
+    }
+</style>

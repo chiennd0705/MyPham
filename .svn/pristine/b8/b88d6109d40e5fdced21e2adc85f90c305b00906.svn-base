@@ -1,0 +1,174 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="Default Description">
+    <meta name="keywords" content="Magento, Varien, E-commerce">
+    <meta name="robots" content="INDEX,FOLLOW">
+    <link href="/Content/Csspublic/css/" rel="stylesheet" type="text/css">
+    <link href="~/Content/css/reset.css" rel="stylesheet" />
+    <link href="~/Content/css/root.css" rel="stylesheet" />
+    <link href="~/Content/css/paging.css" rel="stylesheet" />
+    <link href="~/Content/css/jquery-ui.css" rel="stylesheet" />
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/css/jquery.datetimepicker.css" rel="stylesheet" />
+    <link href="~/Content/font-awesome-4.1.0/css/font-awesome.css" rel="stylesheet" />
+    <link href="~/Content/font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="/Content/Csspublic/css/bootstrap.min.css" media="all">
+    <link rel="stylesheet" type="text/css" href="/Content/Csspublic/css/styles.css" media="all">
+    <link rel="stylesheet" type="text/css" href="/Content/Csspublic/css/magicmenu.css" media="all">
+    <link rel="stylesheet" type="text/css" href="/Content/Csspublic/css/jquery.fancybox.css" media="all">
+    <link rel="stylesheet" type="text/css" href="/Content/Csspublic/css/ajaxcart.css" media="all">
+    <link rel="stylesheet" type="text/css" href="/Content/Csspublic/css/quickview.css" media="all">
+    <link href="~/Content/Csspublic/css/StyleExt.css" rel="stylesheet" />
+    <script type="text/javascript" src="/Content/Csspublic/js/validation.js"></script>
+
+    <script type="text/javascript" src="/Content/Csspublic/js/slider.js"></script>
+    <script type="text/javascript" src="/Content/Csspublic/js/js.js"></script>
+    <script type="text/javascript" src="/Content/Csspublic/js/form.js"></script>
+    <script type="text/javascript" src="/Content/Csspublic/js/menu.js"></script>
+    <script src="~/Scripts/jquery-2.0.0.min.js"></script>
+    <script type="text/javascript" src="/Content/Csspublic/js/jquery.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.8.20.min.js"></script>
+    <script type="text/javascript" src="/Content/Csspublic/js/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery-1.9.1.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js"></script>
+
+    <script src="/Scripts/bootstrap.min.js"></script>
+
+ 
+    <style>
+        .my-error-class {
+            color: #FF0000; /* red */
+        }
+
+        .my-valid-class {
+            color: #00CC00; /* green */
+        }
+    </style>
+    
+</head>
+<body class=" customer-account-login">
+    <div class="social-icons right" style="margin-top: 100px">
+
+    </div>
+
+    <div class="wrapper">
+
+        <div class="page">
+            @Html.Partial("_PartialHeader")
+
+            <div class="container" style="margin-top: 5px">
+                <div class="topbanner">
+                    <a href="#" target="_blank"><img alt="Giảm 50% phí vận chuyển nội thành" src="http://r2.chodientu.vn/images-v8/advbanner/2015/09/03/10/54/6/tomcat7-tomcat7-tmp1200x90.jpg" width="100%"></a>
+                </div>
+                <div class="bground pages-user">
+                    <div class="top-bg-user"></div>
+                    <div class="row" style="margin-top: 10px">
+
+                        @RenderBody()
+                    </div>
+                </div>
+            </div>
+
+            @Html.Partial("_PartialFooter")
+        </div>
+        <script src="/Scripts/controllerJS/paymentController.js"></script>
+        <script src="/Scripts/calculFeeForGoods/calculFeeForGoods.js"></script>
+        <script src="~/Scripts/jquery.validate.min.js"></script>
+        <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+        <script>
+            $(document).ready(function () {
+
+                $("#formPost").validate({
+                    rules: {
+                        buyerName: {
+                            required: true,
+                            minlength: 1
+                        },
+                        buyerPhone: {
+                            required: true,
+                            minlength: 10
+                        },
+                        buyerEmail: {
+                            required: true,
+                            minlength: 6
+                        },
+                        buyerAddress: {
+                            required: true,
+                            minlength: 4
+                        }, receiverName: {
+                            required: true,
+                            minlength: 1
+                        },
+                        receiverPhone: {
+                            required: true,
+                            minlength: 10
+                        },
+                        receiverEmail: {
+                            required: false,
+                            minlength: 6
+                        },
+                        receiverAddress: {
+                            required: true,
+                            minlength: 4
+                        }
+                    },
+                    messages: {
+                        buyerName: {
+                            required: "Vui lòng nhập tên người mua",
+                            minlength: "Tên chưa đúng mời nhập lại",
+                        },
+                        buyerPhone: {
+                            required: "Vui lòng nhập số điện thoại người mua",
+                            minlength: "Vui lòng nhập vào đúng số điện thoại",
+                        },
+                        buyerEmail: {
+                            required: "Vui lòng nhập email người mua",
+                            minlength: "Email nhập chưa đúng mời nhập lại"
+                        },
+                        buyerAddress: {
+                            required: "Vui lòng nhập địa chỉ người mua",
+                            minlength: "Địa chỉ người mua không đúng, mời nhập lại"
+                        },
+                        receiverName: {
+                            required: "Vui lòng nhập tên người nhận",
+                            minlength: "Tên chưa đúng mời nhập lại"
+                        },
+                        receiverPhone: {
+                            required: "Vui lòng nhập số điện thoại người nhận",
+                            minlength: "Vui lòng nhập vào đúng địa chỉ"
+                        },
+                        receiverEmail: {
+                            required: "Vui lòng nhập email người nhận",
+                            minlength: "Email nhập chưa đúng mời nhập lại"
+                        },
+                        receiverAddress: {
+                            required: "Vui lòng nhập địa chỉ người nhận",
+                            minlength: "Địa chỉ người nhận không đúng, mời nhập lại"
+                        }
+                    },
+                    errorClass: "my-error-class",
+                    validClass: "my-valid-class"
+                });
+
+            });
+
+            $(function () {
+                $('[data-toggle="popover"]').popover();
+            });
+        </script>
+
+
+    </div>
+    @Html.Partial("_PartialAcount")
+    <style>
+        .breadcrumb a {
+            color: royalblue;
+        }
+    </style>
+</body>
+</html>

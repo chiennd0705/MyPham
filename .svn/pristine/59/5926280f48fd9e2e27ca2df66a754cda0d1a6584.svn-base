@@ -1,0 +1,446 @@
+﻿@using BuyGroup365.Models.Member
+@using Common.util
+@model global::Common.Member
+
+@{
+    ViewBag.Title = "Profile";
+    Layout = "~/Views/Shared/_LayoutMember.cshtml";
+}
+<div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 ">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+
+                <ol class="breadcrumb">
+                    <li><span class="glyphicon glyphicon-home"></span><a href="/"> Trang chủ</a></li>
+                    <li>
+                        <a href="/Member/Profile">
+                            @Model.MemberProfile.Emaill
+                        </a>
+                    </li>
+                    <li class="active">Tài khoản</li>
+                </ol>
+            </h4>
+        </div>
+        <div id="collapseOne0" class="panel-collapse collapse in" style="height: auto;">
+        
+            <div class="panel-body">
+
+                @using (Html.BeginForm("Profile", "Member", FormMethod.Post, new { enctype = "multipart/form-data", id = "Profile" }))
+                {
+
+                    @Html.HiddenFor(x => x.Id)
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            @Html.Raw(Function.MessengerBox("success-msg", ViewBag.Mes))
+                            <div class="fieldset" disabled="disabled">
+                                <h2 class="legend">Thông tin đăng nhập</h2>
+                                <ul class="form-list">
+                                    <li class="">
+                                        <div class="customer-name-middlename">
+                                            <div class="field name-firstname">
+                                                <label for="firstname" class="required">Tên đăng nhập</label>
+                                                <div class="input-box">
+                                                    <input type="text" id="firstname" disabled name="firstname" value="@Model.UserName" title="First Name" style="width: 30%" maxlength="255" class="input-text required-entry">
+                                                </div>
+                                            </div>
+                                            <div class="field name-lastname">
+                                                <label for="lastname" class="required">E-Mail</label>
+                                                <div class="input-box">
+                                                    <input type="text" id="lastname" disabled name="lastname" value="@Model.MemberProfile.Emaill" title="Last Name" style="width: 30%" maxlength="255" class="input-text required-entry">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                 
+                                </ul>
+                                <div>
+                                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#UpdatePassWord">
+                                        Cập nhật mật khẩu
+                                    </button>
+                                    <div class="modal fade" id="UpdatePassWord" tabindex="-1" role="dialog" aria-labelledby="UpdatePassWord" aria-hidden="true">
+                                        <div class="modal-dialog" style="left: 0">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" id="closeUpdate" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                    <img class="img-responsive" src="/Content/Csspublic/images/logo.png" alt="Buygroup365" style="height: 35px">
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="fieldset">
+                                                        <h2 class="legend">Đổi mật khẩu</h2>
+                                                        <ul class="form-list">
+                                                            <li class="fields">
+                                                               
+                                                                <div class="field">
+                                                                    <label for="password" class="required"><em>*</em>Mật khẩu</label>
+                                                                    <div class="input-box">
+                                                                        <input type="password" name="password" id="passwordUpdate" title="Mật khẩu" class="input-text required-entry validate-password">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="field">
+                                                                    <label for="confirmation" class="required"><em>*</em>Nhập lại mật khẩu</label> 
+                                                                    <div class="input-box">
+                                                                        <input type="password" name="confirmation" title="Nhập lại mật khẩu" id="confirmationUpdate" class="input-text required-entry validate-cpassword">
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+
+                                                        <div class="" id="overbackgroud1" style="display: none;">
+                                                            <img src="/img/loading/6.gif" style="position: absolute; left: 50%" />
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                                                    <button type="button" class="btn btn-primary" onclick="UpdatePass()">Cập nhật</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            
+                            
+                            <div class="fieldset">
+                                <h2 class="legend">Thông tin cá nhân</h2>
+                                <ul class="form-list">
+                                    <li class="">
+                                        <div class="customer-name-middlename">
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <div class="field name-firstname">
+                                                        <label for="firstname" class="required">Tên đầy đủ</label>
+                                                        <div class="input-box">
+                                                            @Html.TextBoxFor(model => model.MemberProfile.LastName, new { @class = "input-text required-entry", @maxlength = "255", @style = "width: 100%", @required = "required" })
+                                                            @Html.ValidationMessageFor(model => model.MemberProfile.LastName)
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="field name-firstname">
+                                                        <label for="firstname" class="required">Số điện thoại</label>
+                                                        <div class="input-box">
+                                                            @Html.TextBoxFor(model => model.MemberProfile.Phone, new { @class = "input-text required-entry", @maxlength = "255", @style = "width: 100%", @required = "required" })
+                                                            @Html.ValidationMessageFor(model => model.MemberProfile.Phone)
+
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="field name-firstname">
+                                                        <label for="firstname" class="required">Ngày sinh</label>
+                                                        <div class="input-box">
+                                                            @Html.TextBoxFor(model => model.MemberProfile.Dob, new { @class = "datepicker-input hasDatepicker", @style = "width: 100%", @required = "required" })
+                                                            @Html.ValidationMessageFor(model => model.MemberProfile.Dob)
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="field name-firstname">
+                                                        <label for="firstname" class="required">Giới tính</label>
+                                                        <div class="input-box">
+                                                            @if (Model.MemberProfile.Sex == 1)
+                                                            {
+                                                                <label class="radio-inline">
+                                                                    <input type="radio" name="gender" value="1" checked="checked"> Nam
+                                                                </label>
+                                                                <label class="radio-inline">
+                                                                    <input type="radio" name="gender" value="0"> Nữ
+                                                                </label>
+                                                            }
+                                                            else
+                                                            {
+                                                                <label class="radio-inline">
+                                                                    <input type="radio" name="gender" value="1"> Nam
+                                                                </label>
+                                                                <label class="radio-inline">
+                                                                    <input type="radio" name="gender" value="0" checked="checked"> Nữ
+                                                                </label>
+                                                            }
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="field name-firstname">
+                                                        <label for="firstname" class="required">Tỉnh thành</label>
+                                                        <div class="input-box">
+                                                            @Html.DropDownList("Location", null, new { @width = "100%", @class = "input", @onchange = "LoadChild(1)" })
+                                                            <input type="hidden" id="receiverAddress" />
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="field name-firstname">
+                                                        <label for="firstname" class="required">Quận huyện: </label>
+                                                        <div class="input-box">
+                                                            <select id="receiverTown" class="input" name="receiverTown" onchange="LoadChild(2)">
+                                                                <option value="-1">--Chọn--</option>
+                                                            </select>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="field name-firstname">
+                                                        <label for="firstname" class="required">Phường xã: </label>
+                                                        <div class="input-box">
+                                                            <select class="input" id="receiverPhuong" name="receiverPhuong">
+                                                                <option value="-1">--Chọn--</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="field name-firstname">
+                                                        <label for="firstname" class="required">Địa chỉ chi tiết:  </label>
+                                                        <div class="input-box">
+                                                            @Html.TextBoxFor(model => model.MemberProfile.Address, new { @class = "input-text required-entry", @maxlength = "500", @style = "width: 100%", @required = "required", @placeholder = "Ví dụ: số 10, Ngõ 50, Ngách 100, Hẻm 22, Đường Nguyễn A" })
+                                                            @Html.ValidationMessageFor(model => model.MemberProfile.Address)
+                                                        
+                                                        </div>
+                                                    </div>
+                                                  
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    
+                                                    <div class="field name-firstname">
+                                                        <label for="lastname" class="required">Ảnh đại diện</label>
+                                                        <div class="input-box">
+                                                            <input type="file" name="avatarmember" class="bottom" />
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="field name-lastname">
+                                                        
+                                                        <div class="input-box">
+                                                            <div class="row">
+                                                                <img src="@FuntionMember.GetUrlImage(Model.MemberProfile.Photo,"Medium")" width="400" />
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                     
+                               
+                                        </div>
+                                    </li>
+
+                                </ul>
+                            </div>
+                     
+                            <button type="submit" class="button" title="Câp nhật" name="send" id="send2"><span><span>Câp nhật</span></span></button>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                }
+            </div>
+        </div>
+    
+
+        <div class="modal fade" id="CreateAcount" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Đăng ký tài khoản</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-main col-lg-12">
+
+                                <form method="post" id="register-form" action="/Member/Register">
+
+                                    <div class="fieldset">
+                                        <input type="hidden" name="success_url" value="">
+                                        <input type="hidden" name="error_url" value="">
+                                        <h2 class="legend">Personal Information</h2>
+                                        <ul class="form-list">
+                                            <li class="">
+                                                <div class="customer-name-middlename">
+                                                    <div class="field name-firstname">
+                                                        <label for="firstname" class="required"><em>*</em>First Name</label>
+                                                        <div class="input-box">
+                                                            <input type="text" id="firstname" name="firstname" value="" title="First Name" maxlength="255" class="input-text required-entry">
+                                                        </div>
+                                                    </div>
+                                                    <div class="field name-lastname">
+                                                        <label for="lastname" class="required"><em>*</em>Last Name</label>
+                                                        <div class="input-box">
+                                                            <input type="text" id="lastname" name="lastname" value="" title="Last Name" maxlength="255" class="input-text required-entry">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <label for="email_address" class="required"><em>*</em>Email Address</label>
+                                                <div class="input-box">
+                                                    <input type="text" name="email" id="email_address" value="" title="Email Address" class="input-text validate-email required-entry">
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="fieldset">
+                                        <h2 class="legend">Login Information</h2>
+                                        <ul class="form-list">
+                                            <li class="fields">
+                                                <div class="field">
+                                                    <label for="password" class="required"><em>*</em>Username</label>
+                                                    <div class="input-box">
+                                                        <input type="password" name="username" id="username" title="Username" class="input-text required-entry" onclick="CheckUserName()">
+                                                    </div>
+                                                </div>
+                                                <div class="field">
+                                                    <label for="password" class="required"><em>*</em>Password</label>
+                                                    <div class="input-box">
+                                                        <input type="password" name="password" id="password" title="Password" class="input-text required-entry validate-password">
+                                                    </div>
+                                                </div>
+                                                <div class="field">
+                                                    <label for="confirmation" class="required"><em>*</em>Confirm Password</label>
+                                                    <div class="input-box">
+                                                        <input type="password" name="confirmation" title="Confirm Password" id="confirmation" class="input-text required-entry validate-cpassword">
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+
+
+
+                                    </div>
+                                    <div class="buttons-set">
+                                        <button type="submit" title="Submit" class="button" onclick="register()"><span><span>Submit</span></span></button>
+                                    </div>
+                                </form>
+                                <script type="text/javascript">
+                                    //<![CDATA[
+                                    var dataForm = new VarienForm('register-form', true);
+                                    //]]>
+                                    function register() {
+                                        $('#login-form').submit();
+                                    }
+                                </script>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    function LoadChild(level) {
+        var int = parseInt(level);
+        var parent = 0;
+        if (int == 1) {
+            parent = $("#Location").val();
+            var text = $("#Location option:selected").text();
+          
+            // alert(a);
+            $('#receiverAddress').html("");
+            $('#receiverAddress').val(text);
+        } else {
+            parent = $("#receiverTown").val();
+        }
+
+        $.ajax({
+            url: '@Url.Action("GetLocationByParent","PayGoods")',
+            data: {
+                'parentId': parent
+            },
+            Type: 'POST',
+            dataType: 'json',
+            success: function (data) {
+
+                if (int == 1) {
+                    $('#receiverTown').html("");
+                    $('#receiverTown').append(data);
+                } else {
+                    $('#receiverPhuong').html("");
+                    $('#receiverPhuong').append(data);
+
+                }
+            },
+            error: function () {
+
+            }
+        });
+    }
+    $(function () {
+        $("#MemberProfile_Dob").datepicker({ dateFormat: 'dd/mm/yy' });
+
+    });
+    $(function () {
+        $("#MemberProfile_Dob").datepicker();
+    });
+    $(function () {
+        $("#datepicker").datepicker();
+    });
+    $(document).ready(function () {
+        $.ajax({          
+            url: '@Url.Action("LoadLocation","Member")',
+            data:
+            {
+                'type':'mb'
+            },
+            Type: 'POST',
+            dataType: 'json',
+            success: function(data) {
+                $('#receiverPhuong').html("");
+                $('#receiverPhuong').append(data.ListItems1);
+                $('#receiverTown').html("");
+                $('#receiverTown').append(data.ListItems2);
+                $('#Location').html("");
+                $('#Location').append(data.ListItems3);
+            },
+            error: function() {
+                
+            }
+        });
+    });
+    function UpdatePass() {
+        $('#overbackgroud1').show();
+         var pass = $('#passwordUpdate').val();
+         var passrep = $('#confirmationUpdate').val();
+         if (pass == "") {
+             alert("Vui lòng nhập mật khẩu");
+             $('#overbackgroud1').hide();
+         } else {
+             if (pass.length < 6) {
+                 alert("Mật khẩu phải nhiều hơn 6 ký tự");
+                 $('#overbackgroud1').hide();
+             } else {
+                 
+                 if (pass != passrep) {
+                     alert('Nhâp lại mật khẩu sai');
+                     $('#confirmationUpdate').focus();
+                     $('#overbackgroud1').hide();
+                 } else {
+                     $.ajax({
+                         url: '@Url.Action("UpdatePass", "Member")',
+                         data:
+                         {
+                             'pass': pass
+                         },
+                         Type: 'POST',
+                         dataType: 'json',
+                         success: function (data) {
+                             alert('Cập nhật thành công!');
+                             $('#closeUpdate').click();
+                             $('#overbackgroud1').hide();
+                         },
+                         error: function () {
+                             alert('Cập nhật thất bại!');
+                             $('#overbackgroud1').hide();
+                         }
+                     });
+                 }
+             }
+         }
+      
+        
+    }
+</script>
+<style>
+    
+</style>
+

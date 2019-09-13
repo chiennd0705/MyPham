@@ -1,0 +1,146 @@
+﻿@using Common.util
+
+@{
+    ViewBag.Title = "Profile";
+    Layout = "~/Views/Shared/_LayoutMember.cshtml";
+}
+<link href="~/Content/jquery-ui.css" rel="stylesheet" />
+
+<style type="text/css">
+    .text-large{
+        font:bold;
+        font-size:large;
+    }
+
+</style>
+<div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 ">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+
+                <ol class="breadcrumb">
+                    <li><span class="glyphicon glyphicon-home"></span><a href="/"> Trang chủ</a></li>
+                    <li>
+                        <a href="/Member/Profile">
+                            @SessionUtility.GetSessionMember(Session).UserName
+                        </a>
+                    </li>
+                    <li class="active">Kiểm tra thẻ</li>
+                </ol>
+            </h4>
+        </div>
+        <div id="collapseOne0" class="panel-collapse collapse in" style="height: auto;">
+            @{
+                int check = (int)ViewBag.Message;
+            }
+            @if (check == 1)
+            {
+                <br />
+                <div class="form-control center">
+                    <p class="bg-success text-center text-large">Thêm thẻ thành công <i class="glyphicon glyphicon-ok"></i></p>
+                </div>
+
+            }
+            else if (check == 2)
+            {
+                <br />
+                <div class="form-control center">
+                    <p class="bg-danger text-center text-danger text-large">Mã thẻ không đúng mời nhập lại <i class="glyphicon glyphicon-warning-sign"></i></p>
+                </div>
+                <div class="panel-body">
+
+                    @using (Html.BeginForm("CheckReditCar", "Member"))
+                    {
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="fieldset">
+                                    <h2 class="legend">Kiểm tra thẻ thành viên</h2>
+                                    <ul class="form-list">
+                                        <li class="center">
+                                            <div class="customer-name-middlename">
+                                                <div class="field name-firstname">
+                                                    <label for="firstname" class="required">Nhập mã thẻ</label>
+                                                    <div class="input-box">
+                                                        <input type="text" id="codeCard" name="codeCard" placeholder="Nhập mã thẻ tại đây.." value="" title="First Name" style="width: 60%" maxlength="50" class="input-text required-entry">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+
+                                    </ul>
+                                    <div>
+                                        <button type="submit" class="btn btn-primary btn-sm">
+                                            Kiểm tra
+                                        </button>
+                                    </div>
+                                    <br /><br />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    }
+                </div>
+            }
+            else if (check == 0)
+            {
+                <br />
+                <div class="form-control center">
+                    <p class="bg-warning text-success text-center text-large">Thẻ đã được Active <i class="glyphicon glyphicon-info-sign"></i></p>
+                </div>
+            } else if (check == 3)
+            {
+                <br />
+                <div class="form-control center">
+                    <p class="bg-warning text-info text-center text-large">Bạn đã có thẻ Member,mỗi member chỉ được có một mã thẻ <i class="glyphicon glyphicon-remove"></i></p>
+                </div>
+            }
+            else
+            {
+                <div class="panel-body">
+
+                    @using (Html.BeginForm("CheckReditCar", "Member"))
+                    {
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="fieldset">
+                                    <h2 class="legend">Kiểm tra thẻ thành viên</h2>
+                                    <ul class="form-list">
+                                        <li class="center">
+                                            <div class="customer-name-middlename">
+                                                <div class="field name-firstname">
+                                                    <label for="firstname" class="required">Nhập mã thẻ</label>
+                                                    <div class="input-box">
+                                                        <input type="text" id="codeCard" name="codeCard" placeholder="Nhập mã thẻ tại đây.." value="" title="First Name" style="width: 60%" maxlength="50" class="input-text required-entry">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+
+                                    </ul>
+                                    <div>
+                                        <button type="submit" class="btn btn-primary btn-sm">
+                                            Kiểm tra
+                                        </button>
+                                    </div>
+                                    <br /><br />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    }
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $("#datepicker1").datepicker({ dateFormat: 'dd/mm/yy' });
+    });
+</script>
+
+
+
+
+

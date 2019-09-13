@@ -1,0 +1,43 @@
+﻿@using Common
+@using Business.ClassBusiness;
+@using BuyGroup365.Models.Home
+@{
+    try
+    {
+        Business.ClassBusiness.NewsBusiness newsBusiness = new Business.ClassBusiness.NewsBusiness();
+        List<Common.News> listNews = newsBusiness.ListByNewsIdNewsGroup(ViewBag.NewgroupS, 5);
+        Common.NewsGroups newgr = new NewsGroups();
+        Business.ClassBusiness.NewsGroupBusiness newsGroupBusiness = new Business.ClassBusiness.NewsGroupBusiness();
+        newgr = newsGroupBusiness.GetById(ViewBag.NewgroupS);
+        if (listNews.Count > 0)
+        {
+            <aside id="flatsome_recent_posts-3" class="widget flatsome_recent_posts" itemprop="hasOfferCatalog" itemscope="" itemtype="http://schema.org/OfferCatalog">
+                <span class="widget-title "><a href="@BuyGroup365.Models.Common.Util.ReturnLinkFull(@newgr.FriendlyUrl)"><span>@newgr.NewsGroupName</span></a></span>
+                <div class="is-divider small"></div>
+                <ul>
+
+                    @foreach (Common.News item in listNews)
+                    {
+                        <li class="recent-blog-posts-li" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/OfferCatalog">
+                            <div class="flex-row recent-blog-posts align-top pt-half pb-half">
+                                <div class="flex-col mr-half">
+                                    <div class="badge post-date  badge-square">
+                                        <div class="badge-inner bg-fill" style="background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2) ), url(@item.ImageSource); color:#fff; text-shadow:1px 1px 0px rgba(0,0,0,.5); border:0;> <span class=" post-date-day" ="">@item.CreateDate.Day<br> <span class="post-date-month is-xsmall">@item.CreateDate.Month</span></div>
+                                    </div>
+                                </div>
+                                <div class="flex-col flex-grow">
+                                    <a href="@BuyGroup365.Models.Common.Util.ReturnLinkFull(item.FriendlyUrl)" title="@item.Title" itemprop="name">@item.Title</a>
+                                    <span class="post_comments oppercase op-7 block is-xsmall">
+                                        <a href="@BuyGroup365.Models.Common.Util.ReturnLinkFull(item.FriendlyUrl)"></a>
+                                    </span>
+                                </div>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </aside>
+
+        }
+    }
+    catch (Exception ex) { }
+}

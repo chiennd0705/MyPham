@@ -1,0 +1,45 @@
+﻿@using Common
+@using Business.ClassBusiness;
+@using DataAccess;
+@using Common;
+@using Business;
+@using Business.ClassBusiness;
+@using BuyGroup365.Models.Common;
+
+
+
+
+<div class="blogs-right">
+
+    @try
+    {
+        Business.ClassBusiness.NewsGroupBusiness newsGroupBusiness = new Business.ClassBusiness.NewsGroupBusiness();
+        NewsGroups newsGroup = new NewsGroups();
+        newsGroup = newsGroupBusiness.GetById(10034);
+        Business.ClassBusiness.NewsBusiness newsBusiness = new Business.ClassBusiness.NewsBusiness();
+        List<Common.News> listNews = newsBusiness.ListByNewsIdNewsGroupActive(10034, 3);
+
+        foreach (Common.News item in listNews)
+        {
+            <div class="item">
+                <div class="latest-news">
+                    <div class="news-img">
+                        <a href="@Util.ReturnLinkFull(item.FriendlyUrl)">
+
+                            <img src="@Util.ReturnLinkCDN(item.ImageSource,Request.Browser.IsMobileDevice)" alt="@item.Title">
+
+                        </a>
+                    </div>
+                    <div class="news-caption">
+                        <a href="@Util.ReturnLinkFull(newsGroup.FriendlyUrl)" class="sub-title-sm">@newsGroup.NewsGroupName</a>
+                        <h3 class="title-2"><a href="@Util.ReturnLinkFull(item.FriendlyUrl)"><span class="light-font">@item.Title</span></a></h3>
+                    </div>
+                </div>
+            </div>
+
+        }
+
+
+    }
+    catch { }
+</div>

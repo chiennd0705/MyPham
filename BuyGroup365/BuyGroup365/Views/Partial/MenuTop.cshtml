@@ -1,0 +1,110 @@
+﻿@using BuyGroup365.Models.Common
+@using Common
+@using Business.ClassBusiness
+
+@{
+    MenusBusiness menubussiness = new MenusBusiness();
+    List<Common.Menus> ListMenu = new List<Common.Menus>();
+    List<Common.Menus> ListMenungang = new List<Common.Menus>();
+    List<Common.Menus> ListMenu1 = new List<Common.Menus>();
+    List<Common.Menus> ListMenu2 = new List<Common.Menus>();
+
+}
+
+<!-- Collect the nav links, forms, and other content for toggling -->
+<div class="col-md-12 menu-mobile">
+
+    <div class="collapse navbar-collapse menu-second" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-left">
+
+            <li class="has-child ">
+                <a class="change-img"><i class="fa fa-bars" aria-hidden="true"></i> Danh mục sản phẩm</a>
+                <div class="nav-mega-menu">
+                    <ul class="nav-main-menu">
+                        @{ ListMenu = menubussiness.SearchMenusByParentId(-1, 2); foreach (var re in ListMenu)
+                            {
+                                ListMenu1 = menubussiness.SearchMenusByParentId(re.Id); if (ListMenu1.Count > 0)
+                                {
+                                    <li class="menu-child">
+                                        <a class="change-img"><img data-alt-src="@Util.ReturnLinkCDN("/Images/img/icon-menu.png",Request.Browser.IsMobileDevice)" src="@Util.ReturnLinkCDN("/Images/img/icon-menu.png",Request.Browser.IsMobileDevice)" /> @re.MenuName </a>
+                                        <div class="sub-menu" style="background:url('@Util.ReturnLinkCDN("/Images/img/Layer-144444.png",Request.Browser.IsMobileDevice)') #fff;background-repeat: no-repeat;background-size: 100%;background-position: bottom;">
+                                            <div class="col-md-6">
+
+                                                @foreach (var re1 in ListMenu1)
+                                                {
+                                                    ListMenu2 = menubussiness.SearchMenusByParentId(re1.Id);
+                                                    <div class="list-one">
+                                                        @if (ListMenu2.Count > 0)
+                                                        {
+                                                            <h6 class="title">@re1.MenuName</h6>
+                                                            <ul class="sub-menu-list">
+                                                                @foreach (var re2 in ListMenu2)
+                                                                {
+                                                                    <li><a href="@Util.ReturnLinkFull(re2.Link)"><i class="fa fa-circle" aria-hidden="true"></i> @re2.Link</a></li>
+                                                                }
+                                                            </ul>
+                                                        }
+                                                        else
+                                                        {
+                                                            <h6 class="title">@re1.MenuName</h6>
+                                                        }
+                                                    </div>
+                                                }
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="list-second">
+                                                    <h6 class="title">Bán chạy</h6>
+                                                    @{
+                                                        ProductsBusiness productsBusiness = new ProductsBusiness();
+                                                        List<SearchProductByType_Result> Listproduct = new List<SearchProductByType_Result>();
+                                                        Listproduct = productsBusiness.GetBySellerByCatalogID(re.Id, 0, 3);
+                                                        foreach (var te in Listproduct)
+                                                        {
+                                                            <div class="list-run">
+                                                                <div class="img">
+                                                                    <a href="@Util.ReturnLinkFull(te.FriendlyUrl)"><img src="@Util.ReturnLinkCDN(te.ImgSource,Request.Browser.IsMobileDevice)" alt="@te.ProductName"></a>
+                                                                </div>
+                                                                <div class="content">
+                                                                    <a href="@Util.ReturnLinkFull(te.FriendlyUrl)"><h6 class="text">@te.ProductName</h6></a>
+                                                                    <h6 class="price">@te.Price<span class="under">đ</span></h6>
+                                                                </div>
+                                                            </div>
+                                                        }
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                }
+                                else
+                                {
+                                    <li>
+                                        <a href="@Util.ReturnLinkFull(re.Link)" class="change-img"><img data-alt-src="" src="@Util.ReturnLinkCDN("/Images/img/icon-menu.png",Request.Browser.IsMobileDevice)" /> @re.MenuName</a>
+                                    </li>
+                                }
+                            }
+                        }
+                    </ul>
+                </div>
+            </li>
+
+            @{
+                ListMenungang = menubussiness.SearchMenusByParentId(-1, 1);
+
+                foreach (var rengang in ListMenungang)
+                {
+                    <li>
+                        <a href="@Util.ReturnLinkFull(rengang.Link)">@rengang.MenuName</a>
+                    </li>
+                }
+            }
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="#"><i class="fa fa-plus-circle" aria-hidden="true"></i> Đăng ký</a></li>
+            <li><a href="#"><i class="fa fa-user-circle-o" aria-hidden="true"></i> Đăng nhập</a></li>
+        </ul>
+    </div>
+    <!-- /.navbar-collapse -->
+</div>

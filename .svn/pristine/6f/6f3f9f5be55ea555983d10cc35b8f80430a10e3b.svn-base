@@ -1,0 +1,135 @@
+﻿
+@model List<Common.Order>
+
+@{
+    ViewBag.Title = "ListOrderOfShop";
+    Layout = "~/Areas/Manage/Views/Shared/_LayoutAdmincshtml.cshtml";
+
+}
+@*<link href="~/Content/css/StyleTree.css" rel="stylesheet" />*@
+<div class="container-fluid" ng-app="body">
+    <!-- Page Heading -->
+    <div class="row" ng-controller="header">
+        <div class="col-lg-12">
+            <br />
+            <h1 class="page-header" style="text-align:center">
+                <strong>Danh sách order cuả shop</strong>
+            </h1>
+
+        </div>
+    </div>
+    <!-- /.row -->
+    <!-- /.row -->
+    <!-- /.row -->
+    <div class="row" ng-controller="Index">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <i class="fa fa-bar-chart-o fa-fw"></i> Danh sách order
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    @using (Ajax.BeginForm("Index", "Product",
+                        new AjaxOptions { UpdateTargetId = "grid-list", HttpMethod = "get", LoadingElementId = "loading", OnBegin = "beginPaging", OnSuccess = "successPaging", OnFailure = "failurePaging" },
+                        new { id = "frm-search" }))
+                    {
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover table-striped" id="dataTables" aria-describedby="dataTables-example_info">
+                                <thead>
+                                    <tr role="row">
+                                        <th style="text-align: center" class="textForTitleTable">STT</th>
+                                        <th class="textForTitleTable">
+                                            Id đơn hàng
+                                        </th>
+                                        <th class="textForTitleTable">
+                                            Khối lượng hàng
+                                        </th>
+
+                                        <th class="textForTitleTable">
+                                            Phí vận chuyển
+                                        </th>
+                                        <th class="textForTitleTable">
+                                            Tổng tiền
+                                        </th>
+                                        <th class="textForTitleTable">
+                                            Ghi chú đơn hàng
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{
+                        var index = 0;
+                                    }
+                                    @foreach (var item in Model)
+                                    {
+                                        index++;
+                                        <tr>
+                                            <td style="text-align: center">@index</td>
+                                            <td class="textalign">
+                                                @Html.DisplayFor(modelItem => item.Id)
+                                            </td>
+
+                                            <td class="textalign">
+                                                @Html.DisplayFor(modelItem => item.GramGood)
+                                            </td>
+
+
+                                            <td class="textalign">
+                                                @Html.DisplayFor(modelItem => item.FeeOfTranspot)
+                                            </td>
+                                            <td class="textalign">
+                                                @Html.DisplayFor(modelItem => item.TotalMoney)
+                                            </td>
+                                            <td class="textalign">
+                                                @Html.DisplayFor(modelItem => item.NoteAboutOrder)
+                                            </td>                                     
+                                        </tr>
+                                    }
+
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+            var setVAL = CKEDITOR.replace('description');
+            setVAL.config.height = 500;
+
+            CKEDITOR.replace('summary');
+        </script>  
+        <style type="text/css">
+            .textalign{
+                text-align:center;
+            }
+            .textForTitleTable{
+                font:bold;
+                color:blue;
+            }
+        </style>   
+    </div>
+    @*End*@
+</div>
+
+@*Kêt thúc cập nhật*@
+<script>
+    angular.module("body", []).controller("header", function ($scope) {
+        //   $scope.quanlyuser = "Câp nhật thái";
+    }).controller("Index", function ($scope) {
+
+
+    });
+</script>
+<style>
+    select {
+        width: 100%;
+    }
+
+    /*.panel {
+        margin: auto;
+        width: 90%;
+    }*/
+</style>

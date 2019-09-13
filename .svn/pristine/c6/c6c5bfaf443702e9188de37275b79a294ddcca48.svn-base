@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="bhd_CardVouCherCRMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="customer">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="bigint" Nullable="false" />
+    <Property Name="code" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="customer_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="phone" Type="nvarchar" MaxLength="20" />
+    <Property Name="email" Type="nvarchar" MaxLength="50" />
+    <Property Name="address" Type="nvarchar" MaxLength="200" />
+    <Property Name="dob" Type="datetime" />
+    <Property Name="pid" Type="nvarchar" MaxLength="20" />
+    <Property Name="create_date" Type="datetime" Nullable="false" />
+    <Property Name="modify_date" Type="datetime" Nullable="false" />
+    <Property Name="description" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="customer_account">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="bigint" Nullable="false" />
+    <Property Name="bo_amount" Type="money" Nullable="false" />
+    <Property Name="co_amount" Type="money" Nullable="false" />
+    <Property Name="promotion_amount" Type="money" Nullable="false" />
+    <Property Name="point" Type="bigint" Nullable="false" />
+    <Property Name="account_type" Type="int" Nullable="false" />
+    <Property Name="create_date" Type="datetime" Nullable="false" />
+    <Property Name="active_date" Type="datetime" Nullable="false" />
+    <Property Name="expired_date" Type="datetime" />
+    <Property Name="status" Type="int" Nullable="false" />
+    <Property Name="description" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="customer_card">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="prefix" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="card_no" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="surfix" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="code" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="grade_id" Type="bigint" Nullable="false" />
+    <Property Name="create_date" Type="datetime" Nullable="false" />
+    <Property Name="active_date" Type="datetime" />
+    <Property Name="expried_date" Type="datetime" />
+    <Property Name="status" Type="int" Nullable="false" />
+    <Property Name="description" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="customer_card_history">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="card_id" Type="bigint" Nullable="false" />
+    <Property Name="full_card_no" Type="nvarchar" MaxLength="50" />
+    <Property Name="card_no" Type="nvarchar" MaxLength="50" />
+    <Property Name="action" Type="nvarchar" MaxLength="200" />
+    <Property Name="account" Type="nchar" MaxLength="50" />
+    <Property Name="debit_old" Type="bigint" />
+    <Property Name="amount" Type="bigint" />
+    <Property Name="debit_new" Type="bigint" />
+    <Property Name="book_id" Type="nvarchar" MaxLength="50" />
+    <Property Name="invoice_no" Type="nvarchar" MaxLength="50" />
+    <Property Name="show_date" Type="datetime" />
+    <Property Name="show_time" Type="nvarchar" MaxLength="50" />
+    <Property Name="num_seat" Type="int" />
+    <Property Name="price_policy" Type="nvarchar" MaxLength="50" />
+    <Property Name="update_time" Type="datetime" />
+    <Property Name="staff_id" Type="bigint" />
+    <Property Name="staff_name" Type="nvarchar" MaxLength="200" />
+    <Property Name="ws_name" Type="nvarchar" MaxLength="50" />
+    <Property Name="ws_id" Type="nvarchar" MaxLength="50" />
+    <Property Name="location" Type="nvarchar" MaxLength="50" />
+    <Property Name="film_id" Type="bigint" />
+    <Property Name="film_name" Type="nvarchar" MaxLength="1000" />
+    <Property Name="log_time" Type="datetime" />
+  </EntityType>
+  <EntityType Name="customer_card_history_detail">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="history_id" Type="bigint" Nullable="false" />
+    <Property Name="seat_row" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="seat_col" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="price" Type="bigint" Nullable="false" />
+    <Property Name="refunded" Type="datetime" />
+  </EntityType>
+  <EntityType Name="customer_gif">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="grade_id" Type="bigint" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="point" Type="bigint" Nullable="false" />
+    <Property Name="imgSource" Type="nvarchar" MaxLength="200" />
+    <Property Name="is_bdgif" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="customer_grade">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="bigint" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="200" Nullable="false" />
+  </EntityType>
+  <EntityType Name="customer_redemption">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="staff_id" Type="bigint" Nullable="false" />
+    <Property Name="staff_name" Type="nvarchar" MaxLength="200" />
+    <Property Name="site" Type="nvarchar" MaxLength="200" />
+    <Property Name="card_no" Type="nvarchar" MaxLength="50" />
+    <Property Name="gift_id" Type="bigint" Nullable="false" />
+    <Property Name="gift_name" Type="nvarchar" MaxLength="200" />
+    <Property Name="is_bdgif" Type="bit" Nullable="false" />
+    <Property Name="date" Type="datetime" Nullable="false" />
+    <Property Name="description" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="voucher">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="code" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="type_id" Type="bigint" Nullable="false" />
+    <Property Name="serial" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="effect" Type="nvarchar" MaxLength="50" />
+    <Property Name="valid_from" Type="datetime" />
+    <Property Name="valid_to" Type="datetime" />
+    <Property Name="loc_id" Type="bigint" />
+    <Property Name="film_id" Type="bigint" />
+    <Property Name="org_id" Type="bigint" />
+    <Property Name="deleted" Type="int" />
+    <Property Name="staff_id" Type="nvarchar" MaxLength="50" />
+    <Property Name="staff_name" Type="nvarchar" MaxLength="200" />
+    <Property Name="status" Type="int" Nullable="false" />
+    <Property Name="description" Type="nvarchar" MaxLength="150" />
+    <Property Name="create_date" Type="datetime" Nullable="false" />
+    <Property Name="last_update_date" Type="datetime" Nullable="false" />
+    <Property Name="redeemed" Type="datetime" />
+    <Property Name="redeem_userid" Type="varchar" MaxLength="200" />
+    <Property Name="redeem_name" Type="nvarchar" MaxLength="200" />
+    <Property Name="redeem_site" Type="nvarchar" MaxLength="200" />
+    <Property Name="redeem_film" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="voucher_type">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="code" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="description" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <EntityContainer Name="bhd_CardVouCherCRMModelStoreContainer">
+    <EntitySet Name="customer" EntityType="Self.customer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="customer_account" EntityType="Self.customer_account" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="customer_card" EntityType="Self.customer_card" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="customer_card_history" EntityType="Self.customer_card_history" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="customer_card_history_detail" EntityType="Self.customer_card_history_detail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="customer_gif" EntityType="Self.customer_gif" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="customer_grade" EntityType="Self.customer_grade" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="customer_redemption" EntityType="Self.customer_redemption" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="voucher" EntityType="Self.voucher" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="voucher_type" EntityType="Self.voucher_type" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,17 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using FluentValidation;
+
+namespace FluentValidationTester.Models
+{
+    public class CustomerValidator : AbstractValidator<Customer>
+    {
+        public CustomerValidator ()
+        {
+            RuleFor(customer => customer.FirstName).NotNull().WithMessage("Please fill the first name.");
+            RuleFor(customer => customer.LastName).NotNull();
+        }
+    }
+}

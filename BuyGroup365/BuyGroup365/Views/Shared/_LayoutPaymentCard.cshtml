@@ -1,0 +1,42 @@
+﻿@using Common.util
+@using Common;
+@using Business;
+@using Business.ClassBusiness;
+
+@{
+    TextHtmlBusiness textHtmlBusiness = new TextHtmlBusiness();
+
+    TextHtml Logo = textHtmlBusiness.GetByCode("Logo");
+    TextHtml footerPay = textHtmlBusiness.GetByCode("footerPay");
+}
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width initial-scale=1.0 maximum-scale=1.0 user-scalable=yes">
+    <title>Thanh toán chuyển khoản ngân hàng</title>
+
+    <link rel="stylesheet" type="text/css" href="~/Content/Csspublic/css-order/paymentcard.css" media="all">
+</head>
+
+<body style="">
+
+    <div id="page">
+        <div class="subHeader">
+            <div class="head-top">
+
+                @Html.Raw(Logo.Content)
+            </div>
+        </div>
+
+        <div id="content">
+
+            @RenderBody()
+
+            <div id="footer" class="footer">
+                @Html.Raw(footerPay.Content)
+            </div>
+        </div>
+    </div>
+</body>
+</html>

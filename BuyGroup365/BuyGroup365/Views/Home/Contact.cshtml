@@ -1,0 +1,112 @@
+﻿@{
+    ViewBag.Title = HttpUtility.HtmlDecode("PlazaVietHan.com - Cửa hàng An cung ngưu, nhân sâm, sản phẩm sức khỏe");
+    ViewBag.Description = "Hệ thông phân phối sản phẩm chăm sóc sức khỏe an cung ngưu, nhân sâm Hàn Quốc, Yến khánh hòa, quà biếu tặng, uy tín chấn lượng tư vấn sức khỏe miễn phí";
+    ViewBag.Keywords = "Plaza Việt Hàn, An cung ngưu, nhân sâm Hàn Quốc, Yến khánh hòa, sản phẩm sức khỏe, tin tức chăm sóc sức khỏe, quà biếu tặng, thiết bị chăm sóc sức khỏe";
+    Layout = "~/Views/Shared/_LayoutIndex.cshtml";
+}
+@using Common.util
+@using Common
+@using Business.ClassBusiness;
+<div class="contacts-index-index">
+    <div class="breadcrumbs">
+        <div class="container">
+            <ul>
+                <li class="home">
+                    <a href="/home" title="Home">Trang chủ</a>
+                </li>
+
+                <li class="Contacts">
+                    <strong>Liên hệ</strong>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="contacanngu">
+        <div id="messages_product_view"></div>
+
+        <form id="contactForm" method="post">
+            <div class="container">
+                <div class="contact-content row" style="text-align:center;">
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="map-conttact">
+
+                            @{
+                                TextHtmlBusiness textHtmlBusiness = new TextHtmlBusiness();
+
+                                TextHtml text1 = textHtmlBusiness.GetByCode("CONTACT");
+                            }
+                            @Html.Raw(text1.Content)
+
+                                <h3 class="h3-title" style="text-align: center;    color: #f4dbab;    /* border: 1px solid; */    font-size: 16px;    text-transform: uppercase;">VĂN phòng Hà Nội</h3>
+
+                                <p>Phòng A209 Thôn Ninh Hiệp ,Xuân Đỉnh Từ Liêm Hà Nội</p>
+
+                                <p>
+                                    <ul style="display:flex;">
+                                        <li><i class="fa fa-phone" aria-hidden="true"></i> Tel: 0942.384.723</li>
+
+                                        <li><i class="fa fa-phone-square" aria-hidden="true"></i> HotLine: 0942.384.723</li>
+                                        <li><i class="fa fa-fax" aria-hidden="true"></i> Fax: 0942.384</li>
+                                        <li><i class="fa fa-envelope" aria-hidden="true"></i> Email: info@hanoi.com</li>
+                                    </ul>
+                                </p>
+
+                                <div class="clear">&nbsp;</div>
+
+                            <h3 class="widget-title" style="text-align: center;    color: #f4dbab;    /* border: 1px solid; */    font-size: 16px;    text-transform: uppercase;" >VĂN phòng TP HCM</h3>
+
+                                <p>Phòng A209 Thôn Ninh Hiệp ,Xuân Đỉnh Từ Liêm Hà Nội</p>
+                                <p>
+                                    <ul style="display:flex;">
+                                        <li><i class="fa fa-phone" aria-hidden="true"></i> Tel: 0942.384.723</li>
+
+                                        <li><i class="fa fa-phone-square" aria-hidden="true"></i> HotLine: 0942.384.723</li>
+                                        <li><i class="fa fa-fax" aria-hidden="true"></i> Fax: 0942.384</li>
+                                        <li><i class="fa fa-envelope" aria-hidden="true"></i> Email: info@hanoi.com</li>
+                                    </ul>
+                                </p>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+
+                        <ul class="form-list">
+                            <li>
+
+                                <div class="input-box" style="border-bottom:1px solid #fff3da">
+                                    <input name="name" id="name" title="Name" value="Họ tên" class="input-text required-entry" type="text">
+                                </div>
+                            </li>
+                            <li>
+
+                                <div class="input-box" style="border-bottom:1px solid #fff3da">
+                                    <input name="email" id="email" title="Email" value="Email" class="input-text required-entry validate-email" type="text">
+                                </div>
+                            </li>
+
+                            <li class="wide">
+
+                                <div class="input-box">
+                                    <textarea name="comment" id="comment" title="Comment" class="required-entry input-text" cols="5" rows="3">Nội dung</textarea>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="input-box">
+                                    <input type="text" name="hideit" id="hideit" value="" style="display: none !important;">
+                                    <button type="submit" title="Submit" class="button gui">Gửi đi</button>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <script type="text/javascript">
+            //<![CDATA[
+            var contactForm = new VarienForm('contactForm', true);
+            //]]>
+        </script>
+    </div>
+</div>
+@Html.Partial("NewsFooter")

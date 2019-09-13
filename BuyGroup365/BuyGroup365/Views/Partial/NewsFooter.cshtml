@@ -1,0 +1,60 @@
+﻿@using Common
+@using Business.ClassBusiness;
+
+<div class="container">
+    <div class="main">
+        <div class="row">
+            <div class="col-main col-lg-12">
+
+                <div class="std">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 page-top-left">
+                            <div class="row  news-footer">
+                                @using DataAccess;
+@using Common;
+@using Business;
+@using Business.ClassBusiness;
+@{NewsGroupBusiness newsGroupBusiness = new NewsGroupBusiness();
+            NewsBusiness newsBusiness = new NewsBusiness();
+            var ListNewsGroup = newsGroupBusiness.GetViewFooter();
+
+            foreach (var newsGroup in ListNewsGroup)
+            {
+   <div class="col-xs-12 col-sm-4">
+       <aside id="penci_popular_news_widget-2" class="widget penci_popular_news_widget">
+           <h4 class="widget-title penci-border-arrow"><span class="inner-arrow">@newsGroup.NewsGroupName</span></h4>
+           <div class="">
+               <ul class="side-newsfeed">
+                   @{var newsList = newsBusiness.ListByNewsIdNewsGroup(newsGroup.Id); int i=0; string class_="",class2_="";
+                foreach(News news in newsList)
+                {
+                    if(i==0){
+                        class_="featured-news";class2_="";
+                    }else{
+                         class_="";class2_="small-fix-size";
+                    }i++;
+                            <li class="penci-feed @class_">
+                                <div class="side-item">
+                                    <div class="side-image">
+                                        <a class="penci-image-holder  @class2_" style="background-image: url('@(news.ImageSource.Split('?')[0])Small/@(news.ImageSource.Split('?')[1])');" href="/tin-tuc/@Common.util.Function.ConvertUrlString(news.Title)-nid@(news.Id).html" title="@news.Title"></a>
+                                    </div>
+                                    <div class="side-item-text">
+                                        <h4><a href="/tin-tuc/@Common.util.Function.ConvertUrlString(news.Title)-nid@(news.Id).html" title="@news.Title">@news.Title</a></h4>
+                                    </div>
+                                </div>
+                            </li>
+                   }}
+               </ul>
+           </div>
+       </aside>
+   </div>
+                                }
+               }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

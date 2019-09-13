@@ -1,0 +1,365 @@
+﻿@model Common.Shop
+
+@{
+    ViewBag.Title = "EditAllInforAboutShop";
+    Layout = "~/Areas/Manage/Views/Shared/_LayoutAdmincshtml.cshtml";
+}
+<br /><br />
+<style type="text/css">
+    .align-center {
+        text-align: center;
+        font-family: Arial;
+        font-style: italic;
+    }
+
+    .text-color-blue {
+        color: blue;
+    }
+
+    .text-size-name-panel {
+        font-size: medium;
+    }
+</style>
+<br />
+<h1 class="align-center text-color-blue">Cập nhật shop</h1>
+<br />
+@using (Html.BeginForm("EditAllInforAboutShop", "Shop", FormMethod.Post, new { enctype = "multipart/form-data", id = "EditAllInforAboutShop" }))
+{
+    @*@Html.AntiForgeryToken()*@
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <strong class="text-size-name-panel align-center">Thông tin Shop</strong>
+                </div>
+                <div class="panel-body fieldset">
+                    <ul class="form-list">
+                        <li class="">
+                            <div class="customer-name-middlename">
+                                <div class="row">
+                                    <div class="field name-firstname">
+                                        <label for="firstname" class="required"><strong><i class="glyphicon glyphicon-leaf"></i> Tên shop:</strong></label>
+                                        <div class="input-box">
+                                            @Html.TextBoxFor(model => model.ShopName, new { @class = "input-text required-entry", @maxlength = "255", @style = "width: 100%", @required = "required" })
+                                            @Html.ValidationMessageFor(model => model.ShopName)
+
+                                        </div>
+                                    </div>
+                                    <div class="field name-firstname">
+                                        <label for="lastname" class="required"><strong><i class="glyphicon glyphicon-picture"></i> Ảnh đại diện</strong></label>
+                                        <div class="input-box">
+                                            <input type="file" name="iconShop" class="bottom" />
+                                        </div>
+                                    </div>
+
+                                    <div class="field name-firstname">
+                                        <label for="firstname" class="required"><strong><i class="glyphicon glyphicon-earphone"></i> Số điện thoại</strong></label>
+                                        <div class="input-box">
+                                            @Html.TextBoxFor(model => model.Phone, new { @class = "input-text required-entry", @maxlength = "255", @style = "width: 100%", @required = "required" })
+                                            @Html.ValidationMessageFor(model => model.Phone)
+
+                                        </div>
+                                    </div>                            
+                                    @*<div class="field name-firstname">
+                                        <label for="firstname" class="required"><strong><i class="glyphicon glyphicon-tasks"></i> Type</strong></label>
+                                        <div class="input-box">
+                                            @Html.TextBoxFor(model => model.Type, new { @class = "input-text required-entry", @maxlength = "255", @style = "width: 100%", @required = "required" })
+                                            @Html.ValidationMessageFor(model => model.Type)
+                                        </div>
+                                    </div>*@
+
+                                    <div class="field name-firstname">
+                                        <label for="firstname" class="required"><strong><i class="glyphicon glyphicon-heart-empty"></i> Status</strong></label>
+                                        <div class="input-box">
+                                            @Html.DropDownList("StatusShop", null, new { @width = "100%", @class = "input", @name = "statusShop" })
+                                        </div>
+                                    </div>
+                                    <div class="field name-firstname">
+                                        <label for="firstname" class="required"><strong>Tỉnh thành</strong></label>
+                                        <div class="input-box">
+                                            @Html.DropDownList("Location", null, new { @width = "100%", @class = "input", @onchange = "LoadChild(1)" })
+                                            <input type="hidden" id="receiverAddress" />
+                                        </div>
+                                    </div>
+                                    <div class="field name-firstname">
+                                        <label for="firstname" class="required"><strong>Quận huyện: </strong></label>
+                                        <div class="input-box">
+                                            <select id="receiverTown" class="input" name="receiverTown" onchange="LoadChild(2)">
+                                                <option value="-1">--Chọn--</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="field name-firstname">
+                                        <label for="firstname" class="required"><strong>Phường xã: </strong></label>
+                                        <div class="input-box">
+                                            <select class="input" id="receiverPhuong" name="receiverPhuong">
+                                                <option value="-1">--Chọn--</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="field name-firstname">
+                                        <label for="firstname" class="required"><strong><i class="glyphicon glyphicon-tags"></i> Địa chỉ chi tiết:  </strong></label>
+                                        <div class="input-box">
+                                            @Html.TextBoxFor(model => model.Address, new { @class = "input-text required-entry", @maxlength = "500", @style = "width: 100%", @required = "required", @placeholder = "Ví dụ: số 10, Ngõ 50, Ngách 100, Hẻm 22, Đường Nguyễn A" })
+                                            @Html.ValidationMessageFor(model => model.Address)
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="panel-footer">
+                    <div>
+                        <p></p>
+                        <p style="font:bold">Cập nhật thông tin shop</p>
+                    </div>                   
+                </div>
+            </div>
+            
+        </div>
+        <div class="col-lg-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <strong class="text-size-name-panel align-center">ShopSupport: </strong>
+                </div>
+                <div class="panel-body fieldset">
+                    <ul class="form-list">
+                        <li class="">
+                            <div class="customer-name-middlename">
+                                <div class="row">
+                                    <div class="field name-firstname">
+                                        @Html.HiddenFor(model => model.ShopSupport.Id)
+                                        <label for="firstname" class="required"><strong><i class="fa fa-university"></i> Tên support: </strong></label>
+                                        <div class="input-box">
+                                            @Html.TextBoxFor(model => model.ShopSupport.SupportName, new { @class = "input-text required-entry", @maxlength = "255", @style = "width: 100%", @required = "required" })
+                                            @Html.ValidationMessageFor(model => model.ShopSupport.SupportName)
+                                        </div>
+                                    </div>
+                                    <div class="field name-firstname">
+                                        <label for="firstname" class="required"><strong><i class="fa fa-university"></i> Email: </strong></label>
+                                        <div class="input-box">
+                                            @Html.TextBoxFor(model => model.ShopSupport.Email, new { @class = "input-text required-entry", @maxlength = "255", @style = "width: 100%", @required = "required" })
+                                            @Html.ValidationMessageFor(model => model.ShopSupport.Email)
+
+                                        </div>
+                                    </div>
+                                    <div class="field name-firstname">
+                                        <label for="firstname" class="required"><strong><i class="glyphicon glyphicon-phone-alt"></i> Phone: </strong></label>
+                                        <div class="input-box">
+                                            @Html.TextBoxFor(model => model.ShopSupport.Phone, new { @class = "input-text required-entry", @maxlength = "255", @style = "width: 100%", @required = "required" })
+                                            @Html.ValidationMessageFor(model => model.ShopSupport.Phone)
+                                        </div>
+                                    </div>
+
+                                    <div class="field name-firstname">
+                                        <label for="firstname" class="required"><strong><i class="glyphicon glyphicon-earphone"></i> Mobile: </strong></label>
+                                        <div class="input-box">
+                                            @Html.TextBoxFor(model => model.ShopSupport.Mobile, new { @class = "input-text required-entry", @maxlength = "255", @style = "width: 100%", @required = "required" })
+                                            @Html.ValidationMessageFor(model => model.ShopSupport.Mobile)
+                                        </div>
+                                    </div>
+                                    <div class="field name-firstname">
+                                        <label for="firstname" class="required"><strong><i class="fa fa-skype"></i> Skype: </strong></label>
+                                        <div class="input-box">
+                                            @Html.TextBoxFor(model => model.ShopSupport.Skype, new { @class = "input-text required-entry", @maxlength = "255", @style = "width: 100%", @required = "required" })
+                                            @Html.ValidationMessageFor(model => model.ShopSupport.Skype)
+                                        </div>
+                                    </div>
+                                    <div class="field name-firstname">
+                                        <label for="firstname" class="required"><strong><i class="fa fa-facebook"></i> Facebook: </strong></label>
+                                        <div class="input-box">
+                                            @Html.TextBoxFor(model => model.ShopSupport.Facebook, new { @class = "input-text required-entry", @maxlength = "255", @style = "width: 100%", @required = "required" })
+                                            @Html.ValidationMessageFor(model => model.ShopSupport.Facebook)
+                                        </div>
+                                    </div>
+                                    <div class="field name-firstname">
+                                        <label for="firstname" class="required"><strong><i class="fa fa-yahoo"></i> Yahoo: </strong></label>
+                                        <div class="input-box">
+                                            @Html.TextBoxFor(model => model.ShopSupport.Yahoo, new { @class = "input-text required-entry", @maxlength = "255", @style = "width: 100%", @required = "required" })
+                                            @Html.ValidationMessageFor(model => model.ShopSupport.Yahoo)
+                                        </div>
+                                    </div>
+                                    <br/><br/><br /><br /><br /><br /><br/>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="panel-footer">
+                    <marquee>
+                        Liên hệ, thắc mắc với shop thông qua các kênh mạng xã hội phổ biến hiện nay để được giải đáp
+                    </marquee>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <strong class="text-size-name-panel align-center">ShopPolicys: </strong>
+                </div>
+                <div class="panel-body fieldset">
+                    <ul class="form-list">
+                        <li class="">
+                            <div class="customer-name-middlename">
+                                <div class="row">
+                                    @Html.HiddenFor(model => model.ShopPolicy.Id)
+                                    <div class="field name-firstname">
+                                        <label for="firstname" class="required"><strong><i class="glyphicon glyphicon-comment"></i> About: </strong></label>
+                                        <div class="input-box">
+                                            @Html.TextAreaFor(model => model.ShopPolicy.About, new { @class = "input-text required-entry", @maxlength = "Max", @style = "width: 100%", @required = "required" })
+                                            @Html.ValidationMessageFor(model => model.ShopPolicy.About)
+                                        </div>
+                                    </div>
+                                    <div class="field name-firstname">
+                                        <label for="firstname" class="required"><strong><i class="glyphicon glyphicon-fire"></i> PrivacyPolicy: </strong></label>
+                                        <div class="input-box">
+                                            @Html.TextAreaFor(model => model.ShopPolicy.PrivacyPolicy, new { @class = "input-text required-entry", @maxlength = "Max", @style = "width: 100%", @required = "required" })
+                                            @Html.ValidationMessageFor(model => model.ShopPolicy.PrivacyPolicy)
+
+                                        </div>
+                                    </div>
+                                    <div class="field name-firstname">
+                                        <label for="firstname" class="required"><strong><i class="glyphicon glyphicon-usd"></i> SalesPolicy: </strong></label>
+                                        <div class="input-box">
+                                            @Html.TextAreaFor(model => model.ShopPolicy.SalesPolicy, new { @class = "input-text required-entry", @maxlength = "Max", @style = "width: 100%", @required = "required" })
+                                            @Html.ValidationMessageFor(model => model.ShopPolicy.SalesPolicy)
+                                        </div>
+                                    </div>
+
+                                    <div class="field name-firstname">
+                                        <label for="firstname" class="required"><strong><i class="glyphicon glyphicon-gbp"></i> PaymentPolicy: </strong></label>
+                                        <div class="input-box">
+                                            @Html.TextAreaFor(model => model.ShopPolicy.PaymentPolicy, new { @class = "input-text required-entry", @maxlength = "Max", @style = "width: 100%", @required = "required" })
+                                            @Html.ValidationMessageFor(model => model.ShopPolicy.PaymentPolicy)
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+                <div class="panel-footer">
+                    <marquee>
+                           Chính sách chủ shop đưa ra tới người tiêu dùng
+                    </marquee>
+                </div>
+            </div>
+        </div>
+
+        @*<div class="col-lg-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <strong class="text-size-name-panel align-center">ShopSetting: </strong>
+                </div>
+                <div class="panel-body fieldset">
+                    <ul class="form-list">
+                        <li class="">
+                            <div class="customer-name-middlename">
+                                <div class="row">
+                                    <div class="field name-firstname">
+                                        <label for="lastname" class="required"><strong><i class="glyphicon glyphicon-pushpin"></i> Key: </strong></label>
+                                        <div class="input-box">
+                                            <textarea rows="20" name="keyShopSetting" class="bottom"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="field name-firstname">
+                                        <label for="lastname" class="required"><strong><i class="glyphicon glyphicon-floppy-open"></i> Value: </strong></label>
+                                        <div class="input-box">
+                                            <textarea rows="50" name="valueShopSetting" class="bottom"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+                                <br /><br /><br /><br />
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+                <div class="panel-footer">
+                    <marquee>
+                        Cấu hình shop theo mong muốn
+                    </marquee>
+                </div>
+            </div>
+        </div>*@
+    </div>
+
+    <div class="buttons-set" style="align-content:center">
+        <button type="submit" title="Submit" class="button"><span><span>Submit</span></span></button>
+    </div>
+
+}
+<script>
+    function LoadChild(level) {
+        var int = parseInt(level);
+        var parent = 0;
+        if (int == 1) {
+            parent = $("#Location").val();
+            var text = $("#Location option:selected").text();
+
+            // alert(a);
+            $('#receiverAddress').html("");
+            $('#receiverAddress').val(text);
+        } else {
+            parent = $("#receiverTown").val();
+        }
+
+        $.ajax({
+            url: '@Url.Action("GetLocationByParent", "Json")',
+            data: {
+                'parentId': parent
+            },
+            Type: 'POST',
+            dataType: 'json',
+            success: function (data) {
+
+                if (int == 1) {
+                    $('#receiverTown').html("");
+                    $('#receiverTown').append(data);
+                } else {
+                    $('#receiverPhuong').html("");
+                    $('#receiverPhuong').append(data);
+
+                }
+            },
+            error: function () {
+
+            }
+        });
+    }
+
+    $(document).ready(function () {
+        $.ajax({
+            url: '@Url.Action("LoadLocation","Member")',
+            data:
+            {
+                'type': 'mb'
+            },
+            Type: 'POST',
+            dataType: 'json',
+            success: function (data) {
+                $('#receiverPhuong').html("");
+                $('#receiverPhuong').append(data.ListItems1);
+                $('#receiverTown').html("");
+                $('#receiverTown').append(data.ListItems2);
+                $('#Location').html("");
+                $('#Location').append(data.ListItems3);
+            },
+            error: function () {
+
+            }
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(function () {
+        $("#datepicker1").datepicker({ dateFormat: 'dd/mm/yy' });
+    });
+</script>

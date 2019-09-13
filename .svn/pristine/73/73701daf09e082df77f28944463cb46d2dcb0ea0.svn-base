@@ -1,0 +1,121 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using Business.ClassBusiness;
+using BuyGroup365.Controllers;
+using Common;
+
+namespace BuyGroup365.Models.Member
+{
+    public class LoadDropdown
+    {
+        readonly LocationsBusiness _locationsBusiness=new LocationsBusiness();
+        readonly CatalogsBusiness _catalogsBusiness=new CatalogsBusiness();
+        readonly  Catalogs_ManufacturersBusiness _catalogsManufacturersBusiness=new Catalogs_ManufacturersBusiness();
+        public  List<SelectListItem> LoadComBoLocations()
+        {
+            var listItems = new List<SelectListItem>();
+            IQueryable<Location> listGroup = _locationsBusiness.GetDynamicQuery();
+            foreach (Location item in listGroup)
+            {
+                listItems.Add(new SelectListItem { Text = item.Name, Value = item.Id.ToString() });
+            }
+            return listItems;
+        }
+        public string LoadComBoManufaceture(long cat,long? manuface)
+        {
+            var html = "";
+      //      var listItems = new List<SelectListItem>();
+           var listGroup = _catalogsManufacturersBusiness.GetDynamicQuery().Where(x=>x.CatalogId==cat).ToList();
+            foreach (var item in listGroup)
+            {
+                if (manuface != null && manuface == item.ManufacturerId)
+                {
+                    html += "<option onclick=\"GetManuface(" + item.ManufacturerId + ")\" selected=\"selected\" value=\"" +
+                            item.ManufacturerId + "\">" + item.Manufacturer.ManufacturerName + "</option>";
+                }
+                else
+                {
+                    html += "<option onclick=\"GetManuface(" + item.ManufacturerId + ")\" value=\"" + item.ManufacturerId + "\">" + item.Manufacturer.ManufacturerName + "</option>";
+                }
+            }
+            return html;
+        }
+        public List<SelectListItem> SearchCategoryByName(ref List<DropdowCate> listDropdowCate)
+        {
+
+            var list = SearchCategoryByParentId("└-------", -1, ref listDropdowCate);
+            var listItems = new List<SelectListItem>();
+            listItems.Add(new SelectListItem { Text = "└Danh mục gốc", Value ="-1" });
+            foreach (var item in list)
+            {
+                listItems.Add(new SelectListItem { Text = item.Name, Value = item.Id.ToString() });
+            }
+            return listItems;
+        }
+        public List<DropdowCate> SearchCategoryByParentId(string sp, long paId,ref List<DropdowCate> listDropdowCate )
+        {
+            var list = MemberController.List;
+        //    List<Catalog> list = _catalogsBusiness.GetDynamicQuery().Where(x => x.ParentId == paId).ToList();
+            list = list.Where(x => x.ParentId == paId).ToList();
+            foreach (var catalog in list)
+            {
+                var dropdowCate=new DropdowCate {Id = catalog.Id, Name = sp + catalog.CatalogName};
+                listDropdowCate.Add(dropdowCate);
+                SearchCategoryByParentId(sp+"--------", catalog.Id, ref listDropdowCate);
+            }
+            return listDropdowCate;
+        }
+        public class DropdowCate
+        {
+            public long Id { get; set; }
+            public string Name { get; set; }
+        }
+
+        #region LocationDropdown
+        public List<SelectListItem> SearchLocationParenId(long id)
+        {
+
+           
+            var listItems = new List<SelectListItem>();
+            listItems.Add(new SelectListItem { Text ="---Chọn---", Value ="-1" });
+            List<Location> list = _locationsBusiness.GetDynamicQuery().Where(x => x.ParentId == id).OrderBy(x => x.Id).ToList();
+            foreach (var item in list)
+            {
+                listItems.Add(new SelectListItem { Text = item.Name, Value = item.Id.ToString() });
+            }
+            return listItems;
+        }
+        public List<SelectListItem> SearchLocationByName(ref List<DropdowLocation> listDropdowLocation)
+        {
+
+            var list = SearchLocationByParentId("└-------",-1, ref listDropdowLocation);
+            var listItems = new List<SelectListItem>();
+            foreach (var item in list)
+            {
+                listItems.Add(new SelectListItem { Text = item.Name, Value = item.Id.ToString() });
+            }
+            return listItems;
+        }
+        public List<DropdowLocation> SearchLocationByParentId(string sp, long paId, ref List<DropdowLocation> listDropdowLocation)
+        {
+            List<Location> list = _locationsBusiness.GetDynamicQuery().Where(x => x.ParentId == paId).OrderBy(x=>x.Name).ToList();
+            foreach (var location in list)
+            {
+                var dropdowLo = new DropdowLocation { Id = location.Id, Name = sp + location.Name };
+                listDropdowLocation.Add(dropdowLo);
+                SearchLocationByParentId(sp + "--------", location.Id, ref listDropdowLocation);
+            }
+            return listDropdowLocation;
+        }
+        public class DropdowLocation
+        {
+            public long Id { get; set; }
+            public string Name { get; set; }
+        }
+        #endregion 
+    }
+    
+}

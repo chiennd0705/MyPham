@@ -1,0 +1,322 @@
+﻿@model List<Common.CommentsNew>
+<div id="timeline-1">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12">
+            @foreach (var item in Model)
+            {
+                var id = "cmt" + item.Id;
+                <div class="timeline-container" id="@id">
+                    <div class="timeline-items">
+                        <div class="timeline-item clearfix">
+                            <div class="timeline-info">
+                                <img alt="Susan't Avatar" src="~/img/avatar4.png" />
+                            </div>
+
+                            <div class="widget-box transparent">
+                                <div class="widget-header widget-header-small">
+                                    <h5 class="widget-title smaller">
+                                        <a href="#" class="blue">@item.NickName</a>
+                                        <span class="grey">Đánh giá tin tức</span>
+                                    </h5>
+
+                                    <span class="widget-toolbar no-border">
+                                        <i class="ace-icon fa fa-clock-o bigger-110"></i>
+                                        @item.CreateDate.ToString("dd/MM/yyyy HH:mm:ss")
+                                    </span>
+                                </div>
+
+                                <div class="widget-body">
+                                    <div class="widget-main">
+                                        @item.Content
+                                        <div class=""></div>
+                                        <div class="clearfix"></div>
+                                        <textarea name="TraLoicontent" id="TraLoicontent" title="Nội dung" class="input-text" cols="5" style="width:96%;margin-top:20px;" placeholder="Nhập nội dung trả lời" rows="3">
+                                            @{
+                try
+                {
+                    Business.ClassBusiness.CommentsNewsBusiness commentsBusiness = new Business.ClassBusiness.CommentsNewsBusiness();
+                    Common.CommentsNew comment = commentsBusiness.GetDynamicQuery().Where(x => x.ParentId == @item.Id).FirstOrDefault();
+
+                    @comment.Content
+
+                }
+                catch
+                { }
+                                            }
+                                        </textarea>
+                                        <div class="clearfix"></div>
+                                        <div class="widget-toolbox clearfix">
+
+                                            <div class="pull-right action-buttons">
+                                                <a href="javascript:void(0)" onclick="TraLoiComment(@item.Id,@item.NewId)">
+                                                    <i class="fa fa-reply" aria-hidden="true"></i>
+                                                </a>
+                                                @if (item.Status == 1)
+                                                {
+                                                    <a href="javascript:void(0)" onclick="Duyet(@item.Id)">
+                                                        <i class="fa fa-thumbs-up"></i>
+                                                    </a>
+                                                }
+                                                <a href="javascript:void(0)" onclick="deletecoment(@item.Id)">
+                                                    <i class="ace-icon fa fa-times red "></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- /.timeline-items -->
+                </div><!-- /.timeline-container -->
+            }
+        </div>
+    </div>
+</div>
+
+<style>
+    .timeline-container {
+        position: relative;
+        padding-top: 4px;
+        margin-bottom: 32px;
+    }
+
+    .timeline-label {
+        display: block;
+        clear: both;
+        margin: 0 0 18px;
+        margin-left: 34px;
+    }
+
+    .label-lg.arrowed-in-right {
+        margin-right: 6px;
+    }
+
+    .label.arrowed-in-right {
+        position: relative;
+        z-index: 1;
+    }
+
+    .timeline-item {
+        position: relative;
+        margin-bottom: 8px;
+    }
+
+    .timeline-info {
+        float: left;
+        width: 60px;
+        text-align: center;
+        position: relative;
+    }
+
+    .timeline-item img {
+        border: 1px solid #AAA;
+        padding: 2px;
+        background-color: #FFF;
+    }
+
+    .timeline-info img {
+        border-radius: 100%;
+        max-width: 42px;
+    }
+
+    img {
+        vertical-align: middle;
+    }
+
+    .timeline-info .label, .timeline-info .badge {
+        font-size: 12px;
+    }
+
+    .label-info, .label.label-info, .badge.badge-info, .badge-info {
+        background-color: #3a87ad;
+    }
+
+    .label-sm {
+        padding: .2em .4em .3em;
+        font-size: 11px;
+        line-height: 1;
+        height: 18px;
+    }
+
+    .label {
+        border-radius: 0;
+        text-shadow: none;
+        font-weight: 400;
+        color: #fff;
+        display: inline-block;
+        background-color: #abbac3;
+    }
+
+    .timeline-item .transparent.widget-box {
+        border-left: 3px solid #DAE1E5;
+    }
+
+    .timeline-item .widget-box {
+        margin: 0;
+        position: relative;
+        max-width: none;
+        margin-left: 60px;
+    }
+
+    .timeline-item .transparent .widget-header {
+        background-color: #ECF1F4;
+        border-bottom-width: 0;
+    }
+
+    .widget-box.transparent > .widget-header-small {
+        padding-left: 1px;
+    }
+
+    .widget-box.transparent > .widget-header {
+        background: 0 0;
+        filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+        border-width: 0;
+        border-bottom: 1px solid #DCE8F1;
+        color: #4383B4;
+        padding-left: 3px;
+    }
+
+    .widget-header-small {
+        min-height: 31px;
+        padding-left: 10px;
+    }
+
+    .widget-header {
+        -webkit-box-sizing: content-box;
+        -moz-box-sizing: content-box;
+        box-sizing: content-box;
+        position: relative;
+        min-height: 38px;
+        background: #f7f7f7;
+        background-image: -webkit-linear-gradient(top,#fff 0,#eee 100%);
+        background-image: -o-linear-gradient(top,#fff 0,#eee 100%);
+        background-image: linear-gradient(to bottom,#fff 0,#eee 100%);
+        background-repeat: repeat-x;
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffeeeeee', GradientType=0);
+        color: #669fc7;
+        border-bottom: 1px solid #DDD;
+        padding-left: 12px;
+    }
+
+    .timeline-item .transparent .widget-header > .widget-title {
+        margin-left: 8px;
+    }
+
+    .widget-header-small > .widget-title {
+        line-height: 30px;
+    }
+
+    .widget-header > .widget-title {
+        line-height: 36px;
+        padding: 0;
+        margin: 0;
+        display: inline;
+    }
+
+    h5.smaller {
+        font-size: 14px;
+    }
+
+    h5 {
+        font-size: 15px;
+        font-weight: 400;
+        font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    }
+
+    .blue {
+        color: #478fca !important;
+    }
+
+    .grey {
+        color: #777 !important;
+    }
+
+    .widget-header-small > .widget-toolbar {
+        line-height: 29px;
+    }
+
+    .widget-toolbar {
+        display: inline-block;
+        padding: 0 10px;
+        line-height: 37px;
+        float: right;
+        position: relative;
+    }
+
+    .bigger-110 {
+        font-size: 110% !important;
+    }
+
+    .ace-icon {
+        text-align: center;
+    }
+
+    .fa {
+        display: inline-block;
+        font: normal normal normal 14px/1 FontAwesome;
+        font-size: inherit;
+        text-rendering: auto;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    .widget-header-small > .widget-toolbar {
+        line-height: 29px;
+    }
+
+    .widget-toolbar {
+        display: inline-block;
+        padding: 0 10px;
+        line-height: 37px;
+        float: right;
+        position: relative;
+    }
+
+    .widget-box > .widget-header > .widget-toolbar > [data-action=reload], .widget-color-dark > .widget-header > .widget-toolbar > [data-action=reload], .widget-box > .widget-header > .widget-toolbar > .widget-menu > [data-action=reload], .widget-color-dark > .widget-header > .widget-toolbar > .widget-menu > [data-action=reload] {
+        color: #ACD392;
+    }
+
+    .widget-box > .widget-header > .widget-toolbar > [data-action=collapse], .widget-color-dark > .widget-header > .widget-toolbar > [data-action=collapse], .widget-box > .widget-header > .widget-toolbar > .widget-menu > [data-action=collapse], .widget-color-dark > .widget-header > .widget-toolbar > .widget-menu > [data-action=collapse] {
+        color: #AAA;
+    }
+
+    .widget-box.transparent > .widget-body {
+        border-width: 0;
+        background-color: transparent;
+    }
+
+    .timeline-item .widget-main {
+        margin: 0;
+        position: relative;
+        max-width: none;
+        border-bottom-width: 0;
+    }
+
+    .widget-main {
+        padding: 12px;
+    }
+
+    .timeline-item .widget-toolbox {
+        padding: 4px 8px 0 !important;
+        background-color: transparent !important;
+        border-width: 0 !important;
+        margin: 0 0 !important;
+    }
+
+    .pull-left {
+        float: left !important;
+    }
+
+    .pull-right {
+        float: right !important;
+    }
+
+    .action-buttons a {
+        margin: 0 3px;
+        display: inline-block;
+        opacity: .85;
+        -webkit-transition: all .1s;
+        -o-transition: all .1s;
+        transition: all .1s;
+    }
+</style>

@@ -1,0 +1,572 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BHD_InventorModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="BHD_InventorEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Data_Balance" EntityType="BHD_InventorModel.Data_Balance" />
+    <EntitySet Name="Data_Balance_Detail" EntityType="BHD_InventorModel.Data_Balance_Detail" />
+    <EntitySet Name="Data_Barcode" EntityType="BHD_InventorModel.Data_Barcode" />
+    <EntitySet Name="Data_Deliver" EntityType="BHD_InventorModel.Data_Deliver" />
+    <EntitySet Name="Data_Deliver_Detail" EntityType="BHD_InventorModel.Data_Deliver_Detail" />
+    <EntitySet Name="Data_Internal" EntityType="BHD_InventorModel.Data_Internal" />
+    <EntitySet Name="Data_Internal_Detail" EntityType="BHD_InventorModel.Data_Internal_Detail" />
+    <EntitySet Name="Data_Order" EntityType="BHD_InventorModel.Data_Order" />
+    <EntitySet Name="Data_Order_Detail" EntityType="BHD_InventorModel.Data_Order_Detail" />
+    <EntitySet Name="Data_Receipt" EntityType="BHD_InventorModel.Data_Receipt" />
+    <EntitySet Name="Data_Receipt_Detail" EntityType="BHD_InventorModel.Data_Receipt_Detail" />
+    <EntitySet Name="Data_Require" EntityType="BHD_InventorModel.Data_Require" />
+    <EntitySet Name="Data_Require_Detail" EntityType="BHD_InventorModel.Data_Require_Detail" />
+    <EntitySet Name="Data_Suggest" EntityType="BHD_InventorModel.Data_Suggest" />
+    <EntitySet Name="Data_Suggest_Detail" EntityType="BHD_InventorModel.Data_Suggest_Detail" />
+    <EntitySet Name="List_Branch" EntityType="BHD_InventorModel.List_Branch" />
+    <EntitySet Name="List_Combo_Detail" EntityType="BHD_InventorModel.List_Combo_Detail" />
+    <EntitySet Name="List_Employee" EntityType="BHD_InventorModel.List_Employee" />
+    <EntitySet Name="List_Goods" EntityType="BHD_InventorModel.List_Goods" />
+    <EntitySet Name="List_Group_Goods" EntityType="BHD_InventorModel.List_Group_Goods" />
+    <EntitySet Name="List_Inventory" EntityType="BHD_InventorModel.List_Inventory" />
+    <EntitySet Name="List_Type" EntityType="BHD_InventorModel.List_Type" />
+    <EntitySet Name="List_Unit" EntityType="BHD_InventorModel.List_Unit" />
+    <EntitySet Name="List_Vendor" EntityType="BHD_InventorModel.List_Vendor" />
+    <EntitySet Name="System_Function" EntityType="BHD_InventorModel.System_Function" />
+    <EntitySet Name="System_Function_Detail" EntityType="BHD_InventorModel.System_Function_Detail" />
+    <EntitySet Name="System_Info" EntityType="BHD_InventorModel.System_Info" />
+    <EntitySet Name="System_Report" EntityType="BHD_InventorModel.System_Report" />
+    <EntitySet Name="System_Report_Detail" EntityType="BHD_InventorModel.System_Report_Detail" />
+    <EntitySet Name="System_Rule" EntityType="BHD_InventorModel.System_Rule" />
+    <EntitySet Name="System_User" EntityType="BHD_InventorModel.System_User" />
+  </EntityContainer>
+  <EntityType Name="Data_Balance">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="deleted" Type="Boolean" />
+    <Property Name="create_date" Type="DateTime" Precision="3" />
+    <Property Name="modified_date" Type="DateTime" Precision="3" />
+    <Property Name="create_user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="modified_user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="balance_date" Type="DateTime" Precision="3" />
+    <Property Name="balance_user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="inventory_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="noted" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="confirmed" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="Data_Balance_Detail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="deleted" Type="Boolean" />
+    <Property Name="create_date" Type="DateTime" Precision="3" />
+    <Property Name="modified_date" Type="DateTime" Precision="3" />
+    <Property Name="create_user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="modified_user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="balance_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="goods_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="receipt_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="expiry_date" Type="DateTime" Precision="3" />
+    <Property Name="quantity_system" Type="Double" />
+    <Property Name="quantity_real" Type="Double" />
+    <Property Name="quantity_balance" Type="Double" />
+    <Property Name="notes_detail" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="shipment_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="barcode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Data_Barcode">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="shipment_code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="barcode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="deleted" Type="Boolean" />
+    <Property Name="create_date" Type="DateTime" Precision="3" />
+    <Property Name="modified_date" Type="DateTime" Precision="3" />
+    <Property Name="create_user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="modified_user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="goods_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="receipt_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="expiry_date" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="Data_Deliver">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="deleted" Type="Boolean" />
+    <Property Name="create_date" Type="DateTime" Precision="3" />
+    <Property Name="modified_date" Type="DateTime" Precision="3" />
+    <Property Name="create_user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="modified_user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="deliver_date" Type="DateTime" Precision="3" />
+    <Property Name="deliver_user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="inventory_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="branch_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="type_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="noted" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="confirmed" Type="Boolean" />
+    <Property Name="require_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Data_Deliver_Detail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="deleted" Type="Boolean" />
+    <Property Name="create_date" Type="DateTime" Precision="3" />
+    <Property Name="modified_date" Type="DateTime" Precision="3" />
+    <Property Name="create_user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="modified_user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="deliver_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="goods_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="receipt_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="quantity" Type="Double" />
+    <Property Name="expiry_date" Type="DateTime" Precision="3" />
+    <Property Name="quantity_before" Type="Double" />
+    <Property Name="notes_detail" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="shipment_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Data_Internal">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="deleted" Type="Boolean" />
+    <Property Name="create_date" Type="DateTime" Precision="3" />
+    <Property Name="modified_date" Type="DateTime" Precision="3" />
+    <Property Name="create_user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="modified_user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="internal_date" Type="DateTime" Precision="3" />
+    <Property Name="internal_user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="from_inventory_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="to_inventory_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="type_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="receipt_user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="deliver_user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="noted" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="confirmed" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="Data_Internal_Detail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="deleted" Type="Boolean" />
+    <Property Name="create_date" Type="DateTime" Precision="3" />
+    <Property Name="modified_date" Type="DateTime" Precision="3" />
+    <Property Name="create_user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="modified_user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="internal_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="goods_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="receipt_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="expiry_date" Type="DateTime" Precision="3" />
+    <Property Name="quantity" Type="Double" />
+    <Property Name="quantity_before" Type="Double" />
+    <Property Name="notes_detail" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="shipment_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Data_Order">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="create_date" Type="DateTime" Precision="3" />
+    <Property Name="modifield_date" Type="DateTime" Precision="3" />
+    <Property Name="create_user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="modified_user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="deleted" Type="Boolean" />
+    <Property Name="code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="order_date" Type="DateTime" Precision="3" />
+    <Property Name="vendor_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="inventory_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="noted" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Data_Order_Detail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="create_date" Type="DateTime" Precision="3" />
+    <Property Name="modifield_date" Type="DateTime" Precision="3" />
+    <Property Name="create_user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="modified_user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="deleted" Type="Boolean" />
+    <Property Name="order_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="goods_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="quantity" Type="Double" />
+    <Property Name="notes_detail" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Data_Receipt">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="deleted" Type="Boolean" />
+    <Property Name="create_date" Type="DateTime" Precision="3" />
+    <Property Name="modified_date" Type="DateTime" Precision="3" />
+    <Property Name="create_user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="modified_user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="receipt_date" Type="DateTime" Precision="3" />
+    <Property Name="receipt_user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="inventory_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="vendor_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="type_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="noted" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="confirmed" Type="Boolean" />
+    <Property Name="deliver_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="branch_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Data_Receipt_Detail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="deleted" Type="Boolean" />
+    <Property Name="create_date" Type="DateTime" Precision="3" />
+    <Property Name="modified_date" Type="DateTime" Precision="3" />
+    <Property Name="create_user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="modified_user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="receipt_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="goods_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="expiry_date" Type="DateTime" Precision="3" />
+    <Property Name="quantity" Type="Double" />
+    <Property Name="notes_detail" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="shipment_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Data_Require">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="deleted" Type="Boolean" />
+    <Property Name="create_date" Type="DateTime" Precision="3" />
+    <Property Name="modified_date" Type="DateTime" Precision="3" />
+    <Property Name="create_user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="modified_user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="require_date" Type="DateTime" Precision="3" />
+    <Property Name="require_user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="require_inventory" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="noted" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="confirmed" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="Data_Require_Detail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="deleted" Type="Boolean" />
+    <Property Name="create_date" Type="DateTime" Precision="3" />
+    <Property Name="modified_date" Type="DateTime" Precision="3" />
+    <Property Name="create_user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="modified_user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="require_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="goods_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="quantity" Type="Double" />
+    <Property Name="notes_detail" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Data_Suggest">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="deleted" Type="Boolean" />
+    <Property Name="create_date" Type="DateTime" Precision="3" />
+    <Property Name="modified_date" Type="DateTime" Precision="3" />
+    <Property Name="create_user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="modified_user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="suggest_date" Type="DateTime" Precision="3" />
+    <Property Name="suggest_user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="noted" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="confirmed" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="Data_Suggest_Detail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="deleted" Type="Boolean" />
+    <Property Name="create_date" Type="DateTime" Precision="3" />
+    <Property Name="modified_date" Type="DateTime" Precision="3" />
+    <Property Name="create_user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="modified_user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="suggest_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="goods_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="quantity" Type="Double" />
+    <Property Name="notes_detail" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="List_Branch">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="deleted" Type="Boolean" />
+    <Property Name="create_date" Type="DateTime" Precision="3" />
+    <Property Name="modified_date" Type="DateTime" Precision="3" />
+    <Property Name="create_user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="modified_user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="List_Combo_Detail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="combo_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="goods_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="quantity" Type="Double" />
+    <Property Name="deleted" Type="Boolean" />
+    <Property Name="create_date" Type="DateTime" Precision="3" />
+    <Property Name="modified_date" Type="DateTime" Precision="3" />
+    <Property Name="create_user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="modified_user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="List_Employee">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="deleted" Type="Boolean" />
+    <Property Name="create_date" Type="DateTime" Precision="3" />
+    <Property Name="modified_date" Type="DateTime" Precision="3" />
+    <Property Name="create_user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="modified_user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="inventory_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="List_Goods">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="deleted" Type="Boolean" />
+    <Property Name="create_date" Type="DateTime" Precision="3" />
+    <Property Name="modified_date" Type="DateTime" Precision="3" />
+    <Property Name="create_user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="modified_user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="unit_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="group_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="min_quantity" Type="Double" />
+    <Property Name="max_quantity" Type="Double" />
+    <Property Name="warn_before" Type="Int32" />
+    <Property Name="manage_expiry" Type="Boolean" />
+    <Property Name="print_barcode" Type="Boolean" />
+    <Property Name="is_combo" Type="Boolean" />
+    <Property Name="input_price" Type="Double" />
+    <Property Name="output_price" Type="Double" />
+  </EntityType>
+  <EntityType Name="List_Group_Goods">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="deleted" Type="Boolean" />
+    <Property Name="create_date" Type="DateTime" Precision="3" />
+    <Property Name="modified_date" Type="DateTime" Precision="3" />
+    <Property Name="create_user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="modified_user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="parent_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="status" Type="Byte" />
+  </EntityType>
+  <EntityType Name="List_Inventory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="deleted" Type="Boolean" />
+    <Property Name="create_date" Type="DateTime" Precision="3" />
+    <Property Name="modified_date" Type="DateTime" Precision="3" />
+    <Property Name="create_user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="modified_user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="branch_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="List_Type">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="deleted" Type="Boolean" />
+    <Property Name="create_date" Type="DateTime" Precision="3" />
+    <Property Name="modified_date" Type="DateTime" Precision="3" />
+    <Property Name="create_user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="modified_user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="List_Unit">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="deleted" Type="Boolean" />
+    <Property Name="create_date" Type="DateTime" Precision="3" />
+    <Property Name="modified_date" Type="DateTime" Precision="3" />
+    <Property Name="create_user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="modified_user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="List_Vendor">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="address" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="phone_number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="deleted" Type="Boolean" />
+    <Property Name="create_date" Type="DateTime" Precision="3" />
+    <Property Name="modified_date" Type="DateTime" Precision="3" />
+    <Property Name="create_user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="modified_user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="System_Function">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="report_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="group_id" Type="Int32" />
+    <Property Name="key_structure" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="visible" Type="Boolean" />
+    <Property Name="locked" Type="Boolean" />
+    <Property Name="main_table" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="main_sql" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="main_key" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="sub_table" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="sub_sql" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="sub_fkey" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="form_display" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="column_display" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="column_value" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="find_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="deleted" Type="Boolean" />
+    <Property Name="create_date" Type="DateTime" Precision="3" />
+    <Property Name="modified_date" Type="DateTime" Precision="3" />
+    <Property Name="create_user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="modified_user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="System_Function_Detail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="function_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="column_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="display_name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="data_type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="length" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="format" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="find_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="position" Type="Int32" />
+    <Property Name="input_required" Type="Boolean" />
+    <Property Name="hide" Type="Boolean" />
+    <Property Name="default_value" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="hide_grid" Type="Boolean" />
+    <Property Name="readonly" Type="Boolean" />
+    <Property Name="deleted" Type="Boolean" />
+    <Property Name="create_date" Type="DateTime" Precision="3" />
+    <Property Name="modified_date" Type="DateTime" Precision="3" />
+    <Property Name="create_user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="modified_user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="System_Info">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="value" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="deleted" Type="Boolean" />
+    <Property Name="create_date" Type="DateTime" Precision="3" />
+    <Property Name="modified_date" Type="DateTime" Precision="3" />
+    <Property Name="create_user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="modified_user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="System_Report">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="function_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="report_file" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="group_report_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="display_sql" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="deleted" Type="Boolean" />
+    <Property Name="create_date" Type="DateTime" Precision="3" />
+    <Property Name="modified_date" Type="DateTime" Precision="3" />
+    <Property Name="create_user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="modified_user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="System_Report_Detail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="report_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="parameter_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="parameter_display" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="parameter_type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="find_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="position" Type="Int32" />
+    <Property Name="input_required" Type="Boolean" />
+    <Property Name="deleted" Type="Boolean" />
+    <Property Name="create_date" Type="DateTime" Precision="3" />
+    <Property Name="modified_date" Type="DateTime" Precision="3" />
+    <Property Name="create_user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="modified_user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="System_Rule">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="group_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="function_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="allow_add" Type="Boolean" />
+    <Property Name="allow_edit" Type="Boolean" />
+    <Property Name="allow_remove" Type="Boolean" />
+    <Property Name="allow_view" Type="Boolean" />
+    <Property Name="allow_print" Type="Boolean" />
+    <Property Name="allow_import" Type="Boolean" />
+    <Property Name="allow_export" Type="Boolean" />
+    <Property Name="deleted" Type="Boolean" />
+    <Property Name="create_date" Type="DateTime" Precision="3" />
+    <Property Name="modified_date" Type="DateTime" Precision="3" />
+    <Property Name="create_user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="modified_user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="System_User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="employee_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="group_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="locked" Type="Boolean" />
+    <Property Name="deleted" Type="Boolean" />
+    <Property Name="create_date" Type="DateTime" Precision="3" />
+    <Property Name="modified_date" Type="DateTime" Precision="3" />
+    <Property Name="create_user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="modified_user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+</Schema>

@@ -1,0 +1,123 @@
+﻿@using BuyGroup365.Models.Member
+@using Common
+@model Common.Order
+@{
+    ViewBag.Title = "OrderContent";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+    var total = Model.TotalMoney;
+}
+<div class="main-container col1-layout content-color color">
+
+
+    <div class="container">
+        <div class="main">
+            <div class="row">
+                <div class="col-main col-lg-12">
+                    <div class="row">
+                        <p>Đơn hàng của bạn</p>
+                    </div>
+                    <div class="row">
+                        <table border="0" cellpadding="0" cellspacing="0" width="799">
+                            <tbody>
+                                <tr height="25">
+                                    <td colspan="4" height="25" width="799" style="font-weight: bold">1.Đơn hàng</td>
+                                </tr>
+
+                                @foreach (var item in Model.OrderDetails)
+                                {
+                                    var money = (double)(item.Price * item.Quantity);
+                                    var price = (double)item.Price;
+                                    <tr height="25">
+                                        <td height="25"><img src="@FuntionMember.GetUrlImage(item.PathImage,"Small")" width="100" /></td>
+                                        <td>@item.NameProduct</td>
+                                        <td>@price.ToString("N0") x @item.Quantity</td>
+
+                                       
+                                        <td align="right">@money.ToString("N0")</td>
+                                    </tr>
+                                }
+                                <tr height="25">
+                                    <td colspan="2" height="25"> </td>
+                                    <td>Tổng</td>
+                                    <td align="right">@((double)Model.TotalMoney).ToString("N0")</td>
+                                </tr>
+                                <tr height="25">
+                                    <td colspan="4" height="25" style="font-weight: bold">2.Thông tin người nhận</td>
+                                </tr>
+                                <tr height="25">
+                                    <td height="25">Họ tên</td>
+                                    <td>@Model.OrderReciver.Name</td>
+                                    <td> </td>
+                                    <td> </td>
+                                </tr>
+                                <tr height="25">
+                                    <td height="25">Điên thoại</td>
+                                    <td align="right">@Model.OrderReciver.PhoneNumber</td>
+                                    <td> </td>
+                                    <td> </td>
+                                </tr>
+                                <tr height="25">
+                                    <td height="25">Email</td>
+                                    <td>@Model.OrderReciver.Email</td>
+                                    <td> </td>
+                                    <td> </td>
+                                </tr>
+                                <tr height="25">
+                                    <td height="25">Địa chỉ</td>
+                                    <td>@Model.OrderReciver.Address</td>
+                                    <td> </td>
+                                    <td> </td>
+                                </tr>
+                                <tr height="25">
+                                    <td colspan="4" height="25" style="font-weight: bold">3.Thông tin người nhận</td>
+                                </tr>
+                                <tr height="25">
+                                    <td height="25">Họ tên</td>
+                                    <td>@Model.OrderBuyer.Name</td>
+                                    <td> </td>
+                                    <td> </td>
+                                </tr>
+                                <tr height="25">
+                                    <td height="25">Điên thoại</td>
+                                    <td align="right">@Model.OrderBuyer.PhoneNumber</td>
+                                    <td> </td>
+                                    <td> </td>
+                                </tr>
+                                <tr height="25">
+                                    <td height="25">Email</td>
+                                    <td>@Model.OrderBuyer.Email</td>
+                                    <td> </td>
+                                    <td> </td>
+                                </tr>
+                                <tr height="25">
+                                    <td height="25">Địa chỉ</td>
+                                    <td>@Model.OrderBuyer.Address</td>
+                <td> </td>
+                <td> </td>
+            </tr>
+            <tr height="25">
+                <td height="25"> </td>
+                <td> </td>
+                <td> </td>
+                <td> </td>
+            </tr>
+            <tr height="25">
+                <td colspan="4" height="25">4.Hình thức thanh toán</td>
+            </tr>
+            <tr height="25">
+
+                <td colspan="4" height="25">Đang cập nhật</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+</div>

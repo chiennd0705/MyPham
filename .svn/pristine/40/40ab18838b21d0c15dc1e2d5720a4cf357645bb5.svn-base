@@ -1,0 +1,252 @@
+﻿<div class="block-footer-top">
+    <div class="container">
+        <div class="main">
+            <div class="footer">
+                <div class="row">
+                    <div class="col-lg-3 col-md-3  col-xs-12">
+                        <div class="collapsible mobile-collapsible">
+                            <div class="block1 block-content-statick">
+                                <a class="introduce-logo" href="/"> <img class="img-responsive logo1" alt="" src="/Content/Csspublic/images/logo.png"></a>
+                                <ul class="address-list">
+                                    <li class="feature-icon first">
+                                        <p class="no-margin"><span class="tit-name">Địa chỉ:</span><span class="tit-contain">179, Trần Hưng Đạo, Hoàn Kiếm, Hà Nội.</span></p>
+                                    </li>
+                                    <li class="feature-icon">
+                                        <p><span class="tit-name">Phone:</span><span class="tit-contain">+84 04.665.99999</span></p>
+                                    </li>
+                                    <li class="feature-icon">
+                                        <p><span class="tit-name">Email:</span><span class="tit-contain">suport@buygroup365.com</span></p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-xs-12">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <div class="collapsible mobile-collapsible">
+                                    <h3 class="block-title heading">BuyGroup365</h3>
+                                    <span class="toggle-tab mobile" style="display: none;"><span class="hidden">facebook</span></span>
+                                    <div class="block-content block-content-statick toggle-content">
+                                        <ul class="bullet">
+                                            <li><a href="#">Giới thiệu</a></li>
+                                            <li><a href="#">Quy chế hoạt động</a></li>
+                                            <li><a href="#">Điều khoản và điều kiện giao dịch</a></li>
+                                           
+                                            <li><a href="#">Liên hệ</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <div class="collapsible mobile-collapsible">
+                                    <h3 class="block-title heading">Tài khoản</h3>
+                                     <div class="block-content block-content-statick toggle-content">
+                                        <ul class="bullet">
+                                            <li><a href="">Đăng nhập</a></li>
+                                            <li><a href="#">Đăng ký</a></li>
+                                          
+                                            <li><a href="#">Đơn hàng</a></li>
+                                             <li><a href="#">Chính sách bảo mật và chia sẻ thông tin</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <div class="collapsible mobile-collapsible">
+                                    <h3 class="block-title heading">Hỗ trợ</h3>
+                                    <span class="toggle-tab mobile" style="display: none;"><span class="hidden">facebook</span></span>
+                                    <div class="block-content block-content-statick toggle-content">
+                                        <ul class="bullet">
+                                            
+                                            <li><a href="#">CS thanh toán</a></li>
+                                            <li><a href="#">CS giao hàng</a></li>
+                                            <li><a href="#">CS đổi trả</a></li>
+                                            <li><a href="#">CS bảo hành</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3  col-xs-12">
+                        <div class="collapsible mobile-collapsible">
+                            <h3 class="block-title heading">Đăng ký nhận tin</h3>
+                            <span class="toggle-tab mobile" style="display: none;"><span class="hidden">facebook</span></span>
+                            <div class="block1 block-content-statick toggle-content">
+                                <div class="block-newletter">
+                                    <div class="block block-subscribe">
+                                        <div class="block-title">
+                                            <strong><span>Đăng ký nhận tin</span></strong>
+                                        </div>
+                                        <form action="http://alothemes.com/demo/kuteshop/index.php/newsletter/subscriber/new/" method="post" id="newsletter-validate-detail">
+                                            <div class="block-content">
+                                                <div class="form-subscribe-header">
+                                                    <p>newsletter!</p>
+                                                </div>
+                                                <div class="input-box">
+                                                    <input type="text" name="email" id="newsletter" title="Sign up for our newsletter" class="input-text required-entry validate-email" placeholder="Your email adress ...">
+                                                    <div class="actions">
+                                                        <button type="submit" title="ok" class="button">
+                                                            <span><span>ok</span></span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <script type="text/javascript">
+                                            //<![CDATA[
+                                            var newsletterSubscriberFormDetail = new VarienForm('newsletter-validate-detail');
+                                            //]]>
+                                        </script>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="collapsible mobile-collapsible">
+                            <h3 class="block-title heading introduce-title">Kết nối với chúng tôi</h3>
+                            <span class="toggle-tab mobile" style="display: none;"><span class="hidden">facebook</span></span>
+                            <ul class="list-inline toggle-content">
+                                <li><a class="social-link facebook" href="#"><i class="fa fa-facebook"><span class="hidden">facebook</span></i></a></li>
+                                <li><a class="social-link pinterest-p" href="#"><i class="fa fa-pinterest-p"><span class="hidden">pinterest</span></i></a></li>
+                                <li><a class="social-link vk" href="#"><i class="fa fa-vk"><span class="hidden">fa-vk</span></i></a></li>
+                                <li><a class="social-link twitter" href="#"><i class="fa fa-twitter"><span class="hidden">twitter</span></i></a></li>
+                                <li><a class="social-link google-plus" href="#"><i class="fa fa-google-plus"><span class="hidden">google-plus</span></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="block-footer-bottom">
+    <div class="container">
+        <div class="main">
+            <div class="footer">
+                <div class="row trademark-box">
+                    <div class="col-sm-12">
+                        <ul class="trademark-list-top">
+                            <li id="payment-methods">Đối tác</li>
+                            <li><a href="#"><img class="img-responsive" alt="ups" src="/Content/Csspublic/images/trademark-ups.jpg"></a></li>
+                            <li><a href="#"><img class="img-responsive" alt="ups" src="/Content/Csspublic/images/trademark-qiwi.jpg"></a></li>
+                            <li><a href="#"><img class="img-responsive" alt="ups" src="/Content/Csspublic/images/trademark-wu.jpg"></a></li>
+                            <li><a href="#"><img class="img-responsive" alt="ups" src="/Content/Csspublic/images/trademark-cn.jpg"> </a></li>
+                            <li><a href="#"><img class="img-responsive" alt="ups" src="/Content/Csspublic/images/trademark-visa.jpg"></a></li>
+                            <li><a href="#"><img class="img-responsive" alt="ups" src="/Content/Csspublic/images/trademark-mc.jpg"></a></li>
+                            <li><a href="#"><img class="img-responsive" alt="ups" src="/Content/Csspublic/images/trademark-ems.jpg"></a></li>
+                            <li><a href="#"><img class="img-responsive" alt="ups" src="/Content/Csspublic/images/trademark-dhl.jpg"></a></li>
+                            <li><a href="#"><img class="img-responsive" alt="ups" src="/Content/Csspublic/images/trademark-fe.jpg"></a></li>
+                            <li><a href="#"><img class="img-responsive" alt="ups" src="/Content/Csspublic/images/trademark-wm.jpg"></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row trademark-text-box">
+                    <div class="col-sm-12">
+                        <ul class="trademark-search-list trademark-list">
+                            <li class="trademark-text-tit">TỪ KHÓA HOT:</li>
+                            <li><a href="#">Xiaomio Mi3</a></li>
+                            <li><a href="#">Digiflipo Pro XT 712 Tablet</a></li>
+                            <li><a href="#">Mi 3 Phones</a></li>
+                            <li><a href="#">Iphoneo 6 Plus</a></li>
+                            <li><a href="#">Women's Messenger Bags</a></li>
+                            <li><a href="#">Wallets</a></li>
+                            <li><a href="#">Women's Clutches</a></li>
+                            <li><a href="#">Backpacks Totes</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-12">
+                        <ul class="trademark-tv-list trademark-list">
+                            <li class="trademark-text-tit">TVS:</li>
+                            <li><a href="#">Sonyo TV</a></li>
+                            <li><a href="#">Samsing TV</a></li>
+                            <li><a href="#">LGG TV</a></li>
+                            <li><a href="#">Onidai TV</a></li>
+                            <li><a href="#">Toshibao TV</a></li>
+                            <li><a href="#">Philipsi TV</a></li>
+                            <li><a href="#">Micromaxo TV</a></li>
+                            <li><a href="#">LED TV</a></li>
+                            <li><a href="#">LCD TV</a></li>
+                            <li><a href="#">Plasma TV</a></li>
+                            <li><a href="#">3D TV</a></li>
+                            <li><a href="#">Smart TV</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-12">
+                        <ul class="trademark-mobile-list trademark-list">
+                            <li class="trademark-text-tit">MOBILES:</li>
+                            <li><a href="#">Moto E</a></li>
+                            <li><a href="#">Samsing Mobile</a></li>
+                            <li><a href="#">Micromaxi Mobile</a></li>
+                            <li><a href="#">Nokian Mobile</a></li>
+                            <li><a href="#">HTCi Mobile</a></li>
+                            <li><a href="#">Sonyo Mobile</a></li>
+                            <li><a href="#">Appleo Mobile</a></li>
+                            <li><a href="#">LGG Mobile</a></li>
+                            <li><a href="#">Karbonni Mobile</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-12">
+                        <ul class="trademark-laptop-list trademark-list">
+                            <li class="trademark-text-tit">LAPTOPS::</li>
+                            <li><a href="#">Appleo Laptop</a></li>
+                            <li><a href="#">Acer Laptop</a></li>
+                            <li><a href="#">Samsing Laptop</a></li>
+                            <li><a href="#">Lenov Laptop</a></li>
+                            <li><a href="#">Sonyo Laptop</a></li>
+                            <li><a href="#">Delli Laptop</a></li>
+                            <li><a href="#">Asuso Laptop</a></li>
+                            <li><a href="#">Toshibao Laptop</a></li>
+                            <li><a href="#">LGG Laptop</a></li>
+                            <li><a href="#">HPo Laptop</a></li>
+                            <li><a href="#">Notebook</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-12">
+                        <ul class="trademark-watches-list trademark-list">
+                            <li class="trademark-text-tit">WATCHES:</li>
+                            <li><a href="#">FCUKo Watches</a></li>
+                            <li><a href="#">Titan Watches</a></li>
+                            <li><a href="#">Casioo Watches</a></li>
+                            <li><a href="#">Fastrack Watches</a></li>
+                            <li><a href="#">Timexi Watches</a></li>
+                            <li><a href="#">Fossili Watches</a></li>
+                            <li><a href="#">Dieselo Watches</a></li>
+                            <li><a href="#">Toshibao Laptop</a></li>
+                            <li><a href="#">Luxury Watches</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-12">
+                        <ul class="trademark-shoes-lis trademark-list">
+                            <li class="trademark-text-tit">FOOTWEAR:</li>
+                            <li><a href="#">Shoes</a></li>
+                            <li><a href="#">Casual Shoes</a></li>
+                            <li><a href="#">Sports Shoes</a></li>
+                            <li><a href="#">Adidasi Shoes</a></li>
+                            <li><a href="#">Gas Shoes</a></li>
+                            <li><a href="#">Pumai Shoes</a></li>
+                            <li><a href="#">Reeboki Shoes</a></li>
+                            <li><a href="#">Woodlandi Shoes</a></li>
+                            <li><a href="#">Red tape Shoes</a></li>
+                            <li><a href="#">Nikeo Shoes</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="block-footer-copyright">
+    <div class="container">
+        <div class="footer">
+            <div class="main">
+                <div class="row">
+                    <div class="footer-menu-box">
+                      
+                    </div>                         <address>Copyright © 2015  by <a class="active" href="http://Buygroup365.com/" title="Alothemes">Buygroup365.com.</a> All rights reserved.</address>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<a href="#" id="backtotop" class="" style="display: none;"><span class="fa fa-angle-up"></span><span class="back-to-top">Back to Top</span></a>

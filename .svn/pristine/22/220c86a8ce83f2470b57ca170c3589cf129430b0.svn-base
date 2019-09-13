@@ -1,0 +1,451 @@
+﻿@using MvcPaging
+@model IPagedList<Common.UserProfile>
+
+@{
+    ViewBag.Title = "Quản lý profile";
+}
+@{   Layout = "~/Areas/Manage/Views/Shared/_LayoutUser.cshtml";}
+
+
+<div class="container-fluid" ng-app="body" >
+    <!-- Page Heading -->
+    <div class="" ng-controller="header">
+        @Html.Raw(BuyGroup365.Areas.Manage.Models.AdminFunction.BindHeader("Danh sách Profile"))
+        <div>{{quanlyuserprofile}}</div>
+    </div>
+    <!-- /.row -->
+    <!-- /.row -->
+    <!-- /.row -->
+    <div ng-controller="Profile">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            <i class="fa fa-bar-chart-o fa-fw"></i> Danh sách userProfile
+                            <span style="float: right">
+                                <a class="glyphicon glyphicon-plus-sign" data-toggle="modal" data-target="#myModal">
+
+                                </a>
+                                @*@Html.ActionLink(" ", "CreateUser", null, new { @class = "glyphicon glyphicon-plus-sign" })*@
+                            </span>
+
+
+                        </h3>
+
+                    </div>
+                    <div class="panel-body">
+                        @using (Ajax.BeginForm("Profile", "User",
+                            new AjaxOptions { UpdateTargetId = "grid-list", HttpMethod = "get", LoadingElementId = "loading", OnBegin = "beginPaging", OnSuccess = "successPaging", OnFailure = "failurePaging" },
+                            new { id = "frm-search" }))
+                        {
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group input-group">
+                                        <input type="text" value="@ViewData["key"]" class="form-control" id="appendedInputButton" name="key" placeholder="input keyword" style="width:80%">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-default" type="submit">
+                                                <i class="fa fa-search"></i>
+                                            </button>
+
+                                        </span>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-hover table-striped" id="dataTables" aria-describedby="dataTables-example_info">
+                                    <thead>
+                                        <tr role="row">
+                                            <th>
+                                                Code
+                                            </th>
+                                            <th>
+                                                Tên
+                                            </th>
+                                            <th>
+                                                Số điện thoại
+                                            </th>
+                                            <th>
+                                                Địa chỉ
+                                            </th>
+                                            <th>
+                                                Email
+                                            </th>
+                                            <th>
+                                                Ngày tạo
+                                            </th>
+                                            <th>
+                                                Ngày cập nhật
+                                            </th>
+                                            <th>
+                                                Mô tả
+                                            </th>
+                                            <th style="width: auto"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Code)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Name)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Phone)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Address)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Email)
+                                                </td>
+                                                <td>
+                                                    @item.Createdate.ToString("dd/MM/yyyy HH:mm:ss")
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Modifieddate)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Description)
+                                                </td>
+                                                <td>
+                                                    @*@Html.ActionLink("Managerrole", "ManageRolesForGroup", new { id = item.Id }, new { @class = "glyphicon glyphicon-folder-open" }) |*@
+                                                    <a class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#EditModal" data-ng-click="GetInfoUser(@item.Id)">
+                                                        Edit
+                                                    </a>|
+                                                    @Html.ActionLink(" ", "DeleteProfile", new { id = item.Id }, new { @class = "glyphicon glyphicon-trash", onclick = "return confirm('Bạn có chắc chắn muốn xóa mục này?');" })
+                                                </td>
+                                            </tr>
+                                        }
+
+                                    </tbody>
+                                </table>
+
+                                <div class="row">
+                                    <div class="">
+                                        <div class="dataTables_info" id="dataTables-example_info" role="alert" aria-live="polite" aria-relevant="all">Hiển thị từ @Model.ItemStart đến @Model.ItemEnd của @Model.TotalItemCount bản ghi</div>
+                                    </div>
+                                    <div class="">
+                                        <div class="dataTables_paginate paging_simple_numbers" id="dataTables-example_paginate">
+
+                                            @Html.Raw(Ajax.Pager(
+                                            new Options
+                                            {
+                                                PageSize = Model.PageSize,
+                                                TotalItemCount = Model.TotalItemCount,
+                                                CurrentPage = Model.PageNumber,
+                                                ItemTexts = new ItemTexts() { Next = "Next", Previous = "Previous", Page = "P" },
+                                                ItemIcon = new ItemIcon() { First = "icon-backward", Previous = "icon-chevron-left", Next = "icon-chevron-right", Last = "icon-forward" },
+                                                TooltipTitles = new TooltipTitles() { Next = "Next page", Previous = "Previous page", Page = "Page {0}." },
+                                                Size = Size.normal,
+                                                Alignment = Alignment.centered,
+                                                IsShowControls = true,
+                                                IsShowFirstLast = true,
+                                                CssClass = ""
+                                            },
+                                            new AjaxOptions
+                                            {
+                                                UpdateTargetId = "grid-list",
+                                                HttpMethod = "get",
+                                                LoadingElementId = "loading",
+                                                OnBegin = "beginPaging",
+                                                OnSuccess = "successPaging",
+                                                OnFailure = "failurePaging"
+                                            }, new { controller = "User", action = "Profile", key = ViewData["key"] }))
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.row -->
+        <!-- /.row -->
+        @*Create*@
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                @using (Html.BeginForm("CreateUserProfile", "User", FormMethod.Post, new { enctype = "multipart/form-data", id = "CreateUserProfile" }))
+                {
+                    @Html.ValidationSummary(true)
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Create userProfile</h4>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <div class="bg-error-infocus">
+                                            @ViewData["ErrMessage"]
+                                        </div>
+
+                                        <label>DepartmentId</label><br />
+                                        <input class="form-control" ng-pattern="/^([a-zA-Z0-9]+)$/" autocomplete="off" @*maxlength="20"*@ id="departmentId" name="departmentId" type="number" ng-model="emp.DepartmentId">
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Code</label><br />
+                                        <input class="form-control" autocomplete="off" id="code" name="code" type="text" ng-model="emp.Code">
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Tên UserProfile<span class="required">*</span></label><br />
+                                        <input class="form-control" autocomplete="off" maxlength="50" required data-val-required="Name." id="name" name="name" type="text" ng-model="emp.Name">
+                                        <span class="field-validation-valid" data-valmsg-for="name" data-valmsg-replace="true"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class=" ">Điện thoại</label><br />
+                                        <input class="form-control" autocomplete="off" maxlength="50" data-val="true" data-val-regex="Số điện thoại không hợp lệ." data-val-regex-pattern="[0-9]{9,15}$" id="tel" name="tel" type="text" data-ng-model="emp.Phone">
+                                        <span class="field-validation-valid" data-valmsg-for="tel" data-valmsg-replace="true"></span>
+                                        <div class="clear"></div>
+                                    </div>
+
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Số địa chỉ</label><br />
+                                        <input class="form-control" data-val="true" autocomplete="off" min="0" id="address" name="address" type="text" data-ng-model="emp.Address">
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Email</label><br />
+                                        <input class="form-control" data-val="true" autocomplete="on" maxlength="50" @*required*@ id="email" name="email" type="email" data-ng-model="emp.Mail">
+                                        <span class="field-validation-valid" data-valmsg-for="email" data-valmsg-replace="true"></span>
+                                    </div>
+                                    <div class="form-group">
+
+                                        <label class=" ">Dob</label><br />
+                                        <input class="form-control" autocomplete="off" maxlength="50" data-val="true" id="dob" name="dob" type="datetime" data-ng-model="emp.Dob">
+                                        <span class="field-validation-valid" data-valmsg-for="dob" data-valmsg-replace="true"></span>
+                                        <div class="clear"></div>
+                                    </div>
+                                    <div class="form-group">
+
+                                        <label class=" ">Mô tả</label><br />
+                                        <textarea rows="4" cols="50" name="description" class="form-control" id="description" data-ng-model="emp.Description"></textarea>
+                                        <span class="field-validation-valid" data-valmsg-for="description" data-valmsg-replace="true"></span>
+                                        <div class="clear"></div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        @*Endcreate*@
+
+
+        @*Edit userProfile*@
+        <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="EditModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Cập nhật userProfile</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <input data-ng-model="emp.Id" style="display: none" />
+
+                                <div class="form-group">
+                                    <label class=" ">DepartmentId</label><br />
+                                    <input class="form-control" autocomplete="off" ng-trim="true" maxlength="20" ng-pattern="/^([a-zA-Z0-9]+)$/" id="departmentId" name="departmentId" type="text" data-ng-model="emp.DepartmentId">
+
+                                    <div class="clear"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label class=" ">Code</label><br />
+                                    <input class="form-control" autocomplete="off" ng-trim="true" maxlength="20" ng-pattern="/^([a-zA-Z0-9]+)$/" id="code" name="code" type="text" data-ng-model="emp.Code">
+
+                                    <div class="clear"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label class=" ">Họ tên<span class="required">*</span></label><br />
+
+                                    <input class="form-control" autocomplete="off" maxlength="50" required id="user_profile_name" name="user_profile_name" type="text" data-ng-model="emp.Name">
+                                    <div class="clear"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label class=" ">Điện thoại</label><br />
+                                    <input class="form-control" autocomplete="off" maxlength="50" data-val="true" data-val-regex="Số điện thoại không hợp lệ." data-val-regex-pattern="[0-9]{9,15}$" id="tel" name="tel" type="text" data-ng-model="emp.Phone">
+                                    <span class="field-validation-valid" data-valmsg-for="tel" data-valmsg-replace="true"></span>
+                                    <div class="clear"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+
+                                <div class="form-group">
+                                    <label class=" ">Địa chỉ</label><br />
+                                    <input class="form-control" autocomplete="off" maxlength="50" id="address" name="address" type="text" data-ng-model="emp.Address">
+
+                                    <div class="clear"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Email</label><br />
+                                    <input class="form-control" data-val="true" @*data-val-required="Mail."*@ autocomplete="on" maxlength="50" @*required*@ id="email" name="email" type="email" data-ng-model="emp.Mail">
+                                    <span class="field-validation-valid" data-valmsg-for="email" data-valmsg-replace="true"></span>
+                                </div>
+                                <div class="form-group">
+
+                                    <label class=" ">Dob</label><br />
+                                    <input class="form-control" autocomplete="off" maxlength="50" data-val="true" id="dobUpdate" name="dobUpdate" type="text" data-ng-model="emp.Dob">
+                                    <span class="field-validation-valid" data-valmsg-for="dob" data-valmsg-replace="true"></span>
+                                    <div class="clear"></div>
+                                </div>
+                                <div class="form-group">
+
+                                    <label class=" ">Mô tả</label><br />
+                                    <textarea rows="4" cols="50" name="description" class="form-control" id="description" data-ng-model="emp.Description"></textarea>
+                                    <span class="field-validation-valid" data-valmsg-for="description" data-valmsg-replace="true"></span>
+                                    <div class="clear"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" ng-click="UpdateChange()">Save changes</button>
+                    </div>
+                </div>
+            </div>
+            @*Kêt thúc cập nhật*@
+        </div>
+    </div>
+</div>
+
+<script>
+    angular.module("body", []).controller("header", function ($scope) {
+           //$scope.quanlyuserprofile = "Câp nhật thái";
+    }).controller("Profile", function ($scope) {
+
+        $scope.emp = {
+            Id:'',
+            DepartmentId: '',
+            Code: '',
+            Name: '',
+            Phone: '',
+            Address: '',
+            Email: '',
+            Dob: '',
+            Description: ''
+        };
+        $scope.GetInfoUser = function (id_val) {
+            $('#overbackgroud').show();
+            //   $scope.emplist = [];
+            //   $scope.emailthai = "tháiisigsjghj";
+            console.log("hhhhhhhhhhhhhhhhhhhh:" + id_val);
+            $.ajax({
+                url: '@Url.Action("GetUserProfileById", "Json")',
+                data: {
+                    'Id': id_val
+                },
+                type: 'GET',
+                contentType: 'application/json; charset=utf-8',
+
+                success: function (data) {
+                    $scope.emp.Id = data.Id;
+                    $scope.emp.DepartmentId = data.DepartmentId;
+                    $scope.emp.Code = data.Code;
+                    $scope.emp.Name = data.Name;
+                    console.log($scope.emp.Name);
+
+                    $scope.emp.Phone = data.Phone;
+                    $scope.emp.Address = data.Address;
+                    $scope.emp.Email = data.Email;
+                    $scope.emp.Dob = data.Dob;
+                    $scope.emp.Description = data.Description;
+                    $scope.$apply();
+                    $('#overbackgroud').hide();
+                },
+                error: function () {
+
+                }
+            });
+            // alert(mail);
+
+            //       $scope.valuetest = mail;
+            //  $scope.emailthai = mail;
+            //  alert(id);
+        };
+        $scope.UpdateChange = function () {
+            $('#overbackgroud').show();
+            $.ajax({
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify($scope.emp),
+                url: '@Url.Action("UpdateUserProfile","Json")',
+                success: function (data) {
+                    if (data == 1) {                      
+                        alert("Cập nhật thành công" + $scope.emp.Id);
+                        window.location.href = "/Manage/User/Profile";
+                        //     $scope.GetInfoUser();
+                    }
+
+                },
+                error: function (status) { }
+            });
+        };
+    });
+</script>
+
+
+<script type="text/javascript">
+
+    function beginPaging(args) {
+        // Animatek
+        $('#grid-list').fadeOut('normal');
+    }
+
+    function successPaging() {
+        // Animate
+        $('#grid-list').fadeIn('normal');
+        $('a').tooltip();
+    }
+
+    function failurePaging() {
+        alert("Could not retrieve list.");
+    }
+
+</script>
+<script type="text/javascript">
+    $(function () {
+        $("#datepicker1").datepicker();
+        $("#dob").datepicker(
+
+            {
+                changeMonth: true,
+                changeYear: true,
+                showButtonPanel: true,
+                yearRange: "-0:+15"
+            });
+        $("#dobUpdate").datepicker(
+
+            {
+                changeMonth: true,
+                changeYear: true,
+                showButtonPanel: true,
+                yearRange: "-0:+15"
+            });
+    });
+</script>
+

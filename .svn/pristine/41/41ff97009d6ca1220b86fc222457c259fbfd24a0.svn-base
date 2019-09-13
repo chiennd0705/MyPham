@@ -1,0 +1,58 @@
+﻿@model Common.user
+
+@{
+    ViewBag.Title = "Cập nhật mật khẩu";
+}
+@{Layout = "~/Areas/Manage/Views/Shared/_LayoutAdmincshtml.cshtml";}
+
+<h1 class="page-header">Cập nhật mật khẩu</h1>
+<div class="simplebox grid740">
+    <div class="titleh">
+        <h3>Cập nhật mật khẩu</h3>
+        <div class="shortcuts-icons">
+              @Html.ActionLink("Trở về", "Index",null,new {@class="glyphicon glyphicon-refresh"})
+        </div>
+    </div>
+    <div class="body">
+
+        @using (Html.BeginForm())
+        {
+            @Html.ValidationSummary(true)
+          
+           
+            <div class="st-form-line">
+                <div class="bg-error-infocus">
+                    @ViewData["ErrMessage"]
+                </div>
+                <span class="st-labeltext">Mật khẩu cũ<span class="required">*</span></span>
+                <input class="st-forminput" maxlength="50" style="width: 200px" data-val="true" data-val-required="Mật khẩu không được bỏ trống." id="pasOld" name="pasOld" type="password" value="@ViewData["passwordOld"]">
+                <span class="field-validation-valid" data-valmsg-for="pasOld" data-valmsg-replace="true"></span>
+                <div class="clear"></div>
+            </div>
+            <div class="st-form-line">
+                <span class="st-labeltext">Mật khẩu mới<span class="required">*</span></span>
+                <input class="st-forminput" maxlength="50" style="width: 200px" data-val="true" data-val-required="Mật khẩu không được bỏ trống." id="password" name="password" type="password" value="@ViewData["password"]">
+                <span class="field-validation-valid" data-valmsg-for="password" data-valmsg-replace="true"></span>
+                <div class="clear"></div>
+            </div>
+            <div class="st-form-line">
+                <span class="st-labeltext">Nhập lại mật khẩu mới<span class="required">*</span></span>
+                <input class="st-forminput" maxlength="50" data-val="true" data-val-equalto="Nhắc lại mật khẩu không chính xác." style="width: 200px"
+                    data-val-equalto-other="password" data-val-required="Nhắc lại mật khẩu không được bỏ trống " id="password_repeat" name="password_repeat" type="password" value="@ViewData["password_repeat"]">
+                <span class="field-validation-valid" data-valmsg-for="password_repeat" data-valmsg-replace="true"></span>
+                <div class="clear"></div>
+            </div>
+            
+            <div class="button-box">
+                <input type="submit" name="button" id="button" value="Cập nhật" class="st-button" />
+
+            </div>
+           
+        }
+    </div>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="bhd_CardVouCherCRMModelStoreContainer" CdmEntityContainer="bhd_CardVouCherCRMEntities">
+    <EntitySetMapping Name="Customers1">
+      <EntityTypeMapping TypeName="bhd_CardVouCherCRMModel.Customer">
+        <MappingFragment StoreEntitySet="customer">
+          <ScalarProperty Name="Description" ColumnName="description" />
+          <ScalarProperty Name="ModifyDate" ColumnName="modify_date" />
+          <ScalarProperty Name="CreateDate" ColumnName="create_date" />
+          <ScalarProperty Name="Pid" ColumnName="pid" />
+          <ScalarProperty Name="Dob" ColumnName="dob" />
+          <ScalarProperty Name="Address" ColumnName="address" />
+          <ScalarProperty Name="Email" ColumnName="email" />
+          <ScalarProperty Name="Phone" ColumnName="phone" />
+          <ScalarProperty Name="CustomerName" ColumnName="customer_name" />
+          <ScalarProperty Name="Code" ColumnName="code" />
+          <ScalarProperty Name="Id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CustomerAccounts">
+      <EntityTypeMapping TypeName="bhd_CardVouCherCRMModel.CustomerAccount">
+        <MappingFragment StoreEntitySet="customer_account">
+          <ScalarProperty Name="Description" ColumnName="description" />
+          <ScalarProperty Name="Status" ColumnName="status" />
+          <ScalarProperty Name="ExpiredDate" ColumnName="expired_date" />
+          <ScalarProperty Name="ActiveDate" ColumnName="active_date" />
+          <ScalarProperty Name="CreateDate" ColumnName="create_date" />
+          <ScalarProperty Name="AccountType" ColumnName="account_type" />
+          <ScalarProperty Name="Point" ColumnName="point" />
+          <ScalarProperty Name="PromotionAmount" ColumnName="promotion_amount" />
+          <ScalarProperty Name="CoAmount" ColumnName="co_amount" />
+          <ScalarProperty Name="BoAmount" ColumnName="bo_amount" />
+          <ScalarProperty Name="Id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CustomerCards">
+      <EntityTypeMapping TypeName="bhd_CardVouCherCRMModel.CustomerCard">
+        <MappingFragment StoreEntitySet="customer_card">
+          <ScalarProperty Name="Description" ColumnName="description" />
+          <ScalarProperty Name="Status" ColumnName="status" />
+          <ScalarProperty Name="ExpriedDate" ColumnName="expried_date" />
+          <ScalarProperty Name="ActiveDate" ColumnName="active_date" />
+          <ScalarProperty Name="CreateDate" ColumnName="create_date" />
+          <ScalarProperty Name="GradeId" ColumnName="grade_id" />
+          <ScalarProperty Name="Code" ColumnName="code" />
+          <ScalarProperty Name="SurFix" ColumnName="surfix" />
+          <ScalarProperty Name="CardNo" ColumnName="card_no" />
+          <ScalarProperty Name="Prefix" ColumnName="prefix" />
+          <ScalarProperty Name="Id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CustomerCardHistories">
+      <EntityTypeMapping TypeName="bhd_CardVouCherCRMModel.CustomerCardHistory">
+        <MappingFragment StoreEntitySet="customer_card_history">
+          <ScalarProperty Name="LogTime" ColumnName="log_time" />
+          <ScalarProperty Name="FilmName" ColumnName="film_name" />
+          <ScalarProperty Name="FilmId" ColumnName="film_id" />
+          <ScalarProperty Name="Location" ColumnName="location" />
+          <ScalarProperty Name="WsId" ColumnName="ws_id" />
+          <ScalarProperty Name="WsName" ColumnName="ws_name" />
+          <ScalarProperty Name="StaffName" ColumnName="staff_name" />
+          <ScalarProperty Name="StaffId" ColumnName="staff_id" />
+          <ScalarProperty Name="UpdateTime" ColumnName="update_time" />
+          <ScalarProperty Name="PricePolicy" ColumnName="price_policy" />
+          <ScalarProperty Name="NumSeat" ColumnName="num_seat" />
+          <ScalarProperty Name="ShowTime" ColumnName="show_time" />
+          <ScalarProperty Name="ShowDate" ColumnName="show_date" />
+          <ScalarProperty Name="InvoiceNo" ColumnName="invoice_no" />
+          <ScalarProperty Name="BookId" ColumnName="book_id" />
+          <ScalarProperty Name="DebitNew" ColumnName="debit_new" />
+          <ScalarProperty Name="Amount" ColumnName="amount" />
+          <ScalarProperty Name="DebitOld" ColumnName="debit_old" />
+          <ScalarProperty Name="Account" ColumnName="account" />
+          <ScalarProperty Name="Action" ColumnName="action" />
+          <ScalarProperty Name="CardNo" ColumnName="card_no" />
+          <ScalarProperty Name="FullCardNo" ColumnName="full_card_no" />
+          <ScalarProperty Name="CardId" ColumnName="card_id" />
+          <ScalarProperty Name="Id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CustomerCardHistoryDetails">
+      <EntityTypeMapping TypeName="bhd_CardVouCherCRMModel.CustomerCardHistoryDetail">
+        <MappingFragment StoreEntitySet="customer_card_history_detail">
+          <ScalarProperty Name="Refunded" ColumnName="refunded" />
+          <ScalarProperty Name="Price" ColumnName="price" />
+          <ScalarProperty Name="SeatCol" ColumnName="seat_col" />
+          <ScalarProperty Name="SeatRow" ColumnName="seat_row" />
+          <ScalarProperty Name="HistoryId" ColumnName="history_id" />
+          <ScalarProperty Name="Id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CustomerGifs">
+      <EntityTypeMapping TypeName="bhd_CardVouCherCRMModel.CustomerGif">
+        <MappingFragment StoreEntitySet="customer_gif">
+          <ScalarProperty Name="IsBdgIf" ColumnName="is_bdgif" />
+          <ScalarProperty Name="ImgSource" ColumnName="imgSource" />
+          <ScalarProperty Name="Point" ColumnName="point" />
+          <ScalarProperty Name="Name" ColumnName="name" />
+          <ScalarProperty Name="GradeId" ColumnName="grade_id" />
+          <ScalarProperty Name="Id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CustomerGrades">
+      <EntityTypeMapping TypeName="bhd_CardVouCherCRMModel.CustomerGrade">
+        <MappingFragment StoreEntitySet="customer_grade">
+          <ScalarProperty Name="Name" ColumnName="name" />
+          <ScalarProperty Name="Id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CustomerRedemptions">
+      <EntityTypeMapping TypeName="bhd_CardVouCherCRMModel.CustomerRedemption">
+        <MappingFragment StoreEntitySet="customer_redemption">
+          <ScalarProperty Name="Description" ColumnName="description" />
+          <ScalarProperty Name="Date" ColumnName="date" />
+          <ScalarProperty Name="IsBdgIf" ColumnName="is_bdgif" />
+          <ScalarProperty Name="GiftName" ColumnName="gift_name" />
+          <ScalarProperty Name="GiftId" ColumnName="gift_id" />
+          <ScalarProperty Name="CardNo" ColumnName="card_no" />
+          <ScalarProperty Name="Site" ColumnName="site" />
+          <ScalarProperty Name="StaffName" ColumnName="staff_name" />
+          <ScalarProperty Name="StaffId" ColumnName="staff_id" />
+          <ScalarProperty Name="Id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Vouchers1">
+      <EntityTypeMapping TypeName="bhd_CardVouCherCRMModel.Voucher">
+        <MappingFragment StoreEntitySet="voucher">
+          <ScalarProperty Name="RedeemFilm" ColumnName="redeem_film" />
+          <ScalarProperty Name="RedeemSite" ColumnName="redeem_site" />
+          <ScalarProperty Name="RedeemName" ColumnName="redeem_name" />
+          <ScalarProperty Name="RedeemUserid" ColumnName="redeem_userid" />
+          <ScalarProperty Name="Redeemed" ColumnName="redeemed" />
+          <ScalarProperty Name="LastUpdateDate" ColumnName="last_update_date" />
+          <ScalarProperty Name="CreateDate" ColumnName="create_date" />
+          <ScalarProperty Name="Description" ColumnName="description" />
+          <ScalarProperty Name="Status" ColumnName="status" />
+          <ScalarProperty Name="StaffName" ColumnName="staff_name" />
+          <ScalarProperty Name="StaffId" ColumnName="staff_id" />
+          <ScalarProperty Name="Deleted" ColumnName="deleted" />
+          <ScalarProperty Name="OrgId" ColumnName="org_id" />
+          <ScalarProperty Name="FilmId" ColumnName="film_id" />
+          <ScalarProperty Name="LocId" ColumnName="loc_id" />
+          <ScalarProperty Name="ValidTo" ColumnName="valid_to" />
+          <ScalarProperty Name="ValidFrom" ColumnName="valid_from" />
+          <ScalarProperty Name="Effect" ColumnName="effect" />
+          <ScalarProperty Name="Serial" ColumnName="serial" />
+          <ScalarProperty Name="TypeId" ColumnName="type_id" />
+          <ScalarProperty Name="Code" ColumnName="code" />
+          <ScalarProperty Name="Id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VoucherTypes">
+      <EntityTypeMapping TypeName="bhd_CardVouCherCRMModel.VoucherType">
+        <MappingFragment StoreEntitySet="voucher_type">
+          <ScalarProperty Name="Description" ColumnName="description" />
+          <ScalarProperty Name="Code" ColumnName="code" />
+          <ScalarProperty Name="Name" ColumnName="name" />
+          <ScalarProperty Name="Id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

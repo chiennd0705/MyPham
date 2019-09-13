@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{26307A02-BE82-4E2C-A128-0735D353D2E6}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Business</RootNamespace>
+    <AssemblyName>Business</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\Aplication\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>
+    </DocumentationFile>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Common.Logging">
+      <HintPath>..\BHDBranchServer\packages\Common.Logging.2.3.1\lib\net40\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\MvcMain\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\MvcMain\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\BHDBranchServer\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="LogSystem">
+      <HintPath>E:\SVN\WebAdminAuthorBranch\LogSystem\bin\Debug\LogSystem.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.QualityTools.Testing.Fakes, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\MvcMain\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Quartz">
+      <HintPath>..\BHDBranchServer\packages\Quartz.2.3\lib\net40\Quartz.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="bases\AbstractBaseBusiness.cs" />
+    <Compile Include="ClassBusiness\CatalogPropertiesBussiness.cs" />
+    <Compile Include="ClassBusiness\CatalogPropertiesValueBussiness.cs" />
+    <Compile Include="ClassBusiness\CatalogsBussiness.cs" />
+    <Compile Include="ClassBusiness\Catalogs_ManufacturersBussiness.cs" />
+    <Compile Include="ClassBusiness\CommentsBussiness.cs" />
+    <Compile Include="ClassBusiness\LocationsBussiness.cs" />
+    <Compile Include="ClassBusiness\ManufacturersBussiness.cs" />
+    <Compile Include="ClassBusiness\MemberProfileBussiness.cs" />
+    <Compile Include="ClassBusiness\MembersBussiness.cs" />
+    <Compile Include="ClassBusiness\ModuleBusiness.cs" />
+    <Compile Include="ClassBusiness\NewsBusines.cs" />
+    <Compile Include="ClassBusiness\NewsGroupBusiness.cs" />
+    <Compile Include="ClassBusiness\OrderBuyerBussiness.cs" />
+    <Compile Include="ClassBusiness\OrderDetailBussiness.cs" />
+    <Compile Include="ClassBusiness\OrderReciverBussiness.cs" />
+    <Compile Include="ClassBusiness\OrdersBussiness.cs" />
+    <Compile Include="ClassBusiness\PayFormBussiness.cs" />
+    <Compile Include="ClassBusiness\ProductImagesBussiness.cs" />
+    <Compile Include="ClassBusiness\ProductPropertiesBussiness.cs" />
+    <Compile Include="ClassBusiness\ProductsBussiness.cs" />
+    <Compile Include="ClassBusiness\RoleBusiness.cs" />
+    <Compile Include="ClassBusiness\RoleModuleBusiness.cs" />
+    <Compile Include="ClassBusiness\ShopCatalogsBussiness.cs" />
+    <Compile Include="ClassBusiness\ShopNewsBussiness.cs" />
+    <Compile Include="ClassBusiness\ShopNewsGroupsBussiness.cs" />
+    <Compile Include="ClassBusiness\ShopPolicysBussiness.cs" />
+    <Compile Include="ClassBusiness\ShopsBussiness.cs" />
+    <Compile Include="ClassBusiness\ShopSettingsBussiness.cs" />
+    <Compile Include="ClassBusiness\ShopSupportsBussiness.cs" />
+    <Compile Include="ClassBusiness\UserBusiness.cs" />
+    <Compile Include="ClassBusiness\UserGroupBusiness.cs" />
+    <Compile Include="ClassBusiness\UserGroupRoleBusiness.cs" />
+    <Compile Include="ClassBusiness\UserProfileBusiness.cs" />
+    <Compile Include="ClassBusiness\User_UserGroupBusiness.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="job_scheduling_data_2_0.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{330d4ef8-64d2-4208-8696-a3f701c69375}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataAccess\DataAccess.csproj">
+      <Project>{7258e057-04ba-4ee4-883c-ed1c2f1739af}</Project>
+      <Name>DataAccess</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

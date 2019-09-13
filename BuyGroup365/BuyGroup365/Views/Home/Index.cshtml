@@ -1,0 +1,80 @@
+﻿@using Common
+@using Business.ClassBusiness
+@{
+    Layout = "~/Views/Shared/_LayoutIndex.cshtml";
+}
+@Html.Raw(ViewData["JSShermahome"])
+<h1 class="hidden">DHC - </h1>
+@Html.Action("SliderHome", "Partial")
+
+
+<section class="awe-section-2">
+
+    <div class="homepage-product-spotlight-banner">
+        <div class="container">
+            <article>
+
+                @Html.Action("GetByCodeHtml", "Partial", new { Code = "Home_Banner1" })
+
+            </article>
+        </div>
+    </div>
+
+    <div class="section-banner" style="margin:30px 0px;">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-sm-4 col-xs-12">
+                    <div class="banner-item">
+                        @Html.Action("GetByCodeHtml", "Partial", new { Code = "Home_Banner2" })
+                    </div>
+                </div>
+
+
+                <div class="col-sm-4 col-xs-12">
+                    <div class="banner-item">
+                        @Html.Action("GetByCodeHtml", "Partial", new { Code = "Home_Banner3" })
+                    </div>
+                </div>
+
+
+                <div class="col-sm-4 col-xs-12">
+                    <div class="banner-item">
+                        @Html.Action("GetByCodeHtml", "Partial", new { Code = "Home_Banner4" })
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+@Html.Action("IsHot", "Partial")
+
+@Html.Action("IsSale", "Partial")
+
+
+@Html.Action("IsNew", "Partial")
+
+<section class="awe-section-6">
+    <section class="naturix-goods sec-blogs">
+        <div class="container">
+            <div class="title-wraps" style="margin-bottom:30px;">
+                <h2 class="section-title"><strong>CẨM NANG LÀM ĐẸP</strong></h2>
+            </div>
+            <div class="row">
+                <div class="col-lg-7 col-md-6">
+
+                    @Html.Partial("NewsAttractive")
+                </div>
+                <div class="col-lg-5 col-md-6">
+                    @Html.Partial("NewsFooter")
+                </div>
+            </div>
+            <div class="line"></div>
+        </div>
+    </section>
+</section>

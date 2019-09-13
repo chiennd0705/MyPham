@@ -1,0 +1,388 @@
+﻿@using Business.ClassBusiness
+@using BuyGroup365.Areas.Manage.Models
+@using BuyGroup365.Models.Member
+@using Common.util
+@using MvcPaging
+@model IPagedList<global::Common.Order>
+
+@{
+    ViewBag.Title = "Quản lý đơn hàng";
+}
+@{Layout = "~/Areas/Manage/Views/Shared/_LayoutAdmincshtml.cshtml";}
+
+
+<div class="container-fluid" ng-app="body">
+    <!-- Page Heading -->
+    @Html.Raw(AdminFunction.BindHeader("Danh sách đơn hàng", null, null, null, null))
+    <!-- /.row -->
+    <!-- /.row -->
+    <!-- /.row -->
+    <div class="row" ng-controller="Index">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <i class="fa fa-bar-chart-o fa-fw"></i> Danh sách đơn hàng
+                        <span style="float: right">
+                        </span>
+                    </h3>
+
+                </div>
+                <div class="panel-body">
+                    
+                    @using (Ajax.BeginForm("Index", "User",
+                        new AjaxOptions { UpdateTargetId = "grid-list", HttpMethod = "get", LoadingElementId = "loading", OnBegin = "beginPaging", OnSuccess = "successPaging", OnFailure = "failurePaging" },
+                        new { id = "frm-search" }))
+                    {
+                        
+                        <div class="row">
+                                      
+                                <div class="col-sm-3">
+                                    <div class="input-group">
+                                   Tên Shop     @Html.DropDownList("loadShop", null, new { @style = "width: 80%", @class = "input-text required-entry" })
+                                    </div>
+                                </div>
+                            <div class="col-sm-3">
+                                <div class="input-group">
+                                    Trạng thái      @Html.DropDownList("stateOrder", null, new { @style = "width: 80%", @class = "input-text required-entry" })
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="input-group">
+                                    Thanh toán       @Html.DropDownList("loadPaid", null, new { @style = "width: 80%", @class = "input-text required-entry" })
+                                </div>
+                            </div>
+                            <div class="col-sm-3" style="margin-top:20px">
+                                <button class="btn btn-primary btn-sm"   type="submit" value="Tìm kiếm"><span><span><i class="fa fa-search"></i> Search</span></span></button>
+                            </div>
+             
+                        </div>
+                        <div class="table-responsive">
+                            @if (Model != null)
+                            {
+                                <table class="table table-striped table-bordered table-hover dataTable no-footer list-product">
+
+                                    <thead>
+                                        <tr style="background-color: ghostwhite;">
+                                            <th>Thông tin sản phẩm</th>
+                                            <th>Thông tin đơn hàng</th>
+                                            <th>Trạng thái</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+
+                                            var id = "tr" + item.Id;
+
+                                            <tr id="@id">
+                                                <td style="padding: 0px">
+                                                    <table class="table  table-condensed" style="width: 100%; margin-bottom: 0">
+
+                                                        <tr style="background-color: ghostwhite;">
+                                                            <td colspan="3">
+                                                                <strong>Mã đơn hàng: #@item.Id</strong>
+                                                            </td>
+
+                                                        </tr>
+                                                        @foreach (var item1 in item.OrderDetails)
+                                                        {
+
+                                                            <tr>
+                                                                <td><img src="@FuntionMember.GetUrlImage(item1.PathImage, "Small")" width="70" /></td>
+                                                                <td>@item1.NameProduct</td>
+                                                                <td class="list-price">
+                                                                    @{
+                                                            var pi = (Double)item1.Price;
+                                                                    }
+                                                                    @pi.ToString("N0")<sup class="u-price">đ</sup>
+                                                                </td>
+                                                            </tr>
+
+                                                        }
+                                                        <tr>
+                                                            <td colspan="3" style="padding: 10px;">
+                                                                @{
+                                                        var tatol = (Double)item.OrderDetails.Sum(x => x.Price) + (Double)item.FeeOfTranspot;
+                                                        var fee = (Double)item.FeeOfTranspot;
+                                                                }
+                                                                <strong style="float: right;">Phí vận chuyển: <span class="" style="font-size: 15px;color: red">@fee.ToString("N0")đ</span></strong><br />
+                                                                <strong style="float: right;">Tổng đơn hàng: <span class="" style="font-size: 15px; color: red">@tatol.ToString("N0")đ</span></strong>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+
+                                                </td>
+                                                <td style="text-align: center">
+
+                                                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" onclick="GetInforBuyer(@item.Id) " data-target="#OderBuyer">
+                                                        Chi tiết
+                                                    </button>
+                                                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" onclick="UpdateOrder(@item.Id) " data-target="#UpdateOrder">
+                                                        Cập nhật hóa đơn
+                                                    </button>
+                                               
+                                                </td>
+                                                <td>
+
+                                                    @if (item.Status == 0)
+                                                    {
+                                                        <p> Đơn hàng mới</p>
+                                                    }
+                                                    else if (item.Status == 1)
+                                                    {
+                                                        <p>Đang chờ giao dịch</p>
+                                                    }
+                                                    else if (item.Status == 2)
+                                                    {
+                                                        <p> Đang chờ chuyển hàng</p>
+                                                    }
+                                                    else if (item.Status == 3)
+                                                    {
+                                                        <p> Đã hoàn tất</p>
+                                                    }
+                                                    else
+                                                    {
+                                                        <p> Đã hủy</p>
+                                                    }
+                                                    @{
+                                                    var paymentmethod = new PayFormBusiness().GetById((long)item.IdPayForm);
+                                                    var namepayment = "Chưa xác định hình thức thanh toán";
+                                                    if (paymentmethod != null)
+                                                    {
+                                                        namepayment = paymentmethod.Name;
+                                                    }
+                                                    }
+                                                    <p>@namepayment</p>
+
+                                                    @if (item.Paid == 0)
+                                                    {
+                                                        <p>Chưa thanh toán</p>
+                                                    }
+                                                    else
+                                                    {
+                                                        <p>Đã thanh toán</p>
+                                                    }
+
+
+                                                </td>
+                                                @*<script>
+                                function Sendvalue(id) {
+                                    $('#valueinvoice').val(id);
+                                }
+                            </script>*@
+                                            </tr>
+                                        }
+
+
+                                    </tbody>
+
+                                </table>
+                                <div class="">
+                                    <div class="">
+                                        <div class="dataTables_info" id="dataTables-example_info" role="alert" aria-live="polite" aria-relevant="all">Display from @Model.ItemStart to @Model.ItemEnd of @Model.TotalItemCount records</div>
+                                    </div>
+                                    <div class="">
+                                        <div class="dataTables_paginate paging_simple_numbers" id="dataTables-example_paginate">
+
+                                            @Html.Raw(Ajax.Pager(
+                                                            new Options
+                                                            {
+                                                                PageSize = Model.PageSize,
+                                                                TotalItemCount = Model.TotalItemCount,
+                                                                CurrentPage = Model.PageNumber,
+                                                                ItemTexts = new ItemTexts() { Next = "Next", Previous = "Previous", Page = "P" },
+                                                                ItemIcon = new ItemIcon() { First = "icon-backward", Previous = "icon-chevron-left", Next = "icon-chevron-right", Last = "icon-forward" },
+                                                                TooltipTitles = new TooltipTitles() { Next = "Next page", Previous = "Previous page", Page = "Page {0}." },
+                                                                Size = Size.normal,
+                                                                Alignment = Alignment.centered,
+                                                                IsShowControls = true,
+                                                                IsShowFirstLast = true,
+                                                                CssClass = ""
+                                                            },
+                                                            new AjaxOptions
+                                                            {
+                                                                UpdateTargetId = "grid-list",
+                                                                HttpMethod = "get",
+                                                                LoadingElementId = "loading",
+                                                                OnBegin = "beginPaging",
+                                                                OnSuccess = "successPaging",
+                                                                OnFailure = "failurePaging"
+                                                            }, new { controller = "Member", action = "OderProduct", key = ViewData["key"], st = ViewBag.Id, grade_card = ViewData["grade_card"] }))
+
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                @Html.Raw(Function.MessengerBox("success-msg", ViewBag.Mes))
+                            }
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="OderBuyer" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" style="left: 0px;width:70%">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <img class="img-responsive" src="/Content/Csspublic/images/logo.png" alt="Buygroup365" style="height: 35px">
+                    </div>
+                    <div class="modal-body" id="buyerContent">
+                        <div class="" id="overbackgroudinfo" style="display: block;">
+                            <img src="/img/loading/6.gif" style="position: absolute; top: 44%; left: 46%" />
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Đóng</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="UpdateOrder" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <input id="orderId" type="hidden"/>
+            <div class="modal-dialog modal-lg" style="left: 0px;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <img class="img-responsive" src="/Content/Csspublic/images/logo.png" alt="Buygroup365" style="height: 35px">
+                    </div>
+                    <div class="modal-body" id="UpdatecontentOrder">
+                        <div class="" id="overbackgroudinfo" style="display: block;">
+                            <img src="/img/loading/6.gif" style="position: absolute; top: 44%; left: 46%" />
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" onclick="UpdateOrderStatus()">Cập nhật</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" id="ClosePoup">Đóng</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.row -->
+        <!-- /.row -->
+        @*Eddi user*@
+ 
+
+      
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    function beginPaging(args) {
+        // Animatek
+        $('#grid-list').fadeOut('normal');
+    }
+
+    function successPaging() {
+        // Animate
+        $('#grid-list').fadeIn('normal');
+        $('a').tooltip();
+    }
+
+    function failurePaging() {
+        alert("Could not retrieve list.");
+    }
+
+
+   
+    function GetInforBuyer(id) {
+        $.ajax({
+            url: '@Url.Action("GetInForBuyer","Order")',
+            data:
+            {
+                'id': id,
+            },
+            Type: 'POST',
+            dataType: 'json',
+            success: function (data) {
+                $('#buyerContent').html("");
+                $('#buyerContent').append(data);
+            },
+            error: function (error) {
+                alert('Hệ thống đang cập nhật!');
+            }
+        });
+    }
+    function UpdateOrder(id) {
+        $('#orderId').val(id);
+        $.ajax({
+            url: '@Url.Action("PoupOder","Order")',
+            data:
+            {
+                'id': id
+            },
+            Type: 'POST',
+            dataType: 'json',
+            success: function (data) {
+                $('#UpdatecontentOrder').html("");
+                $('#UpdatecontentOrder').append(data);
+            },
+            error: function () {
+
+
+            }
+        });
+    }
+    function UpdateOrderStatus() {
+        var orderid = $('#orderId').val();
+        var status = $('#StatusId').val();
+        var paid = $('#PaidId').val();
+        var r = confirm("Bạn thật sự chăc chắn!");
+        if (r) {
+            $.ajax({
+                url: '@Url.Action("UpdateOrder","Order")',
+                data:
+                {
+                    'orderid': orderid,
+                    'status': status,
+                    'paid': paid
+                },
+                Type: 'POST',
+                dataType: 'json',
+                success: function (data) {
+                    if (data == 1) {
+                        alert("Bạn đã cập nhật thành công!");
+                        $('#ClosePoup').click();
+                        window.location.href = "/Manage/Order/Index";
+                    } else {
+                        alert('Hệ thống đang cập nhật vui lòng thực hiện lại sau');
+                    }
+                },
+                error: function () {
+
+                }
+            });
+        } else {
+
+        }
+
+    }
+</script>
+
+<script type="text/javascript">
+    $(function () {
+        $("#datepicker1").datepicker();
+        $("#createDate").datepicker(
+
+            {
+                changeMonth: true,
+                changeYear: true,
+                showButtonPanel: true,
+                yearRange: "-0:+15"
+            });
+        $("#dateDeliver").datepicker(
+
+           {
+               changeMonth: true,
+               changeYear: true,
+               showButtonPanel: true,
+               yearRange: "-0:+15"
+           });
+
+    });
+</script>
+

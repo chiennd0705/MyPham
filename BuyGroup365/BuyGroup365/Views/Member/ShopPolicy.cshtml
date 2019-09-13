@@ -1,0 +1,82 @@
+﻿@using Common.util
+@model global::Common.ShopPolicy
+
+@{
+    ViewBag.Title = "ShopPolicy";
+    Layout = "~/Views/Shared/_LayoutMember.cshtml";
+}
+
+<div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 ">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+
+                <ol class="breadcrumb">
+                    <li><span class="glyphicon glyphicon-home"></span><a href="/"> Trang chủ</a></li>
+                    <li>
+                        <a href="/Member/Profile">
+                            @SessionUtility.GetSessionMember(Session).UserName
+                        </a>
+                    </li>
+                    <li class="active">Chính sách shops</li>
+                </ol>
+            </h4>
+        </div>
+        <div id="collapseOne0" class="panel-collapse collapse in" style="height: auto;">
+            <div class="panel-body">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div role="tabpanel">
+
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Vê chúng tôi</a></li>
+                            <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Chính sách riêng tư</a></li>
+                            <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Chính sách bán hàng</a></li>
+                            <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Chính sách thanh toán</a></li>
+                        </ul>
+
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active" id="home">
+                                <div class="form-group">
+
+                                    <textarea class="form-control" required id="about" name="about">@Model.About</textarea>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="profile">
+                                <div class="form-group">
+
+                                    <textarea class="form-control" required id="privatepolicy" name="privatepolicy">@Model.PrivacyPolicy</textarea>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="messages">
+                                <div class="form-group">
+
+                                    <textarea class="form-control" required id="salespolicy" name="salespolicy">@Model.SalesPolicy</textarea>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="settings">
+
+                                <div class="form-group">
+
+                                    <textarea class="form-control" required id="paymentspolicy" name="paymentspolicy">@Model.PaymentPolicy</textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <button type="submit" class="button" title="Login" name="send" id="send2"><span><span>Cập nhật</span></span></button>
+                    </div>
+
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    initSample();
+</script>

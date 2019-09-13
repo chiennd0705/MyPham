@@ -1,0 +1,129 @@
+﻿using Business.ClassBusiness;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using MvcPaging;
+using System.ServiceModel;
+using Common.util;
+
+namespace BuyGroup365.Controllers
+{
+    public class NewsController : Controller
+    {
+
+        readonly NewsBusiness _newsBusiness = new NewsBusiness();
+        readonly NewsGroupBusiness _newsGroupBusiness = new NewsGroupBusiness();
+
+
+        // GET: /News/
+        public ActionResult Index(long id = 0, int page = 1, int pageSize = 1)
+        {
+            try
+            {
+                int totalRecord = 0;
+                int totalPage = 0;
+                List<Common.News> model = new List<Common.News>();
+
+                var rq = Request.QueryString["rq"];
+                if (!string.IsNullOrEmpty(rq))
+                {
+                    var iDNewsGroup = long.Parse(rq);
+                    // goi danh sach tin theo catagorry này.
+
+                    model = _newsBusiness.ListByNewsIdNewsGroup(iDNewsGroup, ref totalRecord, page, pageSize);
+                    ViewBag.NewsGroup = _newsGroupBusiness.GetById(iDNewsGroup);
+                }
+                else
+                {
+                    //gỏi top 10 tin nôi bât
+                    if (id == 0)
+                    {
+                        model = _newsBusiness.GetDynamicQuery().OrderByDescending(x => x.CreateDate).Skip(1).Take(5).ToList();
+                        totalPage = model.Count();
+                    }
+                    else
+                    {
+                        model = _newsBusiness.ListByNewsIdNewsGroup(id, ref totalRecord, page, pageSize);
+                        ViewBag.NewsGroup = _newsGroupBusiness.GetById(id);
+                    }
+
+                }
+
+                ViewBag.Total = totalRecord;
+                ViewBag.Page = page;
+
+                int maxPage = 1;
+
+
+                totalPage = (int)Math.Ceiling((double)(totalRecord / pageSize));
+                ViewBag.TotalPage = totalPage;
+                ViewBag.MaxPage = maxPage;
+                ViewBag.First = 1;
+                ViewBag.Last = totalPage;
+                ViewBag.Next = page + 1;
+                ViewBag.Prev = page - 1;
+
+
+                return View(model);
+            }
+            catch (FaultException ex)
+            {
+                var exep = Function.GetExeption(ex);
+                var codeExp = exep[1];
+                string url = "Error/ErrorFunction/" + codeExp;
+                return RedirectToActionPermanent(url);
+            }
+        }
+
+        public JsonResult GetDetailNews(long id)
+        {
+
+            try
+            {
+                var dbNews = _newsBusiness.GetById(id);
+                if (dbNews != null)
+                {
+                    Common.News viewNews = new Common.News();
+                    viewNews.Id = dbNews.Id;
+                    viewNews.NewsGroupId = dbNews.NewsGroupId;
+                    viewNews.Title = dbNews.Title;
+                    viewNews.ImageSource = dbNews.ImageSource;
+                    viewNews.Summary = dbNews.Summary;
+                    viewNews.Descriptions = dbNews.Descriptions;
+                    viewNews.Status = dbNews.Status;
+                    viewNews.isPublic = dbNews.isPublic;
+                    viewNews.TotalView = dbNews.TotalView;
+                    viewNews.AdminIDApproval = dbNews.AdminIDApproval;
+
+                    return Json(viewNews, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    return Json(0);
+                }
+            }
+            catch (Exception)
+            {
+                //Write log
+                throw;
+            }
+        }
+
+        public ActionResult Detail(long nid)
+        {
+
+            try
+            {
+                var dbNews = _newsBusiness.GetById(nid);
+                return View(dbNews);
+            }
+            catch (Exception)
+            {
+                //Write log
+                throw;
+            }
+        }
+    }
+}

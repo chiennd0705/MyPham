@@ -1,0 +1,69 @@
+﻿using Business.bases;
+using Common;
+using Common.exception;
+using DataAccess.DAO;
+using log4net;
+using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Reflection;
+
+namespace Business.ClassBusiness
+{
+    public class RoleModuleBusiness : AbstractBaseBusiness<RoleModule, long>
+    {
+        private readonly ILog _logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
+        /// <summary>
+        /// Hàm tạo
+        /// </summary>
+        public RoleModuleBusiness()
+            : base(new RoleModuleDao())
+        {
+            daoLayer.DataContext = DataContext;
+        }
+
+        public override void AddNew(RoleModule obj)
+        {
+            base.AddNew(obj);
+            DataContext.SaveChanges();
+        }
+
+        public override void Edit(RoleModule obj)
+        {
+            base.Edit(obj);
+            DataContext.SaveChanges();
+        }
+
+        public override void Remove(long id)
+        {
+            base.Remove(id);
+            DataContext.SaveChanges();
+        }
+
+        /// <summary>
+        /// Phương thức tìm tất cả các module trong role
+        /// </summary>
+        /// <param name="roleId">ID role cần tìm</param>
+        /// <returns>Danh sách các module nằm trong group</returns>
+        public List<RoleModule> GetByRoleId(long roleId)
+        {
+            try
+            {
+                IQueryable<RoleModule> query = GetDynamicQuery();
+                return query.Where(p => p.RoleId == roleId).ToList();
+            }
+            catch (SqlException ex)
+            {
+                _logger.Error("", ex);
+                throw ObjectUtil.CreateFaultException(CodedException.SqlExceptionUnhandler, "Sql Exeption");
+            }
+            catch (Exception ex)
+            {
+                _logger.Error("", ex);
+                throw ObjectUtil.CreateFaultException(CodedException.Unhandler, "Unhandler Exception");
+            }
+        }
+    }
+}

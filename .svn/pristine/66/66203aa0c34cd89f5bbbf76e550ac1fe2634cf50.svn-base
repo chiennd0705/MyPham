@@ -1,0 +1,522 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Arua2ModelStoreContainer" CdmEntityContainer="DemoEntities1">
+    <EntitySetMapping Name="modules">
+      <EntityTypeMapping TypeName="Arua2Model.module">
+        <MappingFragment StoreEntitySet="module">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="code" ColumnName="code" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="ws_method" ColumnName="ws_method" />
+          <ScalarProperty Name="web_method" ColumnName="web_method" />
+          <ScalarProperty Name="order" ColumnName="order" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QLKhachHang_QuanLyGiaoDich">
+      <EntityTypeMapping TypeName="Arua2Model.QLKhachHang_QuanLyGiaoDich">
+        <MappingFragment StoreEntitySet="QLKhachHang_QuanLyGiaoDich">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TenGiaoDich" ColumnName="TenGiaoDich" />
+          <ScalarProperty Name="NgayGiaoDich" ColumnName="NgayGiaoDich" />
+          <ScalarProperty Name="KhachHangID" ColumnName="KhachHangID" />
+          <ScalarProperty Name="DiaDiemGiaoDich" ColumnName="DiaDiemGiaoDich" />
+          <ScalarProperty Name="HinhThucGiaoDich" ColumnName="HinhThucGiaoDich" />
+          <ScalarProperty Name="MoTa" ColumnName="MoTa" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="PortalID" ColumnName="PortalID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QLKhachHang_QuanLyKhachHang">
+      <EntityTypeMapping TypeName="Arua2Model.QLKhachHang_QuanLyKhachHang">
+        <MappingFragment StoreEntitySet="QLKhachHang_QuanLyKhachHang">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TenCoQuan" ColumnName="TenCoQuan" />
+          <ScalarProperty Name="TenDayDu" ColumnName="TenDayDu" />
+          <ScalarProperty Name="Diachi" ColumnName="Diachi" />
+          <ScalarProperty Name="DienThoai" ColumnName="DienThoai" />
+          <ScalarProperty Name="Fax" ColumnName="Fax" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Website" ColumnName="Website" />
+          <ScalarProperty Name="Masothue" ColumnName="Masothue" />
+          <ScalarProperty Name="NganhNgheID" ColumnName="NganhNgheID" />
+          <ScalarProperty Name="DanhGia" ColumnName="DanhGia" />
+          <ScalarProperty Name="ThongtinGioiThieu" ColumnName="ThongtinGioiThieu" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="PortalID" ColumnName="PortalID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QLKhachHang_QuanLyNganhNghe">
+      <EntityTypeMapping TypeName="Arua2Model.QLKhachHang_QuanLyNganhNghe">
+        <MappingFragment StoreEntitySet="QLKhachHang_QuanLyNganhNghe">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TenNganhNghe" ColumnName="TenNganhNghe" />
+          <ScalarProperty Name="MoTa" ColumnName="MoTa" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="PortalID" ColumnName="PortalID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QLNS_QuanLyChamCong">
+      <EntityTypeMapping TypeName="Arua2Model.QLNS_QuanLyChamCong">
+        <MappingFragment StoreEntitySet="QLNS_QuanLyChamCong">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="NhanvienID" ColumnName="NhanvienID" />
+          <ScalarProperty Name="TongCongTrongThang" ColumnName="TongCongTrongThang" />
+          <ScalarProperty Name="SoNgayNghiLe" ColumnName="SoNgayNghiLe" />
+          <ScalarProperty Name="SoNgayNghiPhep" ColumnName="SoNgayNghiPhep" />
+          <ScalarProperty Name="soNgayKhongPhep" ColumnName="soNgayKhongPhep" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="MoTa" ColumnName="MoTa" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="PortalID" ColumnName="PortalID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QLNS_QuanLyChucVu">
+      <EntityTypeMapping TypeName="Arua2Model.QLNS_QuanLyChucVu">
+        <MappingFragment StoreEntitySet="QLNS_QuanLyChucVu">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="MaChucVu" ColumnName="MaChucVu" />
+          <ScalarProperty Name="TenChucVu" ColumnName="TenChucVu" />
+          <ScalarProperty Name="Mota" ColumnName="Mota" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="PortalID" ColumnName="PortalID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QLNS_QuanLyHopDong">
+      <EntityTypeMapping TypeName="Arua2Model.QLNS_QuanLyHopDong">
+        <MappingFragment StoreEntitySet="QLNS_QuanLyHopDong">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="MaHopDong" ColumnName="MaHopDong" />
+          <ScalarProperty Name="NhanVienID" ColumnName="NhanVienID" />
+          <ScalarProperty Name="TenHopDong" ColumnName="TenHopDong" />
+          <ScalarProperty Name="NgayKyHD" ColumnName="NgayKyHD" />
+          <ScalarProperty Name="NgayKetThuc" ColumnName="NgayKetThuc" />
+          <ScalarProperty Name="Luong" ColumnName="Luong" />
+          <ScalarProperty Name="PhuCap" ColumnName="PhuCap" />
+          <ScalarProperty Name="ThoigianHopDongID" ColumnName="ThoigianHopDongID" />
+          <ScalarProperty Name="NguoiKyID" ColumnName="NguoiKyID" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="Mota" ColumnName="Mota" />
+          <ScalarProperty Name="HinhThucTraLuong" ColumnName="HinhThucTraLuong" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="PortalID" ColumnName="PortalID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QLNS_QuanLyKhenThuong">
+      <EntityTypeMapping TypeName="Arua2Model.QLNS_QuanLyKhenThuong">
+        <MappingFragment StoreEntitySet="QLNS_QuanLyKhenThuong">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="NhanVienID" ColumnName="NhanVienID" />
+          <ScalarProperty Name="LyDo" ColumnName="LyDo" />
+          <ScalarProperty Name="MoTa" ColumnName="MoTa" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="PortalID" ColumnName="PortalID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QLNS_QuanLyNhanVien">
+      <EntityTypeMapping TypeName="Arua2Model.QLNS_QuanLyNhanVien">
+        <MappingFragment StoreEntitySet="QLNS_QuanLyNhanVien">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="MaNV" ColumnName="MaNV" />
+          <ScalarProperty Name="PhongBanID" ColumnName="PhongBanID" />
+          <ScalarProperty Name="TenNV" ColumnName="TenNV" />
+          <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
+          <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
+          <ScalarProperty Name="SoCMND" ColumnName="SoCMND" />
+          <ScalarProperty Name="NgayCapCMND" ColumnName="NgayCapCMND" />
+          <ScalarProperty Name="NoiCapCMND" ColumnName="NoiCapCMND" />
+          <ScalarProperty Name="AnhDaiDien" ColumnName="AnhDaiDien" />
+          <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+          <ScalarProperty Name="NguyenQuan" ColumnName="NguyenQuan" />
+          <ScalarProperty Name="SoDienThoai" ColumnName="SoDienThoai" />
+          <ScalarProperty Name="TTHonNhan" ColumnName="TTHonNhan" />
+          <ScalarProperty Name="MaSoBHXH" ColumnName="MaSoBHXH" />
+          <ScalarProperty Name="NgayCapBHXH" ColumnName="NgayCapBHXH" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="ChucvuID" ColumnName="ChucvuID" />
+          <ScalarProperty Name="TrinhDoID" ColumnName="TrinhDoID" />
+          <ScalarProperty Name="NgayDiLam" ColumnName="NgayDiLam" />
+          <ScalarProperty Name="NgayNghiViec" ColumnName="NgayNghiViec" />
+          <ScalarProperty Name="TinhTrangNghiViec" ColumnName="TinhTrangNghiViec" />
+          <ScalarProperty Name="ThongtinCaNhan" ColumnName="ThongtinCaNhan" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="PortalID" ColumnName="PortalID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QLNS_QuanLyPhongBan">
+      <EntityTypeMapping TypeName="Arua2Model.QLNS_QuanLyPhongBan">
+        <MappingFragment StoreEntitySet="QLNS_QuanLyPhongBan">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="MaPhongBan" ColumnName="MaPhongBan" />
+          <ScalarProperty Name="TenPhongBan" ColumnName="TenPhongBan" />
+          <ScalarProperty Name="MoTa" ColumnName="MoTa" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="PortalID" ColumnName="PortalID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QLNS_QuanLyThoiGianHopDong">
+      <EntityTypeMapping TypeName="Arua2Model.QLNS_QuanLyThoiGianHopDong">
+        <MappingFragment StoreEntitySet="QLNS_QuanLyThoiGianHopDong">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ThoiGianHopDong" ColumnName="ThoiGianHopDong" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="Mota" ColumnName="Mota" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="PortalID" ColumnName="PortalID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QLNS_QuanLyTrinhDo">
+      <EntityTypeMapping TypeName="Arua2Model.QLNS_QuanLyTrinhDo">
+        <MappingFragment StoreEntitySet="QLNS_QuanLyTrinhDo">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="MaTrinhDo" ColumnName="MaTrinhDo" />
+          <ScalarProperty Name="TenTrinhDo" ColumnName="TenTrinhDo" />
+          <ScalarProperty Name="Mota" ColumnName="Mota" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="PortalID" ColumnName="PortalID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QLTaiChinh_ChuyenKhoan">
+      <EntityTypeMapping TypeName="Arua2Model.QLTaiChinh_ChuyenKhoan">
+        <MappingFragment StoreEntitySet="QLTaiChinh_ChuyenKhoan">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TaiKhoanChuyenID" ColumnName="TaiKhoanChuyenID" />
+          <ScalarProperty Name="TaiKhoanNhanID" ColumnName="TaiKhoanNhanID" />
+          <ScalarProperty Name="Sotien" ColumnName="Sotien" />
+          <ScalarProperty Name="NgayChuyen" ColumnName="NgayChuyen" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="PortalID" ColumnName="PortalID" />
+          <ScalarProperty Name="MoTa" ColumnName="MoTa" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QLTaiChinh_DanhMucChi">
+      <EntityTypeMapping TypeName="Arua2Model.QLTaiChinh_DanhMucChi">
+        <MappingFragment StoreEntitySet="QLTaiChinh_DanhMucChi">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TenDanhMucChi" ColumnName="TenDanhMucChi" />
+          <ScalarProperty Name="MoTa" ColumnName="MoTa" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="PortalID" ColumnName="PortalID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QLTaiChinh_QuanLychi">
+      <EntityTypeMapping TypeName="Arua2Model.QLTaiChinh_QuanLychi">
+        <MappingFragment StoreEntitySet="QLTaiChinh_QuanLychi">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DanhMucChiID" ColumnName="DanhMucChiID" />
+          <ScalarProperty Name="SoTienChi" ColumnName="SoTienChi" />
+          <ScalarProperty Name="TaiKhoanID" ColumnName="TaiKhoanID" />
+          <ScalarProperty Name="NgayChi" ColumnName="NgayChi" />
+          <ScalarProperty Name="ChiChoAi" ColumnName="ChiChoAi" />
+          <ScalarProperty Name="MoTa" ColumnName="MoTa" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="PortalID" ColumnName="PortalID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QLTaiChinh_QuanLyDanhMucThu">
+      <EntityTypeMapping TypeName="Arua2Model.QLTaiChinh_QuanLyDanhMucThu">
+        <MappingFragment StoreEntitySet="QLTaiChinh_QuanLyDanhMucThu">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TenDanhMucThu" ColumnName="TenDanhMucThu" />
+          <ScalarProperty Name="MoTa" ColumnName="MoTa" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="PortalID" ColumnName="PortalID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QLTaiChinh_QuanLyTaiKhoan">
+      <EntityTypeMapping TypeName="Arua2Model.QLTaiChinh_QuanLyTaiKhoan">
+        <MappingFragment StoreEntitySet="QLTaiChinh_QuanLyTaiKhoan">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TenTaiKhoan" ColumnName="TenTaiKhoan" />
+          <ScalarProperty Name="SoTien" ColumnName="SoTien" />
+          <ScalarProperty Name="MoTa" ColumnName="MoTa" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="PortalID" ColumnName="PortalID" />
+          <ScalarProperty Name="DanhMucID" ColumnName="DanhMucID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QLTaiChinh_QuanLyThu">
+      <EntityTypeMapping TypeName="Arua2Model.QLTaiChinh_QuanLyThu">
+        <MappingFragment StoreEntitySet="QLTaiChinh_QuanLyThu">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DanhMucThuID" ColumnName="DanhMucThuID" />
+          <ScalarProperty Name="SoTienThu" ColumnName="SoTienThu" />
+          <ScalarProperty Name="TaiKhoanID" ColumnName="TaiKhoanID" />
+          <ScalarProperty Name="NgayChi" ColumnName="NgayChi" />
+          <ScalarProperty Name="ThuNguonNao" ColumnName="ThuNguonNao" />
+          <ScalarProperty Name="MoTa" ColumnName="MoTa" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="PortalID" ColumnName="PortalID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QLTaiSan_QuanLyLDanhMuc">
+      <EntityTypeMapping TypeName="Arua2Model.QLTaiSan_QuanLyLDanhMuc">
+        <MappingFragment StoreEntitySet="QLTaiSan_QuanLyLDanhMuc">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="MaDanhMuc" ColumnName="MaDanhMuc" />
+          <ScalarProperty Name="TenDanhMuc" ColumnName="TenDanhMuc" />
+          <ScalarProperty Name="MoTa" ColumnName="MoTa" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="PortalID" ColumnName="PortalID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QLTaiSan_QuanLyThongTinTaiSan">
+      <EntityTypeMapping TypeName="Arua2Model.QLTaiSan_QuanLyThongTinTaiSan">
+        <MappingFragment StoreEntitySet="QLTaiSan_QuanLyThongTinTaiSan">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="MaTaiSan" ColumnName="MaTaiSan" />
+          <ScalarProperty Name="TenTaiSan" ColumnName="TenTaiSan" />
+          <ScalarProperty Name="NhaSanXuat" ColumnName="NhaSanXuat" />
+          <ScalarProperty Name="TriGiaTaiSan" ColumnName="TriGiaTaiSan" />
+          <ScalarProperty Name="DanhMucID" ColumnName="DanhMucID" />
+          <ScalarProperty Name="PhongBanID" ColumnName="PhongBanID" />
+          <ScalarProperty Name="NgayMua" ColumnName="NgayMua" />
+          <ScalarProperty Name="BaoHanh" ColumnName="BaoHanh" />
+          <ScalarProperty Name="TinhTrangID" ColumnName="TinhTrangID" />
+          <ScalarProperty Name="HinhAnh" ColumnName="HinhAnh" />
+          <ScalarProperty Name="Mota" ColumnName="Mota" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="PortalID" ColumnName="PortalID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QLTaiSan_QuanLyTinhTrang">
+      <EntityTypeMapping TypeName="Arua2Model.QLTaiSan_QuanLyTinhTrang">
+        <MappingFragment StoreEntitySet="QLTaiSan_QuanLyTinhTrang">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TenTinhTrang" ColumnName="TenTinhTrang" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="PortalID" ColumnName="PortalID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="roles">
+      <EntityTypeMapping TypeName="Arua2Model.role">
+        <MappingFragment StoreEntitySet="role">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="code" ColumnName="code" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="create_date" ColumnName="create_date" />
+          <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+          <ScalarProperty Name="description" ColumnName="description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="role_module">
+      <EntityTypeMapping TypeName="Arua2Model.role_module">
+        <MappingFragment StoreEntitySet="role_module">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="role_Id" ColumnName="role_Id" />
+          <ScalarProperty Name="module_Id" ColumnName="module_Id" />
+          <ScalarProperty Name="status" ColumnName="status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="users">
+      <EntityTypeMapping TypeName="Arua2Model.user">
+        <MappingFragment StoreEntitySet="user">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="company_Id" ColumnName="company_Id" />
+          <ScalarProperty Name="is_super_user" ColumnName="is_super_user" />
+          <ScalarProperty Name="create_date" ColumnName="create_date" />
+          <ScalarProperty Name="modify_date" ColumnName="modify_date" />
+          <ScalarProperty Name="expired_date" ColumnName="expired_date" />
+          <ScalarProperty Name="password_encrypted" ColumnName="password_encrypted" />
+          <ScalarProperty Name="password_modify_date" ColumnName="password_modify_date" />
+          <ScalarProperty Name="password_encrypted_method" ColumnName="password_encrypted_method" />
+          <ScalarProperty Name="screenname" ColumnName="screenname" />
+          <ScalarProperty Name="login_date" ColumnName="login_date" />
+          <ScalarProperty Name="last_failed_login_date" ColumnName="last_failed_login_date" />
+          <ScalarProperty Name="failed_login_attemp" ColumnName="failed_login_attemp" />
+          <ScalarProperty Name="lockout" ColumnName="lockout" />
+          <ScalarProperty Name="lockout_date" ColumnName="lockout_date" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="discount_percent" ColumnName="discount_percent" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="user_group">
+      <EntityTypeMapping TypeName="Arua2Model.user_group">
+        <MappingFragment StoreEntitySet="user_group">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="code" ColumnName="code" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="create_date" ColumnName="create_date" />
+          <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+          <ScalarProperty Name="status" ColumnName="status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="user_group_role">
+      <EntityTypeMapping TypeName="Arua2Model.user_group_role">
+        <MappingFragment StoreEntitySet="user_group_role">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="user_group_Id" ColumnName="user_group_Id" />
+          <ScalarProperty Name="role_Id" ColumnName="role_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="user_profile">
+      <EntityTypeMapping TypeName="Arua2Model.user_profile">
+        <MappingFragment StoreEntitySet="user_profile">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+          <ScalarProperty Name="code" ColumnName="code" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="create_date" ColumnName="create_date" />
+          <ScalarProperty Name="dob" ColumnName="dob" />
+          <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+          <ScalarProperty Name="description" ColumnName="description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="user_usergroup">
+      <EntityTypeMapping TypeName="Arua2Model.user_usergroup">
+        <MappingFragment StoreEntitySet="user_usergroup">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="user_Id" ColumnName="user_Id" />
+          <ScalarProperty Name="user_usergroup1" ColumnName="user_usergroup" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="GetAllModuleByUserId" FunctionName="Arua2Model.Store.GetAllModuleByUserId">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Arua2Model.GetAllModuleByUserId_Result">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="code" ColumnName="code" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="web_method" ColumnName="web_method" />
+          <ScalarProperty Name="ws_method" ColumnName="ws_method" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetAllRolesByUserId" FunctionName="Arua2Model.Store.GetAllRolesByUserId">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Arua2Model.GetAllRolesByUserId_Result">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="code" ColumnName="code" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetUserByUserName" FunctionName="Arua2Model.Store.GetUserByUserName">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Arua2Model.GetUserByUserName_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="company_Id" ColumnName="company_Id" />
+          <ScalarProperty Name="is_super_user" ColumnName="is_super_user" />
+          <ScalarProperty Name="create_date" ColumnName="create_date" />
+          <ScalarProperty Name="modify_date" ColumnName="modify_date" />
+          <ScalarProperty Name="expired_date" ColumnName="expired_date" />
+          <ScalarProperty Name="password_encrypted" ColumnName="password_encrypted" />
+          <ScalarProperty Name="password_modify_date" ColumnName="password_modify_date" />
+          <ScalarProperty Name="password_encrypted_method" ColumnName="password_encrypted_method" />
+          <ScalarProperty Name="screenname" ColumnName="screenname" />
+          <ScalarProperty Name="login_date" ColumnName="login_date" />
+          <ScalarProperty Name="last_failed_login_date" ColumnName="last_failed_login_date" />
+          <ScalarProperty Name="failed_login_attemp" ColumnName="failed_login_attemp" />
+          <ScalarProperty Name="lockout" ColumnName="lockout" />
+          <ScalarProperty Name="lockout_date" ColumnName="lockout_date" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="discount_percent" ColumnName="discount_percent" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetUserByUserNameAndPassword" FunctionName="Arua2Model.Store.GetUserByUserNameAndPassword">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Arua2Model.GetUserByUserNameAndPassword_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="company_Id" ColumnName="company_Id" />
+          <ScalarProperty Name="is_super_user" ColumnName="is_super_user" />
+          <ScalarProperty Name="create_date" ColumnName="create_date" />
+          <ScalarProperty Name="modify_date" ColumnName="modify_date" />
+          <ScalarProperty Name="expired_date" ColumnName="expired_date" />
+          <ScalarProperty Name="password_encrypted" ColumnName="password_encrypted" />
+          <ScalarProperty Name="password_modify_date" ColumnName="password_modify_date" />
+          <ScalarProperty Name="password_encrypted_method" ColumnName="password_encrypted_method" />
+          <ScalarProperty Name="screenname" ColumnName="screenname" />
+          <ScalarProperty Name="login_date" ColumnName="login_date" />
+          <ScalarProperty Name="last_failed_login_date" ColumnName="last_failed_login_date" />
+          <ScalarProperty Name="failed_login_attemp" ColumnName="failed_login_attemp" />
+          <ScalarProperty Name="lockout" ColumnName="lockout" />
+          <ScalarProperty Name="lockout_date" ColumnName="lockout_date" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="discount_percent" ColumnName="discount_percent" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SearchVoucherByKey" FunctionName="Arua2Model.Store.SearchVoucherByKey" />
+    <FunctionImportMapping FunctionImportName="SearchVoucherByKey1" FunctionName="Arua2Model.Store.SearchVoucherByKey1" />
+  </EntityContainerMapping>
+</Mapping>

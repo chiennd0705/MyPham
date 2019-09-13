@@ -1,0 +1,116 @@
+﻿using Business.ClassBusiness;
+using Common.util;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.ServiceModel;
+using System.Web;
+using System.Web.Mvc;
+using MvcPaging;
+
+namespace BuyGroup365.Areas.Manage.Controllers
+{
+    public class MembersController : Controller
+    {
+
+        readonly MembersBusiness _memberBusiness = new MembersBusiness();
+        readonly MemberProfileBusiness _memberProfileBusiness = new MemberProfileBusiness();
+        //
+        // GET: /Manage/Member/
+        #region QUẢN LÝ MEMBER
+
+        
+        public ActionResult Index(string key, int? page)
+        {
+            try
+            {
+                ViewData["status"] = true;
+                ViewData["key"] = key;
+                int currentPageIndex = page.HasValue ? page.Value : 1;
+
+                var list = _memberBusiness.GetByKey(key).ToPagedList(currentPageIndex, 20);
+                return View(list);
+            }
+            catch (FaultException ex)
+            {
+                var exep = Function.GetExeption(ex);
+                var codeExp = exep[1];
+                string url = "Error/ErrorFunction/" + codeExp;
+                return RedirectToActionPermanent(url);
+            }          
+        }
+
+        #region Delete member
+        public ActionResult Delete(long id = 0)
+        {
+            try
+            {
+                if (id > 0)
+                {
+                    _memberBusiness.Remove(id);
+
+                }
+                return RedirectToAction("Index");
+            }
+            catch (FaultException ex)
+            {
+                var exep = Function.GetExeption(ex);
+                var codeExp = exep[1];
+                string url = "Error/ErrorFunction/" + codeExp;
+                return RedirectToActionPermanent(url);
+            }
+
+        }
+        #endregion
+        #endregion
+
+        #region Member Profile
+        public ActionResult MemberProfile(string key, int? page)
+        {
+            try
+            {
+                List<BuyGroup365.Models.Member.LoadDropdown.DropdowLocation> listDropdowLocation = new List<BuyGroup365.Models.Member.LoadDropdown.DropdowLocation>();
+                listDropdowLocation.Add(new BuyGroup365.Models.Member.LoadDropdown.DropdowLocation() { Id = 0, Name = "-----------------Chọn Parent----------------" });
+                ViewBag.htmlCate = new BuyGroup365.Models.Member.LoadDropdown().SearchLocationByName(ref listDropdowLocation);
+
+                ViewData["status"] = true;
+                ViewData["key"] = key;
+                int currentPageIndex = page.HasValue ? page.Value : 1;
+
+                var list = _memberProfileBusiness.GetByKey(key).ToPagedList(currentPageIndex, 20);
+                return View(list);
+            }
+            catch (FaultException ex)
+            {
+                var exep = Function.GetExeption(ex);
+                var codeExp = exep[1];
+                string url = "Error/ErrorFunction/" + codeExp;
+                return RedirectToActionPermanent(url);
+            }
+        }
+
+        #region Delete MemberProfile
+        public ActionResult DeleteMemberProfile(long id = 0)
+        {
+            try
+            {
+                if (id > 0)
+                {
+                    _memberProfileBusiness.Remove(id);
+
+                }
+                return RedirectToAction("MemberProfile");
+            }
+            catch (FaultException ex)
+            {
+                var exep = Function.GetExeption(ex);
+                var codeExp = exep[1];
+                string url = "Error/ErrorFunction/" + codeExp;
+                return RedirectToActionPermanent(url);
+            }
+
+        }
+        #endregion
+        #endregion
+    }
+}

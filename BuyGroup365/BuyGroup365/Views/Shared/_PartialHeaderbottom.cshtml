@@ -1,0 +1,34 @@
+﻿@using Common
+@using Business.ClassBusiness;
+
+@{
+    TextHtmlBusiness textHtmlBusiness = new TextHtmlBusiness();
+
+    TextHtml Quatang = textHtmlBusiness.GetByCode("Quatang");
+
+}
+<div class="header-bottom">
+    <div class="header-sticker">
+        <div class="container">
+
+            <div class="border-bottom menu-mobile">
+                <div class="menu-mobile-none">
+                    <div class="header-config-bg col-xs-12 col-sm-12 col-md-12">
+                        <div class="header-wrapper-bottom row">
+                            <div class="custom-menu">
+
+                                @*@Html.Action("MenuCategory", "Partial")*@
+                                @Html.Action("Menutop", "Partial")
+                                @*@Html.Partial("_PartialMenuTop")*@
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="quatang">
+
+                    @Html.Raw(Quatang.Content)
+                </div>
+        </div>
+    </div>
+</div>

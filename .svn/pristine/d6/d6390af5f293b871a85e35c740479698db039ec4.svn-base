@@ -1,0 +1,31 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace BuyGroup365.Areas.Manage.Models
+{
+    public class AdminFunction
+    {
+        public static string GetUrlImage(string url, string folder)
+        {
+            if (!string.IsNullOrEmpty(url))
+            {
+                var a = url.IndexOf('?');
+                if (a != -1)
+                {
+                    var split = url.Split('?');
+                    return split[0] + folder + "/" + split[1];
+                }
+                else
+                {
+                    return "/img/noimage.png";
+                }
+            }
+            else
+            {
+                return "/img/noimage.png";
+            }
+        }
+    }
+}

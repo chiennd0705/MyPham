@@ -1,0 +1,1071 @@
+﻿@using Common
+@model Common.Product
+
+@{
+    /**/
+
+    ViewBag.Title = "Thêm mới sản phẩm";
+    Layout = "~/Areas/Manage/Views/Shared/_LayoutAdmincshtml.cshtml";
+}
+
+<script>
+    function BrowseServer() {
+        var finder = new CKFinder();
+        finder.BasePath = '/Content/css/ckfinder/';
+        finder.selectActionFunction = SetFileFiled;
+        // finder.SelectActionFunction = SetFileFiled;
+        //   finder.SelectFunction = SetFileFiled;
+        //   finder.SelectFunctionData = SetFileFiled;
+        finder.popup();
+    }
+    function SetFileFiled(FileUrl) {
+        document.getElementById('avatar').value = FileUrl;
+    }
+    function BrowseServerlong() {
+        var finder = new CKFinder();
+        finder.BasePath = '/Content/css/ckfinder/';
+        finder.selectActionFunction = SetFileFiledlong;
+        // finder.SelectActionFunction = SetFileFiled;
+        //   finder.SelectFunction = SetFileFiled;
+        //   finder.SelectFunctionData = SetFileFiled;
+        finder.popup();
+    }
+    function SetFileFiledlong(FileUrl) {
+        document.getElementById('LongImages').value = FileUrl;
+    }
+    function BrowseServerFile(id) {
+        var finder = new CKFinder();
+        finder.BasePath = '/Content/css/ckfinder/';
+        finder.selectActionData = "file" + id;
+        finder.selectActionFunction = function (fileUrl, data) {
+            //alert('Selected file: ' + fileUrl + data['selectActionData']);
+            document.getElementById(data['selectActionData']).value = fileUrl;
+        }
+        finder.popup();
+    }
+</script>
+
+<script>
+    $(function () {
+        $("#ModifyDate").datepicker({ dateFormat: 'dd-mm-yy' }).val();
+        $('#ModifyDate').datepicker('setDate', 'today');
+    });
+</script>
+
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <div ng-controller="header">
+        @Html.Raw(BuyGroup365.Areas.Manage.Models.AdminFunction.BindHeader("Sản phẩm", "Thêm mới", "/Manage/Product/Index", null, null))
+    </div>
+    <!-- /.row -->
+    <!-- /.row -->
+    <!-- /.row -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <i class="fa fa-bar-chart-o fa-fw"></i>
+                    </h3>
+                </div>
+                <div class="panel-body">
+
+                    <span>@ViewBag.Mes </span>
+                    @using (Html.BeginForm("Add", "Product", FormMethod.Post, new { enctype = "multipart/form-data", id = "Postsale" }))
+                    {
+                        @Html.ValidationSummary(true)
+
+                        <input type="hidden" value="0" id="categoryproduct" name="categoryproduct" />
+                        <input id="CatalogMain" name="CatalogMain" type="hidden" value="0" />
+                        <div class="modal-contentSale">
+
+                            <div>
+                                <div role="tabpanel">
+
+                                    <!-- Nav tabs -->
+                                    <ul class="nav nav-tabs" role="tablist">
+                                        <li role="presentation" class="active"><a href="#Infomation" aria-controls="Infomation" role="tab" data-toggle="tab">Thông tin tổng quát</a></li>
+                                        <li role="presentation"><a href="#Des" aria-controls="Des" role="tab" data-toggle="tab">Thông tin khác</a></li>
+                                        <li role="presentation"><a href="#AddTintucVeSP" aria-controls="AddTintucVeSP" role="tab" data-toggle="tab">Thêm tin tức về sản phẩm</a></li>
+                                        <li role="presentation"><a href="#Image" aria-controls="Image" role="tab" data-toggle="tab">Gallery ảnh</a></li>
+                                        @*<li role="presentation"><a href="#ImagePrice" aria-controls="ImagePrice" role="tab" data-toggle="tab">Thuộc tính giá sản phẩm</a></li>*@
+                                        <li role="presentation"><a href="#thongtinkhac" aria-controls="thongtinkhac" role="tab" data-toggle="tab">Thuộc tính riêng của sản phẩm</a></li>
+                                        <li role="presentation"><a href="#Khuyenmai" aria-controls="Khuyenmai" role="tab" data-toggle="tab">Thông tin khuyến mãi</a></li>
+                                        <li role="presentation"><a href="#tags" aria-controls="tags" role="tab" data-toggle="tab">Thẻ Tag</a></li>
+                                    </ul>
+
+                                    <!-- Tab panes -->
+                                    <div class="tab-content">
+                                        <div role="tabpanel" class="tab-pane active" id="Infomation">
+
+                                            <div class="row" style="margin-top: 10px; margin-bottom: 15px">
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label for="firstname" class="">Tên sản phẩm:<span class="required">*</span></label>
+                                                        <div class="input-box">
+                                                            @Html.TextBoxFor(model => model.ProductName, new { @class = "form-control", @autocomplete = "off", @maxlength = "150", @required = "required" })
+                                                            @Html.ValidationMessageFor(model => model.ProductName)
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="firstname" class="">Tên sản phẩm ngắn:<span class="required">*</span></label>
+                                                        <div class="input-box">
+                                                            @Html.TextBoxFor(model => model.ProductNameShort, new { @class = "form-control", @autocomplete = "off", @maxlength = "150", @required = "required" })
+                                                            @Html.ValidationMessageFor(model => model.ProductNameShort)
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <div class="row">
+                                                            <div class="row">
+                                                                <div class="col-lg-6">
+                                                                    <div class="form-group">
+                                                                        <label for="firstname" class="">Xuất xứ:</label>
+                                                                        <div class="input-box">
+                                                                            @Html.TextBoxFor(model => model.Model, new { @class = "form-control", @autocomplete = "off", @maxlength = "200", @style = "width: 100%", @size = "25" })
+                                                                            @*@Html.ValidationMessageFor(model => model.Tags)*@
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-6">
+                                                                    <div class="form-group">
+                                                                        <label for="firstname" class="">Mã sản phẩm:</label>
+                                                                        <div class="input-box">
+                                                                            @Html.TextBoxFor(model => model.Code, new { @class = "form-control", @autocomplete = "off", @maxlength = "50", @style = "width: 100%", @size = "25" })
+                                                                            @*@Html.ValidationMessageFor(model => model.Code)*@
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <div class="row">
+                                                            <div class="row">
+                                                                <div class="col-lg-6">
+                                                                    <div class="form-group">
+                                                                        <label for="firstname" class="">Quy cách:</label>
+                                                                        <div class="input-box">
+                                                                            @Html.TextBoxFor(model => model.Model, new { @class = "form-control", @autocomplete = "off", @maxlength = "200", @style = "width: 100%", @size = "25" })
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-6">
+                                                                    <div class="form-group">
+                                                                        <label for="firstname" class="">Chọn Slider:</label>
+                                                                        <div class="form-group">
+
+                                                                            <select style="width: 100%;" id="SliderID" name="SliderID">
+                                                                                @Html.Raw(ViewBag.SliderID)
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Link sản phẩm: </label><br />
+                                                        <input class="form-control" autocomplete="off" maxlength="200" id="FriendlyUrl" disabled="true" name="FriendlyUrl" type="text" value="@Model.FriendlyUrl" />
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <div class="row">
+                                                            <div class="row">
+                                                                <div class="col-lg-6">
+                                                                    <div class="form-group">
+                                                                        <label for="firstname" class="">Ảnh đại diện:<span class="required">*</span></label>
+                                                                        <div class="input-box">
+
+                                                                            <input id="avatar" name="avatar" type="text" class="input-block-level" width="100%" />
+                                                                            <input type="button" value="Browse Server" onclick="BrowseServer();" class="controls" />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-6">
+                                                                    <div class="form-group">
+                                                                        <label for="firstname" class="">Ảnh dài:<span class="required">*</span></label>
+                                                                        <div class="input-box">
+
+                                                                            <input id="LongImages" name="LongImages" type="text" class="input-block-level" width="100%" />
+                                                                            <input type="button" value="Browse Server" onclick="BrowseServerlong();" class="controls" />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <div class="row">
+                                                            <div class="row">
+                                                                <div class="col-lg-6">
+
+                                                                    <div class="form-group">
+                                                                        <label for="firstname" class="">Giá bán:</label>
+                                                                        <div class="input-box">
+                                                                            @Html.TextBoxFor(model => model.Price, new { @class = "form-control", @autocomplete = "off", @maxlength = "50", @style = "width: 100%", @size = "25", @placeholder = "Hộp thư" })
+                                                                            @Html.ValidationMessageFor(model => model.Price)
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="firstname" class="">Giá thị trường:</label>
+                                                                        <div class="input-box">
+                                                                            @Html.TextBoxFor(model => model.Cost, new { @class = "form-control", @autocomplete = "off", @maxlength = "50", @style = "width: 100%", @size = "25", @placeholder = "Hộp thư" })
+                                                                            @Html.ValidationMessageFor(model => model.Cost)
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-lg-6">
+                                                                    <div class="form-group" style="display:none;">
+                                                                        <label>Trạng thái:</label><br />
+
+                                                                        @Html.DropDownListFor(model => model.Status, (IEnumerable<SelectListItem>)ViewBag.statusProduct, new { @class = "form-control" })
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="firstname" class="">Tình trạng sản phẩm:</label>
+                                                                        <div class="input-box">
+                                                                            @* @Html.DropDownListFor(model => model.State, (IEnumerable<SelectListItem>)ViewBag.stateProducttwo, new { @class = "form-control"})*@
+                                                                            <select class="form-control" id="State" name="State">
+                                                                                <option value="1" selected>Còn hàng</option>
+                                                                                <option value="0">Hết hàng</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="firstname" class="">Sắp xếp theo ngày:</label>
+                                                                        <div class="input-box">
+                                                                            <input class="form-control __plannerInput" id="ModifyDate" name="ModifyDate" type="text" />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group" style="display:none;">
+                                                        <label for="firstname" class="">Kiểu hiển thị:</label>
+                                                        <div class="input-box">
+                                                            @* @Html.DropDownListFor(model => model.State, (IEnumerable<SelectListItem>)ViewBag.stateProducttwo, new { @class = "form-control"})*@
+                                                            <select class="form-control" id="ShowType" name="ShowType">
+                                                                <option value="1" selected>Bình thường</option>
+                                                                @*<option value="1">Sản phẩm kiểu bài viết</option>*@
+                                                                <option value="2">LandingPage</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group" style="display:none;">
+                                                        <label>Chương trình khuyến mãi<span class="required">*</span></label><br />
+                                                        @Html.DropDownList("PromotionListID", null, new { @width = "100%" })
+                                                    </div>
+                                                    <div class="form-group" style="display: none">
+                                                        <label for="firstname" class="">Cân nặng:</label>
+                                                        <div class="input-box">
+                                                            @Html.TextBoxFor(model => model.Weight, new { @class = "form-control", @autocomplete = "off", @maxlength = "50", @style = "width: 100%", @size = "25", @placeholder = "Hộp thư" })
+                                                            @Html.ValidationMessageFor(model => model.Weight)
+                                                            <div><i style="color: red; font-size: 12px;">Đơn vị tính bằng gram</i></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <label>Danh mục sản phẩm:<span class="required">*</span></label><br />
+                                                    <div class="">
+                                                    </div>
+
+                                                    <div class="css-khung" style="    height: 272px;    overflow: scroll;    z-index: 999;    position: relative;">
+
+                                                        @Html.Raw(ViewBag.htmlCate)
+                                                    </div>
+                                                    <label>Thương  hiệu:<span class="required">*</span></label><br />
+                                                    <div class="form-group">
+                                                        @*@Html.DropDownListFor(model => model.ManufacturerId, (IEnumerable<SelectListItem>)ViewBag.Manufaceture, new { @class = "form-control", @size = "25", @height = "270px" ,@style="width: 100%"})
+                                                            @Html.ValidationMessageFor(model => model.ManufacturerId)*@
+                                                        <select style="width: 100%;" id="manufaceture" name="manufaceture" onclick="GetManufaceture()">
+                                                            @Html.Raw(ViewBag.Manufaceture)
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+
+                                                    <div class="form-group">
+                                                        <label for="firstname" class="">Nhóm sản phẩm:</label>
+                                                        <div class="input-box">
+                                                            <div class="form-group">
+                                                                <label class="checkbox-inline">
+                                                                    <input id="IsNew" value="1" name="IsNew" type="checkbox" /> Sản phẩm Nhập khẩu
+                                                                </label>
+
+                                                                <label class="checkbox-inline">
+                                                                    <input id="IsAttractive" value="1" name="IsAttractive" type="checkbox" /> Sản phẩm Chính hãng
+                                                                </label>
+                                                                <label class="checkbox-inline">
+                                                                    <input id="IsHanded" value="1" name="IsHanded" type="checkbox" /> Sản phẩm xách TAY
+                                                                </label>
+                                                                <label class="checkbox-inline">
+                                                                    <input id="IsVip" value="1" name="IsVip" type="checkbox" /> Sản phẩm khuyến mãi
+                                                                </label>
+
+                                                                <label class="checkbox-inline">
+                                                                    <input id="IsProductBig" value="1" name="IsProductBig" type="checkbox" />Sản phẩm Ảnh to
+                                                                </label>
+                                                                <label class="checkbox-inline">
+                                                                    <input id="IsHome" value="1" name="IsHome" type="checkbox" />Hiển thị trang chủ
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group" style="display:none;">
+                                                        <label for="firstname" class="">Kích thước hiển thị:</label>
+                                                        <div class="input-box">
+                                                            @Html.DropDownListFor(model => model.ColWidth, (IEnumerable<SelectListItem>)ViewBag.ColWidth, new { @class = "form-control" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12">
+                                                    <div class="form-group">
+                                                        <label>Giới thiệu ngắn về sản phẩm:</label><br />
+                                                        <textarea class="form-control" id="summary" name="summary">@Model.Summary</textarea>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Mô tả chi tiết sản phẩm:</label><br />
+                                                        <textarea class="form-control" id="description" name="description">@Model.Description</textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <script>
+                                                function GetManufaceture() {
+
+                                                }
+                                            </script>
+                                        </div>
+
+                                        <style>
+                                            .suggestions-list-category {
+                                                /* height: 155px; */
+                                                overflow: hidden;
+                                            }
+
+                                            .img123 {
+                                                display: inline !important;
+                                            }
+                                        </style>
+
+                                        <div role="tabpanel" class="tab-pane" id="Des">
+                                            <div class="row">
+                                                <div class="col-lg-6">
+
+                                                    <div class="form-group">
+                                                        <label for="firstname" class="">Thẻ tiêu đề:</label>
+                                                        <div class="input-box">
+                                                            @Html.TextBoxFor(model => model.SeoTitle, new { @class = "form-control ", @autocomplete = "off", @maxlength = "200" })
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="firstname" class="">Thẻ từ khóa:</label>
+                                                        <div class="input-box">
+                                                            @Html.TextBoxFor(model => model.SeoKeyword, new { @class = "form-control ", @autocomplete = "off", @maxlength = "300" })
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="firstname" class="">Thẻ mô tả:</label>
+                                                        <div class="input-box">
+                                                            @Html.TextAreaFor(model => model.SeoDescription, new { @class = "form-control ", @autocomplete = "off", @maxlength = "500", @style = "width: 100%; height:100px;" })
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Tiêu đề chia sẻ:</label><br />
+                                                        <input class="form-control" autocomplete="off" maxlength="200" id="ShareTitle" name="ShareTitle" type="text" />
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Từ khóa chia sẻ:</label><br />
+                                                        <input class="form-control" autocomplete="off" maxlength="300" id="ShareKeyword" name="ShareKeyword" type="text" />
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Mô tả chia sẻ:</label><br />
+                                                        <textarea class="form-control" id="ShareDescription" maxlength="500" name="ShareDescription" style="height: 100px"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div class="form-group tht-con">
+                                                    <label style="font-weight: bold !important">Thuộc tính của sản phẩm theo danh mục:</label><br />
+                                                    <div id="propertybyCate"></div>
+
+                                                    <div role="tabpanel">
+                                                        <ul class="nav nav-tabs" role="tablist" id="tablist"></ul>
+                                                        <div class="tab-content" id="tabcontent">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div role="tabpanel" class="tab-pane" id="Image">
+                                            <link rel="stylesheet" href="/Content/fancybox/css/fancybox/jquery.fancybox-buttons.css">
+                                            <link rel="stylesheet" href="/Content/fancybox/css/fancybox/jquery.fancybox-thumbs.css">
+                                            <link rel="stylesheet" href="/Content/fancybox/css/fancybox/jquery.fancybox.css">
+                                            @*<link rel="stylesheet" href="/Content/fancybox/demo/demo.css">*@<!-- DELETE -->
+                                            <script src="/Content/fancybox/js/fancybox/jquery.fancybox.js"></script>
+                                            <script src="/Content/fancybox/js/fancybox/jquery.fancybox-buttons.js"></script>
+                                            <script src="/Content/fancybox/js/fancybox/jquery.fancybox-thumbs.js"></script>
+
+                                            <script type="text/javascript">
+                                                $(document).ready(function () {
+                                                    $(".fancybox").fancybox();
+                                                });
+                                            </script>
+
+                                            <div style="width: 100%; margin: auto">
+
+                                                <div class="row">
+
+                                                    <div id="content">
+
+                                                        <div class="gal">
+
+                                                            <script>
+                                                                function DeleteImg(id) {
+                                                                    alert(id);
+                                                                    var idd = "img" + id;
+                                                                    $('#' + idd).remove();
+                                                                    $.ajax({
+                                                                        url: '@Url.Action("DeleteImage", "Member")',
+                                                                        data: {
+                                                                            'id': id
+                                                                        },
+                                                                        dataType: 'json',
+                                                                        Type: 'POST',
+                                                                        traditional: true,
+                                                                        success: function (data) {
+                                                                            if (data == 1) {
+                                                                                alert("Xóa thành công!");
+                                                                            }
+                                                                        },
+                                                                        error: function () {
+
+                                                                        }
+                                                                    });
+                                                                }
+                                                            </script>
+                                                        </div>
+                                                        <!--/demo-->
+                                                    </div>
+                                                </div>
+                                                <div id="imageform" style="margin-top: 20px">
+                                                    <div class="form-group">
+                                                        <input id="file1" name='file' type='text' class='input-block-level' />
+                                                        <input type='button' value='Browse Server' onclick='BrowseServerFile(1);' class='controls' />
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <span><a class="btn btn-primary btn-sm" onclick="addImage()">Thêm </a></span>
+                                                    <script>
+                                                        var i = 2;
+                                                        function addImage() {
+                                                            //      alert("thai");
+
+                                                            var html = "<div class='form-group'>  <input id='file" + i + "' name='file' type='text' width='300' class='input-block-level' />    <input type='button' value='Browse Server' onclick='BrowseServerFile(" + i + ");' class='controls' /></div>";
+
+                                                            i++;
+                                                            $("#imageform").append(html);
+                                                        }
+                                                    </script>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div role="tabpanel" class="tab-pane" id="ImagePrice" style="display:none;">
+
+                                            <div style="width: 100%; margin: auto">
+
+                                                <div class="row">
+
+                                                    <div id="content">
+
+                                                        <div class="gal">
+
+                                                            <script>
+                                                                function DeleteImg(id) {
+                                                                    alert(id);
+                                                                    var idd = "img" + id;
+                                                                    $('#' + idd).remove();
+                                                                    $.ajax({
+                                                                        url: '@Url.Action("DeleteImage", "Member")',
+                                                                        data: {
+                                                                            'id': id
+                                                                        },
+                                                                        dataType: 'json',
+                                                                        Type: 'POST',
+                                                                        traditional: true,
+                                                                        success: function (data) {
+                                                                            if (data == 1) {
+                                                                                alert("Xóa thành công!");
+                                                                            }
+                                                                        },
+                                                                        error: function () {
+
+                                                                        }
+                                                                    });
+                                                                }
+                                                            </script>
+                                                        </div>
+                                                        <!--/demo-->
+                                                    </div>
+                                                </div>
+                                                <div id="imageformPrice" style="margin-top: 20px">
+                                                    <div class="form-group">
+                                                        Name:<input type="text" name="ProductNameSub">    Price:<input type="text" name="ProductPrice">   Note:<textarea width='200px' height='100px' name="ProductNote"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <span><a class="btn btn-primary btn-sm" onclick="addImagePrice()">Thêm </a></span>
+                                                    <script>
+                                                        function addImagePrice() {
+                                                            //      alert("thai");
+                                                            var html = "<div class='form-group'> Name:<input type='text' name='ProductNameSub'>   Price:<input type='text' name='ProductPrice'>   Link:<textarea name='ProductNote' width='200px' height='100px'></textarea></div>";
+                                                            $("#imageformPrice").append(html);
+                                                        }
+                                                    </script>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div role="tabpanel" class="tab-pane" id="AddTintucVeSP">
+                                            <div class="form-group tht-con">
+                                                <label style="font-weight: bold !important">Thêm tin tức về sản phẩm:</label><br>
+                                                <div id="propertybyCate"></div>
+
+                                                <div style="width: 100%; margin: auto">
+
+                                                    <input type="text" name="NewAbout" id="NewAbout" placeholder="Tìm kiếm tin">        <a class="btn btn-primary btn-sm" onclick="addNewAbout()">Thêm tin</a>
+
+                                                    <br><label style="font-weight: bold !important">Tin tức đã chọn:</label><br>
+                                                    <div style="border: 1px solid #d9d9d9; height: 200px; width: auto;  margin-top: 10px;   padding: 10px;    border-radius: 5px;">
+                                                        <input id="AboutNewID" name="AboutNewID" type="hidden" />
+
+                                                        <div id="danhsachtinabout"></div>
+                                                        <script>
+                                                            function addNewAbout() {
+                                                                //      alert("thai");
+                                                                var newName = jQuery('#NewAbout').val();
+                                                                var tem = jQuery('#AboutNewID').val();
+                                                                var html = "<div class='form-group'><span id='aboutnewtong" + tem + "'> <input id='AboutNewID" + tem + "' value=" + tem + " name='hiddenNewID'  type='hidden' /><a onclick='DeleteNewAbout(" + tem + ")'>" + newName + "<img src='/img/IconMain/remove.png' width='13' style='margin-left:5px' title='Xóa' /></a></span> </div>";
+                                                                $("#danhsachtinabout").append(html);
+
+                                                            }
+                                                            function DeleteNewAbout(tem) {
+                                                                var idd = "aboutnewtong" + tem;
+                                                                $('#' + idd).remove();
+                                                            }
+                                                        </script>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group tht-con">
+                                                <label style="font-weight: bold !important">Hướng dẫn về sản phẩm:</label><br>
+                                                <div id="propertybyCate"></div>
+
+                                                <div style="width: 100%; margin: auto">
+                                                    <input type="text" name="NewAboutHD" id="NewAboutHD" placeholder="Tìm kiếm tin">        <a class="btn btn-primary btn-sm" onclick="addNewAboutHD()">Thêm tin</a>
+
+                                                    <br> <label style="font-weight: bold !important">Tin tức đã chọn:</label><br>
+                                                    <div style="border: 1px solid #d9d9d9; height: 200px; width: auto;  margin-top: 10px;   padding: 10px;    border-radius: 5px;">
+                                                        <input id="AboutNewIDHD" name="AboutNewIDHD" type="hidden" />
+
+                                                        <div id="danhsachtinaboutHD"></div>
+                                                        <script>
+                                                            function addNewAboutHD() {
+                                                                //      alert("thai");
+                                                                var newName = jQuery('#NewAboutHD').val();
+                                                                var tem = jQuery('#AboutNewIDHD').val();
+                                                                var html = "<div class='form-group' id='aboutnewtongHD" + tem + "'><span> <input id='AboutNewIDHD" + tem + "' value=" + tem + " name='hiddenNewIDHD'  type='hidden' /><a onclick='DeleteNewAboutHD(" + tem + ")'>" + newName + "<img src='/img/IconMain/remove.png' width='13' style='margin-left:5px' title='Xóa' /></a></span> </div>";
+                                                                $("#danhsachtinaboutHD").append(html);
+                                                            }
+                                                            function DeleteNewAbout(tem) {
+                                                                var idd = "aboutnewtongHD" + tem;
+                                                                $('#' + idd).remove();
+                                                            }
+                                                        </script>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group tht-con">
+                                                <label style="font-weight: bold !important">Sản phẩm liên quan:</label><br>
+                                                <div id="propertybyCate"></div>
+                                                <div style="width: 100%; margin: auto">
+                                                    <input type="text" name="RelativesProduct" id="RelativesProduct" placeholder="Tìm kiếm sản phẩm">        <a class="btn btn-primary btn-sm" onclick="addRelativesProduct()">Thêm sản phẩm</a>
+
+                                                    <br> <label style="font-weight: bold !important">Sản phẩm đã chọn:</label><br>
+                                                    <div style="border: 1px solid #d9d9d9; height: 200px; width: auto;  margin-top: 10px;   padding: 10px;    border-radius: 5px;">
+                                                        <input id="RelativesProductID" name="RelativesProductID" type="hidden" />
+
+                                                        <div id="danhsachsanphamlienquan"></div>
+                                                        <script>
+                                                            function addRelativesProduct() {
+                                                                //      alert("thai");
+                                                                var newName = jQuery('#RelativesProduct').val();
+                                                                var tem = jQuery('#RelativesProductID').val();
+                                                                var html = "<div class='form-group' id='RelativesProducttong" + tem + "'><span > <input id='RelativesProductID" + tem + "' value=" + tem + " name='hiddenRelativesProductID'  type='hidden' /><a onclick='DeleteRelativesProduct(" + tem + ")'>" + newName + "<img src='/img/IconMain/remove.png' width='13' style='margin-left:5px' title='Xóa' /></a></span> </div>";
+                                                                $("#danhsachsanphamlienquan").append(html);
+                                                            }
+                                                            function DeleteRelativesProduct(tem) {
+                                                                var idd = "RelativesProducttong" + tem;
+                                                                $('#' + idd).remove();
+                                                            }
+                                                        </script>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane" id="Khuyenmai">
+                                            <div class="form-group">
+                                                <label>Thông tin khuyến mãi:</label><br />
+
+                                                <textarea class="form-control" id="LandingPage" name="landingPage"></textarea>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Thông tin liên quan sản phẩm:</label><br />
+
+                                                <textarea class="form-control" id="Promotion" name="Promotion"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane" id="thongtinkhac">
+                                            <div class="row">
+                                                <div class="col-lg-12" style="margin-top:15px">
+                                                    <style>
+                                                        .attribute input[type='text'] {
+                                                            margin-right: 5px;
+                                                        }
+
+                                                        .attribute a {
+                                                            cursor: pointer;
+                                                        }
+
+                                                        .key {
+                                                            width: 30%;
+                                                        }
+
+                                                        .value {
+                                                            width: 50%;
+                                                        }
+                                                    </style>
+                                                    <div id="attribute" class="attribute">
+                                                        <div class="form-group">
+
+                                                            <input type="text" class="key" name="att_key" id="add_key" placeholder="link icon" style="width:200px" />
+                                                            <input type="text" class="value" name="att_value" id="add_value" placeholder="Nội dung" style="width:500px" />
+                                                            <select class="form-control" name="TypePP" id="TypePP" style="float: left;width: 141px;margin-right: 10px; height: 30px;">
+                                                                <option value="1" selected>Dưới khuyến mãi</option>
+                                                                <option value="2">Bên trái</option>
+                                                            </select>
+                                                            <span><a class="btn btn-primary btn-sm" onclick="addAttribute()">Thêm </a></span>
+                                                        </div>
+                                                    </div>
+                                                    <div>
+
+                                                        <script>
+                                                            function addAttribute() {
+                                                                //      alert("thai");
+                                                                var html = "<div class='form-group'><input  type=\"text\" class=\"key\" style=\"width: 200px\" name=\"att_key\" placeholder=\"link icon\" /><input type=\"text\" style=\"width: 500px\" class=\"value\" name=\"att_value\" placeholder=\"Nội dung\" /> <select class=\"form-control\" name=\"TypePP\" style=\"float: left; width: 141px; margin-right: 10px; height: 30px;\"><option value = \"1\" selected> Dưới khuyến mãi</option><option value=\"2\">Bên trái</option></select></div>";
+                                                                $("#attribute").append(html);
+                                                            }
+                                                        </script>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane" id="tags">
+                                            <div class="row">
+                                                <div class="col-lg-12" style="margin-top:15px">
+                                                    <style>
+                                                        #area-tags .checkbox-inline {
+                                                            width: 24%;
+                                                        }
+                                                    </style>
+                                                    <div class="form-group">
+                                                        @Html.Raw(ViewBag.Tags)
+
+                                                        @*<div class="input-box" id="area-tags">
+                                                            </div>
+                                                            <script>
+                                                                $(document).ready(function () {
+                                                                    $.ajax({
+                                                                        url: '@Url.Action("GetTag", "Product")',
+                                                                        data: {
+                                                                            'id': 0,
+                                                                            'type': 1,
+                                                                            'key': '',
+                                                                        },
+                                                                        dataType: "json",
+                                                                        type: "POST",
+                                                                        traditional: true,
+
+                                                                        success: function (data) {
+                                                                            $('#area-tags').html(data);
+                                                                            $('#overbackgroud').hide();
+
+                                                                        },
+                                                                        error: function () {
+                                                                            alert("Xin lỗi ! Hệ thống đang cập nhật vui long thực hiện lại sau.");
+                                                                            $('#overbackgroud').hide();
+                                                                        }
+                                                                    });
+                                                                });
+                                                            </script>*@
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary btn-md" title="Login" name="send" id="send2"><span>Thêm mới</span></button>
+                        </div>
+
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        var cont = "";
+        function GetManuface(manufaceid) {
+
+            $('#manufacetureid').val(manufaceid);
+        }
+        function GetValueManuface(mnuid) {
+            //$('#overbackgroud').show();
+            //    var cat = $('#Category').val();
+            //var mnuid = $("#categoryproduct option:selected").val();
+            //alert(mnuid);
+            var catalogProducts = "#catalogProducts" + mnuid;
+            var cb_cata = "#cb_cata" + mnuid
+            if ($(cb_cata).is(":checked"))
+                $(catalogProducts).append("<a id=\"SetCatalogPrimary" + mnuid + "\" style=\"color:#428bca;margin-left:10px;\" onclick=\"SetCatalogPrimary(" + mnuid + ")\">Set Primary</a>");
+            else {
+                var SetCatalogPrimary = "#SetCatalogPrimary" + mnuid;
+                $(SetCatalogPrimary).remove();
+                if ($('#CatalogMain').val() == mnuid) {
+                    $('#CatalogMain').val(0);
+                    $(".Primarycs").remove();
+                }
+            }
+
+            $('#categoryproduct').val(mnuid);
+            $.ajax({
+                url: '@Url.Action("GetManufaceByCategory","Product")',
+                data: {
+                    'cate': mnuid
+                },
+                dataType: "json",
+                type: "POST",
+                traditional: true,
+                success: function (data, status) {
+                    if (data == "0") {
+                        $('#overbackgroud').hide();
+                    }
+                    else {
+                        $('label').removeClass("selectcate");
+                        $('#label-' + mnuid).addClass("selectcate");
+
+                        //$('#manufaceture').html("");
+                        //$('#manufaceture').append(data.HtmlManuface);
+                        var htm = "";
+                        var testli = "";
+                        var contentli = "";
+                        var input = "";
+                        $.each(data.JsonProperties, function (key, value) {
+                            input += value.HtmlInputHidden;
+                            if (key == 0) {
+                                testli += "<li  role=\"presentation\" class=\"active\"><a  href=\"#Pro" + value.Id + "\" aria-controls=\"Pro" + value.Id + "\" role=\"tab\" data-toggle=\"tab\">" + value.Name + " </a></li>";
+                                contentli += "<div role=\"tabpanel\" class=\"tab-pane active \" id=\"Pro" + value.Id + "\">";
+                                contentli += value.HtmlType;
+                                contentli += "</div>";
+
+                            } else {
+                                testli += "<li  role=\"presentation\"><a   href=\"#Pro" + value.Id + "\" aria-controls=\"Pro" + value.Id + "\" role=\"tab\" data-toggle=\"tab\">" + value.Name + " </a></li>";
+                                contentli += "<div role=\"tabpanel\" class=\"tab-pane \" id=\"Pro" + value.Id + "\">";
+                                contentli += value.HtmlType;
+                                contentli += "</div>";
+
+                            }
+                        });
+                        //  alert(htm);
+                        $("#tablist").html("");
+                        $("#tabcontent").html("");
+                        $("#tablist").append(testli);
+
+                        $("#tabcontent").append(contentli);
+                        $("#tabcontent").append(input);
+                        $("#propertybyCate").html("");
+                        $("#propertybyCate").append(htm);
+                        $('#overbackgroud').hide();
+                    }
+                },
+                error: function () {
+
+                }
+
+            });
+
+        }
+        function SetCatalogPrimary(id) {
+
+            var SetCatalogPrimary = "#SetCatalogPrimary" + id;
+            $(SetCatalogPrimary).remove();
+            $(".Primarycs").remove();
+            if ($('#CatalogMain').val() != 0) {
+                var mnuid = $('#CatalogMain').val();
+                var catalogProducts = "#catalogProducts" + mnuid;
+                $(catalogProducts).append("<a id=\"SetCatalogPrimary" + mnuid + "\" style=\"color:#428bca;margin-left:10px;\" onclick=\"SetCatalogPrimary(" + mnuid + ")\">Set Primary</a>");
+            }
+            var catalogProducts = "#catalogProducts" + id;
+            $(catalogProducts).append("<span class=\"Primarycs\">Primary</span>");
+            $('#CatalogMain').val(id);
+        }
+        function GetProperty(id) {
+
+            $.ajax({
+                url: '@Url.Action("GetPropertyValueByProId","Product")',
+                data: {
+                    'proId': id
+                },
+                dataType: "json",
+                type: "POST",
+                traditional: true,
+                success: function (data, status) {
+                    if (data == "0") {
+                        alert("Lỗi");
+                        $('#overbackgroud').hide();
+                    }
+                    else {
+                        console.log(data);
+                        //$('#catelog').html("");
+                        $('#contentProperty').html("");
+                        $('#contentProperty').append(data);
+                        //$("#Pro" + id).html("");
+                        //$("#Pro" + id).append(data);
+                        $('#overbackgroud').hide();
+                    }
+                },
+                error: function () {
+
+                }
+
+            });
+        }
+        function GetValueParent(id) {
+            $('#overbackgroud').show();
+
+            $.ajax({
+                url: '@Url.Action("GetCatetagoryByParent","Product")',
+                data: {
+                    'cate': id
+                },
+                dataType: "json",
+                type: "POST",
+                traditional: true,
+                success: function (data, status) {
+                    if (data == "0") {
+                        alert("Lỗi");
+                        $('#overbackgroud').hide();
+                    }
+                    else {
+                        console.log(data);
+                        //$('#catelog').html("");
+                        if (data.HtmlCategory != "") {
+                            $('#catelog').append(data.HtmlCategory);
+                        }
+
+                        $('#overbackgroud').hide();
+                    }
+                },
+                error: function () {
+
+                }
+
+            });
+
+        }
+        function GetValueEditManuface(id) {
+            $.ajax({
+                url: '@Url.Action("GetManufaceByCategory","Product")',
+                data: {
+                    'cate': id
+                },
+                dataType: "json",
+                type: "POST",
+                traditional: true,
+                success: function (data, status) {
+                    if (data == "0") {
+                        alert("Lỗi");
+                        $('#overbackgroud').hide();
+                    }
+                    else {
+                        $('#ManufacturerId').html("");
+                        $('#ManufacturerId').append(data);
+                        $('#overbackgroud').hide();
+                    }
+                },
+                error: function () {
+
+                }
+
+            });
+
+        }
+        // gọi khi thêm sưa xoa ơ danh phân add nhà sản xuât vào danh mục
+        function loadtabl(id) {
+            $.ajax({
+                url: '@Url.Action("GetManuface", "CategoryProduct")',
+                data: {
+                    'id': id
+                },
+                dataType: "json",
+                type: "POST",
+                traditional: true,
+                success: function (data2, status2) {
+                    if (data2 == "0") {
+                        alert("Hệ thống đang cập nhật");
+                        $('#overbackgroud').hide();
+                    }
+                    else if (data2 == 2) {
+
+                        $('#catemanuface').html("");
+                        $('#catemanuface').append("<tr><td>0</td><td>Not results!</td><td></td></tr>");
+                        $('#overbackgroud').hide();
+                    }
+                    else {
+                        $('#catemanuface').html("");
+                        $('#catemanuface').append(data2);
+                        $('#overbackgroud').hide();
+                    }
+                },
+                error: function () {
+
+                }
+            });
+        }
+        function DeleteInbox() {
+            $('#overbackgroud').show();
+            var cat = $('#hidecate').val();
+            var yourArray = new Array();
+
+            $("input:checkbox[name=inbox]:checked").each(function () {
+                yourArray.push($(this).val());
+            });
+            if (yourArray.count < 0) {
+                alert('Vui lòng chọn thư cần xóa !');
+            } else {
+                $.ajax({
+                    url: '@Url.Action("DeleteCateManu", "CategoryProduct")',
+                    data: {
+                        'array': yourArray
+                    },
+                    dataType: "json",
+                    type: "POST",
+                    traditional: true,
+
+                    success: function (data) {
+                        if (data == 0) {
+                            alert("Hệ thống đang cập nhật");
+                            $('#overbackgroud').hide();
+                        } else if (data == 2) {
+                            alert("Vui lòng tích chọn");
+                            $('#overbackgroud').hide();
+                        } else {
+                            loadtabl(cat);
+                            $('#overbackgroud').hide();
+                        }
+                    },
+                    error: function () {
+                        alert("Xin lỗi ! Hệ thống đang cập nhật vui long thực hiện lại sau.");
+                        $('#overbackgroud').hide();
+                    }
+                });
+            }
+
+        }
+
+        $(document).ready(function () {
+            var id = $('#categoryproduct').val();
+            $.ajax({
+                url: '/Member/GetListParent',
+                data: {
+                    'id': id
+                },
+                dataType: 'json',
+                Type: 'POST',
+                traditional: true,
+                success: function (data) {
+
+                    $.each(data, function (key, value) {
+                        var idd = "item-" + value;
+                        $("#" + idd + "").attr("checked", "checked");
+                    });
+                },
+                error: function (data) {
+
+                }
+            });
+        });
+        function SetvaluProperty(idvale, idproperty) {
+
+            if ($('#optionsRadiosInline' + idvale).is(":checked")) {
+
+                var str = $('#proprerty' + idproperty).val();
+                var vl = $('#optionsRadiosInline' + idvale).val();
+                vl = idvale + "#" + vl;
+                str = str + "|" + vl;
+                $('#proprerty' + idproperty).val(str);
+            }
+            else if ($('#optionsRadiosInline' + idvale).is(":not(:checked)")) {
+                var str1 = $('#proprerty' + idproperty).val();
+                //alert(str1);
+                var vl1 = "|" + $('#optionsRadiosInline' + idvale).val();
+                vl1 = idvale + "#" + vl1;
+                str1 = str1.replace(vl1, "");
+                $('#proprerty' + idproperty).val(str1);
+            }
+        }
+        function beginPaging(args) {
+            // Animatek
+            $('#grid-list').fadeOut('normal');
+        }
+
+        function successPaging() {
+            // Animate
+            $('#grid-list').fadeIn('normal');
+            $('a').tooltip();
+        }
+
+        function failurePaging() {
+            alert("Could not retrieve list.");
+        }
+    </script>
+    <style>
+        .tab-content {
+            margin-bottom: 23px;
+            margin-top: 12px;
+        }
+
+        .selectcate {
+            color: blue;
+        }
+    </style>
+
+    <script type="text/javascript">
+        var setVAL = CKEDITOR.replace('description', { height: 500 });
+        CKFinder.setupCKEditor(setVAL, '/Content/css/ckfinder/');
+
+        var newCKEdit = new CKEDITOR.replace('summary', { height: 170 });
+
+                                                                                                                                                                                                                                                    //var setPromotion = CKEDITOR.replace('Promotion', { height: 500 });
+                                                                                                                                                                                                                                                    //CKFinder.setupCKEditor(setPromotion, '/Content/css/ckfinder/');
+
+                                                                                                                                                                                                                                                    //var setLandingPage = CKEDITOR.replace('landingPage', { height: 500 });
+                                                                                                                                                                                                                                                    //CKFinder.setupCKEditor(setLandingPage, '/Content/css/ckfinder/');
+
+                                                                                                                                                                                                                                                                                                                                                                                            //var setModel = CKEDITOR.replace('Model', { height: 170 });
+                                                                                                                                                                                                                                                                                                                                                                                            //CKFinder.setupCKEditor(setModel, '/Content/css/ckfinder/');
+    </script>
+    <script type="text/javascript" src="~/Content/Csspublic/js/Controller/AdminController.js"></script>

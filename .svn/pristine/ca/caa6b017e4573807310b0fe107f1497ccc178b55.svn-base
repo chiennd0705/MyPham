@@ -1,0 +1,1024 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="database_ToolAruaModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="DemoEntities" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="modules" EntityType="database_ToolAruaModel.module" />
+    <EntitySet Name="QLKhachHang_QuanLyGiaoDich" EntityType="database_ToolAruaModel.QLKhachHang_QuanLyGiaoDich" />
+    <EntitySet Name="QLKhachHang_QuanLyKhachHang" EntityType="database_ToolAruaModel.QLKhachHang_QuanLyKhachHang" />
+    <EntitySet Name="QLKhachHang_QuanLyNganhNghe" EntityType="database_ToolAruaModel.QLKhachHang_QuanLyNganhNghe" />
+    <EntitySet Name="QLNS_QuanLyChamCong" EntityType="database_ToolAruaModel.QLNS_QuanLyChamCong" />
+    <EntitySet Name="QLNS_QuanLyChucVu" EntityType="database_ToolAruaModel.QLNS_QuanLyChucVu" />
+    <EntitySet Name="QLNS_QuanLyHopDong" EntityType="database_ToolAruaModel.QLNS_QuanLyHopDong" />
+    <EntitySet Name="QLNS_QuanLyKhenThuong" EntityType="database_ToolAruaModel.QLNS_QuanLyKhenThuong" />
+    <EntitySet Name="QLNS_QuanLyNhanVien" EntityType="database_ToolAruaModel.QLNS_QuanLyNhanVien" />
+    <EntitySet Name="QLNS_QuanLyPhongBan" EntityType="database_ToolAruaModel.QLNS_QuanLyPhongBan" />
+    <EntitySet Name="QLNS_QuanLyThoiGianHopDong" EntityType="database_ToolAruaModel.QLNS_QuanLyThoiGianHopDong" />
+    <EntitySet Name="QLNS_QuanLyTrinhDo" EntityType="database_ToolAruaModel.QLNS_QuanLyTrinhDo" />
+    <EntitySet Name="QLTaiChinh_ChuyenKhoan" EntityType="database_ToolAruaModel.QLTaiChinh_ChuyenKhoan" />
+    <EntitySet Name="QLTaiChinh_DanhMucChi" EntityType="database_ToolAruaModel.QLTaiChinh_DanhMucChi" />
+    <EntitySet Name="QLTaiChinh_QuanLychi" EntityType="database_ToolAruaModel.QLTaiChinh_QuanLychi" />
+    <EntitySet Name="QLTaiChinh_QuanLyDanhMucThu" EntityType="database_ToolAruaModel.QLTaiChinh_QuanLyDanhMucThu" />
+    <EntitySet Name="QLTaiChinh_QuanLyTaiKhoan" EntityType="database_ToolAruaModel.QLTaiChinh_QuanLyTaiKhoan" />
+    <EntitySet Name="QLTaiChinh_QuanLyThu" EntityType="database_ToolAruaModel.QLTaiChinh_QuanLyThu" />
+    <EntitySet Name="QLTaiSan_QuanLyLDanhMuc" EntityType="database_ToolAruaModel.QLTaiSan_QuanLyLDanhMuc" />
+    <EntitySet Name="QLTaiSan_QuanLyThongTinTaiSan" EntityType="database_ToolAruaModel.QLTaiSan_QuanLyThongTinTaiSan" />
+    <EntitySet Name="QLTaiSan_QuanLyTinhTrang" EntityType="database_ToolAruaModel.QLTaiSan_QuanLyTinhTrang" />
+    <EntitySet Name="roles" EntityType="database_ToolAruaModel.role" />
+    <EntitySet Name="role_module" EntityType="database_ToolAruaModel.role_module" />
+    <EntitySet Name="sysdiagrams" EntityType="database_ToolAruaModel.sysdiagram" />
+    <EntitySet Name="users" EntityType="database_ToolAruaModel.user" />
+    <EntitySet Name="user_group" EntityType="database_ToolAruaModel.user_group" />
+    <EntitySet Name="user_group_role" EntityType="database_ToolAruaModel.user_group_role" />
+    <EntitySet Name="user_profile" EntityType="database_ToolAruaModel.user_profile" />
+    <EntitySet Name="user_usergroup" EntityType="database_ToolAruaModel.user_usergroup" />
+    <AssociationSet Name="FK_role_module_module" Association="database_ToolAruaModel.FK_role_module_module">
+      <End Role="module" EntitySet="modules" />
+      <End Role="role_module" EntitySet="role_module" />
+    </AssociationSet>
+    <AssociationSet Name="FK_QLKhachHang_QuanLyGiaoDich_QLKhachHang_QuanLyKhachHang" Association="database_ToolAruaModel.FK_QLKhachHang_QuanLyGiaoDich_QLKhachHang_QuanLyKhachHang">
+      <End Role="QLKhachHang_QuanLyKhachHang" EntitySet="QLKhachHang_QuanLyKhachHang" />
+      <End Role="QLKhachHang_QuanLyGiaoDich" EntitySet="QLKhachHang_QuanLyGiaoDich" />
+    </AssociationSet>
+    <AssociationSet Name="FK_QLKhachHang_QuanLyKhachHang_QLKhachHang_QuanLyNganhNghe" Association="database_ToolAruaModel.FK_QLKhachHang_QuanLyKhachHang_QLKhachHang_QuanLyNganhNghe">
+      <End Role="QLKhachHang_QuanLyNganhNghe" EntitySet="QLKhachHang_QuanLyNganhNghe" />
+      <End Role="QLKhachHang_QuanLyKhachHang" EntitySet="QLKhachHang_QuanLyKhachHang" />
+    </AssociationSet>
+    <AssociationSet Name="FK_QLNS_QuanLyChamCong_QLNS_QuanLyNhanVien" Association="database_ToolAruaModel.FK_QLNS_QuanLyChamCong_QLNS_QuanLyNhanVien">
+      <End Role="QLNS_QuanLyNhanVien" EntitySet="QLNS_QuanLyNhanVien" />
+      <End Role="QLNS_QuanLyChamCong" EntitySet="QLNS_QuanLyChamCong" />
+    </AssociationSet>
+    <AssociationSet Name="FK_QLNS_QuanLyNhanVien_QLNS_QuanLyChucVu" Association="database_ToolAruaModel.FK_QLNS_QuanLyNhanVien_QLNS_QuanLyChucVu">
+      <End Role="QLNS_QuanLyChucVu" EntitySet="QLNS_QuanLyChucVu" />
+      <End Role="QLNS_QuanLyNhanVien" EntitySet="QLNS_QuanLyNhanVien" />
+    </AssociationSet>
+    <AssociationSet Name="FK_QLNS_QuanLyHopDong_QLNS_QuanLyNhanVien" Association="database_ToolAruaModel.FK_QLNS_QuanLyHopDong_QLNS_QuanLyNhanVien">
+      <End Role="QLNS_QuanLyNhanVien" EntitySet="QLNS_QuanLyNhanVien" />
+      <End Role="QLNS_QuanLyHopDong" EntitySet="QLNS_QuanLyHopDong" />
+    </AssociationSet>
+    <AssociationSet Name="FK_QLNS_QuanLyHopDong_QLNS_QuanLyNhanVien1" Association="database_ToolAruaModel.FK_QLNS_QuanLyHopDong_QLNS_QuanLyNhanVien1">
+      <End Role="QLNS_QuanLyNhanVien" EntitySet="QLNS_QuanLyNhanVien" />
+      <End Role="QLNS_QuanLyHopDong" EntitySet="QLNS_QuanLyHopDong" />
+    </AssociationSet>
+    <AssociationSet Name="FK_QLNS_QuanLyHopDong_QLNS_QuanLyNhanVien2" Association="database_ToolAruaModel.FK_QLNS_QuanLyHopDong_QLNS_QuanLyNhanVien2">
+      <End Role="QLNS_QuanLyNhanVien" EntitySet="QLNS_QuanLyNhanVien" />
+      <End Role="QLNS_QuanLyHopDong" EntitySet="QLNS_QuanLyHopDong" />
+    </AssociationSet>
+    <AssociationSet Name="FK_QLNS_QuanLyHopDong_QLNS_QuanLyThoiGianHopDong" Association="database_ToolAruaModel.FK_QLNS_QuanLyHopDong_QLNS_QuanLyThoiGianHopDong">
+      <End Role="QLNS_QuanLyThoiGianHopDong" EntitySet="QLNS_QuanLyThoiGianHopDong" />
+      <End Role="QLNS_QuanLyHopDong" EntitySet="QLNS_QuanLyHopDong" />
+    </AssociationSet>
+    <AssociationSet Name="FK_QLNS_QuanLyKhenThuong_QLNS_QuanLyNhanVien" Association="database_ToolAruaModel.FK_QLNS_QuanLyKhenThuong_QLNS_QuanLyNhanVien">
+      <End Role="QLNS_QuanLyNhanVien" EntitySet="QLNS_QuanLyNhanVien" />
+      <End Role="QLNS_QuanLyKhenThuong" EntitySet="QLNS_QuanLyKhenThuong" />
+    </AssociationSet>
+    <AssociationSet Name="FK_QLNS_QuanLyNhanVien_QLNS_QuanLyPhongBan" Association="database_ToolAruaModel.FK_QLNS_QuanLyNhanVien_QLNS_QuanLyPhongBan">
+      <End Role="QLNS_QuanLyPhongBan" EntitySet="QLNS_QuanLyPhongBan" />
+      <End Role="QLNS_QuanLyNhanVien" EntitySet="QLNS_QuanLyNhanVien" />
+    </AssociationSet>
+    <AssociationSet Name="FK_QLNS_QuanLyNhanVien_QLNS_QuanLyTrinhDo" Association="database_ToolAruaModel.FK_QLNS_QuanLyNhanVien_QLNS_QuanLyTrinhDo">
+      <End Role="QLNS_QuanLyTrinhDo" EntitySet="QLNS_QuanLyTrinhDo" />
+      <End Role="QLNS_QuanLyNhanVien" EntitySet="QLNS_QuanLyNhanVien" />
+    </AssociationSet>
+    <AssociationSet Name="FK_QLTaiSan_QuanLyThongTinTaiSan_QLNS_QuanLyPhongBan" Association="database_ToolAruaModel.FK_QLTaiSan_QuanLyThongTinTaiSan_QLNS_QuanLyPhongBan">
+      <End Role="QLNS_QuanLyPhongBan" EntitySet="QLNS_QuanLyPhongBan" />
+      <End Role="QLTaiSan_QuanLyThongTinTaiSan" EntitySet="QLTaiSan_QuanLyThongTinTaiSan" />
+    </AssociationSet>
+    <AssociationSet Name="FK_QLTaiChinh_ChuyenKhoan_QLTaiChinh_QuanLyTaiKhoan" Association="database_ToolAruaModel.FK_QLTaiChinh_ChuyenKhoan_QLTaiChinh_QuanLyTaiKhoan">
+      <End Role="QLTaiChinh_QuanLyTaiKhoan" EntitySet="QLTaiChinh_QuanLyTaiKhoan" />
+      <End Role="QLTaiChinh_ChuyenKhoan" EntitySet="QLTaiChinh_ChuyenKhoan" />
+    </AssociationSet>
+    <AssociationSet Name="FK_QLTaiChinh_ChuyenKhoan_QLTaiChinh_QuanLyTaiKhoan1" Association="database_ToolAruaModel.FK_QLTaiChinh_ChuyenKhoan_QLTaiChinh_QuanLyTaiKhoan1">
+      <End Role="QLTaiChinh_QuanLyTaiKhoan" EntitySet="QLTaiChinh_QuanLyTaiKhoan" />
+      <End Role="QLTaiChinh_ChuyenKhoan" EntitySet="QLTaiChinh_ChuyenKhoan" />
+    </AssociationSet>
+    <AssociationSet Name="FK_QLTaiChinh_QuanLychi_QLTaiChinh_DanhMucChi" Association="database_ToolAruaModel.FK_QLTaiChinh_QuanLychi_QLTaiChinh_DanhMucChi">
+      <End Role="QLTaiChinh_DanhMucChi" EntitySet="QLTaiChinh_DanhMucChi" />
+      <End Role="QLTaiChinh_QuanLychi" EntitySet="QLTaiChinh_QuanLychi" />
+    </AssociationSet>
+    <AssociationSet Name="FK_QLTaiChinh_QuanLychi_QLTaiChinh_QuanLyTaiKhoan" Association="database_ToolAruaModel.FK_QLTaiChinh_QuanLychi_QLTaiChinh_QuanLyTaiKhoan">
+      <End Role="QLTaiChinh_QuanLyTaiKhoan" EntitySet="QLTaiChinh_QuanLyTaiKhoan" />
+      <End Role="QLTaiChinh_QuanLychi" EntitySet="QLTaiChinh_QuanLychi" />
+    </AssociationSet>
+    <AssociationSet Name="FK_QLTaiChinh_QuanLyThu_QLTaiChinh_QuanLyDanhMucThu" Association="database_ToolAruaModel.FK_QLTaiChinh_QuanLyThu_QLTaiChinh_QuanLyDanhMucThu">
+      <End Role="QLTaiChinh_QuanLyDanhMucThu" EntitySet="QLTaiChinh_QuanLyDanhMucThu" />
+      <End Role="QLTaiChinh_QuanLyThu" EntitySet="QLTaiChinh_QuanLyThu" />
+    </AssociationSet>
+    <AssociationSet Name="FK_QLTaiChinh_QuanLyThu_QLTaiChinh_QuanLyTaiKhoan" Association="database_ToolAruaModel.FK_QLTaiChinh_QuanLyThu_QLTaiChinh_QuanLyTaiKhoan">
+      <End Role="QLTaiChinh_QuanLyTaiKhoan" EntitySet="QLTaiChinh_QuanLyTaiKhoan" />
+      <End Role="QLTaiChinh_QuanLyThu" EntitySet="QLTaiChinh_QuanLyThu" />
+    </AssociationSet>
+    <AssociationSet Name="FK_QLTaiSan_QuanLyThongTinTaiSan_QLTaiSan_QuanLyLDanhMuc" Association="database_ToolAruaModel.FK_QLTaiSan_QuanLyThongTinTaiSan_QLTaiSan_QuanLyLDanhMuc">
+      <End Role="QLTaiSan_QuanLyLDanhMuc" EntitySet="QLTaiSan_QuanLyLDanhMuc" />
+      <End Role="QLTaiSan_QuanLyThongTinTaiSan" EntitySet="QLTaiSan_QuanLyThongTinTaiSan" />
+    </AssociationSet>
+    <AssociationSet Name="FK_QLTaiSan_QuanLyThongTinTaiSan_QLTaiSan_QuanLyTinhTrang" Association="database_ToolAruaModel.FK_QLTaiSan_QuanLyThongTinTaiSan_QLTaiSan_QuanLyTinhTrang">
+      <End Role="QLTaiSan_QuanLyTinhTrang" EntitySet="QLTaiSan_QuanLyTinhTrang" />
+      <End Role="QLTaiSan_QuanLyThongTinTaiSan" EntitySet="QLTaiSan_QuanLyThongTinTaiSan" />
+    </AssociationSet>
+    <AssociationSet Name="FK_role_module_role" Association="database_ToolAruaModel.FK_role_module_role">
+      <End Role="role" EntitySet="roles" />
+      <End Role="role_module" EntitySet="role_module" />
+    </AssociationSet>
+    <AssociationSet Name="FK_user_group_role_role" Association="database_ToolAruaModel.FK_user_group_role_role">
+      <End Role="role" EntitySet="roles" />
+      <End Role="user_group_role" EntitySet="user_group_role" />
+    </AssociationSet>
+    <AssociationSet Name="FK_user_profile_user" Association="database_ToolAruaModel.FK_user_profile_user">
+      <End Role="user" EntitySet="users" />
+      <End Role="user_profile" EntitySet="user_profile" />
+    </AssociationSet>
+    <AssociationSet Name="FK_user_usergroup_user" Association="database_ToolAruaModel.FK_user_usergroup_user">
+      <End Role="user" EntitySet="users" />
+      <End Role="user_usergroup" EntitySet="user_usergroup" />
+    </AssociationSet>
+    <AssociationSet Name="FK_user_group_role_user_group" Association="database_ToolAruaModel.FK_user_group_role_user_group">
+      <End Role="user_group" EntitySet="user_group" />
+      <End Role="user_group_role" EntitySet="user_group_role" />
+    </AssociationSet>
+    <AssociationSet Name="FK_user_usergroup_user_group" Association="database_ToolAruaModel.FK_user_usergroup_user_group">
+      <End Role="user_group" EntitySet="user_group" />
+      <End Role="user_usergroup" EntitySet="user_usergroup" />
+    </AssociationSet>
+    <FunctionImport Name="GetAllModuleByUserId" ReturnType="Collection(database_ToolAruaModel.GetAllModuleByUserId_Result)">
+      <Parameter Name="UserId" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="GetAllRolesByUserId" ReturnType="Collection(database_ToolAruaModel.GetAllRolesByUserId_Result)">
+      <Parameter Name="UserId" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="GetUserByUserName" ReturnType="Collection(database_ToolAruaModel.GetUserByUserName_Result)">
+      <Parameter Name="UserName" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="GetUserByUserNameAndPassword" ReturnType="Collection(database_ToolAruaModel.GetUserByUserNameAndPassword_Result)">
+      <Parameter Name="UserName" Mode="In" Type="String" />
+      <Parameter Name="Password" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SearchVoucherByKey">
+      <Parameter Name="key" Mode="In" Type="String" />
+      <Parameter Name="voucher_type" Mode="In" Type="Int64" />
+      <Parameter Name="location" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="SearchVoucherByKey1">
+      <Parameter Name="key" Mode="In" Type="String" />
+      <Parameter Name="voucher_type" Mode="In" Type="Int64" />
+      <Parameter Name="location" Mode="In" Type="Int64" />
+    </FunctionImport>
+  </EntityContainer>
+  <EntityType Name="module">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="code" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="name" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+    <Property Name="ws_method" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+    <Property Name="web_method" Type="String" MaxLength="4000" Unicode="true" FixedLength="false" />
+    <Property Name="order" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="role_module" Relationship="database_ToolAruaModel.FK_role_module_module" FromRole="module" ToRole="role_module" />
+  </EntityType>
+  <EntityType Name="QLKhachHang_QuanLyGiaoDich">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="TenGiaoDich" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="NgayGiaoDich" Type="DateTime" Precision="3" />
+    <Property Name="KhachHangID" Type="Int64" />
+    <Property Name="DiaDiemGiaoDich" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+    <Property Name="HinhThucGiaoDich" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="MoTa" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="UserID" Type="Int64" />
+    <Property Name="PortalID" Type="Int64" />
+    <NavigationProperty Name="QLKhachHang_QuanLyKhachHang" Relationship="database_ToolAruaModel.FK_QLKhachHang_QuanLyGiaoDich_QLKhachHang_QuanLyKhachHang" FromRole="QLKhachHang_QuanLyGiaoDich" ToRole="QLKhachHang_QuanLyKhachHang" />
+  </EntityType>
+  <EntityType Name="QLKhachHang_QuanLyKhachHang">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="TenCoQuan" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="TenDayDu" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+    <Property Name="Diachi" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+    <Property Name="DienThoai" Type="String" MaxLength="12" Unicode="true" FixedLength="true" />
+    <Property Name="Fax" Type="String" MaxLength="12" Unicode="true" FixedLength="true" />
+    <Property Name="Email" Type="String" MaxLength="20" Unicode="true" FixedLength="true" />
+    <Property Name="Website" Type="String" MaxLength="40" Unicode="true" FixedLength="true" />
+    <Property Name="Masothue" Type="String" MaxLength="15" Unicode="true" FixedLength="true" />
+    <Property Name="NganhNgheID" Type="Int64" />
+    <Property Name="DanhGia" Type="String" MaxLength="300" Unicode="true" FixedLength="false" />
+    <Property Name="ThongtinGioiThieu" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="UserID" Type="Int64" />
+    <Property Name="PortalID" Type="Int64" />
+    <NavigationProperty Name="QLKhachHang_QuanLyGiaoDich" Relationship="database_ToolAruaModel.FK_QLKhachHang_QuanLyGiaoDich_QLKhachHang_QuanLyKhachHang" FromRole="QLKhachHang_QuanLyKhachHang" ToRole="QLKhachHang_QuanLyGiaoDich" />
+    <NavigationProperty Name="QLKhachHang_QuanLyNganhNghe" Relationship="database_ToolAruaModel.FK_QLKhachHang_QuanLyKhachHang_QLKhachHang_QuanLyNganhNghe" FromRole="QLKhachHang_QuanLyKhachHang" ToRole="QLKhachHang_QuanLyNganhNghe" />
+  </EntityType>
+  <EntityType Name="QLKhachHang_QuanLyNganhNghe">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" />
+    <Property Name="TenNganhNghe" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+    <Property Name="MoTa" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="UserID" Type="Int64" />
+    <Property Name="PortalID" Type="Int64" />
+    <NavigationProperty Name="QLKhachHang_QuanLyKhachHang" Relationship="database_ToolAruaModel.FK_QLKhachHang_QuanLyKhachHang_QLKhachHang_QuanLyNganhNghe" FromRole="QLKhachHang_QuanLyNganhNghe" ToRole="QLKhachHang_QuanLyKhachHang" />
+  </EntityType>
+  <EntityType Name="QLNS_QuanLyChamCong">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="NhanvienID" Type="Int64" />
+    <Property Name="TongCongTrongThang" Type="String" MaxLength="10" Unicode="true" FixedLength="true" />
+    <Property Name="SoNgayNghiLe" Type="Double" />
+    <Property Name="SoNgayNghiPhep" Type="Double" />
+    <Property Name="soNgayKhongPhep" Type="Double" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="MoTa" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="UserID" Type="Int64" />
+    <Property Name="PortalID" Type="Int64" />
+    <NavigationProperty Name="QLNS_QuanLyNhanVien" Relationship="database_ToolAruaModel.FK_QLNS_QuanLyChamCong_QLNS_QuanLyNhanVien" FromRole="QLNS_QuanLyChamCong" ToRole="QLNS_QuanLyNhanVien" />
+  </EntityType>
+  <EntityType Name="QLNS_QuanLyChucVu">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="MaChucVu" Type="String" MaxLength="50" Unicode="true" FixedLength="true" />
+    <Property Name="TenChucVu" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+    <Property Name="Mota" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="UserID" Type="Int64" />
+    <Property Name="PortalID" Type="Int64" />
+    <NavigationProperty Name="QLNS_QuanLyNhanVien" Relationship="database_ToolAruaModel.FK_QLNS_QuanLyNhanVien_QLNS_QuanLyChucVu" FromRole="QLNS_QuanLyChucVu" ToRole="QLNS_QuanLyNhanVien" />
+  </EntityType>
+  <EntityType Name="QLNS_QuanLyHopDong">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="MaHopDong" Type="String" MaxLength="50" Unicode="true" FixedLength="true" />
+    <Property Name="NhanVienID" Type="Int64" />
+    <Property Name="TenHopDong" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+    <Property Name="NgayKyHD" Type="DateTime" Precision="3" />
+    <Property Name="NgayKetThuc" Type="DateTime" Precision="3" />
+    <Property Name="Luong" Type="Int64" />
+    <Property Name="PhuCap" Type="Int64" />
+    <Property Name="ThoigianHopDongID" Type="Int64" />
+    <Property Name="NguoiKyID" Type="Int64" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="Mota" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="HinhThucTraLuong" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+    <Property Name="UserID" Type="Int64" />
+    <Property Name="PortalID" Type="Int64" />
+    <NavigationProperty Name="QLNS_QuanLyNhanVien" Relationship="database_ToolAruaModel.FK_QLNS_QuanLyHopDong_QLNS_QuanLyNhanVien" FromRole="QLNS_QuanLyHopDong" ToRole="QLNS_QuanLyNhanVien" />
+    <NavigationProperty Name="QLNS_QuanLyNhanVien1" Relationship="database_ToolAruaModel.FK_QLNS_QuanLyHopDong_QLNS_QuanLyNhanVien1" FromRole="QLNS_QuanLyHopDong" ToRole="QLNS_QuanLyNhanVien" />
+    <NavigationProperty Name="QLNS_QuanLyNhanVien2" Relationship="database_ToolAruaModel.FK_QLNS_QuanLyHopDong_QLNS_QuanLyNhanVien2" FromRole="QLNS_QuanLyHopDong" ToRole="QLNS_QuanLyNhanVien" />
+    <NavigationProperty Name="QLNS_QuanLyThoiGianHopDong" Relationship="database_ToolAruaModel.FK_QLNS_QuanLyHopDong_QLNS_QuanLyThoiGianHopDong" FromRole="QLNS_QuanLyHopDong" ToRole="QLNS_QuanLyThoiGianHopDong" />
+  </EntityType>
+  <EntityType Name="QLNS_QuanLyKhenThuong">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="NhanVienID" Type="Int64" />
+    <Property Name="LyDo" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="MoTa" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="UserID" Type="Int64" />
+    <Property Name="PortalID" Type="Int64" />
+    <NavigationProperty Name="QLNS_QuanLyNhanVien" Relationship="database_ToolAruaModel.FK_QLNS_QuanLyKhenThuong_QLNS_QuanLyNhanVien" FromRole="QLNS_QuanLyKhenThuong" ToRole="QLNS_QuanLyNhanVien" />
+  </EntityType>
+  <EntityType Name="QLNS_QuanLyNhanVien">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="MaNV" Type="String" MaxLength="50" Unicode="true" FixedLength="true" />
+    <Property Name="PhongBanID" Type="Int64" />
+    <Property Name="TenNV" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+    <Property Name="NgaySinh" Type="DateTime" Precision="3" />
+    <Property Name="GioiTinh" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+    <Property Name="SoCMND" Type="String" MaxLength="20" Unicode="true" FixedLength="true" />
+    <Property Name="NgayCapCMND" Type="DateTime" Precision="3" />
+    <Property Name="NoiCapCMND" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+    <Property Name="AnhDaiDien" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+    <Property Name="DiaChi" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+    <Property Name="NguyenQuan" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+    <Property Name="SoDienThoai" Type="String" MaxLength="12" Unicode="true" FixedLength="true" />
+    <Property Name="TTHonNhan" Type="Boolean" />
+    <Property Name="MaSoBHXH" Type="String" MaxLength="20" Unicode="true" FixedLength="true" />
+    <Property Name="NgayCapBHXH" Type="DateTime" Precision="3" />
+    <Property Name="Email" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="ChucvuID" Type="Int64" />
+    <Property Name="TrinhDoID" Type="Int64" />
+    <Property Name="NgayDiLam" Type="DateTime" Precision="3" />
+    <Property Name="NgayNghiViec" Type="DateTime" Precision="3" />
+    <Property Name="TinhTrangNghiViec" Type="Boolean" />
+    <Property Name="ThongtinCaNhan" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="UserID" Type="Int64" />
+    <Property Name="PortalID" Type="Int64" />
+    <NavigationProperty Name="QLNS_QuanLyChamCong" Relationship="database_ToolAruaModel.FK_QLNS_QuanLyChamCong_QLNS_QuanLyNhanVien" FromRole="QLNS_QuanLyNhanVien" ToRole="QLNS_QuanLyChamCong" />
+    <NavigationProperty Name="QLNS_QuanLyChucVu" Relationship="database_ToolAruaModel.FK_QLNS_QuanLyNhanVien_QLNS_QuanLyChucVu" FromRole="QLNS_QuanLyNhanVien" ToRole="QLNS_QuanLyChucVu" />
+    <NavigationProperty Name="QLNS_QuanLyHopDong" Relationship="database_ToolAruaModel.FK_QLNS_QuanLyHopDong_QLNS_QuanLyNhanVien" FromRole="QLNS_QuanLyNhanVien" ToRole="QLNS_QuanLyHopDong" />
+    <NavigationProperty Name="QLNS_QuanLyHopDong1" Relationship="database_ToolAruaModel.FK_QLNS_QuanLyHopDong_QLNS_QuanLyNhanVien1" FromRole="QLNS_QuanLyNhanVien" ToRole="QLNS_QuanLyHopDong" />
+    <NavigationProperty Name="QLNS_QuanLyHopDong2" Relationship="database_ToolAruaModel.FK_QLNS_QuanLyHopDong_QLNS_QuanLyNhanVien2" FromRole="QLNS_QuanLyNhanVien" ToRole="QLNS_QuanLyHopDong" />
+    <NavigationProperty Name="QLNS_QuanLyKhenThuong" Relationship="database_ToolAruaModel.FK_QLNS_QuanLyKhenThuong_QLNS_QuanLyNhanVien" FromRole="QLNS_QuanLyNhanVien" ToRole="QLNS_QuanLyKhenThuong" />
+    <NavigationProperty Name="QLNS_QuanLyPhongBan" Relationship="database_ToolAruaModel.FK_QLNS_QuanLyNhanVien_QLNS_QuanLyPhongBan" FromRole="QLNS_QuanLyNhanVien" ToRole="QLNS_QuanLyPhongBan" />
+    <NavigationProperty Name="QLNS_QuanLyTrinhDo" Relationship="database_ToolAruaModel.FK_QLNS_QuanLyNhanVien_QLNS_QuanLyTrinhDo" FromRole="QLNS_QuanLyNhanVien" ToRole="QLNS_QuanLyTrinhDo" />
+  </EntityType>
+  <EntityType Name="QLNS_QuanLyPhongBan">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" />
+    <Property Name="MaPhongBan" Type="String" MaxLength="50" Unicode="true" FixedLength="true" />
+    <Property Name="TenPhongBan" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+    <Property Name="MoTa" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="UserID" Type="Int64" />
+    <Property Name="PortalID" Type="Int64" />
+    <NavigationProperty Name="QLNS_QuanLyNhanVien" Relationship="database_ToolAruaModel.FK_QLNS_QuanLyNhanVien_QLNS_QuanLyPhongBan" FromRole="QLNS_QuanLyPhongBan" ToRole="QLNS_QuanLyNhanVien" />
+    <NavigationProperty Name="QLTaiSan_QuanLyThongTinTaiSan" Relationship="database_ToolAruaModel.FK_QLTaiSan_QuanLyThongTinTaiSan_QLNS_QuanLyPhongBan" FromRole="QLNS_QuanLyPhongBan" ToRole="QLTaiSan_QuanLyThongTinTaiSan" />
+  </EntityType>
+  <EntityType Name="QLNS_QuanLyThoiGianHopDong">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="ThoiGianHopDong" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="Mota" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="UserID" Type="Int64" />
+    <Property Name="PortalID" Type="Int64" />
+    <NavigationProperty Name="QLNS_QuanLyHopDong" Relationship="database_ToolAruaModel.FK_QLNS_QuanLyHopDong_QLNS_QuanLyThoiGianHopDong" FromRole="QLNS_QuanLyThoiGianHopDong" ToRole="QLNS_QuanLyHopDong" />
+  </EntityType>
+  <EntityType Name="QLNS_QuanLyTrinhDo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="MaTrinhDo" Type="String" MaxLength="50" Unicode="true" FixedLength="true" />
+    <Property Name="TenTrinhDo" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+    <Property Name="Mota" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="UserID" Type="Int64" />
+    <Property Name="PortalID" Type="Int64" />
+    <NavigationProperty Name="QLNS_QuanLyNhanVien" Relationship="database_ToolAruaModel.FK_QLNS_QuanLyNhanVien_QLNS_QuanLyTrinhDo" FromRole="QLNS_QuanLyTrinhDo" ToRole="QLNS_QuanLyNhanVien" />
+  </EntityType>
+  <EntityType Name="QLTaiChinh_ChuyenKhoan">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="TaiKhoanChuyenID" Type="Int64" />
+    <Property Name="TaiKhoanNhanID" Type="Int64" />
+    <Property Name="Sotien" Type="Double" />
+    <Property Name="NgayChuyen" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="UserID" Type="Int64" />
+    <Property Name="PortalID" Type="Int64" />
+    <Property Name="MoTa" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="QLTaiChinh_QuanLyTaiKhoan" Relationship="database_ToolAruaModel.FK_QLTaiChinh_ChuyenKhoan_QLTaiChinh_QuanLyTaiKhoan" FromRole="QLTaiChinh_ChuyenKhoan" ToRole="QLTaiChinh_QuanLyTaiKhoan" />
+    <NavigationProperty Name="QLTaiChinh_QuanLyTaiKhoan1" Relationship="database_ToolAruaModel.FK_QLTaiChinh_ChuyenKhoan_QLTaiChinh_QuanLyTaiKhoan1" FromRole="QLTaiChinh_ChuyenKhoan" ToRole="QLTaiChinh_QuanLyTaiKhoan" />
+  </EntityType>
+  <EntityType Name="QLTaiChinh_DanhMucChi">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="TenDanhMucChi" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="MoTa" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="UserID" Type="Int64" />
+    <Property Name="PortalID" Type="Int64" />
+    <NavigationProperty Name="QLTaiChinh_QuanLychi" Relationship="database_ToolAruaModel.FK_QLTaiChinh_QuanLychi_QLTaiChinh_DanhMucChi" FromRole="QLTaiChinh_DanhMucChi" ToRole="QLTaiChinh_QuanLychi" />
+  </EntityType>
+  <EntityType Name="QLTaiChinh_QuanLychi">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="DanhMucChiID" Type="Int64" />
+    <Property Name="SoTienChi" Type="Double" />
+    <Property Name="TaiKhoanID" Type="Int64" />
+    <Property Name="NgayChi" Type="DateTime" Precision="3" />
+    <Property Name="ChiChoAi" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="MoTa" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="UserID" Type="Int64" />
+    <Property Name="PortalID" Type="Int64" />
+    <NavigationProperty Name="QLTaiChinh_DanhMucChi" Relationship="database_ToolAruaModel.FK_QLTaiChinh_QuanLychi_QLTaiChinh_DanhMucChi" FromRole="QLTaiChinh_QuanLychi" ToRole="QLTaiChinh_DanhMucChi" />
+    <NavigationProperty Name="QLTaiChinh_QuanLyTaiKhoan" Relationship="database_ToolAruaModel.FK_QLTaiChinh_QuanLychi_QLTaiChinh_QuanLyTaiKhoan" FromRole="QLTaiChinh_QuanLychi" ToRole="QLTaiChinh_QuanLyTaiKhoan" />
+  </EntityType>
+  <EntityType Name="QLTaiChinh_QuanLyDanhMucThu">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="TenDanhMucThu" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="MoTa" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="UserID" Type="Int64" />
+    <Property Name="PortalID" Type="Int64" />
+    <NavigationProperty Name="QLTaiChinh_QuanLyThu" Relationship="database_ToolAruaModel.FK_QLTaiChinh_QuanLyThu_QLTaiChinh_QuanLyDanhMucThu" FromRole="QLTaiChinh_QuanLyDanhMucThu" ToRole="QLTaiChinh_QuanLyThu" />
+  </EntityType>
+  <EntityType Name="QLTaiChinh_QuanLyTaiKhoan">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="TenTaiKhoan" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="SoTien" Type="Double" />
+    <Property Name="MoTa" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="UserID" Type="Int64" />
+    <Property Name="PortalID" Type="Int64" />
+    <Property Name="DanhMucID" Type="Int64" />
+    <NavigationProperty Name="QLTaiChinh_ChuyenKhoan" Relationship="database_ToolAruaModel.FK_QLTaiChinh_ChuyenKhoan_QLTaiChinh_QuanLyTaiKhoan" FromRole="QLTaiChinh_QuanLyTaiKhoan" ToRole="QLTaiChinh_ChuyenKhoan" />
+    <NavigationProperty Name="QLTaiChinh_ChuyenKhoan1" Relationship="database_ToolAruaModel.FK_QLTaiChinh_ChuyenKhoan_QLTaiChinh_QuanLyTaiKhoan1" FromRole="QLTaiChinh_QuanLyTaiKhoan" ToRole="QLTaiChinh_ChuyenKhoan" />
+    <NavigationProperty Name="QLTaiChinh_QuanLychi" Relationship="database_ToolAruaModel.FK_QLTaiChinh_QuanLychi_QLTaiChinh_QuanLyTaiKhoan" FromRole="QLTaiChinh_QuanLyTaiKhoan" ToRole="QLTaiChinh_QuanLychi" />
+    <NavigationProperty Name="QLTaiChinh_QuanLyThu" Relationship="database_ToolAruaModel.FK_QLTaiChinh_QuanLyThu_QLTaiChinh_QuanLyTaiKhoan" FromRole="QLTaiChinh_QuanLyTaiKhoan" ToRole="QLTaiChinh_QuanLyThu" />
+  </EntityType>
+  <EntityType Name="QLTaiChinh_QuanLyThu">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="DanhMucThuID" Type="Int64" />
+    <Property Name="SoTienThu" Type="Double" />
+    <Property Name="TaiKhoanID" Type="Int64" />
+    <Property Name="NgayChi" Type="DateTime" Precision="3" />
+    <Property Name="ThuNguonNao" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="MoTa" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="UserID" Type="Int64" />
+    <Property Name="PortalID" Type="Int64" />
+    <NavigationProperty Name="QLTaiChinh_QuanLyDanhMucThu" Relationship="database_ToolAruaModel.FK_QLTaiChinh_QuanLyThu_QLTaiChinh_QuanLyDanhMucThu" FromRole="QLTaiChinh_QuanLyThu" ToRole="QLTaiChinh_QuanLyDanhMucThu" />
+    <NavigationProperty Name="QLTaiChinh_QuanLyTaiKhoan" Relationship="database_ToolAruaModel.FK_QLTaiChinh_QuanLyThu_QLTaiChinh_QuanLyTaiKhoan" FromRole="QLTaiChinh_QuanLyThu" ToRole="QLTaiChinh_QuanLyTaiKhoan" />
+  </EntityType>
+  <EntityType Name="QLTaiSan_QuanLyLDanhMuc">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="MaDanhMuc" Type="String" MaxLength="50" Unicode="true" FixedLength="true" />
+    <Property Name="TenDanhMuc" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+    <Property Name="MoTa" Type="String" MaxLength="10" Unicode="true" FixedLength="true" />
+    <Property Name="ModifyDate" Type="DateTime" Precision="3" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="UserID" Type="Int64" />
+    <Property Name="PortalID" Type="Int64" />
+    <NavigationProperty Name="QLTaiSan_QuanLyThongTinTaiSan" Relationship="database_ToolAruaModel.FK_QLTaiSan_QuanLyThongTinTaiSan_QLTaiSan_QuanLyLDanhMuc" FromRole="QLTaiSan_QuanLyLDanhMuc" ToRole="QLTaiSan_QuanLyThongTinTaiSan" />
+  </EntityType>
+  <EntityType Name="QLTaiSan_QuanLyThongTinTaiSan">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="MaTaiSan" Type="String" MaxLength="50" Unicode="true" FixedLength="true" />
+    <Property Name="TenTaiSan" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+    <Property Name="NhaSanXuat" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+    <Property Name="TriGiaTaiSan" Type="Int64" />
+    <Property Name="DanhMucID" Type="Int64" />
+    <Property Name="PhongBanID" Type="Int64" />
+    <Property Name="NgayMua" Type="DateTime" Precision="3" />
+    <Property Name="BaoHanh" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="TinhTrangID" Type="Int64" />
+    <Property Name="HinhAnh" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Mota" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="ModifyDate" Type="DateTime" Precision="3" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="UserID" Type="Int64" />
+    <Property Name="PortalID" Type="Int64" />
+    <NavigationProperty Name="QLNS_QuanLyPhongBan" Relationship="database_ToolAruaModel.FK_QLTaiSan_QuanLyThongTinTaiSan_QLNS_QuanLyPhongBan" FromRole="QLTaiSan_QuanLyThongTinTaiSan" ToRole="QLNS_QuanLyPhongBan" />
+    <NavigationProperty Name="QLTaiSan_QuanLyLDanhMuc" Relationship="database_ToolAruaModel.FK_QLTaiSan_QuanLyThongTinTaiSan_QLTaiSan_QuanLyLDanhMuc" FromRole="QLTaiSan_QuanLyThongTinTaiSan" ToRole="QLTaiSan_QuanLyLDanhMuc" />
+    <NavigationProperty Name="QLTaiSan_QuanLyTinhTrang" Relationship="database_ToolAruaModel.FK_QLTaiSan_QuanLyThongTinTaiSan_QLTaiSan_QuanLyTinhTrang" FromRole="QLTaiSan_QuanLyThongTinTaiSan" ToRole="QLTaiSan_QuanLyTinhTrang" />
+  </EntityType>
+  <EntityType Name="QLTaiSan_QuanLyTinhTrang">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="TenTinhTrang" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="UserID" Type="Int64" />
+    <Property Name="PortalID" Type="Int64" />
+    <NavigationProperty Name="QLTaiSan_QuanLyThongTinTaiSan" Relationship="database_ToolAruaModel.FK_QLTaiSan_QuanLyThongTinTaiSan_QLTaiSan_QuanLyTinhTrang" FromRole="QLTaiSan_QuanLyTinhTrang" ToRole="QLTaiSan_QuanLyThongTinTaiSan" />
+  </EntityType>
+  <EntityType Name="role">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="code" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="150" Unicode="true" FixedLength="false" />
+    <Property Name="title" Type="String" Nullable="false" MaxLength="200" Unicode="true" FixedLength="false" />
+    <Property Name="status" Type="Int32" Nullable="false" />
+    <Property Name="type" Type="Int32" />
+    <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="modified_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="description" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="role_module" Relationship="database_ToolAruaModel.FK_role_module_role" FromRole="role" ToRole="role_module" />
+    <NavigationProperty Name="user_group_role" Relationship="database_ToolAruaModel.FK_user_group_role_role" FromRole="role" ToRole="user_group_role" />
+  </EntityType>
+  <EntityType Name="role_module">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="role_Id" Type="Int64" Nullable="false" />
+    <Property Name="module_Id" Type="Int64" Nullable="false" />
+    <Property Name="status" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="module" Relationship="database_ToolAruaModel.FK_role_module_module" FromRole="role_module" ToRole="module" />
+    <NavigationProperty Name="role" Relationship="database_ToolAruaModel.FK_role_module_role" FromRole="role_module" ToRole="role" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="user">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="username" Type="String" Nullable="false" MaxLength="75" Unicode="true" FixedLength="false" />
+    <Property Name="password" Type="String" Nullable="false" MaxLength="75" Unicode="true" FixedLength="false" />
+    <Property Name="company_Id" Type="Int64" Nullable="false" />
+    <Property Name="is_super_user" Type="Boolean" Nullable="false" />
+    <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="modify_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="expired_date" Type="DateTime" Precision="3" />
+    <Property Name="password_encrypted" Type="Boolean" Nullable="false" />
+    <Property Name="password_modify_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="password_encrypted_method" Type="String" Nullable="false" MaxLength="30" Unicode="true" FixedLength="false" />
+    <Property Name="screenname" Type="String" Nullable="false" MaxLength="75" Unicode="true" FixedLength="false" />
+    <Property Name="login_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="last_failed_login_date" Type="DateTime" Precision="3" />
+    <Property Name="failed_login_attemp" Type="Int32" Nullable="false" />
+    <Property Name="lockout" Type="Boolean" Nullable="false" />
+    <Property Name="lockout_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="status" Type="Int32" Nullable="false" />
+    <Property Name="description" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+    <Property Name="discount_percent" Type="Double" Nullable="false" />
+    <NavigationProperty Name="user_profile" Relationship="database_ToolAruaModel.FK_user_profile_user" FromRole="user" ToRole="user_profile" />
+    <NavigationProperty Name="user_usergroup" Relationship="database_ToolAruaModel.FK_user_usergroup_user" FromRole="user" ToRole="user_usergroup" />
+  </EntityType>
+  <EntityType Name="user_group">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="code" Type="String" Nullable="false" MaxLength="150" Unicode="true" FixedLength="false" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="150" Unicode="true" FixedLength="false" />
+    <Property Name="description" Type="String" MaxLength="150" Unicode="true" FixedLength="false" />
+    <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="modified_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="status" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="user_group_role" Relationship="database_ToolAruaModel.FK_user_group_role_user_group" FromRole="user_group" ToRole="user_group_role" />
+    <NavigationProperty Name="user_usergroup" Relationship="database_ToolAruaModel.FK_user_usergroup_user_group" FromRole="user_group" ToRole="user_usergroup" />
+  </EntityType>
+  <EntityType Name="user_group_role">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="user_group_Id" Type="Int64" Nullable="false" />
+    <Property Name="role_Id" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="role" Relationship="database_ToolAruaModel.FK_user_group_role_role" FromRole="user_group_role" ToRole="role" />
+    <NavigationProperty Name="user_group" Relationship="database_ToolAruaModel.FK_user_group_role_user_group" FromRole="user_group_role" ToRole="user_group" />
+  </EntityType>
+  <EntityType Name="user_profile">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="User_Id" Type="Int64" />
+    <Property Name="code" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="phone" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+    <Property Name="address" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+    <Property Name="email" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="dob" Type="DateTime" Precision="0" />
+    <Property Name="modified_date" Type="DateTime" Precision="3" />
+    <Property Name="description" Type="String" MaxLength="150" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="user" Relationship="database_ToolAruaModel.FK_user_profile_user" FromRole="user_profile" ToRole="user" />
+  </EntityType>
+  <EntityType Name="user_usergroup">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="user_Id" Type="Int64" Nullable="false" />
+    <Property Name="user_usergroup1" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="user" Relationship="database_ToolAruaModel.FK_user_usergroup_user" FromRole="user_usergroup" ToRole="user" />
+    <NavigationProperty Name="user_group" Relationship="database_ToolAruaModel.FK_user_usergroup_user_group" FromRole="user_usergroup" ToRole="user_group" />
+  </EntityType>
+  <Association Name="FK_role_module_module">
+    <End Role="module" Type="database_ToolAruaModel.module" Multiplicity="1" />
+    <End Role="role_module" Type="database_ToolAruaModel.role_module" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="module">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="role_module">
+        <PropertyRef Name="module_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_QLKhachHang_QuanLyGiaoDich_QLKhachHang_QuanLyKhachHang">
+    <End Role="QLKhachHang_QuanLyKhachHang" Type="database_ToolAruaModel.QLKhachHang_QuanLyKhachHang" Multiplicity="0..1" />
+    <End Role="QLKhachHang_QuanLyGiaoDich" Type="database_ToolAruaModel.QLKhachHang_QuanLyGiaoDich" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QLKhachHang_QuanLyKhachHang">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="QLKhachHang_QuanLyGiaoDich">
+        <PropertyRef Name="KhachHangID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_QLKhachHang_QuanLyKhachHang_QLKhachHang_QuanLyNganhNghe">
+    <End Role="QLKhachHang_QuanLyNganhNghe" Type="database_ToolAruaModel.QLKhachHang_QuanLyNganhNghe" Multiplicity="0..1" />
+    <End Role="QLKhachHang_QuanLyKhachHang" Type="database_ToolAruaModel.QLKhachHang_QuanLyKhachHang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QLKhachHang_QuanLyNganhNghe">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="QLKhachHang_QuanLyKhachHang">
+        <PropertyRef Name="NganhNgheID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_QLNS_QuanLyChamCong_QLNS_QuanLyNhanVien">
+    <End Role="QLNS_QuanLyNhanVien" Type="database_ToolAruaModel.QLNS_QuanLyNhanVien" Multiplicity="0..1" />
+    <End Role="QLNS_QuanLyChamCong" Type="database_ToolAruaModel.QLNS_QuanLyChamCong" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QLNS_QuanLyNhanVien">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="QLNS_QuanLyChamCong">
+        <PropertyRef Name="NhanvienID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_QLNS_QuanLyNhanVien_QLNS_QuanLyChucVu">
+    <End Role="QLNS_QuanLyChucVu" Type="database_ToolAruaModel.QLNS_QuanLyChucVu" Multiplicity="0..1" />
+    <End Role="QLNS_QuanLyNhanVien" Type="database_ToolAruaModel.QLNS_QuanLyNhanVien" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QLNS_QuanLyChucVu">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="QLNS_QuanLyNhanVien">
+        <PropertyRef Name="ChucvuID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_QLNS_QuanLyHopDong_QLNS_QuanLyNhanVien">
+    <End Role="QLNS_QuanLyNhanVien" Type="database_ToolAruaModel.QLNS_QuanLyNhanVien" Multiplicity="0..1" />
+    <End Role="QLNS_QuanLyHopDong" Type="database_ToolAruaModel.QLNS_QuanLyHopDong" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QLNS_QuanLyNhanVien">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="QLNS_QuanLyHopDong">
+        <PropertyRef Name="NhanVienID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_QLNS_QuanLyHopDong_QLNS_QuanLyNhanVien1">
+    <End Role="QLNS_QuanLyNhanVien" Type="database_ToolAruaModel.QLNS_QuanLyNhanVien" Multiplicity="0..1" />
+    <End Role="QLNS_QuanLyHopDong" Type="database_ToolAruaModel.QLNS_QuanLyHopDong" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QLNS_QuanLyNhanVien">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="QLNS_QuanLyHopDong">
+        <PropertyRef Name="NguoiKyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_QLNS_QuanLyHopDong_QLNS_QuanLyNhanVien2">
+    <End Role="QLNS_QuanLyNhanVien" Type="database_ToolAruaModel.QLNS_QuanLyNhanVien" Multiplicity="0..1" />
+    <End Role="QLNS_QuanLyHopDong" Type="database_ToolAruaModel.QLNS_QuanLyHopDong" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QLNS_QuanLyNhanVien">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="QLNS_QuanLyHopDong">
+        <PropertyRef Name="NguoiKyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_QLNS_QuanLyHopDong_QLNS_QuanLyThoiGianHopDong">
+    <End Role="QLNS_QuanLyThoiGianHopDong" Type="database_ToolAruaModel.QLNS_QuanLyThoiGianHopDong" Multiplicity="0..1" />
+    <End Role="QLNS_QuanLyHopDong" Type="database_ToolAruaModel.QLNS_QuanLyHopDong" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QLNS_QuanLyThoiGianHopDong">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="QLNS_QuanLyHopDong">
+        <PropertyRef Name="ThoigianHopDongID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_QLNS_QuanLyKhenThuong_QLNS_QuanLyNhanVien">
+    <End Role="QLNS_QuanLyNhanVien" Type="database_ToolAruaModel.QLNS_QuanLyNhanVien" Multiplicity="0..1" />
+    <End Role="QLNS_QuanLyKhenThuong" Type="database_ToolAruaModel.QLNS_QuanLyKhenThuong" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QLNS_QuanLyNhanVien">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="QLNS_QuanLyKhenThuong">
+        <PropertyRef Name="NhanVienID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_QLNS_QuanLyNhanVien_QLNS_QuanLyPhongBan">
+    <End Role="QLNS_QuanLyPhongBan" Type="database_ToolAruaModel.QLNS_QuanLyPhongBan" Multiplicity="0..1" />
+    <End Role="QLNS_QuanLyNhanVien" Type="database_ToolAruaModel.QLNS_QuanLyNhanVien" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QLNS_QuanLyPhongBan">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="QLNS_QuanLyNhanVien">
+        <PropertyRef Name="PhongBanID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_QLNS_QuanLyNhanVien_QLNS_QuanLyTrinhDo">
+    <End Role="QLNS_QuanLyTrinhDo" Type="database_ToolAruaModel.QLNS_QuanLyTrinhDo" Multiplicity="0..1" />
+    <End Role="QLNS_QuanLyNhanVien" Type="database_ToolAruaModel.QLNS_QuanLyNhanVien" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QLNS_QuanLyTrinhDo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="QLNS_QuanLyNhanVien">
+        <PropertyRef Name="TrinhDoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_QLTaiSan_QuanLyThongTinTaiSan_QLNS_QuanLyPhongBan">
+    <End Role="QLNS_QuanLyPhongBan" Type="database_ToolAruaModel.QLNS_QuanLyPhongBan" Multiplicity="0..1" />
+    <End Role="QLTaiSan_QuanLyThongTinTaiSan" Type="database_ToolAruaModel.QLTaiSan_QuanLyThongTinTaiSan" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QLNS_QuanLyPhongBan">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="QLTaiSan_QuanLyThongTinTaiSan">
+        <PropertyRef Name="PhongBanID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_QLTaiChinh_ChuyenKhoan_QLTaiChinh_QuanLyTaiKhoan">
+    <End Role="QLTaiChinh_QuanLyTaiKhoan" Type="database_ToolAruaModel.QLTaiChinh_QuanLyTaiKhoan" Multiplicity="0..1" />
+    <End Role="QLTaiChinh_ChuyenKhoan" Type="database_ToolAruaModel.QLTaiChinh_ChuyenKhoan" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QLTaiChinh_QuanLyTaiKhoan">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="QLTaiChinh_ChuyenKhoan">
+        <PropertyRef Name="TaiKhoanChuyenID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_QLTaiChinh_ChuyenKhoan_QLTaiChinh_QuanLyTaiKhoan1">
+    <End Role="QLTaiChinh_QuanLyTaiKhoan" Type="database_ToolAruaModel.QLTaiChinh_QuanLyTaiKhoan" Multiplicity="0..1" />
+    <End Role="QLTaiChinh_ChuyenKhoan" Type="database_ToolAruaModel.QLTaiChinh_ChuyenKhoan" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QLTaiChinh_QuanLyTaiKhoan">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="QLTaiChinh_ChuyenKhoan">
+        <PropertyRef Name="TaiKhoanNhanID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_QLTaiChinh_QuanLychi_QLTaiChinh_DanhMucChi">
+    <End Role="QLTaiChinh_DanhMucChi" Type="database_ToolAruaModel.QLTaiChinh_DanhMucChi" Multiplicity="0..1" />
+    <End Role="QLTaiChinh_QuanLychi" Type="database_ToolAruaModel.QLTaiChinh_QuanLychi" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QLTaiChinh_DanhMucChi">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="QLTaiChinh_QuanLychi">
+        <PropertyRef Name="DanhMucChiID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_QLTaiChinh_QuanLychi_QLTaiChinh_QuanLyTaiKhoan">
+    <End Role="QLTaiChinh_QuanLyTaiKhoan" Type="database_ToolAruaModel.QLTaiChinh_QuanLyTaiKhoan" Multiplicity="0..1" />
+    <End Role="QLTaiChinh_QuanLychi" Type="database_ToolAruaModel.QLTaiChinh_QuanLychi" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QLTaiChinh_QuanLyTaiKhoan">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="QLTaiChinh_QuanLychi">
+        <PropertyRef Name="TaiKhoanID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_QLTaiChinh_QuanLyThu_QLTaiChinh_QuanLyDanhMucThu">
+    <End Role="QLTaiChinh_QuanLyDanhMucThu" Type="database_ToolAruaModel.QLTaiChinh_QuanLyDanhMucThu" Multiplicity="0..1" />
+    <End Role="QLTaiChinh_QuanLyThu" Type="database_ToolAruaModel.QLTaiChinh_QuanLyThu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QLTaiChinh_QuanLyDanhMucThu">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="QLTaiChinh_QuanLyThu">
+        <PropertyRef Name="DanhMucThuID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_QLTaiChinh_QuanLyThu_QLTaiChinh_QuanLyTaiKhoan">
+    <End Role="QLTaiChinh_QuanLyTaiKhoan" Type="database_ToolAruaModel.QLTaiChinh_QuanLyTaiKhoan" Multiplicity="0..1" />
+    <End Role="QLTaiChinh_QuanLyThu" Type="database_ToolAruaModel.QLTaiChinh_QuanLyThu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QLTaiChinh_QuanLyTaiKhoan">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="QLTaiChinh_QuanLyThu">
+        <PropertyRef Name="TaiKhoanID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_QLTaiSan_QuanLyThongTinTaiSan_QLTaiSan_QuanLyLDanhMuc">
+    <End Role="QLTaiSan_QuanLyLDanhMuc" Type="database_ToolAruaModel.QLTaiSan_QuanLyLDanhMuc" Multiplicity="0..1" />
+    <End Role="QLTaiSan_QuanLyThongTinTaiSan" Type="database_ToolAruaModel.QLTaiSan_QuanLyThongTinTaiSan" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QLTaiSan_QuanLyLDanhMuc">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="QLTaiSan_QuanLyThongTinTaiSan">
+        <PropertyRef Name="DanhMucID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_QLTaiSan_QuanLyThongTinTaiSan_QLTaiSan_QuanLyTinhTrang">
+    <End Role="QLTaiSan_QuanLyTinhTrang" Type="database_ToolAruaModel.QLTaiSan_QuanLyTinhTrang" Multiplicity="0..1" />
+    <End Role="QLTaiSan_QuanLyThongTinTaiSan" Type="database_ToolAruaModel.QLTaiSan_QuanLyThongTinTaiSan" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QLTaiSan_QuanLyTinhTrang">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="QLTaiSan_QuanLyThongTinTaiSan">
+        <PropertyRef Name="TinhTrangID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_role_module_role">
+    <End Role="role" Type="database_ToolAruaModel.role" Multiplicity="1" />
+    <End Role="role_module" Type="database_ToolAruaModel.role_module" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="role">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="role_module">
+        <PropertyRef Name="role_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_user_group_role_role">
+    <End Role="role" Type="database_ToolAruaModel.role" Multiplicity="1" />
+    <End Role="user_group_role" Type="database_ToolAruaModel.user_group_role" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="role">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="user_group_role">
+        <PropertyRef Name="role_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_user_profile_user">
+    <End Role="user" Type="database_ToolAruaModel.user" Multiplicity="0..1" />
+    <End Role="user_profile" Type="database_ToolAruaModel.user_profile" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="user_profile">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_user_usergroup_user">
+    <End Role="user" Type="database_ToolAruaModel.user" Multiplicity="1" />
+    <End Role="user_usergroup" Type="database_ToolAruaModel.user_usergroup" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="user_usergroup">
+        <PropertyRef Name="user_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_user_group_role_user_group">
+    <End Role="user_group" Type="database_ToolAruaModel.user_group" Multiplicity="1" />
+    <End Role="user_group_role" Type="database_ToolAruaModel.user_group_role" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user_group">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="user_group_role">
+        <PropertyRef Name="user_group_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_user_usergroup_user_group">
+    <End Role="user_group" Type="database_ToolAruaModel.user_group" Multiplicity="1" />
+    <End Role="user_usergroup" Type="database_ToolAruaModel.user_usergroup" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user_group">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="user_usergroup">
+        <PropertyRef Name="user_usergroup1" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="GetAllModuleByUserId_Result">
+    <Property Type="Int64" Name="id" Nullable="false" />
+    <Property Type="String" Name="code" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="name" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="web_method" Nullable="true" MaxLength="4000" />
+    <Property Type="String" Name="ws_method" Nullable="true" MaxLength="500" />
+  </ComplexType>
+  <ComplexType Name="GetAllRolesByUserId_Result">
+    <Property Type="Int64" Name="id" Nullable="false" />
+    <Property Type="String" Name="code" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="name" Nullable="false" MaxLength="150" />
+  </ComplexType>
+  <ComplexType Name="GetUserByUserName_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="String" Name="username" Nullable="false" MaxLength="75" />
+    <Property Type="String" Name="password" Nullable="false" MaxLength="75" />
+    <Property Type="Int64" Name="company_Id" Nullable="false" />
+    <Property Type="Boolean" Name="is_super_user" Nullable="false" />
+    <Property Type="DateTime" Name="create_date" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="modify_date" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="expired_date" Nullable="true" Precision="23" />
+    <Property Type="Boolean" Name="password_encrypted" Nullable="false" />
+    <Property Type="DateTime" Name="password_modify_date" Nullable="false" Precision="23" />
+    <Property Type="String" Name="password_encrypted_method" Nullable="false" MaxLength="30" />
+    <Property Type="String" Name="screenname" Nullable="false" MaxLength="75" />
+    <Property Type="DateTime" Name="login_date" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="last_failed_login_date" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="failed_login_attemp" Nullable="false" />
+    <Property Type="Boolean" Name="lockout" Nullable="false" />
+    <Property Type="DateTime" Name="lockout_date" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="status" Nullable="false" />
+    <Property Type="String" Name="description" Nullable="true" MaxLength="200" />
+    <Property Type="Double" Name="discount_percent" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="GetUserByUserNameAndPassword_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="String" Name="username" Nullable="false" MaxLength="75" />
+    <Property Type="String" Name="password" Nullable="false" MaxLength="75" />
+    <Property Type="Int64" Name="company_Id" Nullable="false" />
+    <Property Type="Boolean" Name="is_super_user" Nullable="false" />
+    <Property Type="DateTime" Name="create_date" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="modify_date" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="expired_date" Nullable="true" Precision="23" />
+    <Property Type="Boolean" Name="password_encrypted" Nullable="false" />
+    <Property Type="DateTime" Name="password_modify_date" Nullable="false" Precision="23" />
+    <Property Type="String" Name="password_encrypted_method" Nullable="false" MaxLength="30" />
+    <Property Type="String" Name="screenname" Nullable="false" MaxLength="75" />
+    <Property Type="DateTime" Name="login_date" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="last_failed_login_date" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="failed_login_attemp" Nullable="false" />
+    <Property Type="Boolean" Name="lockout" Nullable="false" />
+    <Property Type="DateTime" Name="lockout_date" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="status" Nullable="false" />
+    <Property Type="String" Name="description" Nullable="true" MaxLength="200" />
+    <Property Type="Double" Name="discount_percent" Nullable="false" />
+  </ComplexType>
+</Schema>

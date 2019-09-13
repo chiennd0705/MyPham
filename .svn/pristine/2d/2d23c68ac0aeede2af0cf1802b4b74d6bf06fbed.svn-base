@@ -1,0 +1,474 @@
+﻿@using MvcPaging
+@model IPagedList<Common.Shop>
+
+@{
+    ViewBag.Title = "Quản lý Shop";
+}
+@{Layout = "~/Areas/Manage/Views/Shared/_LayoutAdmincshtml.cshtml";}
+
+
+<div class="container-fluid" ng-app="body">
+    @Html.Raw(BuyGroup365.Areas.Manage.Models.AdminFunction.BindHeader("Danh sách shop", null, null, null, null))
+    <!-- Page Heading -->
+    @*<div class="row" ng-controller="header">
+            <div class="col-lg-12">
+                <h1 class="page-header">
+                    Quản lý shop
+                </h1>
+                <hr />
+                <div>{{quanlyshop}}</div>
+            </div>
+        </div>*@
+    <!-- /.row -->
+    <!-- /.row -->
+    <!-- /.row -->
+    <div class="row" ng-controller="Index">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+
+                <div class="panel-body">
+                    @using (Ajax.BeginForm("Index", "Shop",
+                        new AjaxOptions { UpdateTargetId = "grid-list", HttpMethod = "get", LoadingElementId = "loading", OnBegin = "beginPaging", OnSuccess = "successPaging", OnFailure = "failurePaging" },
+                        new { id = "frm-search" }))
+                    {
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group input-group">
+                                    <input type="text" value="@ViewData["key"]" class="form-control" id="appendedInputButton" name="key" placeholder="Nhập từ khóa tìm kiếm" style="width:80%">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="submit">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+
+                                    </span>
+                                </div>
+
+                            </div>
+                            <div>
+                                <span style="float: right ;margin-right: 20px;font-size: 20px">
+                                    @Html.ActionLink(" ", "CreateShop", null, new { @class = "glyphicon glyphicon-plus-sign" })
+                                </span>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover table-striped" id="dataTables" aria-describedby="dataTables-example_info">
+                                <thead>
+                                    <tr role="row">
+
+                                        <th class="cssForcolumTitleTable">
+                                            Tên Shop
+                                        </th>
+                                        <th class="cssForcolumTitleTable">
+                                            Địa chỉ
+                                        </th>
+                                        <th class="cssForcolumTitleTable">
+                                            Điện thoại
+                                        </th>
+                                        <th class="cssForcolumTitleTable">
+                                            Rate
+                                        </th>
+                                        <th class="cssForcolumTitleTable">
+                                            Trạng thái
+                                        </th>
+                                        <th style="width: auto" class="cssForcolumTitleTable">Chức năng</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td style="text-align:center">
+                                                @Html.DisplayFor(modelItem => item.ShopName)
+                                            </td>
+                                            <td style="text-align:center">
+                                                @Html.DisplayFor(modelItem => item.Address)
+                                            </td>
+                                            <td style="text-align:center">
+                                                @Html.DisplayFor(modelItem => item.Phone)
+                                            </td>
+                                            <td style="text-align:center">
+                                                @Html.DisplayFor(modelItem => item.Rate)
+                                            </td>
+                                            <td style="text-align:center">
+                                                @if (item.Status == 0)
+                                                {
+                                                    <p>Khóa</p>
+                                                }
+                                                else if (item.Status == 1)
+                                                {
+                                                    <p>Active</p>
+                                                }
+                                                else
+                                                {
+                                                    <p>Đang chờ duyệt</p>
+                                                }
+                                            </td>
+                                            <td style="text-align: center">
+                                                <a class="glyphicon glyphicon-pencil" href="/Manage/Shop/EditAllInforAboutShop/@item.Id"></a> |
+                                                <a class="glyphicon glyphicon-eye-open" data-toggle="modal" data-target="#DeatailShop" data-ng-click="GetInfoShop(@item.Id)"></a> |
+                                                @Html.ActionLink(" ", "" + "" + "DeleteShop", new { id = item.Id }, new { @class = "glyphicon glyphicon-trash", onclick = "return confirm('Bạn có muốn xóa bản ghi này?');" })
+                                            </td>
+                                        </tr>
+                                    }
+
+                                </tbody>
+                            </table>
+
+                            <div class="row">
+                                <div class="">
+                                    <div class="dataTables_info" id="dataTables-example_info" role="alert" aria-live="polite" aria-relevant="all">Hiển thị từ @Model.ItemStart đến @Model.ItemEnd của @Model.TotalItemCount bản ghi</div>
+                                </div>
+                                <div class="">
+                                    <div class="dataTables_paginate " id="dataTables-example_paginate">
+
+                                        @Html.Raw(Ajax.Pager(
+                                            new Options
+                                            {
+                                                PageSize = Model.PageSize,
+                                                TotalItemCount = Model.TotalItemCount,
+                                                CurrentPage = Model.PageNumber,
+                                                ItemTexts = new ItemTexts() { Next = "Next", Previous = "Previous", Page = "P" },
+                                                ItemIcon = new ItemIcon() { First = "icon-backward", Previous = "icon-chevron-left", Next = "icon-chevron-right", Last = "icon-forward" },
+                                                TooltipTitles = new TooltipTitles() { Next = "Next page", Previous = "Previous page", Page = "Page {0}." },
+                                                Size = Size.normal,
+                                                Alignment = Alignment.centered,
+                                                IsShowControls = true,
+                                                IsShowFirstLast = true,
+                                                CssClass = ""
+                                            },
+                                            new AjaxOptions
+                                            {
+                                                UpdateTargetId = "grid-list",
+                                                HttpMethod = "get",
+                                                LoadingElementId = "loading",
+                                                OnBegin = "beginPaging",
+                                                OnSuccess = "successPaging",
+                                                OnFailure = "failurePaging"
+                                            }, new { controller = "Shop", action = "Index", key = ViewData["key"] }))
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- /.row -->
+        <!-- /.row -->
+        @*Detail Shop*@
+        <div class="modal fade" id="DeatailShop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" style="left: 0px;width:65%">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="row" style="text-align:left;margin-left:12px">
+                            <img id="btnCloseModal" class="img-responsive box" src="/Content/Csspublic/images/close-icon.png" alt="Close" style="height: 25px;">
+                        </div>
+                        <div class="row" style="margin-left:10px">
+                            <div class="col-lg-2">
+                                <img class="img-responsive" src="/Content/Csspublic/images/shopIcon.jpg" alt="Shop Image" style="height: 90px;margin-left:10px">
+                            </div>
+                            <div class="col-lg-10">
+                                <h1 style="font:bold;margin-left:150px;margin-top:20px">Thông tin shop <strong style="color:blue">{{emp.ShopName}}</strong></h1>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-body" id="buyerContent">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover table-striped" id="dataTables" aria-describedby="dataTables-example_info">
+                                <thead>
+                                    <tr role="row">
+                                        <th class="cssForcolumTitleTable">
+                                            Tên Shop
+                                        </th >
+                                        <th class ="cssForcolumTitleTable">
+                                            Địa chỉ
+                                        </th>
+                                        <th class="cssForcolumTitleTable">
+                                            Phone
+                                        </th>
+                                        <th class="cssForcolumTitleTable">
+                                            Status
+                                        </th>
+                                        <th class="cssForcolumTitleTable">
+                                            Facebook
+                                        </th>
+                                        <th class="cssForcolumTitleTable">
+                                            Skype
+                                        </th>
+                                        <th class="cssForcolumTitleTable">
+                                            Email
+                                        </th>
+                                        <th class="cssForcolumTitleTable">
+                                            Số sản phẩm
+                                        </th>
+                                        <th class="cssForcolumTitleTable">
+                                            Số đơn hàng
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th style="text-align:center;font:bold"><strong>{{emp.ShopName}}</strong></th>
+                                        <th>{{emp.Address}}</th>
+                                        <th>{{emp.Phone}}</th>
+                                        <th>{{emp.Status}}</th>
+                                        <th>{{emp.Facebook}}</th>
+                                        <th>{{emp.Skype}}</th>
+                                        <th>{{emp.Email}}</th>
+                                        <th><a href="/Manage/Shop/ListProductOfShop/{{emp.Id}}">{{emp.NumberOfProduct}}</a></th>
+                                        <th><a href="/Manage/Shop/ListOrderOfShop/{{emp.Id}}">{{emp.NumberOfOrder}}</a></th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Đóng</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @*Enddetail shop*@
+
+            <script type="text/javascript">
+                $('#btnCloseModal').attr('data-dismiss', 'modal').attr('aria-label', 'Close');
+            </script>
+            <style type="text/css">
+                .box:hover {
+                    -moz-box-shadow: 0 0 10px #ccc;
+                    -webkit-box-shadow: 0 0 10px #ccc;
+                    box-shadow: 0 0 10px #ccc;
+                }
+                .cssForcolumTitleTable{
+                    text-align:center;
+                    font:bold;
+                    color:blue;
+                }
+
+            </style>
+        </div>
+    </div>
+    @*Kêt thúc cập nhật*@
+    <script>
+        angular.module("body", []).controller("header", function ($scope) {
+            //   $scope.quanlyuser = "Câp nhật thái";
+        }).controller("Index", function ($scope) {
+
+            $scope.emp = {
+                Id: '',
+                ShopName: '',
+                Icon: '',
+                Address: '',
+                LocationId: '',
+                Phone: '',
+                Rate: '',
+                TotalView: '',
+                Type: '',
+                Status: '',
+                BeginDate: '',
+                EndDate: '',
+                ActiveDate: '',
+                CreateDate: '',
+                ModifyDate: '',
+                Skype: '',
+                Facebook: '',
+                Email: '',
+                NumberOfOrder: '',
+                NumberOfProduct:''
+            };
+            $scope.objpass = {
+                OldPass: '',
+                NewPass: '',
+                RepeatPass: '',
+                UserId: ''
+            };
+            $scope.GetInfoShop = function (id) {
+
+                $('#overbackgroud').show();
+                //   $scope.emplist = [];
+                //   $scope.emailthai = "tháiisigsjghj";
+                $.ajax({
+                    url: '@Url.Action("GetInforShop", "Json")',
+                    data: {
+                        'id': id
+                    },
+                    type: 'GET',
+                    contentType: 'application/json; charset=utf-8',
+
+                    success: function (data) {
+                        $scope.emp.Id = data.Id;
+                        $scope.emp.ShopName = data.ShopName;
+                        $scope.emp.Icon = data.Icon;
+                        $scope.emp.Address = data.Address;
+                        $scope.emp.LocationId = data.LocationId;
+                        $scope.emp.Phone = data.Phone;
+                        $scope.emp.Rate = data.Rate;
+                        $scope.emp.TotalView = data.TotalView;
+                        $scope.emp.Type = data.Type;
+                        //$scope.emp.Status = data.Status;
+                        if (data.Status == 0) {
+                            $scope.emp.Status = "Khóa";
+                        } else if (data.Status == 1) {
+                            $scope.emp.Status = "Active";
+                        } else {
+                            $scope.emp.Status = "Đang chờ duyệt";
+                        }
+                        $scope.emp.Email = data.Email;
+                        $scope.emp.Skype = data.Skype;
+                        $scope.emp.Facebook = data.Facebook;
+
+                        var checkNumOrder = parseInt(data.NumberOfOrder);
+                        if (checkNumOrder != 0) {
+                            $scope.emp.NumberOfOrder = checkNumOrder + " - xem chi tiết";
+                        }
+
+                        var checkOrder = parseInt(data.NumberOfProduct);
+                        if (checkOrder != 0) {
+                            $scope.emp.NumberOfProduct = checkOrder + " - xem chi tiết";
+                        }
+
+                        $scope.emp.BeginDate = data.BeginDate;
+                        $scope.emp.EndDate = data.EndDate;
+                        $scope.emp.ActiveDate = data.ActiveDate;
+                        $scope.emp.CreateDate = data.CreateDate;
+                        $scope.emp.ModifyDate = data.ModifyDate;
+
+                        $scope.$apply();
+                        $('#overbackgroud').hide();
+                    },
+                    error: function () {
+
+                    }
+                });
+            };
+            $scope.GetPass = function (id) {
+
+                $scope.objpass.UserId = id;
+            };
+            $scope.UpdateChange = function () {
+                $('#overbackgroud').show();
+                $.ajax({
+                    type: 'POST',
+                    contentType: 'application/json; charset=utf-8',
+                    data: JSON.stringify($scope.emp),
+                    url: '@Url.Action("UpdateShop", "Json")',
+                    success: function (data) {
+                        if (data == 1) {
+                            alert("Cập nhật thành công");
+                            window.location.href = "/Manage/Shop/Index";
+                            //     $scope.GetInfoUser();
+                        }
+
+                    },
+                    error: function (status) { }
+                });
+            };
+
+        });
+    </script>
+
+    <script type="text/javascript">
+        function beginPaging(args) {
+            // Animatek
+            $('#grid-list').fadeOut('normal');
+        }
+
+        function successPaging() {
+            // Animate
+            $('#grid-list').fadeIn('normal');
+            $('a').tooltip();
+        }
+
+        function failurePaging() {
+            alert("Could not retrieve list.");
+        }
+
+    </script>
+
+    <script type="text/javascript">
+        $(function () {
+            $("#datepicker1").datepicker();
+            $("#beginDate").datepicker(
+
+                {
+                    changeMonth: true,
+                    changeYear: true,
+                    showButtonPanel: true,
+                    yearRange: "-0:+15"
+                });
+            $("#endDate").datepicker(
+
+               {
+                   changeMonth: true,
+                   changeYear: true,
+                   showButtonPanel: true,
+                   yearRange: "-0:+15"
+               });
+            $("#activeDate").datepicker(
+
+               {
+                   changeMonth: true,
+                   changeYear: true,
+                   showButtonPanel: true,
+                   yearRange: "-0:+15"
+               });
+            $("#createDate").datepicker(
+
+               {
+                   changeMonth: true,
+                   changeYear: true,
+                   showButtonPanel: true,
+                   yearRange: "-0:+15"
+               });
+            $("#modifyDate").datepicker(
+
+               {
+                   changeMonth: true,
+                   changeYear: true,
+                   showButtonPanel: true,
+                   yearRange: "-0:+15"
+               });
+
+
+            $("#beginDateEdit").datepicker(
+
+                {
+                    changeMonth: true,
+                    changeYear: true,
+                    showButtonPanel: true,
+                    yearRange: "-0:+15"
+                });
+            $("#endDateEdit").datepicker(
+
+               {
+                   changeMonth: true,
+                   changeYear: true,
+                   showButtonPanel: true,
+                   yearRange: "-0:+15"
+               });
+            $("#activeDateEdit").datepicker(
+
+               {
+                   changeMonth: true,
+                   changeYear: true,
+                   showButtonPanel: true,
+                   yearRange: "-0:+15"
+               });
+            $("#createDateEdit").datepicker(
+
+               {
+                   changeMonth: true,
+                   changeYear: true,
+                   showButtonPanel: true,
+                   yearRange: "-0:+15"
+               });
+            $("#modifyDateEdit").datepicker(
+
+               {
+                   changeMonth: true,
+                   changeYear: true,
+                   showButtonPanel: true,
+                   yearRange: "-0:+15"
+               });
+        });
+    </script>
+

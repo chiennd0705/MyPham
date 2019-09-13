@@ -1,0 +1,290 @@
+﻿<div class="vmagicmenu clearfix">
+    <div class="block-title block-title-vmagicmenu">
+        <strong>
+            <span class="fa fa-bars"></span>
+            <span class="vmagicmenu-subtitle">Danh mục</span>
+        </strong>
+    </div>
+    <div class="block-vmagicmenu-content">
+        <ul class="vmagicmenu-narrow clearfix">
+            @Html.Raw(ViewData["StrMenu"])
+               
+        </ul>
+        <div class="all-cat"><span>Xem toàn bộ danh mục</span>@*<span style="display: none">Close</span>*@</div>
+    </div>
+</div>
+<div class="magicmenu clearfix">
+    <ul class="nav-desktop sticker">
+        <li class="level0 home active"><a class="level-top" href="/"><span class="icon-home fa fa-home"></span><span class="icon-text">Trang chủ</span></a><div class="level-top-mega">
+            <div><a href="/"><span class="demo-home">Demo 01</span></a></div>
+            <div><a href="/?___store=english_2"><span class="demo-home">Demo 02</span></a></div>
+            <div><a href="/?___store=english_3"><span class="demo-home">Demo 03</span></a></div>
+            <div><a href="/?___store=english_4"><span class="demo-home">Demo 04</span></a></div>
+            <div><a href="/?___store=english_5"><span class="demo-home">Demo 05</span></a></div>
+            <div><a href="/?___store=english_6"><span class="demo-home">Demo 06</span></a></div>
+            <div><a href="/?___store=english_7"><span class="demo-home">Demo 07</span></a></div>
+        </div>
+        </li>
+        <li class="level0 cat first hasChild">
+            <a class="level-top" href="/Home/Category"><span>Thời trang</span><span class="boder-menu"></span></a><div class="level-top-mega" style="left: 338px;">
+                <div class="content-mega">
+                    <div class="content-mega-horizontal" style="width: 800px;">
+                        <ul class="level0 mage-column cat-mega">
+                            <li class="children level1">
+                                <a class="a-image" href="/fashion/men-s.html">
+                                    <img class="img-responsive" alt="Men&#39;s" src="/Content/Csspublic/images/men.png"></a><a href="/fashion/men-s.html"><span>Men's</span></a><ul class="level1">
+                                        <li class="level2 hasChild">
+                                            <a href="/fashion/men-s/skirts.html"><span>Skirts</span></a>
+                                            <ul class="level2">
+                                                <li class="level3">
+                                                    <a href="/fashion/men-s/skirts/t-shirts.html"><span>T-Shirts</span></a>
+                                                </li>
+                                                <li class="level3">
+                                                    <a href="/fashion/men-s/skirts/tops.html"><span>Tops</span></a>
+                                                </li>
+                                                <li class="level3">
+                                                    <a href="/fashion/men-s/skirts/new-in.html"><span>New In</span></a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="level2">
+                                            <a href="/fashion/men-s/jackets.html"><span>Jackets</span></a>
+                                        </li>
+                                        <li class="level2">
+                                            <a href="/fashion/men-s/tops.html"><span>Tops</span></a>
+                                        </li>
+                                        <li class="level2">
+                                            <a href="/fashion/men-s/scarves.html"><span>Scarves</span></a>
+                                        </li>
+                                        <li class="level2">
+                                            <a href="/fashion/men-s/pants.html"><span>Pants</span></a>
+                                        </li>
+                                    </ul>
+                            </li>
+                            <li class="children level1">
+                                <a class="a-image" href="/fashion/women-s.html">
+                                    <img class="img-responsive" alt="Women&#39;s" src="/Content/Csspublic/images/women.png"></a><a href="/fashion/women-s.html"><span>Women's</span></a><ul class="level1">
+                                        <li class="level2">
+                                            <a href="/fashion/women-s/skirts.html"><span>Skirts</span></a>
+                                        </li>
+                                        <li class="level2">
+                                            <a href="/fashion/women-s/jackets.html"><span>Jackets</span></a>
+                                        </li>
+                                        <li class="level2">
+                                            <a href="/fashion/women-s/tops.html"><span>Tops</span></a>
+                                        </li>
+                                        <li class="level2">
+                                            <a href="/fashion/women-s/scarves.html"><span>Scarves</span></a>
+                                        </li>
+                                        <li class="level2">
+                                            <a href="/fashion/women-s/pants.html"><span>Pants</span></a>
+                                        </li>
+                                    </ul>
+                            </li>
+                            <li class="children level1">
+                                <a class="a-image" href="/fashion/kids.html">
+                                    <img class="img-responsive" alt="Kids" src="/Content/Csspublic/images/kid.png"></a><a href="/fashion/kids.html"><span>Kids</span></a><ul class="level1">
+                                        <li class="level2">
+                                            <a href="/fashion/kids/shoes.html"><span>Shoes</span></a>
+                                        </li>
+                                        <li class="level2">
+                                            <a href="/fashion/kids/clothing.html"><span>Clothing</span></a>
+                                        </li>
+                                        <li class="level2">
+                                            <a href="/fashion/kids/tops.html"><span>Tops</span></a>
+                                        </li>
+                                        <li class="level2">
+                                            <a href="/fashion/kids/scarves.html"><span>Scarves</span></a>
+                                        </li>
+                                        <li class="level2">
+                                            <a href="/fashion/kids/accessories.html"><span>Accessories</span></a>
+                                        </li>
+                                    </ul>
+                            </li>
+                            <li class="children level1">
+                                <a class="a-image" href="/fashion/trending.html">
+                                    <img class="img-responsive" alt="Trending" src="/Content/Csspublic/images/trending.png"></a><a href="/fashion/trending.html"><span>Trending</span></a><ul class="level1">
+                                        <li class="level2">
+                                            <a href="/fashion/trending/men-s-clothing.html"><span>Men's Clothing</span></a>
+                                        </li>
+                                        <li class="level2">
+                                            <a href="/fashion/trending/kid-s-clothing.html"><span>Kid's Clothing</span></a>
+                                        </li>
+                                        <li class="level2">
+                                            <a href="/fashion/trending/women-s-clothing.html"><span>Women's Clothing</span></a>
+                                        </li>
+                                        <li class="level2">
+                                            <a href="/fashion/trending/accessories.html"><span>Accessories</span></a>
+                                        </li>
+                                    </ul>
+                            </li>
+                            <li></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li class="level0 cat  hasChild" data-options="{&quot;menu_id&quot;:&quot;1&quot;,&quot;cat_columns&quot;:&quot;3&quot;,&quot;cat_proportions&quot;:&quot;3&quot;,&quot;right_proportions&quot;:&quot;1&quot;,&quot;left_proportions&quot;:null}" style="clear: both;">
+            <a class="level-top" href="/Home/Category"><span>Thể thao<span class="cat_label New">New</span></span><span class="boder-menu"></span></a><div class="level-top-mega" style="left: 338px;">
+                <div class="content-mega">
+                    <div class="content-mega-horizontal" style="width: 800px;">
+                        <ul class="level0 mage-column cat-mega" style="width: 75%;">
+                            <li class="children level1">
+                                <a href="/sports/tennis.html"><span>Tennis</span></a><ul class="level1">
+                                    <li class="level2">
+                                        <a href="/sports/tennis/scarves.html"><span>Scarves</span></a>
+                                    </li>
+                                    <li class="level2">
+                                        <a href="/sports/tennis/pants.html"><span>Pants</span></a>
+                                    </li>
+                                    <li class="level2">
+                                        <a href="/sports/tennis/skirts.html"><span>Skirts</span></a>
+                                    </li>
+                                    <li class="level2">
+                                        <a href="/sports/tennis/jackets.html"><span>Jackets</span></a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="children level1">
+                                <a href="/sports/football.html"><span>Football</span></a><ul class="level1">
+                                    <li class="level2">
+                                        <a href="/sports/football/coats-jackets.html"><span>Coats &amp; Jackets</span></a>
+                                    </li>
+                                    <li class="level2">
+                                        <a href="/sports/football/blouses-shirts.html"><span>Blouses &amp; Shirts</span></a>
+                                    </li>
+                                    <li class="level2">
+                                        <a href="/sports/football/tops-tees.html"><span>Tops &amp; Tees</span></a>
+                                    </li>
+                                    <li class="level2">
+                                        <a href="/sports/football/intimates.html"><span>Intimates</span></a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="children level1">
+                                <a href="/sports/swimming.html"><span>Swimming</span></a><ul class="level1">
+                                    <li class="level2">
+                                        <a href="/sports/swimming/accessories.html"><span>Accessories</span></a>
+                                    </li>
+                                    <li class="level2">
+                                        <a href="/sports/swimming/men-s-clothing.html"><span>Men's Clothing</span></a>
+                                    </li>
+                                    <li class="level2">
+                                        <a href="/sports/swimming/kid-s-clothing.html"><span>Kid's Clothing</span></a>
+                                    </li>
+                                    <li class="level2">
+                                        <a href="/sports/swimming/women-s-clothing.html"><span>Women's Clothing</span></a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="children level1">
+                                <a href="/sports/climbing.html"><span>Climbing</span></a><ul class="level1">
+                                    <li class="level2">
+                                        <a href="/sports/climbing/dresses.html"><span>Dresses</span></a>
+                                    </li>
+                                    <li class="level2">
+                                        <a href="/sports/climbing/coats-jackets.html"><span>Coats &amp; Jackets</span></a>
+                                    </li>
+                                    <li class="level2">
+                                        <a href="/sports/climbing/blouses-shirts.html"><span>Blouses &amp; Shirts</span></a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="children level1">
+                                <a href="/sports/asian.html"><span>Asian</span></a><ul class="level1">
+                                    <li class="level2">
+                                        <a href="/sports/asian/vietnamese-pho.html"><span>Vietnamese Pho</span></a>
+                                    </li>
+                                    <li class="level2">
+                                        <a href="/sports/asian/noodles.html"><span>Noodles</span></a>
+                                    </li>
+                                    <li class="level2">
+                                        <a href="/sports/asian/seafood.html"><span>Seafood</span></a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="children level1">
+                                <a href="/sports/sausages.html"><span>Sausages</span></a><ul class="level1">
+                                    <li class="level2">
+                                        <a href="/sports/sausages/meat-dishes.html"><span>Meat Dishes</span></a>
+                                    </li>
+                                    <li class="level2">
+                                        <a href="/sports/sausages/desserts.html"><span>Desserts</span></a>
+                                    </li>
+                                    <li class="level2">
+                                        <a href="/sports/sausages/tops.html"><span>Tops</span></a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li></li>
+                        </ul>
+                        <div class="mage-column mega-block-right" style="width: 25%;">
+                            <div class="banner-top-menu">
+                                <img class="img-responsive" src="/Content/Csspublic/images/banner-topmenu.jpg" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li class="level0 cat  hasChild dropdown">
+            <a class="level-top" href="/Home/Category"><span>Kỹ thuật số</span><span class="boder-menu"></span></a><ul class="level0">
+                <li class="level1 hasChild">
+                    <a href="/digital/accessories.html"><span>Accessories</span></a>
+                    <ul class="level1">
+                        <li class="level2">
+                            <a href="/digital/accessories/mobile.html"><span>Mobile</span></a>
+                        </li>
+                        <li class="level2">
+                            <a href="/digital/accessories/tablets.html"><span>Tablets</span></a>
+                        </li>
+                        <li class="level2">
+                            <a href="/digital/accessories/memory-cards.html"><span>Memory Cards</span></a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="level1">
+                    <a href="/digital/swimming.html"><span>Swimming</span></a>
+                </li>
+                <li class="level1">
+                    <a href="/digital/computers-networking.html"><span>Computers &amp; Networking</span></a>
+                </li>
+                <li class="level1">
+                    <a href="/digital/flashlights-lamps.html"><span>Flashlights &amp; Lamps</span></a>
+                </li>
+            </ul>
+        </li>
+        <li class="level0 cat  hasChild">
+            <a class="level-top" href="/Home/Category"><span>Đồ gia dụng </span><span class="boder-menu"></span></a>
+            <div class="level-top-mega">
+                <div class="content-mega">
+                    <div class="content-mega-horizontal" style="width: 200px;">
+                        <ul class="level0 mage-column cat-mega">
+                            <li class="children level1">
+                                <a href="/furniture/accessories.html"><span>Accessories</span></a><ul class="level1">
+                                    <li class="level2">
+                                        <a href="/furniture/accessories/television.html"><span>Television</span></a>
+                                    </li>
+                                    <li class="level2">
+                                        <a href="/furniture/accessories/air-conditional.html"><span>Air Conditional</span></a>
+                                    </li>
+                                    <li class="level2">
+                                        <a href="/furniture/accessories/theater.html"><span>Theater</span></a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li class="level0 ext  first"><a class="level-top" href="/blog/"><span>Tin tức</span></a></li>
+    </ul>
+</div>
+<div class="nav-mobile" style="display: none;">
+    <h3 class="mobi-title">Danh mục</h3>
+    <ul>
+        @Html.Raw(ViewData["StrMenuMobile"])
+    </ul>
+</div>

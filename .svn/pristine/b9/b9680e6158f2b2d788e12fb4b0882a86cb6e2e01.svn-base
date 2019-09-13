@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0029)http://bizwebvietnam.com/ssss -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Không tìm thấy trang</title>
+
+    <meta name="description" content="Trang không tồn tại">
+    <meta name="robots" content="noindex, nofollow">
+    <link type="image/x-icon" rel="shortcut icon" href="/Content/Csspublic/images/favicon.ico">
+    <style type="text/css">
+        html {
+            height: 100% !important;
+            height: auto;
+            margin-bottom: 1px;
+        }
+
+        body {
+            margin: 0 auto;
+            width: 100%;
+            background: url('/error/error404/404.jpg') repeat center top transparent;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+            a img {
+                border: none;
+            }
+
+        .box {
+            margin: 0 auto;
+            padding: 285px 0 0 35px;
+            width: 350px;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div class="box">
+            <a href="http://buygroup365.com/">
+                <img src="/error/error404/404gohome.png" alt="buygroup365.com">
+            </a>
+        </div>
+
+    </form>
+</body>
+</html>

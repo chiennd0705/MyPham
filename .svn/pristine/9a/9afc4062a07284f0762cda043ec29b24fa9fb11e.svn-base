@@ -1,0 +1,240 @@
+﻿
+@model List<Common.News>
+@{
+    ViewBag.Title = "Tin tức";
+    Layout = "~/Views/Shared/_LayoutIndex.cshtml";
+    var newsGroup = (Common.NewsGroup)ViewBag.NewsGroup;
+
+
+    <script src="~/Scripts/jquery-1.9.1.min.js"></script>
+    <script src="~/Scripts/angular.min.js"></script>
+}
+<link rel="stylesheet" type="text/css" href="/Content/Csspublic/css/customer.css" media="all">
+<div class="main-container col2-left-layout " ng-app="application">
+    <div class="breadcrumbs">
+        <div class="container">
+            <ul>
+                <li class="home" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <a href="/Home/Index" title="Go to Home Page" itemprop="url"><span itemprop="title">Home</span></a>
+                </li>
+                <li class="blog">
+                    <strong>Tin tức</strong>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="container">
+        <div class="main">
+            <div class="row">
+                <div class="col-main col-lg-9 col-md-9 col-sm-9 col-xs-12 content-color color f-right" ng-controller="Index">
+                    <div id="displayNewsDetail" data-ng-model="emp">
+                        <div class="postWrapper">
+                            <div class="postTitle">
+                                <h2><a href="#">{{emp.Title}}</a></h2>
+                            </div>
+                            <div class="blog-head post-date clearfix">
+                                <div class="postDetails">
+                                    <div class="date" ><span>{{emp.CreateDate | date : 'short'}}</span></div>
+                                </div>
+                            </div>
+                            <!--<div class="tags"></div>-->
+
+                            <div class="postContent postContent-detail"><p class="blog-img"><img alt="" src="/FileUpload/Image/thumb/{{emp.ImageSource}}"></p><p>{{emp.Summary}}</p></div>
+                        </div>
+
+                        <div class="commentWrapper">
+                            <div class="commentDetails"><h4 class="username"><b>{{emp.Title}}</b></h4>  {{emp.CreateDate | date : 'short'}}</div>
+                            <div class="commentContent">{{emp.Descriptions}}</div>
+                        </div>
+                        <br/><br/><br/>
+                    </div>
+                    <div id="displayListNews">
+                        @*Hiển thị list tin tức theo danh mục củ thể*@
+                        @foreach (var item in Model)
+                        {
+                            <div class="postWrapper">
+                                <div class="blog-poss">
+
+                                    <div class="row">
+                                        <div class="col-sm-5">
+                                            <div class="blog-image al-style-2 image-container">
+                                                <a class="blog-img-none" ng-click="showingDetailNews(@item.Id)" href="#"><img class="img-responsive" src="/FileUpload/Image/thumb/@item.ImageSource"></a>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-7">
+                                            <div class="blog-right">
+                                                <div class="postTitle">
+                                                    <h2><a ng-click="showingDetailNews(@item.Id)" href="#">@item.Title</a></h2>
+                                                </div>
+
+                                                <div class="by post-date clearfix">
+                                                    <div class="postDetails">
+                                                        <span class="posted">Tổng lượt xem:</span>@item.TotalView <span class="user"></span>
+                                                    </div>
+
+                                                </div>
+                                                <div class="blog-head post-date clearfix">
+                                                    <div class="postDetails">
+                                                        <div class="number"><span>@item.CreateDate</span></div>
+                                                    </div>
+                                                </div>
+                                                <div class="postContent"><p>@item.Summary</p><a class="aw-blog-read-more" ng-click="showingDetailNews(@item.Id)" href="#">Chi tiết</a></div><br /><br />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        }
+
+                        @*Phân trang*@
+                        <!--Phân trang-->
+                        <div style="text-align:center">
+                            @if (ViewBag.TotalPage > 1)
+                            {
+                                var pageDisplay = (int)ViewBag.MaxPage;
+                                int totalPage = (int)ViewBag.TotalPage;
+                                int currentPage = ((int)ViewBag.Page);
+
+                                // Create numeric links
+                                var startPageIndex = Math.Max(1, currentPage - pageDisplay / 2);
+                                var endPageIndex = Math.Min(totalPage, currentPage + pageDisplay / 2);
+
+                                var link = "/News/Index/" + @newsGroup.Id;
+
+                                <nav>
+                                    <ul class="pagination">
+                                        @if (currentPage > ViewBag.First)
+                                        {
+                                            <li><a href="@link?page=@ViewBag.First" title="Trang đầu" class="first"><i class="fa fa-angle-double-left"></i></a></li>
+                                            <li>
+                                                <a href="@link?page=@ViewBag.Prev" title="Trang trước" class="prev"><i class="fa fa-angle-left"></i></a>
+                                            </li>
+
+                                        }
+                                        @for (int i = startPageIndex; i <= endPageIndex; i++)
+                                        {
+                                            if (currentPage == i)
+                                            {
+
+                                                <li> <a href="@link?page=@i" class="active" title="Trang @i">@i</a></li>
+                                            }
+                                            else
+                                            {
+                                                <li><a href="@link?page=@i" title="Trang @i" class="pos">@i</a></li>
+                                            }
+                                        }
+                                        @if (currentPage < totalPage)
+                                        {
+                                            <li><a href="@link?page=@ViewBag.Next" class="next" title="Trang sau"><i class="fa fa-angle-right"></i></a></li>
+                                            <li> <a href="@link?page=@ViewBag.Last" class="last" title="Trang cuối"><i class="fa fa-angle-double-right"></i></a></li>
+                                        }
+
+                                    </ul>
+                                </nav>
+
+                            }
+                            else
+                            {
+                                @*<span>Không có bản ghi nào</span>*@
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                @*Hiển thị tên nhóm tin*@
+                <div class="col-left sidebar col-lg-3 col-md-3 col-sm-3 col-xs-12 left-color color f-left">
+                    <div id="menuNewsGroup">
+                        @Html.Partial("_PartialMenuNewsGroup")  
+
+                        @*Code collapse js*@
+                        <script type="text/javascript">
+                            jQuery(document).ready(function ($) {
+                                (function (selector) {
+                                    var $content = $(selector);
+                                    var $accordion = $content.find('.nav-accordion');
+                                    var catplus = $accordion.find('>.level0:hidden');
+                                    if (!catplus.length) $content.find('.all-cat').hide();
+                                    else $content.find('.all-cat').click(function (event) { $(this).children().toggle(); catplus.slideToggle('slow'); });
+                                })('.anav-container');
+                            });
+                        </script>
+                        <script type="text/javascript">
+                            jQuery(document).ready(function ($) {
+                                $(".nav-accordion").magicaccordion({
+                                    accordion: true,
+                                    speed: 400,
+                                    closedSign: 'collapse',
+                                    openedSign: 'expand',
+                                    easing: 'easeInOutQuad'
+                                });
+                            });
+                        </script>                   
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    $('#displayNewsDetail').hide();
+
+    //function showingDetailNews(id) {
+
+
+    //    $('displayNewsDetail').show();
+    //    $('displayListNews').hide();
+    //}
+
+    angular.module("application", []).controller("header", function ($scope) {
+        //   $scope.quanlyuser = "Câp nhật thái";
+    }).controller("Index", function ($scope) {
+
+        $scope.emp = {
+            Id: '',
+            NewsGroupId: '',
+            Title: '',
+            ImageSource: '',
+            Summary: '',
+            Descriptions: '',
+            Status: '',
+            isPublic: '',
+            TotalView: '',
+            CreateDate: ''
+        };      
+        $scope.showingDetailNews = function (id) {           
+            $.ajax({
+                url: '@Url.Action("GetDetailNews", "News")',
+                data: {
+                    'id': id
+                },
+                type: 'GET',
+                contentType: 'application/json; charset=utf-8',
+
+                success: function (data) {
+                    $scope.emp.Id = data.Id;
+                    $scope.emp.NewsGroupId = data.NewsGroupId;
+                    $scope.emp.Title = data.Title;
+                    $scope.emp.ImageSource = data.ImageSource;
+                    $scope.emp.Summary = data.Summary;
+                    $scope.emp.Descriptions = data.Descriptions;
+                    $scope.emp.Status = data.Status;
+                    $scope.emp.TotalView = data.TotalView;
+                    $scope.emp.CreateDate = data.CreateDate;
+
+                    $('#displayNewsDetail').show();
+                    $('#displayListNews').hide();
+
+                    $scope.$apply();
+                },
+                error: function (data) {
+                    window.alert("loi");
+                }
+            });          
+        };
+       
+    });
+   
+</script>

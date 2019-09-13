@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="bec5a3ff728c43e8a08268790c626059" Name="Diagram1" ZoomLevel="90">
+        <EntityTypeShape EntityType="BuyGroup365Model.CatalogProperty" Width="1.5" PointX="3" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BuyGroup365Model.CatalogPropertiesValue" Width="1.5" PointX="5.25" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BuyGroup365Model.Catalog" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BuyGroup365Model.Catalogs_Manufacturers" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BuyGroup365Model.Comment" Width="1.5" PointX="10.25" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BuyGroup365Model.Manufacturer" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BuyGroup365Model.MemberProfile" Width="1.5" PointX="15" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BuyGroup365Model.Member" Width="1.5" PointX="12.75" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BuyGroup365Model.Module" Width="1.5" PointX="5.75" PointY="24.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BuyGroup365Model.News" Width="1.5" PointX="20" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="BuyGroup365Model.NewsGroup" Width="1.5" PointX="17.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BuyGroup365Model.OrderBuyer" Width="1.5" PointX="17.25" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BuyGroup365Model.OrderDetail" Width="1.5" PointX="17.25" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BuyGroup365Model.OrderReciver" Width="1.5" PointX="17.25" PointY="14.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BuyGroup365Model.Order" Width="1.5" PointX="15" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BuyGroup365Model.PayForm" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BuyGroup365Model.ProductImage" Width="1.5" PointX="10.25" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BuyGroup365Model.ProductProperty" Width="1.5" PointX="10.25" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BuyGroup365Model.Product" Width="1.5" PointX="8" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BuyGroup365Model.Role" Width="1.5" PointX="5.75" PointY="19.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BuyGroup365Model.RoleModule" Width="1.5" PointX="8" PointY="20.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BuyGroup365Model.ShopCatalog" Width="1.5" PointX="8.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BuyGroup365Model.ShopNew" Width="1.5" PointX="17.25" PointY="18.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BuyGroup365Model.ShopNewsGroup" Width="1.5" PointX="15" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BuyGroup365Model.ShopPolicy" Width="1.5" PointX="17.25" PointY="22.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BuyGroup365Model.Shop" Width="1.5" PointX="15" PointY="23.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BuyGroup365Model.ShopSetting" Width="1.5" PointX="15" PointY="29.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BuyGroup365Model.ShopSupport" Width="1.5" PointX="17.25" PointY="25.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BuyGroup365Model.User" Width="1.5" PointX="0.75" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BuyGroup365Model.UserGroup" Width="1.5" PointX="3.75" PointY="18.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BuyGroup365Model.UserGroupRole" Width="1.5" PointX="8" PointY="23.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BuyGroup365Model.UserProfile" Width="1.5" PointX="3" PointY="14.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BuyGroup365Model.UserUsergroup" Width="1.5" PointX="6" PointY="15.125" IsExpanded="true" />
+        <AssociationConnector Association="BuyGroup365Model.FK_CatalogProperties_Catalogs" ManuallyRouted="false" />
+        <AssociationConnector Association="BuyGroup365Model.FK_CatalogPropertiesValue_CatalogProperties" ManuallyRouted="false" />
+        <AssociationConnector Association="BuyGroup365Model.FK_Catalogs_Manufacturers_Catalogs" ManuallyRouted="false" />
+        <AssociationConnector Association="BuyGroup365Model.FK_Products_Catalogs" ManuallyRouted="false" />
+        <AssociationConnector Association="BuyGroup365Model.FK_Catalogs_Manufacturers_Manufacturers" ManuallyRouted="false" />
+        <AssociationConnector Association="BuyGroup365Model.FK_Comments_Products" ManuallyRouted="false" />
+        <AssociationConnector Association="BuyGroup365Model.FK_Products_Manufacturers" ManuallyRouted="false" />
+        <AssociationConnector Association="BuyGroup365Model.FK_MemberProfile_Members" ManuallyRouted="false" />
+        <AssociationConnector Association="BuyGroup365Model.FK_Orders_Members" ManuallyRouted="false" />
+        <AssociationConnector Association="BuyGroup365Model.FK_ShopNewsGroups_Members" ManuallyRouted="false" />
+        <AssociationConnector Association="BuyGroup365Model.FK_Shops_Members" ManuallyRouted="false" />
+        <AssociationConnector Association="BuyGroup365Model.FK_ShopSettings_Members" ManuallyRouted="false" />
+        <AssociationConnector Association="BuyGroup365Model.FK_role_module_module" ManuallyRouted="false" />
+        <AssociationConnector Association="BuyGroup365Model.FK_News_NewsGroups" ManuallyRouted="false" />
+        <AssociationConnector Association="BuyGroup365Model.FK_OrderBuyer_Order" ManuallyRouted="false" />
+        <AssociationConnector Association="BuyGroup365Model.FK_OrderDetail_Order" ManuallyRouted="false" />
+        <AssociationConnector Association="BuyGroup365Model.FK_OrderReciver_Order" ManuallyRouted="false" />
+        <AssociationConnector Association="BuyGroup365Model.FK_ProductImages_Products" ManuallyRouted="false" />
+        <AssociationConnector Association="BuyGroup365Model.FK_ProductProperties_Products" ManuallyRouted="false" />
+        <AssociationConnector Association="BuyGroup365Model.FK_role_module_role" ManuallyRouted="false" />
+        <AssociationConnector Association="BuyGroup365Model.FK_user_group_role_role" ManuallyRouted="false" />
+        <AssociationConnector Association="BuyGroup365Model.FK_ShopNews_ShopNewsGroups" ManuallyRouted="false" />
+        <AssociationConnector Association="BuyGroup365Model.FK_ShopPolicys_Shops" ManuallyRouted="false" />
+        <AssociationConnector Association="BuyGroup365Model.FK_ShopSupports_Shops" ManuallyRouted="false" />
+        <AssociationConnector Association="BuyGroup365Model.FK_user_profile_user1" ManuallyRouted="false" />
+        <AssociationConnector Association="BuyGroup365Model.FK_user_usergroup_user" ManuallyRouted="false" />
+        <AssociationConnector Association="BuyGroup365Model.FK_user_usergroup_user_group" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="BuyGroup365Model.Location" Width="1.5" PointX="7.375" PointY="0.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

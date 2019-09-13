@@ -1,0 +1,572 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BHD_InventorModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Data_Balance">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="code" Type="nvarchar" MaxLength="50" />
+    <Property Name="deleted" Type="bit" />
+    <Property Name="create_date" Type="datetime" />
+    <Property Name="modified_date" Type="datetime" />
+    <Property Name="create_user" Type="nvarchar" MaxLength="50" />
+    <Property Name="modified_user" Type="nvarchar" MaxLength="50" />
+    <Property Name="balance_date" Type="datetime" />
+    <Property Name="balance_user" Type="nvarchar" MaxLength="50" />
+    <Property Name="inventory_code" Type="nvarchar" MaxLength="50" />
+    <Property Name="noted" Type="nvarchar" MaxLength="250" />
+    <Property Name="confirmed" Type="bit" />
+  </EntityType>
+  <EntityType Name="Data_Balance_Detail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="deleted" Type="bit" />
+    <Property Name="create_date" Type="datetime" />
+    <Property Name="modified_date" Type="datetime" />
+    <Property Name="create_user" Type="nvarchar" MaxLength="50" />
+    <Property Name="modified_user" Type="nvarchar" MaxLength="50" />
+    <Property Name="balance_code" Type="nvarchar" MaxLength="50" />
+    <Property Name="goods_code" Type="nvarchar" MaxLength="50" />
+    <Property Name="receipt_code" Type="nvarchar" MaxLength="50" />
+    <Property Name="expiry_date" Type="datetime" />
+    <Property Name="quantity_system" Type="float" />
+    <Property Name="quantity_real" Type="float" />
+    <Property Name="quantity_balance" Type="float" />
+    <Property Name="notes_detail" Type="nvarchar" MaxLength="250" />
+    <Property Name="shipment_code" Type="nvarchar" MaxLength="50" />
+    <Property Name="barcode" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Data_Barcode">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="shipment_code" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="barcode" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="deleted" Type="bit" />
+    <Property Name="create_date" Type="datetime" />
+    <Property Name="modified_date" Type="datetime" />
+    <Property Name="create_user" Type="nvarchar" MaxLength="50" />
+    <Property Name="modified_user" Type="nvarchar" MaxLength="50" />
+    <Property Name="goods_code" Type="nvarchar" MaxLength="50" />
+    <Property Name="receipt_code" Type="nvarchar" MaxLength="50" />
+    <Property Name="expiry_date" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Data_Deliver">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="code" Type="nvarchar" MaxLength="50" />
+    <Property Name="deleted" Type="bit" />
+    <Property Name="create_date" Type="datetime" />
+    <Property Name="modified_date" Type="datetime" />
+    <Property Name="create_user" Type="nvarchar" MaxLength="50" />
+    <Property Name="modified_user" Type="nvarchar" MaxLength="50" />
+    <Property Name="deliver_date" Type="datetime" />
+    <Property Name="deliver_user" Type="nvarchar" MaxLength="50" />
+    <Property Name="inventory_code" Type="nvarchar" MaxLength="50" />
+    <Property Name="branch_code" Type="nvarchar" MaxLength="50" />
+    <Property Name="type_code" Type="nvarchar" MaxLength="50" />
+    <Property Name="noted" Type="nvarchar" MaxLength="250" />
+    <Property Name="confirmed" Type="bit" />
+    <Property Name="require_code" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Data_Deliver_Detail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="deleted" Type="bit" />
+    <Property Name="create_date" Type="datetime" />
+    <Property Name="modified_date" Type="datetime" />
+    <Property Name="create_user" Type="nvarchar" MaxLength="50" />
+    <Property Name="modified_user" Type="nvarchar" MaxLength="50" />
+    <Property Name="deliver_code" Type="nvarchar" MaxLength="50" />
+    <Property Name="goods_code" Type="nvarchar" MaxLength="50" />
+    <Property Name="receipt_code" Type="nvarchar" MaxLength="50" />
+    <Property Name="quantity" Type="float" />
+    <Property Name="expiry_date" Type="datetime" />
+    <Property Name="quantity_before" Type="float" />
+    <Property Name="notes_detail" Type="nvarchar" MaxLength="250" />
+    <Property Name="shipment_code" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Data_Internal">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="code" Type="nvarchar" MaxLength="50" />
+    <Property Name="deleted" Type="bit" />
+    <Property Name="create_date" Type="datetime" />
+    <Property Name="modified_date" Type="datetime" />
+    <Property Name="create_user" Type="nvarchar" MaxLength="50" />
+    <Property Name="modified_user" Type="nvarchar" MaxLength="50" />
+    <Property Name="internal_date" Type="datetime" />
+    <Property Name="internal_user" Type="nvarchar" MaxLength="50" />
+    <Property Name="from_inventory_code" Type="nvarchar" MaxLength="50" />
+    <Property Name="to_inventory_code" Type="nvarchar" MaxLength="50" />
+    <Property Name="type_code" Type="nvarchar" MaxLength="50" />
+    <Property Name="receipt_user" Type="nvarchar" MaxLength="50" />
+    <Property Name="deliver_user" Type="nvarchar" MaxLength="50" />
+    <Property Name="noted" Type="nvarchar" MaxLength="250" />
+    <Property Name="confirmed" Type="bit" />
+  </EntityType>
+  <EntityType Name="Data_Internal_Detail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="deleted" Type="bit" />
+    <Property Name="create_date" Type="datetime" />
+    <Property Name="modified_date" Type="datetime" />
+    <Property Name="create_user" Type="nvarchar" MaxLength="50" />
+    <Property Name="modified_user" Type="nvarchar" MaxLength="50" />
+    <Property Name="internal_code" Type="nvarchar" MaxLength="50" />
+    <Property Name="goods_code" Type="nvarchar" MaxLength="50" />
+    <Property Name="receipt_code" Type="nvarchar" MaxLength="50" />
+    <Property Name="expiry_date" Type="datetime" />
+    <Property Name="quantity" Type="float" />
+    <Property Name="quantity_before" Type="float" />
+    <Property Name="notes_detail" Type="nvarchar" MaxLength="250" />
+    <Property Name="shipment_code" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Data_Order">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="create_date" Type="datetime" />
+    <Property Name="modifield_date" Type="datetime" />
+    <Property Name="create_user" Type="nvarchar" MaxLength="50" />
+    <Property Name="modified_user" Type="nvarchar" MaxLength="50" />
+    <Property Name="deleted" Type="bit" />
+    <Property Name="code" Type="nvarchar" MaxLength="50" />
+    <Property Name="order_date" Type="datetime" />
+    <Property Name="vendor_code" Type="nvarchar" MaxLength="50" />
+    <Property Name="inventory_code" Type="nvarchar" MaxLength="50" />
+    <Property Name="noted" Type="nvarchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="Data_Order_Detail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="create_date" Type="datetime" />
+    <Property Name="modifield_date" Type="datetime" />
+    <Property Name="create_user" Type="nvarchar" MaxLength="50" />
+    <Property Name="modified_user" Type="nvarchar" MaxLength="50" />
+    <Property Name="deleted" Type="bit" />
+    <Property Name="order_code" Type="nvarchar" MaxLength="50" />
+    <Property Name="goods_code" Type="nvarchar" MaxLength="50" />
+    <Property Name="quantity" Type="float" />
+    <Property Name="notes_detail" Type="nvarchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="Data_Receipt">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="code" Type="nvarchar" MaxLength="50" />
+    <Property Name="deleted" Type="bit" />
+    <Property Name="create_date" Type="datetime" />
+    <Property Name="modified_date" Type="datetime" />
+    <Property Name="create_user" Type="nvarchar" MaxLength="50" />
+    <Property Name="modified_user" Type="nvarchar" MaxLength="50" />
+    <Property Name="receipt_date" Type="datetime" />
+    <Property Name="receipt_user" Type="nvarchar" MaxLength="50" />
+    <Property Name="inventory_code" Type="nvarchar" MaxLength="50" />
+    <Property Name="vendor_code" Type="nvarchar" MaxLength="50" />
+    <Property Name="type_code" Type="nvarchar" MaxLength="50" />
+    <Property Name="noted" Type="nvarchar" MaxLength="250" />
+    <Property Name="confirmed" Type="bit" />
+    <Property Name="deliver_code" Type="nvarchar" MaxLength="50" />
+    <Property Name="branch_code" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Data_Receipt_Detail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="deleted" Type="bit" />
+    <Property Name="create_date" Type="datetime" />
+    <Property Name="modified_date" Type="datetime" />
+    <Property Name="create_user" Type="nvarchar" MaxLength="50" />
+    <Property Name="modified_user" Type="nvarchar" MaxLength="50" />
+    <Property Name="receipt_code" Type="nvarchar" MaxLength="50" />
+    <Property Name="goods_code" Type="nvarchar" MaxLength="50" />
+    <Property Name="expiry_date" Type="datetime" />
+    <Property Name="quantity" Type="float" />
+    <Property Name="notes_detail" Type="nvarchar" MaxLength="250" />
+    <Property Name="shipment_code" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Data_Require">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="code" Type="nvarchar" MaxLength="50" />
+    <Property Name="deleted" Type="bit" />
+    <Property Name="create_date" Type="datetime" />
+    <Property Name="modified_date" Type="datetime" />
+    <Property Name="create_user" Type="nvarchar" MaxLength="50" />
+    <Property Name="modified_user" Type="nvarchar" MaxLength="50" />
+    <Property Name="require_date" Type="datetime" />
+    <Property Name="require_user" Type="nvarchar" MaxLength="50" />
+    <Property Name="require_inventory" Type="nvarchar" MaxLength="50" />
+    <Property Name="noted" Type="nvarchar" MaxLength="250" />
+    <Property Name="confirmed" Type="bit" />
+  </EntityType>
+  <EntityType Name="Data_Require_Detail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="deleted" Type="bit" />
+    <Property Name="create_date" Type="datetime" />
+    <Property Name="modified_date" Type="datetime" />
+    <Property Name="create_user" Type="nvarchar" MaxLength="50" />
+    <Property Name="modified_user" Type="nvarchar" MaxLength="50" />
+    <Property Name="require_code" Type="nvarchar" MaxLength="50" />
+    <Property Name="goods_code" Type="nvarchar" MaxLength="50" />
+    <Property Name="quantity" Type="float" />
+    <Property Name="notes_detail" Type="nvarchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="Data_Suggest">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="code" Type="nvarchar" MaxLength="50" />
+    <Property Name="deleted" Type="bit" />
+    <Property Name="create_date" Type="datetime" />
+    <Property Name="modified_date" Type="datetime" />
+    <Property Name="create_user" Type="nvarchar" MaxLength="50" />
+    <Property Name="modified_user" Type="nvarchar" MaxLength="50" />
+    <Property Name="suggest_date" Type="datetime" />
+    <Property Name="suggest_user" Type="nvarchar" MaxLength="50" />
+    <Property Name="noted" Type="nvarchar" MaxLength="250" />
+    <Property Name="confirmed" Type="bit" />
+  </EntityType>
+  <EntityType Name="Data_Suggest_Detail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="deleted" Type="bit" />
+    <Property Name="create_date" Type="datetime" />
+    <Property Name="modified_date" Type="datetime" />
+    <Property Name="create_user" Type="nvarchar" MaxLength="50" />
+    <Property Name="modified_user" Type="nvarchar" MaxLength="50" />
+    <Property Name="suggest_code" Type="nvarchar" MaxLength="50" />
+    <Property Name="goods_code" Type="nvarchar" MaxLength="50" />
+    <Property Name="quantity" Type="float" />
+    <Property Name="notes_detail" Type="nvarchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="List_Branch">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="code" Type="nvarchar" MaxLength="50" />
+    <Property Name="name" Type="nvarchar" MaxLength="50" />
+    <Property Name="deleted" Type="bit" />
+    <Property Name="create_date" Type="datetime" />
+    <Property Name="modified_date" Type="datetime" />
+    <Property Name="create_user" Type="nvarchar" MaxLength="50" />
+    <Property Name="modified_user" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="List_Combo_Detail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="combo_code" Type="nvarchar" MaxLength="50" />
+    <Property Name="goods_code" Type="nvarchar" MaxLength="50" />
+    <Property Name="quantity" Type="float" />
+    <Property Name="deleted" Type="bit" />
+    <Property Name="create_date" Type="datetime" />
+    <Property Name="modified_date" Type="datetime" />
+    <Property Name="create_user" Type="nvarchar" MaxLength="50" />
+    <Property Name="modified_user" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="List_Employee">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="code" Type="nvarchar" MaxLength="50" />
+    <Property Name="name" Type="nvarchar" MaxLength="50" />
+    <Property Name="deleted" Type="bit" />
+    <Property Name="create_date" Type="datetime" />
+    <Property Name="modified_date" Type="datetime" />
+    <Property Name="create_user" Type="nvarchar" MaxLength="50" />
+    <Property Name="modified_user" Type="nvarchar" MaxLength="50" />
+    <Property Name="inventory_code" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="List_Goods">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="code" Type="nvarchar" MaxLength="50" />
+    <Property Name="name" Type="nvarchar" MaxLength="50" />
+    <Property Name="deleted" Type="bit" />
+    <Property Name="create_date" Type="datetime" />
+    <Property Name="modified_date" Type="datetime" />
+    <Property Name="create_user" Type="nvarchar" MaxLength="50" />
+    <Property Name="modified_user" Type="nvarchar" MaxLength="50" />
+    <Property Name="unit_code" Type="nvarchar" MaxLength="50" />
+    <Property Name="group_code" Type="nvarchar" MaxLength="50" />
+    <Property Name="min_quantity" Type="float" />
+    <Property Name="max_quantity" Type="float" />
+    <Property Name="warn_before" Type="int" />
+    <Property Name="manage_expiry" Type="bit" />
+    <Property Name="print_barcode" Type="bit" />
+    <Property Name="is_combo" Type="bit" />
+    <Property Name="input_price" Type="float" />
+    <Property Name="output_price" Type="float" />
+  </EntityType>
+  <EntityType Name="List_Group_Goods">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="code" Type="nvarchar" MaxLength="50" />
+    <Property Name="name" Type="nvarchar" MaxLength="50" />
+    <Property Name="deleted" Type="bit" />
+    <Property Name="create_date" Type="datetime" />
+    <Property Name="modified_date" Type="datetime" />
+    <Property Name="create_user" Type="nvarchar" MaxLength="50" />
+    <Property Name="modified_user" Type="nvarchar" MaxLength="50" />
+    <Property Name="parent_code" Type="nvarchar" MaxLength="50" />
+    <Property Name="status" Type="tinyint" />
+  </EntityType>
+  <EntityType Name="List_Inventory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="code" Type="nvarchar" MaxLength="50" />
+    <Property Name="name" Type="nvarchar" MaxLength="50" />
+    <Property Name="deleted" Type="bit" />
+    <Property Name="create_date" Type="datetime" />
+    <Property Name="modified_date" Type="datetime" />
+    <Property Name="create_user" Type="nvarchar" MaxLength="50" />
+    <Property Name="modified_user" Type="nvarchar" MaxLength="50" />
+    <Property Name="branch_code" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="List_Type">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="code" Type="nvarchar" MaxLength="50" />
+    <Property Name="name" Type="nvarchar" MaxLength="50" />
+    <Property Name="deleted" Type="bit" />
+    <Property Name="create_date" Type="datetime" />
+    <Property Name="modified_date" Type="datetime" />
+    <Property Name="create_user" Type="nvarchar" MaxLength="50" />
+    <Property Name="modified_user" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="List_Unit">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="code" Type="nvarchar" MaxLength="50" />
+    <Property Name="name" Type="nvarchar" MaxLength="50" />
+    <Property Name="deleted" Type="bit" />
+    <Property Name="create_date" Type="datetime" />
+    <Property Name="modified_date" Type="datetime" />
+    <Property Name="create_user" Type="nvarchar" MaxLength="50" />
+    <Property Name="modified_user" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="List_Vendor">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="code" Type="nvarchar" MaxLength="50" />
+    <Property Name="name" Type="nvarchar" MaxLength="50" />
+    <Property Name="address" Type="nvarchar" MaxLength="250" />
+    <Property Name="phone_number" Type="nvarchar" MaxLength="50" />
+    <Property Name="deleted" Type="bit" />
+    <Property Name="create_date" Type="datetime" />
+    <Property Name="modified_date" Type="datetime" />
+    <Property Name="create_user" Type="nvarchar" MaxLength="50" />
+    <Property Name="modified_user" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="System_Function">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="code" Type="nvarchar" MaxLength="50" />
+    <Property Name="name" Type="nvarchar" MaxLength="50" />
+    <Property Name="report_code" Type="nvarchar" MaxLength="50" />
+    <Property Name="group_id" Type="int" />
+    <Property Name="key_structure" Type="nvarchar" MaxLength="50" />
+    <Property Name="visible" Type="bit" />
+    <Property Name="locked" Type="bit" />
+    <Property Name="main_table" Type="nvarchar" MaxLength="50" />
+    <Property Name="main_sql" Type="nvarchar(max)" />
+    <Property Name="main_key" Type="nvarchar" MaxLength="50" />
+    <Property Name="sub_table" Type="nvarchar" MaxLength="50" />
+    <Property Name="sub_sql" Type="nvarchar(max)" />
+    <Property Name="sub_fkey" Type="nvarchar" MaxLength="50" />
+    <Property Name="form_display" Type="nvarchar" MaxLength="50" />
+    <Property Name="column_display" Type="nvarchar" MaxLength="50" />
+    <Property Name="column_value" Type="nvarchar" MaxLength="50" />
+    <Property Name="find_code" Type="nvarchar" MaxLength="50" />
+    <Property Name="deleted" Type="bit" />
+    <Property Name="create_date" Type="datetime" />
+    <Property Name="modified_date" Type="datetime" />
+    <Property Name="create_user" Type="nvarchar" MaxLength="50" />
+    <Property Name="modified_user" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="System_Function_Detail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="function_code" Type="nvarchar" MaxLength="50" />
+    <Property Name="column_name" Type="nvarchar" MaxLength="50" />
+    <Property Name="display_name" Type="nvarchar" MaxLength="150" />
+    <Property Name="data_type" Type="nvarchar" MaxLength="50" />
+    <Property Name="length" Type="nvarchar" MaxLength="50" />
+    <Property Name="format" Type="nvarchar" MaxLength="50" />
+    <Property Name="find_code" Type="nvarchar" MaxLength="50" />
+    <Property Name="position" Type="int" />
+    <Property Name="input_required" Type="bit" />
+    <Property Name="hide" Type="bit" />
+    <Property Name="default_value" Type="nvarchar" MaxLength="50" />
+    <Property Name="hide_grid" Type="bit" />
+    <Property Name="readonly" Type="bit" />
+    <Property Name="deleted" Type="bit" />
+    <Property Name="create_date" Type="datetime" />
+    <Property Name="modified_date" Type="datetime" />
+    <Property Name="create_user" Type="nvarchar" MaxLength="50" />
+    <Property Name="modified_user" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="System_Info">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="code" Type="nvarchar" MaxLength="50" />
+    <Property Name="name" Type="nvarchar" MaxLength="50" />
+    <Property Name="value" Type="nvarchar" MaxLength="50" />
+    <Property Name="deleted" Type="bit" />
+    <Property Name="create_date" Type="datetime" />
+    <Property Name="modified_date" Type="datetime" />
+    <Property Name="create_user" Type="nvarchar" MaxLength="50" />
+    <Property Name="modified_user" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="System_Report">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="code" Type="nvarchar" MaxLength="50" />
+    <Property Name="name" Type="nvarchar" MaxLength="50" />
+    <Property Name="function_code" Type="nvarchar" MaxLength="50" />
+    <Property Name="report_file" Type="varbinary(max)" />
+    <Property Name="group_report_code" Type="nvarchar" MaxLength="50" />
+    <Property Name="display_sql" Type="nvarchar(max)" />
+    <Property Name="deleted" Type="bit" />
+    <Property Name="create_date" Type="datetime" />
+    <Property Name="modified_date" Type="datetime" />
+    <Property Name="create_user" Type="nvarchar" MaxLength="50" />
+    <Property Name="modified_user" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="System_Report_Detail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="report_code" Type="nvarchar" MaxLength="50" />
+    <Property Name="parameter_name" Type="nvarchar" MaxLength="50" />
+    <Property Name="parameter_display" Type="nvarchar" MaxLength="150" />
+    <Property Name="parameter_type" Type="nvarchar" MaxLength="50" />
+    <Property Name="find_code" Type="nvarchar" MaxLength="50" />
+    <Property Name="position" Type="int" />
+    <Property Name="input_required" Type="bit" />
+    <Property Name="deleted" Type="bit" />
+    <Property Name="create_date" Type="datetime" />
+    <Property Name="modified_date" Type="datetime" />
+    <Property Name="create_user" Type="nvarchar" MaxLength="50" />
+    <Property Name="modified_user" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="System_Rule">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="group_code" Type="nvarchar" MaxLength="50" />
+    <Property Name="function_code" Type="nvarchar" MaxLength="50" />
+    <Property Name="allow_add" Type="bit" />
+    <Property Name="allow_edit" Type="bit" />
+    <Property Name="allow_remove" Type="bit" />
+    <Property Name="allow_view" Type="bit" />
+    <Property Name="allow_print" Type="bit" />
+    <Property Name="allow_import" Type="bit" />
+    <Property Name="allow_export" Type="bit" />
+    <Property Name="deleted" Type="bit" />
+    <Property Name="create_date" Type="datetime" />
+    <Property Name="modified_date" Type="datetime" />
+    <Property Name="create_user" Type="nvarchar" MaxLength="50" />
+    <Property Name="modified_user" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="System_User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="username" Type="nvarchar" MaxLength="50" />
+    <Property Name="password" Type="nvarchar" MaxLength="50" />
+    <Property Name="employee_code" Type="nvarchar" MaxLength="50" />
+    <Property Name="group_code" Type="nvarchar" MaxLength="50" />
+    <Property Name="locked" Type="bit" />
+    <Property Name="deleted" Type="bit" />
+    <Property Name="create_date" Type="datetime" />
+    <Property Name="modified_date" Type="datetime" />
+    <Property Name="create_user" Type="nvarchar" MaxLength="50" />
+    <Property Name="modified_user" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityContainer Name="BHD_InventorModelStoreContainer">
+    <EntitySet Name="Data_Balance" EntityType="Self.Data_Balance" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Data_Balance_Detail" EntityType="Self.Data_Balance_Detail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Data_Barcode" EntityType="Self.Data_Barcode" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Data_Deliver" EntityType="Self.Data_Deliver" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Data_Deliver_Detail" EntityType="Self.Data_Deliver_Detail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Data_Internal" EntityType="Self.Data_Internal" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Data_Internal_Detail" EntityType="Self.Data_Internal_Detail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Data_Order" EntityType="Self.Data_Order" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Data_Order_Detail" EntityType="Self.Data_Order_Detail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Data_Receipt" EntityType="Self.Data_Receipt" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Data_Receipt_Detail" EntityType="Self.Data_Receipt_Detail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Data_Require" EntityType="Self.Data_Require" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Data_Require_Detail" EntityType="Self.Data_Require_Detail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Data_Suggest" EntityType="Self.Data_Suggest" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Data_Suggest_Detail" EntityType="Self.Data_Suggest_Detail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="List_Branch" EntityType="Self.List_Branch" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="List_Combo_Detail" EntityType="Self.List_Combo_Detail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="List_Employee" EntityType="Self.List_Employee" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="List_Goods" EntityType="Self.List_Goods" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="List_Group_Goods" EntityType="Self.List_Group_Goods" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="List_Inventory" EntityType="Self.List_Inventory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="List_Type" EntityType="Self.List_Type" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="List_Unit" EntityType="Self.List_Unit" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="List_Vendor" EntityType="Self.List_Vendor" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="System_Function" EntityType="Self.System_Function" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="System_Function_Detail" EntityType="Self.System_Function_Detail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="System_Info" EntityType="Self.System_Info" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="System_Report" EntityType="Self.System_Report" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="System_Report_Detail" EntityType="Self.System_Report_Detail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="System_Rule" EntityType="Self.System_Rule" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="System_User" EntityType="Self.System_User" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

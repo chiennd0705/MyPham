@@ -1,0 +1,397 @@
+﻿@using Common.util
+@model IPagedList<global::Common.ShopSetting>
+
+@{
+    ViewBag.Title = "ShopSetting";
+    Layout = "~/Views/Shared/_LayoutMember.cshtml";
+}
+<div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 ">
+    <div class="overbackgroud" id="overbackgroud" style="display: none;">
+        <img src="/img/loading/6.gif" style="position: relative; top: 44%; left: 46%" />
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+
+                <ol class="breadcrumb">
+                    <li><span class="glyphicon glyphicon-home"></span><a href="/"> Trang chủ</a></li>
+                    <li>
+                        <a href="/Member/Profile">
+                            @SessionUtility.GetSessionMember(Session).UserName
+                        </a>
+                    </li>
+                    <li class="active">Cài đặt shop</li>
+                </ol>
+            </h4>
+        </div>
+        <div id="collapseOne0" class="panel-collapse collapse in" style="height: auto;">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    <i class="fa fa-bar-chart-o fa-fw"></i> Danh mục sản phẩm
+                    <span style="float: right">
+                        <a class="glyphicon glyphicon-plus-sign" data-toggle="modal" data-target="#ShopSetting">
+
+                        </a>
+                    </span>
+
+
+                </h3>
+
+            </div>
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <div id="dataTables-example_wrapper" class="dataTables_wrapper form-inline" role="grid">
+                        @using (Ajax.BeginForm("ProductList", "Member", null,
+                            new AjaxOptions { UpdateTargetId = "grid-list", HttpMethod = "get", LoadingElementId = "loading", OnBegin = "beginPaging", OnSuccess = "successPaging", OnFailure = "failurePaging" },
+                            new { id = "frm-search" }))
+                        {
+                            <div id="grid-list">
+                                <table class="table table-striped table-bordered table-hover dataTable no-footer" id="dataTables" aria-describedby="dataTables-example_info">
+                                    <thead>
+                                        <tr>
+
+                                         
+                                            <th>Key </th>
+                                            <th>Giá trị</th>
+                                            <th>Ngày tao</th>
+                                            <th>Ngày cập nhật</th>
+                                            <th>Chức năng</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    @item.Key
+                                                </td>
+                                                <td>
+                                                    @item.Value
+                                                </td>
+                                                <td>
+                                                    @item.CreateDate.ToString("dd/MM/yyyy HH:mm:ss")
+                                                </td>
+                                                
+                                                <td>
+                                                    @item.ModifyDate.ToString("dd/MM/yyyy HH:mm:ss")
+                                                </td>
+                                                <td>
+                                                    
+                                                    <a class="fa fa-pencil-square-o" data-toggle="modal" data-target="#EditShopSetting" onclick="SendValue(@item.Id)" title="sửa cấu hình shop">
+
+                                                    </a>
+                                                    <span style="margin-right: 5px">|</span>
+                                                    <a href="#" class="glyphicon glyphicon-trash" onclick="Delete(@item.Id)"></a>
+                                                </td>
+
+                                            </tr>
+                                        }
+
+                                    </tbody>
+                                </table>
+
+                                <div class="">
+                                    <div class="">
+                                        <div class="dataTables_info" id="dataTables-example_info" role="alert" aria-live="polite" aria-relevant="all">Display from @Model.ItemStart to @Model.ItemEnd of @Model.TotalItemCount records</div>
+                                    </div>
+                                    <div class="">
+                                        <div class="dataTables_paginate paging_simple_numbers" id="dataTables-example_paginate">
+
+                                            @Html.Raw(Ajax.Pager(
+                                                new Options
+                                                {
+                                                    PageSize = Model.PageSize,
+                                                    TotalItemCount = Model.TotalItemCount,
+                                                    CurrentPage = Model.PageNumber,
+                                                    ItemTexts = new ItemTexts() { Next = "Next", Previous = "Previous", Page = "P" },
+                                                    ItemIcon = new ItemIcon() { First = "icon-backward", Previous = "icon-chevron-left", Next = "icon-chevron-right", Last = "icon-forward" },
+                                                    TooltipTitles = new TooltipTitles() { Next = "Next page", Previous = "Previous page", Page = "Page {0}." },
+                                                    Size = Size.normal,
+                                                    Alignment = Alignment.centered,
+                                                    IsShowControls = true,
+                                                    IsShowFirstLast = true,
+                                                    CssClass = ""
+                                                },
+                                                new AjaxOptions
+                                                {
+                                                    UpdateTargetId = "grid-list",
+                                                    HttpMethod = "get",
+                                                    LoadingElementId = "loading",
+                                                    OnBegin = "beginPaging",
+                                                    OnSuccess = "successPaging",
+                                                    OnFailure = "failurePaging"
+                                                }, new { controller = "Member", action = "ProductList", key = ViewData["key"], grade_card = ViewData["grade_card"] }))
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="modal fade" id="ShopSetting" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="overbackgroud" id="overbackgroud1" style="display: none;">
+        <img src="/img/loading/6.gif" style="position: relative; top: 44%; left: 46%" />
+    </div>
+    <div class="modal-dialog" style="left:0">
+        <div class="modal-content">
+            
+           
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Thêm mới cấu hình shop</h4>
+            </div>
+            <div class="modal-body">
+
+                <input type="hidden" name="success_url" value="">
+                <input type="hidden" name="error_url" value="">
+                <ul class="form-list">
+                    <li class="">
+                        <div class="customer-name-middlename">
+                            <div class="field name-firstname">
+                                <label for="firstname" class="required"><em>*</em>Key</label>
+                                <div class="input-box">
+                                    <input type="text" id="key" name="key" value="" title="Key" maxlength="255" class="input-text required-entry">
+                                </div>
+                            </div>
+                            <div class="field name-lastname">
+                                <label for="lastname" class="required"><em>*</em>Giá trị</label>
+                                <div class="input-box">
+                                    <input type="text" id="value" name="value" value="" title="Giá trị" maxlength="255" class="input-text required-entry">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                  
+                </ul>
+
+                <div class="buttons-set">
+                  
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="button" data-dismiss="modal"><span><span>Hủy bỏ</span></span></button>
+                <button  title="Submit" class="button" onclick="CreateShopSetting()"><span><span>Thêm mới</span></span></button>
+                  
+            </div>
+         
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="EditShopSetting" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="overbackgroud" id="overbackgroud1" style="display: none;">
+        <img src="/img/loading/6.gif" style="position: relative; top: 44%; left: 46%" />
+    </div>
+    <div class="modal-dialog" style="left:0">
+        <div class="modal-content">
+            <input type="hidden" id="idshopsetting"/>
+          
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Cập nhật cấu hình</h4>
+            </div>
+            <div class="modal-body">
+
+                <input type="hidden" name="success_url" value="">
+                <input type="hidden" name="error_url" value="">
+                <ul class="form-list">
+                    <li class="">
+                        <div class="customer-name-middlename">
+                            <div class="field name-firstname">
+                                <label for="firstname" class="required"><em>*</em>Key</label>
+                                <div class="input-box">
+                                    <input type="text" id="keyEdit" name="keyEdit" value="" title="keyEdit" maxlength="255" class="input-text required-entry">
+                                </div>
+                            </div>
+                            <div class="field name-lastname">
+                                <label for="lastname" class="required"><em>*</em>Giá trị</label>
+                                <div class="input-box">
+                                    <input type="text" id="valueEdit" name="valueEdit" value="" title="Giá trị" maxlength="255" class="input-text required-entry">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                </ul>
+
+                <div class="buttons-set">
+
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="button" data-dismiss="modal"><span><span>Hủy bỏ</span></span></button>
+                <button type="submit" title="Submit" class="button" onclick="EditShopSetting()"><span><span>Cập nhật</span></span></button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .overbackgroud {
+        position: absolute !important;
+        width: 96.5% !important;
+    }
+</style>
+<script type="text/javascript">
+
+    function SendValue(id) {
+        $('#overbackgroud1').show();
+        $('#idshopsetting').val(id);
+        $.ajax({
+            url: '@Url.Action("EditShopsetting", "Member")',
+            data: {
+                'id': id
+            },
+            dataType: 'json',
+            Type: 'POST',
+            traditional: true,
+            success: function(data) {
+                if (data == 0) {
+                    alert("Thao tác của bạn không hợp lệ");
+                    $('#overbackgroud').hide();
+                }
+                else if (data == 1) {
+                    alert("Hệ thống đang cập nhật vui lòng thực hiện lại sau");
+                    $('#overbackgroud').hide();
+                } else {
+                    alert(data.Key);
+                    $('#keyEdit').val(data.Key);
+                    $('#valueEdit').val(data.Value);
+                    $('#overbackgroud').hide();
+                }
+            },
+            error: function() {
+
+            }            
+        });
+    }
+    var dataForm = new VarienForm('frm-shopsetting', true);
+    
+    function CreateShopSetting() {
+        $('#overbackgroud1').show();
+        var key = $("#key").val();
+        var value = $("#value").val();
+        $.ajax({
+            url: '@Url.Action("CreateShopSetting","Member")',
+            data: {
+                'key': key,
+                'value': value
+            },
+            dataType: 'json',
+            Type: 'POST',
+            traditional: true,
+            success: function(data) {
+                if (data == "1") {
+                    alert("Vui lòng nhập key");
+                    $('#overbackgroud1').hide();
+                    $("#key").focus();
+                }
+                else if (data == "2") {
+                    alert("Vui lòng nhập giá trị");
+                    $('#overbackgroud1').hide();
+                    $("#value").focus();
+                }
+                else if (data =="4") {
+                    alert("Hệ thống đang cập nhật vui lòng thực hiện lại sau");
+                    $('#overbackgroud1').hide();
+                }
+                else if (data == "3") {
+                    alert(data);
+                    alert("Thêm mới thành công!");
+                    window.location.href = "/Member/ShopSetting";
+
+                }
+            },
+            error: function() {
+
+            }
+        });
+    }
+    function EditShopSetting() {
+        $('#overbackgroud1').show();
+        var key = $("#keyEdit").val();
+        var value = $("#valueEdit").val();
+        var id = $('#idshopsetting').val();
+        $.ajax({
+            url: '@Url.Action("EditShopsettingUpdate", "Member")',
+            data: {
+                'id':id,
+                'key': key,
+                'value': value
+            },
+            dataType: 'json',
+            Type: 'POST',
+            traditional: true,
+            success: function (data) {
+                if (data == 1) {
+                    alert("Vui lòng nhập key");
+                    $("#keyEdit").focus();
+                    $('#overbackgroud1').hide();
+                }
+                else if (data == 2) {
+                    alert("Vui lòng nhập giá trị");
+            $("#valueEdit").focus();
+                    $('#overbackgroud1').hide();
+                }
+                else if (data == 4) {
+                    alert("Hệ thống đang cập nhật vui lòng thực hiện lại sau");
+                    $('#overbackgroud1').hide();
+                }
+                else {
+                    alert("Câp nhật thành công!");
+                    window.location.href = "/Member/ShopSetting";
+
+                }
+            },
+            error: function () {
+
+            }
+        });
+    }
+    function Delete(id) {
+        var r = confirm("Bạn thật sự chắc chắn!");
+        $('#overbackgroud').show();
+        if (r) {
+            $.ajax({
+                url: '@Url.Action("DeleteShopSetting","Member")',
+                data: {
+                    'id': id
+                },
+                dataType: 'json',
+                Type: 'POST',
+                traditional: true,
+                success: function (data) {
+                    if (data == 2) {
+                        alert("Hệ thống đang cập nhật vui lòng thực hiện lại sau");
+                        $('#overbackgroud').hide();
+                    }
+                    else if (data == 0) {
+                        alert("Thao tác xóa của bạn không hợp lệ");
+                        $('#overbackgroud').hide();
+                    } else {
+                        alert("Xóa thành công!");
+                        window.location.href = "/Member/ShopSetting";
+                    }
+                },
+                error: function () {
+
+                }
+            });
+        }
+   
+    }
+</script>

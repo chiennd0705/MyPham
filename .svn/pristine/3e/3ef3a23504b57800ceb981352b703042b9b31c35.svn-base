@@ -1,0 +1,374 @@
+﻿@using MvcPaging
+@model IPagedList<Common.NewsGroup>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Manage/Views/Shared/_LayoutSetting.cshtml";
+
+    <script src="~/Content/css/ckeditor/ckeditor.js"></script>
+}
+
+<div class="container-fluid" ng-app="body">
+    <!-- Page Heading -->
+    @Html.Raw(BuyGroup365.Areas.Manage.Models.AdminFunction.BindHeader("Danh mục nhóm tin", null, null, null, null))
+    <!-- /.row -->
+    <!-- /.row -->
+    <!-- /.row -->
+    <div class="row" ng-controller="Index">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+       
+                <div class="panel-body">
+                    @using (Ajax.BeginForm("NewsGroup", "News",
+                        new AjaxOptions { UpdateTargetId = "grid-list", HttpMethod = "get", LoadingElementId = "loading", OnBegin = "beginPaging", OnSuccess = "successPaging", OnFailure = "failurePaging" },
+                        new { id = "frm-search" }))
+                    {
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group input-group">
+                                    <input type="text" value="@ViewData["key"]" class="form-control" id="appendedInputButton" name="key" placeholder="Nhập từ khóa tìm kiếm" style="width:80%">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="submit">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                            <div>
+                                <span style="float: right ;margin-right: 20px;font-size: 20px">
+                                    <a class="glyphicon glyphicon-plus-sign" data-toggle="modal" data-target="#myModal">
+
+                                    </a>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover table-striped" id="dataTables" aria-describedby="dataTables-example_info">
+                                <thead>
+                                    <tr role="row">
+                                        <th>
+                                            ParentId
+                                        </th>
+                                        <th>
+                                            Tên nhóm tin
+                                        </th>
+                                        <th>
+                                            IsPublic?
+                                        </th>
+
+                                        <th>
+                                            Status
+                                        </th>
+                                        <th>
+                                            Ngày tạo
+                                        </th>
+                                        <th>
+                                            Người duyệt
+                                        </th>
+
+                                        <th style="width: auto">Chức năng</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.ParentId)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.NewsGroupName)
+                                            </td>
+                                            <td>
+                                                @if (item.isPublic)
+                                                {
+                                                    <p>Public</p>
+                                                }
+                                                else
+                                                {
+                                                    <p>Private</p>
+                                                }
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Status)
+                                            </td>
+                                            <td>
+                                                @item.CreateDate.ToString("dd/MM/yyyy HH:mm:ss")
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.AdminIDApproval)
+                                            </td>
+                                            <td style="text-align: center">
+                                                <a class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#EditModal" data-ng-click="GetInforNewsGroup(@item.Id)">
+                                                    Edit
+                                                </a>|
+                                                @Html.ActionLink(" ", "" + "" + "DeleteNewsGroup", new { id = item.Id }, new { @class = "glyphicon glyphicon-trash", onclick = "return confirm('Bạn muốn xóa nhóm tin này?');" })
+                                            </td>
+                                        </tr>
+                                    }
+
+                                </tbody>
+                            </table>
+                            <script>
+
+                            </script>
+                            <div class="row">
+                                <div class="">
+                                    <div class="dataTables_info" id="dataTables-example_info" role="alert" aria-live="polite" aria-relevant="all">Hiển thị từ @Model.ItemStart đến @Model.ItemEnd của @Model.TotalItemCount bản ghi</div>
+                                </div>
+                                <div class="">
+                                    <div class="dataTables_paginate " id="dataTables-example_paginate">
+
+                                        @Html.Raw(Ajax.Pager(
+                                            new Options
+                                            {
+                                                PageSize = Model.PageSize,
+                                                TotalItemCount = Model.TotalItemCount,
+                                                CurrentPage = Model.PageNumber,
+                                                ItemTexts = new ItemTexts() { Next = "Next", Previous = "Previous", Page = "P" },
+                                                ItemIcon = new ItemIcon() { First = "icon-backward", Previous = "icon-chevron-left", Next = "icon-chevron-right", Last = "icon-forward" },
+                                                TooltipTitles = new TooltipTitles() { Next = "Next page", Previous = "Previous page", Page = "Page {0}." },
+                                                Size = Size.normal,
+                                                Alignment = Alignment.centered,
+                                                IsShowControls = true,
+                                                IsShowFirstLast = true,
+                                                CssClass = ""
+                                            },
+                                            new AjaxOptions
+                                            {
+                                                UpdateTargetId = "grid-list",
+                                                HttpMethod = "get",
+                                                LoadingElementId = "loading",
+                                                OnBegin = "beginPaging",
+                                                OnSuccess = "successPaging",
+                                                OnFailure = "failurePaging"
+                                            }, new { controller = "News", action = "NewsGroup", key = ViewData["key"] }))
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <!-- /.row -->
+        <!-- /.row -->
+        @*Create*@
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                @using (Html.BeginForm("CreateNewsGroup", "News", FormMethod.Post, new { enctype = "multipart/form-data", id = "CreateNews" }))
+                {
+                    @Html.ValidationSummary(true)
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Thêm mới nhóm tin tức</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Tên nhóm tin: <span class="required">*</span></label><br />
+                                        <input class="form-control" autocomplete="off" required maxlength="200" id="newsGroupName" name="newsGroupName" type="text" data-ng-model="emp.newsGroupName">
+                                        <span class="field-validation-valid" data-valmsg-for="newsGroupName" data-valmsg-replace="true"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Status<span class="required">*</span></label><br />
+                                        @Html.DropDownList("statusCatg", null, new { @width = "100%" })
+                                    </div>
+                                    <div class="form-group">
+                                        <label>IsPublic<span class="required">*</span></label><br />
+                                        @Html.DropDownList("IsPublic", null, new { @width = "100%" })
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Admin duyệt<span class="required">*</span></label><br />
+                                        <input class="form-control" autocomplete="off" data-val-required="Trường là bắt buộc" required id="adminIDApproval" name="adminIDApproval" type="number" data-ng-model="emp.adminIDApproval">
+                                        <span class="field-validation-valid" data-valmsg-for="adminIDApproval" data-valmsg-replace="true"></span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Parent<span class="required">*</span></label><br />
+                                        @Html.DropDownList("parent", null, new { @height = "60px", @size = "15", @width = "90%" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        @*Endcreate*@
+
+        @*Edit newsGroup*@
+        <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="EditModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Cập nhật nhóm tin tức</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="row">
+                            <div class="col-lg-6">
+                                @*<div class="form-group">
+                                        <label>Nhóm tin: <span class="required">*</span></label><br />
+                                        @Html.DropDownList("listGroupNewsGroupWithNamme", null, new { @width = "100%" })
+                                    </div>*@
+                                <div class="form-group">
+                                    <label>Tên nhóm tin: <span class="required">*</span></label><br />
+                                    <input class="form-control" autocomplete="off" required maxlength="200" id="newsGroupName" name="newsGroupName" type="file" data-ng-model="emp.NewsGroupName">
+                                    <span class="field-validation-valid" data-valmsg-for="newsGroupName" data-valmsg-replace="true"></span>
+                                </div>
+                                <div class="form-group">
+
+                                    <label>Status<span class="required">*</span></label><br />
+                                    @Html.DropDownList("statusCatg", null, new { @width = "100%" })
+                                </div>
+                                <div class="form-group">
+
+                                    <label>IsPublic<span class="required">*</span></label><br />
+                                    @Html.DropDownList("IsPublic", null, new { @width = "100%" })
+                                </div>
+                                <div class="form-group">
+                                    <label>Admin duyệt<span class="required">*</span></label><br />
+                                    <input class="form-control" autocomplete="off" data-val-required="Trường là bắt buộc" required id="adminIDApproval" name="adminIDApproval" type="number" data-ng-model="emp.AdminIDApproval">
+                                    <span class="field-validation-valid" data-valmsg-for="adminIDApproval" data-valmsg-replace="true"></span>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>Nhóm tin<span class="required">*</span></label><br />
+                                    @Html.DropDownList("parent", null, new { @height = "60px", @size = "15", @width = "90%" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" ng-click="UpdateChange()">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @*Kêt thúc cập nhật*@
+    </div>
+    @*End*@
+</div>
+
+@*Kêt thúc cập nhật*@
+<script>
+    angular.module("body", []).controller("header", function ($scope) {
+        //   $scope.quanlyuser = "Câp nhật thái";
+    }).controller("Index", function ($scope) {
+
+        $scope.emp = {
+            Id: '',
+            ParentId: '',
+            NewsGroupName: '',
+            isPublic: '',
+            Status: '',
+            CreateDate: '',
+            ModifyDate: '',
+            AdminIDApproval: ''
+        };
+
+        $scope.GetInforNewsGroup = function (id) {
+
+            $('#overbackgroud').show();
+            //   $scope.emplist = [];
+            //   $scope.emailthai = "tháiisigsjghj";
+            $.ajax({
+                url: '@Url.Action("GetNewsGroupById", "Json")',
+                data: {
+                    'id': id
+                },
+                type: 'GET',
+                contentType: 'application/json; charset=utf-8',
+
+                success: function (data) {
+                    $scope.emp.Id = data.Id;
+                    $scope.emp.ParentId = data.ParentId;
+                    $scope.emp.NewsGroupName = data.NewsGroupName;
+                    $scope.emp.isPublic = data.isPublic;
+                    $scope.emp.Status = data.Status;
+                    $scope.emp.CreateDate = data.CreateDate;
+                    $scope.emp.ModifyDate = data.ModifyDate;
+                    $scope.emp.AdminIDApproval = data.AdminIDApproval;
+
+                    $scope.$apply();
+                    $('#overbackgroud').hide();
+                },
+                error: function () {
+
+                }
+            });
+            // alert(mail);
+
+            //       $scope.valuetest = mail;
+            //  $scope.emailthai = mail;
+            //  alert(id);
+        };
+        $scope.UpdateChange = function () {
+            $('#overbackgroud').show();
+            $.ajax({
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify($scope.emp),
+                url: '@Url.Action("UpdateNewsGroup", "Json")',
+                success: function (data) {
+                    if (data == 1) {
+                        alert("Cập nhật thành công");
+                        window.location.href = "/Manage/News/NewsGroup";
+                        //     $scope.GetInfoUser();
+                    }
+
+                },
+                error: function (status) { }
+            });
+        };
+    });
+</script>
+
+<script type="text/javascript">
+    function beginPaging(args) {
+        // Animatek
+        $('#grid-list').fadeOut('normal');
+    }
+
+    function successPaging() {
+        // Animate
+        $('#grid-list').fadeIn('normal');
+        $('a').tooltip();
+    }
+
+    function failurePaging() {
+        alert("Could not retrieve list.");
+    }
+
+</script>
+
+<script type="text/javascript">
+    $(function () {
+        $("#datepicker1").datepicker();
+        $("#dob").datepicker(
+
+            {
+                changeMonth: true,
+                changeYear: true,
+                showButtonPanel: true,
+                yearRange: "-0:+15"
+            });
+
+    });
+</script>
+<style>
+    select {
+        width: 100%;
+    }
+</style>

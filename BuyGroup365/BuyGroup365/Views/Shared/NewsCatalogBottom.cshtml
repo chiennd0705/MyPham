@@ -1,0 +1,45 @@
+﻿@using Common
+@using Business.ClassBusiness;
+@using DataAccess;
+@using Common;
+@using Business;
+@using Business.ClassBusiness;
+
+@{
+    TextHtmlBusiness textHtmlBusiness = new TextHtmlBusiness();
+
+    TextHtml BannerLeftTinmoi = textHtmlBusiness.GetByCode("BannerLeftTinmoi");
+}
+
+<div class="clear"></div>
+<div class="img_catalogbottom">
+
+   @Html.Raw(BannerLeftTinmoi.Content)
+    </div>
+<div class="NewsCatalogBottom">
+
+    <h1><i class="fa fa-clock-o" aria-hidden="true"></i> Mới nhất </h1>
+
+    <div class="clear"></div>
+
+                <div class="hit_content">
+                    @{
+                        Business.ClassBusiness.NewsBusiness newsBusiness = new Business.ClassBusiness.NewsBusiness();
+                        List<Common.News> listNews = newsBusiness.ListByNews(10);
+                        foreach (Common.News item in listNews)
+                        {
+                            <div class="hit_item">
+
+                                <div class="hit_des">
+                                    <a class="clt" href="/@item.FriendlyUrl">@item.Title</a>
+                                </div>
+                                <div class="hit_time">
+                                    <i class="fa fa-calendar"></i> @item.CreateDate.ToString("dd/M/yyyy")
+                                </div>
+                            </div>
+
+                        }
+                    }
+                </div>
+</div>
+<div class="clear"></div>

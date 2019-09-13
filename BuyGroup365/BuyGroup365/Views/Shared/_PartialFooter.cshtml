@@ -1,0 +1,122 @@
+﻿@using Common
+@using Business.ClassBusiness;
+
+
+
+
+<div class="section_showroom">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                @Html.Action("GetByCodeHtml", "Partial", new { Code = "Footer_TimRoom" })
+              
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section-support hidden-sm hidden-xs">
+    <div class="container">
+        <div class="row">
+            <div class="line">
+                <div class="col-md-3 co-sm-6 col-xs-12">
+                   
+                    @Html.Action("GetByCodeHtml", "Partial", new { Code = "Footer_KhieuNai0" })
+                </div>
+                <div class="col-md-3 co-sm-6 col-xs-12">
+                  
+                    @Html.Action("GetByCodeHtml", "Partial", new { Code = "Footer_KhieuNai" })
+                </div>
+                <div class="col-md-3 co-sm-6 col-xs-12">
+                    @Html.Partial("Sendmail")
+                </div>
+                <div class="col-md-3 co-sm-6 col-xs-12">
+                    @Html.Action("GetByCodeHtml", "Partial", new { Code = "Footer_MangXaHoi" })
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="fix-footer hidden-lg hidden-md">
+    <div class="nav-mobile">
+        @Html.Action("GetByCodeHtml", "Partial", new { Code = "Footer_Menu" })
+        
+    </div>
+    <div class="section-support">
+        <div class="container">
+            <div class="row">
+                <div class="line">
+                    <div class="col-md-3 co-sm-6 col-xs-12">
+                
+                        @Html.Action("GetByCodeHtml", "Partial", new { Code = "Footer_KhieuNai0" })
+                    </div>
+                    <div class="col-md-3 co-sm-6 col-xs-12">
+                     
+                        @Html.Action("GetByCodeHtml", "Partial", new { Code = "Footer_KhieuNai1" })
+                    </div>
+                    <div class="line-support">
+                        @Html.Action("GetByCodeHtml", "Partial", new { Code = "Footer_Huuich" })
+                       
+                        <script>
+                            $(document).ready(function () {
+                                $(".bnt-nav").click(function () {
+                                    $(".list").toggle();
+                                });
+                            });
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- FOOTER -->
+
+
+
+
+
+
+<footer class="page-footer">
+    <section class="ptb-15">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 footer-widget" style="margin-bottom:30px;">
+                   
+                    @Html.Action("GetByCodeHtml", "Partial", new { Code = "Footer_Logo" })
+                </div>
+                <div class="col-md-3 col-sm-12 footer-widget hidden-sm hidden-xs">
+                 
+                    @Html.Action("GetByCodeHtml", "Partial", new { Code = "Footer_Contact" })
+                </div>
+                <div class="col-md-3 col-sm-4 col-xs-6 footer-widget hidden-sm hidden-xs">
+                    @Html.Action("GetByCodeHtml", "Partial", new { Code = "Footer_HuongDan" })
+                </div>
+                <div class="col-md-3 col-sm-4 col-xs-6 footer-widget hidden-sm hidden-xs">
+                    
+                    @Html.Action("GetByCodeHtml", "Partial", new { Code = "Footer_ChinhSach" })
+                </div>
+                <div class="col-md-3 col-sm-4 col-xs-12 footer-widget hidden-sm hidden-xs">
+                    
+                    @Html.Action("GetByCodeHtml", "Partial", new { Code = "Footer_LienHe" })
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="footer-bottom">
+        <div class="container ptb-15">
+            <div class="row">
+                <div class="col-md-9 col-sm-12 text-left">
+                    @Html.Action("GetByCodeHtml", "Partial", new { Code = "Footer_BanQuyen" })
+                   
+                </div>
+                <div class="col-md-3 col-sm-12 text-left">
+                    @Html.Action("GetByCodeHtml", "Partial", new { Code = "Footer_BocongThuong" })
+
+                 
+                </div>
+            </div>
+        </div>
+    </section>
+</footer>

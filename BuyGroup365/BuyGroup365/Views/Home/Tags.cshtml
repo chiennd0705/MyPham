@@ -1,0 +1,101 @@
+﻿@using MvcPaging
+@model List<Common.Product>
+@{
+
+    Layout = "~/Views/Shared/_LayoutProduct.cshtml";
+
+}
+
+<div class="row category-page-row">
+
+    <div class="col large-12">
+
+        <div class="shop-container">
+            <div class="breadcrumbs">
+                <div class="container">
+
+                    <div class="home" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                        <a href="/" title="Go to Home Page" itemprop="url"><span itemprop="title">Trang chủ</span></a><span class="divider"><i class="fa fa-angle-double-right"></i></span>
+                    </div>
+                    @Html.Raw(ViewData["Breadcrumbs"])
+                </div>
+            </div>
+            <div class="woocommerce-notices-wrapper"></div>
+            @*@Html.Raw(ViewData["ListOrder"])*@
+            <div class="products row row-small large-columns-4 medium-columns-3 small-columns-2 has-shadow row-box-shadow-1 row-box-shadow-2-hover" itemprop="hasOfferCatalog" itemscope="" itemtype="http://schema.org/OfferCatalog">
+                @{
+
+                    Business.ClassBusiness.ProductImagesBusiness productImageBusiness = new Business.ClassBusiness.ProductImagesBusiness();
+
+                    foreach (var item in Model)
+                    {
+                        var listImg = productImageBusiness.FindProductId(item.Id);
+                        var imgSource = "";
+                        foreach (var img in listImg)
+                        {
+                            if (img.IsAvatar == 1)
+                            {
+
+                                imgSource = img.ImgSource;
+                                // imgSource = img.ImgSource.Replace("Uploadimages", "Upload_thumbs/Images");
+
+                            }
+
+                        }
+                        int phantramKM = 0;
+                        try
+                        {
+                            phantramKM = Convert.ToInt32((item.Cost - item.Price) / item.Cost * 100);
+                        }
+                        catch { }
+
+                        <div class="product-small col has-hover post-1544 product type-product status-publish has-post-thumbnail product_cat-do-gia-dung product_cat-may-danh-giay product_cat-may-danh-giay-gia-dinh product_cat-may-danh-giay-quang-minh product_cat-may-danh-giay-van-phong first instock sale shipping-taxable purchasable product-type-simple" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/OfferCatalog">
+                            <div class="col-inner">
+                                <div class="badge-container absolute left top z-1">
+                                    <div class="callout badge badge-square">
+                                        @if (phantramKM > 0)
+                                        {
+
+                                            <div class="badge-inner secondary on-sale">
+                                                <span class="onsale">-@phantramKM%</span>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                                <div class="product-small box ">
+                                    <div class="box-image">
+                                        <div class="image-zoom">
+                                            <a href="@BuyGroup365.Models.Common.Util.ReturnLinkFull(item.FriendlyUrl)"> <img width="300" height="300" itemprop="image" src="@imgSource" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt=""> </a>
+                                        </div>
+                                        <div class="image-tools is-small top right show-on-hover"></div>
+                                        <div class="image-tools is-small hide-for-small bottom left show-on-hover"></div>
+                                        <div class="image-tools grid-tools text-center hide-for-small bottom hover-slide-in show-on-hover"></div>
+                                    </div>
+                                    <div class="box-text box-text-products">
+                                        <div class="title-wrapper"><p class="name product-title" itemprop="name"><a href="@BuyGroup365.Models.Common.Util.ReturnLinkFull(item.FriendlyUrl)">@item.ProductName</a></p></div>
+                                        <div class="price-wrapper">
+                                            <span class="price">
+                                                <del><span class="woocommerce-Price-amount amount">@(String.Format("{0:#,###}", item.Cost))<span class="woocommerce-Price-currencySymbol">₫</span></span></del>
+                                                <ins><span class="woocommerce-Price-amount amount"> @(String.Format("{0:#,###}", item.Price))<span class="woocommerce-Price-currencySymbol">₫</span></span></ins>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    }
+                }
+            </div>
+
+            <div class="toolbar-bottom">
+                <div class="toolbar">
+                    <div class="sorter" id="_Phantrang">
+
+                        @Html.Raw(ViewData["Paging"])
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,53 @@
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+
+namespace BuyGroup365.Models.Member
+{
+    public class ControllerExtensions
+    {
+        public virtual string RenderView(ViewContext viewContext)
+        {
+            var response = viewContext.HttpContext.Response;
+            response.Flush();
+            var oldFilter = response.Filter;
+            Stream filter = null;
+            try
+            {
+                filter = new MemoryStream();
+                response.Filter = filter;
+                viewContext.View.Render(viewContext, viewContext.HttpContext.Response.Output);
+                response.Flush();
+                filter.Position = 0;
+                var reader = new StreamReader(filter, response.ContentEncoding);
+                return reader.ReadToEnd();
+            }
+            finally
+            {
+                if (filter != null)
+                {
+                    filter.Dispose();
+                }
+                response.Filter = oldFilter;
+            }
+        }
+
+        public static string RenderRazorViewToString( Controller controller, string viewName, object model)
+        {
+
+            controller.ViewData.Model = model;
+            using (var sw = new StringWriter())
+            {
+                var viewResult = ViewEngines.Engines.FindPartialView(controller.ControllerContext, viewName);
+                var viewContext = new ViewContext(controller.ControllerContext, viewResult.View, controller.ViewData, controller.TempData, sw);
+                viewResult.View.Render(viewContext, sw);
+                viewResult.ViewEngine.ReleaseView(controller.ControllerContext, viewResult.View);
+                return sw.GetStringBuilder().ToString();
+            }
+        }
+
+    }
+}

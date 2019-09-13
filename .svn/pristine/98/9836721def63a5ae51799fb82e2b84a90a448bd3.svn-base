@@ -1,0 +1,84 @@
+﻿<div class="collapse navbar-collapse navbar-ex1-collapse">
+    <ul class="nav navbar-nav side-nav">
+        <li class="active">
+            <a href="/">
+                <i class="fa fa-home"></i>  Trang chủ
+            </a>
+        </li>
+        <li>
+            <a href="javascript:;" data-toggle="collapse" data-target="#Members"><i class="fa fa-male"></i> Quản lý Members<i class="fa fa-fw fa-caret-down"></i></a>
+            <ul id="Members" class="">
+                <li>
+                    <a href="/Manage/Members/Index">
+                        <i class="fa fa-male"></i> Member
+                    </a>
+                </li>
+
+                @*<li>
+                    <a href="/Manage/Members/MemberProfile">
+                        <i class="fa fa-file"></i> MemberProfile
+                    </a>
+                </li>*@
+            </ul>
+        </li>
+        <li>
+            <a href="javascript:;" data-toggle="collapse" data-target="#Products"><i class="glyphicon glyphicon-phone"></i> Sản Phẩm</a>
+            <ul id="Products" class="">
+                <li>
+                    <a href="/Manage/Product/Index">
+                        <i class="glyphicon glyphicon-hdd"></i> QL sản phẩm
+                    </a>
+                </li>               
+            </ul>
+        </li>
+        <li>
+            <a href="javascript:;" data-toggle="collapse" data-target="#Orders"><i class="fa fa-shopping-cart"></i> Đơn hàng<i class="fa fa-fw fa-caret-down"></i></a>
+            <ul id="Orders" class="">
+                <li>
+                    <a href="/Manage/Order/Index">
+                        <i class="fa fa-file-pdf-o"></i> Đơn hàng
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/Manage/Order/Buyer">
+                        <i class="fa fa-male"></i> Người mua
+                    </a>
+                </li>
+                <li>
+                    <a href="/Manage/Order/Reciver">
+                        <i class="fa fa-male"></i> Người nhận
+                    </a>
+                </li>                
+            </ul>
+        </li>
+        
+        <li>
+            <a href="javascript:;" data-toggle="collapse" data-target="#Shops"><i class="fa fa-th-list"></i>  Quản lý Shops<i class="fa fa-fw fa-caret-down"></i></a>
+            <ul id="Shops" class="">
+                <li>
+                    <a href="/Manage/Shop/Index">
+                        <i class="fa fa-th-list"></i> Danh sách
+                    </a>
+                </li>
+                <li>
+                    <a href="/Manage/Shops/NewsGroups">
+                        <i class="glyphicon glyphicon-send"></i> NewsGroups
+                    </a>
+                </li>
+                <li>
+                    <a href="/Manage/Shops/News">
+                        <i class="fa fa-hacker-news"></i> News
+                    </a>
+                </li>
+                <li>
+                    <a href="/Manage/Shops/Catalogs">
+                        <i class="glyphicon glyphicon-tree-deciduous"></i> Catalogs
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        
+    </ul>
+</div>

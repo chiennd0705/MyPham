@@ -1,0 +1,63 @@
+﻿@using Common.util
+<div class="header-bottom">
+    <div class="header-sticker">
+        <div class="container">
+            <div class="border-bottom menu-mobile">
+                <div class="row menu-mobile-none">
+                    <div class="header-config-bg col-xs-12 col-sm-12 col-md-12">
+                        <div class="header-wrapper-bottom">
+                            <div class="custom-menu">
+
+                                @Html.Action("MenuCategory", "Partial")
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="header-setting header-setting-icon">
+                    <div class="settting-switcher">
+                        <div class="dropdown-toggle">
+                            <div class="text-setting">Links</div>
+                        </div>
+                        <div class="dropdown-switcher">
+                            <div class="top-links-alo">
+                                <div class="header-top-link">
+                                    <ul class="links">
+                                        @if (SessionUtility.GetSessionMember(Session) != null)
+                                        {
+                                            <li class="first"><a href="/Member/Profile" title="My Account">Xin chào @SessionUtility.GetSessionMember(Session).MemberProfile.LastName @SessionUtility.GetSessionMember(Session).MemberProfile.FirstName </a></li>
+                                            <li><a href="/Member/LikeProduct" title="My Wishlist">Sản phẩm yêu thích</a></li>
+                                            <li><a href="/Member/OderProduct" title="Testimonial">Quản lý đơn hàng</a></li>
+                                            <li class="last"><a href="/Login/Logout" title="Checkout" class="top-link-checkout">Đăng xuất</a></li>
+                                        }
+                                        else
+                                        {
+                                            <li class=" first">
+
+                                                <a data-toggle="modal" href="javarscipt:;" data-target="#myModal">
+                                                    Đăng nhập
+                                                </a>
+
+                                            </li>
+                                            <li><a href="/Member/LikeProduct" title="My Wishlist">Sản phẩm yêu thích</a></li>
+                                            <li class="last"><a href="/Member/OderProduct" title="Testimonial">Quản lý đơn hàng</a></li>
+                                        }
+                                    </ul>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- CART ICON ON MMENU -->
+                <div class="shopping-cart-box-ontop">
+                    <div class="miniCartWrap shopping-cart-box-ontop-content">
+                        <div class="mini-maincart">
+                            @Html.Partial("PartialCart")
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

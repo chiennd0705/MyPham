@@ -1,0 +1,148 @@
+﻿
+@model Common.News
+@{
+    ViewBag.Title = "Tin tức";
+    Layout = "~/Views/Shared/_LayoutIndex.cshtml";
+    var news = GetById(long.Parse(Request["nid"]));
+
+
+  
+}
+<link rel="stylesheet" type="text/css" href="/Content/Csspublic/css/customer.css" media="all">
+<div class="main-container col2-left-layout " ng-app="application">
+    <div class="breadcrumbs">
+        <div class="container">
+            <ul>
+                <li class="home" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <a href="/" title="Go to Home Page" itemprop="url"><span itemprop="title">Trang chủ</span></a>
+                </li>
+                <li class="blog">
+                    <strong>Tin tức</strong>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="container">
+        <div class="main">
+            <div class="row">
+                <div class="col-main col-lg-9 col-md-9 col-sm-9 col-xs-12 content-color color f-right" ng-controller="Index">
+                    <div id="displayNewsDetail" data-ng-model="emp">
+                        <div class="postWrapper">
+                            <div class="postTitle">
+                                <h2><a href="#">{{news.Title}}</a></h2>
+                            </div>
+                            <div class="blog-head post-date clearfix">
+                                <div class="postDetails">
+                                    <div class="date" ><span>{{news.CreateDate | date : 'short'}}</span></div>
+                                </div>
+                            </div>
+                            <!--<div class="tags"></div>-->
+
+                            <div class="postContent postContent-detail"><p class="blog-img"><img alt="" src="/FileUpload/Image/thumb/{{emp.ImageSource}}"></p><p>{{news.Summary}}</p></div>
+                        </div>
+
+                        <div class="commentWrapper">
+                            <div class="commentDetails"><h4 class="username"><b>{{news.Title}}</b></h4>  {{news.CreateDate | date : 'short'}}</div>
+                            <div class="commentContent">{{news.Descriptions}}</div>
+                        </div>
+                        <br/><br/><br/>
+                    </div>
+                    
+                </div>
+
+                @*Hiển thị tên nhóm tin*@
+                <div class="col-left sidebar col-lg-3 col-md-3 col-sm-3 col-xs-12 left-color color f-left">
+                    <div id="menuNewsGroup">
+                        @Html.Partial("_PartialMenuNewsGroup")  
+
+                        @*Code collapse js*@
+                        <script type="text/javascript">
+                            jQuery(document).ready(function ($) {
+                                (function (selector) {
+                                    var $content = $(selector);
+                                    var $accordion = $content.find('.nav-accordion');
+                                    var catplus = $accordion.find('>.level0:hidden');
+                                    if (!catplus.length) $content.find('.all-cat').hide();
+                                    else $content.find('.all-cat').click(function (event) { $(this).children().toggle(); catplus.slideToggle('slow'); });
+                                })('.anav-container');
+                            });
+                        </script>
+                        <script type="text/javascript">
+                            jQuery(document).ready(function ($) {
+                                $(".nav-accordion").magicaccordion({
+                                    accordion: true,
+                                    speed: 400,
+                                    closedSign: 'collapse',
+                                    openedSign: 'expand',
+                                    easing: 'easeInOutQuad'
+                                });
+                            });
+                        </script>                   
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    $('#displayNewsDetail').hide();
+
+    //function showingDetailNews(id) {
+
+
+    //    $('displayNewsDetail').show();
+    //    $('displayListNews').hide();
+    //}
+
+    angular.module("application", []).controller("header", function ($scope) {
+        //   $scope.quanlyuser = "Câp nhật thái";
+    }).controller("Index", function ($scope) {
+
+        $scope.emp = {
+            Id: '',
+            NewsGroupId: '',
+            Title: '',
+            ImageSource: '',
+            Summary: '',
+            Descriptions: '',
+            Status: '',
+            isPublic: '',
+            TotalView: '',
+            CreateDate: ''
+        };      
+        $scope.showingDetailNews = function (id) {           
+            $.ajax({
+                url: '@Url.Action("GetDetailNews", "News")',
+                data: {
+                    'id': id
+                },
+                type: 'GET',
+                contentType: 'application/json; charset=utf-8',
+
+                success: function (data) {
+                    $scope.emp.Id = data.Id;
+                    $scope.emp.NewsGroupId = data.NewsGroupId;
+                    $scope.emp.Title = data.Title;
+                    $scope.emp.ImageSource = data.ImageSource;
+                    $scope.emp.Summary = data.Summary;
+                    $scope.emp.Descriptions = data.Descriptions;
+                    $scope.emp.Status = data.Status;
+                    $scope.emp.TotalView = data.TotalView;
+                    $scope.emp.CreateDate = data.CreateDate;
+
+                    $('#displayNewsDetail').show();
+                    $('#displayListNews').hide();
+
+                    $scope.$apply();
+                },
+                error: function (data) {
+                    window.alert("loi");
+                }
+            });          
+        };
+       
+    });
+   
+</script>

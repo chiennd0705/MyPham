@@ -1,0 +1,218 @@
+﻿@using Common
+@using Business.ClassBusiness;
+@model List<Common.NewsGroups>
+@{
+    ViewBag.Title = "Rss của Nội Thất Gỗ Quý";
+
+    Layout = "~/Views/Shared/_Layout404.cshtml";
+}
+
+<style>
+    .trang404 {
+        margin: 20px auto;
+        color: #ffcc66;
+        width: 100%;
+    }
+
+    .mota404 {
+        margin: 80px auto;
+        color: #ffcc66;
+        width: 68%;
+    }
+
+    .hinh404 {
+        width: 50%;
+        float: left;
+        padding: 0px 10px;
+    }
+
+    .hinh404_1 {
+        width: 50%;
+        float: left;
+        padding: 22px;
+        font-size: 16px;
+    }
+
+        .hinh404_1 p a {
+            background: #491a00;
+            /* border: 1px solid #704f0c; */
+            padding: 10px;
+            color: #f3f5c3;
+            margin: 10px 20px 10px 0px;
+            border-radius: 7px;
+        }
+
+    #search_mini_form {
+        width: 350px;
+        /* float: right; */
+        height: 56px;
+        margin: 19px 0px;
+    }
+
+    .tool-header {
+        margin-right: 0 !important;
+    }
+
+    .form-search {
+        border-width: 2px;
+        border-style: solid;
+        height: 30px;
+        position: relative;
+        margin-top: 4px;
+        border-radius: 8px;
+    }
+
+        .form-search label {
+            text-align: left;
+            text-transform: capitalize;
+            padding: 0;
+            margin: 0;
+            font-weight: 500;
+        }
+
+        .form-search .form-imput-serach {
+            display: inline-block;
+            width: calc(100%);
+        }
+
+        .form-search input.input-text {
+            display: inline-block;
+            border-style: solid;
+            border-color: rgb(0, 149, 255);
+            color: black;
+            border-width: 0;
+            background: white;
+            font-size: 100%;
+            margin: 0;
+            line-height: 28px;
+            height: 26px;
+            padding: 0 10px;
+            width: 100%;
+            border-radius: 5px;
+        }
+
+        .form-search button.button {
+            border: 0 none;
+            position: absolute;
+            top: -0px;
+            right: 0px;
+            border-left: 2px solid #ffba00;
+            background: #491a00;
+            height: 27px;
+            border-bottom-right-radius: 7px;
+            color: #f3f5c3;
+            border-top-right-radius: 7px;
+        }
+
+            .form-search button.button:hover {
+                opacity: .8;
+            }
+
+        .form-search .dd-container {
+            background-color: #f6f6f6;
+            float: left;
+        }
+
+        .form-search .dd-options {
+            height: 250px;
+            box-shadow: 0 0 10px 0 rgba(0,0,0,0.15);
+            -moz-box-shadow: 0 0 10px 0 rgba(0,0,0,0.15);
+            -webkit-box-shadow: 0 0 10px 0 rgba(0,0,0,0.15);
+            -o-box-shadow: 0 0 10px 0 rgba(0,0,0,0.15);
+            -ms-box-shadow: 0 0 10px 0 rgba(0,0,0,0.15);
+            border: 0;
+        }
+
+        .form-search .dd-container .dd-select {
+            border-radius: 0;
+            border: 0;
+            background-color: transparent !important;
+            margin-bottom: 0;
+            line-height: 37px;
+        }
+
+        .form-search .dd-option-text {
+            font-size: 12px;
+            margin: 0;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .form-search .dd-options .dd-option {
+            border: 0;
+            padding: 5px 0 5px 18px;
+            text-align: left;
+        }
+</style>
+@{
+    TextHtmlBusiness textHtmlBusiness = new TextHtmlBusiness();
+
+    TextHtml Loi404 = textHtmlBusiness.GetByCode("Loi404");
+    TextHtml MotaRss = textHtmlBusiness.GetByCode("MotaRss");
+}
+<div class="trang404">
+
+    <div style="padding:33px;">
+        @Html.Raw(MotaRss.Content)
+       
+    </div>
+    <div class="clear"></div>
+    <div class="hinh404">
+        <ul>
+            @foreach (Common.NewsGroups newGroup in Model)
+            {
+                var url = @Request.Url.Host;
+            <li>
+                <div style="width:30%; float:left;">@newGroup.NewsGroupName </div><div style="width:70%;float:left;"><a href="Https://@url/news/RssFeed?id=@newGroup.Id">Https://@url/news/RssFeed?id=@newGroup.Id</a></div>
+            </li>
+            }
+
+
+        </ul>
+    </div>
+
+
+    <div class="hinh404_1">
+
+
+        @Html.Raw(Loi404.Content)
+        <p><a href="/">Trang chủ</a><a href="/lien-he.html">Báo lỗi</a></p>
+        <div id="search_mini_form">
+            <div class="form-search clearfix">
+               
+                        
+                        <input id="catsearch" type="hidden" name="cat" value="">
+
+                        <div class="form-imput-serach">
+                            <input itemprop="query-input" id="txtKeyword" type="text" name="keyword" class="input-text" placeholder="" autocomplete="off">
+
+                            @*<input type="text" id="txtKeyword" name="keyword" placeholder="Gõ từ khoá"><input type="submit" value="">*@
+                        </div>
+                        <button type="button" title="Search" class="button" id="btnSearch" onclick="search()"><span><span><i class="fa fa-search"></i></span></span></button>
+                    </div>
+           
+
+            <script type="text/javascript">
+                $("#txtKeyword").keydown(function (event) {
+                    $('#txtKeyword').keypress(function (e) {
+                        if (e.keyCode == 13) {
+                            event.preventDefault();
+                            search();
+                        }
+
+                    });
+                });
+                function search() {
+
+                    window.location.href = '/search.html' + "?k=" + jQuery('#txtKeyword').val();
+
+                }
+            </script>
+        </div>
+    </div>
+
+
+</div>
+
+
+

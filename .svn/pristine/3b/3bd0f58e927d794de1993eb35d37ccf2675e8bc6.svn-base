@@ -1,0 +1,146 @@
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using Business.ClassBusiness;
+using BuyGroup365.Areas.Manage.Controllers;
+using BuyGroup365.Controllers;
+using Common;
+using Common.util;
+
+namespace BuyGroup365.Models.Common
+{
+    public class Util
+    {
+        private readonly List<Catalog> _listCate = null;
+        public Util() 
+        {
+            if (MemberController.List != null)
+            {
+                _listCate = MemberController.List;
+            }
+            else if (CategoryProductController.ListCate != null)
+            {
+                _listCate = CategoryProductController.ListCate;
+            }
+           
+        }
+        public string HtmlCate(long prentid, long? id)
+        {
+            int i = 0;
+            string html = "<ul>";
+            //var List = MemberController.List;
+            List<Catalog> listobj = _listCate.Where(x => x.ParentId == prentid).ToList();//Test Cache dữ liêu.
+            {
+                foreach (Catalog item in listobj)
+                {
+                    if (id != null && item.Id == id)
+                    {
+                        html += "<li><input type=\"checkbox\" checked=\"checked\" id=\"item-" + item.Id +
+                                "\"   onclick=\"GetValueManuface(" + item.Id +
+                                ")\" /><label class=\"selectcate\" id=\"label-" + item.Id + "\"  for=\"item-" + item.Id +
+                                "\"  onclick=\"GetValueManuface(" + item.Id + ")\" >" + item.CatalogName + "</label>";
+
+                        i++;
+                        string str = HtmlbyCate(item.Id, ref i, id);
+                        html += str;
+
+                        html += "</li>";
+                    }
+                    else
+                    {
+                        html += "<li><input type=\"checkbox\" id=\"item-" + item.Id + "\"   onclick=\"GetValueManuface(" +
+                                item.Id + ")\" /><label id=\"label-" + item.Id + "\"  for=\"item-" + item.Id +
+                                "\"  onclick=\"GetValueManuface(" + item.Id + ")\" >" + item.CatalogName + "</label>";
+
+                        i++;
+                        string str = HtmlbyCate(item.Id, ref i, id);
+                        html += str;
+
+                        html += "</li>";
+                    }
+                }
+            }
+            html += "</ul>";
+            return html;
+        }
+        public string HtmlbyCate(long cateId, ref int i, long? idmember)
+        {
+            string html = "<ul>";
+            //   List<Catalog> listobj = _catalogsBusiness.GetDynamicQuery().Where(x => x.ParentId == cateId).ToList();
+            List<Catalog> listobj = _listCate.Where(x => x.ParentId == cateId).ToList();//Test cache dữ liệu
+            if (listobj.Any())
+            {
+                foreach (Catalog item in listobj)
+                {
+                    if (idmember != null && item.Id == idmember)
+                    {
+                        html += "<li><input type=\"checkbox\" checked=\"checked\" id=\"item-" + item.Id +
+                                "\" onclick=\"GetValueManuface(" + item.Id +
+                                ")\" /><label class=\"selectcate\"  id=\"label-" + item.Id + "\" for=\"item-" + item.Id +
+                                "\"   onclick=\"GetValueManuface(" + item.Id + ")\" >" + item.CatalogName + "</label>";
+                        i++;
+                        string str = HtmlbyCate(item.Id, ref i, idmember);
+                        html += str;
+                        html += "</li>";
+                    }
+                    else
+                    {
+                        html += "<li><input type=\"checkbox\" id=\"item-" + item.Id + "\" onclick=\"GetValueManuface(" +
+                                item.Id + ")\" /><label  id=\"label-" + item.Id + "\" for=\"item-" + item.Id +
+                                "\"   onclick=\"GetValueManuface(" + item.Id + ")\" >" + item.CatalogName + "</label>";
+                        i++;
+                        string str = HtmlbyCate(item.Id, ref i, idmember);
+                        html += str;
+                        html += "</li>";
+                    }
+                }
+            }
+
+
+            html += "</ul>";
+            return html;
+        }
+        #region Shop
+        public List<SelectListItem> LoadComBoShop()
+        {
+            var listItems = new List<SelectListItem>();
+          var listShop = new ShopsBusiness().GetDynamicQuery();
+          listItems.Add(new SelectListItem { Text ="--Chọn Shop--", Value ="-1"});
+          foreach (var item in listShop)
+            {
+                listItems.Add(new SelectListItem { Text = item.ShopName, Value = item.Id.ToString() });
+            }
+            return listItems;
+        }
+
+        public static int CheckFileImage(HttpPostedFileBase fileBase)
+        {
+            if (fileBase != null && fileBase.ContentLength > 0)
+            {
+                string ext = System.IO.Path.GetExtension(fileBase.FileName);
+                ext = ext.ToUpper();
+                if (fileBase.ContentLength > 1000000)
+                {
+                    return 0;// File quá lớn
+                }
+                if (ext == ".JPG" || ext == ".PNG" || ext == ".GIF" || ext == ".JPEG")
+                {
+                    return 2;//  đúng định dạng
+                }
+                else
+                {
+
+                    return 1;// File không đúng định dạng
+                }
+            }
+            else
+            {
+                return 2;
+            }
+            return 2;
+        }
+
+        #endregion
+    }
+}

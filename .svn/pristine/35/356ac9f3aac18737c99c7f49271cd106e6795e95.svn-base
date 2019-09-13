@@ -1,0 +1,338 @@
+﻿@model Common.Shop
+
+@{
+    ViewBag.Title = "Quản lý Shop";
+}
+@{Layout = "~/Areas/Manage/Views/Shared/_LayoutAdmincshtml.cshtml";}
+
+
+<div class="container-fluid" ng-app="body">
+    <!-- Page Heading -->
+    <div class="row" ng-controller="header">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                Quản lý danh mục sản phẩm
+            </h1>
+        </div>
+    </div>
+    <!-- /.row -->
+    <!-- /.row -->
+    <!-- /.row -->
+    <div class="row" ng-controller="Index">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <i class="fa fa-bar-chart-o fa-fw"></i> Danh mục sản phẩm
+                        <span style="float: right">
+                            <a class="glyphicon glyphicon-plus-sign" data-toggle="modal" data-target="#myModal">
+
+                            </a>
+                        </span>
+
+
+                    </h3>
+
+                </div>
+
+                <div class="panel-body">
+
+                    @using (Html.BeginForm("CreateShop", "Shop", FormMethod.Post, new { enctype = "multipart/form-data", id = "Profile" }))
+                    {
+
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                @Html.Raw(Common.util.Function.MessengerBox("success-msg", ViewBag.Mes))
+                                <div class="col-lg-6">
+                                    <div class="fieldset" disabled="disabled">
+                                        <h2 class="legend">Thông tin shop</h2>
+                                        <ul class="form-list">
+                                            <li class="">
+                                                <div class="customer-name-middlename">
+                                                    <div class="field name-firstname">
+                                                        <label for="firstname" class="required">Tên shop <span style="color: red"> (*)</span></label>
+                                                        <div class="input-box">
+
+                                                            @Html.TextBoxFor(model => model.ShopName, new {@required = "required", @class = "input-text required-entry", @autocomplete = "off", @maxlength = "200", @style = "width: 100%", @size = "25", @placeholder = "Tên shop" })
+                                                        
+                                                           </div>
+                                                    </div>
+                                                    <div class="field name-lastname">
+                                                        <label for="lastname" class="required" style="color:red">E-Mail/Username (Được khác hàng cung cấp, là một thành viên của hệ thống)<span style="color: red"> (*)</span></label>
+                                                        <div class="input-box">
+                                                            <input type="text" id="acount" name="acount" required="required" value="" title="E-Mail/Username (Được khác hàng cung cấp, là một thành viên của hệ thống)" style="width: 100%" maxlength="255" class="input-text required-entry" onchange="CheckMemberSystem()">
+                                                        </div>
+                                                    </div>
+                                                    <div class="field name-firstname">
+                                                        <label for="firstname" class="required">Phone <span style="color: red"> (*)</span></label>
+                                                        <div class="input-box">
+                                                            @Html.TextBoxFor(model => model.Phone, new { @required = "required",@class = "input-text required-entry", @autocomplete = "off", @maxlength = "200", @style = "width: 100%", @size = "25", @placeholder = "Số điện thoại" })
+                                                        </div>
+                                                    </div>
+                                                    <div class="field name-firstname">
+                                                        <label for="firstname" class="required">Tỉnh thành <span style="color: red"> (*)</span></label>
+                                                        <div class="input-box">
+                                                            @Html.DropDownList("Location", null, new { @width = "100%", @class = "input", @onchange = "LoadChild(1)" })
+                                                            <input type="hidden" id="receiverAddress" />
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="field name-firstname">
+                                                        <label for="firstname" class="required">Quận huyện <span style="color: red"> (*)</span></label>
+                                                        <div class="input-box">
+                                                            <select id="receiverTown" class="input" name="receiverTown" onchange="LoadChild(2)">
+                                                                <option value="-1">--Chọn--</option>
+                                                            </select>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="field name-firstname">
+                                                        <label for="firstname" class="required">Phường xã <span style="color: red"> (*)</span> </label>
+                                                        <div class="input-box">
+                                                            <select class="input" id="receiverPhuong" name="receiverPhuong">
+                                                                <option value="-1">--Chọn--</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="field name-firstname">
+                                                        <label for="firstname" class="required">Địa chỉ chi tiết <span style="color: red"> (*)</span></label>
+                                                        <div class="input-box">
+                                                            @Html.TextBoxFor(model => model.Address, new { @class = "input-text required-entry", @maxlength = "500", @style = "width: 100%", @required = "required", @placeholder = "Ví dụ: số 10, Ngõ 50, Ngách 100, Hẻm 22, Đường Nguyễn A" })
+                                                            @Html.ValidationMessageFor(model => model.Address)
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+
+                                        </ul>
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="fieldset">
+                                        <h2 class="legend">Thông tin hổ trợ</h2>
+                                        <ul class="form-list">
+                                            <li class="">
+                                                <div class="customer-name-middlename">
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <div class="field name-firstname">
+                                                                <label for="firstname" class="required">Người hổ trợ <span style="color: red"> (*)</span></label>
+                                                                <div class="input-box">
+                                                                    @Html.TextBoxFor(model => model.ShopSupport.SupportName, new { @class = "input-text required-entry", @maxlength = "255", @style = "width: 100%", @required = "required" })
+                                                                    @Html.ValidationMessageFor(model => model.ShopSupport.SupportName)
+
+                                                                </div>
+                                                            </div>
+                                                            <div class="field name-firstname">
+                                                                <label for="firstname" class="required">E-mail <span style="color: red"> (*)</span></label>
+                                                                <div class="input-box">
+                                                                    @Html.TextBoxFor(model => model.ShopSupport.Email, new { @class = "input-text required-entry", @maxlength = "255", @style = "width: 100%", @required = "required" })
+                                                                    @Html.ValidationMessageFor(model => model.ShopSupport.Email)
+
+                                                                </div>
+                                                            </div>
+                                                            <div class="field name-firstname">
+                                                                <label for="firstname" class="required">Số điện thoại <span style="color: red"> (*)</span></label>
+                                                                <div class="input-box">
+                                                                    @Html.TextBoxFor(model => model.ShopSupport.Phone, new { @class = "input-text required-entry", @maxlength = "255", @style = "width: 100%", @required = "required" })
+                                                                    @Html.ValidationMessageFor(model => model.ShopSupport.Phone)
+
+                                                                </div>
+                                                            </div>
+                                                            <div class="field name-firstname">
+                                                                <label for="firstname" class="required">Sô điện thoại cố định <span style="color: red"> (*)</span></label>
+                                                                <div class="input-box">
+                                                                    @Html.TextBoxFor(model => model.ShopSupport.Mobile, new { @class = "input-text required-entry", @maxlength = "255", @style = "width: 100%", @required = "required" })
+                                                                    @Html.ValidationMessageFor(model => model.ShopSupport.Mobile)
+
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="field name-firstname">
+                                                                <label for="firstname" class="required">Skype <span style="color: red"> (*)</span></label>
+                                                                <div class="input-box">
+                                                                    @Html.TextBoxFor(model => model.ShopSupport.Skype, new { @class = "input-text required-entry", @maxlength = "255", @style = "width: 100%", @required = "required" })
+                                                                    @Html.ValidationMessageFor(model => model.ShopSupport.Skype)
+
+                                                                </div>
+                                                            </div>
+                                                            <div class="field name-firstname">
+                                                                <label for="firstname" class="required">Facebook</label>
+                                                                <div class="input-box">
+                                                                    @Html.TextBoxFor(model => model.ShopSupport.Facebook, new { @class = "input-text required-entry", @maxlength = "255", @style = "width: 100%" })
+                                                             
+
+                                                                </div>
+                                                            </div>
+                                                            <div class="field name-firstname">
+                                                                <label for="firstname" class="required">Yahoo</label>
+                                                                <div class="input-box">
+                                                                    @Html.TextBoxFor(model => model.ShopSupport.Yahoo, new { @class = "input-text required-entry", @maxlength = "255", @style = "width: 100%" })
+                                                                  
+                                                                </div>
+                                                            </div>
+
+
+                                                        </div>
+
+                                                    </div>
+
+
+                                                </div>
+                                            </li>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                             
+                              
+
+                                <button type="submit" class="button" title="Cập nhật" name="send" id="send2"><span><span>Active</span></span></button>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+        <script>
+            function LoadChild(level) {
+                var int = parseInt(level);
+                var parent = 0;
+                if (int == 1) {
+                    parent = $("#Location").val();
+                    var text = $("#Location option:selected").text();
+
+                    // alert(a);
+                    $('#receiverAddress').html("");
+                    $('#receiverAddress').val(text);
+                } else {
+                    parent = $("#receiverTown").val();
+                }
+
+                $.ajax({
+                    url: '/PayGoods/GetLocationByParent',
+                    data: {
+                        'parentId': parent
+                    },
+                    Type: 'POST',
+                    dataType: 'json',
+                    success: function (data) {
+
+                        if (int == 1) {
+                            $('#receiverTown').html("");
+                            $('#receiverTown').append(data);
+                        } else {
+                            $('#receiverPhuong').html("");
+                            $('#receiverPhuong').append(data);
+
+                        }
+                    },
+                    error: function () {
+
+                    }
+                });
+            }
+
+            $(document).ready(function () {
+                $.ajax({
+                    url: '@Url.Action("LoadLocation","Member")',
+                    data:
+                    {
+                        'type': 'mb'
+                    },
+                    Type: 'POST',
+                    dataType: 'json',
+                    success: function (data) {
+                        $('#receiverPhuong').html("");
+                        $('#receiverPhuong').append(data.ListItems1);
+                        $('#receiverTown').html("");
+                        $('#receiverTown').append(data.ListItems2);
+                        $('#Location').html("");
+                        $('#Location').append(data.ListItems3);
+                    },
+                    error: function () {
+
+                    }
+                });
+            });
+
+            function VerifyPass() {
+                debugger;
+                var pass = $('#passwordold').val();
+                $.ajax({
+                    url: '@Url.Action("CheckPass", "Member")',
+                    data:
+                    {
+                        'pass': pass
+                    },
+                    Type: 'POST',
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data == 0) {
+                            alert('Mật khẩu cũ không chính xác!');
+                            $('#passwordold').focus();
+                        }
+                    },
+                    error: function () {
+
+                    }
+                });
+
+
+            }
+            function UpdatePass() {
+                $('#overbackgroud1').show();
+
+                var pass = $('#passwordUpdate').val();
+                var passrep = $('#confirmationUpdate').val();
+                if (pass == "") {
+                    alert("Vui lòng nhập mật khẩu");
+                    $('#overbackgroud1').hide();
+                } else {
+                    if (pass.length < 6) {
+                        alert("Mật khẩu phải nhiều hơn 6 ký tự");
+                        $('#overbackgroud1').hide();
+                    } else {
+
+                        if (pass != passrep) {
+                            alert('Nhâp lại mật khẩu sai');
+                            $('#confirmationUpdate').focus();
+                            $('#overbackgroud1').hide();
+                        } else {
+
+
+                            $.ajax({
+                                url: '@Url.Action("UpdatePass", "Member")',
+                                data:
+                                {
+                                    'pass': pass
+                                },
+                                Type: 'POST',
+                                dataType: 'json',
+                                success: function (data) {
+                                    alert('Cập nhật thành công!');
+                                    $('#closeUpdate').click();
+                                    $('#overbackgroud1').hide();
+                                },
+                                error: function () {
+                                    alert('Cập nhật thất bại!');
+                                    $('#overbackgroud1').hide();
+                                }
+                            });
+                        }
+                    }
+                }
+
+
+            }
+        </script>
+        <script type="text/javascript">
+            $(function () {
+                $("#datepicker1").datepicker({ dateFormat: 'dd/mm/yy' });
+            });
+        </script>

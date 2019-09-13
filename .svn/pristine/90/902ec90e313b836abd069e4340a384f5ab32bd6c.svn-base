@@ -1,0 +1,549 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="THACHSANHModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="DataEntities" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="CommissionLogs" EntityType="THACHSANHModel.CommissionLog" />
+    <EntitySet Name="Locations" EntityType="THACHSANHModel.Location" />
+    <EntitySet Name="MemberInfoes" EntityType="THACHSANHModel.MemberInfo" />
+    <EntitySet Name="MemberInsertTemps" EntityType="THACHSANHModel.MemberInsertTemp" />
+    <EntitySet Name="MemberLevels" EntityType="THACHSANHModel.MemberLevel" />
+    <EntitySet Name="MemberProfiles" EntityType="THACHSANHModel.MemberProfile" />
+    <EntitySet Name="Members" EntityType="THACHSANHModel.Member" />
+    <EntitySet Name="MemberSendRequests" EntityType="THACHSANHModel.MemberSendRequest" />
+    <EntitySet Name="modules" EntityType="THACHSANHModel.module" />
+    <EntitySet Name="roles" EntityType="THACHSANHModel.role" />
+    <EntitySet Name="role_module" EntityType="THACHSANHModel.role_module" />
+    <EntitySet Name="Settings" EntityType="THACHSANHModel.Setting" />
+    <EntitySet Name="TransactionLogs" EntityType="THACHSANHModel.TransactionLog" />
+    <EntitySet Name="users" EntityType="THACHSANHModel.user" />
+    <EntitySet Name="user_group" EntityType="THACHSANHModel.user_group" />
+    <EntitySet Name="user_group_role" EntityType="THACHSANHModel.user_group_role" />
+    <EntitySet Name="user_profile" EntityType="THACHSANHModel.user_profile" />
+    <EntitySet Name="user_usergroup" EntityType="THACHSANHModel.user_usergroup" />
+    <AssociationSet Name="FK_MemberProfile_Locations" Association="THACHSANHModel.FK_MemberProfile_Locations">
+      <End Role="Locations" EntitySet="Locations" />
+      <End Role="MemberProfile" EntitySet="MemberProfiles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MemberInfo_MemberLevel" Association="THACHSANHModel.FK_MemberInfo_MemberLevel">
+      <End Role="MemberLevel" EntitySet="MemberLevels" />
+      <End Role="MemberInfo" EntitySet="MemberInfoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MemberInfo_Members" Association="THACHSANHModel.FK_MemberInfo_Members">
+      <End Role="Members" EntitySet="Members" />
+      <End Role="MemberInfo" EntitySet="MemberInfoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MemberProfile_Members" Association="THACHSANHModel.FK_MemberProfile_Members">
+      <End Role="Members" EntitySet="Members" />
+      <End Role="MemberProfile" EntitySet="MemberProfiles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_role_module_module" Association="THACHSANHModel.FK_role_module_module">
+      <End Role="module" EntitySet="modules" />
+      <End Role="role_module" EntitySet="role_module" />
+    </AssociationSet>
+    <AssociationSet Name="FK_role_module_role" Association="THACHSANHModel.FK_role_module_role">
+      <End Role="role" EntitySet="roles" />
+      <End Role="role_module" EntitySet="role_module" />
+    </AssociationSet>
+    <AssociationSet Name="FK_user_group_role_role" Association="THACHSANHModel.FK_user_group_role_role">
+      <End Role="role" EntitySet="roles" />
+      <End Role="user_group_role" EntitySet="user_group_role" />
+    </AssociationSet>
+    <AssociationSet Name="FK_user_profile_user1" Association="THACHSANHModel.FK_user_profile_user1">
+      <End Role="user" EntitySet="users" />
+      <End Role="user_profile" EntitySet="user_profile" />
+    </AssociationSet>
+    <AssociationSet Name="FK_user_usergroup_user" Association="THACHSANHModel.FK_user_usergroup_user">
+      <End Role="user" EntitySet="users" />
+      <End Role="user_usergroup" EntitySet="user_usergroup" />
+    </AssociationSet>
+    <AssociationSet Name="FK_user_usergroup_user_group" Association="THACHSANHModel.FK_user_usergroup_user_group">
+      <End Role="user_group" EntitySet="user_group" />
+      <End Role="user_usergroup" EntitySet="user_usergroup" />
+    </AssociationSet>
+    <FunctionImport Name="GetAllModuleByUserId" ReturnType="Collection(THACHSANHModel.GetAllModuleByUserId_Result)">
+      <Parameter Name="UserId" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="GetAllRolesByUserId" ReturnType="Collection(THACHSANHModel.GetAllRolesByUserId_Result)">
+      <Parameter Name="UserId" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="GetUserByUserName" ReturnType="Collection(THACHSANHModel.GetUserByUserName_Result)">
+      <Parameter Name="UserName" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="GetUserByUserNameAndPassword" ReturnType="Collection(THACHSANHModel.GetUserByUserNameAndPassword_Result)">
+      <Parameter Name="UserName" Mode="In" Type="String" />
+      <Parameter Name="Password" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SearchVoucherByKey">
+      <Parameter Name="key" Mode="In" Type="String" />
+      <Parameter Name="voucher_type" Mode="In" Type="Int64" />
+      <Parameter Name="location" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <EntitySet Name="MemberSMS" EntityType="THACHSANHModel.MemberSM" />
+  </EntityContainer>
+  <EntityType Name="CommissionLog">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Type" Type="Int32" Nullable="false" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="200" Unicode="true" FixedLength="false" />
+    <Property Name="Money" Type="Double" Nullable="false" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="DateCreate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="MemberId" Type="Int64" Nullable="false" />
+    <Property Name="AdminId" Type="Int64" Nullable="false" />
+    <Property Name="Status" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Location">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="ParentId" Type="Int64" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Icon" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+    <Property Name="Order" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="MemberProfiles" Relationship="THACHSANHModel.FK_MemberProfile_Locations" FromRole="Locations" ToRole="MemberProfile" />
+  </EntityType>
+  <EntityType Name="MemberInfo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" />
+    <Property Name="LevelId" Type="Int64" Nullable="false" />
+    <Property Name="MemberParentId" Type="Int64" Nullable="false" />
+    <Property Name="MemberAboutId" Type="Int64" Nullable="false" />
+    <Property Name="MemIdTree1" Type="Int64" Nullable="false" />
+    <Property Name="MemIdTree2" Type="Int64" Nullable="false" />
+    <Property Name="TotalNum1" Type="Int32" Nullable="false" />
+    <Property Name="TotalNum2" Type="Int32" Nullable="false" />
+    <Property Name="TotalNumberBalancedPairsed" Type="Int32" Nullable="false" />
+    <Property Name="TotalComInDay" Type="Double" Nullable="false" />
+    <Property Name="TotalNumberBalancedInMonth" Type="Int32" Nullable="false" />
+    <Property Name="TotalNumberBalancedPairsReceived" Type="Int32" Nullable="false" />
+    <Property Name="BalancedPairsReceivedFloors" Type="Int32" Nullable="false" />
+    <Property Name="ComDirect" Type="Double" Nullable="false" />
+    <Property Name="ComBalancedPaird" Type="Double" Nullable="false" />
+    <Property Name="ComIncentive" Type="Double" Nullable="false" />
+    <Property Name="ComIncentive_His" Type="Double" Nullable="false" />
+    <Property Name="ComStock" Type="Double" Nullable="false" />
+    <Property Name="TotalMoney" Type="Double" Nullable="false" />
+    <Property Name="CC1" Type="Int32" Nullable="false" />
+    <Property Name="CC2" Type="Int32" Nullable="false" />
+    <Property Name="CC3" Type="Int32" Nullable="false" />
+    <Property Name="CC4" Type="Int32" Nullable="false" />
+    <Property Name="CC5" Type="Int32" Nullable="false" />
+    <Property Name="CC6" Type="Int32" Nullable="false" />
+    <Property Name="CC7" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="MemberLevel" Relationship="THACHSANHModel.FK_MemberInfo_MemberLevel" FromRole="MemberInfo" ToRole="MemberLevel" />
+    <NavigationProperty Name="Member" Relationship="THACHSANHModel.FK_MemberInfo_Members" FromRole="MemberInfo" ToRole="Members" />
+    <Property Type="Double" Name="ComBalancedPairdFloors_1_7" Nullable="false" />
+    <Property Type="Double" Name="ComBalancedPairdFloors_8_12" Nullable="false" />
+    <Property Type="Double" Name="ComBalancedPairdFloors_13_End" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MemberInsertTemp">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" />
+    <Property Name="MemberParentId" Type="Int64" Nullable="false" />
+    <Property Name="MemberAboutId" Type="Int64" Nullable="false" />
+    <Property Name="DateCreate" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="MemberLevel">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Money" Type="Double" Nullable="false" />
+    <NavigationProperty Name="MemberInfoes" Relationship="THACHSANHModel.FK_MemberInfo_MemberLevel" FromRole="MemberLevel" ToRole="MemberInfo" />
+  </EntityType>
+  <EntityType Name="MemberProfile">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" />
+    <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="LocationId" Type="Int64" Nullable="false" />
+    <Property Name="Address" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Emaill" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Phone" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="Dob" Type="DateTime" Precision="3" />
+    <Property Name="Sex" Type="Int32" Nullable="false" />
+    <Property Name="Pid" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="ZipCode" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Location" Relationship="THACHSANHModel.FK_MemberProfile_Locations" FromRole="MemberProfile" ToRole="Locations" />
+    <NavigationProperty Name="Member" Relationship="THACHSANHModel.FK_MemberProfile_Members" FromRole="MemberProfile" ToRole="Members" />
+  </EntityType>
+  <EntityType Name="Member">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="PasswordTransaction" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="PasswordEncrypted" Type="Int64" Nullable="false" />
+    <Property Name="PasswordModifyDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="PasswordEncryptedMethod" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="LoginDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="LastFailedLoginDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Loutout" Type="Boolean" Nullable="false" />
+    <Property Name="LockoutDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Verify" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="true" />
+    <Property Name="Status" Type="Int32" Nullable="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifyDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ActiveDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Question" Type="String" MaxLength="300" Unicode="true" FixedLength="false" />
+    <Property Name="Answer" Type="String" MaxLength="300" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="MemberInfo" Relationship="THACHSANHModel.FK_MemberInfo_Members" FromRole="Members" ToRole="MemberInfo" />
+    <NavigationProperty Name="MemberProfile" Relationship="THACHSANHModel.FK_MemberProfile_Members" FromRole="Members" ToRole="MemberProfile" />
+  </EntityType>
+  <EntityType Name="MemberSendRequest">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="300" Unicode="true" FixedLength="false" />
+    <Property Name="MemberId" Type="Int64" Nullable="false" />
+    <Property Name="Content" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Money" Type="Double" Nullable="false" />
+    <Property Name="DateCreate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Status" Type="Int32" Nullable="false" />
+    <Property Name="AdminID" Type="Int64" Nullable="false" />
+  </EntityType>
+  <EntityType Name="module">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="code" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="name" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+    <Property Name="ws_method" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+    <Property Name="web_method" Type="String" MaxLength="4000" Unicode="true" FixedLength="false" />
+    <Property Name="order" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="role_module" Relationship="THACHSANHModel.FK_role_module_module" FromRole="module" ToRole="role_module" />
+  </EntityType>
+  <EntityType Name="role">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="code" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="150" Unicode="true" FixedLength="false" />
+    <Property Name="title" Type="String" Nullable="false" MaxLength="200" Unicode="true" FixedLength="false" />
+    <Property Name="status" Type="Int32" Nullable="false" />
+    <Property Name="type" Type="Int32" />
+    <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="modified_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="description" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="role_module" Relationship="THACHSANHModel.FK_role_module_role" FromRole="role" ToRole="role_module" />
+    <NavigationProperty Name="user_group_role" Relationship="THACHSANHModel.FK_user_group_role_role" FromRole="role" ToRole="user_group_role" />
+  </EntityType>
+  <EntityType Name="role_module">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="role_id" Type="Int64" Nullable="false" />
+    <Property Name="module_id" Type="Int64" Nullable="false" />
+    <Property Name="status" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="module" Relationship="THACHSANHModel.FK_role_module_module" FromRole="role_module" ToRole="module" />
+    <NavigationProperty Name="role" Relationship="THACHSANHModel.FK_role_module_role" FromRole="role_module" ToRole="role" />
+  </EntityType>
+  <EntityType Name="Setting">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="200" Unicode="true" FixedLength="false" />
+    <Property Name="Key" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Value" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="TransactionLog">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Type" Type="Int32" Nullable="false" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="200" Unicode="true" FixedLength="false" />
+    <Property Name="Money" Type="Double" Nullable="false" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="DateCreate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="MemberId" Type="Int64" Nullable="false" />
+    <Property Name="AdminId" Type="Int64" Nullable="false" />
+    <Property Name="Status" Type="Int32" Nullable="false" />
+    <Property Type="String" Name="CodeSMS" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="user">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="username" Type="String" Nullable="false" MaxLength="75" Unicode="true" FixedLength="false" />
+    <Property Name="password" Type="String" Nullable="false" MaxLength="75" Unicode="true" FixedLength="false" />
+    <Property Name="company_id" Type="Int64" Nullable="false" />
+    <Property Name="is_super_user" Type="Boolean" Nullable="false" />
+    <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="modify_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="expired_date" Type="DateTime" Precision="3" />
+    <Property Name="password_encrypted" Type="Boolean" Nullable="false" />
+    <Property Name="password_modify_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="password_encrypted_method" Type="String" Nullable="false" MaxLength="30" Unicode="true" FixedLength="false" />
+    <Property Name="screenname" Type="String" Nullable="false" MaxLength="75" Unicode="true" FixedLength="false" />
+    <Property Name="login_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="last_failed_login_date" Type="DateTime" Precision="3" />
+    <Property Name="failed_login_attemp" Type="Int32" Nullable="false" />
+    <Property Name="lockout" Type="Boolean" Nullable="false" />
+    <Property Name="lockout_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="status" Type="Int32" Nullable="false" />
+    <Property Name="description" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+    <Property Name="discount_percent" Type="Double" Nullable="false" />
+    <NavigationProperty Name="user_profile" Relationship="THACHSANHModel.FK_user_profile_user1" FromRole="user" ToRole="user_profile" />
+    <NavigationProperty Name="user_usergroup" Relationship="THACHSANHModel.FK_user_usergroup_user" FromRole="user" ToRole="user_usergroup" />
+  </EntityType>
+  <EntityType Name="user_group">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="code" Type="String" Nullable="false" MaxLength="150" Unicode="true" FixedLength="false" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="150" Unicode="true" FixedLength="false" />
+    <Property Name="description" Type="String" MaxLength="150" Unicode="true" FixedLength="false" />
+    <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="modified_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="status" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="user_usergroup" Relationship="THACHSANHModel.FK_user_usergroup_user_group" FromRole="user_group" ToRole="user_usergroup" />
+  </EntityType>
+  <EntityType Name="user_group_role">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="user_group_id" Type="Int64" Nullable="false" />
+    <Property Name="role_id" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="role" Relationship="THACHSANHModel.FK_user_group_role_role" FromRole="user_group_role" ToRole="role" />
+  </EntityType>
+  <EntityType Name="user_profile">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" />
+    <Property Name="department_id" Type="Int64" />
+    <Property Name="code" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="phone" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+    <Property Name="address" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+    <Property Name="email" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="dob" Type="DateTime" Precision="0" />
+    <Property Name="modified_date" Type="DateTime" Precision="3" />
+    <Property Name="description" Type="String" MaxLength="150" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="user" Relationship="THACHSANHModel.FK_user_profile_user1" FromRole="user_profile" ToRole="user" />
+  </EntityType>
+  <EntityType Name="user_usergroup">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="user_id" Type="Int64" Nullable="false" />
+    <Property Name="user_usergroup1" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="user" Relationship="THACHSANHModel.FK_user_usergroup_user" FromRole="user_usergroup" ToRole="user" />
+    <NavigationProperty Name="user_group" Relationship="THACHSANHModel.FK_user_usergroup_user_group" FromRole="user_usergroup" ToRole="user_group" />
+  </EntityType>
+  <Association Name="FK_MemberProfile_Locations">
+    <End Role="Locations" Type="THACHSANHModel.Location" Multiplicity="1" />
+    <End Role="MemberProfile" Type="THACHSANHModel.MemberProfile" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Locations">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MemberProfile">
+        <PropertyRef Name="LocationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MemberInfo_MemberLevel">
+    <End Role="MemberLevel" Type="THACHSANHModel.MemberLevel" Multiplicity="1" />
+    <End Role="MemberInfo" Type="THACHSANHModel.MemberInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MemberLevel">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MemberInfo">
+        <PropertyRef Name="LevelId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MemberInfo_Members">
+    <End Role="Members" Type="THACHSANHModel.Member" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="MemberInfo" Type="THACHSANHModel.MemberInfo" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Members">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MemberInfo">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MemberProfile_Members">
+    <End Role="Members" Type="THACHSANHModel.Member" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="MemberProfile" Type="THACHSANHModel.MemberProfile" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Members">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MemberProfile">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_role_module_module">
+    <End Role="module" Type="THACHSANHModel.module" Multiplicity="1" />
+    <End Role="role_module" Type="THACHSANHModel.role_module" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="module">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="role_module">
+        <PropertyRef Name="module_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_role_module_role">
+    <End Role="role" Type="THACHSANHModel.role" Multiplicity="1" />
+    <End Role="role_module" Type="THACHSANHModel.role_module" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="role">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="role_module">
+        <PropertyRef Name="role_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_user_group_role_role">
+    <End Role="role" Type="THACHSANHModel.role" Multiplicity="1" />
+    <End Role="user_group_role" Type="THACHSANHModel.user_group_role" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="role">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="user_group_role">
+        <PropertyRef Name="role_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_user_profile_user1">
+    <End Role="user" Type="THACHSANHModel.user" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="user_profile" Type="THACHSANHModel.user_profile" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="user">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="user_profile">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_user_usergroup_user">
+    <End Role="user" Type="THACHSANHModel.user" Multiplicity="1" />
+    <End Role="user_usergroup" Type="THACHSANHModel.user_usergroup" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="user_usergroup">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_user_usergroup_user_group">
+    <End Role="user_group" Type="THACHSANHModel.user_group" Multiplicity="1" />
+    <End Role="user_usergroup" Type="THACHSANHModel.user_usergroup" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user_group">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="user_usergroup">
+        <PropertyRef Name="user_usergroup1" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="GetAllModuleByUserId_Result">
+    <Property Type="Int64" Name="id" Nullable="false" />
+    <Property Type="String" Name="code" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="name" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="web_method" Nullable="true" MaxLength="4000" />
+    <Property Type="String" Name="ws_method" Nullable="true" MaxLength="500" />
+  </ComplexType>
+  <ComplexType Name="GetAllRolesByUserId_Result">
+    <Property Type="Int64" Name="id" Nullable="false" />
+    <Property Type="String" Name="code" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="name" Nullable="false" MaxLength="150" />
+  </ComplexType>
+  <ComplexType Name="GetUserByUserName_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="String" Name="username" Nullable="false" MaxLength="75" />
+    <Property Type="String" Name="password" Nullable="false" MaxLength="75" />
+    <Property Type="Int64" Name="company_id" Nullable="false" />
+    <Property Type="Boolean" Name="is_super_user" Nullable="false" />
+    <Property Type="DateTime" Name="create_date" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="modify_date" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="expired_date" Nullable="true" Precision="23" />
+    <Property Type="Boolean" Name="password_encrypted" Nullable="false" />
+    <Property Type="DateTime" Name="password_modify_date" Nullable="false" Precision="23" />
+    <Property Type="String" Name="password_encrypted_method" Nullable="false" MaxLength="30" />
+    <Property Type="String" Name="screenname" Nullable="false" MaxLength="75" />
+    <Property Type="DateTime" Name="login_date" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="last_failed_login_date" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="failed_login_attemp" Nullable="false" />
+    <Property Type="Boolean" Name="lockout" Nullable="false" />
+    <Property Type="DateTime" Name="lockout_date" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="status" Nullable="false" />
+    <Property Type="String" Name="description" Nullable="true" MaxLength="200" />
+    <Property Type="Double" Name="discount_percent" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="GetUserByUserNameAndPassword_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="String" Name="username" Nullable="false" MaxLength="75" />
+    <Property Type="String" Name="password" Nullable="false" MaxLength="75" />
+    <Property Type="Int64" Name="company_id" Nullable="false" />
+    <Property Type="Boolean" Name="is_super_user" Nullable="false" />
+    <Property Type="DateTime" Name="create_date" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="modify_date" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="expired_date" Nullable="true" Precision="23" />
+    <Property Type="Boolean" Name="password_encrypted" Nullable="false" />
+    <Property Type="DateTime" Name="password_modify_date" Nullable="false" Precision="23" />
+    <Property Type="String" Name="password_encrypted_method" Nullable="false" MaxLength="30" />
+    <Property Type="String" Name="screenname" Nullable="false" MaxLength="75" />
+    <Property Type="DateTime" Name="login_date" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="last_failed_login_date" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="failed_login_attemp" Nullable="false" />
+    <Property Type="Boolean" Name="lockout" Nullable="false" />
+    <Property Type="DateTime" Name="lockout_date" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="status" Nullable="false" />
+    <Property Type="String" Name="description" Nullable="true" MaxLength="200" />
+    <Property Type="Double" Name="discount_percent" Nullable="false" />
+  </ComplexType>
+  <EntityType Name="MemberSM">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int64" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int64" Name="MemberId" Nullable="false" />
+    <Property Type="DateTime" Name="Active" Nullable="false" Precision="3" />
+    <Property Type="String" Name="Phone" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="Status" Nullable="false" />
+    <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="3" />
+    <Property Type="DateTime" Name="ModifiDate" Nullable="false" Precision="3" />
+  </EntityType>
+</Schema>

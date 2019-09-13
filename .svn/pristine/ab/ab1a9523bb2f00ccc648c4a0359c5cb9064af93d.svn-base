@@ -1,0 +1,131 @@
+﻿@using Microsoft.Ajax.Utilities
+@model Common.Member
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+<div class="main-container col1-layout content-color color">
+
+
+    <div class="container">
+        <div class="main">
+            <div class="row">
+                <div class="col-main col-lg-12">
+                    <div class="account-login">
+                        <div class="page-title">
+                            <h1>Đăng nhập hoặc đăng ký tài khoản</h1>
+                        </div>
+                        @Html.Raw(Common.util.Function.MessengerBox("error-msg", ViewBag.Mes))
+                        @*<ul class="messages">
+
+                            <li class="error-msg">
+                                <ul>
+                                    <li><span>@ViewBag.Mes</span></li>
+                                </ul>
+                            </li>
+
+
+                        </ul>*@
+                        <form method="post" id="login-form">
+                            <input name="form_key" type="hidden" value="HnaklC8YxlYfN2mK">
+                            <div class="col2-set">
+                                <div class="col-1 new-users">
+                                    <div class="content">
+                                        <div class="account-login-title new-users-title">
+                                            <h2>Thành viên mới</h2>
+                                        </div>
+                                        <p>Bằng cách tạo một tài khoản trên hệ thống, bạn sẽ có thể kiểm soát các quy trình nhanh hơn, lưu trữ nhiều địa chỉ gửi hàng, xem và theo dõi đơn đặt hàng của bạn trong tài khoản của bạn và nhiều hơn nữa:</p>
+                                        <div class="">
+                                            <h3>Mua hàng online
+                                            </h3>
+                                            <p>
+                                                An toàn, tiện lợi, giao hàng tận nơi, tiết kiệm chi phí nhất cho khách hàng.
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <h3>Đảm bảo về chất lượng và dịch vụ
+                                            </h3>
+                                            <p>
+                                                Đảm bảo 100% đổi hoặc trả hàng linh hoạt khi khách hàng không hài lòng về sản phẩm.
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <h3>Luôn luôn kết nối
+                                            </h3>
+                                            <p>Luôn giải quyết mọi yêu cầu của khách hàng một cách nhanh chóng nhất.</p>
+                                        </div>
+                                        <div>
+                                            <div class="buttons-set">
+                                                <button type="button" title="Create an Account" class="button" onclick="window.location='/login/register';"><span><span>Đăng ký tài khoản</span></span></button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-2 registered-users">
+                                    <div class="content">
+                                        <div class="account-login-title registered-users-title">
+                                            <h2>Đăng nhập hệ thống</h2>
+                                        </div>
+                                        <p>Nếu bạn có một tài khoản, xin vui lòng đăng nhập.</p>
+                                        <ul class="form-list">
+                                            <li>
+                                                <label for="email" class="required"><em>*</em>Địa chỉ hòm thư hoặc tên đăng nhập</label>
+                                                <div class="input-box">
+                                                    <input type="text" name="email" value="" id="email" class="input-text required-entry" title="Địa chỉ hòm thư hoặc tên đăng nhập">
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <label for="pass" class="required"><em>*</em>Mật khẩu</label>
+                                                <div class="input-box">
+                                                    <input type="password" name="pass" class="input-text required-entry validate-password" id="pass" title="Password">
+                                                </div>
+                                            </li>
+                                        </ul>
+
+
+                                        <p class="required">*Trường bắt buộc</p>
+                                        <div class="buttons-set">
+                                            <a href="/Login/Forgot" class="">Quên mật khẩu?</a>
+                                            <button type="submit" class="button" title="Login" name="send" id="send2"><span><span>Đăng nhập</span></span></button>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col2-set">
+                            </div>
+                        </form>
+                        <script type="text/javascript">
+                            //<![CDATA[
+                            var dataForm = new VarienForm('login-form', true);
+                            //]]>
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+<style>
+    a.button {
+        background-color: #666666;
+        border-color: #eaeaea;
+        color: #ffffff;
+    }
+
+        a.button:hover {
+            background-color: #ff3366;
+            border-color: #ff3366;
+            color: #ffffff;
+        }
+
+    .account-login .buttons-set a.button span {
+    }
+</style>

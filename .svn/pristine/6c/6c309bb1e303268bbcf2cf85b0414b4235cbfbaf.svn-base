@@ -1,0 +1,29 @@
+﻿<div class="block-title">
+    <strong><span>Sản phẩm chọn theo</span></strong>
+</div>
+<div class="block-content toggle-content1">
+    <p class="block-subtitle block-subtitle--filter">Filter</p>
+    <div id="narrow-by-list">
+        <dl class="narrow-by">
+            <dt class="odd">Thương hiệu</dt>
+            <dt class="toggle-tab mobile even" style="display: none"></dt>
+            <dd class="Category toggle-content odd visible">
+                <ol>
+                    @Html.Raw(@ViewData["ItemMenuManufacturer"])
+                </ol>
+            </dd>
+        </dl>
+        <dl class="narrow-by">
+            <dt class="odd">Giá sản phẩm</dt>
+            <dt class="toggle-tab mobile even" style="display: none"></dt>
+            <dd class="Price toggle-content odd visible">
+                <ol>
+                    @Html.Raw(@ViewData["ItemMenuPrice"])
+                </ol>
+            </dd>
+        </dl>
+        @Html.Raw(ViewData["ItemMenuAttribute"])
+      
+    </div>
+    <script type="text/javascript">decorateDataList('narrow-by-list')</script>
+</div>

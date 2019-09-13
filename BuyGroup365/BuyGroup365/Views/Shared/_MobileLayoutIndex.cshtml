@@ -1,0 +1,235 @@
+﻿@using BuyGroup365.Models.Member
+@using Newtonsoft.Json
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    <meta name="description" content="@ViewBag.Description">
+    <meta name="keywords" content="@ViewBag.Keywords">
+    <meta property="og:title" content="@ViewBag.Title" />
+    <meta property="og:description" content="@ViewBag.Description" />
+    <meta name="robots" content="no-index,follow">
+    <meta name="author" content="Plaza Việt Hàn" />
+    <meta name="viewport" content="width=device-width" />
+    <meta property="og:site_name" content="plazaviethan.com" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="vi_VN" />
+    <link rel="SHORTCUT ICON" href="/Content/Csspublic/images/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+   <link rel="stylesheet" type="text/css" href="~/Content/Csspublic/font-awesome-4.4.0/css/font-awesome.min.css" media="all">
+    <link rel="stylesheet" type="text/css" href="/Content/Csspublic/css/fontello.css" media="all">
+
+    @Styles.Render("~/bundles/jscss")
+
+    @Scripts.Render("~/bundles/jqueryheader")
+</head>
+<body class=" cms-index-index cms-kute-shop">
+    @Html.Action("MenuTopMobile", "Partial")
+    <div id="panel" class="panel slideout-panel" style="">
+
+        <div class="wrapper">
+
+            <div class="page">
+
+                @Html.Partial("_PartialHeader_Mobile")
+                <div class="main-container col1-layout content-color color">
+                    @RenderBody()
+                    @*Content*@
+                </div>
+
+                <div class="footer-container footer-color color">
+                    @Html.Partial("_PartialFooter")
+                    @*Footer*@
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="myCompare" tabindex="-1" role="dialog" aria-labelledby="myCompare" aria-hidden="true">
+            <div class="modal-dialog" style="width: 70%;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <img class="img-responsive" src="/Content/Csspublic/images/logo.png" alt="Buygroup365" style="height: 35px">
+                    </div>
+                    <div class="modal-body" id="comparse" style="overflow-x: scroll; min-height: 300px">
+                        <div class="" id="overbackgroudCom" style="display: block;">
+                            <img src="/img/loading/6.gif" style="position: absolute; left: 50%" />
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @*Kêt thúc*@
+        <style>
+            .product-item {
+                width: 250px;
+                float: left;
+            }
+        </style>
+
+        <script>
+            window.onload = function () {
+                var slideout = new Slideout({
+                    'panel': document.getElementById('panel'),
+                    'menu': document.getElementById('menu'),
+                    'side': 'right'
+                });
+
+                document.querySelector('.js-slideout-toggle').addEventListener('click', function () {
+                    slideout.toggle();
+                });
+
+                document.querySelector('.menu').addEventListener('click', function (eve) {
+                    if (eve.target.nodeName === 'A') { slideout.close(); }
+                });
+            };
+        </script>
+
+        @Scripts.Render("~/bundles/jqueryui")
+
+        <script>
+            $(document).ready(function () {
+                /* 1. Visualizing things on Hover - See next part for action on click */
+                $('#stars li').on('mouseover', function () {
+                    var onStar = parseInt($(this).data('value'), 10); // The star currently mouse on
+
+                    // Now highlight all the stars that's not after the current hovered star
+                    $(this).parent().children('li.star').each(function (e) {
+                        if (e < onStar) {
+                            $(this).addClass('hover');
+                        }
+                        else {
+                            $(this).removeClass('hover');
+                        }
+                    });
+
+                }).on('mouseout', function () {
+                    $(this).parent().children('li.star').each(function (e) {
+                        $(this).removeClass('hover');
+                    });
+                });
+
+                /* 2. Action to perform on click */
+                $('#stars li').on('click', function () {
+                    var onStar = parseInt($(this).data('value'), 10); // The star currently selected
+                    var stars = $(this).parent().children('li.star');
+
+                    for (i = 0; i < stars.length; i++) {
+                        $(stars[i]).removeClass('selected');
+                    }
+
+                    for (i = 0; i < onStar; i++) {
+                        $(stars[i]).addClass('selected');
+                    }
+
+                    // JUST RESPONSE (Not needed)
+                    var ratingValue = parseInt($('#stars li.selected').last().data('value'), 10);
+                    var msg = "";
+                    if (ratingValue > 1) {
+
+                        document.getElementById('starValue').value = ratingValue;
+                    }
+                    else {
+
+                        document.getElementById('starValue').value = ratingValue;
+                    }
+                    responseMessage(msg);
+
+                });
+
+                function responseMessage(msg) {
+                    $('.success-box').fadeIn(200);
+                    $('.success-box div.text-message').html("<span>" + msg + "</span>");
+                }
+            })
+        </script>
+
+        <script>
+
+    $(document).ready(function () {
+
+        var sync1 = $("#sync1");
+        var sync2 = $("#sync2");
+        var slidesPerPage = 5; //globaly define number of elements per page
+        var syncedSecondary = true;
+
+        sync1.owlCarousel({
+            items: 1,
+            slideSpeed: 2000,
+            nav: true,
+            autoplay: true,
+            dots: false,
+            loop: true,
+            responsiveRefreshRate: 200,
+            navText: ['<svg width="100%" height="100%" viewBox="0 0 11 20"><path style="fill:none;stroke-width: 1px;stroke: #000;" d="M9.554,1.001l-8.607,8.607l8.607,8.606" /></svg>', '<svg width="100%" height="100%" viewBox="0 0 11 20" version="1.1"><path style="fill:none;stroke-width: 1px;stroke: #000;" d="M1.054,18.214l8.606,-8.606l-8.606,-8.607" /></svg>'],
+        }).on('changed.owl.carousel', syncPosition);
+
+        sync2
+          .on('initialized.owl.carousel', function () {
+              sync2.find(".owl-item").eq(0).addClass("current");
+          })
+          .owlCarousel({
+              items: slidesPerPage,
+              dots: false,
+              nav: false,
+              smartSpeed: 200,
+              slideSpeed: 500,
+              slideBy: slidesPerPage, //alternatively you can slide by 1, this way the active slide will stick to the first item in the second carousel
+              responsiveRefreshRate: 100
+          }).on('changed.owl.carousel', syncPosition2);
+
+        function syncPosition(el) {
+            //if you set loop to false, you have to restore this next line
+            //var current = el.item.index;
+
+            //if you disable loop you have to comment this block
+            var count = el.item.count - 1;
+            var current = Math.round(el.item.index - (el.item.count / 2) - .5);
+
+            if (current < 0) {
+                current = count;
+            }
+            if (current > count) {
+                current = 0;
+            }
+
+            //end block
+
+            sync2
+              .find(".owl-item")
+              .removeClass("current")
+              .eq(current)
+              .addClass("current");
+            var onscreen = sync2.find('.owl-item.active').length - 1;
+            var start = sync2.find('.owl-item.active').first().index();
+            var end = sync2.find('.owl-item.active').last().index();
+
+            if (current > end) {
+                sync2.data('owl.carousel').to(current, 100, true);
+            }
+            if (current < start) {
+                sync2.data('owl.carousel').to(current - onscreen, 100, true);
+            }
+        }
+
+        function syncPosition2(el) {
+            if (syncedSecondary) {
+                var number = el.item.index;
+                sync1.data('owl.carousel').to(number, 100, true);
+            }
+        }
+
+        sync2.on("click", ".owl-item", function (e) {
+            e.preventDefault();
+            var number = $(this).index();
+            sync1.data('owl.carousel').to(number, 300, true);
+        });
+    });
+        </script>
+    </div>
+</body>
+</html>

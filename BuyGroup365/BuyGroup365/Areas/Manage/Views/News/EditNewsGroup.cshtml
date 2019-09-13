@@ -1,0 +1,125 @@
+﻿@using BuyGroup365.Areas.Manage.Models
+@using MvcPaging
+@model Common.NewsGroups
+@{
+    ViewBag.Title = "Thay đổi danh mục sản phẩm";
+    Layout = "~/Areas/Manage/Views/Shared/_LayoutAdmincshtml.cshtml";
+}
+<script>
+    function BrowseServer() {
+        var finder = new CKFinder();
+        finder.BasePath = '/Content/css/ckfinder/';
+        finder.selectActionFunction = SetFileFiled;
+        // finder.SelectActionFunction = SetFileFiled;
+        //   finder.SelectFunction = SetFileFiled;
+        //   finder.SelectFunctionData = SetFileFiled;
+        finder.popup();
+    }
+    function SetFileFiled(FileUrl) {
+        document.getElementById('ImageSource').value = FileUrl;
+    }
+</script>
+<div class="container-fluid" ng-app="body">
+    @Html.Raw(AdminFunction.BindHeader("Tin tức", " Nhóm tin", "Cập nhật", null, null))
+    <!-- /.row -->
+    <!-- /.row -->
+    <!-- /.row -->
+    <div class="row" ng-controller="Index">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                @using (Html.BeginForm("EditNewsGroup", "News", FormMethod.Post, new { enctype = "multipart/form-data", id = "EditNewsGroup" }))
+                {
+                    @Html.ValidationSummary(true)
+                    <input type="hidden" name="id" value="@Model.Id" />
+                    <input type="hidden" name="FriendlyUrlhd" value="@Model.FriendlyUrl" />
+                    <div class="modal-footer">
+                        <a type="button" class="btn btn-default" onclick="window.history.back();">Trở về</a>
+
+                        <button type="submit" class="btn btn-primary">Cập nhật</button>
+                    </div>
+
+                    <div style="">
+
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label>Tên nhóm tin: <span class="required">*</span></label><br />
+                                <input class="form-control" autocomplete="off" required maxlength="200" id="newsGroupName" name="newsGroupName" type="text" value="@Model.NewsGroupName" />
+                            </div>
+                            <div class="form-group">
+                                <label>Link nhóm tin: </label><br />
+                                <input class="form-control" autocomplete="off" maxlength="200" disabled="true" id="FriendlyUrl" name="FriendlyUrl" type="text" value="@Model.FriendlyUrl" />
+                            </div>
+                            <div class="input">
+                                <label>Nhóm tin cha<span class="required">*</span></label><br />
+                                @Html.DropDownList("parent", null, new { @height = "60px", @size = "15", @style = "width:100%" })
+                            </div>
+                            <div class="form-group">
+                                <label>Ảnh đại diện:<span class="required">*</span></label><br />
+
+                                <input id="ImageSource" name="ImageSource" data-val-required="Trường là bắt buộc" type="text" class="input-block-level" value="@Model.ImageSource" />
+                                <input type="button" value="Browse Server" onclick="BrowseServer();" class="controls" />
+                            </div>
+                            <div class="input">
+                                <label>Hiển thị:</label>
+                                <input id="IsPublic" value="1" name="IsPublic" type="checkbox" @(Model.isPublic == true ? "checked" : "") />
+                            </div>
+
+                            <div class="input">
+                                <label>Hiển thị trên trong danh mục tin:</label>
+                                <input id="IsView1" value="1" name="IsView1" type="checkbox" @(Model.IsView1 == true ? "checked" : "") />
+                            </div>
+                            <div class="input">
+                                <label>Hiển thị trong danh mục tin: </label>
+                                <input value="1" id="IsView2" name="IsView2" type="checkbox" @(Model.IsView2 == true ? "checked" : "") />
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+
+                            <div class="form-group">
+                                <label>Thẻ tiêu đề:</label><br />
+                                <input class="form-control" autocomplete="off" maxlength="200" id="SeoTitle" name="SeoTitle" type="text" value="@Model.SeoTitle" />
+                            </div>
+                            <div class="form-group">
+                                <label>Thẻ từ khóa:</label><br />
+                                <input class="form-control" autocomplete="off" maxlength="200" id="SeoKeyword" name="SeoKeyword" type="text" value="@Model.SeoKeyword" />
+                            </div>
+                            <div class="form-group">
+                                <label>Mô tả</label><br />
+                                <textarea class="form-control" id="SeoDescription" name="SeoDescription" style="height:200px">@Model.SeoDescription</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Tiêu đề chia sẻ:</label><br />
+                                <input class="form-control" autocomplete="off" maxlength="200" id="ShareTitle" name="ShareTitle" type="text" value="@Model.ShareTitle" />
+                            </div>
+                            <div class="form-group">
+                                <label>Từ khóa chia sẻ:</label><br />
+                                <input class="form-control" autocomplete="off" maxlength="300" id="ShareKeyword" name="ShareKeyword" type="text" value="@Model.ShareKeyword" />
+                            </div>
+                            <div class="form-group">
+                                <label>Mô tả chia sẻ:</label><br />
+                                <textarea class="form-control" id="ShareDescription" maxlength="500" name="ShareDescription" style="height: 100px">@Model.ShareDescription</textarea>
+                            </div>
+                        </div><div class="clear"></div>
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label>Mô tả danh mục</label><br />
+                                <textarea class="form-control" rows="5" maxlength="2000" id="Descriptions" name="Descriptions">@Model.Descriptions</textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <a type="button" class="btn btn-default" onclick="window.history.back();">Trở về</a>
+
+                        <button type="submit" class="btn btn-primary">Cập nhật</button>
+                    </div>
+
+                }
+            </div>
+        </div>
+        <script type="text/javascript">
+            var Descriptions = CKEDITOR.replace('Descriptions', { height: 500 });
+            CKFinder.setupCKEditor(Descriptions, '/Content/css/ckfinder/');
+        </script>
+    </div>
+</div>

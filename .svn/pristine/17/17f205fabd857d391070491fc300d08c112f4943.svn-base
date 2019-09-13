@@ -1,0 +1,101 @@
+﻿@model Common.Member
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+<div class="main-container col1-layout content-color color">
+
+
+    <div class="container">
+        <div class="main">
+            <div class="row">
+                <div class="col-main col-lg-12">
+                    <div class="account-login">
+                        <div class="page-title">
+                            <h1>@ViewBag.Mes</h1>
+                        </div>
+                        <form  method="post" id="login-form">
+                            <input name="form_key" type="hidden" value="HnaklC8YxlYfN2mK">
+                            <div class="col2-set">
+                                <div class="col-1 new-users">
+                                    <div class="content">
+                                        <div class="account-login-title new-users-title">
+                                            <h2>Thành viên mới</h2>
+                                        </div>
+                                        <p>Bằng cách tạo một tài khoản trên cửa hàng của chúng tôi, bạn sẽ có thể kiểm soát thông qua các quy trình kiểm tra nhanh hơn, lưu trữ nhiều địa chỉ gửi hàng, xem và theo dõi đơn đặt hàng của bạn trong tài khoản của bạn và nhiều hơn nữa.</p>
+                                    </div>
+                                </div>
+                                <div class="col-2 registered-users">
+                                    <div class="content">
+                                        <div class="account-login-title registered-users-title">
+                                            <h2>Đăng ký thành viên</h2>
+                                        </div>
+                                        <p>Nếu bạn có một tài khoản, xin vui lòng đăng nhập.</p>
+                                        <ul class="form-list">
+                                            <li>
+                                                <label for="email" class="required"><em>*</em>Địa chỉ hòm thư hoặc tên đăng nhập</label>
+                                                <div class="input-box">
+                                                    <input type="text" name="email" value="" id="email" class="input-text required-entry validate-email" title="Địa chỉ hòm thư hoặc tên đăng nhập">
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <label for="pass" class="required"><em>*</em>Mật khẩu</label>
+                                                <div class="input-box">
+                                                    <input type="password" name="pass" class="input-text required-entry validate-password" id="pass" title="Password">
+                                                </div>
+                                            </li>
+                                        </ul>
+
+                                    
+                                        <p class="required">*Trường bắt buộc</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col2-set">
+                                <div class="col-1 new-users">
+                                    <div class="buttons-set">
+                                        <a type="button" style="display: block; padding: 10px; width: 148px;" title="Create an Account" class="button" href="/Member/Register"><span><span>Tạo tài khoản</span></span></a>
+                                    </div>
+                                </div>
+                                <div class="col-2 registered-users">
+                                    <div class="buttons-set">
+                                        <a href="http://alothemes.com/demo/kuteshop/index.php/customer/account/forgotpassword/" class="f-left">Quyên mật khẩu?</a>
+                                        <button type="submit" class="button" title="Login" name="send" id="send2"><span><span>Đăng nhập</span></span></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <script type="text/javascript">
+                            //<![CDATA[
+                            var dataForm = new VarienForm('login-form', true);
+                        //]]>
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+<style>
+    a.button {
+        background-color: #666666;
+        border-color: #eaeaea;
+        color: #ffffff;
+    }
+
+        a.button:hover {
+            background-color: #ff3366;
+            border-color: #ff3366;
+            color: #ffffff;
+        }
+    .account-login .buttons-set a.button span {
+       
+    }
+
+  
+</style>

@@ -1,0 +1,69 @@
+﻿<div class="start_group" style="" itemprop="aggregateRating" xmlns:v="http://rdf.data-vocabulary.org/#" typeof="v:Review-aggregate" property="v:itemreviewed">
+
+    <div class='rating-widget'>
+
+        <!-- Rating Stars Box -->
+        <div class='rating-stars text-center'>
+            <ul id='starsproduct' class="sp1">
+
+                @Html.Raw(ViewData["TotalStar"])
+                <li class="star"><span> @ViewData["TotalVote"]</span> đánh giá	</li>
+            </ul>
+        </div>
+
+
+
+
+    </div>
+
+
+</div>
+
+<style>
+    .single_vote {
+        padding-top: 10px;
+    }
+    /* Rating Star Widgets Style */
+    .votename {
+        display: none;
+    }
+
+    .rating-widget, .vote_label {
+        float: left;
+    }
+
+
+    .rating-stars ul {
+        list-style-type: none;
+        padding: 0;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+    }
+
+        .rating-stars ul > li.star {
+            display: inline-block;
+        }
+
+            /* Idle State of the stars */
+            .rating-stars ul > li.star > i.fa {
+                font-size: 20px;
+                color: #ccc;
+            }
+
+            /* Hover state of the stars */
+            .rating-stars ul > li.star.hover > i.fa {
+                color: #ffea00;
+            }
+
+            /* Selected state of the stars */
+            .rating-stars ul > li.star.selected > i.fa {
+                color: #FF912C;
+            }
+
+    .start_group {
+        float: right;
+        margin: 10px 0px;
+    }
+</style>
+
+

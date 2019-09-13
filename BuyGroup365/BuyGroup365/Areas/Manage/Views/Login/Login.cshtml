@@ -1,0 +1,57 @@
+﻿@using Common.util
+
+@{
+    ViewBag.Title = "Đăng nhập";
+}
+@{Layout = "~/Areas/Manage/Views/Shared/_LayoutLoginAmin.cshtml";}
+
+<div class="row" style="margin-top: 100px">
+    <div class="col-md-4 col-md-offset-4 new-users ">
+        <div class="content" style="background-color: #a80000;padding: 20px">
+            <div class="" style="margin-bottom: 15px">
+                <img class="img-responsive" src="/Content/Csspublic/images/logo.png" alt="Buygroup365" style="height: 50px">
+            </div>
+
+            @using (Html.BeginForm())
+            {
+                <ul class="form-list">
+
+                    @Html.ValidationSummary(true)
+
+                    <li>
+                        <label for="email" style="color:white;" class="required"><em style="color:white;">*</em>Tên đăng nhập </label>
+                        <div class="input-box">
+                            <input class="user input-text required-entry" placeholder="Tên đăng nhập" name="userName" id="userName" type="text" autofocus autocomplete="off" maxlength="50" data-val="true" data-val-required="">
+                        </div>
+                    </li>
+                    <li>
+                        <label for="pass" style="color:white;" class="required"><em style="color:white;">*</em>Mật khẩu</label>
+                        <div class="input-box">
+                            <input class="lock input-text required-entry validate-password" placeholder="Mật khẩu" name="password" id="password" type="password" value="" autocomplete="off" maxlength="50" data-val="true" data-val-required="">
+                        </div>
+                    </li>
+                </ul>
+
+                @Html.Raw(Function.MessengerBox("error-msg", ViewBag.Mes))
+                <div class="buttons-set">
+                    <button type="submit" class="button" title="Login" name="send" id="send2" style="color:white;background:black;" onclick="login()"><span><span>Đăng nhập</span></span></button>
+                    <div class="" id="overbackgroud1" style="display: none;">
+                        <img src="/img/loading/6.gif" style="position: absolute; left: 50%">
+                    </div>
+                </div>
+
+            }
+        </div>
+    </div>
+</div>
+<style>
+    .user {
+        background: url(/Areas/Manage/Content/login/username.png)no-repeat 8px 10px #fff !important;
+        padding: 10px 15px 10px 37px !important;
+    }
+
+    .lock {
+        background: url(/Areas/Manage/Content/login/keypass.png)no-repeat 8px 10px #fff !important;
+        padding: 10px 15px 10px 37px !important;
+    }
+</style>

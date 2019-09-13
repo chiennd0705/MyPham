@@ -1,0 +1,186 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using Business.ClassBusiness;
+
+namespace BuyGroup365.Models.Member
+{
+    public class FuntionMember
+    {
+
+        #region Khai bao biến
+
+        //     readonly CatalogsBusiness _catalogsBusiness=new CatalogsBusiness();
+
+        #endregion
+
+        public static string HtmlBreadcrumb(long id)
+        {
+            var html = "";
+            return HtmlBreadcrumb(id, ref html);
+        }
+        public static string HtmlBreadcrumb(long id, ref string html)
+        {
+            var catalogsBusiness = new CatalogsBusiness();
+            var obj = catalogsBusiness.GetById(id);
+            html = "<li><a href=\"#\">" + obj.CatalogName + "</a></li>" + html;
+            if (obj.ParentId != -1)
+            {
+                HtmlBreadcrumb(obj.ParentId, ref html);
+            }
+            return html;
+        }
+
+        public static List<long> GetIdPrentById(long id, ref List<long> listParent)
+        {
+
+            var catalogsBusiness = new CatalogsBusiness();
+            var obj = catalogsBusiness.GetById(id);
+            if (obj != null)
+            {
+                if (obj.ParentId != -1)
+                {
+                    listParent.Add(obj.ParentId);
+                    GetIdPrentById(obj.ParentId, ref listParent);
+                }
+
+            }
+
+            return listParent;
+        }
+
+        public static string GetUrlImage(string url, string folder)
+        {
+            if (!string.IsNullOrEmpty(url))
+            {
+                var a = url.IndexOf('?');
+                if (a != -1)
+                {
+                    var split = url.Split('?');
+                    return split[0] + folder + "/" + split[1];
+                }
+                else
+                {
+                    return "/img/noimage.png";
+                }
+            }
+            else
+            {
+                return "/img/noimage.png";
+            }
+        }
+
+        public static double CountMoneyTransport(double kmRoad, double gramGoods, string location)
+        {
+            if (location == "Hà Nội")
+            {
+                if (gramGoods <= 5000)
+                {
+                    return 1500;
+                }
+                else if (gramGoods > 5000)
+                {
+                    return ((gramGoods - 5000) / 500) * 5 + 15000;
+                }
+            }
+            else if (location == "TP Hồ Chí Minh")
+            {
+                if (gramGoods <= 2000)
+                {
+                    return 20000;
+                }
+                else if (gramGoods > 5000)
+                {
+                    return ((gramGoods - 5000) / 500) * 5 + 2000;
+                }
+            }
+            //Tinh phi chuyen hang lien tinh
+            else
+            {
+                if (gramGoods <= 250)
+                {
+                    if (kmRoad < 100)
+                    {
+                        return 21780;
+                    }
+                    else if (kmRoad >= 100 && kmRoad <= 300)
+                    {
+                        return 24024;
+                    }
+                    else
+                    {
+                        return 30360;
+                    }
+                }
+                else if (gramGoods > 250 && gramGoods <= 500)
+                {
+                    if (kmRoad < 100)
+                    {
+                        return 31548;
+                    }
+                    else if (kmRoad >= 100 && kmRoad < 300)
+                    {
+                        return 33396;
+                    }
+                    else
+                    {
+                        return 39468;
+                    }
+                }
+                else if (gramGoods > 500 && gramGoods <= 1000)
+                {
+                    if (kmRoad < 100)
+                    {
+                        return 43824;
+                    }
+                    else if (kmRoad >= 100 && kmRoad < 300)
+                    {
+                        return 44880;
+                    }
+                    else
+                    {
+                        return 57684;
+                    }
+                }
+                else if (gramGoods > 1000 && gramGoods <= 1500)
+                {
+                    if (kmRoad < 100)
+                    {
+                        return 52800;
+                    }
+                    else if (kmRoad >= 100 && kmRoad < 300)
+                    {
+                        return 55176;
+                    }
+                    else
+                    {
+                        return 74448;
+                    }
+                }
+                else if (gramGoods > 1500 && gramGoods <= 2000)
+                {
+                    if (kmRoad < 100)
+                    {
+                        return 63888;
+                    }
+                    else if (kmRoad >= 100 && kmRoad < 300)
+                    {
+                        return 68244;
+                    }
+                    else
+                    {
+                        return 90420;
+                    }
+                }
+             
+                else if (gramGoods > 5000)
+                {
+                    // chưa xac đinh phạm vi
+                    return 500000;
+                }
+            }
+            return 0;
+        }
+    }
+}

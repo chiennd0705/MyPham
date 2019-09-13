@@ -1,0 +1,770 @@
+﻿@using Common.util
+@{
+  
+    Layout = "~/Views/Shared/_LayoutIndex.cshtml";
+    @*<script src="~/Scripts/jquery-1.9.1.min.js"></script>*@
+}
+ <link rel="stylesheet" type="text/css" href="/Content/Csspublic/css/customer.css" media="all">
+<div id="fb-root">
+</div>
+<div class="main-container col2-left-layout ">
+    <div class="breadcrumbs">
+        <div class="container">
+            <ul>
+                <li class="home" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <a href="/" title="Go to Home Page" itemprop="url"><span itemprop="title">Trang chủ</span></a>
+
+                </li>
+                 @Html.Raw(ViewData["Breadcrumbs"])
+            </ul>
+        </div>
+    </div>
+
+                                                                                                         
+    <div class="container">
+        <div class="main">
+            <div class="row">
+                <div class="col-main col-lg-9 col-md-9 col-sm-9 col-xs-12 content-color color f-left">
+                    <script type="text/javascript">
+                        var optionsPrice = new Product.OptionsPrice([]);
+                    </script>
+                    <div id="messages_product_view"></div>
+                    <div class="product-view" itemscope="" itemtype="http://schema.org/Product">
+                        <div class="product-essential">
+                            <div class="row">
+                                <form action="" method="post" id="product_addtocart_form">
+
+                                    <div class="product-img-box clearfix col-md-6 col-sm-6 col-xs-12">
+                                        <div class="product-img-content">
+                                            <div class="product-image product-image-zoom zoom-available">
+                                                <div class="product-image-gallery">
+                                                 @*   <span class="sticker top-left"><span class="labelnew">New</span></span><span class="sticker top-right"><span class="labelsale">-26%</span></span>
+                                                 *@   <img id="image-main" itemprop="image" class="gallery-image visible img-responsive"  src="@ViewData["ImgMain"]" data-zoom-image="@ViewData["ImgMainBig"]" alt="@ViewData["ProductName"]" title="@ViewData["ProductName"]">
+                                                      @Html.Raw(@ViewData["Img1"])
+
+                                                </div>
+                                            </div>
+                                            <div class="more-views">
+                                                <h2>More Views</h2>
+                                                <ul class="product-image-thumbs">
+                                                    @Html.Raw(@ViewData["Img2"])
+                                                </ul>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="product-shop col-md-6 col-sm-6 col-xs-12">
+                                        <div class="product-shop-content">
+                                            <div class="product-name">
+                                                <h1 itemprop="name">@ViewData["ProductName"]</h1>
+                                            </div>
+<div class="sf-row" style="margin-top: 7px;">Thương hiệu: <span class="text-danger">@Html.Raw(ViewData["Manufacturer"])</span> | Lượt xem: <span class="text-danger">@ViewData["TotalView"]</span> | Cập nhật: <span class="text-danger">
+                            @ViewData["LastUpdate"]</span>
+                        </div>
+                                            <div class="ratings" itemprop="aggregateRating" itemscope="" itemtype="http://schema.org/AggregateRating">
+                                                <meta itemprop="ratingValue" content="100">
+                                                <meta itemprop="reviewCount" content="1">
+                                                <meta itemprop="bestRating" content="100">
+                                                <meta itemprop="worstRating" content="0">
+                                                <div class="rating-box">
+                                                    @Html.Raw(@ViewData["rating"])
+                                                    <div class="rating" style="width: 100%"></div>
+                                                </div>
+                                                <p class="rating-links">
+                                                    <a href="#">@ViewData["count"] Đánh giá</a>
+                                                    <span class="separator">|</span>
+                                                    <a href="#review-form">Đánh giá sản phẩm này</a>
+                                                </p>
+                                            </div>
+                                            <div itemprop="offers" itemscope="" itemtype="http://schema.org/Offer">
+                                                <meta itemprop="priceCurrency" content="USD">
+
+                                                <div class="product-type-data">
+
+
+                                                    <div class="price-box">
+
+                                                        <p class="old-price">
+                                                            <span class="price-label">Regular Price:</span>
+                                                            <span class="price" id="old-price-1">@Html.Raw(@ViewData["OldPrice"])
+                                                            </span>
+                                                        </p>
+                                                        <p class="special-price">
+                                                            <span class="price-label">Special Price</span>
+                                                            <span class="price" itemprop="price" content="38.95" id="product-price-1">@Html.Raw(@ViewData["Price"])
+                                                            </span>
+                                                        </p>
+
+
+                                                    </div>
+                                                    <p class="availability in-stock">
+                                                        <link itemprop="availability" href="http://schema.org/InStock">
+                                                        Tình trạng: <span>@ViewData["State"]</span>
+                                                    </p>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="short-description">
+
+                                                    <div class="">
+                                                        <label>Phí vận chuyển:</label>
+                                                        <div class="text-outer" style="display: INLINE-BLOCK;">
+                                                                Linh hoạt theo địa chỉ người mua
+                                                         </div>
+                                                    </div>
+
+                                                <h2>Mô tả ngắn</h2>
+                                                <div class="std" itemprop="description">
+                                                   
+                                                    @Html.Raw(@ViewData["Summary"])
+                                                </div>
+                                            </div>
+                                            <div class=" " id="overbackgroud1" style="display: none; position:absolute;left: 43%;z-index: 99;margin-top: 11px;">
+                                                <img src="/img/loading/6.gif" style="position: relative; top: 44%; left: 46%" />
+                                            </div>
+                                            <div class="add-to-box">
+                                                <div class="row">
+                                                    <div class="col-sm-5">
+                                                        <div class="product-qty">
+                                                            <label for="qty">Số lượng:</label>
+                                                            <div class="custom-qty">
+                                                                <input type="text" name="qty" id="qty" maxlength="12" value="1" title="Qty" class="input-text qty">
+                                                                <div class="btn-plus">
+
+                                                                    <button type="button" class="increase items" onclick="var result = document.getElementById(&#39;qty&#39;); var qty = result.value; if( !isNaN( qty )) result.value++;return false;">
+                                                                        <i class="fa fa-caret-up"></i>
+                                                                    </button>
+                                                                    <button type="button" class="reduced items" onclick="var result = document.getElementById(&#39;qty&#39;); var qty = result.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 1 ) result.value--;return false;">
+                                                                        <i class="fa fa-caret-down"></i>
+                                                                    </button>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-7">
+                                                        <div class="add-to-cart">
+                                                            <a title="Add to Cart" onclick="updatecart(@ViewBag.ID)" class="button btn-cart" data-toggle="modal" data-target="#CartContent">
+                                                                <span>
+                                                                    <span class="view-cart">Thêm vào giỏ hàng</span>
+                                                                </span>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                               
+                                               
+                                               
+                                                <ul class="add-to-links">
+                                                    <li>
+                                                        <a href="" rel="tooltip" title="Add to Wishlist" onclick="productAddToCartForm.submitLight(this, this.href); return false;" class="link-wishlist">
+                                                            <i class="fa fa-heart-o icons"></i>
+                                                            Yêu thích
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="" class="link-compare" title="Add to Compare">
+                                                            <i class="fa fa-signal icons"></i>
+                                                            So sánh
+                                                        </a>
+                                                    </li>
+                                                </ul>
+
+                                            </div>
+
+
+
+                                            <div class="form-share clearfix">
+                                                <p class="print">
+                                                    <a href="javascript:print();"><i class="fa fa-print" style="margin-right:4px;"></i>Print</a>
+                                                </p>
+                                                <p class="email-friend">
+                                                    <a href="#">
+                                                        <i class="fa fa-envelope-o"></i>
+                                                        Email cho bạn bè
+                                                    </a>
+                                                </p>
+                                            </div>
+                                            <div class="addit">
+                                                <div class="alo-social-links clearfix">
+
+                                                    <div class="so-facebook so-social-share">
+   <div class="fb-like" data-href="@ViewData["RawUrl"]" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
+
+                                                    </div>
+                                                    <div class="so-twitter so-social-share">
+<a href="https://twitter.com/share" class="twitter-share-button" data-url="@ViewData["RawUrl"]">Tweet</a>
+
+                                        <script>                                            !function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = "//platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs); } }(document, "script", "twitter-wjs");</script>
+
+                                 
+                                                    </div>
+                                                    <div class="so-plusone so-social-share">
+  <script src="https://apis.google.com/js/plusone.js"></script>
+
+                                        <g:plusone size="medium"></g:plusone>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <script type="text/javascript">
+                                //<![CDATA[
+                                var productAddToCartForm = new VarienForm('product_addtocart_form');
+                                productAddToCartForm.submit = function (button, url) {
+                                    if (this.validator.validate()) {
+                                        var form = this.form;
+                                        var oldUrl = form.action;
+
+                                        if (url) {
+                                            form.action = url;
+                                        }
+                                        var e = null;
+                                        try {
+                                            this.form.submit();
+                                        } catch (e) {
+                                        }
+                                        this.form.action = oldUrl;
+                                        if (e) {
+                                            throw e;
+                                        }
+
+                                        if (button && button != 'undefined') {
+                                            button.disabled = true;
+                                        }
+                                    }
+                                }.bind(productAddToCartForm);
+
+                                productAddToCartForm.submitLight = function (button, url) {
+                                    if (this.validator) {
+                                        var nv = Validation.methods;
+                                        delete Validation.methods['required-entry'];
+                                        delete Validation.methods['validate-one-required'];
+                                        delete Validation.methods['validate-one-required-by-name'];
+                                        // Remove custom datetime validators
+                                        for (var methodName in Validation.methods) {
+                                            if (methodName.match(/^validate-datetime-.*/i)) {
+                                                delete Validation.methods[methodName];
+                                            }
+                                        }
+
+                                        if (this.validator.validate()) {
+                                            if (url) {
+                                                this.form.action = url;
+                                            }
+                                            this.form.submit();
+                                        }
+                                        Object.extend(Validation.methods, nv);
+                                    }
+                                }.bind(productAddToCartForm);
+                                (function (d, s, id) {
+                                    var js, fjs = d.getElementsByTagName(s)[0];
+                                    if (d.getElementById(id)) return;
+                                    js = d.createElement(s);
+                                    js.id = id;
+                                    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=115245961994281";
+                                    fjs.parentNode.insertBefore(js, fjs);
+                                }(document, 'script', 'facebook-jssdk'));
+                                !function (d, s, id) {
+                                    var js, fjs = d.getElementsByTagName(s)[0];
+                                    if (!d.getElementById(id)) {
+                                        js = d.createElement(s);
+                                        js.id = id;
+                                        js.src = "//platform.twitter.com/widgets.js";
+                                        fjs.parentNode.insertBefore(js, fjs);
+                                    }
+                                }(document, "script", "twitter-wjs");
+                                //]]>
+                            </script>
+                        </div>
+
+
+                    </div>
+
+                </div>
+                <div class="col-left sidebar col-lg-3 col-md-3 col-sm-3 col-xs-12 left-color color f-right">
+                    <div class="anav-container">
+                        <div class="adr box">
+                            <img src="/Content/Csspublic/images/Mien_phi_van_chuyen.png" width="100%" />
+                        </div>
+<div class="adr box" id="box_merchants_info">
+                            <div class="body bg-selago" id="selected_merchant">
+                                <div class="adr list">
+                                    <div class="item">
+                                        <div class="icon"><i class="adr huge icon blue ribbon"></i></div>
+                                        <div class="text">
+                                            Sản phẩm được cung cấp bởi  <a id="selected_merchant_name" href='/@(ViewData["ShopUrl"]+"-mc"+ViewData["ShopId"])'>@ViewData["ShopName"]</a>
+                                        </div>
+<div style="padding:10px; padding-bottom:0;">
+<div class="g-row"><p class="p-checkred"><span class="icon16-placegray"></span>@ViewData["ShopAddress"]</p></div>
+<div class="g-row">
+                                    <p class="p-checkred"><span class="icon16-telgray"></span>Liên hệ với người bán: <b>@ViewData["ShopPhone"]</b></p>
+                                </div>
+
+
+</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end #selected_merchant -->
+                            <div class="body hide" id="other_merchants">
+                                <div class="text-lighter-black">0 Nhà cung cấp khác</div>
+                                <div class="adr list" id="other_merchants_list" style="max-height: none;">
+                                </div>
+                            </div>
+                            <!-- end #other_merchants -->
+                        </div>
+                        <div class="adr box" id="box_delivery_policies">
+                            <div class="header">
+                                <h4 class="title">Chính sách giao hàng</h4>
+                            </div>
+                            <div class="body">
+                                <div class="adr list" id="delivery_policies_list">
+                                    <div class="item">
+                                        <div class="icon"><i class="adr huge icon truck"></i></div>
+                                        <div class="text">Miễn phí vận chuyển và công lắp đặt bởi Buygroup365.</div>
+                                    </div>
+
+
+                                    <div class="item ">
+                                        <div class="icon"><i class="adr huge icon location2"></i></div>
+                                        <div class="text">Chỉ giao hàng tại Hà Nội &amp; Tp. Hồ Chí Minh.</div>
+                                    </div>
+                                    <div class="item ">
+                                        <div class="icon"><i class="adr huge icon box"></i></div>
+                                        <div class="text">Đổi trả trong 3 ngày, thủ tục đơn giản.</div>
+                                    </div>
+                                    <div class="item bill-support hide">
+                                        <div class="icon"><i class="adr huge icon bill"></i></div>
+                                        <div class="text">Nhà cung cấp xuất hóa đơn cho sản phẩm này.</div>
+                                    </div>
+                                    <div class="item bill-support">
+                                        <div class="icon"><i class="adr huge icon cash"></i></div>
+                                        <div class="text">Khách hàng vui lòng thanh toán phí vật tư phát sinh.</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="main">
+
+
+            <div class="product-view">
+
+                <div class="product-wapper-tab clearfix">
+                    <!--<ul class="toggle-tabs"><li class="item active"><span>Description</span></li><li class="item "><span>Reviews</span></li><li class="item "><span>Product Tags</span></li></ul>-->
+                    <div class="product-collateral">
+                        <div class="box-collateral box-description active">
+                            <h2>Giới thiệu sản phẩm</h2>
+                            <h2>Chi tiết</h2>
+                            <div class="std">
+  @Html.Raw(@ViewData["Description"])
+                                         </div>
+                        </div>
+                        <div class="box-collateral box-tags">
+                            <h2>Thông số sản phẩm</h2>
+                          <table class="table table-striped table-bordered" id="tblGeneralAttribute" style="display:none">
+                <tbody>
+                            <tr>
+                                <td><strong>Chất liệu</strong></td>
+                                <td>Vỏ nhôm</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Model</strong></td>
+                                <td>iPad Air Wifi 4G 16GB (MH1C2TH/A)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Hệ điều hành</strong></td>
+                                <td>iOS 8</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Kết nối</strong></td>
+                                <td>Wifi 802.11 a/b/g/n/ac, HT80 with MIMO, Bluetooth v4.0</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Tốc độ CPU</strong></td>
+                                <td>1.5GHz</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Kích thước</strong></td>
+                                <td>240 x 169.5 x 6.1 mm</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Bộ nhớ trong</strong></td>
+                                <td>16GB</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Loại màn hình</strong></td>
+                                <td>Retina công nghệ IPS</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Độ phân giải màn hình</strong></td>
+                                <td>2048 x 1536 pixels</td>
+                            </tr>
+                            <tr>
+                                <td><strong>RAM</strong></td>
+                                <td>2GB</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Tính năng camera</strong></td>
+                                <td>iSight, facetime, auto HDR, f/2.2</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Quay phim</strong></td>
+                                <td>Full HD 1080p</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Màu màn hình</strong></td>
+                                <td>16 triệu màu</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Chipset</strong></td>
+                                <td>A8X</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Loại pin</strong></td>
+                                <td>Li-Po</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Tính năng khác</strong></td>
+                                <td>Lịch, đồng hồ, báo thức, mail, sổ tay</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Thời gian hoạt động</strong></td>
+                                <td>10 giờ</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Khối lượng</strong></td>
+                                <td>437 (g)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Màu sắc</strong></td>
+                                <td>Vàng</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Thời hạn bảo hành</strong></td>
+                                <td>12 (tháng)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Camera sau</strong></td>
+                                <td>8 (MP)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Kích thước màn hình</strong></td>
+                                <td>9,7 (inches)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Dung lượng pin</strong></td>
+                                <td>7.340 (mAh)</td>
+                            </tr>
+                </tbody>
+            </table>
+                        </div>
+                        <div class="box-collateral box-reviews">
+                            <h2>Đánh giá và bình luận</h2>
+
+                            <div class=" box-reviews" id="customer-reviews">
+                                <h2>Customer Reviews</h2>
+                                <dl>
+                                    <dt>
+                                        <a href="">Sexy Lady</a> Review by <span>Sexy Lady</span>
+                                    </dt>
+                                    <dd>
+                                        <table class="ratings-table">
+                                            <colgroup>
+                                                <col width="1">
+                                                <col>
+                                            </colgroup>
+                                            <tbody>
+                                                <tr>
+                                                    <th>Value</th>
+                                                    <td>
+                                                        <div class="rating-box">
+                                                            <div class="rating" style="width: 100%;"></div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Quality</th>
+                                                    <td>
+                                                        <div class="rating-box">
+                                                            <div class="rating" style="width: 100%;"></div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Price</th>
+                                                    <td>
+                                                        <div class="rating-box">
+                                                            <div class="rating" style="width: 100%;"></div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        Sexy Lady                <small class="date">(Posted on 7/14/2015)</small>
+                                    </dd>
+                                </dl>
+                                <div class="form-add">
+                                    <h2>Write Your Own Review</h2>
+                                    <form action="" method="post" id="review-form">
+                                        <input name="form_key" type="hidden" value="zZIKn6w9lSw5UQf5">
+                                        <fieldset>
+                                            <h3>You're reviewing: <span>Sexy Lady</span></h3>
+                                            <h4>How do you rate this product? <em class="required">*</em></h4>
+                                            <span id="input-message-box"></span>
+                                            <table class="data-table" id="product-review-table">
+                                                <colgroup>
+                                                    <col>
+                                                    <col width="1">
+                                                    <col width="1">
+                                                    <col width="1">
+                                                    <col width="1">
+                                                    <col width="1">
+                                                </colgroup>
+                                                <thead>
+                                                    <tr class="first last">
+                                                        <th>&nbsp;</th>
+                                                        <th><span class="nobr">1 star</span></th>
+                                                        <th><span class="nobr">2 stars</span></th>
+                                                        <th><span class="nobr">3 stars</span></th>
+                                                        <th><span class="nobr">4 stars</span></th>
+                                                        <th><span class="nobr">5 stars</span></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr class="first odd">
+                                                        <th>Quality</th>
+                                                        <td class="value">
+                                                            <input type="radio" name="ratings[1]" id="Quality_1" value="1" class="radio"></td>
+                                                        <td class="value">
+                                                            <input type="radio" name="ratings[1]" id="Quality_2" value="2" class="radio"></td>
+                                                        <td class="value">
+                                                            <input type="radio" name="ratings[1]" id="Quality_3" value="3" class="radio"></td>
+                                                        <td class="value">
+                                                            <input type="radio" name="ratings[1]" id="Quality_4" value="4" class="radio"></td>
+                                                        <td class="value last">
+                                                            <input type="radio" name="ratings[1]" id="Quality_5" value="5" class="radio"></td>
+                                                    </tr>
+                                                    <tr class="even">
+                                                        <th>Price</th>
+                                                        <td class="value">
+                                                            <input type="radio" name="ratings[3]" id="Price_1" value="11" class="radio"></td>
+                                                        <td class="value">
+                                                            <input type="radio" name="ratings[3]" id="Price_2" value="12" class="radio"></td>
+                                                        <td class="value">
+                                                            <input type="radio" name="ratings[3]" id="Price_3" value="13" class="radio"></td>
+                                                        <td class="value">
+                                                            <input type="radio" name="ratings[3]" id="Price_4" value="14" class="radio"></td>
+                                                        <td class="value last">
+                                                            <input type="radio" name="ratings[3]" id="Price_5" value="15" class="radio"></td>
+                                                    </tr>
+                                                    <tr class="last odd">
+                                                        <th>Value</th>
+                                                        <td class="value">
+                                                            <input type="radio" name="ratings[2]" id="Value_1" value="6" class="radio"></td>
+                                                        <td class="value">
+                                                            <input type="radio" name="ratings[2]" id="Value_2" value="7" class="radio"></td>
+                                                        <td class="value">
+                                                            <input type="radio" name="ratings[2]" id="Value_3" value="8" class="radio"></td>
+                                                        <td class="value">
+                                                            <input type="radio" name="ratings[2]" id="Value_4" value="9" class="radio"></td>
+                                                        <td class="value last">
+                                                            <input type="radio" name="ratings[2]" id="Value_5" value="10" class="radio"></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <input type="hidden" name="validate_rating" class="validate-rating" value="">
+                                            <script type="text/javascript">decorateTable('product-review-table')</script>
+                                            <ul class="form-list">
+                                                <li>
+                                                    <label for="nickname_field" class="required"><em>*</em>Nickname</label>
+                                                    <div class="input-box">
+                                                        <input type="text" name="nickname" id="nickname_field" class="input-text required-entry" value="">
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <label for="summary_field" class="required"><em>*</em>Summary of Your Review</label>
+                                                    <div class="input-box">
+                                                        <input type="text" name="title" id="summary_field" class="input-text required-entry" value="">
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <label for="review_field" class="required"><em>*</em>Review</label>
+                                                    <div class="input-box">
+                                                        <textarea name="detail" id="review_field" cols="5" rows="3" class="required-entry"></textarea>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </fieldset>
+                                        <div class="buttons-set">
+                                            <button type="submit" title="Submit Review" class="button"><span><span>Submit Review</span></span></button>
+                                        </div>
+                                    </form>
+                                    <script type="text/javascript">
+                                        //<![CDATA[
+                                        var dataForm = new VarienForm('review-form');
+                                        Validation.addAllThese(
+                                            [
+                                                ['validate-rating', 'Please select one of each of the ratings above', function (v) {
+                                                    var trs = $('product-review-table').select('tr');
+                                                    var inputs;
+                                                    var error = 1;
+
+                                                    for (var j = 0; j < trs.length; j++) {
+                                                        var tr = trs[j];
+                                                        if (j > 0) {
+                                                            inputs = tr.select('input');
+
+                                                            for (i in inputs) {
+                                                                if (inputs[i].checked == true) {
+                                                                    error = 0;
+                                                                }
+                                                            }
+
+                                                            if (error == 1) {
+                                                                return false;
+                                                            } else {
+                                                                error = 1;
+                                                            }
+                                                        }
+                                                    }
+                                                    return true;
+                                                }]
+                                            ]
+                                        );
+                                        //]]>
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="Mycart" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+   
+</div>
+
+<div class="modal fade" id="CartContent" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" style="width: 60%">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <img class="img-responsive" src="/Content/Csspublic/images/logo.png" alt="Buygroup365" style="height: 35px">
+            </div>
+            <div class="modal-body">
+                <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                    <tbody id="contentCart"></tbody>
+                </table>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-angle-double-left"></i> Tiếp tục mua hàng</button>
+                <a class="btn btn-primary" href="/PayGoods/Payment">Thanh toán <i class="fa fa-angle-double-right"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function updatecart(id) {
+        $('#overbackgroud1').show();
+        //  alert(id);
+        var sl = $('#qty').val();
+
+        //    alert(sl);
+        $.ajax({
+            url: '@Url.Action("ViewCart", "Ajax")',
+            data: {
+                'id': id,
+                'sl': sl
+            },
+            dataType: 'json',
+            Type: 'POST',
+            success: function (data) {
+                //  var count = $.map(data, function(n, i) { return i; }).length;
+                var html = "";
+                var total = 0;
+                var sl1 = 0;
+                var htmlpoup = "";
+                htmlpoup += " <tr style=\"background-color: #669933;\"><td colspan=\"2\" height=\"20\" width=\"120\" style=\"font-weight: bold;\">Sản phẩm</td>  <td width=\"120\" style=\"text-align: center;font-weight: bold;\">Đơn giá</td> <td width=\"80\"  style=\"text-align: center;font-weight: bold;\">Số lượng</td> <td width=\"120\"  style=\"text-align: center;font-weight: bold;\">Thành tiền</td></tr>";
+                $.each(data, function (key, value) {
+                    //alert(value.FriendlyUrl);
+                    var strurl = "/" + value.FriendlyUrl + "-ct" + value.Id;
+                    //   var url =string.Format("/{0}-ct{1}", url, id);
+                    //        html += "  <li><i class=\"fa fa-angle-double-right\"></i><span> " + value.ProductName + "</span> <strong>(" + value.Quantity + ")</strong></li>";
+                    sl1 += parseInt(value.Quantity); //    alert( key + ": " + value );
+                    total += parseInt(value.Quantity) * parseFloat(value.Price);
+                    var thanhtien=parseInt(value.Quantity) * parseFloat(value.Price);
+                    html += " <li class=\"item clearfix odd\" id=\"cartItem_" + value.Id + "\">" + "<div class=\"cart-content-top\">" + "<a href=\"" + strurl + "\" title=\"" + value.ProductName + "\" target=\"_blank\" class=\"product-image\">" +
+                        "<img src=\"" + value.AvatarUrl + "\" width=\"60\" height=\"77\" alt=\"" + value.ProductName + "\">   </a>" +
+                        "<div class=\"product-details\">" +
+                        "<p class=\"product-name\"><a target=\"_blank\" href=\"" + strurl + "\">" + value.ProductName + "</a></p>" +
+                        "<strong>" + formatNumber(value.Quantity) + "</strong> x <span class=\"price\"> " + formatNumber(value.Price) + " <sup class=\"u-price\">đ</sup></span>  </div></div>" +
+                        "<div class=\"cart-content-bottom\">" +
+                        "<div class=\"clearfix\">" +
+                        "<a href=\"#\" title=\"Edit item\" class=\"btn-edit\"><i class=\"fa fa-pencil-square-o\"></i></a>" +
+                        "<a href=\"#\" title=\"Remove\" onclick=\"DeleteItemCart(" + value.Id + ")\" class=\"btn-remove btn-remove2\"><i class=\"icon-close icons\"></i></a></div></div></li>";
+
+                    htmlpoup += " <tr style=\"border-bottom: 1px; border-color: red;border-bottom-style: dashed\">  <td height=\"20\"><img src=\"" + value.AvatarUrl + "\" width=\"60\"  alt=\"" + value.ProductName + "\"></td> " +
+                        " <td>" + value.ProductName + "</td> " +
+                        "<td style=\"text-align: right;font-weight: bold;\">" + formatNumber(value.Price) + " <sup class=\"u-price\">đ</sup></span></td>" +
+                        "<td style=\"width:80px;text-align: center;font-weight: bold;\">" + formatNumber(value.Quantity) + "</td>" +
+                        "<td style=\"text-align: right;font-weight: bold;\">" + formatNumber(thanhtien) + " <sup class=\"u-price\">đ</sup></span></td>   </tr>";
+                });
+
+                var htmcontent = " <div class=\"block-content\">" +
+                    "<p class=\"block-subtitle\">Giỏ hàng của bạn</p>" +
+                    "<ol id=\"cart-sidebar\" class=\"mini-products-list clearfix\">" + html +
+                    "</ol>" +
+                    "<p class=\"subtotal\">" +
+                    "<span class=\"label\">Tổng :</span> <span class=\"price\" id=\"totalPice\">" + formatNumber(total) + "<sup class=\"u-price\">đ</sup></span>" +
+                    +"</p>" +
+                    "<div class=\"actions\">" +
+                    "<a href=\"/PayGoods/Payment\" class=\"view-cart\">View cart </a><a href=\"/PayGoods/Payment\" class=\"checkout\">Checkout   </a>  </div></div>";
+             
+                htmlpoup+="<tr height=\"20\"><td  colspan=\"4\"style=\"text-align: right;padding-top: 25px; font-weight: bold; font-size: 18px;\">Thành tiền:  </td><td align=\"right\" style=\"padding-top: 25px; font-weight:text-align: right; bold; font-size: 18px;\">" + formatNumber(total) + " <sup class=\"u-price\">đ</sup></span></td> </tr>";
+                
+                $('#numberProduct').html("");
+                $('#numberProduct').append(" <span class=\"zero\">" + sl1 + " </span>");
+                $('.mini-contentCart').html("");
+                $('.mini-contentCart').append(htmcontent);
+                $('#overbackgroud1').hide();
+                //alert("Đã thêm " + sl + " sản phẩm vào giỏ hàng!");
+                $('#contentCart').html("");
+                $('#contentCart').append(htmlpoup);
+
+
+               
+            },
+            error: function () {
+
+            }
+        });
+    }
+    function formatNumber(num) {
+        return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+    }
+</script>
+<style>
+
+</style>

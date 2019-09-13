@@ -1,0 +1,68 @@
+1, Cập nhật thông tin tk không cập nhật được
+/Member/Profile
+
+2, Radio thuộc tính riêng chọn được nhiều mục
+
+3,State chuyển là còn hàng hay hết hàng (hiện tại để là cũ,mới)
+
+- Check user nếu ko chọn danh mục và  thương hiệu thông báo
+- Các thông báo lỗi chưa nhập hiển thị popup để khách hàng dễ nhận ra
+
+list sp: tìm kiếm chưa chuẩn
+list sp: để 10sp/trang sắp xếp mới đến cũ
+
+Sửa sp chưa update được ảnh con
+
+4, Avarta bên cạnh chưa thay theo hình đại diện
+
+5, Thêm chức năng quan tâm của tôi
+
+
+Đơn hàng:
+
+chuyển tab mất ảnh SP
+Chuyển thành thông tin người mua
+Hiển thị popup chi tiết thông tin người mua, người nhận
+Thêm chức năng cập nhật trạng thái đơn hàng
+
+
+------------------
+Chi tiết SP: 
+-hiển thị thuộc tính,
+-Đánh giá sp
+-Hiển thị sp của 1 shop
+-Update Lượt xem
+-Print, email cho bạn vè
+
+
+Check lỗi mới:
+
+-/Member/Profile:
+Cập nhật các trường thông tin của bảng Member và MemberProfile (bỏ câu hỏi bảo mật đi)
+
+- Thêm trang thay đổi mk
+
+
+
+
+Cấu hình thông tin shop, hỗ trợ
+/Member/Shop
+
+
+Thông tin shop: Update các trường thông tin của Bảng Shop
+Thông tin support: Update các trường thông tin của Bảng ShopSupport
+
+Giỏ hàng scoll
+Xem toàn bộ danh mục
+Map thương hiệu footer
+
+/PayGoods/Payment: khi không có sp thông báo: "Giỏ hàng của bạn hiện đang trống"
+Member: xóa sp chưa xóa được
+
+
+
+
+
+
+
+

@@ -1,0 +1,205 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using Business.ClassBusiness;
+using BuyGroup365.Controllers;
+using BuyGroup365.Models.Member;
+using Common;
+
+namespace BuyGroup365.Areas.Manage.Models
+{
+    public class LoadCombo
+    {
+        readonly CatalogsBusiness _catalogsBusiness = new CatalogsBusiness();
+        readonly ManufacturersBusiness _manufacturersBusiness=new ManufacturersBusiness();
+        readonly Catalogs_ManufacturersBusiness _catalogsManufacturersBusiness=new Catalogs_ManufacturersBusiness();
+        readonly NewsBusiness _newsBusiness = new NewsBusiness();
+        readonly NewsGroupBusiness _newsGroupBusiness = new NewsGroupBusiness();
+
+        public List<SelectListItem> SearchCategoryByName(ref List<LoadDropdown.DropdowCate> listDropdowCate)
+        {
+
+            var list = SearchCategoryByParentId("└-------", -1, ref listDropdowCate);
+            var listItems = new List<SelectListItem>();
+            listItems.Add(new SelectListItem { Text = "└Danh mục gốc", Value = "-1" ,Selected = true});
+            foreach (var item in list)
+            {
+                listItems.Add(new SelectListItem { Text = item.Name, Value = item.Id.ToString() });
+            }
+            return listItems;
+        }
+        public List<LoadDropdown.DropdowCate> SearchCategoryByParentId(string sp, long paId, ref List<LoadDropdown.DropdowCate> listDropdowCate)
+        {
+        //    List<Catalog> list = _catalogsBusiness.GetDynamicQuery().Where(x => x.ParentId == paId).ToList();
+            List<Catalog> list = MemberController.List.Where(x => x.ParentId == paId).ToList();// Test cache dl
+            foreach (var catalog in list)
+            {
+                var dropdowCate = new LoadDropdown.DropdowCate { Id = catalog.Id, Name = sp + catalog.CatalogName };
+                listDropdowCate.Add(dropdowCate);
+                SearchCategoryByParentId(sp + "--------", catalog.Id, ref listDropdowCate);
+            }
+            return listDropdowCate;
+        }
+        public class DropdowCate
+        {
+            public long Id { get; set; }
+            public string Name { get; set; }
+        }
+
+ 
+
+        public List<SelectListItem> InitSelectListItemStatus()
+        {
+            var listItemStatus = new List<SelectListItem>();
+            listItemStatus.Add(new SelectListItem { Text = "--Chọn trạng thái--", Value = "-1" });
+            listItemStatus.Add(new SelectListItem { Text = "Sản phẩm chưa được duyệt", Value = "1" });
+            listItemStatus.Add(new SelectListItem { Text = "Sản phẩm đang bán", Value = "2" });
+            listItemStatus.Add(new SelectListItem { Text = "Sản phẩm đã hết hạn", Value = "3" });
+            listItemStatus.Add(new SelectListItem { Text = "Sản phẩm đã hết hàng", Value = "4" });
+            listItemStatus.Add(new SelectListItem { Text = "Sản phẩm chờ bán", Value = "5" });
+            listItemStatus.Add(new SelectListItem { Text = "Sản phẩm đã xóa", Value = "6" });
+            return listItemStatus;
+        }
+
+
+
+        public List<SelectListItem> InitSelectListItemState()
+        {
+            var listItemStatus = new List<SelectListItem>();
+            listItemStatus.Add(new SelectListItem { Text = "--Chọn trạng thái--", Value = "-1" });
+            listItemStatus.Add(new SelectListItem { Text = "Sản phẩm mới", Value = "0" });
+            //listItemStatus.Add(new SelectListItem { Text = "Không phát hành", Value = "0" });
+            listItemStatus.Add(new SelectListItem { Text = "Sản phẩm củ", Value = "1" });
+            return listItemStatus;
+
+        }
+        #region category
+        public List<SelectListItem> InitDropCategorys(int islast)
+        {
+            var listItemStatus = new List<SelectListItem>();
+            listItemStatus.Add(new SelectListItem { Text = "-Danh mục gốc-", Value = "-1" });
+            var obj = _catalogsBusiness.GetDynamicQuery().Where(x => x.Status == 1 && x.IsLast == islast);
+            foreach (var item in obj)
+            {
+                listItemStatus.Add(new SelectListItem { Text = item.CatalogName, Value = item.Id.ToString() });
+            }
+            return listItemStatus;
+        }
+        public List<SelectListItem> InitDropCategorysParent()
+        {
+            var listItemStatus = new List<SelectListItem>();
+            listItemStatus.Add(new SelectListItem { Text = "-Select-", Value = "-1" });
+            var obj = _catalogsBusiness.GetDynamicQuery().Where(x => x.Status == 1 && x.ParentId == -1);
+            foreach (var item in obj)
+            {
+                listItemStatus.Add(new SelectListItem { Text = item.CatalogName, Value = item.Id.ToString() });
+            }
+            return listItemStatus;
+        }
+        public List<SelectListItem> InitManufaceture()
+        {
+            var listItemStatus = new List<SelectListItem>();
+        //    listItemStatus.Add(new SelectListItem { Text = "-Select-", Value = "-1" });
+            var obj = _manufacturersBusiness.GetDynamicQuery();
+            foreach (var item in obj)
+            {
+                listItemStatus.Add(new SelectListItem { Text = item.ManufacturerName, Value = item.Id.ToString() });
+            }
+            return listItemStatus;
+        }
+        public List<SelectListItem> InitManufacetureByCateId(long cateId)
+        {
+            var listItemStatus = new List<SelectListItem>();
+            //    listItemStatus.Add(new SelectListItem { Text = "-Select-", Value = "-1" });
+            var obj = _catalogsManufacturersBusiness.GetDynamicQuery().Where(x=>x.CatalogId==cateId);
+            foreach (var item in obj)
+            {
+                listItemStatus.Add(new SelectListItem { Text = item.Manufacturer.ManufacturerName, Value = item.Id.ToString() });
+            }
+            return listItemStatus;
+        }
+
+        #region Commbo Create 
+        public List<SelectListItem> InitSelectListItemStatusCreateCategory()
+        {
+            var listItemStatus = new List<SelectListItem>();
+            listItemStatus.Add(new SelectListItem { Text = "--Chọn trạng thái--", Value = "-1" });
+            listItemStatus.Add(new SelectListItem { Text = "Lock", Value = "0" });
+            listItemStatus.Add(new SelectListItem { Text = "Active", Value = "1" });
+     
+            return listItemStatus;
+        }
+        #endregion
+        #endregion
+
+        #region News
+
+        #region NewsGroup
+        public List<SelectListItem> InitSelectListItemStatusNewsGroup()
+        {
+            var listItemStatus = new List<SelectListItem>();
+            listItemStatus.Add(new SelectListItem { Text = "--Chọn trạng thái--", Value = "-1" });
+
+            var listNewsGroup = _newsGroupBusiness.GetListNewsGroup();
+            foreach (NewsGroup item in listNewsGroup)
+            {
+                listItemStatus.Add(new SelectListItem { Text = item.NewsGroupName, Value = item.Id+"" });
+            }
+                        
+            return listItemStatus;
+        }
+
+        public List<SelectListItem> IsPublicForNewsGroup()
+        {
+            var listItemStatus = new List<SelectListItem>();
+            listItemStatus.Add(new SelectListItem { Text = "--Chọn trạng thái--", Value = "-1" });
+            listItemStatus.Add(new SelectListItem { Text = "public", Value = "0" });
+            listItemStatus.Add(new SelectListItem { Text = "private", Value = "1" });
+
+            return listItemStatus;
+        }
+        #endregion
+        public List<SelectListItem> InitSelectListItemStatusNews()
+        {
+            var listItemStatus = new List<SelectListItem>();
+            listItemStatus.Add(new SelectListItem { Text = "--Chọn trạng thái--", Value = "-1" });
+            listItemStatus.Add(new SelectListItem { Text = "Lock", Value = "0" });
+            listItemStatus.Add(new SelectListItem { Text = "Active", Value = "1" });
+
+            return listItemStatus;
+        }
+
+
+        public List<SelectListItem> SearchNewsByName(ref List<DropdowNews> listDropdowNews)
+        {
+
+            var list = SearchNewsByParentId("└-------", -1, ref listDropdowNews);
+            var listItems = new List<SelectListItem>();
+            listItems.Add(new SelectListItem { Text = "└Nhóm tin", Value = "-1", Selected = true });
+            foreach (var item in list)
+            {
+                listItems.Add(new SelectListItem { Text = item.Name, Value = item.Id.ToString() });
+            }
+            return listItems;
+        }
+        public List<DropdowNews> SearchNewsByParentId(string sp, long paId, ref List<DropdowNews> listDropdowNews)
+        {
+            List<NewsGroup> list = _newsGroupBusiness.GetDynamicQuery().Where(x => x.ParentId == paId).ToList();
+            foreach (var newsGroup in list)
+            {
+                var dropdowCate = new DropdowNews { Id = newsGroup.Id, Name = sp + newsGroup.NewsGroupName };
+                listDropdowNews.Add(dropdowCate);
+                SearchNewsByParentId(sp + "--------", newsGroup.Id, ref listDropdowNews);
+            }
+            return listDropdowNews;
+        }
+        public class DropdowNews
+        {
+            public long Id { get; set; }
+            public string Name { get; set; }
+        }
+        #endregion
+    }
+}

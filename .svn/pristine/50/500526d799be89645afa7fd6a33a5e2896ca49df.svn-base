@@ -1,0 +1,114 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Reflection;
+using System.ServiceModel;
+using System.Text.RegularExpressions;
+using Newtonsoft.Json;
+
+namespace Common.exception
+{
+    public static class ObjectUtil
+    {
+
+        public static void CopyTo<D, S>(D output, S input)
+        {
+            //D output = new D();
+            PropertyInfo[] propsT = typeof(S).GetProperties();
+            PropertyInfo[] propsY = typeof(D).GetProperties();
+
+            List<PropertyInfo> similarsT = propsT.Where(x =>
+                propsY.Any(y => y.Name == x.Name
+                                && y.PropertyType == x.PropertyType)).OrderBy(x => x.Name).ToList();
+
+            List<PropertyInfo> similarsY = propsY.Where(x =>
+                propsT.Any(y => y.Name == x.Name
+                                && y.PropertyType == x.PropertyType)).OrderBy(x => x.Name).ToList();
+
+            for (int i = 0; i < similarsY.Count; i++)
+            {
+                similarsY[i]
+                    .SetValue(output, similarsT[i].GetValue(input, null), null);
+            }
+        }
+
+        public static FaultException CreateFaultException(string code, string reason)
+        {
+            FaultException fex = new FaultException(new FaultReason(string.Format("#{0}#{1}#", code, reason)), new FaultCode(code));
+            return fex;
+        }
+        /// <summary>
+        /// IsEmail : hàm kiêm tra mail hơp lệ hay không, True là hợp lệ ngược lại la false.
+        /// </summary>
+        /// <param name="email"> tên mail cân kiêm tra dạng string</param>
+        /// <returns>True/False</returns>
+        public static bool IsEmail(string email)
+        {
+            const string matchEmailPattern = @"^(([\w-]+\.)+[\w-]+|([a-zA-Z]{1}|[\w-]{2,}))@"
+                                             + @"((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\.([0-1]?
+				[0-9]{1,2}|25[0-5]|2[0-4][0-9])\."
+                                             + @"([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\.([0-1]?
+				[0-9]{1,2}|25[0-5]|2[0-4][0-9])){1}|"
+                                             + @"([a-zA-Z]+[\w-]+\.)+[a-zA-Z]{2,4})$";
+
+            if (email != null) return Regex.IsMatch(email, matchEmailPattern);
+            else return false;
+        }
+
+        public static bool IsNumeric(string val)
+        {
+            const NumberStyles numberStyle = System.Globalization.NumberStyles.AllowDecimalPoint;
+            Double result;
+            return Double.TryParse(val, numberStyle, System.Globalization.CultureInfo.CurrentCulture, out result);
+        }
+
+        public static bool IsEqualNull(object obj)
+        {
+            return obj == null;
+        }
+
+        public static bool IsEqualStrings(string s1, string s2)
+        {
+            return Equals(s1, s2);
+        }
+
+        public static String ParseObjectToJson(Object[] obj)
+        {
+            return JsonConvert.SerializeObject(obj);
+        }
+
+        public static String ParseDictionaryToJson(Dictionary<String, Object> obj)
+        {
+            return JsonConvert.SerializeObject(obj);
+        }
+
+        public static String ParseConditionsToJson(List<object[]> conditions, string operation,
+            List<string[]> orderby,
+            int startIndex, int pageSize)
+        {
+            Dictionary<String, Object> obj = new Dictionary<string, object>();
+            obj.Add("Conditions : ", conditions);
+            obj.Add("Operation : ", operation);
+            obj.Add("Order By : ", orderby);
+            obj.Add("Start Index : ", startIndex);
+            obj.Add("Page Size : ", pageSize);
+            return JsonConvert.SerializeObject(obj);
+        }
+
+        public static String ParseConditionsToJson(List<object[]> conditions, string operation)
+        {
+            Dictionary<String, Object> obj = new Dictionary<string, object>();
+            obj.Add("Conditions : ", conditions);
+            obj.Add("Operation : ", operation);
+            return JsonConvert.SerializeObject(obj);
+        }
+
+        //public static String ParseIntToJson(int obj)
+        //{
+        //    Dictionary<String, int> dic = new Dictionary<string, int>();
+        //}
+
+       
+    }
+}

@@ -1,0 +1,508 @@
+﻿@using Common.util
+@model global::Common.Product
+
+@{
+    ViewBag.Title = "Postsale";
+    Layout = "~/Views/Shared/_LayoutMember.cshtml";
+}
+<link href="~/Content/css/StyleTree.css" rel="stylesheet" />
+<div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 ">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+
+                <ol class="breadcrumb">
+                    <li><span class="glyphicon glyphicon-home"></span><a href="/"> Trang chủ</a></li>
+                    <li>
+                        <a href="/Member/Profile">
+                          @SessionUtility.GetSessionMember(Session).UserName
+                        </a>
+                    </li>
+                    <li class="active">Tài khoản</li>
+                </ol>
+            </h4>
+        </div>
+        <div id="collapseOne0" class="panel-collapse collapse in" style="height: auto;">
+            <div class="panel-body">
+                <span>@ViewBag.Mes </span>
+                @using (Html.BeginForm("Postsale", "Member", FormMethod.Post, new { enctype = "multipart/form-data", id = "Postsale" }))
+                {
+                    @Html.ValidationSummary(true)
+                    <div class="modal-contentSale">
+
+                        <div class="modal-body">
+                            <input id="categoryproduct" name="categoryproduct" type="hidden" />
+                            <input id="manufacetureid" name="manufaceproduct" value="-1" type="hidden" />
+                            <div role="tabpanel">
+
+                                <!-- Nav tabs -->
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li role="presentation" class="active"><a href="#Infomation" aria-controls="Infomation" role="tab" data-toggle="tab">Thông tổng quát</a></li>
+                                    <li role="presentation"><a href="#Des" aria-controls="Des" role="tab" data-toggle="tab">Thông tin chi tiết</a></li>
+                                    <li role="presentation"><a href="#Image" aria-controls="Image" role="tab" data-toggle="tab">Hình ảnh</a></li>
+
+                                </ul>
+
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <div role="tabpanel" class="tab-pane active" id="Infomation">
+                                        <div class="row" style="margin-top: 10px">
+                                            <div class="col-lg-7">
+                                                <label>Danh mục sản phẩm</label><br />
+                                                <div class="css-treeview">
+                                                    @Html.Raw(ViewBag.htmlCate)
+
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-5">
+                                                <label>Nhãn hiệu</label><br />
+                                                <select size="18" style="width: 100%; height: 270px;" id="manufaceture" name="manufaceture" onclick="GetManufaceture()"></select>
+                                            </div>
+                                        </div>
+                                        <script>
+                                            function GetManufaceture() {
+
+                                            }
+                                        </script>
+                                        <div class="form-group">
+                                            <label>Thuộc tính<span class="required">*</span></label><br />
+                                            <div id="propertybyCate"></div>
+
+                                        </div>
+
+                                        <div role="tabpanel">
+                                            <ul class="nav nav-tabs" role="tablist" id="tablist"></ul>
+                                            <div class="tab-content" id="tabcontent">
+
+                                            </div>
+                                        </div>
+                                        <div class="field name-firstname">
+                                            <label for="firstname" class="">Tên sản phẩm</label>
+                                            <div class="input-box">
+                                                <input class="input-text required-entry" autocomplete="off" maxlength="50" style="width: 50%" required id="name" name="name" type="text" value="">
+                                            </div>
+                                        </div>
+                                        <div class="field name-firstname">
+                                            <label for="firstname" class="">Model</label>
+                                            <div class="input-box">
+                                                <input class="input-text required-entry" autocomplete="off" maxlength="50" style="width: 50%" required id="model" name="model" type="text" value="">
+                                            </div>
+                                        </div>
+                                       
+                                        <style>
+                                            .suggestions-list-category {
+                                                /* height: 155px; */
+                                                overflow: hidden;
+                                            }
+                                        </style>
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane" id="Des">
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="field name-firstname">
+                                                    <label for="firstname" class="">Giá</label>
+                                                    <div class="input-box">
+                                                        <input class="input-text required-entry" autocomplete="off" maxlength="50" style="width: 80%" required id="pice" name="pice" type="text" value="">
+                                                    </div>
+                                                </div>
+                                                <div class="field name-firstname">
+                                                    <label for="firstname" class="">Giá nhập vào</label>
+                                                    <div class="input-box">
+                                                        <input class="input-text required-entry" autocomplete="off" maxlength="50" required id="cost" name="cost" style="width: 80%" type="text" value="">
+                                                    </div>
+                                                </div>
+                                                <div class="field name-firstname">
+                                                    <label for="firstname" class="">Cân nặng</label>
+                                                    <div class="input-box">
+                                                        <input class="input-text required-entry" autocomplete="off" maxlength="50" required id="weight" style="width: 80%" name="weight" type="text" value="">
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="field name-firstname">
+                                                    <label for="firstname" class="">Đơn vị tiền tệ</label>
+                                                    <div class="input-box">
+                                                        <input class="input-text required-entry" autocomplete="off" maxlength="50" style="width: 80%" required id="typeofcurrency" name="typeofcurrency" type="text" value="">
+                                                    </div>
+                                                </div>
+                                                <div class="field name-firstname">
+                                                    <label for="firstname" class="">Tính trạng sản phẩm</label>
+                                                    <div class="input-box">
+                                                        @Html.DropDownList("stateProduct", null, new { @style = "width: 80%", @class = "input-text required-entry" })
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-lg-6">
+
+
+                                                <div class="field name-firstname">
+                                                    <label for="firstname" class="">Tags</label>
+                                                    <div class="input-box">
+                                                        <input class="input-text required-entry" autocomplete="off" maxlength="50" style="width: 80%" required id="tags" name="tags" type="text" value="">
+                                                    </div>
+                                                </div>
+                                                <div class="field name-firstname">
+                                                    <label for="firstname" class="">Ảnh đại diện</label>
+                                                    <div class="input-box">
+                                                        <input type="file" name="avatar" class="input-text required-entry" autocomplete="off" maxlength="50" style="width: 80%" required />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="form-group">
+                                                <label>Mô tả ngắn</label><br />
+                                                <textarea class="form-control" required id="summary" name="summary"></textarea>
+
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Mô tả chi tiết</label><br />
+                                                <textarea class="form-control" required id="description" name="description"></textarea>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane" id="Image">
+                                        <div style="width: 80%;margin: auto">
+                                            <label>Hình ảnh sản phẩm</label><br />
+                                            <div id="imageform" class="row">
+                                                <div class="form-group">
+                                                    <input type="file" name="file">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <span><a class="btn btn-primary btn-sm" onclick="addImage()">Thêm </a></span>
+                                                <script>
+                                                    function addImage() {
+                                                        //      alert("thai");
+                                                        var html = "<div class='form-group'><input type='file' name='file'> </div>";
+                                                        $("#imageform").append(html);
+                                                    }
+                                                </script>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="button" title="Login" name="send" id="send2"><span><span>Đăng bán</span></span></button>
+                        </div>
+                    </div>
+                }
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<script type="text/javascript">
+    var cont = "";
+    function GetManuface(manufaceid) {
+
+        $('#manufacetureid').val(manufaceid);
+    }
+    function GetValueManuface(mnuid) {
+        //$('#overbackgroud').show();
+        //    var cat = $('#Category').val();
+        //var mnuid = $("#categoryproduct option:selected").val();
+        //alert(mnuid);
+        $('#categoryproduct').val(mnuid);
+        $.ajax({
+            url: '@Url.Action("GetManufaceByCategory","Product")',
+            data: {
+                'cate': mnuid
+            },
+            dataType: "json",
+            type: "POST",
+            traditional: true,
+            success: function (data, status) {
+                if (data == "0") {
+                    alert("Lỗi");
+                    $('#overbackgroud').hide();
+                }
+                else {
+                    //debugger;
+                    $('label').removeClass("selectcate");
+                    $('#label-' + mnuid).addClass("selectcate");
+                    // alert(data);
+                    $('#manufaceture').html("");
+                    $('#manufaceture').append(data.HtmlManuface);
+                    var htm = "";
+                    var testli = "";
+                    var contentli = "";
+                    var input = "";
+                    $.each(data.JsonProperties, function (key, value) {
+                        input += value.HtmlInputHidden;
+                        if (key == 0) {
+                            testli += "<li  role=\"presentation\" class=\"active\"><a  href=\"#Pro" + value.Id + "\" aria-controls=\"Pro" + value.Id + "\" role=\"tab\" data-toggle=\"tab\">" + value.Name + " </a></li>";
+                            contentli += "<div role=\"tabpanel\" class=\"tab-pane active \" id=\"Pro" + value.Id + "\">";
+                            contentli += value.HtmlType;
+                            contentli += "</div>";
+
+                        } else {
+                            testli += "<li  role=\"presentation\"><a   href=\"#Pro" + value.Id + "\" aria-controls=\"Pro" + value.Id + "\" role=\"tab\" data-toggle=\"tab\">" + value.Name + " </a></li>";
+                            contentli += "<div role=\"tabpanel\" class=\"tab-pane \" id=\"Pro" + value.Id + "\">";
+                            contentli += value.HtmlType;
+                            contentli += "</div>";
+
+                        }
+                    });
+                    //  alert(htm);
+                    $("#tablist").html("");
+                    $("#tabcontent").html("");
+                    $("#tablist").append(testli);
+
+                    $("#tabcontent").append(contentli);
+                    $("#tabcontent").append(input);
+                    $("#propertybyCate").html("");
+                    $("#propertybyCate").append(htm);
+                    $('#overbackgroud').hide();
+                }
+            },
+            error: function () {
+
+            }
+
+        });
+
+    }
+    function GetProperty(id) {
+        alert(id);
+
+        $.ajax({
+            url: '@Url.Action("GetPropertyValueByProId","Product")',
+            data: {
+                'proId': id
+            },
+            dataType: "json",
+            type: "POST",
+            traditional: true,
+            success: function (data, status) {
+                if (data == "0") {
+                    alert("Lỗi");
+                    $('#overbackgroud').hide();
+                }
+                else {
+                    console.log(data);
+                    //$('#catelog').html("");
+                    $('#contentProperty').html("");
+                    $('#contentProperty').append(data);
+                    //$("#Pro" + id).html("");
+                    //$("#Pro" + id).append(data);
+                    $('#overbackgroud').hide();
+                }
+            },
+            error: function () {
+
+            }
+
+        });
+    }
+    function GetValueParent(id) {
+        $('#overbackgroud').show();
+
+        $.ajax({
+            url: '@Url.Action("GetCatetagoryByParent","Product")',
+            data: {
+                'cate': id
+            },
+            dataType: "json",
+            type: "POST",
+            traditional: true,
+            success: function (data, status) {
+                if (data == "0") {
+                    alert("Lỗi");
+                    $('#overbackgroud').hide();
+                }
+                else {
+                    console.log(data);
+                    //$('#catelog').html("");
+                    if (data.HtmlCategory != "") {
+                        $('#catelog').append(data.HtmlCategory);
+                    }
+
+                    $('#overbackgroud').hide();
+                }
+            },
+            error: function () {
+
+            }
+
+        });
+
+    }
+    function GetValueEditManuface(id) {
+        $.ajax({
+            url: '@Url.Action("GetManufaceByCategory","Product")',
+            data: {
+                'cate': id
+            },
+            dataType: "json",
+            type: "POST",
+            traditional: true,
+            success: function (data, status) {
+                if (data == "0") {
+                    alert("Lỗi");
+                    $('#overbackgroud').hide();
+                }
+                else {
+                    $('#manufaceture').html("");
+                    $('#manufaceture').append(data);
+                    $('#overbackgroud').hide();
+                }
+            },
+            error: function () {
+
+            }
+
+        });
+
+    }
+    // gọi khi thêm sưa xoa ơ danh phân add nhà sản xuât vào danh mục
+    function loadtabl(id) {
+        $.ajax({
+            url: '@Url.Action("GetManuface", "CategoryProduct")',
+            data: {
+                'id': id
+            },
+            dataType: "json",
+            type: "POST",
+            traditional: true,
+            success: function(data2, status2) {
+                if (data2 == "0") {
+                    alert("Hệ thống đang cập nhật");
+                    $('#overbackgroud').hide();
+                } else if (data2 == 2) {
+
+                    $('#catemanuface').html("");
+                    $('#catemanuface').append("<tr><td>0</td><td>Not results!</td><td></td></tr>");
+                    $('#overbackgroud').hide();
+                } else {
+                    $('#catemanuface').html("");
+                    $('#catemanuface').append(data2);
+                    $('#overbackgroud').hide();
+                }
+            },
+            error: function() {
+
+            }
+        });
+    }
+
+    function DeleteInbox() {
+        $('#overbackgroud').show();
+        var cat = $('#hidecate').val();
+        var yourArray = new Array();
+
+        $("input:checkbox[name=inbox]:checked").each(function() {
+            yourArray.push($(this).val());
+        });
+        if (yourArray.count < 0) {
+            alert('Vui lòng chọn thư cần xóa !');
+        } else {
+            $.ajax({
+                url: '@Url.Action("DeleteCateManu", "CategoryProduct")',
+                data: {
+                    'array': yourArray
+                },
+                dataType: "json",
+                type: "POST",
+                traditional: true,
+
+                success: function (data) {
+                    if (data == 0) {
+                        alert("Hệ thống đang cập nhật");
+                        $('#overbackgroud').hide();
+                    }
+                    else if (data == 2) {
+                        alert("Vui lòng tích chọn");
+                        $('#overbackgroud').hide();
+                    }
+                    else {
+                        loadtabl(cat);
+                        $('#overbackgroud').hide();
+                    }
+                },
+                error: function () {
+                    alert("Xin lỗi ! Hệ thống đang cập nhật vui long thực hiện lại sau.");
+                    $('#overbackgroud').hide();
+                }
+            });
+        }
+
+    }
+    function SetvaluProperty(idvale,idproperty) {
+      
+        if ($('#optionsRadiosInline' + idvale).is(":checked")) {
+     
+            
+            var str = $('#proprerty' + idproperty).val();
+            var vl = $('#optionsRadiosInline' + idvale).val();
+            alert(vl);
+            str = str + "|" + vl;
+            $('#proprerty' + idproperty).val(str);
+        }
+        else if ($('#optionsRadiosInline' + idvale).is(":not(:checked)")) {
+            var str1 = $('#proprerty' + idproperty).val();
+            alert(str1);
+            var vl1 = "|" + $('#optionsRadiosInline' + idvale).val();
+            str1 = str1.replace(vl1, "");
+            $('#proprerty' + idproperty).val(str1);
+        }
+        //if ($('#proprerty'+idproperty).is(':checked')) {
+        //    var str = $('#proprerty' + idproperty).val();
+        //    var vl = $('#optionsRadiosInline' + idproperty).val();
+        //    alert(vl);
+        //    str = str + "|" + vl;
+        //    $('#proprerty' + idproperty).val(str);
+        //} else {
+        //    var str1 = $('#proprerty' + idproperty).val();
+        //    alert(str1);
+        //    var vl1=   "|"+$('#optionsRadiosInline' + idproperty).val();
+        //    str1 = str1.replace(vl1, "");
+        //    $('#proprerty' + idproperty).val(str1);
+        //}
+        }
+    function beginPaging(args) {
+        // Animatek
+        $('#grid-list').fadeOut('normal');
+    }
+
+    function successPaging() {
+        // Animate
+        $('#grid-list').fadeIn('normal');
+        $('a').tooltip();
+    }
+
+    function failurePaging() {
+        alert("Could not retrieve list.");
+    }
+
+</script>
+<style>
+    .tab-content {
+        margin-bottom: 23px;
+        margin-top: 12px;
+    }
+    .selectcate {
+        color: blue;
+    } 
+    .modal-contentSale {
+        border: 1px solid rgba(0, 0, 0, 0.2);
+    }
+</style>
+<script type="text/javascript">
+    var editor; function createEditor(languageCode,
+        id) { var editor = CKEDITOR.replace(id, { language: languageCode }); } </script>
+<script language="javascript" type="text/javascript">
+    createEditor('vi', 'description');
+
+</script>

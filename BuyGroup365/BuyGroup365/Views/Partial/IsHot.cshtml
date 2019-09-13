@@ -1,0 +1,119 @@
+﻿@using BuyGroup365.Models.Home
+@using BuyGroup365.Models.Common
+
+
+
+
+
+<section class="awe-section-3">
+
+
+    <section class="naturix-goods">
+        <div class="container-full">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="title-wraps">
+                        <h2 class="section-title">
+                            <strong>#Sản phẩm hot</strong>
+                        </h2>
+                    </div>
+                    <div class="products-best-sell">
+                        <div class="products-section container">
+                            <div class="row">
+                                <div class="col-md-12 col-xs-12">
+                                    <div class="row">
+                                        @{
+                                            /**/
+
+                                            Business.ClassBusiness.ProductsBusiness productsBusiness = new Business.ClassBusiness.ProductsBusiness();
+                                            List<Common.Product> listProducts2 = productsBusiness.GetByAttactive(6);
+                                            Business.ClassBusiness.ProductImagesBusiness productImageBusiness = new Business.ClassBusiness.ProductImagesBusiness();
+
+                                            foreach (Common.Product item in listProducts2)
+                                            {
+                                                int phantramKM = 0;
+                                                try
+                                                {
+                                                    phantramKM = Convert.ToInt32((item.Cost - item.Price) / item.Cost * 100);
+                                                }
+                                                catch { }
+                                                var listImg = productImageBusiness.FindProductId(item.Id);
+                                                var imgSource = "";
+                                                foreach (var img in listImg)
+                                                {
+                                                    if (img.IsAvatar == 1)
+                                                    {
+
+                                                        imgSource = Util.ReturnLinkCDN(img.ImgSource, Request.Browser.IsMobileDevice);
+
+                                                    }
+
+                                                }
+                                                <div class="item col-sm-3 col-xs-6">
+                                                    <div class="product-box">
+                                                        <div class="product-media">
+
+                                                            <a href="@Util.ReturnLinkFull(item.FriendlyUrl)" title="@item.ProductName">
+                                                                <picture>
+                                                                    <source media="(min-width: 1200px)" srcset="@imgSource">
+                                                                    <source media="(min-width: 1024px)" srcset="@imgSource">
+                                                                    <source media="(min-width: 736px)" srcset="@imgSource">
+                                                                    <source media="(min-width: 667px)" srcset="@imgSource">
+                                                                    <source media="(min-width: 569px)" srcset="@imgSource">
+                                                                    <source media="(min-width: 480px)" srcset="@imgSource">
+                                                                    <img src="@imgSource" alt="" class="img-responsive center-block">
+                                                                </picture>
+                                                            </a>
+
+
+                                                        </div>
+                                                        <div class="product-caption">
+                                                            <h3 class="product-title">
+                                                                <a href="@Util.ReturnLinkFull(item.FriendlyUrl)" title="@item.ProductName"><span class="light-font">@item.ProductName</span></a>
+
+                                                            </h3>
+                                                            <div class="price">
+
+
+                                                                <strong class="clr-txt">@(String.Format("{0:#,###}", item.Price))₫</strong>
+
+
+                                                            </div>
+                                                            <div class="prod-action">
+                                                                <button type="button" onclick="add_item_show_modalCart(1037293649)" class="hidden-sm hidden-lg hidden-md btn buy-nows">Mua Ngay</button>
+                                                            </div>
+                                                            <div class="prod-icons ababababa">
+                                                                <form action="https://dhcvietnam.com.vn/cart/add" method="post" class="variants form-nut-grid has-validation-callback" data-id="product-actions-1018820719" enctype="multipart/form-data">
+
+
+                                                                    <input type="hidden" name="id" value="1037293649">
+                                                                    <a class="fa fa-shopping-basket" onclick="add_item_show_modalCart(1037293649)" title="Cho vào giỏ hàng"></a>
+
+
+                                                                    <a href="https://dhcvietnam.com.vn/products/bo-olive-sube-sube-mini-set-ss" class="fa fa-expand quick-view"></a>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+                                        }
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="banner" style="margin:0px 0px 30px;">
+        <div class="container">
+            <a href="https://dhcvietnam.com.vn/"><img src="/content/Mypham/images/banner_5.jpg" alt=""></a>
+        </div>
+    </section>
+</section>

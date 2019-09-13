@@ -1,0 +1,130 @@
+﻿@model List<Common.News>
+@using Business.ClassBusiness;
+@using BuyGroup365.Models.Home;
+@using BuyGroup365.Models.Common;
+@using Common
+@{
+
+    Layout = "~/Views/Shared/_LayoutNews.cshtml";
+
+    var Tag = (Common.Tag)ViewBag.Tag;
+
+}
+@{
+    NewsBusiness newsBusiness = new NewsBusiness();
+    List<News> news = new List<News>();
+   
+}
+<div class="wapper">
+    <div class="container banner-news">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="img-banner">
+                    @Html.Raw(Tag.Description)
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container list-news" style="margin-top: 20px;" itemprop="hasOfferCatalog" itemscope="" itemtype="http://schema.org/OfferCatalog">
+        <div class="row">
+            <div class="col-md-8">
+
+                @foreach (var item in Model)
+                {
+                    <div class="per-news">
+                        <div class="img">
+                            <a href="@Util.ReturnLinkFull(item.FriendlyUrl)">
+                                <img data-src="@Util.ReturnLinkCDN(item.ImageSource,Request.Browser.IsMobileDevice)" class="lazyload" itemprop="image" alt="@item.Title">
+                            </a>
+                        </div>
+                        <div class="text-news">
+                            <a href="@Util.ReturnLinkFull(item.FriendlyUrl)">
+                                <h5 class="title" itemprop="name">@item.Title </h5>
+                                <div class="text" itemprop="description">@Html.Raw(@item.Summary)</div>
+                            </a>
+                        </div>
+                    </div>
+                }
+
+                <div class="pagination">
+                    @if (ViewBag.TotalPage > 1)
+                    {
+                        var pageDisplay = (int)ViewBag.MaxPage;
+                        int totalPage = (int)ViewBag.TotalPage;
+                        int currentPage = ((int)ViewBag.Page);
+
+                        // Create numeric links
+                        var startPageIndex = Math.Max(1, currentPage - pageDisplay / 2);
+                        var endPageIndex = Math.Min(totalPage, currentPage + pageDisplay / 2);
+
+                        var link = "/" + ViewBag.CatalogUrl;
+                        <ul class="pag-ul">
+                            @if (currentPage > ViewBag.First)
+                            {
+                                <li><a href="@link?page=@ViewBag.First" title="Trang đầu" class="first"><i class="fa fa-angle-double-left"></i></a></li>
+                                <li>
+                                    <a href="@link?page=@ViewBag.Prev" title="Trang trước" class="prev"><i class="fa fa-angle-left"></i></a>
+                                </li>
+
+                            }
+
+                            @for (int i = startPageIndex; i <= endPageIndex; i++)
+                            {
+                                if (currentPage == i)
+                                {
+
+                                    <li> <a href="@link?page=@i" class="page-number current" title="Trang @i">@i</a></li>
+                                }
+                                else
+                                {
+                                    <li><a href="@link?page=@i" title="Trang @i" class="page-number">@i</a></li>
+                                }
+                            }
+                            @if (currentPage < totalPage)
+                            {
+                                <li><a href="@link?page=@ViewBag.Next" class="next" title="Trang sau"><i class="fa fa-angle-right"></i></a></li>
+                                <li> <a href="@link?page=@ViewBag.Last" class="last" title="Trang cuối"><i class="fa fa-angle-double-right"></i></a></li>
+                            }
+                        </ul>
+                    }
+                </div>
+            </div>
+            <div class="col-md-4">
+                @{
+                    NewsGroupBusiness newsGroupBusiness = new NewsGroupBusiness();
+                    List<NewsGroups> newsGroups = new List<NewsGroups>();
+                    newsGroups = newsGroupBusiness.GetViewFooter();
+                    foreach (NewsGroups tem in newsGroups)
+                    {
+                        <div class="title-cate">
+                            <h4 class="text">@tem.NewsGroupName</h4>
+                        </div>
+                        <div class="cate-list">
+                            @{
+
+                                news = newsBusiness.ListByNewsIdNewsGroupActive(tem.Id, 3);
+                                foreach (News _new in news)
+                                {
+                                    <div class="per-news">
+                                        <div class="img">
+                                            <a href="@Util.ReturnLinkFull(_new.FriendlyUrl)">
+                                                <img data-src="@Util.ReturnLinkCDN(_new.ImageSource,Request.Browser.IsMobileDevice)" class="lazyload" alt="@_new.Title">
+                                            </a>
+                                        </div>
+                                        <div class="text">
+                                            <a href="@Util.ReturnLinkFull(_new.FriendlyUrl)">
+                                                <h5 class="title">@_new.Title </h5>
+                                               
+                                            </a>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    }
+
+                }
+            </div>
+        </div>
+    </div>
+</div>

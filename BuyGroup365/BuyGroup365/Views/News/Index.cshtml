@@ -1,0 +1,248 @@
+﻿@model List<Common.SearchNewByGroupID_Result>
+@using Business.ClassBusiness;
+@using BuyGroup365.Models.Home;
+@using BuyGroup365.Models.Common;
+@using Common
+@{
+
+
+    var newsGroup = (Common.NewsGroups)ViewBag.NewsGroup;
+
+    Layout = "~/Views/Shared/_LayoutIndex.cshtml";
+}
+
+@{
+    NewsBusiness newsBusiness = new NewsBusiness();
+    List<News> news = new List<News>();
+    news = newsBusiness.ListByNewsIdNewsGroupActive(newsGroup.Id, 15);
+}
+<div class="blogs-heading" style="background:url(@Util.ReturnLinkCDN(@newsGroup.ImageSource,Request.Browser.IsMobileDevice))">
+    <div class="container">
+        <div class="blog-heading" >
+            <h1 class="title-2"> @Html.Raw(newsGroup.NewsGroupName)</h1>
+        </div>
+    </div>
+</div>
+<section class="breadcrumb-bg">
+    <div class="theme-container container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="site-breadcumb white-clr">
+                    <ul class="breadcrumb breadcrumb-menubar" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                        <li class="home">
+                            <a itemprop="url" href="/"><span itemprop="title">Trang chủ</span></a>
+                        </li>
+
+                        @Html.Raw(ViewData["Breadcrumbs"])
+
+
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="blog-wrap sec-space-bottom" itemscope="" itemtype="http://schema.org/Blog">
+    <meta itemprop="name" content="Làm đẹp cùng DHC">
+    <meta itemprop="description" content="Chủ đề không có mô tả">
+    <div class="container pt-30">
+        <div class="row">
+            <section class="right-content col-md-9">
+                <div class="blog-wrap">
+                    <div class="blog-content">
+
+                        <div class="row">
+
+
+
+                            <div class="col-sm-12 big-news">
+                                @{
+                                    if (news.Count >= 1)
+                                    {
+                                        try
+                                        {
+
+
+                                            for (int i = 0; i < 1; i++)
+                                            {
+
+
+
+
+                                                <div class="blog-item">
+                                                    <div class="image">
+                                                        <a href="@Util.ReturnLinkFull(news[i].FriendlyUrl)" class="@news[i].Title">
+
+                                                            <picture>
+                                                                <source media="(min-width: 992px)" srcset="@Util.ReturnLinkCDN(news[i].ImageSource,Request.Browser.IsMobileDevice)">
+                                                                <source media="(min-width: 480px)" srcset="@Util.ReturnLinkCDN(news[i].ImageSource,Request.Browser.IsMobileDevice)">
+                                                                <img src="@Util.ReturnLinkCDN(news[i].ImageSource,Request.Browser.IsMobileDevice)" alt="@news[i].Title" class="img-responsive center-block">
+                                                            </picture>
+
+                                                        </a>
+                                                    </div>
+                                                    <div class="blog-caption">
+                                                        <h2 class="title-2"> <a href="/blogs/lam-dep-cung-dhc/review-sua-rua-mat-cho-da-dau-mun-tu-thuong-hieu-dhc"> Review sữa rửa mặt cho da dầu mụn từ thương hiệu DHC </a> </h2>
+                                                        <p class="sub-title-1">
+                                                            <span class="post-date">Ngày đăng: 13/09/2019</span>
+                                                        </p>
+                                                        <div class="ptb-10">
+                                                            <p>Thương hiệu mỹ phẩm DHC uy tín từ Nhật sở hữu nhiều dòng mỹ phẩm dưỡng da chiếm được ưu ái từ người tiêu dùng. Sữa rửa mặt là một trong các dòng mỹ phẩm được hãng phát triển đa...</p>
+                                                        </div>
+                                                        <a href="/blogs/lam-dep-cung-dhc/review-sua-rua-mat-cho-da-dau-mun-tu-thuong-hieu-dhc" class="clr-txt"> <strong> Chi tiết <i class="fa fa-long-arrow-right"></i> </strong> </a>
+                                                    </div>
+                                                </div>
+                                         
+                                        }
+
+
+                                        }
+                                        catch { }
+                                    }
+                                }
+
+
+
+                                @foreach (var item in Model)
+                                {
+                                    <div class="col-sm-6 blog-fis">
+                                        <div class="blog-item">
+                                            <div class="blog-addes" style="position: relative;">
+                                                <div class="image">
+                                                    <a href="@Util.ReturnLinkFull(item.FriendlyUrl)" class="@item.Title">
+
+                                                        <picture>
+                                                            <source media="(min-width: 992px)" srcset="@Util.ReturnLinkCDN(item.ImageSource,Request.Browser.IsMobileDevice)">
+                                                            <source media="(min-width: 480px)" srcset="@Util.ReturnLinkCDN(item.ImageSource,Request.Browser.IsMobileDevice)">
+                                                            <img src="@Util.ReturnLinkCDN(item.ImageSource,Request.Browser.IsMobileDevice)" alt="@item.Title" class="img-responsive center-block">
+                                                        </picture>
+
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="blog-dess">
+                                                <h2 class="title-2"> <a href="@Util.ReturnLinkFull(item.FriendlyUrl)"> @item.Title </a> </h2>
+                                                <p class="sub-title-1">
+                                                    <span class="post-date">Ngày đăng: @item.CreateDate </span>
+                                                </p>
+                                                <div class="ptb-10">
+                                                    @Html.Raw(item.Summary)...
+                                                </div>
+                                                <a href="@Util.ReturnLinkFull(item.FriendlyUrl)" class="clr-txt"> <strong> Chi tiết <i class="fa fa-long-arrow-right"></i> </strong> </a>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                }
+
+                            </div>
+
+                            <div class="pagination-wrap">
+                                <div class="divider-full-1"></div>
+                                @if (ViewBag.TotalPage > 1)
+                                {
+                                    var pageDisplay = (int)ViewBag.MaxPage;
+                                    int totalPage = (int)ViewBag.TotalPage;
+                                    int currentPage = ((int)ViewBag.Page);
+
+                                    // Create numeric links
+                                    var startPageIndex = Math.Max(1, currentPage - pageDisplay / 2);
+                                    var endPageIndex = Math.Min(totalPage, currentPage + pageDisplay / 2);
+
+                                    var link = @Util.ReturnLinkFull(newsGroup.FriendlyUrl);
+                                    <ul class="pagintn pt-10">
+
+
+
+                                        @if (currentPage > ViewBag.First)
+                                        {
+                                            @*<li><a href="@link?page=@ViewBag.First" title="Trang đầu" class="page-item disabled">«</i></a></li>*@
+                                            <li class="page-item">
+                                                <a href="@link?page=@ViewBag.Prev" title="Trang trước" class="page-link">«</a>
+                                            </li>
+
+                                        }
+                                        @for (int i = startPageIndex; i <= endPageIndex; i++)
+                                        {
+                                            if (currentPage == i)
+                                            {
+
+                                                <li class="page-item"> <a href="@link?page=@i" class="active page-link" title="Trang @i">@i</a></li>
+                                            }
+                                            else
+                                            {
+                                                <li class="page-item"><a href="@link?page=@i" title="Trang @i" class="page-link">@i</a></li>
+                                            }
+                                        }
+                                        @if (currentPage < totalPage)
+                                        {
+                                            <li class="page-item"><a href="@link?page=@ViewBag.Next" class="page-link" title="Trang sau">»</a></li>
+                                            @*<li> <a href="@link?page=@ViewBag.Last" class="last" title="Trang cuối"><i class="fa fa-angle-double-right"></i></a></li>*@
+                                        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                    </ul>
+                                }
+                            </div>
+
+
+                        </div>
+                    </div>
+                </section>
+                <aside class="left left-content col-md-3">
+
+                    @Html.Action("MenuCategory", "Partial")
+
+
+                    @Html.Action("IsBanchay", "Partial")
+
+
+                    <div class="widget-wrap">
+
+                        @Html.Action("GetByCodeHtml", "Partial", new { Code = "XuHuongTimKiem" })
+
+
+                    </div>
+
+
+
+
+                    <div class="widget-wrap">
+                        @Html.Action("GetByCodeHtml", "Partial", new { Code = "FanPageFacebook" })
+
+
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

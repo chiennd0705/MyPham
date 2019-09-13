@@ -1,0 +1,292 @@
+﻿@model Common.Product
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Manage/Views/Shared/_LayoutAdmincshtml.cshtml";
+}
+
+
+<div class="container-fluid" ng-app="body">
+    <!-- Page Heading -->
+    <div class="row" ng-controller="header">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                Quản lý  sản phẩm
+            </h1>
+
+        </div>
+    </div>
+    <!-- /.row -->
+    <!-- /.row -->
+    <!-- /.row -->
+    <div class="row" ng-controller="Index">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <i class="fa fa-bar-chart-o fa-fw"></i> Danh sản phẩm
+                        <span style="float: right">
+                            <a class="glyphicon glyphicon-plus-sign" data-toggle="modal" data-target="#myModal">
+
+                            </a>
+                        </span>
+
+
+                    </h3>
+
+                </div>
+                <div class="panel-body">
+                    @using (Html.BeginForm("Edit", "Product", FormMethod.Post, new { enctype = "multipart/form-data", id = "Create" }))
+                    {
+                        @Html.ValidationSummary(true)
+
+                        <div class="modal-body">
+                            
+                            <input id="productId" name="productId" />
+                            <div role="tabpanel">
+
+                                <!-- Nav tabs -->
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li role="presentation" class="active"><a href="#Infomation" aria-controls="Infomation" role="tab" data-toggle="tab">Infomation</a></li>
+                                    <li role="presentation"><a href="#Des" aria-controls="Des" role="tab" data-toggle="tab">Des</a></li>
+                                    <li role="presentation"><a href="#Image" aria-controls="Image" role="tab" data-toggle="tab">Image</a></li>
+                                    <li role="presentation"><a href="#Property" aria-controls="Property" role="tab" data-toggle="tab">More..</a></li>
+                                </ul>
+
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <div role="tabpanel" class="tab-pane active" id="Infomation">
+                                        <div class="form-group">
+                                            <label>Name<span class="required">*</span></label><br />
+                                            @Html.TextBoxFor(model => model.ProductName, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.ProductName)
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Model</label><br />
+                                            @Html.TextBoxFor(model => model.Model, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.Model)
+
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Friendly Url</label><br />
+                                            @Html.TextBoxFor(model => model.FriendlyUrl, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.FriendlyUrl)
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>Category</label><br />
+                                                    @* @Html.DropDownList("categoryproductedit", null, new { @height = "100px", @size = "18", @width = "100%", @onclick = "GetValueManuface()" })*@
+                                                    <select size="18" style="width: 100%" id="categoryproductedit" name="categoryproductedit"></select>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <label>Manufaceture</label><br />
+                                                <select size="18" style="width: 100%" id="manufacetureedit" name="manufacetureedit"></select>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane" id="Des">
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>Pice<span class="required">*</span></label><br />
+                                                    @Html.TextBoxFor(model => model.Price, new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(model => model.Price)
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Cost<span class="required">*</span></label><br />
+                                                    @Html.TextBoxFor(model => model.Cost, new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(model => model.Cost)
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Weight<span class="required">*</span></label><br />
+                                                    @Html.TextBoxFor(model => model.Weight, new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(model => model.Weight)
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>TypeOfCurrency<span class="required">*</span></label><br />
+                                                    @Html.TextBoxFor(model => model.TypeOfCurrency, new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(model => model.TypeOfCurrency)
+                                                </div>
+                                                <div class="form-group">
+                                                    State
+                                                    <label>State<span class="required">*</span></label><br />
+                                                    @*  @Html.DropDownList("stateProduct", null, new { @width = "100%" })*@
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>Tags<span class="required">*</span></label><br />
+                                                    @Html.TextBoxFor(model => model.Tags, new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(model => model.Tags)
+                                                </div>
+                                                <div class="form-group">
+
+                                                    <label>Status<span class="required">*</span></label><br />
+                                                    @* @Html.DropDownList("statusProduct", null, new { @width = "100%" })*@
+                                                </div>
+                                                <div class="checkbox">
+                                                    <label><input class="" type="checkbox" id="isnew" name="isnew" onclick="SetIsnew()" /> Is new?</label><br />
+
+
+                                                </div>
+
+                                                <div class="checkbox">
+                                                    <label><input class="" type="checkbox" id="isattactive" name="isattactive" onclick="SetIsactive()" /> Is attractive?</label><br />
+
+                                                </div>
+                                                <div class="checkbox">
+                                                    <label><input class="" type="checkbox" id="isvip" name="isvip" onclick="SetIsvip()" /> Is vip?</label><br />
+
+                                                </div>
+                                                <script>
+                                                    function SetIsnew() {
+                                                        var a = $('#isnew').is(":checked");
+                                                        if (!a) {
+                                                            $('#isnew').val(1);
+                                                        } else { $('#isnew').val(0); }
+
+                                                    }
+                                                    function SetIsactive() {
+                                                        var a = $('#isattactive').is(":checked");
+                                                        if (!a) {
+                                                            $('#isattactive').val(1);
+                                                        } else { $('#isattactive').val(0); }
+
+                                                    }
+                                                    function SetIsvip() {
+                                                        var a = $('#isvip').is(":checked");
+                                                        if (!a) {
+                                                            $('#isvip').val(1);
+                                                        } else { $('#isvip').val(0); }
+
+                                                    }
+                                                </script>
+                                                <div class="form-group">
+                                                    <label>Avatar</label><br />
+                                                    <p><img src="/FileUpload/Image/thumb/@Model.ProductImages.FirstOrDefault(x=>x.IsAvatar==1).ImgSource"/></p>
+                                                    <input type="file" name="avatar" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="form-group">
+                                                <label>Summary</label><br />
+                                                <textarea class="form-control" required id="summary" name="summary">@Model.Summary</textarea>
+
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Description</label><br />
+                                                <textarea class="form-control" required id="description" name="description">@Model.Description</textarea>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane" id="Image">
+                                        <div style="width: 80%;margin: auto">
+                                            <label>File input</label><br />
+                                            <div class="row">
+                                                @foreach (var item in Model.ProductImages)
+                                                {
+                                                    if (item.IsAvatar != 1)
+                                                    {
+                                                        <div class="col-lg-3">
+                                                            <img src="/FileUpload/Image/thumb/@item.ImgSource"/>
+                                                        </div>
+                                                    }
+                                                }
+                                            </div>
+                                            <div id="imageform" class="row">
+                                                <div class="form-group">
+                                                    <input type="file" name="file">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <span><a class="btn btn-primary btn-sm" onclick="addImage()">Add more</a></span>
+                                                <script>
+                                                    function addImage() {
+                                                        //      alert("thai");
+                                                        var html = "<div class='form-group'><input type='file' name='file'> </div>";
+                                                        $("#imageform").append(html);
+                                                    }
+                                                </script>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane" id="Property">
+                                        <div class="row" id="contentproperty">
+                                            @{
+                                                var dem = Model.ProductProperties.Count;
+                                                var ind = 1;
+                                            }
+                                            @foreach (var item in Model.ProductProperties)
+                                            {
+                                                <div class="form-group col-lg-4">
+                                                    <label>Name<span class="required">*</span></label><br />
+                                                    <input class="form-control"  autocomplete="off" maxlength="50" required id='"nameproperty"@ind'  name='"nameproperty"@ind' type="text" value="@item.Name">
+
+                                                </div>
+                                                <div class="form-group col-lg-4">
+                                                    <label>Key<span class="required">*</span></label><br />
+                                                    <input class="form-control" autocomplete="off" maxlength="50" required id='"keyproperty"@ind' name='"keyproperty"@ind'  type="text" value="@item.Key">
+
+                                                </div>
+                                                <div class="form-group col-lg-4">
+                                                    <label>Vale<span class="required">*</span></label><br />
+                                                    <input class="form-control" autocomplete="off" maxlength="50" required id='"valeproperty"@ind' name='"valeproperty"@ind' type="text" value="@item.Value">
+
+                                                </div>
+                                                ind++;
+                                            }
+                                      
+
+                                        </div>
+                                        <hr />
+                                        <div class="row">
+                                            <div id="value"></div>
+                                            <div style="float:right"><a onclick="Addvalue()" class="btn btn-primary btn-sm">Add row</a></div>
+
+                                            <input id="index" value="@dem" type="" name="index" />
+                                        </div>
+                                        <script>
+                                            function Addvalue() {
+                                                var index = $('#index').val();
+                                                var id = parseInt(index);
+                                                id++;
+                                                $('#index').val(id);
+                                                var htm = "";
+                                                htm += "  <div class='form-group col-lg-4'>" +
+                                                    "<label>Name<span class='required'>*</span></label><br />" +
+                                                    " <input class='form-control' autocomplete='off' maxlength='50' required id='nameproperty" + id + "' name='nameproperty" + id + "' type='text'> </div>";
+                                                htm += "  <div class='form-group col-lg-4'>" +
+                                                    "<label>Key<span class='required'>*</span></label><br />" +
+                                                    " <input class='form-control' autocomplete='off' maxlength='50' required id='keyproperty" + id + "' name='keyproperty" + id + "' type='text'> </div>";
+                                                htm += "  <div class='form-group col-lg-4'>" +
+                                                    "<label>Value<span class='required'>*</span></label><br />" +
+                                                    " <input class='form-control' autocomplete='off' maxlength='50' required id='valeproperty" + id + "' name='valeproperty" + id + "' type='text'> </div>";
+                                                $('#contentproperty').append(htm);
+                                            }
+                                        </script>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            @Html.ActionLink("Back to List", "Index")
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                      
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

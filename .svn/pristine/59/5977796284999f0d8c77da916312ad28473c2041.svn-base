@@ -1,0 +1,1084 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="bhd_cinemaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Booking">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BookingCode" Type="nvarchar" MaxLength="75" Nullable="false" />
+    <Property Name="BookingType" Type="nvarchar" MaxLength="75" Nullable="false" />
+    <Property Name="FilmScheduleId" Type="bigint" Nullable="false" />
+    <Property Name="LocationId" Type="bigint" Nullable="false" />
+    <Property Name="TicketCount" Type="int" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="ExpiredDate" Type="datetime" />
+    <Property Name="Status" Type="int" Nullable="false" />
+    <Property Name="PaymentMethod" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="TicketQuantity" Type="int" Nullable="false" />
+    <Property Name="BookingGrosslAmount" Type="money" Nullable="false" />
+    <Property Name="BookingTaxAmount" Type="money" Nullable="false" />
+    <Property Name="BookingNetAmount" Type="money" Nullable="false" />
+    <Property Name="DiscountAmount" Type="money" Nullable="false" />
+    <Property Name="CommAmount" Type="money" Nullable="false" />
+    <Property Name="TaxIds" Type="nvarchar" MaxLength="200" />
+    <Property Name="PaymentDate" Type="datetime" />
+    <Property Name="DeleteUserId" Type="bigint" />
+    <Property Name="DiscountApprUserId" Type="bigint" />
+    <Property Name="EmplBookingUserId" Type="bigint" Nullable="false" />
+    <Property Name="PaymentShiftId" Type="bigint" />
+    <Property Name="PaymentUserID" Type="bigint" />
+    <Property Name="PaymentUserName" Type="nvarchar" MaxLength="50" />
+    <Property Name="PaymentUserFullName" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="BookingCustomerLoyalty">
+    <Key>
+      <PropertyRef Name="BookingId" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BookingId" Type="bigint" Nullable="false" />
+    <Property Name="CardNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CardName" Type="nvarchar" MaxLength="100" />
+    <Property Name="CardInfo" Type="nvarchar" MaxLength="200" />
+    <Property Name="Description" Type="nvarchar" MaxLength="500" />
+    <Property Name="PaymentAmount" Type="money" Nullable="false" />
+    <Property Name="AddGold" Type="float" Nullable="false" />
+    <Property Name="TransCard" Type="nvarchar" MaxLength="50" />
+    <Property Name="Status" Type="int" Nullable="false" />
+    <Property Name="ModuleName" Type="nvarchar" MaxLength="50" />
+    <Property Name="AddUserID" Type="bigint" />
+    <Property Name="AddUserName" Type="nvarchar" MaxLength="100" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BookingInfo">
+    <Key>
+      <PropertyRef Name="BookingId" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BookingId" Type="bigint" Nullable="false" />
+    <Property Name="BookingCode" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="NumberPhone" Type="nchar" MaxLength="15" Nullable="false" />
+    <Property Name="CustomersName" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BookingPacketDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BookingId" Type="bigint" Nullable="false" />
+    <Property Name="PacketId" Type="bigint" Nullable="false" />
+    <Property Name="PacketName" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="PacketPrice" Type="float" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BookingPaymentMenthodDetail">
+    <Key>
+      <PropertyRef Name="BookingId" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BookingId" Type="bigint" Nullable="false" />
+    <Property Name="PayMentMenthodCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="PayMentMenthodAmount" Type="money" Nullable="false" />
+    <Property Name="CardNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="DiscountAmount" Type="money" />
+    <Property Name="TransCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="PayMentInfo" Type="nvarchar" MaxLength="200" />
+    <Property Name="PayMentDesciption" Type="nvarchar" MaxLength="200" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BookingVoucher">
+    <Key>
+      <PropertyRef Name="BookingId" />
+      <PropertyRef Name="VoucherCode" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" />
+    <Property Name="BookingId" Type="bigint" Nullable="false" />
+    <Property Name="VoucherCode" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="Status" Type="int" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="200" />
+    <Property Name="VoucherType" Type="nvarchar" MaxLength="50" />
+    <Property Name="ValidateFrom" Type="datetime" />
+    <Property Name="ValidateTo" Type="datetime" />
+    <Property Name="Effect" Type="nvarchar" MaxLength="50" />
+    <Property Name="FilmID" Type="nvarchar" MaxLength="50" />
+    <Property Name="FilmName" Type="nvarchar" MaxLength="100" />
+    <Property Name="ApliedForBoCo" Type="nvarchar" MaxLength="50" />
+    <Property Name="VoucherPercentCo" Type="float" />
+    <Property Name="VoucherPercentBo" Type="float" />
+    <Property Name="PriceBo" Type="float" />
+    <Property Name="PriceCo" Type="float" />
+    <Property Name="ProductId" Type="nvarchar" MaxLength="50" />
+    <Property Name="ProductCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="LocationName" Type="nvarchar" MaxLength="50" />
+    <Property Name="IsTotalDiscount" Type="bit" />
+    <Property Name="StatusMessage" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="Distributor">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Address" Type="nvarchar" MaxLength="200" />
+    <Property Name="CompanyMobile" Type="nchar" MaxLength="20" />
+    <Property Name="Email" Type="nchar" MaxLength="50" />
+    <Property Name="Fax" Type="nchar" MaxLength="20" />
+    <Property Name="ContactName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ContactPhone" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="PostCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="AccountNumber" Type="int" Nullable="false" />
+    <Property Name="AccountName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="DomainName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Status" Type="int" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+    <Property Name="Description" Type="nchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="Film">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DistributorId" Type="bigint" Nullable="false" />
+    <Property Name="Code" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="ShortTitle" Type="nvarchar" MaxLength="50" />
+    <Property Name="Language" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Duration" Type="int" Nullable="false" />
+    <Property Name="Rating" Type="int" />
+    <Property Name="TotalNumber" Type="int" Nullable="false" />
+    <Property Name="SubTitle" Type="nvarchar" MaxLength="50" />
+    <Property Name="DateIn" Type="date" Nullable="false" />
+    <Property Name="DateOut" Type="date" />
+    <Property Name="ModifiedDate" Type="date" Nullable="false" />
+    <Property Name="ReleaseDate" Type="date" />
+    <Property Name="MainActor" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="Director" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="Avartar" Type="image" />
+    <Property Name="TrailerIid" Type="bigint" />
+    <Property Name="TypeId" Type="bigint" Nullable="false" />
+    <Property Name="Price" Type="money" Nullable="false" />
+    <Property Name="Grossing" Type="money" />
+    <Property Name="Policy" Type="int" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="200" />
+    <Property Name="FilmGroupId" Type="int" />
+  </EntityType>
+  <EntityType Name="FilmGroup">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="50" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="Description" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="FilmSchedule">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FilmId" Type="bigint" Nullable="false" />
+    <Property Name="RoomId" Type="bigint" Nullable="false" />
+    <Property Name="PricePolicyConfId" Type="bigint" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="500" />
+    <Property Name="FromDate" Type="datetime" Nullable="false" />
+    <Property Name="StartFilmTime" Type="datetime" Nullable="false" />
+    <Property Name="EndFilmTime" Type="datetime" Nullable="false" />
+    <Property Name="BosOffline" Type="bit" />
+    <Property Name="Cds" Type="bit" />
+    <Property Name="Status" Type="bit" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifyDate" Type="datetime" Nullable="false" />
+    <Property Name="ApproveStatus" Type="int" />
+    <Property Name="FilmTitle" Type="nvarchar" MaxLength="150" />
+    <Property Name="TotalSeat" Type="int" />
+    <Property Name="Admit" Type="int" />
+  </EntityType>
+  <EntityType Name="FilmSchedulePrice">
+    <Key>
+      <PropertyRef Name="FilmScheduleId" />
+      <PropertyRef Name="TicketTypeId" />
+      <PropertyRef Name="SeatTypeId" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FilmScheduleId" Type="bigint" Nullable="false" />
+    <Property Name="TicketTypeId" Type="bigint" Nullable="false" />
+    <Property Name="SeatTypeId" Type="bigint" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="200" />
+    <Property Name="Price" Type="float" Nullable="false" />
+    <Property Name="Quantity" Type="int" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="150" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifyDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FilmScheduleRoom">
+    <Key>
+      <PropertyRef Name="FilmScheduleId" />
+      <PropertyRef Name="RoomId" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FilmScheduleId" Type="bigint" Nullable="false" />
+    <Property Name="RoomId" Type="bigint" Nullable="false" />
+    <Property Name="LocationId" Type="bigint" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Area" Type="float" />
+    <Property Name="SeatNumber" Type="int" />
+    <Property Name="ValueScreen" Type="int" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="Description" Type="nvarchar" MaxLength="150" />
+    <Property Name="SeatMatrix" Type="xml" />
+    <Property Name="ToalColum" Type="int" Nullable="false" />
+    <Property Name="ToalRow" Type="int" Nullable="false" />
+    <Property Name="WayColum" Type="varchar" MaxLength="100" />
+    <Property Name="WayRow" Type="varchar" MaxLength="100" />
+    <Property Name="DisableSeat" Type="varchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="FilmScheduleSeat">
+    <Key>
+      <PropertyRef Name="FilmScheduleId" />
+      <PropertyRef Name="SeatId" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RoomId" Type="bigint" Nullable="false" />
+    <Property Name="FilmScheduleId" Type="bigint" Nullable="false" />
+    <Property Name="SeatId" Type="bigint" Nullable="false" />
+    <Property Name="SeatX" Type="nvarchar" MaxLength="5" Nullable="false" />
+    <Property Name="SeatY" Type="nvarchar" MaxLength="5" Nullable="false" />
+    <Property Name="PayMentOnlineStatus" Type="int" />
+    <Property Name="ReserveStatus" Type="int" />
+    <Property Name="SoldStatus" Type="int" />
+    <Property Name="TicketId" Type="bigint" />
+    <Property Name="SectionId" Type="bigint" />
+    <Property Name="Code" Type="nvarchar" MaxLength="50" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="SeatTypeId" Type="bigint" Nullable="false" />
+    <Property Name="Status" Type="int" />
+    <Property Name="Descripsion" Type="nvarchar" MaxLength="150" />
+    <Property Name="LocationId" Type="bigint" Nullable="false" />
+    <Property Name="GroupSeat" Type="nvarchar" MaxLength="50" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FilmScheduleTitle">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DistributorId" Type="bigint" Nullable="false" />
+    <Property Name="NameDistrbutor" Type="nvarchar" MaxLength="100" />
+    <Property Name="RoomId" Type="bigint" Nullable="false" />
+    <Property Name="FilmScheduleId" Type="bigint" Nullable="false" />
+    <Property Name="FilmName" Type="nvarchar" MaxLength="500" />
+    <Property Name="StartFilmTime" Type="datetime" />
+    <Property Name="EndFilmTime" Type="datetime" />
+    <Property Name="FreeSeating" Type="int" />
+    <Property Name="SeatSold" Type="int" />
+    <Property Name="SeatLeft" Type="int" />
+    <Property Name="SeatTotal" Type="int" />
+    <Property Name="Code" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="ShortTitle" Type="nvarchar" MaxLength="50" />
+    <Property Name="Language" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Duration" Type="int" Nullable="false" />
+    <Property Name="Rating" Type="int" />
+    <Property Name="SubTitle" Type="nvarchar" MaxLength="50" />
+    <Property Name="DateIn" Type="date" Nullable="false" />
+    <Property Name="DateOut" Type="date" />
+    <Property Name="ModifiedDate" Type="date" Nullable="false" />
+    <Property Name="ReleaseDate" Type="date" />
+    <Property Name="MainActor" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="Director" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="TrailerIid" Type="bigint" />
+    <Property Name="TypeId" Type="bigint" Nullable="false" />
+    <Property Name="NameTypeId" Type="nvarchar" MaxLength="50" />
+    <Property Name="Policy" Type="int" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="200" />
+    <Property Name="FilmGroupId" Type="int" />
+    <Property Name="GrossPrice" Type="float" />
+    <Property Name="FillRate" Type="float" />
+    <Property Name="Admit" Type="int" />
+    <Property Name="Tax" Type="float" />
+    <Property Name="NetPrice" Type="float" />
+  </EntityType>
+  <EntityType Name="FilmType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="150" />
+  </EntityType>
+  <EntityType Name="ImgGallery">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="DataImg" Type="image" />
+    <Property Name="ScrImg" Type="nvarchar" MaxLength="200" />
+    <Property Name="ModifiDate" Type="datetime" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Location">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" />
+    <Property Name="CompanyId" Type="bigint" Nullable="false" />
+    <Property Name="LocName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="LocAddress" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="LocPhone" Type="varchar" MaxLength="20" />
+    <Property Name="LocFax" Type="varchar" MaxLength="20" />
+    <Property Name="LocMail" Type="nvarchar" MaxLength="50" />
+    <Property Name="LocRepresentative" Type="nvarchar" MaxLength="50" />
+    <Property Name="LocBankName" Type="nvarchar" MaxLength="50" />
+    <Property Name="LocDomainName" Type="nvarchar" MaxLength="50" />
+    <Property Name="LocAccountNumber" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="LocStatus" Type="int" Nullable="false" />
+    <Property Name="LocLogo" Type="image" />
+    <Property Name="LocTotalSeat" Type="bigint" Nullable="false" />
+    <Property Name="LocDescription" Type="ntext" />
+  </EntityType>
+  <EntityType Name="Packet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Price" Type="float" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="500" />
+    <Property Name="Status" Type="bit" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PaymentMenthod">
+    <Key>
+      <PropertyRef Name="PaymentCode" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PaymentCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="PaymentName" Type="nvarchar" MaxLength="100" />
+    <Property Name="Status" Type="int" />
+    <Property Name="Description" Type="nvarchar" MaxLength="500" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifyDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PricePolicyConf">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="50" />
+    <Property Name="Name" Type="nvarchar" MaxLength="500" />
+    <Property Name="FilmTypeId" Type="bigint" Nullable="false" />
+    <Property Name="StartDate" Type="datetime" Nullable="false" />
+    <Property Name="EndDate" Type="datetime" />
+    <Property Name="Priority" Type="int" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="150" />
+    <Property Name="StartFilmTime" Type="datetime" />
+    <Property Name="EndFilmTime" Type="datetime" />
+    <Property Name="Day" Type="nvarchar" MaxLength="50" />
+    <Property Name="CronExpression" Type="nvarchar" MaxLength="200" />
+    <Property Name="NextFireTime" Type="datetime" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifyDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PricePolicyConfDetail">
+    <Key>
+      <PropertyRef Name="PricePolicyConfId" />
+      <PropertyRef Name="TicketTypeId" />
+      <PropertyRef Name="SeatTypeId" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PricePolicyConfId" Type="bigint" Nullable="false" />
+    <Property Name="TicketTypeId" Type="bigint" Nullable="false" />
+    <Property Name="SeatTypeId" Type="bigint" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="200" />
+    <Property Name="Price" Type="float" Nullable="false" />
+    <Property Name="Quantity" Type="int" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="150" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifyDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Promotion">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="StartDate" Type="datetime" Nullable="false" />
+    <Property Name="EndDate" Type="datetime" Nullable="false" />
+    <Property Name="Type" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Method" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Money" Type="money" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="150" />
+  </EntityType>
+  <EntityType Name="Room">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LocationId" Type="bigint" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Area" Type="float" />
+    <Property Name="SeatNumber" Type="int" />
+    <Property Name="ValueScreen" Type="int" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="Description" Type="nvarchar" MaxLength="150" />
+    <Property Name="SeatMatrix" Type="xml" />
+    <Property Name="ToalColum" Type="int" Nullable="false" />
+    <Property Name="ToalRow" Type="int" Nullable="false" />
+    <Property Name="WayColum" Type="varchar" MaxLength="100" />
+    <Property Name="WayRow" Type="varchar" MaxLength="100" />
+    <Property Name="DisableSeat" Type="varchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="Seat">
+    <Key>
+      <PropertyRef Name="RoomId" />
+      <PropertyRef Name="SeatX" />
+      <PropertyRef Name="SeatY" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RoomId" Type="bigint" Nullable="false" />
+    <Property Name="SeatX" Type="nvarchar" MaxLength="5" Nullable="false" />
+    <Property Name="SeatY" Type="nvarchar" MaxLength="5" Nullable="false" />
+    <Property Name="SectionId" Type="bigint" />
+    <Property Name="Code" Type="nvarchar" MaxLength="50" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="SeatTypeId" Type="bigint" Nullable="false" />
+    <Property Name="Status" Type="int" />
+    <Property Name="PayMentOnlineStatus" Type="int" />
+    <Property Name="ReserveStatus" Type="int" />
+    <Property Name="Descripsion" Type="nvarchar" MaxLength="150" />
+    <Property Name="LocationId" Type="bigint" Nullable="false" />
+    <Property Name="GroupSeat" Type="nvarchar" MaxLength="50" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SeatType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Price" Type="money" Nullable="false" />
+    <Property Name="TotalSeat" Type="int" />
+    <Property Name="Icon" Type="image" />
+    <Property Name="GalleryCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="Description" Type="nvarchar" MaxLength="500" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SeatTypeImage">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SeatTypeId" Type="bigint" Nullable="false" />
+    <Property Name="Image" Type="image" />
+    <Property Name="GalleryCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifyDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Section">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SectionNo" Type="int" Nullable="false" />
+    <Property Name="KeySeat" Type="nvarchar" MaxLength="50" />
+    <Property Name="TotalRows" Type="int" Nullable="false" />
+    <Property Name="TotalCols" Type="int" Nullable="false" />
+    <Property Name="RoomId" Type="bigint" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="150" />
+  </EntityType>
+  <EntityType Name="ShiftSale">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ShiftNumber" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="ShiftName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="StartTime" Type="datetime" Nullable="false" />
+    <Property Name="EndTime" Type="datetime" />
+    <Property Name="ShiftUserid" Type="bigint" Nullable="false" />
+    <Property Name="ShiftUserName" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="ActiveUserId" Type="bigint" />
+    <Property Name="ActiveUserName" Type="nvarchar" MaxLength="200" />
+    <Property Name="ShiftDescription" Type="nvarchar" MaxLength="150" />
+    <Property Name="TotalInitMoney" Type="float" />
+    <Property Name="TotalMoneyUserInput" Type="float" />
+    <Property Name="TotalMoneyReal" Type="float" />
+    <Property Name="Status" Type="int" />
+    <Property Name="CashierUserId" Type="bigint" />
+    <Property Name="CashierUserName" Type="nvarchar" MaxLength="200" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifyDate" Type="datetime" Nullable="false" />
+    <Property Name="ShiftUserFullName" Type="nvarchar" MaxLength="100" />
+    <Property Name="POS_NAME" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="SoundSystem">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" />
+    <Property Name="RoomId" Type="bigint" Nullable="false" />
+    <Property Name="CompanyProviderId" Type="bigint" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Type" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+    <Property Name="UseDate" Type="datetime" Nullable="false" />
+    <Property Name="WarrantyTime" Type="int" Nullable="false" />
+    <Property Name="Price" Type="money" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="SystemSetting">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SettingKey" Type="varchar" MaxLength="50" />
+    <Property Name="SettingValue" Type="nvarchar(max)" />
+    <Property Name="Status" Type="bit" />
+    <Property Name="Type" Type="varchar" MaxLength="50" />
+    <Property Name="Description" Type="nvarchar" MaxLength="500" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifyDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="TaxType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Status" Type="int" Nullable="false" />
+    <Property Name="Rate" Type="int" Nullable="false" />
+    <Property Name="Amount" Type="money" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifileDate" Type="datetime" Nullable="false" />
+    <Property Name="StartDate" Type="datetime" Nullable="false" />
+    <Property Name="EndDate" Type="datetime" />
+    <Property Name="Description" Type="nvarchar" MaxLength="150" />
+  </EntityType>
+  <EntityType Name="TemplateTicket">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Image" Type="image" />
+    <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="150" />
+  </EntityType>
+  <EntityType Name="Ticket">
+    <Key>
+      <PropertyRef Name="ScheduleFilmId" />
+      <PropertyRef Name="SeatId" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ScheduleFilmId" Type="bigint" Nullable="false" />
+    <Property Name="SeatId" Type="bigint" Nullable="false" />
+    <Property Name="FilmshiftId" Type="bigint" Nullable="false" />
+    <Property Name="BookingId" Type="bigint" Nullable="false" />
+    <Property Name="XRow" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="XColumn" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="SeatType" Type="bigint" Nullable="false" />
+    <Property Name="SeatTypeCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="SeatTypeName" Type="nvarchar" MaxLength="50" />
+    <Property Name="PriceType" Type="bigint" Nullable="false" />
+    <Property Name="StandardValue" Type="float" Nullable="false" />
+    <Property Name="ChildValue" Type="float" Nullable="false" />
+    <Property Name="DiscountAmount" Type="float" Nullable="false" />
+    <Property Name="TaxAmount" Type="float" Nullable="false" />
+    <Property Name="Total" Type="float" />
+    <Property Name="BookStatus" Type="int" Nullable="false" />
+    <Property Name="RefundFlag" Type="int" Nullable="false" />
+    <Property Name="MemberId" Type="int" />
+    <Property Name="MemberUsername" Type="nvarchar" MaxLength="50" />
+    <Property Name="SoldUserid" Type="bigint" Nullable="false" />
+    <Property Name="PrintedCount" Type="int" Nullable="false" />
+    <Property Name="DeletedUserId" Type="bigint" />
+    <Property Name="DiscountApprUserId" Type="bigint" />
+    <Property Name="PaymentMethod" Type="nvarchar" MaxLength="50" />
+    <Property Name="PromotionId" Type="nvarchar" MaxLength="150" />
+    <Property Name="TemplateTicketId" Type="bigint" Nullable="false" />
+    <Property Name="PaymentShiftId" Type="bigint" Nullable="false" />
+    <Property Name="ChekPrice" Type="bit" />
+    <Property Name="CheckStatus" Type="int" />
+    <Property Name="TicketTypeID" Type="bigint" />
+    <Property Name="TicketTypeCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="TicketTypeName" Type="nvarchar" MaxLength="100" />
+    <Property Name="ReserverType" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="TicketType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="50" />
+    <Property Name="Name" Type="nvarchar" MaxLength="500" />
+    <Property Name="Image" Type="image" />
+    <Property Name="Description" Type="nvarchar" MaxLength="1000" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Trailer">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" />
+    <Property Name="Code" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Link" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Lengh" Type="bigint" Nullable="false" />
+    <Property Name="Size" Type="bigint" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="WorkStation">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="IpAddress" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="Type" Type="int" Nullable="false" />
+    <Property Name="Enabled" Type="bit" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="150" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'BHD_CRMTESTBO.dbo.View_BookingReserve' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="View_BookingReserve">
+    <Key>
+      <PropertyRef Name="BookingId" />
+      <PropertyRef Name="RoomId" />
+      <PropertyRef Name="RoomName" />
+      <PropertyRef Name="FromDate" />
+      <PropertyRef Name="StartFilmTime" />
+      <PropertyRef Name="EndFilmTime" />
+      <PropertyRef Name="FilmId" />
+      <PropertyRef Name="Title" />
+      <PropertyRef Name="Duration" />
+      <PropertyRef Name="MainActor" />
+      <PropertyRef Name="Director" />
+      <PropertyRef Name="SeatTypeId" />
+      <PropertyRef Name="TicketId" />
+      <PropertyRef Name="BookingCode" />
+      <PropertyRef Name="SeatId" />
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="SeatX" />
+      <PropertyRef Name="SeatY" />
+      <PropertyRef Name="PricePolicyConfId" />
+    </Key>
+    <Property Name="BookingId" Type="bigint" Nullable="false" />
+    <Property Name="ScheduleFilmId" Type="bigint" />
+    <Property Name="Total" Type="float" />
+    <Property Name="SoGhe" Type="nvarchar" MaxLength="50" />
+    <Property Name="RoomId" Type="bigint" Nullable="false" />
+    <Property Name="RoomName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="FromDate" Type="datetime" Nullable="false" />
+    <Property Name="StartFilmTime" Type="datetime" Nullable="false" />
+    <Property Name="EndFilmTime" Type="datetime" Nullable="false" />
+    <Property Name="FilmId" Type="bigint" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="Duration" Type="int" Nullable="false" />
+    <Property Name="Rating" Type="int" />
+    <Property Name="MainActor" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="Director" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="SeatTypeId" Type="bigint" Nullable="false" />
+    <Property Name="TotalSeat" Type="int" />
+    <Property Name="TicketId" Type="bigint" Nullable="false" />
+    <Property Name="BookingCode" Type="nvarchar" MaxLength="75" Nullable="false" />
+    <Property Name="SeatId" Type="bigint" Nullable="false" />
+    <Property Name="Id" Type="bigint" Nullable="false" />
+    <Property Name="SeatX" Type="nvarchar" MaxLength="5" Nullable="false" />
+    <Property Name="SeatY" Type="nvarchar" MaxLength="5" Nullable="false" />
+    <Property Name="GroupSeat" Type="nvarchar" MaxLength="50" />
+    <Property Name="PricePolicyConfId" Type="bigint" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'BHD_CRMTESTBO.dbo.View_Film' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="View_Film">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="code" />
+      <PropertyRef Name="title" />
+      <PropertyRef Name="language" />
+      <PropertyRef Name="duration" />
+      <PropertyRef Name="total_number" />
+      <PropertyRef Name="date_in" />
+      <PropertyRef Name="modified_date" />
+      <PropertyRef Name="main_actor" />
+      <PropertyRef Name="director" />
+      <PropertyRef Name="TypeId" />
+      <PropertyRef Name="price" />
+      <PropertyRef Name="policy" />
+      <PropertyRef Name="FilmTypeName" />
+      <PropertyRef Name="DistributorName" />
+    </Key>
+    <Property Name="id" Type="bigint" Nullable="false" />
+    <Property Name="code" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="title" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="short_title" Type="nvarchar" MaxLength="50" />
+    <Property Name="language" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="duration" Type="int" Nullable="false" />
+    <Property Name="rating" Type="int" />
+    <Property Name="total_number" Type="int" Nullable="false" />
+    <Property Name="subtitle" Type="nvarchar" MaxLength="50" />
+    <Property Name="date_in" Type="date" Nullable="false" />
+    <Property Name="date_out" Type="date" />
+    <Property Name="modified_date" Type="date" Nullable="false" />
+    <Property Name="release_date" Type="date" />
+    <Property Name="main_actor" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="director" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="avartar" Type="image" />
+    <Property Name="trailer_id" Type="bigint" />
+    <Property Name="TypeId" Type="bigint" Nullable="false" />
+    <Property Name="price" Type="money" Nullable="false" />
+    <Property Name="grossing" Type="money" />
+    <Property Name="policy" Type="int" Nullable="false" />
+    <Property Name="description" Type="nvarchar" MaxLength="200" />
+    <Property Name="film_GroupID" Type="int" />
+    <Property Name="GroupName" Type="nvarchar" MaxLength="50" />
+    <Property Name="FilmTypeName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="DistributorName" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'BHD_CRMTESTBO.dbo.View_FilmFilmSchedule' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="View_FilmFilmSchedule">
+    <Key>
+      <PropertyRef Name="FilmId" />
+      <PropertyRef Name="Code" />
+      <PropertyRef Name="Title" />
+      <PropertyRef Name="Language" />
+      <PropertyRef Name="Duration" />
+      <PropertyRef Name="RoomId" />
+      <PropertyRef Name="FromDate" />
+      <PropertyRef Name="StartFilmTime" />
+      <PropertyRef Name="EndFilmTime" />
+      <PropertyRef Name="PricePolicyConfId" />
+      <PropertyRef Name="FilmScheduleId" />
+    </Key>
+    <Property Name="FilmId" Type="bigint" Nullable="false" />
+    <Property Name="Code" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="Language" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ShortTitle" Type="nvarchar" MaxLength="50" />
+    <Property Name="Duration" Type="int" Nullable="false" />
+    <Property Name="RoomId" Type="bigint" Nullable="false" />
+    <Property Name="FromDate" Type="datetime" Nullable="false" />
+    <Property Name="StartFilmTime" Type="datetime" Nullable="false" />
+    <Property Name="EndFilmTime" Type="datetime" Nullable="false" />
+    <Property Name="BosOffline" Type="bit" />
+    <Property Name="Cds" Type="bit" />
+    <Property Name="PricePolicyConfId" Type="bigint" Nullable="false" />
+    <Property Name="FilmScheduleId" Type="bigint" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'BHD_CRMTESTBO.dbo.View_PricePolicyConfFilmType' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="View_PricePolicyConfFilmType">
+    <Key>
+      <PropertyRef Name="PricePolicyId" />
+      <PropertyRef Name="NameFilmType" />
+      <PropertyRef Name="StartDate" />
+      <PropertyRef Name="Priority" />
+      <PropertyRef Name="CreateDate" />
+      <PropertyRef Name="ModifyDate" />
+      <PropertyRef Name="FilmTypeId" />
+    </Key>
+    <Property Name="PricePolicyId" Type="bigint" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="50" />
+    <Property Name="Name" Type="nvarchar" MaxLength="500" />
+    <Property Name="NameFilmType" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="StartDate" Type="datetime" Nullable="false" />
+    <Property Name="EndDate" Type="datetime" />
+    <Property Name="Priority" Type="int" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="150" />
+    <Property Name="StartFilmTime" Type="datetime" />
+    <Property Name="EndFilmTime" Type="datetime" />
+    <Property Name="Day" Type="nvarchar" MaxLength="50" />
+    <Property Name="CronExpression" Type="nvarchar" MaxLength="200" />
+    <Property Name="NextFireTime" Type="datetime" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifyDate" Type="datetime" Nullable="false" />
+    <Property Name="FilmTypeId" Type="bigint" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'BHD_CRMTESTBO.dbo.View_SeatPriceBySeatIdAndTicketTypeId' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="View_SeatPriceBySeatIdAndTicketTypeId">
+    <Key>
+      <PropertyRef Name="SeatId" />
+      <PropertyRef Name="TicketTypeId" />
+      <PropertyRef Name="FilmScheduleId" />
+      <PropertyRef Name="Price" />
+      <PropertyRef Name="SeatTypeId" />
+    </Key>
+    <Property Name="SeatId" Type="bigint" Nullable="false" />
+    <Property Name="TicketTypeId" Type="bigint" Nullable="false" />
+    <Property Name="FilmScheduleId" Type="bigint" Nullable="false" />
+    <Property Name="Price" Type="float" Nullable="false" />
+    <Property Name="SeatTypeId" Type="bigint" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'BHD_CRMTESTBO.dbo.ViewSeat_SeatType_Image' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="ViewSeat_SeatType_Image">
+    <Key>
+      <PropertyRef Name="seatTypeId" />
+      <PropertyRef Name="location_id" />
+      <PropertyRef Name="room_id" />
+      <PropertyRef Name="SeatTypeCode" />
+      <PropertyRef Name="SeatTypeName" />
+      <PropertyRef Name="SeatId" />
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="seatTypeId" Type="bigint" Nullable="false" />
+    <Property Name="location_id" Type="bigint" Nullable="false" />
+    <Property Name="room_id" Type="bigint" Nullable="false" />
+    <Property Name="section_id" Type="bigint" />
+    <Property Name="seat_x" Type="nvarchar" MaxLength="5" />
+    <Property Name="seat_y" Type="nvarchar" MaxLength="5" />
+    <Property Name="Code" Type="nvarchar" MaxLength="50" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Status" Type="int" />
+    <Property Name="descripsion" Type="nvarchar" MaxLength="150" />
+    <Property Name="GroupSeat" Type="nvarchar" MaxLength="50" />
+    <Property Name="Image" Type="image" />
+    <Property Name="SeatTypeCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="SeatTypeName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="SeatId" Type="bigint" Nullable="false" />
+    <Property Name="Icon" Type="image" />
+    <Property Name="ID" Type="int" Nullable="false" />
+  </EntityType>
+  <Function Name="SP_GetDetailBookingByReserve" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="bookingId" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SP_GetDetailByBookingReserve" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="bookingId" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SP_GetFilmScheduleByDate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="datetime" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="SP_GetInfoTicketBookingCode" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="bookingId" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SP_GetListHourFilmByScheduleId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idFilm" Type="bigint" Mode="In" />
+    <Parameter Name="fromDate" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="SP_GetTicketByBooking" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="bookingCode" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SP_ListPacketByTicketType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="TickTypeId" Type="bigint" Mode="In" />
+    <Parameter Name="Quantity" Type="int" Mode="In" />
+  </Function>
+  <Function Name="SP_NameTicketAndTypePolicyConfDetail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="pricePolicyConfId" Type="bigint" Mode="In" />
+  </Function>
+  <EntityContainer Name="bhd_cinemaModelStoreContainer">
+    <EntitySet Name="Booking" EntityType="Self.Booking" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BookingCustomerLoyalty" EntityType="Self.BookingCustomerLoyalty" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BookingInfo" EntityType="Self.BookingInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BookingPacketDetail" EntityType="Self.BookingPacketDetail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BookingPaymentMenthodDetail" EntityType="Self.BookingPaymentMenthodDetail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BookingVoucher" EntityType="Self.BookingVoucher" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Distributor" EntityType="Self.Distributor" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Film" EntityType="Self.Film" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FilmGroup" EntityType="Self.FilmGroup" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FilmSchedule" EntityType="Self.FilmSchedule" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FilmSchedulePrice" EntityType="Self.FilmSchedulePrice" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FilmScheduleRoom" EntityType="Self.FilmScheduleRoom" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FilmScheduleSeat" EntityType="Self.FilmScheduleSeat" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FilmScheduleTitle" EntityType="Self.FilmScheduleTitle" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FilmType" EntityType="Self.FilmType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ImgGallery" EntityType="Self.ImgGallery" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Location" EntityType="Self.Location" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Packet" EntityType="Self.Packet" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PaymentMenthod" EntityType="Self.PaymentMenthod" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PricePolicyConf" EntityType="Self.PricePolicyConf" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PricePolicyConfDetail" EntityType="Self.PricePolicyConfDetail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Promotion" EntityType="Self.Promotion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Room" EntityType="Self.Room" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Seat" EntityType="Self.Seat" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SeatType" EntityType="Self.SeatType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SeatTypeImage" EntityType="Self.SeatTypeImage" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Section" EntityType="Self.Section" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ShiftSale" EntityType="Self.ShiftSale" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SoundSystem" EntityType="Self.SoundSystem" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SystemSetting" EntityType="Self.SystemSetting" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TaxType" EntityType="Self.TaxType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TemplateTicket" EntityType="Self.TemplateTicket" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Ticket" EntityType="Self.Ticket" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TicketType" EntityType="Self.TicketType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Trailer" EntityType="Self.Trailer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="WorkStation" EntityType="Self.WorkStation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="View_BookingReserve" EntityType="Self.View_BookingReserve" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [View_BookingReserve].[BookingId] AS [BookingId], 
+    [View_BookingReserve].[ScheduleFilmId] AS [ScheduleFilmId], 
+    [View_BookingReserve].[Total] AS [Total], 
+    [View_BookingReserve].[SoGhe] AS [SoGhe], 
+    [View_BookingReserve].[RoomId] AS [RoomId], 
+    [View_BookingReserve].[RoomName] AS [RoomName], 
+    [View_BookingReserve].[FromDate] AS [FromDate], 
+    [View_BookingReserve].[StartFilmTime] AS [StartFilmTime], 
+    [View_BookingReserve].[EndFilmTime] AS [EndFilmTime], 
+    [View_BookingReserve].[FilmId] AS [FilmId], 
+    [View_BookingReserve].[Title] AS [Title], 
+    [View_BookingReserve].[Duration] AS [Duration], 
+    [View_BookingReserve].[Rating] AS [Rating], 
+    [View_BookingReserve].[MainActor] AS [MainActor], 
+    [View_BookingReserve].[Director] AS [Director], 
+    [View_BookingReserve].[SeatTypeId] AS [SeatTypeId], 
+    [View_BookingReserve].[TotalSeat] AS [TotalSeat], 
+    [View_BookingReserve].[TicketId] AS [TicketId], 
+    [View_BookingReserve].[BookingCode] AS [BookingCode], 
+    [View_BookingReserve].[SeatId] AS [SeatId], 
+    [View_BookingReserve].[Id] AS [Id], 
+    [View_BookingReserve].[SeatX] AS [SeatX], 
+    [View_BookingReserve].[SeatY] AS [SeatY], 
+    [View_BookingReserve].[GroupSeat] AS [GroupSeat], 
+    [View_BookingReserve].[PricePolicyConfId] AS [PricePolicyConfId]
+    FROM [dbo].[View_BookingReserve] AS [View_BookingReserve]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="View_Film" EntityType="Self.View_Film" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [View_Film].[id] AS [id], 
+    [View_Film].[code] AS [code], 
+    [View_Film].[title] AS [title], 
+    [View_Film].[short_title] AS [short_title], 
+    [View_Film].[language] AS [language], 
+    [View_Film].[duration] AS [duration], 
+    [View_Film].[rating] AS [rating], 
+    [View_Film].[total_number] AS [total_number], 
+    [View_Film].[subtitle] AS [subtitle], 
+    [View_Film].[date_in] AS [date_in], 
+    [View_Film].[date_out] AS [date_out], 
+    [View_Film].[modified_date] AS [modified_date], 
+    [View_Film].[release_date] AS [release_date], 
+    [View_Film].[main_actor] AS [main_actor], 
+    [View_Film].[director] AS [director], 
+    [View_Film].[avartar] AS [avartar], 
+    [View_Film].[trailer_id] AS [trailer_id], 
+    [View_Film].[TypeId] AS [TypeId], 
+    [View_Film].[price] AS [price], 
+    [View_Film].[grossing] AS [grossing], 
+    [View_Film].[policy] AS [policy], 
+    [View_Film].[description] AS [description], 
+    [View_Film].[film_GroupID] AS [film_GroupID], 
+    [View_Film].[GroupName] AS [GroupName], 
+    [View_Film].[FilmTypeName] AS [FilmTypeName], 
+    [View_Film].[DistributorName] AS [DistributorName]
+    FROM [dbo].[View_Film] AS [View_Film]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="View_FilmFilmSchedule" EntityType="Self.View_FilmFilmSchedule" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [View_FilmFilmSchedule].[FilmId] AS [FilmId], 
+    [View_FilmFilmSchedule].[Code] AS [Code], 
+    [View_FilmFilmSchedule].[Title] AS [Title], 
+    [View_FilmFilmSchedule].[Language] AS [Language], 
+    [View_FilmFilmSchedule].[ShortTitle] AS [ShortTitle], 
+    [View_FilmFilmSchedule].[Duration] AS [Duration], 
+    [View_FilmFilmSchedule].[RoomId] AS [RoomId], 
+    [View_FilmFilmSchedule].[FromDate] AS [FromDate], 
+    [View_FilmFilmSchedule].[StartFilmTime] AS [StartFilmTime], 
+    [View_FilmFilmSchedule].[EndFilmTime] AS [EndFilmTime], 
+    [View_FilmFilmSchedule].[BosOffline] AS [BosOffline], 
+    [View_FilmFilmSchedule].[Cds] AS [Cds], 
+    [View_FilmFilmSchedule].[PricePolicyConfId] AS [PricePolicyConfId], 
+    [View_FilmFilmSchedule].[FilmScheduleId] AS [FilmScheduleId]
+    FROM [dbo].[View_FilmFilmSchedule] AS [View_FilmFilmSchedule]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="View_PricePolicyConfFilmType" EntityType="Self.View_PricePolicyConfFilmType" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [View_PricePolicyConfFilmType].[PricePolicyId] AS [PricePolicyId], 
+    [View_PricePolicyConfFilmType].[Code] AS [Code], 
+    [View_PricePolicyConfFilmType].[Name] AS [Name], 
+    [View_PricePolicyConfFilmType].[NameFilmType] AS [NameFilmType], 
+    [View_PricePolicyConfFilmType].[StartDate] AS [StartDate], 
+    [View_PricePolicyConfFilmType].[EndDate] AS [EndDate], 
+    [View_PricePolicyConfFilmType].[Priority] AS [Priority], 
+    [View_PricePolicyConfFilmType].[Description] AS [Description], 
+    [View_PricePolicyConfFilmType].[StartFilmTime] AS [StartFilmTime], 
+    [View_PricePolicyConfFilmType].[EndFilmTime] AS [EndFilmTime], 
+    [View_PricePolicyConfFilmType].[Day] AS [Day], 
+    [View_PricePolicyConfFilmType].[CronExpression] AS [CronExpression], 
+    [View_PricePolicyConfFilmType].[NextFireTime] AS [NextFireTime], 
+    [View_PricePolicyConfFilmType].[CreateDate] AS [CreateDate], 
+    [View_PricePolicyConfFilmType].[ModifyDate] AS [ModifyDate], 
+    [View_PricePolicyConfFilmType].[FilmTypeId] AS [FilmTypeId]
+    FROM [dbo].[View_PricePolicyConfFilmType] AS [View_PricePolicyConfFilmType]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="View_SeatPriceBySeatIdAndTicketTypeId" EntityType="Self.View_SeatPriceBySeatIdAndTicketTypeId" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [View_SeatPriceBySeatIdAndTicketTypeId].[SeatId] AS [SeatId], 
+    [View_SeatPriceBySeatIdAndTicketTypeId].[TicketTypeId] AS [TicketTypeId], 
+    [View_SeatPriceBySeatIdAndTicketTypeId].[FilmScheduleId] AS [FilmScheduleId], 
+    [View_SeatPriceBySeatIdAndTicketTypeId].[Price] AS [Price], 
+    [View_SeatPriceBySeatIdAndTicketTypeId].[SeatTypeId] AS [SeatTypeId]
+    FROM [dbo].[View_SeatPriceBySeatIdAndTicketTypeId] AS [View_SeatPriceBySeatIdAndTicketTypeId]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="ViewSeat_SeatType_Image" EntityType="Self.ViewSeat_SeatType_Image" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ViewSeat_SeatType_Image].[seatTypeId] AS [seatTypeId], 
+    [ViewSeat_SeatType_Image].[location_id] AS [location_id], 
+    [ViewSeat_SeatType_Image].[room_id] AS [room_id], 
+    [ViewSeat_SeatType_Image].[section_id] AS [section_id], 
+    [ViewSeat_SeatType_Image].[seat_x] AS [seat_x], 
+    [ViewSeat_SeatType_Image].[seat_y] AS [seat_y], 
+    [ViewSeat_SeatType_Image].[Code] AS [Code], 
+    [ViewSeat_SeatType_Image].[Name] AS [Name], 
+    [ViewSeat_SeatType_Image].[Status] AS [Status], 
+    [ViewSeat_SeatType_Image].[descripsion] AS [descripsion], 
+    [ViewSeat_SeatType_Image].[GroupSeat] AS [GroupSeat], 
+    [ViewSeat_SeatType_Image].[Image] AS [Image], 
+    [ViewSeat_SeatType_Image].[SeatTypeCode] AS [SeatTypeCode], 
+    [ViewSeat_SeatType_Image].[SeatTypeName] AS [SeatTypeName], 
+    [ViewSeat_SeatType_Image].[SeatId] AS [SeatId], 
+    [ViewSeat_SeatType_Image].[Icon] AS [Icon], 
+    [ViewSeat_SeatType_Image].[ID] AS [ID]
+    FROM [dbo].[ViewSeat_SeatType_Image] AS [ViewSeat_SeatType_Image]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,1029 @@
+﻿@using BuyGroup365.Areas.Manage.Models
+@using MvcPaging
+@model IPagedList<Common.Catalog>
+@{
+    ViewBag.Title = "Danh mục sản phẩm";
+    Layout = "~/Areas/Manage/Views/Shared/_LayoutAdmincshtml.cshtml";
+}
+<script>
+    function BrowseServer() {
+        var finder = new CKFinder();
+        finder.BasePath = '/Content/css/ckfinder/';
+        finder.selectActionFunction = SetFileFiled;
+        // finder.SelectActionFunction = SetFileFiled;
+        //   finder.SelectFunction = SetFileFiled;
+        //   finder.SelectFunctionData = SetFileFiled;
+        finder.popup();
+    }
+    function SetFileFiled(FileUrl) {
+        document.getElementById('ImageSource').value = FileUrl;
+    }
+</script>
+<div class="container-fluid" ng-app="body">
+    @Html.Raw(AdminFunction.BindHeader("Danh mục sản phẩm", null, null, null, null))
+    <!-- /.row -->
+    <!-- /.row -->
+    <!-- /.row -->
+    <div class="row" ng-controller="Index">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    @using (Ajax.BeginForm("Index", "CategoryProduct",
+                        new AjaxOptions { UpdateTargetId = "grid-list", HttpMethod = "get", LoadingElementId = "loading", OnBegin = "beginPaging", OnSuccess = "successPaging", OnFailure = "failurePaging" },
+                        new { id = "frm-search" }))
+                    {
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group input-group">
+                                    <input type="text" value="@ViewData["key"]" class="form-control" id="appendedInputButton" name="key" placeholder="Nhập từ khóa tìm kiếm" style="width:80%">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="submit">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                            <div>
+                                <span style="float: right ;margin-right: 20px;font-size: 20px">
+                                    <a class="glyphicon glyphicon-plus-sign" data-toggle="modal" data-target="#myModal">
+                                    </a>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover table-striped" id="dataTables" aria-describedby="dataTables-example_info">
+                                <thead>
+                                    <tr role="row">
+                                        <th style="width:80px">
+                                            STT
+                                        </th>
+                                        <th>
+                                            Tên Danh Mục
+                                        </th>
+                                        <th>
+                                            Link Danh Mục
+                                        </th>
+
+                                        <th style="width:120px">
+                                            Ngày Tạo
+                                        </th>
+                                        <th style="width: 120px;">Chức Năng</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{int i = -1;}
+                                    @foreach (var item in Model)
+                                    {
+                                        i++;
+                                        <tr>
+                                            <td style="text-align:center">
+                                                @(Model.ItemStart + i)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.NameChild)
+                                            </td>
+                                            <td>
+                                                /@item.FriendlyUrl
+                                            </td>
+                                            <td style="text-align:center">
+                                                @item.CreateDate.ToString("dd/MM/yyyy")
+                                            </td>
+
+                                            <td style="text-align: center">
+
+                                                <a class="" href="javarscript:;" data-toggle="modal" data-target="#Properties" data-ng-click="ManageProperties(@item.Id)">
+                                                    <img src="~/img/IconMain/properties.png" width="19" title="Thuộc tính danh mục" />
+                                                </a>
+                                                <a href="/Manage/CategoryProduct/UpdateCatalog/@item.Id" data-toggle="modal">
+                                                    <img src="~/img/IconMain/edit.png" width="19" title="Sửa" />
+                                                </a>
+                                                <a href="/Manage/CategoryProduct/DeleteCategory/@item.Id" title="Xóa" onclick="return confirm('Bạn có chắc chắn?');">
+                                                    <img src="~/img/IconMain/remove.png" width="19" title="Xóa" />
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                            <div class="row">
+                                <div class="">
+                                    <div class="dataTables_info" id="dataTables-example_info" role="alert" aria-live="polite" aria-relevant="all">Hiển thị từ @Model.ItemStart đến @Model.ItemEnd của @Model.TotalItemCount bản ghi</div>
+                                </div>
+                                <div class="">
+                                    <div class="dataTables_paginate " id="dataTables-example_paginate">
+
+                                        @Html.Raw(Ajax.Pager(
+                                            new Options
+                                            {
+                                                PageSize = Model.PageSize,
+                                                TotalItemCount = Model.TotalItemCount,
+                                                CurrentPage = Model.PageNumber,
+                                                ItemTexts = new ItemTexts() { Next = "Next", Previous = "Previous", Page = "P" },
+                                                ItemIcon = new ItemIcon() { First = "icon-backward", Previous = "icon-chevron-left", Next = "icon-chevron-right", Last = "icon-forward" },
+                                                TooltipTitles = new TooltipTitles() { Next = "Next page", Previous = "Previous page", Page = "Page {0}." },
+                                                Size = Size.normal,
+                                                Alignment = Alignment.centered,
+                                                IsShowControls = true,
+                                                IsShowFirstLast = true,
+                                                CssClass = ""
+                                            },
+                                            new AjaxOptions
+                                            {
+                                                UpdateTargetId = "grid-list",
+                                                HttpMethod = "get",
+                                                LoadingElementId = "loading",
+                                                OnBegin = "beginPaging",
+                                                OnSuccess = "successPaging",
+                                                OnFailure = "failurePaging"
+                                            }, new { controller = "CategoryProduct", action = "Index", key = ViewData["key"] }))
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- /.row -->
+        <!-- /.row -->
+        @*Create*@
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                @using (Html.BeginForm("CreateCate", "CategoryProduct", FormMethod.Post, new { enctype = "multipart/form-data", id = "CreateCate" }))
+                {
+                    @Html.ValidationSummary(true)
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Tạo danh mục</h4>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Tên danh mục<span class="required">*</span></label><br />
+                                        <input class="form-control" autocomplete="off" maxlength="100" data-val-required="Mời nhập tên danh mục" required id=" categoryname" name="categoryname" type="text" data-ng-model="emp.categoryname">
+                                        <span class="field-validation-valid" data-valmsg-for="categoryname" data-valmsg-replace="true"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Link danh mục<span class="required">*</span></label><br />
+                                        <input class="form-control" autocomplete="off" maxlength="100" disabled="true" id="FriendlyUrl" name="FriendlyUrl" type="text" data-ng-model="emp.FriendlyUrl">
+                                        <span class="field-validation-valid" data-valmsg-for="FriendlyUrl" data-valmsg-replace="true"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Icon</label><br />
+                                        <input class="form-control" autocomplete="off" style="width: 200px" id="icon" name="icon" type="file" data-ng-model="emp.icon">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Ảnh đại diện:<span class="required">*</span></label><br />
+                                        <input id="ImageSource" name="ImageSource" data-val-required="Trường là bắt buộc" data-ng-model="emp.ImageSource" type="text" class="input-block-level" />
+                                        <input type="button" value="Browse Server" onclick="BrowseServer();" class="controls" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Status<span class="required">*</span></label><br />
+                                        @Html.DropDownList("statusCatg", null, new { @width = "100%" })
+                                    </div>
+                                    @*<div class="form-group">
+                                            <label>Chương trình khuyến mãi<span class="required">*</span></label><br />
+                                            @Html.DropDownList("PromotionListID", null, new { @width = "100%" })
+                                        </div>*@
+                                    <div class="form-group">
+                                        <label>Thẻ tiêu đề<span class="required">*</span></label><br />
+                                        <textarea class="form-control" maxlength="200" id="seoTitle" name="seoTitle" required data-ng-model="emp.seoTitle"></textarea>
+                                        <span class="field-validation-valid" data-valmsg-for="seoTitle" data-valmsg-replace="true"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Thẻ từ khóa<span class="required">*</span></label><br />
+                                        <textarea class="form-control" maxlength="200" id="seoKeyword" name="seoKeyword" required data-ng-model="emp.seoKeyword"></textarea>
+                                        <span class="field-validation-valid" data-valmsg-for="seoKeyword" data-valmsg-replace="true"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Tiêu đề chia sẻ:</label><br />
+                                        <input class="form-control" autocomplete="off" maxlength="400" id="ShareTitle" name="ShareTitle" type="text" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Từ khóa chia sẻ:</label><br />
+                                        <input class="form-control" autocomplete="off" maxlength="400" id="ShareKeyword" name="ShareKeyword" type="text" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Mô tả chia sẻ:</label><br />
+                                        <textarea class="form-control" id="ShareDescription" maxlength="800" name="ShareDescription" style="height: 100px"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Danh mục cha<span class="required">*</span></label><br />
+                                        @Html.DropDownList("parent", null, new { @height = "100px", @size = "25", @width = "100%" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+
+                                <div class="form-group">
+                                    <label>Thẻ Mô tả<span class="required">*</span></label><br />
+                                    <textarea class="form-control" maxlength="300" id="seoDescription" required name="seoDescription" data-ng-model="emp.seoDescription"></textarea>
+                                    <span class="field-validation-valid" data-valmsg-for="seoDescription" data-valmsg-replace="true"></span>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="form-group">
+                                    <label>Mô tả cho danh mục</label><br />
+                                    <textarea class="form-control" id="description1" name="description" data-ng-model="emp.description"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        @*Endcreate*@
+
+        @*Edit Category*@
+        <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="EditModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Cập nhật Danh mục</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <input ng-model="emp.Id" id="id" name="id" style="display: none" />
+
+                                <div class="form-group">
+                                    <label>Tên danh mục<span class="required">*</span></label><br />
+                                    <input class="form-control" autocomplete="off" maxlength="100" data-val-required="Mời nhập tên danh mục" required id=" categoryname" name="categoryname" type="text" data-ng-model="emp.CatalogName">
+                                    <span class="field-validation-valid" data-valmsg-for="categoryname" data-valmsg-replace="true"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label>Đường dẫn<span class="required">*</span></label><br />
+                                    <input class="form-control" autocomplete="off" maxlength="100" data-val-required="Trường là bắt buộc" required id="friendlyurl" name="friendlyurl" type="text" data-ng-model="emp.FriendlyUrl">
+                                </div>
+                                <div class="form-group">
+                                    <label>Icon</label><br />
+                                    <input class="form-control" autocomplete="off" style="width: 200px" id="icon" name="icon" type="file" data-ng-model="emp.Icon">
+                                </div>
+                                <div class="form-group">
+                                    <label>Banner</label><br />
+                                    <input class="form-control" autocomplete="off" style="width: 200px" id="icon" name="icon" type="file" data-ng-model="emp.Banner">
+                                </div>
+                                <div class="form-group">
+                                    <label>Sắp xếp<span class="required">*</span></label><br />
+                                    <input class="form-control" autocomplete="off" style="width: 200px" id="oder" name="oder" type="number" data-ng-model="emp.Order">
+                                    <span class="field-validation-valid" data-valmsg-for="oder" data-valmsg-replace="true"></span>
+                                </div>
+
+                                <div class="form-group">
+
+                                    <label>Status<span class="required">*</span></label><br />
+                                    @Html.DropDownList("statusCatg", null, new { @width = "100%", data_ng_model = "emp.Status" })
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+
+                                    <label>Danh mục cha<span class="required">*</span></label><br />
+                                    @Html.DropDownList("parent", null, new { @height = "100px", @size = "25", @width = "100%", @data_ng_model = "emp.ParentId" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="form-group">
+                                <label>Thẻ tiêu đề</label><br />
+                                <textarea class="form-control" maxlength="200" id="seoTitle" name="seoTitle" data-ng-model="emp.SeoTitle"></textarea>
+                                <span class="field-validation-valid" data-valmsg-for="seoTitle" data-valmsg-replace="true"></span>
+                            </div>
+                            <div class="form-group">
+                                <label>Thẻ từ khóa</label><br />
+                                <textarea class="form-control" maxlength="200" id="seoKeyword" name="seoKeyword" data-ng-model="emp.SeoKeyword"></textarea>
+                                <span class="field-validation-valid" data-valmsg-for="seoKeyword" data-valmsg-replace="true"></span>
+                            </div>
+                            <div class="form-group">
+                                <label>Mô tả</label><br />
+                                <textarea class="form-control" id="description" name="description" data-ng-model="emp.Description"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Thẻ mô tả</label><br />
+                                <textarea class="form-control" maxlength="300" id="seoDescription" name="seoDescription" data-ng-model="emp.SeoDescription"></textarea>
+                                <span class="field-validation-valid" data-valmsg-for="seoDescription" data-valmsg-replace="true"></span>
+                            </div>
+                            <div class="form-group">
+                                <label>Tiêu đề chia sẻ:</label><br />
+                                <input class="form-control" autocomplete="off" maxlength="200" id="ShareTitle" name="ShareTitle" type="text" data-ng-model="emp.ShareTitle" />
+                            </div>
+                            <div class="form-group">
+                                <label>Từ khóa chia sẻ:</label><br />
+                                <input class="form-control" autocomplete="off" maxlength="300" id="ShareKeyword" name="ShareKeyword" type="text" data-ng-model="emp.ShareKeyword" />
+                            </div>
+                            <div class="form-group">
+                                <label>Mô tả chia sẻ:</label><br />
+                                <textarea class="form-control" id="ShareDescription" maxlength="500" name="ShareDescription" style="height: 100px" data-ng-model="emp.ShareDescription"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" ng-click="UpdateChange()">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @*Kêt thúc cập nhật*@
+
+        @*Properties*@
+
+        <div class="modal fade" id="Properties" tabindex="-1" role="dialog" aria-labelledby="PropertiesModalLabel" aria-hidden="true" style="overflow-y: scroll">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">
+                            <img src="~/img/IconMain/properties.ico" width="20" /> Quản lý thuộc tính
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <input id="hidecateProperty" type="hidden" />
+                        <div class="row" id="oldcontentproperty">
+                        </div>
+                        <div class="row" id="contentproperty">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a class="btn btn-default" data-toggle="modal" data-target="#AddProperties" onclick="OnfowadId()">
+                            Thêm thuộc tính
+                        </a>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            function OnfowadId() {
+                var vl = $('#hidecateProperty').val();
+                $('#catlg').val(vl);
+                $('#nameproperty').val("");
+                $('#value').html("");
+                $("#allvalue").val("");
+                $('#index').val(1);
+            }
+        </script>
+        @*Add Properties*@
+        <div class="modal fade" id="AddProperties" tabindex="-1" role="dialog" aria-labelledby="AddPropertiesModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">    Thêm thuộc tính</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <input type="hidden" id="catlg" />
+                            <div class="form-group col-lg-4">
+                                <label>Tên<span class="required">*</span></label><br />
+                                <input class="form-control" autocomplete="off" maxlength="50" required id="nameproperty" name="nameproperty" type="text" value="">
+                            </div>
+                            <div class="form-group col-lg-4" style="display:none;">
+                                <label>Kiểu<span class="required">*</span></label><br />
+                                <input type="checkbox" id="typevalue" value="1" onclick="SetCheck()" checked="checked"> Loại check box?
+                            </div>
+                            <div class="form-group col-lg-4">
+                                <label>Kiểu hiển thị<span class="required"></span></label><br />
+
+                                <input type="checkbox" id="typedesign" value="1" onclick="SetCheckdesign()" checked="checked"> Hiển thị 1 dòng
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row">
+                            <div id="value"></div>
+                            <div style="float:right"><a onclick="Addvalue()" class="btn btn-primary btn-sm">Thêm giá trị</a></div>
+                            <input type="hidden" id="allvalue" />
+                            <input id="index" value="1" type="hidden" />
+                        </div>
+                        <script>
+
+                            function Addvalue() {
+                                var index = $("#index").val();
+                                var html = "";
+                                html += "<p><i class=\"fa fa-angle-double-right\">   </i> <input id='value" + index + "' onchange=\"SendValue(" + index + ")\"></p>";
+                                $("#value").append(html);
+                                index++;
+                                $('#index').val(index);
+                            }
+                            function SetCheck() {
+                                var a = $('#typevalue').is(":checked");
+                                if (!a) {
+                                    $('#typevalue').val(1);
+                                } else { $('#typevalue').val(2); }
+
+                            }
+                            function SetCheckdesign() {
+                                var a = $('#typedesign').is(":checked");
+                                if (a) {
+                                    $('#typedesign').val(1);
+                                } else { $('#typedesign').val(2); }
+
+                            }
+
+                            function AddvalueFormUpdate(i) {
+                                var index = $("#contentproperty").val();
+                                var html = "";
+                                html += "<p id=\"properties_value_" + i + "\">+  <input id=\"properties_value_edit\" type=\"text\" /><a class=\"update_2\" onclick=\"AddPropertiesValueByUpdate(" + i + ")\">Thêm</a></p>";
+                                $("#valueUpdate").append(html);
+                                index++;
+                                $('#contentproperty').val(index);
+                            }
+                        </script>
+                    </div>
+                    <div class="modal-footer">
+                        <span style="color: red"><i>(Vui lòng 'thêm giá trị' trước khi thêm mới)</i></span> <a class="btn btn-default" data-toggle="modal" data-target="#AddProperties" onclick="Addproperty()">
+                            Thêm mới
+                        </a>
+                        <script>
+                            function Addproperty() {
+                                $('#index').val(1);
+                                $('#overbackgroud').show();
+                                var cat = $('#catlg').val();
+                                //      alert(cat);
+                                var name = $('#nameproperty').val();
+                                //  var key = $('#keyproperty').val();
+                                var type = $('#typevalue').val();
+                                var typedesgin = $('#typedesign').val();
+                                var value = $('#allvalue').val();
+                                var objval = value.split('|');
+                                var htmlval = "";
+
+                                $.ajax({
+                                    url: '@Url.Action("AddProperty","CategoryProduct")',
+                                    data: {
+                                        'nameproperty': name,
+                                        'typevalue': type,
+                                        'typedesgin': typedesgin,
+                                        'cate': cat,
+                                        'allvalue': value
+                                    },
+                                    dataType: "json",
+                                    type: "POST",
+                                    traditional: true,
+                                    success: function (data, status) {
+                                        $('#contentproperty').append(data);
+
+                                        $('#overbackgroud').hide();
+
+                                    },
+                                    error: function () {
+
+                                    }
+
+                                });
+
+                            }
+                            function AddPropertiesValueByUpdate(id) {
+
+                                var value = $('#properties_value_edit').val();
+
+                                $.ajax({
+                                    url: '@Url.Action("AddPropertyUpdate", "CategoryProduct")',
+                                    data: {
+                                        'id': id,
+                                        'propertyvalue': value,
+
+                                    },
+                                    dataType: "json",
+                                    type: "POST",
+                                    traditional: true,
+                                    success: function (data, status) {
+                                        if (data == 1) {
+                                            alert("Cập nhật thành công");
+                                            window.location.href = "/Manage/CategoryProduct/Index";
+                                            //     $scope.GetInfoUser();
+                                        }
+
+                                    },
+                                    error: function () {
+
+                                    }
+
+                                });
+
+                            }
+                            function SendValue(id) {
+                                var index = $('#index').val();
+                                var ix = parseInt(index);
+                                var htm = "";
+                                for (var i = 1; i < ix; i++) {
+                                    var vl = $('#value' + i).val();
+                                    if (vl != "") {
+                                        htm += vl + "|";
+                                    }
+                                }
+                                //var a = $('#allvalue').val();
+                                //var b = $('#value' + id).val();
+                                //var ctx = a + b + '|';
+                                $('#allvalue').val(htm);
+
+                            }
+                        </script>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @*Add Value*@
+        <div class="modal fade" id="AddValue" tabindex="-1" role="dialog" aria-labelledby="AddPropertiesModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">     AddValue</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="form-group">
+                                <label>Value<span class="required">*</span></label><br />
+                                <input class="form-control" autocomplete="off" maxlength="50" required id="valueproperty" name="valueproperty" type="text" value="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a class="btn btn-default" data-dismiss="modal" onclick="AddValue1()">
+                            AddValue
+                        </a>
+                        <script>
+                            function AddValue1() {
+
+                                var a = $('#valueproperty').val();
+                                var htm = "<p>+" + a + "</p>";
+                                $('#vl001').append(htm);
+                            }
+                        </script>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*End*@
+</div>
+
+@*Kêt thúc cập nhật*@
+<script>
+    angular.module("body", []).controller("header", function ($scope) {
+        //   $scope.quanlyuser = "Câp nhật thái";
+    }).controller("Index", function ($scope) {
+
+        $scope.emp = {
+            Id: '',
+            ParentId: '',
+            Code: '',
+            CatalogName: '',
+            FriendlyUrl: '',
+            ImageSource: '',
+            Icon: '',
+            Banner: '',
+            Description: '',
+            Order: '',
+            Status: '',
+            CreateDate: '',
+            ModifyDate: '',
+            IsLast: '',
+            SeoTitle: '',
+            SeoKeyword: '',
+            SeoDescription: ''
+        };
+
+        $scope.GetInforCategory = function (id) {
+
+            $('#overbackgroud').show();
+            //   $scope.emplist = [];
+            //   $scope.emailthai = "tháiisigsjghj";
+            $.ajax({
+                url: '@Url.Action("GetCatalogProuctById", "Json")',
+                data: {
+                    'id': id
+                },
+                type: 'GET',
+                contentType: 'application/json; charset=utf-8',
+
+                success: function (data) {
+
+                    $scope.emp.Id = id;
+                    $scope.emp.ParentId = data.ParentId;
+                    $scope.emp.Code = data.Code;
+                    $scope.emp.CatalogName = data.CatalogName;
+                    $scope.emp.FriendlyUrl = data.FriendlyUrl;
+                    $scope.emp.Icon = data.Icon;
+                    $scope.emp.Icon = data.ImageSource;
+                    $scope.emp.Banner = data.Icon;
+                    $scope.emp.Description = data.Description;
+                    $scope.emp.Order = data.Order;
+                    $scope.emp.Status = data.Status;
+                    $scope.emp.CreateDate = data.CreateDate;
+                    $scope.emp.ModifyDate = data.ModifyDate;
+                    $scope.emp.IsLast = data.IsLast;
+                    $scope.emp.SeoTitle = data.SeoTitle;
+                    $scope.emp.SeoKeyword = data.SeoKeyword;
+                    $scope.emp.SeoDescription = data.SeoDescription;
+
+                    $scope.$apply();
+                    $('#overbackgroud').hide();
+                },
+                error: function () {
+
+                }
+            });
+            // alert(mail);
+
+            //       $scope.valuetest = mail;
+            //  $scope.emailthai = mail;
+            //  alert(id);
+        };
+        $scope.ManageManuface = function (id) {
+            $('#hidecate').val(id);
+            //  $('#overbackgroud').show();
+            loadtabl(id);
+
+        };
+        $scope.UpdateChange = function () {
+            $('#overbackgroud').show();
+            $.ajax({
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify($scope.emp),
+                url: '@Url.Action("UpdateCatalog", "Json")',
+                success: function (data) {
+                    if (data == 1) {
+                        alert("Cập nhật thành công");
+                        window.location.href = "/Manage/CategoryProduct/Index";
+                        //     $scope.GetInfoUser();
+                    }
+
+                },
+                error: function (status) { }
+            });
+        };
+        $scope.ManageProperties = function (id) {
+
+            $('#hidecateProperty').val(id);
+
+            $.ajax({
+                url: '@Url.Action("GetProperty","CategoryProduct")',
+                data: {
+                    'cateId': id
+                },
+                dataType: "json",
+                type: "POST",
+                traditional: true,
+                success: function (data, status) {
+                    if (data == "0") {
+                        alert("Lỗi");
+                        $('#overbackgroud').hide();
+                    }
+                    else {
+
+                        $('#oldcontentproperty').html("");
+                        $('#oldcontentproperty').append(data);
+                        $('#overbackgroud').hide();
+                    }
+                },
+                error: function () {
+
+                }
+
+            });
+        };
+
+        //khi bấm delete chạy tới hàm này
+        $scope.ChangeStatusCategory = function (id) {
+            $('#overbackgroud').show();
+            $.ajax({
+                url: '@Url.Action("ChangeStatusCatalog", "Json")',
+                data: {
+                    id: id
+                },
+                type: 'POST',
+                dataType: "json",
+                success: function (status) {
+                    if (status == 1) {
+                        window.alert("Catalog được Active");
+                        window.location.href = "/Manage/CategoryProduct/Index";
+                        //     $scope.GetInfoUser();
+                    } else {
+                        window.alert("Catalog đã bị log");
+                        window.location.href = "/Manage/CategoryProduct/Index";
+                    }
+                },
+                error: function (status) {
+                    window.alert("Thay đổi trạng thái không thành công : " + status);
+                    $('#overbackgroud').hide();
+                }
+            });
+        };
+    });
+
+    function DeleteProperties(id) {
+
+        $.ajax({
+            url: '@Url.Action("DeleteProperty","CategoryProduct")',
+            data: {
+                'id': id
+
+            },
+            dataType: "json",
+            type: "POST",
+            traditional: true,
+            success: function (data, status) {
+                if (data == "1") {
+                    $('.panlel_' + id).remove();
+                    $('#overbackgroud').hide();
+                }
+                else {
+                    alert("Lỗi");
+                    $('#overbackgroud').hide();
+                }
+            },
+            error: function () {
+
+            }
+
+        });
+    }
+    function UpdateProperties(id) {
+        var cataproname = $('#cataproname' + id).val();
+        var cataprokey = $('#cataprokey' + id).val() ;
+        var typeproperty ;
+
+        var b = $("#typeproperty" + id).is(":checked");
+        if (b)
+            typeproperty = 1;
+        else
+            typeproperty = 2;
+        var typedesignproperty;
+        var a = $("#typedesignproperty" + id).is(":checked");
+        if (a)
+            typedesignproperty = 1;
+        else
+            typedesignproperty = 2;
+        $.ajax({
+            url: '@Url.Action("UpdateProperty","CategoryProduct")',
+            data: {
+                'id': id,
+                'cataproname': cataproname,
+                'cataprokey': cataprokey,
+                'typeproperty': typeproperty,
+                'typedesignproperty': typedesignproperty
+            },
+            dataType: "json",
+            type: "POST",
+            traditional: true,
+            success: function (data, status) {
+                if (data == "1") {
+                    alert("Cập nhật thành công");
+                }
+                else {
+                    alert("Lỗi");
+                    $('#overbackgroud').hide();
+                }
+            },
+            error: function () {
+
+            }
+
+        });
+    }
+
+    function DeletePropertiesValue(id) {
+        $.ajax({
+            url: '@Url.Action("DeletePropertyValue","CategoryProduct")',
+            data: {
+                'id': id
+
+            },
+            dataType: "json",
+            type: "POST",
+            traditional: true,
+            success: function (data, status) {
+                if (data == "1") {
+                    $('#properties_value_' + id).remove();
+                    $('#overbackgroud').hide();
+                }
+                else {
+                    alert("Lỗi");
+                    $('#overbackgroud').hide();
+                }
+            },
+            error: function () {
+
+            }
+
+        });
+    }
+    function UpdatePropertiesValue(id) {
+
+        var properties_value_edit = $('#properties_value_edit_' + id).val();
+
+        $.ajax({
+            url: '@Url.Action("UpdatePropertyValue","CategoryProduct")',
+            data: {
+                'id': id,
+                'properties_value_edit': properties_value_edit
+            },
+            dataType: "json",
+            type: "POST",
+            traditional: true,
+            success: function (data, status) {
+                if (data == "1") {
+                    alert("Cập nhật thành công");
+                }
+                else {
+                    alert("Lỗi");
+                    $('#overbackgroud').hide();
+                }
+            },
+            error: function () {
+
+            }
+
+        });
+    }
+</script>
+
+<script type="text/javascript">
+    function GetValueManuface() {
+        $('#overbackgroud').show();
+        var cat = $('#hidecate').val();
+        var mnuid = $("#manuface option:selected").val();
+        $.ajax({
+            url: '@Url.Action("AddManuToCategory","CategoryProduct")',
+            data: {
+                'cateId': cat,
+                'manufaceid': mnuid
+            },
+            dataType: "json",
+            type: "POST",
+            traditional: true,
+            success: function (data, status) {
+                if (data == "1") {
+                    loadtabl(cat);
+                    $('#overbackgroud').hide();
+                }
+                else {
+                    alert("Lỗi");
+                    $('#overbackgroud').hide();
+                }
+            },
+            error: function () {
+
+            }
+
+        });
+
+    }
+    // gọi khi thêm sưa xoa ơ danh phân add nhà sản xuât vào danh mục
+    function loadtabl(id) {
+        $.ajax({
+            url: '@Url.Action("GetManuface", "CategoryProduct")',
+            data: {
+                'id': id
+            },
+            dataType: "json",
+            type: "POST",
+            traditional: true,
+            success: function (data2, status2) {
+                if (data2 == "0") {
+                    alert("Hệ thống đang cập nhật");
+                    $('#overbackgroud').hide();
+                }
+                else if (data2 == 2) {
+
+                    $('#catemanuface').html("");
+                    $('#catemanuface').append("<tr><td>0</td><td>Not results!</td><td></td></tr>");
+                    $('#overbackgroud').hide();
+                }
+                else {
+                    $('#catemanuface').html("");
+                    $('#catemanuface').append(data2);
+                    $('#overbackgroud').hide();
+                }
+            },
+            error: function () {
+
+            }
+        });
+    }
+    function DeleteInbox() {
+        $('#overbackgroud').show();
+        var cat = $('#hidecate').val();
+        var yourArray = new Array();
+
+        $("input:checkbox[name=inbox]:checked").each(function () {
+            yourArray.push($(this).val());
+        });
+        if (yourArray.count < 0) {
+            alert('Vui lòng chọn thư cần xóa !');
+        } else {
+            $.ajax({
+                url: '@Url.Action("DeleteCateManu", "CategoryProduct")',
+                data: {
+                    'array': yourArray
+                },
+                dataType: "json",
+                type: "POST",
+                traditional: true,
+
+                success: function (data) {
+                    if (data == 0) {
+                        alert("Hệ thống đang cập nhật");
+                        $('#overbackgroud').hide();
+                    }
+                    else if (data == 2) {
+                        alert("Vui lòng tích chọn");
+                        $('#overbackgroud').hide();
+                    }
+                    else {
+                        loadtabl(cat);
+                        $('#overbackgroud').hide();
+                    }
+                },
+                error: function () {
+                    alert("Xin lỗi ! Hệ thống đang cập nhật vui long thực hiện lại sau.");
+                    $('#overbackgroud').hide();
+                }
+            });
+        }
+
+    }
+    function beginPaging(args) {
+        // Animatek
+        $('#grid-list').fadeOut('normal');
+    }
+
+    function successPaging() {
+        // Animate
+        $('#grid-list').fadeIn('normal');
+        $('a').tooltip();
+    }
+
+    function failurePaging() {
+        alert("Could not retrieve list.");
+    }
+</script>
+
+<script type="text/javascript">
+    $(function () {
+        $("#datepicker1").datepicker();
+        $("#dob").datepicker(
+
+            {
+                changeMonth: true,
+                changeYear: true,
+                showButtonPanel: true,
+                yearRange: "-0:+15"
+            });
+
+    });
+</script>
+<style>
+    select {
+        width: 100%;
+    }
+
+    .tht_panel {
+    }
+
+        .tht_panel input[type="checkbox"] {
+            margin-left: 10px;
+        }
+
+        .tht_panel label {
+            font-size: 13px;
+            font-weight: normal !important;
+        }
+
+    .del_1, .del_2 {
+        cursor: pointer;
+        margin-left: 20px;
+        color: #2a6496 !important;
+        font-weight: normal !important;
+    }
+
+        .del_1:hover, .del_2:hover {
+            color: #000 !important;
+        }
+</style>
+
+<script type="text/javascript">
+    var setVAL = CKEDITOR.replace(emp.Description);
+    CKFinder.setupCKEditor(setVAL, '/Content/css/ckfinder/');
+
+    var setVAL1 = CKEDITOR.replace('description1');
+    CKFinder.setupCKEditor(setVAL1, '/Content/css/ckfinder/');
+</script>

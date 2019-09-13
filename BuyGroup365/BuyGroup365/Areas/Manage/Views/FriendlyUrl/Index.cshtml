@@ -1,0 +1,180 @@
+﻿@using MvcPaging
+@model MvcPaging.IPagedList<Common.FriendlyUrl>
+
+@{
+    ViewBag.Title = "Danh sách Đường link";
+    Layout = "~/Areas/Manage/Views/Shared/_LayoutAdmincshtml.cshtml";
+
+}
+<link href="~/Content/css/StyleTree.css" rel="stylesheet" />
+<div class="container-fluid" ng-app="body">
+    <!-- Page Heading -->
+    @*<div class="row" ng-controller="header">
+            <div class="col-lg-12">
+                <h1 class="page-header">
+                    Quản lý  sản phẩm
+                </h1>
+            </div>
+        </div>*@
+    @Html.Raw(BuyGroup365.Areas.Manage.Models.AdminFunction.BindHeader("Danh sách đường link", null, null, null, null))
+    <!-- /.row -->
+    <!-- /.row -->
+    <!-- /.row -->
+    <div class="row" ng-controller="Index">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                @*<div class="panel-heading">
+                        <h3 class="panel-title">
+                            <i class="fa fa-bar-chart-o fa-fw"></i> Danh sản phẩm
+                            <span style="float: right">
+                                <a class="glyphicon glyphicon-plus-sign" data-toggle="modal" data-target="#myModal" onclick="GetValueParent(-1)">
+                                </a>
+                            </span>
+                        </h3>
+                    </div>*@
+                <div class="panel-body">
+                    @using (Ajax.BeginForm("Index", "FriendlyUrl", new { name = ViewBag.Name, page = ViewBag.Page },
+                        new AjaxOptions { UpdateTargetId = "grid-list", HttpMethod = "get", LoadingElementId = "loading", OnBegin = "beginPaging", OnSuccess = "successPaging", OnFailure = "failurePaging" },
+                        new { id = "frm-search" }))
+                    {
+                        <div class="row">
+                            <div class="col-sm-10">
+                                <div class="form-group input-group">
+
+                                    <input type="text" value="@ViewBag.Name" class="input-text form-control required-entry" id="appendedInputButton" name="name" placeholder="Nhập từ khóa tìm kiếm">
+                                    <button class="btn btn-primary btn-sm" type="submit">
+                                        <i class="fa fa-search"></i> Tìm Kiếm
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-sm-2" style="text-align:right">
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover table-striped" id="dataTables" aria-describedby="dataTables-example_info">
+                                <thead>
+                                    <tr role="row">
+                                        <th style="text-align: center">STT</th>
+                                        @*<th>
+                                            Tên Link
+                                        </th>*@
+
+                                        <th>
+                                            Link
+                                        </th>
+                                        <th>
+                                            ControllerName
+                                        </th>
+                                        <th>
+                                            ActionName
+                                        </th>
+                                        <th>
+                                            NameSpaces
+                                        </th>
+                                        <th>
+                                            Vị trí ưu tiên
+                                        </th>
+                                        <th>
+                                            Mã
+                                        </th>
+                                        <th style="width: auto">Chức năng</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{
+                        var index = 0;
+                                    }
+                                    @foreach (var item in Model)
+                                    {
+                                        index++;
+                                        <tr>
+                                            <td style="text-align: center">@index</td>
+                                            @*<td>
+                                                @Html.DisplayFor(modelItem => item.NameLink)
+                                            </td>*@
+
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Link)
+                                            </td>
+
+                                            <td>
+                                                @item.ControllerName
+                                            </td>
+                                            <td>
+                                                @item.ActionName
+                                            </td>
+                                            <td>
+                                                @item.NameSpaces
+                                            </td>
+                                            <td>
+                                                @item.Order
+                                            </td>
+                                            <td>
+                                                @item.ItemId
+                                            </td>
+
+                                            <td style="text-align: center">
+
+                                                <a href="/Manage/FriendlyUrl/Delete/@item.Id" onclick="return confirm('Are you ready?')" class=" btn btn-danger btn-sm">
+                                                    <i class="glyphicon glyphicon-trash"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                            <script>
+                            </script>
+                            <div class="row">
+                                <div class="">
+                                    <div class="dataTables_info" id="dataTables-example_info" role="alert" aria-live="polite" aria-relevant="all">Hiển thị từ @Model.ItemStart đến @Model.ItemEnd của @Model.TotalItemCount bản ghi</div>
+                                </div>
+                                <div class="">
+                                    <div class="dataTables_paginate " id="dataTables-example_paginate">
+
+                                        @Html.Raw(Ajax.Pager(
+                                            new Options
+                                            {
+                                                PageSize = Model.PageSize,
+                                                TotalItemCount = Model.TotalItemCount,
+                                                CurrentPage = Model.PageNumber,
+                                                ItemTexts = new ItemTexts() { Next = "Next", Previous = "Previous", Page = "P" },
+                                                ItemIcon = new ItemIcon() { First = "icon-backward", Previous = "icon-chevron-left", Next = "icon-chevron-right", Last = "icon-forward" },
+                                                TooltipTitles = new TooltipTitles() { Next = "Next page", Previous = "Previous page", Page = "Page {0}." },
+                                                Size = Size.normal,
+                                                Alignment = Alignment.centered,
+                                                IsShowControls = true,
+                                                IsShowFirstLast = true,
+                                                CssClass = ""
+                                            },
+                                            new AjaxOptions
+                                            {
+                                                UpdateTargetId = "grid-list",
+                                                HttpMethod = "get",
+                                                LoadingElementId = "loading",
+                                                OnBegin = "beginPaging",
+                                                OnSuccess = "successPaging",
+                                                OnFailure = "failurePaging"
+                                            }, new { controller = "FriendlyUrl", action = "Index", name = ViewBag.Name }))
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    @*End*@
+</div>
+
+<style>
+    select {
+        width: 100%;
+    }
+
+    /*.panel {
+        margin: auto;
+        width: 90%;
+    }*/
+</style>

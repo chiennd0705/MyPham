@@ -1,0 +1,832 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.ServiceModel;
+using System.Transactions;
+using System.Web;
+using System.Web.Mvc;
+using System.Web.Routing;
+using Business.ClassBusiness;
+using BuyGroup365.Areas.Manage.Models;
+using BuyGroup365.Models.Member;
+using Common;
+using Common.util;
+using MvcPaging;
+
+namespace BuyGroup365.Controllers
+{
+    public class MemberController : Controller
+    {
+        #region Khai bao
+
+        private readonly CatalogPropertiesBusiness _catalogPropertiesBusiness = new CatalogPropertiesBusiness();
+        private readonly CatalogsBusiness _catalogsBusiness = new CatalogsBusiness();
+        private readonly LoadCombo _loadCombo = new LoadCombo();
+        private readonly MembersBusiness _membersBusiness = new MembersBusiness();
+        private readonly OrdersBusiness _ordersBusiness = new OrdersBusiness();
+        private readonly ProductImagesBusiness _productImagesBusiness = new ProductImagesBusiness();
+        private readonly ProductPropertiesBusiness _productPropertiesBusiness = new ProductPropertiesBusiness();
+        private readonly ProductsBusiness _productsBusiness = new ProductsBusiness();
+        private readonly ShopPolicysBusiness _shopPolicysBusiness = new ShopPolicysBusiness();
+        private readonly ShopSettingsBusiness _shopSettingsBusiness = new ShopSettingsBusiness();
+        private readonly ShopsBusiness _shopsBusiness = new ShopsBusiness();
+
+        #endregion
+
+        protected override void Initialize(RequestContext rc)
+        {
+            base.Initialize(rc);
+
+            if (!SessionUtility.CheckLoginMember(Session))
+            {
+                Response.Redirect("/Login/Login?returnUrl=" + rc.HttpContext.Request.Url.PathAndQuery);
+            }
+        }
+
+        public ActionResult Test()
+        {
+            return View();
+        }
+
+
+        public new ActionResult Profile()
+        {
+            try
+            {
+                if (Session != null)
+                {
+                    Member entity = SessionUtility.GetSessionMember(Session);
+
+                    if (entity == null) return RedirectToRoute(new { controller = "Login", action = "Login" });
+                    Member obj = _membersBusiness.GetById(entity.Id);
+                    return View(obj);
+                }
+                return RedirectToRoute(new { controller = "Login", action = "Login" });
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Profile(Member obj, int gender, HttpPostedFileBase avatarmember)
+        {
+            Member entity = _membersBusiness.GetById(obj.Id);
+            entity.MemberProfile.LastName = obj.MemberProfile.LastName;
+            entity.MemberProfile.Phone = obj.MemberProfile.Phone;
+            entity.MemberProfile.Dob = obj.MemberProfile.Dob;
+            entity.MemberProfile.Address = obj.MemberProfile.Address;
+            entity.Question = obj.Question;
+            entity.Answer = obj.Answer;
+            entity.MemberProfile.Sex = gender;
+            if (avatarmember != null && avatarmember.ContentLength > 0)
+            {
+                string randomImage = Guid.NewGuid().ToString();
+                string pathImage = HttpContext.Server.MapPath("~/FileUpload");
+                string strurlimage = Function.ResizeImageNew(avatarmember, 300, 300, pathImage, randomImage);
+                Function.ResizeImageNew(avatarmember, 500, 500, pathImage, randomImage);
+                Function.ResizeImageNew(avatarmember, 1000, 1000, pathImage, randomImage);
+                entity.MemberProfile.Photo = strurlimage;
+            }
+            _membersBusiness.Edit(entity);
+            return View(entity);
+        }
+
+        public ActionResult Invoice()
+        {
+            Member member = SessionUtility.GetSessionMember(Session);
+            List<Order> obj = _ordersBusiness.GetDynamicQuery().Where(x => x.IdShop == member.Id).ToList();
+            return View(obj.Any() ? obj : new List<Order>());
+        }
+
+        public ActionResult EditProduct(long id)
+        {
+            try
+            {
+                var loadDropdown = new LoadDropdown();
+                var listDropdowCate = new List<LoadDropdown.DropdowCate>();
+                ViewBag.stateProduct = loadDropdown.SearchCategoryByName(ref listDropdowCate);
+                ViewBag.stateProducttwo = _loadCombo.InitSelectListItemState();
+                Product obj = _productsBusiness.GetById(id);
+                ViewBag.Manufaceture = loadDropdown.LoadComBoManufaceture(obj.CatalogId, obj.ManufacturerId);
+                string html = HtmlCate(-1, obj.CatalogId);
+                ViewBag.htmlCate = html;
+                return View(obj);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public JsonResult GetListParent(long id)
+        {
+            var listid = new List<long>();
+            List<long> obj = FuntionMember.GetIdPrentById(id, ref listid);
+            return Json(obj, JsonRequestBehavior.AllowGet);
+        }
+
+        [ValidateInput(false)]
+        [HttpPost]
+        public ActionResult EditProduct(Product obj, long categoryproduct,
+            long manufaceproduct, HttpPostedFileBase avatar, string description, HttpPostedFileBase[] file,
+            string[] proprertyvalue)
+        {
+            try
+            {
+                using (var ts = new TransactionScope())
+                {
+                    Product entity = _productsBusiness.GetById(obj.Id);
+                    entity.CatalogId = categoryproduct;
+                    entity.ManufacturerId = manufaceproduct;
+                    entity.ProductProperties = obj.ProductProperties;
+                    entity.ProductName = obj.ProductName;
+                    entity.Model = obj.Model;
+                    entity.Price = obj.Price;
+                    entity.Summary = obj.Summary;
+                    entity.Description = Server.HtmlDecode(description);
+                    entity.Cost = obj.Cost;
+                    entity.Weight = obj.Weight;
+                    entity.TypeOfCurrency = obj.TypeOfCurrency;
+                    entity.State = obj.State; // Check lỗi này
+                    //TODDO
+                    entity.Tags = obj.Tags;
+                    List<ProductImage> productImages = entity.ProductImages.ToList();
+                    if (avatar != null && avatar.ContentLength > 0)
+                    {
+                        ProductImage productImage = entity.ProductImages.First(x => x.IsAvatar == 1);
+                        string randomImage = Guid.NewGuid().ToString();
+                        string pathImage = HttpContext.Server.MapPath("~/FileUpload");
+                        string strurlimage = Function.ResizeImageNew(avatar, 300, 300, pathImage, randomImage);
+                        Function.ResizeImageNew(avatar, 500, 500, pathImage, randomImage);
+                        Function.ResizeImageNew(avatar, 1000, 1000, pathImage, randomImage);
+                        productImage.ImgSource = strurlimage;
+                        productImages.Add(productImage);
+                    }
+                    if (file != null)
+                    {
+                        foreach (HttpPostedFileBase item in file)
+                        {
+                            if (item != null && item.ContentLength > 0)
+                            {
+                                var productImage = new ProductImage();
+                                string randomImage = Guid.NewGuid().ToString();
+                                string pathImage = HttpContext.Server.MapPath("~/FileUpload");
+                                string strurlimage = Function.ResizeImageNew(avatar, 300, 300, pathImage, randomImage);
+                                Function.ResizeImageNew(avatar, 500, 500, pathImage, randomImage);
+                                Function.ResizeImageNew(avatar, 1000, 1000, pathImage, randomImage);
+                                productImage.ImgSource = strurlimage;
+                                productImages.Add(productImage);
+                            }
+                        }
+                    }
+                    entity.ProductImages = productImages;
+
+                    #region Property
+
+                    ICollection<ProductProperty> listproduc = entity.ProductProperties;
+                    foreach (ProductProperty productProperty in listproduc)
+                    {
+                        _productPropertiesBusiness.Remove(productProperty.Id);
+                    }
+                    var productProperties = new List<ProductProperty>();
+
+                    if (proprertyvalue != null)
+                    {
+                        List<string> listobjproperty = proprertyvalue.ToList();
+                        foreach (string item in listobjproperty)
+                        {
+                            string[] splitobj = item.Split('|');
+                            CatalogProperty cateproperty = _catalogPropertiesBusiness.GetById(long.Parse(splitobj[0]));
+                            for (int i = 1; i < splitobj.Count(); i++)
+                            {
+                                var productProperty = new ProductProperty
+                                {
+                                    Name = cateproperty.Name,
+                                    Key = cateproperty.Key,
+                                    Value = splitobj[i],
+                                    ProductId = entity.Id
+                                };
+                                productProperties.Add(productProperty);
+                            }
+                        }
+                    }
+
+                    #endregion
+
+                    _productPropertiesBusiness.AddRange(productProperties);
+                    _productsBusiness.Edit(entity);
+                    ts.Complete();
+                    return RedirectToAction("ProductList");
+                }
+            }
+            catch (Exception ex)
+            {
+                //Write log
+                throw;
+            }
+        }
+
+        #region Shop
+
+        public ActionResult Shop()
+        {
+            Member member = SessionUtility.GetSessionMember(Session);
+            Shop obj = _shopsBusiness.GetById(member.Id);
+            return View(obj);
+        }
+
+        [HttpPost]
+        public ActionResult Shop(Shop obj)
+        {
+            try
+            {
+                Shop entity = _shopsBusiness.GetById(obj.Id);
+                entity.Address = obj.Address;
+                entity.Phone = obj.Phone;
+                ShopSupport shopSupport = entity.ShopSupport;
+                shopSupport.SupportName = obj.ShopSupport.SupportName;
+                shopSupport.Mobile = obj.ShopSupport.Mobile;
+                shopSupport.Phone = obj.ShopSupport.Phone;
+                shopSupport.Skype = obj.ShopSupport.Skype;
+                shopSupport.Yahoo = obj.ShopSupport.Yahoo;
+                shopSupport.Email = obj.ShopSupport.Email;
+                shopSupport.Facebook = obj.ShopSupport.Facebook;
+                entity.ShopSupport = shopSupport;
+                _shopsBusiness.Edit(entity);
+                ViewBag.Mes = "Cập nhật thành công!";
+                return View(obj);
+            }
+            catch (FaultException ex)
+            {
+                string[] exep = Function.GetExeption(ex);
+                string codeExp = exep[1];
+                ViewBag.Mes = codeExp;
+                return View(obj);
+            }
+        }
+
+        public ActionResult ShopPolicy()
+        {
+            Member member = SessionUtility.GetSessionMember(Session);
+            ShopPolicy obj = _shopPolicysBusiness.GetById(member.Id);
+            if (obj != null)
+            {
+                return View(obj);
+            }
+            var shopPolicy = new ShopPolicy();
+            return View(shopPolicy);
+        }
+
+
+        [ValidateInput(false)]
+        [HttpPost]
+        public ActionResult ShopPolicy(string about, string privatepolicy, string salespolicy, string paymentspolicy)
+        {
+            Member member = SessionUtility.GetSessionMember(Session);
+            ShopPolicy obj = _shopPolicysBusiness.GetById(member.Id);
+            if (obj != null)
+            {
+                obj.About = Server.HtmlDecode(about);
+                obj.PrivacyPolicy = Server.HtmlDecode(privatepolicy);
+                obj.SalesPolicy = Server.HtmlDecode(salespolicy);
+                obj.PaymentPolicy = Server.HtmlDecode(paymentspolicy);
+                _shopPolicysBusiness.Edit(obj);
+                return View(obj);
+            }
+            var shopPolicy = new ShopPolicy
+            {
+                Id = member.Id,
+                About = Server.HtmlDecode(about),
+                PrivacyPolicy = Server.HtmlDecode(privatepolicy),
+                SalesPolicy = Server.HtmlDecode(salespolicy),
+                PaymentPolicy = Server.HtmlDecode(paymentspolicy)
+            };
+            _shopPolicysBusiness.AddNew(shopPolicy);
+            return View(shopPolicy);
+        }
+
+        public ActionResult ShopSetting(string key, int? page)
+        {
+            try
+            {
+                Member member = SessionUtility.GetSessionMember(Session);
+                ViewData["key"] = key;
+                ViewBag.Mes = "";
+                int currentPageIndex = page.HasValue ? page.Value : 1;
+                IPagedList<ShopSetting> listSetting =
+                    _shopSettingsBusiness.GetDynamicQuery()
+                        .Where(x => x.ShopId == member.Id)
+                        .OrderBy(x => x.Id)
+                        .ToPagedList(currentPageIndex, 20);
+                return View(listSetting);
+            }
+            catch (Exception)
+            {
+                return null;
+                // throw;
+            }
+        }
+
+        public JsonResult CreateShopSetting(string key, string value)
+        {
+            Member member = SessionUtility.GetSessionMember(Session);
+            if (string.IsNullOrEmpty(key))
+            {
+                return Json(1, JsonRequestBehavior.AllowGet); //Vui long nhập key
+            }
+            if (string.IsNullOrEmpty(value))
+            {
+                return Json(2, JsonRequestBehavior.AllowGet); // vui long nhập vale
+            }
+            try
+            {
+                var entity = new ShopSetting { Key = key, Value = value, ShopId = member.Id };
+                _shopSettingsBusiness.AddNew(entity);
+                return Json(3, JsonRequestBehavior.AllowGet); // thêm được rồi e
+            }
+            catch (Exception)
+            {
+                return Json(4, JsonRequestBehavior.AllowGet); //Lỗi hệ thống
+                // throw;
+            }
+        }
+
+        public JsonResult EditShopsetting(long id)
+        {
+            Member member = SessionUtility.GetSessionMember(Session);
+            IQueryable<ShopSetting> listShopsetting =
+                _shopSettingsBusiness.GetDynamicQuery().Where(x => x.Id == id && x.ShopId == member.Id);
+            if (listShopsetting.Any())
+            {
+                try
+                {
+                    var entity = new ShopSettingEntity
+                    {
+                        Key = listShopsetting.First().Key,
+                        Value = listShopsetting.First().Value
+                    };
+                    return Json(entity, JsonRequestBehavior.AllowGet); // xóa thành công
+                }
+                catch (Exception)
+                {
+                    return Json(1, JsonRequestBehavior.AllowGet); // Lỗi hệ thống
+                }
+            }
+            return Json(0, JsonRequestBehavior.AllowGet); //Không xem đươc thông tin đâu, key này không fai của bạn
+        }
+
+
+        public JsonResult EditShopsettingUpdate(long id, string key, string value)
+        {
+            // var member = SessionUtility.GetSessionMember(Session);
+            if (string.IsNullOrEmpty(key))
+            {
+                return Json(1, JsonRequestBehavior.AllowGet); //Vui long nhập key
+            }
+            if (string.IsNullOrEmpty(value))
+            {
+                return Json(2, JsonRequestBehavior.AllowGet); // vui long nhập vale
+            }
+            try
+            {
+                ShopSetting entity = _shopSettingsBusiness.GetById(id);
+                entity.Key = key;
+                entity.Value = value;
+                _shopSettingsBusiness.Edit(entity);
+                return Json(3, JsonRequestBehavior.AllowGet); // cập nhật được rồi e
+            }
+            catch (Exception)
+            {
+                return Json(4, JsonRequestBehavior.AllowGet); //Lỗi hệ thống
+                // throw;
+            }
+        }
+
+        public JsonResult DeleteShopSetting(long id)
+        {
+            Member member = SessionUtility.GetSessionMember(Session);
+            IQueryable<ShopSetting> listShopsetting =
+                _shopSettingsBusiness.GetDynamicQuery().Where(x => x.Id == id && x.ShopId == member.Id);
+            if (listShopsetting.Any())
+            {
+                try
+                {
+                    _shopSettingsBusiness.Remove(id);
+                    return Json(1, JsonRequestBehavior.AllowGet); // xóa thành công
+                }
+                catch (Exception)
+                {
+                    return Json(2, JsonRequestBehavior.AllowGet); // Lỗi hệ thống
+                }
+            }
+            return Json(0, JsonRequestBehavior.AllowGet); //Không xóa dc đâu e, dây k fai key của e
+        }
+
+        public class ShopSettingEntity
+        {
+            public string Key { get; set; }
+            public string Value { get; set; }
+        }
+
+        #endregion
+
+        #region Json
+
+        public JsonResult DeleteImage(long id)
+        {
+            try
+            {
+                List<ProductImage> listobj = _productImagesBusiness.GetDynamicQuery().Where(x => x.Id == id).ToList();
+                if (listobj.Any())
+                {
+                    _productImagesBusiness.Remove(id);
+                    return Json(1); //Xóa thành công.
+                }
+                return Json(0); //Xóa k thành công.
+            }
+            catch (Exception ex)
+            {
+                return Json(0); //Xóa k thành công.
+                throw;
+            }
+        }
+
+        #endregion
+
+        #region Đang bấn sản phẩm
+
+        public ActionResult ProductList(string key, int? page, long? parent, int? stateProduct, int? statusProduct,
+            int? day)
+        {
+            try
+            {
+                string id = Request.QueryString["st"];
+                //   int status=0;
+                ViewBag.Id = id;
+                if (!string.IsNullOrEmpty(id))
+                {
+                    statusProduct = int.Parse(id);
+                    //   status = int.Parse(id);
+                    stateProduct = -1;
+                    parent = -1;
+                    day = -1;
+                }
+                else
+                {
+                    statusProduct = 2; //mặc đinh láy danh sach nhưng san phâm đang bán
+                }
+                var listDropdowCate = new List<LoadDropdown.DropdowCate>();
+                ViewBag.parent = _loadCombo.SearchCategoryByName(ref listDropdowCate);
+                ViewBag.statusProduct = _loadCombo.InitSelectListItemStatus();
+                ViewBag.stateProduct = _loadCombo.InitSelectListItemState();
+                var listcate = new List<long>();
+                if (parent != null)
+                {
+                    _catalogsBusiness.GetListCateByParent((long)parent, ref listcate);
+                }
+                Member member = SessionUtility.GetSessionMember(Session);
+                ViewData["key"] = key;
+                ViewBag.Mes = "";
+
+                int currentPageIndex = page.HasValue ? page.Value : 1;
+                var totallist = new List<Product>();
+                IPagedList<Product> listproduct =
+                    _productsBusiness.GetList(ref totallist, member.Id, key, listcate, stateProduct, statusProduct, day)
+                        .OrderBy(x => x.Id)
+                        .ToPagedList(currentPageIndex, 20);
+                ViewBag.Number = totallist;
+                return View(listproduct);
+            }
+            catch (Exception)
+            {
+                return null;
+                // throw;
+            }
+        }
+
+        public ActionResult Postsale()
+        {
+            ViewBag.Mes = "";
+            string obj = HtmlCate(-1, null);
+            ViewBag.htmlCate = obj;
+            ViewBag.categoryproduct = _loadCombo.InitDropCategorys(1);
+            ViewBag.categoryproductedit = _loadCombo.InitDropCategorys(1);
+            ViewBag.categoryproductParent = _loadCombo.InitDropCategorysParent();
+            //  ViewBag.statusProduct = _loadCombo.InitSelectListItemStatus();
+            ViewBag.stateProduct = _loadCombo.InitSelectListItemState();
+            return View();
+        }
+
+        [ValidateInput(false)]
+        [HttpPost]
+        public ActionResult Postsale(string name, string model, long categoryproduct,
+            long manufaceproduct, float pice, float cost, float weight, string typeofcurrency, string tags,
+            HttpPostedFileBase avatar, int stateProduct, string summary, string description, HttpPostedFileBase[] file,
+            string[] proprertyvalue)
+        {
+            try
+            {
+                using (var ts = new TransactionScope())
+                {
+                    var objproduct = new Product
+                    {
+                        MemberId = SessionUtility.GetSessionMember(Session).Id,
+                        ProductName = name,
+                        Code = Guid.NewGuid().ToString(),
+                        Model = model,
+                        Cost = cost,
+                        CatalogId = categoryproduct,
+                        Description = Server.HtmlDecode(description),
+                        FriendlyUrl = Function.ConvertFileName(name),
+                        ManufacturerId = manufaceproduct
+                    };
+                    // Guid gd;
+                    objproduct.MemberId = 0; //Fix
+                    objproduct.Price = pice;
+                    objproduct.State = stateProduct;
+                    //   objproduct.Status = statusProduct;
+                    objproduct.TypeOfCurrency = typeofcurrency;
+                    objproduct.Weight = weight;
+
+                    #region Property
+
+                    var productProperties = new List<ProductProperty>();
+
+                    if (proprertyvalue != null)
+                    {
+                        List<string> listobjproperty = proprertyvalue.ToList();
+                        foreach (string item in listobjproperty)
+                        {
+                            string[] splitobj = item.Split('|');
+                            CatalogProperty cateproperty = _catalogPropertiesBusiness.GetById(long.Parse(splitobj[0]));
+                            for (int i = 1; i < splitobj.Count(); i++)
+                            {
+                                var productProperty = new ProductProperty
+                                {
+                                    Name = cateproperty.Name,
+                                    Key = cateproperty.Key,
+                                    Value = splitobj[i]
+                                };
+                                productProperties.Add(productProperty);
+                            }
+                        }
+                    }
+
+                    //for (int i = 1; i <= index; i++)
+                    //{
+                    //  var  productProperty=new ProductProperty();
+                    //    var namepro = formCollections["nameproperty"+i];
+                    //    var keypro = formCollections["keyproperty"+i];
+                    //    var valpro = formCollections["valeproperty"+i];
+                    //    productProperty.Name = namepro;
+                    //    productProperty.Key = keypro;
+                    //    productProperty.Value = valpro;
+                    //    productProperties.Add(productProperty);
+                    //}
+
+                    #endregion
+
+                    #region image
+
+                    var productImages = new List<ProductImage>();
+                    if (file != null)
+                    {
+                        foreach (HttpPostedFileBase item in file)
+                        {
+                            if (item != null && item.ContentLength > 0)
+                            {
+                                var productImage = new ProductImage();
+                                string randomImage = Guid.NewGuid().ToString();
+                                string pathImage = HttpContext.Server.MapPath("~/FileUpload");
+                                string strurlimage = Function.ResizeImageNew(item, 300, 300, pathImage, randomImage);
+                                Function.ResizeImageNew(item, 500, 500, pathImage, randomImage);
+                                Function.ResizeImageNew(item, 1000, 1000, pathImage, randomImage);
+                                productImage.ImgSource = strurlimage;
+                                productImages.Add(productImage);
+                            }
+                        }
+                    }
+                    if (avatar != null && avatar.ContentLength > 0)
+                    {
+                        var productImage = new ProductImage();
+                        string randomImage = Guid.NewGuid().ToString();
+                        string pathImage = HttpContext.Server.MapPath("~/FileUpload");
+                        string strurlimage = Function.ResizeImageNew(avatar, 300, 300, pathImage, randomImage);
+                        Function.ResizeImageNew(avatar, 500, 500, pathImage, randomImage);
+                        Function.ResizeImageNew(avatar, 1000, 1000, pathImage, randomImage);
+                        productImage.ImgSource = strurlimage;
+                        productImage.IsAvatar = 1;
+                        productImages.Add(productImage);
+                    }
+
+                    #endregion
+
+                    objproduct.SeoKeyword = string.Empty; //Fix code
+                    objproduct.SeoTitle = string.Empty; //fix code
+                    objproduct.SeoDescription = string.Empty; //fix code
+                    objproduct.ProductProperties = productProperties;
+                    objproduct.ProductImages = productImages;
+                    _productsBusiness.AddNew(objproduct);
+                    ViewBag.Mes = "Đăng thành công!";
+                    ts.Complete();
+                    return RedirectToAction("Postsale");
+                }
+            }
+            catch (FaultException ex)
+            {
+                string[] exep = Function.GetExeption(ex);
+                string codeExp = exep[1];
+                ViewBag.Mes = codeExp;
+                return View();
+            }
+        }
+
+        public string HtmlCate(long prentid, long? id)
+        {
+            int i = 0;
+            string html = "<ul>";
+            List<Catalog> listobj = _catalogsBusiness.GetDynamicQuery().Where(x => x.ParentId == prentid).ToList();
+            {
+                foreach (Catalog item in listobj)
+                {
+                    if (id != null && item.Id == id)
+                    {
+                        html += "<li><input type=\"checkbox\" checked=\"checked\" id=\"item-" + item.Id +
+                                "\"   onclick=\"GetValueManuface(" + item.Id +
+                                ")\" /><label class=\"selectcate\" id=\"label-" + item.Id + "\"  for=\"item-" + item.Id +
+                                "\"  onclick=\"GetValueManuface(" + item.Id + ")\" >" + item.CatalogName + "</label>";
+
+                        i++;
+                        string str = HtmlbyCate(item.Id, ref i, id);
+                        html += str;
+
+                        html += "</li>";
+                    }
+                    else
+                    {
+                        html += "<li><input type=\"checkbox\" id=\"item-" + item.Id + "\"   onclick=\"GetValueManuface(" +
+                                item.Id + ")\" /><label id=\"label-" + item.Id + "\"  for=\"item-" + item.Id +
+                                "\"  onclick=\"GetValueManuface(" + item.Id + ")\" >" + item.CatalogName + "</label>";
+
+                        i++;
+                        string str = HtmlbyCate(item.Id, ref i, id);
+                        html += str;
+
+                        html += "</li>";
+                    }
+                }
+            }
+            html += "</ul>";
+            return html;
+        }
+
+        public string HtmlbyCate(long cateId, ref int i, long? idmember)
+        {
+            string html = "<ul>";
+            List<Catalog> listobj = _catalogsBusiness.GetDynamicQuery().Where(x => x.ParentId == cateId).ToList();
+            if (listobj.Any())
+            {
+                foreach (Catalog item in listobj)
+                {
+                    if (idmember != null && item.Id == idmember)
+                    {
+                        html += "<li><input type=\"checkbox\" checked=\"checked\" id=\"item-" + item.Id +
+                                "\" onclick=\"GetValueManuface(" + item.Id +
+                                ")\" /><label class=\"selectcate\"  id=\"label-" + item.Id + "\" for=\"item-" + item.Id +
+                                "\"   onclick=\"GetValueManuface(" + item.Id + ")\" >" + item.CatalogName + "</label>";
+                        i++;
+                        string str = HtmlbyCate(item.Id, ref i, idmember);
+                        html += str;
+                        html += "</li>";
+                    }
+                    else
+                    {
+                        html += "<li><input type=\"checkbox\" id=\"item-" + item.Id + "\" onclick=\"GetValueManuface(" +
+                                item.Id + ")\" /><label  id=\"label-" + item.Id + "\" for=\"item-" + item.Id +
+                                "\"   onclick=\"GetValueManuface(" + item.Id + ")\" >" + item.CatalogName + "</label>";
+                        i++;
+                        string str = HtmlbyCate(item.Id, ref i, idmember);
+                        html += str;
+                        html += "</li>";
+                    }
+                }
+            }
+
+
+            html += "</ul>";
+            return html;
+        }
+
+        #endregion
+
+        #region Oder
+
+        public ActionResult OderProduct(string key, int? page)
+        {
+            Member member = SessionUtility.GetSessionMember(Session);
+            int currentPageIndex = page.HasValue ? page.Value : 1;
+            IPagedList<Order> obj =
+                _ordersBusiness.GetDynamicQuery()
+                    .Where(x => x.OrderBuyer.IdMember == member.Id )
+                    .OrderByDescending(x => x.CreateDate)
+                    .ToPagedList(currentPageIndex, 20);
+
+            if (obj.Any())
+            {
+                //    obj=obj.ToPagedList(currentPageIndex, 20);
+                return View(obj);
+            }
+            return View();
+        }
+
+        public JsonResult DeleteProduct(string[] array)
+        {
+            try
+            {
+                if (array != null && array.Any())
+                {
+                    _productsBusiness.UpdateStatus(array, 6);
+                    return Json(1); //thành công
+                }
+                return Json(2); // chưa chon ô check
+            }
+            catch (Exception)
+            {
+                return Json(0); //lỗi
+            }
+        }
+
+        public JsonResult ContentOder(int st)
+        {
+            Member member = SessionUtility.GetSessionMember(Session);
+                const int currentPageIndex = 1;
+            IPagedList<Order> obj = null;
+            if (st == -1)
+            {
+                obj =
+                _ordersBusiness.GetDynamicQuery()
+                    .Where(x => x.OrderBuyer.IdMember == member.Id)
+                    .OrderByDescending(x => x.CreateDate)
+                    .ToPagedList(currentPageIndex, 2);
+            }
+            else
+            {
+                obj =
+                _ordersBusiness.GetDynamicQuery()
+                    .Where(x => x.OrderBuyer.IdMember == member.Id && x.Status == st)
+                    .OrderByDescending(x => x.CreateDate)
+                    .ToPagedList(currentPageIndex, 2);
+            }
+        
+            if (obj.Any())
+            {
+                string body = ControllerExtensions.RenderRazorViewToString(this, "ViewRendererOder", obj);
+                return Json(body, JsonRequestBehavior.AllowGet);
+            }
+            return Json("Không tồn tại dữ liệu", JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult CountOder()
+        {
+            var objoder = new ObjOder();
+               Member member = SessionUtility.GetSessionMember(Session);
+            var obj = _ordersBusiness.GetDynamicQuery().Where(x => x.OrderBuyer.IdMember == member.Id);
+            objoder.TotalMoney = obj.Sum(item => (double) item.OrderDetails.Sum(x => x.Price)).ToString("N0") + " VNĐ";
+            objoder.CountAll = obj.Count().ToString("N0");
+            objoder.CountNotPay = obj.Count(x => x.Status == 0).ToString("N0");
+            objoder.CountPay = obj.Count(x => x.Status == 1).ToString("N0");
+            objoder.CountNotGetProduct = obj.Count(x => x.Status == 2).ToString("N0");
+            objoder.CountGetProduct = obj.Count(x => x.Status == 3).ToString("N0");
+           
+            objoder.CountRecy = obj.Count(x => x.Status == 4).ToString("N0");
+            return Json(objoder, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult DeleteOder(long id)
+        {
+            try
+            {
+                Order obj = _ordersBusiness.GetById(id); //
+                if (obj.Status == 4)
+                {
+                    _ordersBusiness.Remove(id); // xoa hẳn
+                }
+                else
+                {
+                    obj.Status = 4; //Trạng thái đơn hàng bị xóa
+                    _ordersBusiness.Edit(obj);
+                }
+
+                return Json(1, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception)
+            {
+                return Json(0, JsonRequestBehavior.AllowGet); // lỗi không xóa được
+                // write log               throw;
+            }
+        }
+
+        #endregion
+    }
+}

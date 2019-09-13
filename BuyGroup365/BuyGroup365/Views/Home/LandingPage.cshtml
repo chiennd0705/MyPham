@@ -1,0 +1,21 @@
+﻿@using Business.ClassBusiness
+@using BuyGroup365.Models.Home
+@model Common.Product
+
+@{
+
+    Layout = "~/Views/Shared/_LayoutLandingPage.cshtml";
+
+    if (string.IsNullOrEmpty(Model.SeoTitle))
+    {
+        ViewBag.Title = Model.ProductName;
+    }
+    else
+    {
+        ViewBag.Title = Model.SeoTitle;
+    }
+    ViewBag.Description = Model.SeoDescription;
+    ViewBag.Keywords = Model.SeoKeyword;
+}
+
+                                            @Html.Raw(Model.LandingPage)

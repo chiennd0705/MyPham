@@ -1,0 +1,93 @@
+﻿@using System.Web.Optimization
+@using BuyGroup365.Models.Common;
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>@Html.Raw(@ViewBag.Title)</title>
+    <meta property="og:locale" content="vi_VN">
+    <meta name="description" content="@Html.Raw(@ViewBag.Description)">
+    <meta name="keywords" content="@Html.Raw(@ViewBag.Keywords)">
+    <meta property="og:title" content="@Html.Raw(@ViewBag.ShareTitle)" />
+    <meta property="og:description" content="@Html.Raw(@ViewBag.ShareDescription)" />
+    <meta property="og:keyword" content="@Html.Raw(@ViewBag.ShareKeyword)" />
+    <meta property="og:url" content="@Util.ReturnLinkFull(@Request.RawUrl)" />
+    <meta property="og:site_name" content="vinaplaza.vn" />
+    <meta property="og:image" content="@Util.ReturnLinkCDN(@ViewBag.image,Request.Browser.IsMobileDevice)" />
+    <meta property="og:image:secure_url" content="@Util.ReturnLinkCDN(@ViewBag.image,Request.Browser.IsMobileDevice)" />
+    <meta property="og:image:alt" content="@Html.Raw(@ViewBag.Title)" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:description" content="@Html.Raw(@ViewBag.ShareDescription)" />
+    <meta name="twitter:title" content="@Html.Raw(@ViewBag.ShareTitle)" />
+    <meta name="twitter:image" content="@Util.ReturnLinkCDN(@ViewBag.image,Request.Browser.IsMobileDevice)" />
+    @*<meta name="author" content="@ViewBag.author" />*@
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+    <link rel="canonical" href="@Util.ReturnLinkFull(@Request.RawUrl)" />
+    <link rel="dns-prefetch" href="https://cdn.vinaplaza.vn/">
+    <link rel="dns-prefetch" href="https://ajax.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+
+    @Scripts.RenderFormat(SiteKeys.ScriptNoDeferVersion, "~/bundles/jqueryui")
+    @Styles.RenderFormat(SiteKeys.StyleVersion, "~/bundles/Newcss")
+    @Scripts.RenderFormat(SiteKeys.ScriptVersion, "~/bundles/jqueryheader")
+</head>
+<body>
+    @Html.Partial("_PartialHeader")
+
+    <!--menu-->
+
+    @RenderBody()
+
+    <div class="container tab-promotion">
+        <div class="row">
+            @Html.Action("GetByCodeHtml", "Partial", new { Code = "Home_Tabuudai" })
+        </div>
+    </div>
+
+    @Html.Partial("_PartialFooter")
+    @Html.Action("GetByCodeHtml", "Partial", new { Code = "F_Home_HotlineFix" })
+
+    <!-- Nếu có class active thì sẽ hiện lên ở customer buy, ko thì sẽ ko hiện lên. Mỗi lần có khách mua chỉ cần thêm class active -->
+    <div style="display: block;" class="fade-in fade-out customized" id="someone-purchased">
+        <div style="display: block;">
+
+            <a href="/">
+                <img src="https://cdn.vinaplaza.vn/Images/img/custom-buy.png" alt="order">
+                <p>Khách hàng <span class="people">Anh Dũng</span> số điện thoại: <span class="phone-order">092342xxx</span><br><font>tại <span class="country">Hà Nội</span> vừa đặt hàng cách đây <span class="timeAgo">10 giây trước</span></font></p>
+            </a>
+
+        </div>
+        <div style="display: none;">
+            <a href="/">
+                <img src="https://cdn.vinaplaza.vn/Images/img/custom-buy.png" alt="order">
+                <p>Khách hàng <span class="people">Anh Dũng</span> số điện thoại: <span class="phone-order">092342xxx</span><br><font>tại <span class="country">Hải Phòng</span> vừa đặt hàng cách đây <span class="timeAgo">5 phút  trước</span></font></p>
+            </a>
+        </div>
+    </div>
+    <script>
+        window.addEventListener('DOMContentLoaded', function () {
+            (function ($) {
+                var menuSlider = $(".sync-menu"); $('.sync-menu').owlCarousel({ items: 1, lazyLoad: !0, autoPlay: 5000, pagination: !1, navigation: !0, navigationText: ['‹', '›'], })
+                $('.slide-owl').owlCarousel({ items: 5, lazyLoad: !0, autoPlay: !1, pagination: !0, navigation: !1, itemsDesktop: [1199, 5], itemsTablet: [768, 3], itemsMobile: [479, 1] })
+                var sourceSwap = function () { var $this = $(this); var img = $this.find('img'); var newSource = img.data('alt-src'); img.data('alt-src', img.attr('src')); img.attr('src', newSource) }
+                $(function () { $('.change-img').hover(sourceSwap, sourceSwap) })
+                  @Html.Raw(Util.JSSitting());
+            })(jQuery)
+        })
+    </script>
+    <script src="/Content/Vinaplaza/js/Controller/BaseController.js"></script>
+    <script type="text/javascript">
+        WebFontConfig = {
+            google: { families: ['Roboto:100,300,400,700'] }
+        };
+        (function () {
+            var wf = document.createElement('script');
+            wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+            wf.type = 'text/javascript';
+            wf.async = 'true';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(wf, s);
+        })();</script>
+</body>
+</html>

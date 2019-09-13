@@ -1,0 +1,1026 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BuyGroup365Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CatalogProperties">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CatalogId" Type="bigint" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Key" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Type" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CatalogPropertiesValue">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CatalogPropertieId" Type="bigint" Nullable="false" />
+    <Property Name="Value" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Catalogs">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ParentId" Type="bigint" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="20" />
+    <Property Name="CatalogName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="FriendlyUrl" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Icon" Type="nvarchar" MaxLength="100" />
+    <Property Name="Description" Type="nvarchar" MaxLength="500" />
+    <Property Name="Order" Type="int" Nullable="false" />
+    <Property Name="Status" Type="int" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifyDate" Type="datetime" Nullable="false" />
+    <Property Name="IsLast" Type="int" Nullable="false" />
+    <Property Name="SeoTitle" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="SeoKeyword" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="SeoDescription" Type="nvarchar" MaxLength="300" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Catalogs_Manufacturers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CatalogId" Type="bigint" Nullable="false" />
+    <Property Name="ManufacturerId" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Comments">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ParentId" Type="bigint" Nullable="false" />
+    <Property Name="ProductId" Type="bigint" Nullable="false" />
+    <Property Name="ShopId" Type="bigint" Nullable="false" />
+    <Property Name="MemberId" Type="bigint" Nullable="false" />
+    <Property Name="Rate" Type="int" Nullable="false" />
+    <Property Name="Content" Type="nvarchar" MaxLength="1000" Nullable="false" />
+    <Property Name="Status" Type="int" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="MofifyDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Locations">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" />
+    <Property Name="ParentId" Type="bigint" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Icon" Type="nvarchar" MaxLength="200" />
+    <Property Name="Order" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Manufacturers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ManufacturerName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Icon" Type="nvarchar" MaxLength="200" />
+    <Property Name="Description" Type="nvarchar" MaxLength="1000" />
+    <Property Name="Order" Type="int" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifyDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MemberProfile">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="LocationId" Type="bigint" Nullable="false" />
+    <Property Name="Address" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="Emaill" Type="nvarchar" MaxLength="50" />
+    <Property Name="Phone" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Dob" Type="datetime" />
+    <Property Name="Sex" Type="int" Nullable="false" />
+    <Property Name="Pid" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ZipCode" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Photo" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="Members">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="PasswordTransaction" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="PasswordEncrypted" Type="bigint" Nullable="false" />
+    <Property Name="PasswordModifyDate" Type="datetime" Nullable="false" />
+    <Property Name="PasswordEncryptedMethod" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="LoginDate" Type="datetime" Nullable="false" />
+    <Property Name="LastFailedLoginDate" Type="datetime" Nullable="false" />
+    <Property Name="Loutout" Type="bit" Nullable="false" />
+    <Property Name="LockoutDate" Type="datetime" Nullable="false" />
+    <Property Name="Verify" Type="nchar" MaxLength="100" Nullable="false" />
+    <Property Name="Status" Type="int" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifyDate" Type="datetime" Nullable="false" />
+    <Property Name="ActiveDate" Type="datetime" Nullable="false" />
+    <Property Name="Question" Type="nvarchar" MaxLength="300" />
+    <Property Name="Answer" Type="nvarchar" MaxLength="300" />
+  </EntityType>
+  <EntityType Name="Module">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="500" />
+    <Property Name="WsMethod" Type="nvarchar" MaxLength="500" />
+    <Property Name="WebMethod" Type="nvarchar" MaxLength="4000" />
+    <Property Name="Order" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="News">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NewsGroupId" Type="bigint" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="ImageSource" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="Summary" Type="nvarchar" MaxLength="2000" Nullable="false" />
+    <Property Name="Descriptions" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Status" Type="int" Nullable="false" />
+    <Property Name="isPublic" Type="bit" Nullable="false" />
+    <Property Name="TotalView" Type="int" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifyDate" Type="datetime" Nullable="false" />
+    <Property Name="AdminIDApproval" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="NewsGroups">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ParentId" Type="bigint" Nullable="false" />
+    <Property Name="NewsGroupName" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="isPublic" Type="bit" Nullable="false" />
+    <Property Name="Status" Type="int" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifyDate" Type="datetime" Nullable="false" />
+    <Property Name="AdminIDApproval" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="OrderBuyer">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="PhoneNumber" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="LocationId" Type="bigint" Nullable="false" />
+    <Property Name="Address" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="ModifyDate" Type="datetime" />
+    <Property Name="ModifyBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="NoteAboutBuyer" Type="text" />
+    <Property Name="IdMember" Type="bigint" />
+  </EntityType>
+  <EntityType Name="OrderDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdOrder" Type="bigint" Nullable="false" />
+    <Property Name="IdProduct" Type="bigint" Nullable="false" />
+    <Property Name="NameProduct" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="Price" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="Quantity" Type="int" Nullable="false" />
+    <Property Name="Description" Type="ntext" />
+    <Property Name="PathImage" Type="varchar(max)" />
+    <Property Name="Status" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="OrderReciver">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="PhoneNumber" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Address" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="ModifyDate" Type="datetime" />
+    <Property Name="ModifyBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="NoteAboutReciver" Type="ntext" />
+  </EntityType>
+  <EntityType Name="Orders">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="ModifyDate" Type="datetime" />
+    <Property Name="ModifyBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="DateDeliver" Type="datetime" />
+    <Property Name="Status" Type="int" />
+    <Property Name="KmRoad" Type="float" Nullable="false" />
+    <Property Name="NoteAboutOrder" Type="ntext" />
+    <Property Name="GramGood" Type="float" Nullable="false" />
+    <Property Name="IdPayForm" Type="bigint" />
+    <Property Name="IdShop" Type="bigint" Nullable="false" />
+    <Property Name="TotalMoney" Type="float" />
+    <Property Name="FeeOfTranspot" Type="float" />
+    <Property Name="UrlBtnPayNL" Type="ntext" />
+  </EntityType>
+  <EntityType Name="PayForm">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="ModifyDate" Type="datetime" />
+    <Property Name="ModifyBy" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="ProductImages">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProductId" Type="bigint" Nullable="false" />
+    <Property Name="ImgSource" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="IsAvatar" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ProductProperties">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProductId" Type="bigint" Nullable="false" />
+    <Property Name="CatalogPropertyId" Type="bigint" Nullable="false" />
+    <Property Name="CatalogPropertyValueId" Type="bigint" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Key" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Value" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="ValueUrl" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Products">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CatalogId" Type="bigint" Nullable="false" />
+    <Property Name="ManufacturerId" Type="bigint" />
+    <Property Name="Model" Type="nvarchar" MaxLength="200" />
+    <Property Name="MemberId" Type="bigint" Nullable="false" />
+    <Property Name="ShopCatalogId" Type="bigint" />
+    <Property Name="ProductName" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="50" />
+    <Property Name="FriendlyUrl" Type="nvarchar" MaxLength="200" />
+    <Property Name="Summary" Type="nvarchar" MaxLength="1000" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="Price" Type="float" Nullable="false" />
+    <Property Name="Cost" Type="float" Nullable="false" />
+    <Property Name="Weight" Type="float" Nullable="false" />
+    <Property Name="TypeOfCurrency" Type="nchar" MaxLength="5" />
+    <Property Name="State" Type="int" Nullable="false" />
+    <Property Name="Tags" Type="nvarchar" MaxLength="200" />
+    <Property Name="IsNew" Type="bit" Nullable="false" />
+    <Property Name="IsAttractive" Type="bit" Nullable="false" />
+    <Property Name="IsVip" Type="bit" Nullable="false" />
+    <Property Name="TotalView" Type="int" Nullable="false" />
+    <Property Name="Status" Type="int" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifyDate" Type="datetime" Nullable="false" />
+    <Property Name="AdminIDApproval" Type="bigint" Nullable="false" />
+    <Property Name="SeoTitle" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="SeoKeyword" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="SeoDescription" Type="nvarchar" MaxLength="300" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="Status" Type="int" Nullable="false" />
+    <Property Name="Type" Type="int" />
+    <Property Name="Createdate" Type="datetime" Nullable="false" />
+    <Property Name="Modifieddate" Type="datetime" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="RoleModule">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RoleId" Type="bigint" Nullable="false" />
+    <Property Name="ModuleId" Type="bigint" Nullable="false" />
+    <Property Name="Status" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ShopCatalogs">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ShopId" Type="bigint" Nullable="false" />
+    <Property Name="ParentId" Type="bigint" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="20" />
+    <Property Name="CatalogName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="FriendlyUrl" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Icon" Type="nvarchar" MaxLength="100" />
+    <Property Name="Description" Type="nvarchar" MaxLength="500" />
+    <Property Name="Order" Type="int" Nullable="false" />
+    <Property Name="Status" Type="int" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifyDate" Type="datetime" Nullable="false" />
+    <Property Name="IsLast" Type="bit" Nullable="false" />
+    <Property Name="SeoTitle" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="SeoKeyword" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="SeoDescription" Type="nvarchar" MaxLength="300" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ShopNews">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MemberId" Type="bigint" Nullable="false" />
+    <Property Name="NewsGroupId" Type="bigint" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="ImageSource" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="Summary" Type="nvarchar" MaxLength="2000" Nullable="false" />
+    <Property Name="Descriptions" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Status" Type="int" Nullable="false" />
+    <Property Name="isPublic" Type="bit" Nullable="false" />
+    <Property Name="TotalView" Type="int" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifyDate" Type="datetime" Nullable="false" />
+    <Property Name="AdminIDApproval" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ShopNewsGroups">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MemberId" Type="bigint" Nullable="false" />
+    <Property Name="NewsGroupName" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="isPublic" Type="bit" Nullable="false" />
+    <Property Name="Status" Type="int" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifyDate" Type="datetime" Nullable="false" />
+    <Property Name="AdminIDApproval" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ShopPolicys">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" />
+    <Property Name="About" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PrivacyPolicy" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="SalesPolicy" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PaymentPolicy" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Shops">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" />
+    <Property Name="ShopName" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="Icon" Type="nvarchar" MaxLength="200" />
+    <Property Name="Address" Type="nvarchar" MaxLength="200" />
+    <Property Name="LocationId" Type="bigint" Nullable="false" />
+    <Property Name="Phone" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Rate" Type="int" Nullable="false" />
+    <Property Name="TotalView" Type="int" Nullable="false" />
+    <Property Name="Type" Type="int" Nullable="false" />
+    <Property Name="Status" Type="int" Nullable="false" />
+    <Property Name="BeginDate" Type="datetime" />
+    <Property Name="EndDate" Type="datetime" Nullable="false" />
+    <Property Name="ActiveDate" Type="datetime" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifyDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ShopSettings">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" />
+    <Property Name="ShopId" Type="bigint" Nullable="false" />
+    <Property Name="Key" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Value" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifyDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ShopSupports">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" />
+    <Property Name="SupportName" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Phone" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Mobile" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Skype" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Facebook" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Yahoo" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Username" Type="nvarchar" MaxLength="75" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="75" Nullable="false" />
+    <Property Name="CompanyId" Type="bigint" />
+    <Property Name="IsSuperUser" Type="bit" Nullable="false" />
+    <Property Name="Createdate" Type="datetime" Nullable="false" />
+    <Property Name="Modifydate" Type="datetime" Nullable="false" />
+    <Property Name="Expireddate" Type="datetime" />
+    <Property Name="PasswordEncrypted" Type="bit" Nullable="false" />
+    <Property Name="PasswordModify_date" Type="datetime" Nullable="false" />
+    <Property Name="PasswordEncryptedMethod" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="Screenname" Type="nvarchar" MaxLength="75" Nullable="false" />
+    <Property Name="Logindate" Type="datetime" Nullable="false" />
+    <Property Name="LastFailedLoginDate" Type="datetime" />
+    <Property Name="FailedLoginAttemp" Type="int" Nullable="false" />
+    <Property Name="Lockout" Type="bit" Nullable="false" />
+    <Property Name="LockoutDate" Type="datetime" Nullable="false" />
+    <Property Name="Status" Type="int" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="200" />
+    <Property Name="DiscountPercent" Type="float" />
+  </EntityType>
+  <EntityType Name="UserGroup">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="150" />
+    <Property Name="Createdate" Type="datetime" Nullable="false" />
+    <Property Name="Modifieddate" Type="datetime" Nullable="false" />
+    <Property Name="Status" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserGroupRole">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserGroupId" Type="bigint" Nullable="false" />
+    <Property Name="RoleId" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserProfile">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" />
+    <Property Name="DepartmentId" Type="bigint" />
+    <Property Name="Code" Type="nvarchar" MaxLength="20" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Phone" Type="nvarchar" MaxLength="20" />
+    <Property Name="Address" Type="nvarchar" MaxLength="200" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="Createdate" Type="datetime" Nullable="false" />
+    <Property Name="Dob" Type="date" />
+    <Property Name="Modifieddate" Type="datetime" />
+    <Property Name="Description" Type="nvarchar" MaxLength="150" />
+  </EntityType>
+  <EntityType Name="UserUsergroup">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="bigint" Nullable="false" />
+    <Property Name="UserUsergroup" Type="bigint" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_CatalogProperties_Catalogs">
+    <End Role="Catalogs" Type="Self.Catalogs" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="CatalogProperties" Type="Self.CatalogProperties" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Catalogs">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CatalogProperties">
+        <PropertyRef Name="CatalogId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CatalogPropertiesValue_CatalogProperties">
+    <End Role="CatalogProperties" Type="Self.CatalogProperties" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="CatalogPropertiesValue" Type="Self.CatalogPropertiesValue" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CatalogProperties">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CatalogPropertiesValue">
+        <PropertyRef Name="CatalogPropertieId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Catalogs_Manufacturers_Catalogs">
+    <End Role="Catalogs" Type="Self.Catalogs" Multiplicity="1" />
+    <End Role="Catalogs_Manufacturers" Type="Self.Catalogs_Manufacturers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Catalogs">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Catalogs_Manufacturers">
+        <PropertyRef Name="CatalogId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Catalogs_Manufacturers_Manufacturers">
+    <End Role="Manufacturers" Type="Self.Manufacturers" Multiplicity="1" />
+    <End Role="Catalogs_Manufacturers" Type="Self.Catalogs_Manufacturers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Manufacturers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Catalogs_Manufacturers">
+        <PropertyRef Name="ManufacturerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Comments_Products">
+    <End Role="Products" Type="Self.Products" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Comments">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MemberProfile_Members">
+    <End Role="Members" Type="Self.Members" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="MemberProfile" Type="Self.MemberProfile" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Members">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MemberProfile">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_News_NewsGroups">
+    <End Role="NewsGroups" Type="Self.NewsGroups" Multiplicity="1" />
+    <End Role="News" Type="Self.News" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NewsGroups">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="News">
+        <PropertyRef Name="NewsGroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderBuyer_Order">
+    <End Role="Orders" Type="Self.Orders" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="OrderBuyer" Type="Self.OrderBuyer" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Orders">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrderBuyer">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderDetail_Order">
+    <End Role="Orders" Type="Self.Orders" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Orders">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrderDetail">
+        <PropertyRef Name="IdOrder" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderReciver_Order">
+    <End Role="Orders" Type="Self.Orders" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="OrderReciver" Type="Self.OrderReciver" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Orders">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrderReciver">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Orders_Members">
+    <End Role="Members" Type="Self.Members" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Members">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="IdShop" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductImages_Products">
+    <End Role="Products" Type="Self.Products" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ProductImages" Type="Self.ProductImages" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ProductImages">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductProperties_Products">
+    <End Role="Products" Type="Self.Products" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ProductProperties" Type="Self.ProductProperties" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ProductProperties">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Products_Catalogs">
+    <End Role="Catalogs" Type="Self.Catalogs" Multiplicity="1" />
+    <End Role="Products" Type="Self.Products" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Catalogs">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Products">
+        <PropertyRef Name="CatalogId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Products_Manufacturers">
+    <End Role="Manufacturers" Type="Self.Manufacturers" Multiplicity="0..1" />
+    <End Role="Products" Type="Self.Products" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Manufacturers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Products">
+        <PropertyRef Name="ManufacturerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_role_module_module">
+    <End Role="Module" Type="Self.Module" Multiplicity="1" />
+    <End Role="RoleModule" Type="Self.RoleModule" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Module">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RoleModule">
+        <PropertyRef Name="ModuleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_role_module_role">
+    <End Role="Role" Type="Self.Role" Multiplicity="1" />
+    <End Role="RoleModule" Type="Self.RoleModule" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RoleModule">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ShopNews_ShopNewsGroups">
+    <End Role="ShopNewsGroups" Type="Self.ShopNewsGroups" Multiplicity="1" />
+    <End Role="ShopNews" Type="Self.ShopNews" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ShopNewsGroups">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ShopNews">
+        <PropertyRef Name="NewsGroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ShopNewsGroups_Members">
+    <End Role="Members" Type="Self.Members" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ShopNewsGroups" Type="Self.ShopNewsGroups" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Members">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ShopNewsGroups">
+        <PropertyRef Name="MemberId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ShopPolicys_Shops">
+    <End Role="Shops" Type="Self.Shops" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ShopPolicys" Type="Self.ShopPolicys" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Shops">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ShopPolicys">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Shops_Members">
+    <End Role="Members" Type="Self.Members" Multiplicity="1" />
+    <End Role="Shops" Type="Self.Shops" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Members">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Shops">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ShopSettings_Members">
+    <End Role="Members" Type="Self.Members" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ShopSettings" Type="Self.ShopSettings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Members">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ShopSettings">
+        <PropertyRef Name="ShopId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ShopSupports_Shops">
+    <End Role="Shops" Type="Self.Shops" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ShopSupports" Type="Self.ShopSupports" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Shops">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ShopSupports">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_user_group_role_role">
+    <End Role="Role" Type="Self.Role" Multiplicity="1" />
+    <End Role="UserGroupRole" Type="Self.UserGroupRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserGroupRole">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_user_profile_user1">
+    <End Role="User" Type="Self.User" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserProfile">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_user_usergroup_user">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="UserUsergroup" Type="Self.UserUsergroup" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserUsergroup">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_user_usergroup_user_group">
+    <End Role="UserGroup" Type="Self.UserGroup" Multiplicity="1" />
+    <End Role="UserUsergroup" Type="Self.UserUsergroup" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserGroup">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserUsergroup">
+        <PropertyRef Name="UserUsergroup" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="CaculatorRate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="float">
+    <Parameter Name="id" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="FindAvatar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="nvarchar">
+    <Parameter Name="id" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="GetAllModuleByUserId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="GetAllRolesByUserId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="GetUserByUserName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserName" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="GetUserByUserNameAndPassword" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserName" Type="nvarchar" Mode="In" />
+    <Parameter Name="Password" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="SearchProductByBrand" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="bigint" Mode="In" />
+    <Parameter Name="PageNum" Type="int" Mode="In" />
+    <Parameter Name="PageSize" Type="int" Mode="In" />
+  </Function>
+  <Function Name="SearchProductByType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="type" Type="bigint" Mode="In" />
+    <Parameter Name="id" Type="bigint" Mode="In" />
+    <Parameter Name="PageNum" Type="int" Mode="In" />
+    <Parameter Name="PageSize" Type="int" Mode="In" />
+  </Function>
+  <EntityContainer Name="BuyGroup365ModelStoreContainer">
+    <EntitySet Name="CatalogProperties" EntityType="Self.CatalogProperties" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CatalogPropertiesValue" EntityType="Self.CatalogPropertiesValue" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Catalogs" EntityType="Self.Catalogs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Catalogs_Manufacturers" EntityType="Self.Catalogs_Manufacturers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Comments" EntityType="Self.Comments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Locations" EntityType="Self.Locations" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Manufacturers" EntityType="Self.Manufacturers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MemberProfile" EntityType="Self.MemberProfile" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Members" EntityType="Self.Members" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Module" EntityType="Self.Module" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="News" EntityType="Self.News" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NewsGroups" EntityType="Self.NewsGroups" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OrderBuyer" EntityType="Self.OrderBuyer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OrderDetail" EntityType="Self.OrderDetail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OrderReciver" EntityType="Self.OrderReciver" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PayForm" EntityType="Self.PayForm" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProductImages" EntityType="Self.ProductImages" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProductProperties" EntityType="Self.ProductProperties" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RoleModule" EntityType="Self.RoleModule" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ShopCatalogs" EntityType="Self.ShopCatalogs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ShopNews" EntityType="Self.ShopNews" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ShopNewsGroups" EntityType="Self.ShopNewsGroups" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ShopPolicys" EntityType="Self.ShopPolicys" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Shops" EntityType="Self.Shops" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ShopSettings" EntityType="Self.ShopSettings" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ShopSupports" EntityType="Self.ShopSupports" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserGroup" EntityType="Self.UserGroup" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserGroupRole" EntityType="Self.UserGroupRole" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserProfile" EntityType="Self.UserProfile" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserUsergroup" EntityType="Self.UserUsergroup" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_CatalogProperties_Catalogs" Association="Self.FK_CatalogProperties_Catalogs">
+      <End Role="Catalogs" EntitySet="Catalogs" />
+      <End Role="CatalogProperties" EntitySet="CatalogProperties" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CatalogPropertiesValue_CatalogProperties" Association="Self.FK_CatalogPropertiesValue_CatalogProperties">
+      <End Role="CatalogProperties" EntitySet="CatalogProperties" />
+      <End Role="CatalogPropertiesValue" EntitySet="CatalogPropertiesValue" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Catalogs_Manufacturers_Catalogs" Association="Self.FK_Catalogs_Manufacturers_Catalogs">
+      <End Role="Catalogs" EntitySet="Catalogs" />
+      <End Role="Catalogs_Manufacturers" EntitySet="Catalogs_Manufacturers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Catalogs_Manufacturers_Manufacturers" Association="Self.FK_Catalogs_Manufacturers_Manufacturers">
+      <End Role="Manufacturers" EntitySet="Manufacturers" />
+      <End Role="Catalogs_Manufacturers" EntitySet="Catalogs_Manufacturers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Comments_Products" Association="Self.FK_Comments_Products">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="Comments" EntitySet="Comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MemberProfile_Members" Association="Self.FK_MemberProfile_Members">
+      <End Role="Members" EntitySet="Members" />
+      <End Role="MemberProfile" EntitySet="MemberProfile" />
+    </AssociationSet>
+    <AssociationSet Name="FK_News_NewsGroups" Association="Self.FK_News_NewsGroups">
+      <End Role="NewsGroups" EntitySet="NewsGroups" />
+      <End Role="News" EntitySet="News" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderBuyer_Order" Association="Self.FK_OrderBuyer_Order">
+      <End Role="Orders" EntitySet="Orders" />
+      <End Role="OrderBuyer" EntitySet="OrderBuyer" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderDetail_Order" Association="Self.FK_OrderDetail_Order">
+      <End Role="Orders" EntitySet="Orders" />
+      <End Role="OrderDetail" EntitySet="OrderDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderReciver_Order" Association="Self.FK_OrderReciver_Order">
+      <End Role="Orders" EntitySet="Orders" />
+      <End Role="OrderReciver" EntitySet="OrderReciver" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Orders_Members" Association="Self.FK_Orders_Members">
+      <End Role="Members" EntitySet="Members" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductImages_Products" Association="Self.FK_ProductImages_Products">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="ProductImages" EntitySet="ProductImages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductProperties_Products" Association="Self.FK_ProductProperties_Products">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="ProductProperties" EntitySet="ProductProperties" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Products_Catalogs" Association="Self.FK_Products_Catalogs">
+      <End Role="Catalogs" EntitySet="Catalogs" />
+      <End Role="Products" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Products_Manufacturers" Association="Self.FK_Products_Manufacturers">
+      <End Role="Manufacturers" EntitySet="Manufacturers" />
+      <End Role="Products" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_role_module_module" Association="Self.FK_role_module_module">
+      <End Role="Module" EntitySet="Module" />
+      <End Role="RoleModule" EntitySet="RoleModule" />
+    </AssociationSet>
+    <AssociationSet Name="FK_role_module_role" Association="Self.FK_role_module_role">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="RoleModule" EntitySet="RoleModule" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ShopNews_ShopNewsGroups" Association="Self.FK_ShopNews_ShopNewsGroups">
+      <End Role="ShopNewsGroups" EntitySet="ShopNewsGroups" />
+      <End Role="ShopNews" EntitySet="ShopNews" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ShopNewsGroups_Members" Association="Self.FK_ShopNewsGroups_Members">
+      <End Role="Members" EntitySet="Members" />
+      <End Role="ShopNewsGroups" EntitySet="ShopNewsGroups" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ShopPolicys_Shops" Association="Self.FK_ShopPolicys_Shops">
+      <End Role="Shops" EntitySet="Shops" />
+      <End Role="ShopPolicys" EntitySet="ShopPolicys" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Shops_Members" Association="Self.FK_Shops_Members">
+      <End Role="Members" EntitySet="Members" />
+      <End Role="Shops" EntitySet="Shops" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ShopSettings_Members" Association="Self.FK_ShopSettings_Members">
+      <End Role="Members" EntitySet="Members" />
+      <End Role="ShopSettings" EntitySet="ShopSettings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ShopSupports_Shops" Association="Self.FK_ShopSupports_Shops">
+      <End Role="Shops" EntitySet="Shops" />
+      <End Role="ShopSupports" EntitySet="ShopSupports" />
+    </AssociationSet>
+    <AssociationSet Name="FK_user_group_role_role" Association="Self.FK_user_group_role_role">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="UserGroupRole" EntitySet="UserGroupRole" />
+    </AssociationSet>
+    <AssociationSet Name="FK_user_profile_user1" Association="Self.FK_user_profile_user1">
+      <End Role="User" EntitySet="User" />
+      <End Role="UserProfile" EntitySet="UserProfile" />
+    </AssociationSet>
+    <AssociationSet Name="FK_user_usergroup_user" Association="Self.FK_user_usergroup_user">
+      <End Role="User" EntitySet="User" />
+      <End Role="UserUsergroup" EntitySet="UserUsergroup" />
+    </AssociationSet>
+    <AssociationSet Name="FK_user_usergroup_user_group" Association="Self.FK_user_usergroup_user_group">
+      <End Role="UserGroup" EntitySet="UserGroup" />
+      <End Role="UserUsergroup" EntitySet="UserUsergroup" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,233 @@
+﻿using Business.ClassBusiness;
+using MvcPaging;
+using Common.util;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.ServiceModel;
+using System.Web;
+using System.Web.Mvc;
+using BuyGroup365.Areas.Manage.Models;
+using BuyGroup365.Models.Member;
+
+
+namespace BuyGroup365.Areas.Manage.Controllers
+{
+
+    public class NewsController : BaseController
+    {
+
+        readonly NewsBusiness _newsBusines = new NewsBusiness();
+        readonly LoadCombo _loadCombo = new LoadCombo();
+        readonly NewsGroupBusiness _newsGroupBusiness = new NewsGroupBusiness();
+      
+        //
+        // GET: /Manage/News/
+        public ActionResult Index(string key,int? page)
+        {
+            try
+            {
+                ViewBag.statusCatg = _loadCombo.InitSelectListItemStatusNews();
+                List<LoadCombo.DropdowNews> listDropdowNews = new List<LoadCombo.DropdowNews>();
+                ViewBag.parent = _loadCombo.SearchNewsByName(ref listDropdowNews);
+                ViewBag.IsPublic = _loadCombo.IsPublicForNewsGroup();
+
+                //ListGroup from name of group
+                ViewBag.listGroupNewsGroupWithNamme = _loadCombo.InitSelectListItemStatusNewsGroup();
+
+                ViewData["status"] = true;
+                ViewData["key"] = key;
+                int currentPageIndex = page.HasValue ? page.Value : 1;
+
+                var list = _newsBusines.GetByKey(key).ToPagedList(currentPageIndex, 5);
+
+                return View(list);
+            }
+            catch (FaultException ex)
+            {
+                var exep = Function.GetExeption(ex);
+                var codeExp = exep[1];
+                string url = "Error/ErrorFunction/" + codeExp;
+                return RedirectToActionPermanent(url);
+            }
+        }
+
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult CreateNews(string title, string descriptionCreate, string summaryCreate, HttpPostedFileBase imageSource, int statusCatg, int IsPublic, int parent)
+        {
+            try
+            {              
+                    Common.News news = new Common.News();
+
+                    news.Title = title;
+                    news.Descriptions = descriptionCreate;
+                    news.Summary = summaryCreate;
+
+                    if (imageSource != null && imageSource.ContentLength > 0)
+                    {
+                        // TourInfo entity=new TourInfo();
+                        //Random rdImage = new Random();
+                        string randomImage = Guid.NewGuid().ToString();
+                        string fileNameImage = Common.util.Function.ConvertFileName(imageSource.FileName);
+                        string pathImage = HttpContext.Server.MapPath("~/FileUpload");
+                        var strurlimage = Common.util.Function.ResizeImageNew(imageSource, 300, 300, pathImage, randomImage);
+                        Common.util.Function.ResizeImageNew(imageSource, 500, 500, pathImage, randomImage);
+                        Common.util.Function.ResizeImageNew(imageSource, 1000, 1000, pathImage, randomImage);
+                        news.ImageSource = strurlimage;
+                    }
+
+                    news.Status = statusCatg;
+                    if(IsPublic == 0){
+                        news.isPublic = true;
+                    }
+                    else
+                    {
+                        news.isPublic = false;
+                    }
+
+                    //lấy tạm -1 sau lấy qua Id của người login
+                    news.AdminIDApproval = -1;
+
+                    if (parent > -1) { 
+                        news.NewsGroupId = parent;
+                    }
+                    else
+                    {
+                        //xử lý Lỗi không chọn nhóm tin
+                        //không chọn mặc định sẽ là 1
+                        var listNewsGroup = _newsGroupBusiness.GetListNewsGroup();
+                        if (listNewsGroup == null)
+                        {
+                            //chưa có nhóm tin
+                            //tạo nhóm tin trước khi tạo tin tức
+                            return RedirectToAction("NewsGroup");
+                        }
+                        else
+                        {
+                            //lấy id của nhóm tin đầu tiên (mặc định) nếu người dùng không chọn
+                            var newsGroupFirst = listNewsGroup.First();
+                            news.NewsGroupId = newsGroupFirst.Id;
+                        }
+                        
+                    }
+                    news.CreateDate = DateTime.Now;
+                    news.ModifyDate = DateTime.Now;
+
+                    _newsBusines.AddNew(news);
+                    return RedirectToAction("Index");
+                               
+            }
+            catch (Exception ex)
+            {
+                //witrelog
+                throw new Exception(ex.Message);
+            }
+        }
+
+        #region Delete News
+        public ActionResult DeleteNews(long id = 0)
+        {
+            try
+            {
+                if (id > 0)
+                {
+                    _newsBusines.Remove(id);
+
+                }
+                return RedirectToAction("Index");
+            }
+            catch (FaultException ex)
+            {
+                var exep = Function.GetExeption(ex);
+                var codeExp = exep[1];
+                string url = "Error/ErrorFunction/" + codeExp;
+                return RedirectToActionPermanent(url);
+            }
+
+        }
+        #endregion
+
+        #region NewsGroup 
+        public ActionResult NewsGroup(string key, int? page)
+        {
+
+            try
+            {
+                ViewBag.statusCatg = _loadCombo.InitSelectListItemStatusNews();
+                List<LoadCombo.DropdowNews> listDropdowNews = new List<LoadCombo.DropdowNews>();
+                ViewBag.parent = _loadCombo.SearchNewsByName(ref listDropdowNews);
+                ViewBag.IsPublic = _loadCombo.IsPublicForNewsGroup();
+
+                //ListGroup from name of group
+                ViewBag.listGroupNewsGroupWithNamme = _loadCombo.InitSelectListItemStatusNewsGroup();
+
+                ViewData["status"] = true;
+                ViewData["key"] = key;
+                int currentPageIndex = page.HasValue ? page.Value : 1;
+
+                var list = _newsGroupBusiness.GetByKey(key).ToPagedList(currentPageIndex, 10);
+
+                return View(list);
+            }
+            catch (FaultException ex)
+            {
+                var exep = Function.GetExeption(ex);
+                var codeExp = exep[1];
+                string url = "Error/ErrorFunction/" + codeExp;
+                return RedirectToActionPermanent(url);
+            }
+        }
+
+        public ActionResult DeleteNewsGroup(long id = 0)
+        {
+            try
+            {
+                if (id > 0)
+                {
+                    _newsGroupBusiness.Remove(id);
+
+                }
+                return RedirectToAction("NewsGroup");
+            }
+            catch (FaultException ex)
+            {
+                var exep = Function.GetExeption(ex);
+                var codeExp = exep[1];
+                string url = "Error/ErrorFunction/" + codeExp;
+                return RedirectToActionPermanent(url);
+            }
+
+        }
+
+        public ActionResult CreateNewsGroup(string newsGroupName, int statusCatg, int IsPublic, int adminIDApproval, int parent)
+        {
+            try {
+                Common.NewsGroup newsGroup = new Common.NewsGroup();
+                newsGroup.ParentId = parent;
+                newsGroup.NewsGroupName = newsGroupName;
+                if (IsPublic == 0)
+                {
+                    newsGroup.isPublic = true;
+                }
+                else
+                {
+                    newsGroup.isPublic = false;
+                }
+                newsGroup.Status = statusCatg;
+                newsGroup.CreateDate = DateTime.Now;
+                newsGroup.ModifyDate = DateTime.Now;
+                newsGroup.AdminIDApproval = adminIDApproval;
+
+                _newsGroupBusiness.AddNew(newsGroup);
+                return RedirectToAction("NewsGroup");
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+   
+        }
+        #endregion
+    }
+}

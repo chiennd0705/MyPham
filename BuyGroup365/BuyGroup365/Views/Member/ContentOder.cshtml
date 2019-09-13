@@ -1,0 +1,88 @@
+﻿@using Common.util
+@model List<global::Common.Order>
+@{
+    var str = " mc-";
+    if (Model.First().Status ==0)
+    {
+        str += "notpay";
+    }
+    else if (Model.First().Status == 1)
+    {
+        str += "payed";
+    }
+
+    else if (Model.First().Status == 2)
+    {
+        str += "notget";
+    }
+
+    else if (Model.First().Status == 3)
+    {
+        str += "geted";
+    }
+
+    else
+    {
+        str += "recy";
+    }
+}
+
+<div class="mage-magictabs @str">
+    <div class="bx-wrapper" style="max-width: 960px; margin: 0px auto;">
+        <div class="bx-viewport" style="width: 100%; ">
+            <table class="table table-bordered  table-condensed">
+
+                <thead>
+                    <tr style="background-color: ghostwhite">
+                        <th>Tên đơn hàng</th>
+                        <th>Người bán</th>
+                        <th>Tình trạng thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+
+                                    <table class="table table-bordered table-hover table-condensed" style="width: 98%">
+
+                                        <tr style="background-color: ghostwhite">
+                                            <td colspan="3">
+                                                <strong>Tên đon hàng:@item.OrderBuyer.Name</strong>
+                                            </td>
+                                        </tr>
+                                        @foreach (var item1 in item.OrderDetails)
+                                        {
+
+                                            <tr>
+                                                <td><img src="/FileUpload/Image/thumb/@item1.PathImage" width="100" /></td>
+                                                <td>@item1.NameProduct</td>
+                                                <td>
+                                                    @{
+                                                        var pi = (Double)item1.Price;
+                                                    }
+                                                    @pi.ToString("N0")
+                                                </td>
+                                            </tr>
+
+                                        }
+                                        <tr>
+                                            <td colspan="3">
+                                                @{ var tatol = (Double) item.OrderDetails.Sum(x => x.Price);}
+                                                <strong style="float: right">Tổng đơn hàng: <span class="label label-danger">@tatol.ToString("N0")</span></strong>
+                                            </td>
+                                        </tr>
+                                    </table>
+                            </td>
+                            <td>@item.OrderBuyer.Name</td>
+                            <td><input type="button" value="Thanh toán" class="btn btn-danger btn-sm" onclick="Contine()" />
+                                <input type="button" class="btn btn-danger btn-sm" onclick="Contine()" value="Cập nhật" />
+                                <input type="button" class="btn btn-danger btn-sm" onclick="Contine()" value="Xóa" /></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

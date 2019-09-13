@@ -1,0 +1,126 @@
+﻿@using BuyGroup365.Models.Common
+
+<script>
+
+    function SubmitFAQ(id) {
+               var Name = document.getElementById('name').value;
+                 var Email = document.getElementById('Email').value;
+                var Content = document.getElementById('contentQuestion').value;
+
+        $.ajax({
+            url: "@Url.Action("SubmitFaq", "Ajax")",
+            type: 'POST',
+            data: {
+                'id': id,
+                'Name': Name,
+                'Email': Email,
+                'Content': Content,
+            },
+            dataType: 'json',
+            //contentType: 'application/json',
+            traditional: true,
+            success: function (response) {
+                if (response.data) {
+                    alert('Cảm ơn bạn đã đặt câu hỏi, câu hỏi của bản sẽ được chúng tôi xem xét và phản hồi trong thời gian sớm nhất');
+
+                } else {
+                    alert('Lỗi: Không thể gửi phản hồi.');
+                }
+            },
+            error: function (err) {
+                alert('Đã xảy ra lỗi. ' + err);
+            }
+        });
+        return true;
+
+    }
+</script>
+
+<div class="comment">
+    <div class="title-comment">
+        <h5 class="text">Bình luận bài viết</h5>
+    </div>
+    <div class="comment-form">
+        <h6 class="text">Viết bình luận</h6>
+        <div class="text-input">
+            <textarea name="" id="contentQuestion" cols="30" rows="10" class="textarea-input"></textarea>
+        </div>
+        <div class="info-comment">
+            <label class="text" for="name">Tên của bạn:</label>
+            <input type="text" id="name" placeholder="" class="input-comment">
+            <label class="text" for="name">Email của bạn:</label>
+            <input type="text" id="mail" placeholder="" class="input-comment">
+        </div>
+        <div class="send">
+            <button class="btn-send" onclick="SubmitFAQ(@ViewBag.NID);">đăng bình luận</button>
+            <input type="text" name="hideit" id="hideit" value="" style="display: none !important;">
+        </div>
+    </div>
+    <div class="custom-comment">
+        <div class="per-comment">
+            <ul class="user-comment">
+                @{
+                    try
+                    {
+                        long id = long.Parse(ViewBag.NID.ToString());
+                        Business.ClassBusiness.CommentsNewsBusiness commentsBusiness = new Business.ClassBusiness.CommentsNewsBusiness();
+                        List<Common.CommentsNew> listcomments = commentsBusiness.ListByCommentsNewID(ViewBag.NID, 0, 10);
+
+                        foreach (var item in listcomments)
+                        {
+
+                            <li>
+                                <h6 class="name">@item.NickName </h6>
+                                <p class="text">@item.Content</p>
+                                <ul class="action">
+                                    <li class="answer">Trả lời</li>
+                                    <li class="like"><i class="fa fa-thumbs-up" aria-hidden="true"></i> Thích</li>
+                                    <li class="times"> 27 phút trước</li>
+                                </ul>
+                                @{
+                                    try
+                                    {
+                                        List<Common.CommentsNew> listcommentSubs = commentsBusiness.ListByCommentsNewByParentID(@item.Id);
+                                        foreach (var item1 in listcommentSubs)
+                                        {
+                                            <div class="admin-comment">
+                                                <div class="img-admin">
+                                                    <a href="#"><img data-src="@Util.ReturnLinkCDN("/Images/img/Layer-103.png",Request.Browser.IsMobileDevice)" class="lazyload" alt=""></a>
+                                                </div>
+                                                <div class="content">
+                                                    <h6 class="name">Quản trị viên <span class="power">Nguyễn Hoa</span></h6>
+                                                    <div class="text">
+                                                        @item1.Content
+                                                    </div>
+                                                    <ul class="action">
+                                                        <li class="answer">Trả lời</li>
+                                                        <li class="like"><i class="fa fa-thumbs-up" aria-hidden="true"></i> Thích</li>
+                                                        <li class="times"> 8 giờ trước</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        }
+                                    }
+                                    catch { }
+
+                                }
+                            </li>
+                        }
+                    }
+                    catch (Exception ex) { }
+
+                }
+            </ul>
+            @*<div class="pagination">
+                    <ul class="pag-ul">
+                        <li><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">...</a></li>
+                        <li><a href="#">10</a></li>
+                    </ul>
+                </div>*@
+        </div>
+    </div>
+</div>

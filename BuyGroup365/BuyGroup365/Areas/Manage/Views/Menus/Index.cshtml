@@ -1,0 +1,229 @@
+﻿@using BuyGroup365.Areas.Manage.Models
+@using MvcPaging
+@model MvcPaging.IPagedList<Common.Menus>
+@using Common
+@using Business.ClassBusiness;
+@{
+    ViewBag.Title = "Cập nhật Menus";
+    Layout = "~/Areas/Manage/Views/Shared/_LayoutAdmincshtml.cshtml";
+}
+<script>
+    function BrowseServer() {
+        var finder = new CKFinder();
+        finder.BasePath = '/Content/css/ckfinder/';
+        finder.selectActionFunction = SetFileFiled;
+        // finder.SelectActionFunction = SetFileFiled;
+        //   finder.SelectFunction = SetFileFiled;
+        //   finder.SelectFunctionData = SetFileFiled;
+        finder.popup();
+    }
+    function SetFileFiled(FileUrl) {
+        document.getElementById('BackGround').value = FileUrl;
+    }
+</script>
+<div class="container-fluid" ng-app="body">
+    @Html.Raw(AdminFunction.BindHeader("Menus", " Thêm mới", null, null, null))
+    <!-- /.row -->
+    <!-- /.row -->
+    <!-- /.row -->
+    <div class="row" ng-controller="Index">
+
+        <div class="col-lg-6">
+            @{
+                Menus menu;
+                LoadCombo _loadCombo = new LoadCombo();
+                long id = 0;
+
+                if (Request.QueryString["id"] != null)
+                {
+                    id = long.Parse(Request.QueryString["id"].ToString());
+                    menu = new MenusBusiness().GetById(id);
+                    List<LoadCombo.DropdowMenus> listDropdowMenus = new List<LoadCombo.DropdowMenus>();
+                    ViewBag.ParentId = _loadCombo.SearchMenusByName(ref listDropdowMenus, menu.ParentId);
+
+                }
+                else
+                {
+                    menu = new Menus();
+                    List<LoadCombo.DropdowMenus> listDropdowMenus = new List<LoadCombo.DropdowMenus>();
+                    ViewBag.ParentId = _loadCombo.SearchMenusByName(ref listDropdowMenus);
+                    menu.IsBackGround = false;
+                }
+
+            }
+            @using (Html.BeginForm("Update", "Menus", FormMethod.Post, new { enctype = "multipart/form-data", id = "Update" }))
+            {
+                <input type="hidden" value="@menu.Id" id="Id" name="id" />
+
+                @Html.ValidationSummary(true)
+
+                <div class="form-group">
+                    <label>Tiêu đề:<span class="required">*</span></label><br />
+                    <input class="form-control" autocomplete="off" maxlength="200" data-val-required="Mời nhập tiêu đề" id="MenuName" required name="MenuName" type="text" value="@menu.MenuName " />
+                </div>
+                <div class="form-group">
+                    <label>Link Menu:</label><br />
+                    <input class="form-control" autocomplete="off" maxlength="200" data-val-required="Mời nhập tiêu đề" id="Link" name="Link" type="text" value="@menu.Link" />
+                </div>
+                <div class="form-group">
+                    <label>Icon</label><br />
+
+                    <input id="BackGround" name="BackGround" data-val-required="Trường là bắt buộc" type="text" class="input-block-level" value="@menu.BackGround" />
+                    <input type="button" value="Browse Server" onclick="BrowseServer();" class="controls" />
+                </div>
+                <div class="form-group">
+                    <label class="checkbox-inline">
+
+                        @Html.CheckBox("IsBackGround", @menu.IsBackGround.Value) Hiển thị
+                    </label>
+                </div>
+                @*@Html.CheckBoxFor(menu => menu.IsBackGround)*@
+                <div class="form-group" style="overflow:scroll">
+
+                    <label>Menu cha:<span class="required">*</span></label><br />
+                    @Html.DropDownList("ParentId", null, new { @height = "auto", @size = "15", style = "width:100%;border: none;", @name = "ParentId" })
+                </div>
+                <div class="form-group">
+                    <label>Kiểu menu</label><br />
+                    <select class="form-control" name="TypeMenu" id="TypeMenu">
+                        <option value="1" @(menu.TypeMenu == 1 ? "selected" : "")>Menu dọc</option>
+                        <option value="2" @(menu.TypeMenu == 2 ? "selected" : "")>Menu ngang</option>
+                        <option value="3" @(menu.TypeMenu == 3 ? "selected" : "")>Menu mobile</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Phát hành</label><br />
+                    <select class="form-control" name="Status" id="Status">
+                        <option value="1" @(menu.Status == 1 ? "selected" : "")>Hiển thị</option>
+                        <option value="2" @(menu.Status == 2 ? "selected" : "")>Không hiển thị</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Thứ tự</label><br />
+                    <input class="form-control" autocomplete="off" maxlength="200" id="Order" name="Order" type="text" value="@menu.Order" />
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary" name="btnSubmit" value="Thêm">Thêm</button>
+
+                    @if (Request.QueryString["id"] != null)
+                    {
+                        <button type="submit" class="btn btn-primary" name="btnSubmit" value="Cập nhật">Cập nhật</button>
+                    }
+                </div>
+            }
+        </div>
+        <div class="col-lg-6">
+            @using (Ajax.BeginForm("Index", "CategoryProduct",
+           new AjaxOptions { UpdateTargetId = "grid-list", HttpMethod = "get", LoadingElementId = "loading", OnBegin = "beginPaging", OnSuccess = "successPaging", OnFailure = "failurePaging" },
+           new { id = "frm-search" }))
+            {
+                <div class="form-group input-group">
+                    <input type="text" value="@ViewData["key"]" class="form-control" id="key" name="key" placeholder="Nhập từ khóa tìm kiếm">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="submit">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </span>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover table-striped" id="dataTables" aria-describedby="dataTables-example_info">
+                        <thead>
+                            <tr role="row">
+                                <th style="width:80px">
+                                    STT
+                                </th>
+                                <th>
+                                    Tiêu đề Menu
+                                </th>
+                                <th>
+                                    Loại menu
+                                </th>
+                                <th>
+                                    Link Menu
+                                </th>
+
+                                <th style="width: 120px;">Chức Năng</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                int i = Model.ItemStart;
+                            }
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td style="text-align:center">
+                                        @(i)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.MenuName)
+                                    </td>
+                                    <td>
+                                        @if (item.TypeMenu == 1)
+                                        {
+                                            <span>Menu dọc</span>
+                                        }
+                                        @if (item.TypeMenu == 2)
+                                        {
+                                            <span>Menu ngang</span>
+                                        }
+                                        @if (item.TypeMenu == 3)
+                                        {
+                                            <span>Menu mobile</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        /@item.Link
+                                    </td>
+
+                                    <td style="text-align: center">
+
+                                        <a href="/Manage/Menus/Index/?id=@item.Id">
+                                            <img src="~/img/IconMain/edit.png" width="19" title="Sửa" />
+                                        </a>
+                                        <a href="/Manage/Menus/Delete/@item.Id" title="Xóa" onclick="return confirm('Bạn có chắc chắn?');">
+                                            <img src="~/img/IconMain/remove.png" width="19" title="Xóa" />
+                                        </a>
+                                    </td>
+                                </tr>
+                                i++;
+                            }
+                        </tbody>
+                    </table>
+                    <div class="">
+                        <div class="dataTables_info" id="dataTables-example_info" role="alert" aria-live="polite" aria-relevant="all">Hiển thị từ @Model.ItemStart đến @Model.ItemEnd của @Model.TotalItemCount bản ghi</div>
+                    </div>
+                    <div class="">
+                        <div class="dataTables_paginate " id="dataTables-example_paginate">
+
+                            @Html.Raw(Ajax.Pager(
+                                new Options
+                                {
+                                    PageSize = Model.PageSize,
+                                    TotalItemCount = Model.TotalItemCount,
+                                    CurrentPage = Model.PageNumber,
+                                    ItemTexts = new ItemTexts() { Next = "Next", Previous = "Previous", Page = "P" },
+                                    ItemIcon = new ItemIcon() { First = "icon-backward", Previous = "icon-chevron-left", Next = "icon-chevron-right", Last = "icon-forward" },
+                                    TooltipTitles = new TooltipTitles() { Next = "Next page", Previous = "Previous page", Page = "Page {0}." },
+                                    Size = Size.normal,
+                                    Alignment = Alignment.centered,
+                                    IsShowControls = true,
+                                    IsShowFirstLast = true,
+                                    CssClass = ""
+                                },
+                                new AjaxOptions
+                                {
+                                    UpdateTargetId = "grid-list",
+                                    HttpMethod = "get",
+                                    LoadingElementId = "loading",
+                                    OnBegin = "beginPaging",
+                                    OnSuccess = "successPaging",
+                                    OnFailure = "failurePaging"
+                                }, new { controller = "Menus", action = "Index", name = ViewBag.TagName}))
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>

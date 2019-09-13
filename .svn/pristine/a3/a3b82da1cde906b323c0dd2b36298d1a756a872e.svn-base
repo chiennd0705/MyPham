@@ -1,0 +1,1361 @@
+
+
+/* 
+    Compenent: Progress bars
+--------------------------------
+*/
+
+/* size variation */
+
+.progress.sm {
+    height: 10px;
+}
+
+.progress.lg {
+    height: 28px;
+}
+
+    .progress.lg .progress-bar {
+        line-height: 28px;
+    }
+
+.progress.xs {
+    height: 7px;
+}
+/* Vertical bars */
+
+.progress.vertical {
+    position: relative;
+    width: 30px;
+    height: 200px;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+    .progress.vertical > .progress-bar {
+        width: 100% !important;
+        position: absolute;
+        bottom: 0;
+    }
+
+    .progress.vertical.sm {
+        width: 20px;
+    }
+
+    .progress.vertical.xs {
+        width: 10px;
+    }
+/* Remove margins from progress bars when put in a table */
+
+.table tr > td .progress {
+    margin: 0;
+}
+
+.progress-bar-light-blue, .progress-bar-primary {
+    background-color: #3c8dbc;
+}
+
+.progress-striped .progress-bar-light-blue, .progress-striped .progress-bar-primary {
+    background-image: -webkit-gradient(linear, 0 100%, 100% 0, color-stop(0.25, rgba(255, 255, 255, 0.15)), color-stop(0.25, transparent), color-stop(0.5, transparent), color-stop(0.5, rgba(255, 255, 255, 0.15)), color-stop(0.75, rgba(255, 255, 255, 0.15)), color-stop(0.75, transparent), to(transparent));
+    background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+    background-image: -moz-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+    background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+}
+
+.progress-bar-green, .progress-bar-success {
+    background-color: #9fd468;
+}
+
+.progress-striped .progress-bar-green, .progress-striped .progress-bar-success {
+    background-image: -webkit-gradient(linear, 0 100%, 100% 0, color-stop(0.25, rgba(255, 255, 255, 0.15)), color-stop(0.25, transparent), color-stop(0.5, transparent), color-stop(0.5, rgba(255, 255, 255, 0.15)), color-stop(0.75, rgba(255, 255, 255, 0.15)), color-stop(0.75, transparent), to(transparent));
+    background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+    background-image: -moz-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+    background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+}
+
+.progress-bar-aqua, .progress-bar-info {
+    background-color: #50c1e9;
+}
+
+.progress-striped .progress-bar-aqua, .progress-striped .progress-bar-info {
+    background-image: -webkit-gradient(linear, 0 100%, 100% 0, color-stop(0.25, rgba(255, 255, 255, 0.15)), color-stop(0.25, transparent), color-stop(0.5, transparent), color-stop(0.5, rgba(255, 255, 255, 0.15)), color-stop(0.75, rgba(255, 255, 255, 0.15)), color-stop(0.75, transparent), to(transparent));
+    background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+    background-image: -moz-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+    background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+}
+
+.progress-bar-yellow, .progress-bar-warning {
+    background-color: #ffce55;
+}
+
+.progress-striped .progress-bar-yellow, .progress-striped .progress-bar-warning {
+    background-image: -webkit-gradient(linear, 0 100%, 100% 0, color-stop(0.25, rgba(255, 255, 255, 0.15)), color-stop(0.25, transparent), color-stop(0.5, transparent), color-stop(0.5, rgba(255, 255, 255, 0.15)), color-stop(0.75, rgba(255, 255, 255, 0.15)), color-stop(0.75, transparent), to(transparent));
+    background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+    background-image: -moz-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+    background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+}
+
+.progress-bar-red, .progress-bar-danger {
+    background-color: #ee5665;
+}
+
+.progress-striped .progress-bar-red, .progress-striped .progress-bar-danger {
+    background-image: -webkit-gradient(linear, 0 100%, 100% 0, color-stop(0.25, rgba(255, 255, 255, 0.15)), color-stop(0.25, transparent), color-stop(0.5, transparent), color-stop(0.5, rgba(255, 255, 255, 0.15)), color-stop(0.75, rgba(255, 255, 255, 0.15)), color-stop(0.75, transparent), to(transparent));
+    background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+    background-image: -moz-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+    background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+}
+
+
+.progress {
+    box-shadow: none;
+    background: #e6e9ee;
+    border-radius: 20px;
+    overflow: inherit;
+}
+
+    .progress .progress-bar {
+        box-shadow: none;
+        text-transform: uppercase;
+        position: relative;
+        border-radius: 20px;
+    }
+
+    .progress .tooltip {
+        z-index: 1000;
+        opacity: 1;
+        right: -18px;
+        width: 45px;
+        top: -30px;
+        height: 33px;
+    }
+
+        .progress .tooltip .tooltip-circle {
+            width: 20px;
+            height: 20px;
+            margin-top: 5px;
+        }
+
+    .progress.sm .tooltip .tooltip-circle {
+        width: 10px;
+        height: 10px;
+        margin-top: 1px;
+    }
+
+    .progress.xs .tooltip .tooltip-circle {
+        width: 7px;
+        height: 7px;
+        margin-top: -2px;
+    }
+
+    .progress.lg .tooltip {
+        right: -14px;
+    }
+
+        .progress.lg .tooltip .tooltip-circle {
+            width: 28px;
+            height: 28px;
+            margin-top: 5px;
+        }
+
+.bg-red-solid {
+    background: #e51c23;
+}
+
+.bg-green-solid {
+    background: #8ec452;
+}
+
+.bg-info-solid {
+    background: #3baeda;
+}
+
+.bg-yellow-solid {
+    background: #f6bb43;
+}
+/* Breadcrumb */
+
+.breadcrumb-custom {
+    background: none;
+    padding-left: 0;
+    padding-right: 0px;
+}
+
+    .breadcrumb-custom li {
+        position: relative;
+    }
+
+        .breadcrumb-custom li a {
+            color: #aab2bd;
+            padding-right: 18px;
+            font-family: "Roboto";
+        }
+
+    .breadcrumb-custom > .active {
+        color: #e51c23 !important;
+    }
+
+.breadcrumb > li + li:before {
+    content: inherit;
+}
+
+.icon-bread-arrow {
+    position: absolute;
+    right: 5px;
+    top: 4px;
+}
+/* Progress step 1 */
+
+.progress-step {
+    display: block;
+    height: 20px;
+    background: #e6e9ee;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+
+    .progress-step ul {
+        margin: 0px;
+        padding-left: 0px;
+    }
+
+        .progress-step ul li {
+            display: inline;
+            position: relative;
+        }
+
+            .progress-step ul li a {
+                color: #656d78;
+                text-transform: uppercase;
+                font-size: 12px;
+                display: block;
+                text-align: center;
+                line-height: 20px;
+                font-family: "Roboto";
+            }
+
+            .progress-step ul li.active {
+                background: #a0d569;
+            }
+
+                .progress-step ul li.active a {
+                    color: #fff;
+                }
+
+            .progress-step ul li.focus {
+                border-top-right-radius: 20px;
+                -moz-border-top-right-radius: 20px;
+                -webkit-border-top-right-radius: 20px;
+                border-bottom-right-radius: 20px;
+                -moz-border-bottom-right-radius: 20px;
+                -webkit-border-bottom-right-radius: 20px;
+            }
+/*  Progress step 2 */
+
+.progress-style2 {
+    width: 100%;
+    margin: 20px auto;
+    text-align: center;
+}
+
+    .progress-style2 .circle, .progress-style2 .bar {
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        border-radius: 40px;
+    }
+
+    .progress-style2 .bar {
+        position: relative;
+        width: 18%;
+        height: 10px;
+        margin: 0 -12px 27px;
+        border-left: none;
+        border-right: none;
+        border-radius: 0;
+        background: #e6e9ee;
+        color: #666867;
+    }
+
+    .progress-style2 .circle .label {
+        display: inline-block;
+        width: 25px;
+        height: 25px;
+        line-height: 25px;
+        border-radius: 28px;
+        color: #666867;
+        font-size: 12px;
+        position: relative;
+        z-index: 100;
+        padding: 0px;
+        text-align: center;
+        background: #e6e9ee;
+    }
+
+    .progress-style2 .circle .title {
+        color: #656d78;
+        font-size: 12px;
+        line-height: 30px;
+        margin-left: -5px;
+        text-transform: uppercase;
+    }
+    /* Done / Active */
+
+    .progress-style2 .bar.done {
+        background: #a0d569;
+    }
+
+    .progress-style2 .bar.active {
+        background: linear-gradient(to right, #EEE 40%, #FFF 60%);
+    }
+
+    .progress-style2 .circle.done .label {
+        color: #FFF;
+        background: #a0d569;
+    }
+
+    .progress-style2 .circle.done .title {
+        color: #444;
+    }
+
+    .progress-style2 .circle.active .label {
+        color: #FFF;
+        background: #0c95be;
+    }
+
+    .progress-style2 .circle.active .title {
+        color: #0c95be;
+    }
+/* Blockquote */
+
+blockquote {
+    border-left: 5px solid #9fd566;
+    padding: 0px 10px;
+    margin-left: 35px;
+}
+
+    blockquote p {
+        font-size: 13px;
+        line-height: 1.6;
+    }
+
+    blockquote small, blockquote .small {
+        color: #616d79;
+        font-style: italic;
+        font-size: 13px;
+    }
+/***********PANEL SWITCH*****************/
+
+#scheme {
+    position: fixed;
+    top: 20px;
+    left: 0;
+    background-color: #eee;
+    z-index: 10000;
+}
+
+    #scheme h3 {
+        text-shadow: none;
+        margin-bottom: 0;
+        font-size: 14px;
+        line-height: 0.3em;
+        color: #555;
+        text-align: center;
+    }
+
+    #scheme ul {
+        margin: 0;
+        padding: 0;
+        width: 56px;
+        margin-right: -10px;
+    }
+
+        #scheme ul li {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            display: block;
+            margin-top: 10px;
+            text-align: left;
+        }
+
+            #scheme ul li a {
+                padding: 0;
+                margin: 0;
+                width: 200px;
+                display: block;
+                font-size: 12px;
+                color: #000;
+            }
+
+.toggle-panel {
+    position: absolute;
+    right: -44px;
+    width: 45px;
+    height: 45px;
+    background: #fff;
+    color: #000;
+    text-align: center;
+    padding: 5px;
+    border: 1px solid #ccc;
+    text-align: center;
+}
+
+.styleswitch-panel {
+    width: 210px;
+    height: auto;
+    padding: 5px 5px 15px 10px;
+    border: 1px solid #f2f2f2;
+    display: none;
+}
+
+.bootbox .modal-dialog {
+    width: 380px;
+}
+
+.bootbox .modal-footer {
+    text-align: center;
+    padding: 13px 20px 13px;
+    border: none;
+}
+
+.bootbox .close {
+    font-size: 20px;
+    position: absolute;
+    right: 10px;
+    top: 14px;
+}
+
+.bootbox .modal-header {
+    padding: 10px;
+    text-align: center;
+}
+
+.bootbox .modal-body {
+    text-align: center;
+}
+
+.modal {
+    overflow-y: auto;
+}
+
+.modal-open {
+    overflow: auto;
+}
+/*Component*/
+
+.uniform label {
+    padding-left: 0px;
+}
+/*Main Form*/
+
+.adr-header {
+    padding: 0px 45px 0 0;
+    color: #fff;
+    position: static;
+}
+
+    .adr-header .title-header {
+        color: #e73430;
+        line-height: 64px;
+        margin: 0 0 0 48px;
+        font-size: 13px;
+    }
+
+.user-info .username {
+    color: #666;
+    padding: 23px 5px;
+    border-radius: 0px;
+    display: block;
+    cursor: pointer;
+}
+
+    .user-info .username:hover, .user-info .username.active {
+        position: relative;
+        z-index: 2000;
+    }
+
+.user-info .dropdown-menu {
+    padding: 20px;
+    border-radius: 0px;
+    width: 260px;
+    color: #333;
+    /*box-shadow: 0 1px 2px rgba(0, 0, 0, 0.176)*/
+    box-shadow: none;
+    margin-top: -1px;
+    border: 2px solid #ED1C24;
+}
+
+.user-info .box-access {
+    padding-top: 15px;
+    margin-top: 15px;
+    border-top: 1px solid #ccc;
+}
+
+    .user-info .box-access ul {
+        padding-left: 0px;
+        list-style: none;
+    }
+
+        .user-info .box-access ul li a {
+            padding: 5px 0px;
+            display: block;
+        }
+
+
+
+.form_login_authen .modal-content {
+    border: none !important;
+}
+
+
+
+.form-login {
+    width: 384px;
+    background: #fff;
+    padding-bottom: 52px;
+    float: right;
+    margin: 95px 110px 95px 0;
+}
+
+.form-login-content {
+    padding: 0 50px;
+}
+
+.form-login .form-note a {
+    color: #666;
+}
+
+    .form-login .form-note a:hover {
+        color: #333;
+    }
+
+.form-login-content h3 {
+    font-size: 20px;
+}
+
+.form-login-content .form-control {
+    height: 40px;
+    padding-right: 40px;
+}
+
+.form-login-content .form-group {
+    position: relative;
+}
+
+    .form-login-content .form-group i {
+        right: 2px;
+        top: 1px;
+        height: 38px;
+        text-align: center;
+        line-height: 38px;
+        width: 38px;
+        position: absolute;
+        background: #fff;
+    }
+
+        .form-login-content .form-group i.fa-lock {
+            font-size: 18px;
+        }
+
+.form-login-content ul {
+    margin-top: 18px;
+}
+
+    .form-login-content ul li {
+        margin-top: 7px;
+        position: relative;
+    }
+
+
+        .form-login-content ul li:first-child {
+            margin-top: 0;
+        }
+
+
+   
+
+
+/* error pass*/
+
+.error-pass {
+    background: #fff;
+    padding: 20px 20px 30px;
+    margin-top: 150px;
+    margin-bottom: 200px;
+    font-size: 16px;
+}
+
+    .error-pass h2 {
+        padding-bottom: 10px;
+        margin-top: 0;
+        margin-bottom: 22px;
+    }
+
+        .error-pass h2 img {
+            margin-right: 15px;
+        }
+
+    .error-pass p {
+        line-height: 28px;
+        margin-bottom: 32px;
+    }
+
+    .error-pass a {
+        color: #333;
+    }
+
+        .error-pass a:hover {
+            color: #0071bc;
+        }
+
+    .error-pass .list-inline > li {
+        padding-left: 27px;
+        padding-right: 27px;
+    }
+
+        .error-pass .list-inline > li:first-child {
+            padding-left: 0;
+        }
+
+        .error-pass .list-inline > li > a {
+            overflow: hidden;
+            height: 32px;
+            line-height: 32px;
+        }
+
+            .error-pass .list-inline > li > a > img {
+                float: left;
+                margin-right: 8px;
+            }
+
+            .error-pass .list-inline > li > a .fa {
+                margin-left: 4px;
+            }
+
+/*@media screen and (max-width: 599px) {
+    .error-pass .list-inline > li {
+        padding-left: 0;
+        margin-top: 16px;
+    }
+
+        .error-pass .list-inline > li:first-child {
+            margin-top: 0;
+        }
+}*/
+
+/*@media screen and (min-width: 1400px) {
+    #head_history .form-inline .form-group {
+        display: block
+    }
+}
+
+@media screen and (min-width: 1400px) {
+    #head_history .form-inline .form-group {
+        display: inline-block
+    }
+}
+@media screen and (min-width: 1399px) {
+    #head_history .form-inline .form-group {
+        display: block
+    }
+}*/
+
+.nav-creat-store {
+    border-top: 1px solid #e5e5e5;
+    margin-top: 8px;
+    padding-top: 8px;
+}
+
+.top-footer .container, .bottom-footer .container {
+    border-top: 1px solid #e5e5e5;
+    padding-top: 20px;
+    padding-bottom: 22px;
+}
+
+.border-right.height {
+    height: 248px;
+}
+
+.top-footer .col-sm-4, .top-footer .col-sm-8 {
+    padding-left: 24px;
+    padding-right: 24px;
+}
+
+.top-footer .row {
+}
+
+.modal-content .circle .fa-user:before {
+    display: none;
+}
+
+.modal-content .circle .fa-user {
+    width: 31px;
+    height: 35px;
+    background: url("../images/user.png") no-repeat;
+}
+
+.modal-content.oauth-content .form-control {
+    *height: 26px;
+    *width: 394px;
+}
+
+.modal-content.oauth-content .form-group {
+    *margin-bottom: 16px;
+}
+
+.modal-content.oauth-content .circle {
+    *width: 74px;
+    *height: 74px;
+}
+
+.modal-dialog {
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+#box-history-order > .row {
+    *width: 1083px;
+}
+
+#box-history-order .col-1 {
+    *width: 122px;
+}
+
+#box-history-order .col-2 {
+    *width: 100px;
+}
+
+#box-history-order .col-3 {
+    *width: 150px;
+}
+
+#box-history-order .col-4 {
+    *width: 150px;
+}
+
+#box-history-order .col-5 {
+    *width: 150px;
+}
+
+#box-history-order .col-6 {
+    *width: 150px;
+}
+
+#box-history-order .col-md-12 {
+    *width: 1075px;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+    #box-history-order .col-md-12 .col-1 {
+        *width: 114px;
+        width: 20%;
+    }
+    #box-history-order .col-md-12 .col-6 {
+       
+        width: 20%;
+    }
+
+#head_history .btn-form {
+    *margin-top: 34px;
+}
+
+#head_history #OrderStatus {
+    *height: 40px;
+}
+
+.adr-header {
+    *z-index: 2;
+}
+
+.adr-content {
+    *z-index: 1;
+}
+
+.user-info, .user-info .dropdown-menu {
+    *background: #fff;
+    *z-index: 9999;
+}
+
+.hidden-lg {
+    display: none;
+}
+
+#box-history-order .row > div {
+    padding-left: 4px;
+    padding-right: 4px;
+    float: left;
+}
+
+.w-toggle {
+    padding-left: 4px !important;
+}
+
+.adr-header {
+    padding-right: 16px\0;
+}
+
+    .adr-header .title-header {
+        margin-left: 16px\0;
+    }
+
+.main-content {
+    margin-left: 16px\0;
+    margin-right: 16px\0;
+}
+
+#box-history-order .btn-toggle.margin-right-8 {
+    margin: 2px 2px 0 2px;
+}
+
+#box-history-order .col-1 {
+    width: 14%\0;
+}
+
+#box-history-order .col-2 {
+    width: 13%\0;
+}
+
+#box-history-order .col-3 {
+    width: 13%\0;
+}
+
+#box-history-order .col-4 {
+    width: 14%\0;
+}
+
+#box-history-order .col-5 {
+    width: 14%\0;
+}
+
+#box-history-order .col-6 {
+    width: 18%\0;
+}
+
+#box-history-order .col-7 {
+    width: 14%\0;
+}
+
+@media (max-width: 1270px) {
+    .adr-header {
+        padding-right: 16px;
+    }
+
+        .adr-header .title-header {
+            margin-left: 16px;
+        }
+
+    .main-content {
+        margin-left: 16px;
+        margin-right: 16px;
+    }
+
+    #box-history-order .col-1 {
+        width: 14%;
+    }
+
+    #box-history-order .col-2 {
+        width: 13%;
+    }
+
+    #box-history-order .col-3 {
+        width: 13%;
+    }
+
+    #box-history-order .col-4 {
+        width: 14%;
+    }
+
+    #box-history-order .col-5 {
+        width: 14%;
+    }
+
+    #box-history-order .col-6 {
+        width: 18%;
+    }
+
+    #box-history-order .col-7 {
+        width: 14%;
+    }
+}
+
+@media (max-width: 1650px) {
+
+    #box-history-order .col-1 {
+        width: 12%;
+    }
+
+    #box-history-order .col-2 {
+        width: 12%;
+    }
+
+    #box-history-order .col-3 {
+        width: 14%;
+    }
+
+    #box-history-order .col-4 {
+        width: 14%;
+    }
+
+    #box-history-order .col-5 {
+        width: 14%;
+    }
+
+    #box-history-order .col-6 {
+        width: 11%;
+    }
+
+    #box-history-order .col-7 {
+        width: 14%;
+    }
+
+    #box-history-order .col-9 {
+        width: 9%;
+    }
+}
+
+@media (max-width: 1620px) {
+    .form-inline-custom .btn {
+        margin-top: 34px;
+    }
+}
+
+.disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: 0.65;
+    *-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=65)";
+    filter: alpha(opacity=65);
+}
+
+.adr-oms.form {
+    margin-top: 0;
+}
+
+    .adr-oms.form:before,
+    .adr-oms.form:after {
+        content: " ";
+        display: table;
+    }
+
+    .adr-oms.form:after {
+        clear: both;
+    }
+
+    .adr-oms.form:before,
+    .adr-oms.form:after {
+        content: " ";
+        display: table;
+    }
+
+    .adr-oms.form:after {
+        clear: both;
+    }
+
+    .adr-oms.form .group {
+        margin-bottom: 16px;
+        min-height: 1px;
+    }
+
+        .adr-oms.form .group:before,
+        .adr-oms.form .group:after {
+            content: " ";
+            display: table;
+        }
+
+        .adr-oms.form .group:after {
+            clear: both;
+        }
+
+        .adr-oms.form .group:before,
+        .adr-oms.form .group:after {
+            content: " ";
+            display: table;
+        }
+
+        .adr-oms.form .group:after {
+            clear: both;
+        }
+
+        .adr-oms.form .group > .column {
+            float: left;
+            min-height: 1px;
+        }
+
+    .adr-oms.form label {
+        color: #111111 !important;
+        font-size: 12px !important;
+        margin-bottom: 2px;
+    }
+
+    .adr-oms.form > label {
+        color: #111111 !important;
+        font-size: 12px !important;
+        font-family: "Roboto-Medium";
+        font-weight: 400;
+        line-height: 32px;
+        margin-bottom: 0px;
+    }
+
+    .adr-oms.form .input {
+        display: block;
+        width: 100%;
+        height: 34px;
+        /*// Make inputs at least the height of their button counterpart (base line-height + padding + border)*/
+        padding: 6px 12px;
+        font-size: 14px;
+        line-height: 1.42857143;
+        color: #555555;
+        background-color: #ffffff;
+        background-image: none;
+        /*// Reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214*/
+        border: 1px solid #cccccc;
+        border-radius: 4px;
+        /* // Note: This has no effect on <select>s in some browsers, due to the limited stylability of <select>s in CSS.*/
+        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+        -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+        transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+        /*// Customize the `:focus` state to imitate native WebKit styles.*/
+        /*// Placeholder*/
+        /*// Disabled and read-only inputs
+  //
+  // HTML5 says that controls under a fieldset > legend:first-child won't be
+  // disabled if the fieldset is disabled. Due to implementation difficulty, we
+  // don't honor that edge case; we style them as disabled anyway.*/
+        /*// Reset height for `textarea`s*/
+        height: 32px;
+        *height: 18px;
+        *line-height: 18px;
+        font-size: 12px !important;
+    }
+
+        .adr-oms.form .input:focus {
+            border-color: #66afe9;
+            outline: 0;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6);
+            box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6);
+        }
+
+        .adr-oms.form .input::-moz-placeholder {
+            color: #999999;
+            opacity: 1;
+        }
+
+        .adr-oms.form .input:-ms-input-placeholder {
+            color: #999999;
+        }
+
+        .adr-oms.form .input::-webkit-input-placeholder {
+            color: #999999;
+        }
+
+        .adr-oms.form .input[disabled],
+        .adr-oms.form .input[readonly],
+        fieldset[disabled] .adr-oms.form .input {
+            cursor: not-allowed;
+            background-color: #eeeeee;
+            opacity: 1;
+            /*// iOS fix for unreadable disabled content; see https://github.com/twbs/bootstrap/issues/11655*/
+        }
+
+textarea.adr-oms.form .input {
+    height: auto;
+}
+
+.adr-oms.form .input.small {
+    height: 24px;
+    padding: 0 8px;
+    line-height: 24px;
+    font-size: 12px !important;
+}
+
+.adr-oms.form .input:focus {
+    border-color: #0388cd;
+    box-shadow: none;
+}
+
+.adr-oms.form textarea {
+    display: block;
+    width: 100%;
+    height: 34px;
+    /*// Make inputs at least the height of their button counterpart (base line-height + padding + border)*/
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555555;
+    background-color: #ffffff;
+    background-image: none;
+    /*// Reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214*/
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    /* // Note: This has no effect on <select>s in some browsers, due to the limited stylability of <select>s in CSS.*/
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    /*// Customize the `:focus` state to imitate native WebKit styles.*/
+    /*// Placeholder*/
+    /*// Disabled and read-only inputs
+  //
+  // HTML5 says that controls under a fieldset > legend:first-child won't be
+  // disabled if the fieldset is disabled. Due to implementation difficulty, we
+  // don't honor that edge case; we style them as disabled anyway.*/
+    /*// Reset height for `textarea`s*/
+    height: auto;
+    resize: vertical;
+    font-size: 12px !important;
+    font-family: "Roboto-Regular";
+    font-weight: 400;
+}
+
+    .adr-oms.form textarea:focus {
+        border-color: #66afe9;
+        outline: 0;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6);
+        box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6);
+    }
+
+    .adr-oms.form textarea::-moz-placeholder {
+        color: #999999;
+        opacity: 1;
+    }
+
+    .adr-oms.form textarea:-ms-input-placeholder {
+        color: #999999;
+    }
+
+    .adr-oms.form textarea::-webkit-input-placeholder {
+        color: #999999;
+    }
+
+    .adr-oms.form textarea[disabled],
+    .adr-oms.form textarea[readonly],
+    fieldset[disabled] .adr-oms.form textarea {
+        cursor: not-allowed;
+        background-color: #eeeeee;
+        opacity: 1;
+        /*// iOS fix for unreadable disabled content; see https://github.com/twbs/bootstrap/issues/11655*/
+    }
+
+textarea.adr-oms.form textarea {
+    height: auto;
+}
+
+::-webkit-input-placeholder,
+:-moz-placeholder,
+::-moz-placeholder,
+:-ms-input-placeholder {
+    color: #999999 !important;
+}
+
+.adr-oms.radio {
+    width: auto;
+    height: auto;
+    margin: 0;
+    display: block;
+}
+/*
+ * Radio
+ */
+.adr-oms.radio {
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+    .adr-oms.radio:first-child {
+        margin-top: 0;
+    }
+
+    .adr-oms.radio:last-child {
+        margin-bottom: 0;
+    }
+
+    .adr-oms.radio input {
+        display: none;
+        *display: block;
+        *margin: 0;
+    }
+
+@media \0screen {
+    .adr-oms.radio input {
+        display: block;
+        margin-left: 0;
+    }
+}
+
+.adr-oms.radio > label {
+    display: inline-block;
+    position: relative;
+    margin-right: 14px;
+    padding-left: 21px !important;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+@media \0screen {
+    .adr-oms.radio > label {
+        padding-left: 0;
+    }
+}
+
+.adr-oms.radio > label:before {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    left: 0;
+    top: 50%;
+    margin-top: -7px;
+    border: 1px solid #666666;
+    border-radius: 7px;
+}
+
+@media \0screen {
+    .adr-oms.radio > label:before {
+        display: none;
+    }
+}
+
+.adr-oms.radio > label:after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 0;
+    height: 0;
+    top: 50%;
+    left: 7px;
+    margin-top: 0;
+    background: #ffffff;
+    border-radius: 3px;
+    transition: 0.2s ease-in-out;
+}
+
+@media \0screen {
+    .adr-oms.radio > label:after {
+        display: none;
+    }
+}
+
+.adr-oms.radio > label:hover:before {
+    border: 1px solid #0388cd;
+}
+
+.adr-oms.radio > label:hover:after {
+    background: #ffffff;
+}
+
+.adr-oms.radio :checked + label:before {
+    border: 1px solid #0388cd;
+    background: #0388cd;
+}
+
+.adr-oms.radio :checked + label:after {
+    color: #ffffff;
+    height: 6px;
+    width: 6px;
+    margin-top: -3px;
+    left: 4px;
+}
+
+.adr-oms.radio [disabled] + label {
+    cursor: not-allowed;
+}
+
+    .adr-oms.radio [disabled] + label:before {
+        border: 1px solid #cccccc;
+        background: #f0f0f0;
+    }
+
+    .adr-oms.radio [disabled] + label:after {
+        color: #ffffff;
+        height: 6px;
+        width: 6px;
+        margin-top: -3px;
+        left: 4px;
+    }
+
+form#suggest-form .btn {
+    padding: 5px 0;
+    line-height: 20px;
+    text-transform: none;
+    width: 194px;
+    float: left;
+    font-family: "Roboto-Medium";
+      font-size: 14px;
+}
+
+form#suggest-form .btn.btn-success{      
+    border: 1px solid #0d6fd0;
+    background:#0388cd !important;
+    margin-right: 12px;
+}
+form#suggest-form .btn.btn-success:hover {
+    opacity: .8;
+    filter: alpha(opacity=80);
+}
+form#suggest-form .btn.btn-default {
+    background: #fff !important;
+    border-color: #999;
+}
+
+form#suggest-form label {
+    color: #333;
+}
+form#suggest-form .footer {
+    padding-top: 8px;
+    border-top: 1px dotted #ccc;
+}
+
+form#suggest-form .header {
+    background: #f7f7f7;
+  border: none;
+  border-bottom: 1px solid #eeeeee;
+  padding: 0.5em 1em;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  text-align: center;
+  font-size: 15px;
+  color: #333;
+  font-weight: bold;
+    margin: -16px -16px 12px;
+}
+.more-info {
+ font-size: 12px;
+ font-style: italic;
+}
+
+.info-card-header h3{
+    float: left;
+    margin-top: 0;
+}
+.info-card-header .btn{
+     margin: 0 5px;
+}
+.info-card-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 6px;
+}
+
+.info-card-modal .modal-dialog {
+    width: 350px;
+}
+
+.info-card-modal .modal-header {
+    /*border-bottom: 1px solid #e5e5e5;*/
+}
+
+.card-modal-auth.green .modal-header, .card-modal-auth.green .circle {
+  background-color: #81b123;
+}
+
+

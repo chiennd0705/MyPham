@@ -1,0 +1,140 @@
+﻿@using BuyGroup365.Models.Member
+@using Common.util
+@{
+    var listCart = NlCheckout.GetSessionCard(Session);
+    var sl = 0;
+    if (listCart != null)
+    {
+        foreach (var cartItem in listCart)
+        {
+            sl += cartItem.Quantity;
+        }
+    }
+   
+}
+@*<div class="header-setting">
+    <div class="settting-switcher">
+        <div class="dropdown-toggle">
+            <p class="mt-cart-title">Cart</p>
+            <div class="crat-icon">
+                @if (NlCheckout.GetSessionCard(Session) != null)
+                {
+                    
+                    <a href="/PayGoods/Payment"><span class="zero" id="numberProduct">@sl</span></a>
+                }
+                else
+                {
+                    <a href="/PayGoods/Payment"><span class="zero" id="numberProduct">0</span></a>
+                }
+              
+
+            </div>
+        </div>
+        <div class="dropdown-switcher">
+            <div class="top-links-alo">
+                <div class="header-top-link">
+                    <ul class="links" id="contentCart">
+                        @if (NlCheckout.GetSessionCard(Session) != null)
+                        {
+
+                            foreach (var cartItem in listCart)
+                            {
+                                <li><span><i class="fa fa-angle-double-right"></i><span>@cartItem.Product.ProductName</span> <strong>(@cartItem.Quantity)</strong></span></li>
+                        }
+                        }
+                        else
+                        {
+
+                         
+                            <li><span><i class="fa fa-angle-double-right"></i><span style="color: blue">Giỏ hàng trống!</span></span></li>
+
+
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+*@
+<div class="mini-maincart">
+    <div class="cartSummary">
+        <p class="mt-cart-title">cart</p>
+        <div class="crat-icon">
+            @if (NlCheckout.GetSessionCard(Session) != null)
+                {
+                     <span class="zero">@sl </span>
+
+            }
+                else
+                {
+                <span class="zero">0 </span>
+
+            }
+               
+            
+        </div>
+        <div class="cart-header">
+            <p class="cart-tolatl">
+                <!--<span class="toltal"></span>-->
+                <span class="zero">0 items - </span>
+                <span><span class="price">$0.00</span></span>
+            </p>
+        </div>
+    </div>
+    <div class="mini-contentCart" style="display: none;">
+        <div class="block-content">
+
+        
+
+            @if (NlCheckout.GetSessionCard(Session) != null)
+                {
+                        <p class="block-subtitle">Giỏ hàng của bạn</p>
+                        <ol id="cart-sidebar" class="mini-products-list clearfix">
+                foreach (var cartItem in listCart)
+                            {
+
+                                <li><span><i class="fa fa-angle-double-right"></i><span>@cartItem.Product.ProductName</span> <strong>(@cartItem.Quantity)</strong></span></li>
+                <li class="item clearfix odd">
+                    <div class="cart-content-top">
+                        <a href="http://alothemes.com/demo/kuteshop/index.php/maecenas-consequat-mauris.html" title="Maecenas consequat mauris" class="product-image">
+                            <img src="http://alothemes.com/demo/kuteshop/media/catalog/product/cache/7/thumbnail/100x122/9df78eab33525d08d6e5fb8d27136e95/3/7/37_4.jpg" width="60" height="77" alt="Maecenas consequat mauris"></a>
+                        <div class="product-details">
+                            <p class="product-name"><a href="http://alothemes.com/demo/kuteshop/index.php/maecenas-consequat-mauris.html">>@cartItem.Product.ProductName</a></p>
+                            <strong>@cartItem.Quantity</strong> x <span class="price">$78.00</span>
+
+                        </div>
+                    </div>
+                    <div class="cart-content-bottom">
+                        <div class="clearfix">
+                            <a href="http://alothemes.com/demo/kuteshop/index.php/checkout/cart/configure/id/409/" title="Edit item" class="btn-edit"><i class="fa fa-pencil-square-o"></i></a>
+                            <a href="http://alothemes.com/demo/kuteshop/index.php/checkout/cart/delete/id/409/uenc/aHR0cDovL2Fsb3RoZW1lcy5jb20vZGVtby9rdXRlc2hvcC9pbmRleC5waHAvbWFnaWNzaG9wL2FqYXgvaW5kZXgv/" title="Remove" onclick="return confirm('Are you sure you would like to remove this item from the shopping cart?');" class="btn-remove btn-remove2"><i class="icon-close icons"></i></a>
+                        </div>
+                    </div>
+                </li>
+                }
+            </ol>
+            <p class="subtotal">
+                <span class="label">Subtotal:</span> <span class="price">$116.95</span>
+            </p>
+            <div class="actions">
+                <a href="#" class="view-cart">View cart                </a>
+                <a href="#" class="checkout">Checkout                </a>
+            </div>
+            }
+                else
+                {
+
+                         
+                          <p class="empty">Giỏ hàng trống.</p>
+
+
+            }
+      
+          
+        </div>
+
+    </div>
+
+</div>

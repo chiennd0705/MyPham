@@ -1,0 +1,183 @@
+﻿@using BuyGroup365.Areas.Manage.Models
+@using MvcPaging
+@model MvcPaging.IPagedList<Common.Videos>
+@using Common
+@using Business.ClassBusiness;
+@{
+    ViewBag.Title = "Cập nhật Video";
+    Layout = "~/Areas/Manage/Views/Shared/_LayoutAdmincshtml.cshtml";
+}
+
+<div class="container-fluid" ng-app="body">
+    @Html.Raw(AdminFunction.BindHeader("Videos", " Thêm mới", "/Manage/Videos/Index", null, null))
+    <!-- /.row -->
+    <!-- /.row -->
+    <!-- /.row -->
+    <div class="row" ng-controller="Index">
+
+<div class="col-lg-6">
+@{
+    Videos video;
+ long id=0;
+if(Request.QueryString["id"]!=null)
+{
+     id = long.Parse(Request.QueryString["id"].ToString());
+     video = new VideosBusiness().GetById(id);
+}else{
+    video = new Videos();
+}
+
+}
+  @using (Html.BeginForm("Update", "Videos", FormMethod.Post, new { enctype = "multipart/form-data", id = "Update" }))
+                {
+                <input type="hidden" value="@video.Id" id="Id" name="id" />
+
+    <input type="hidden" value="@video.VideoUrl" id="VideoNamecu" name="VideoNamecu" />
+                    @Html.ValidationSummary(true)
+
+ <div class="form-group">
+                        <label>Tên video:<span class="required">*</span></label><br />
+                        <input class="form-control" autocomplete="off" maxlength="200" data-val-required="Mời nhập tiêu đề" id="VideoName" required id="VideoName" name="VideoName" type="text" value="@video.VideoName" />
+                    </div>
+    <div class="form-group" style="display:none;">
+        <label>Tên video tiếng anh:<span class="required">*</span></label><br />
+        <input class="form-control" autocomplete="off" maxlength="200" id="VideoName_EN" name="VideoName_EN" type="text" value="@video.VideoName_EN" />
+    </div>
+    <div class="form-group" style="display:none;">
+        <label>Đường dẫn thân thiện:</label><br />
+        <input class="form-control" autocomplete="off" maxlength="200" data-val-required="Mời nhập tên video" id="VideoUrl" name="VideoUrl" type="text" value="@video.VideoUrl" />
+    </div>
+    <div class="form-group">
+        <label>Link Youtube:</label><br />
+        <input class="form-control" autocomplete="off"  data-val-required="Mời nhập đường link video youtube" id="VideoLink" name="VideoLink" type="text" value="@video.VideoLink" />
+    </div>
+
+ <div class="form-group">
+                        <label>Mô tả</label><br />
+     <textarea class="form-control" id="VideoDecription" name="VideoDecription" style="height:100px">@video.VideoDecription</textarea>
+                    </div>
+  <div class="form-group" style="display:none;">
+                            <label>Thẻ tiêu đề:</label><br />
+                            <input class="form-control" autocomplete="off" maxlength="200" id="SeoTitle" name="SeoTitle" type="text"  value="@video.SeoTitle" />
+                        </div>
+                        <div class="form-group" style="display:none;">
+                            <label>Thẻ từ khóa:</label><br />
+                            <input class="form-control" autocomplete="off"  maxlength="200" id="SeoKeyword" name="SeoKeyword" type="text"  value="@video.SeoKeyword" />
+                        </div>
+                        <div class="form-group" style="display:none;">
+                            <label>Mô tả</label><br />
+                            <textarea class="form-control" id="SeoDescription" name="SeoDescription" style="height:200px">@video.SeoDescription</textarea>
+                        </div>
+ <div class="form-group">
+                         <button type="submit" class="btn btn-primary" name="btnSubmit" value="Thêm">Thêm</button>
+
+@if(Request.QueryString["id"]!=null)
+{
+ <button type="submit" class="btn btn-primary" name="btnSubmit" value="Cập nhật">Cập nhật</button>
+}
+                    </div>
+}
+
+        <script type="text/javascript">
+
+            var setVAL = CKEDITOR.replace('Description', { height: 300 });
+
+            setVAL.CKFinder.setupCKEditor(setVAL, '/Content/css/ckfinder/');
+        </script>
+    </div>
+  <div class="col-lg-6"> @using (Ajax.BeginForm("Index", "Videos",
+                        new AjaxOptions { UpdateTargetId = "grid-list", HttpMethod = "get", LoadingElementId = "loading", OnBegin = "beginPaging", OnSuccess = "successPaging", OnFailure = "failurePaging" },
+                        new { id = "frm-search" }))
+                    {
+ <div class="form-group input-group">
+                                    <input type="text" value="@ViewData["key"]" class="form-control" id="key" name="key" placeholder="Nhập từ khóa tìm kiếm">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="submit">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </span>
+                                </div>
+           <div class="table-responsive">
+                            <table class="table table-bordered table-hover table-striped" id="dataTables" aria-describedby="dataTables-example_info">
+                                <thead>
+                                    <tr role="row">
+                                        <th style="width:80px">
+                                            STT
+                                        </th>
+                                        <th>
+                                            Tiêu đề video
+                                        </th>
+                                        <th>
+                                            Link Youtube
+                                        </th>
+
+                                        <th style="width: 120px;">Chức Năng</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+@{
+int i=Model.ItemStart;
+}
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td style="text-align:center">
+                                                @(i)
+                                            </td>
+                                            <td>
+                                                @item.VideoName
+                                            </td>
+                                            <td>
+                                                /@item.VideoUrl
+                                            </td>
+
+                                            <td style="text-align: center">
+
+                                                <a href="/Manage/Videos/Index/?id=@item.Id">
+                                                    <img src="~/img/IconMain/edit.png" width="19" title="Sửa" />
+                                                </a>
+                                                 <a href="/Manage/Videos/Delete/@item.Id" title="Xóa" onclick = "return confirm('Bạn có chắc chắn?');">
+                                                    <img src="~/img/IconMain/remove.png" width="19" title="Xóa" />
+                                                </a>
+                                            </td>
+                                        </tr>
+i++;
+                                    }
+                                </tbody>
+                            </table>
+ <div class="">
+                                    <div class="dataTables_info" id="dataTables-example_info" role="alert" aria-live="polite" aria-relevant="all">Hiển thị từ @Model.ItemStart đến @Model.ItemEnd của @Model.TotalItemCount bản ghi</div>
+                                </div>
+                                <div class="">
+                                    <div class="dataTables_paginate " id="dataTables-example_paginate">
+
+                                        @Html.Raw(Ajax.Pager(
+                                            new Options
+                                            {
+                                                PageSize = Model.PageSize,
+                                                TotalItemCount = Model.TotalItemCount,
+                                                CurrentPage = Model.PageNumber,
+                                                ItemTexts = new ItemTexts() { Next = "Next", Previous = "Previous", Page = "P" },
+                                                ItemIcon = new ItemIcon() { First = "icon-backward", Previous = "icon-chevron-left", Next = "icon-chevron-right", Last = "icon-forward" },
+                                                TooltipTitles = new TooltipTitles() { Next = "Next page", Previous = "Previous page", Page = "Page {0}." },
+                                                Size = Size.normal,
+                                                Alignment = Alignment.centered,
+                                                IsShowControls = true,
+                                                IsShowFirstLast = true,
+                                                CssClass = ""
+                                            },
+                                            new AjaxOptions
+                                            {
+                                                UpdateTargetId = "grid-list",
+                                                HttpMethod = "get",
+                                                LoadingElementId = "loading",
+                                                OnBegin = "beginPaging",
+                                                OnSuccess = "successPaging",
+                                                OnFailure = "failurePaging"
+                                            }, new { controller = "Videos", action = "Index", name = ViewBag.VideoName}))
+                                    </div>
+                                </div>
+             </div>
+}
+        </div>
+</div>

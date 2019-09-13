@@ -1,0 +1,361 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.ServiceModel;
+using System.Web;
+using System.Web.Mvc;
+using Business.ClassBusiness;
+using BuyGroup365.Areas.Manage.Models;
+using BuyGroup365.Models.Member;
+using Common;
+using Common.util;
+using MvcPaging;
+using BuyGroup365.Models.Member;
+
+namespace BuyGroup365.Areas.Manage.Controllers
+{
+    public class CategoryProductController : Controller
+    {
+        //
+        // GET: /Manage/CategoryProduct/
+        #region Khai bao biến
+
+        CatalogsBusiness _catalogsBusiness = new CatalogsBusiness();
+        readonly LoadCombo _loadCombo = new LoadCombo();
+        readonly ManufacturersBusiness _manufacturersBusiness = new ManufacturersBusiness();
+        readonly Catalogs_ManufacturersBusiness _catalogsManufacturersBusiness = new Catalogs_ManufacturersBusiness();
+        readonly CatalogPropertiesBusiness _catalogPropertiesBusiness = new CatalogPropertiesBusiness();
+        readonly CatalogPropertiesValueBusiness _catalogPropertiesValueBusiness = new CatalogPropertiesValueBusiness();
+
+        #endregion
+        #region Category
+
+
+        public ActionResult Index(string key, int? page)
+        {
+            try
+            {
+                ViewBag.statusCatg = _loadCombo.InitSelectListItemStatusCreateCategory();
+                List<LoadDropdown.DropdowCate> listDropdowCate = new List<LoadDropdown.DropdowCate>();
+                ViewBag.parent = _loadCombo.SearchCategoryByName(ref listDropdowCate);
+                ViewBag.manuface = _loadCombo.InitManufaceture();
+                ViewData["status"] = true;
+                ViewData["key"] = key;
+                int currentPageIndex = page.HasValue ? page.Value : 1;
+                List<Catalog> listcate = new List<Catalog>();
+                var listobj = _catalogsBusiness.SearchCategoryByName(ref listcate);
+                //     var list = _catalogsBusiness.GetDynamicQuery().ToList().ToPagedList(currentPageIndex, 20);
+                var list = listobj.ToPagedList(currentPageIndex, 20);
+
+                return View(list);
+            }
+            catch (FaultException ex)
+            {
+                var exep = Function.GetExeption(ex);
+                var codeExp = exep[1];
+                string url = "Error/ErrorFunction/" + codeExp;
+                return RedirectToActionPermanent(url);
+            }
+        }
+        [HttpPost]
+        public ActionResult CreateCate(string categoryname, HttpPostedFileBase icon, int statusCatg, int parent, string seoTitle, string seoKeyword, string seoDescription, string description)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    Random rd = new Random();
+                    Catalog obj = new Catalog();
+                    // obj.FriendlyUrl = Function.ConvertFileName(categoryname);
+                    obj.FriendlyUrl = Function.ConvertFileName(categoryname);
+                    obj.ParentId = parent;
+                    obj.Status = statusCatg;
+                    obj.CatalogName = categoryname;
+                    obj.Code = rd.Next(100000, 999999).ToString();
+                    if (icon != null && icon.ContentLength > 0)
+                    {
+                        // TourInfo entity=new TourInfo();
+                        //Random rdImage = new Random();
+                        string randomImage = Guid.NewGuid().ToString();
+                        //string fileNameImage = Common.util.Function.ConvertFileName(icon.FileName);
+                        string pathImage = HttpContext.Server.MapPath("~/FileUpload");
+                        var strurlimage = Common.util.Function.ResizeImageNew(icon, 300, 300, pathImage, randomImage);
+                        Common.util.Function.ResizeImageNew(icon, 500, 500, pathImage, randomImage);
+                        Common.util.Function.ResizeImageNew(icon, 1000, 1000, pathImage, randomImage);
+                      //  Common.util.Function.ReSizeImage(pathImage, fileNameImage, randomImage, 1000, 1000, icon);
+                        obj.Icon = strurlimage;
+                    }
+                   
+                    obj.SeoKeyword = seoKeyword;
+                    obj.SeoTitle = seoTitle;
+                    obj.SeoDescription = seoDescription;
+                    obj.Description = description;
+
+                    _catalogsBusiness.AddNew(obj);
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ModelState.AddModelError("","Tạo mới không thành công");
+                    return View();
+                }
+            }
+            catch (Exception ex)
+            {
+                //witrelog
+                throw;
+            }
+        }
+        //public ActionResult DeleteCategory(long id)
+        //{
+        //    try
+        //    {
+        //        if (id > 0)
+        //        {
+        //            //Thay đổi trạng thái danh mục 
+        //            //_catalogsBusiness.Remove(id);
+        //            //status: 1(active), 0(private)
+
+
+
+        //        }
+        //        return RedirectToAction("Index");
+        //    }
+        //    catch (Exception)
+        //    {
+        //        //write log
+        //        throw;
+        //    }
+        //}
+
+        public JsonResult GetManuface(long id)
+        {
+            try
+            {
+                var obj = _catalogsManufacturersBusiness.GetDynamicQuery().Where(x => x.CatalogId == id);
+                if (obj.Any())
+                {
+                    var htm = "";
+                    var index = 1;
+                    foreach (var item in obj)
+                    {
+                        htm += "<tr>" +
+                               "<td  style=\"text-align: center\">" + index + "</td> " +
+                               "<td>" + item.Manufacturer.ManufacturerName + "</td>" +
+                                "<td  style=\"text-align: center\"><input type=\"checkbox\" onclick=\"setValue('" + item.Id + "')\" id=\"ck" + item.Id + "\" name=\"inbox\" value=\"" + item.Id + "\"/></td>" +
+                               "</tr>";
+                        index++;
+
+                    }
+                    return Json(htm);
+                }
+                else
+                {
+                    return Json(2);
+                }
+            }
+            catch (Exception)
+            {
+                //witre long
+                return Json(0);
+                //    throw;
+            }
+        }
+
+        public JsonResult AddManuToCategory(long cateId, long manufaceid)
+        {
+            try
+            {
+                Catalogs_Manufacturers obj = new Catalogs_Manufacturers();
+                obj.CatalogId = cateId;
+                obj.ManufacturerId = manufaceid;
+                _catalogsManufacturersBusiness.AddNew(obj);
+
+                return Json(1);
+            }
+            catch (Exception)
+            {
+                return Json(0);
+                //write log
+                throw;
+            }
+        }
+
+        public JsonResult DeleteCateManu(string[] array)
+        {
+            try
+            {
+                if (array != null && array.Any())
+                {
+                    foreach (var s in array)
+                    {
+                        _catalogsManufacturersBusiness.Remove(long.Parse(s));
+                    }
+                    return Json(1);//thành công
+                }
+                else
+                {
+                    return Json(2);// chưa chon ô check
+                }
+            }
+            catch (Exception)
+            {
+                return Json(0);//lỗi
+                //write log
+                throw;
+            }
+        }
+
+        public ActionResult Properties(string key, int? page)
+        {
+            try
+            {
+
+                ViewData["status"] = true;
+                ViewData["key"] = key;
+                int currentPageIndex = page.HasValue ? page.Value : 1;
+
+                var list = _catalogPropertiesBusiness.GetDynamicQuery().ToList().ToPagedList(currentPageIndex, 20);
+
+                return View(list);
+            }
+            catch (FaultException ex)
+            {
+                var exep = Function.GetExeption(ex);
+                var codeExp = exep[1];
+                string url = "Error/ErrorFunction/" + codeExp;
+                return RedirectToActionPermanent(url);
+            }
+        }
+
+        public JsonResult GetProperty(long cateId)
+        {
+            try
+            {
+                var htm = "";
+                var property = _catalogPropertiesBusiness.GetDynamicQuery().Where(x => x.CatalogId == cateId);
+                foreach (var item in property)
+                {
+                    htm += "<div class=\"panel panel-default\">" +
+                          "<div class=\"panel-heading\">" +
+                          "<h3 class=\"panel-title\">" +
+                          "  <input type=\"text\" value=\"" + item.Name + "\" />" +
+                          " <input type=\"text\" value=\"" + item.Key + "\" />";
+                    if (item.Type == 1)
+                    {
+                        htm += "<label><input type=\"checkbox\" id =\"typeproperty\" value=\"1\">Is mumtile? </label></h3> </div>" +
+                           "<div class=\"panel-body\">";
+                    }
+                    else
+                    {
+                        htm += "<label><input type=\"checkbox\" id =\"typeproperty\" value=\"2\"  checked=\"checked\">Is mumtile? </label></h3> </div>" +
+                          "<div class=\"panel-body\">";
+                    }
+                    foreach (var item2 in item.CatalogPropertiesValues)
+                    {
+                        htm += "<p>+" + item2.Value + "</p>";
+                    }
+                    htm += " </div></div>";
+                }
+                return Json(htm);
+            }
+            catch (Exception)
+            {
+                //write log
+                return Json(0);
+                throw;
+            }
+
+
+
+        }
+        public JsonResult AddProperty(string nameproperty, int typevalue, long cate, string allvalue)
+        {
+            try
+            {
+                CatalogProperty objCatalogProperty = new CatalogProperty();
+                objCatalogProperty.CatalogId = cate;
+                objCatalogProperty.Type = typevalue;
+                objCatalogProperty.Name = nameproperty;
+                objCatalogProperty.Key = Function.ConvertFileName(nameproperty);
+                var vl = allvalue.TrimEnd('|');
+                var arrValue = vl.Split('|');
+                List<CatalogPropertiesValue> catalogPropertiesValues = new List<CatalogPropertiesValue>();
+                foreach (var s in arrValue)
+                {
+                    CatalogPropertiesValue objCatalogPropertiesValue = new CatalogPropertiesValue();
+                    objCatalogPropertiesValue.Value = s;
+                    catalogPropertiesValues.Add(objCatalogPropertiesValue);
+                }
+                objCatalogProperty.CatalogPropertiesValues = catalogPropertiesValues;
+                _catalogPropertiesBusiness.AddNew(objCatalogProperty);
+                return Json(1);//add susess
+            }
+            catch (Exception)
+            {
+                return Json(0);
+                //write log
+                throw;
+            }
+        }
+        #endregion
+
+
+        #region Manufaceture
+        public ActionResult Manufaceture(string key, int? page)
+        {
+            try
+            {
+
+                ViewData["status"] = true;
+                ViewData["key"] = key;
+                int currentPageIndex = page.HasValue ? page.Value : 1;
+
+                var list = _manufacturersBusiness.GetDynamicQuery().ToList().ToPagedList(currentPageIndex, 20);
+
+                return View(list);
+            }
+            catch (FaultException ex)
+            {
+                var exep = Function.GetExeption(ex);
+                var codeExp = exep[1];
+                string url = "Error/ErrorFunction/" + codeExp;
+                return RedirectToActionPermanent(url);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult CreateManufaceture(string manufaceturename, string dicription, HttpPostedFileBase icon)
+        {
+            try
+            {
+                Manufacturer obj = new Manufacturer();
+                obj.Code = Guid.NewGuid().ToString().Substring(0, 18);
+                obj.ManufacturerName = manufaceturename;
+                //     obj.Order = oder;
+                obj.Description = dicription;
+                if (icon != null && icon.ContentLength > 0)
+                {
+                    // TourInfo entity=new TourInfo();
+                    //Random rdImage = new Random();
+                    string randomImage = Guid.NewGuid().ToString();
+                    string fileNameImage = Common.util.Function.ConvertFileName(icon.FileName);
+                    string pathImage = HttpContext.Server.MapPath("~/FileUpload");
+                    var strurlimage = Common.util.Function.ResizeImageNew(icon, 300, 300, pathImage, randomImage);
+                    Common.util.Function.ResizeImageNew(icon, 500, 500, pathImage, randomImage);
+                    Common.util.Function.ResizeImageNew(icon, 1000, 1000, pathImage, randomImage);
+                    obj.Icon = strurlimage;
+                }
+                _manufacturersBusiness.AddNew(obj);
+                return RedirectToAction("Manufaceture");
+            }
+            catch (Exception ex)
+            {
+                // Write log
+                throw;
+            }
+        }
+        #endregion
+
+    }
+}

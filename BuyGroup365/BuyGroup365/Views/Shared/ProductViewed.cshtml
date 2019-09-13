@@ -1,0 +1,87 @@
+﻿@using Common
+@using Business.ClassBusiness;
+@using BuyGroup365.Models.Common
+
+
+
+<div class="section-view">
+    <div class="container">
+        <div class="col-md-12 last-view-products">
+            <div class="last-view-products-wrapper">
+                <div class="header-title">
+                    <h2>Sản phẩm vừa xem</h2>
+                </div>
+
+                <div class="row product-list">
+                    <div class="content-product-list products-view-owl owl-carousel not-dqowl owl-loaded owl-drag">
+                        @{
+
+                            List<long> ListProductViewed = BuyGroup365.Models.Member.NlCheckout.GetSessionProductViewed(Session).Take(3).ToList();
+                            ProductsBusiness productBusiness = new ProductsBusiness();
+                            int count = 0;
+                            string col = "";
+                            string img = "";
+                            string height = "", display = "";
+                            foreach (var re in ListProductViewed)
+                            {
+                                try
+                                {
+                                    Product item = productBusiness.GetById(re);
+                                    count++;
+
+                                    img = "Small";
+                                    col = "4";
+                                    height = ""; display = "";
+                                    string imgPro = "";
+                                    try
+                                    {
+
+                                        // imgPro = item.ProductImages.;
+                                    }
+                                    catch { }
+                                    int phantramKM = 0;
+                                    try
+                                    {
+                                        phantramKM = Convert.ToInt32((item.Cost - item.Price) / item.Cost * 100);
+                                    }
+                                    catch { }
+
+                                    <div class="product-box pro-loop item">
+                                        <div class="product-block product-resize">
+                                            <div class="product-img view view-third product-media">
+                                                <a href="@Util.ReturnLinkFull(@item.FriendlyUrl)" title="@item.ProductName">
+                                                    <div class="mask">
+                                                        <img src="@Util.ReturnLinkCDN(imgPro,Request.Browser.IsMobileDevice)" data-handle="@item.ProductName" alt="@item.ProductName">
+                                                    </div>
+                                                    <img alt="Bộ Olive chăm sóc da DHC Olive Skin Care Set" src="@Util.ReturnLinkCDN(imgPro,Request.Browser.IsMobileDevice)">
+                                                    <span class="prod-tag tag-1">phantramKM%</span>
+                                                </a>
+
+                                            </div>
+
+                                            <div class="product-detail clearfix product-caption">
+                                                <h3 class="pro-name product-title"><a href="@Util.ReturnLinkFull(@item.FriendlyUrl)" title="@item.ProductName">@item.ProductName</a></h3>
+                                                <div class="price">
+                                                    <strong class="pro-price clr-txt">@(String.Format("{0:#,###}", item.Price))₫</strong>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                }
+                                catch { }
+                            }
+
+                        }
+
+
+                    </div>
+
+                </div>
+            </div><div class="owl-nav disabled"><div class="owl-prev disabled">prev</div><div class="owl-next disabled">next</div></div><div class="owl-dots disabled"></div>
+        </div>
+
+
+    </div>
+</div>

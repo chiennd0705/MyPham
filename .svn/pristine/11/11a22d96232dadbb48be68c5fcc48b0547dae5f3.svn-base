@@ -1,0 +1,51 @@
+﻿@using Business.ClassBusiness
+@using BuyGroup365.Models.Member
+@using Common.util
+@model List<ProductItem>
+<ul class="row" style="  width: 1500px;">
+    @foreach (var item in Model)
+{
+    <li class="per-product product-item">
+        <div class="images-container">
+            <div class="product-hover">
+                <a href="@Function.InitUrlDetaiProduct(item.FriendlyUrl, item.Id)" title="" class="product-image"><img class="img-responsive" src="@FuntionMember.GetUrlImage(item.Img1, "Small")" alt="@item.ProductName"></a>
+            </div>
+            <div class="actions-no hover-box">
+                <a class="detail_links" href="@Function.InitUrlDetaiProduct(item.FriendlyUrl, item.Id)"></a>
+               
+            </div>
+        </div>
+        <div class="products-textlink clearfix" style="min-height: 170px">
+            <h2 class="product-name"><a href="@Function.InitUrlDetaiProduct(item.FriendlyUrl, item.Id)" title="">@item.ProductName</a></h2>
+            <div class="price-box"><p class="old-price"><span class="price">@item.Cost<sup class="u-price">đ</sup></span></p><p class="special-price"><span class="price" itemprop="price">@item.Price<sup class="u-price">đ</sup></span></p></div>
+            <div class="ratings">
+                <div class="rating-box">
+                    <div class="rating" style="width:@item.Rate%"></div>
+                </div>
+            </div>
+            <div class="price-box"><p class="old-price">
+                                       Cân nặng : @item.Weight gram
+                                   </p>
+            </div>
+            <div class="price-box">
+                <p class="old-price">
+                    Lượt xem : @item.TotalView
+                </p>
+            </div>
+            <div class="actions">
+                <a href="javarscript:;" onclick="SetWishlist(25)" title="Add to Wishlist" class="btn btn-primary btn-sm" ><i class="fa fa-heart-o icons"></i>Add to Wishlist</a>
+                
+            </div>
+          
+        </div>
+        <div class="" style="min-height: 220px; padding-left: 5px;padding-right: 2px; text-align: justify;">
+            <p class="old-price">
+                @{ var a = new ProductsBusiness().GetById(item.Id).Summary;}
+                @Html.Raw(a)
+            </p>
+        </div>
+    </li>
+}
+
+</ul>
+

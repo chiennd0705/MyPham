@@ -1,0 +1,67 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Reflection;
+using Business.bases;
+using Common;
+using Common.exception;
+using DataAccess.DAO;
+using log4net;
+
+namespace Business.ClassBusiness
+{
+    public class UserGroupRoleBusiness : AbstractBaseBusiness<UserGroupRole, long>
+    {
+        private readonly ILog _logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        public UserGroupRoleBusiness()
+            : base(new UserGroupRoleDao())
+        {
+            daoLayer.DataContext = DataContext;
+        }
+
+        public override void AddNew(UserGroupRole obj)
+        {
+            base.AddNew(obj);
+            DataContext.SaveChanges();
+        }
+
+        public override void Edit(UserGroupRole obj)
+        {
+            base.Edit(obj);
+            DataContext.SaveChanges();
+        }
+
+        public override void Remove(long id)
+        {
+            base.Remove(id);
+            DataContext.SaveChanges();
+        }
+
+        /// <summary>
+        /// Phương thức lọc user_group_role theo group_id
+        /// </summary>
+        /// <param name="groupId">GroupId</param>
+        /// <returns>Danh sách user_group_role</returns>
+        
+        public List<UserGroupRole> GetByGroupId(long groupId)
+        {
+            try
+            {
+                IQueryable<UserGroupRole> query = GetDynamicQuery();
+                return query.Where(p => p.UserGroupId == groupId).ToList();
+
+            }
+            catch (SqlException ex)
+            {
+                _logger.Error("", ex);
+                throw ObjectUtil.CreateFaultException(CodedException.SqlExceptionUnhandler, "Sql Exeption");
+            }
+            catch (Exception ex)
+            {
+                _logger.Error("", ex);
+                throw ObjectUtil.CreateFaultException(CodedException.Unhandler, "Unhandler Exception");
+            }
+        }
+    }
+}

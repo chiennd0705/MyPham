@@ -1,0 +1,368 @@
+﻿@using BuyGroup365.Areas.Manage.Models
+@using MvcPaging
+@using Common
+@using Business.ClassBusiness;
+@model IPagedList<Common.SystemSetting>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Manage/Views/Shared/_LayoutAdmincshtml.cshtml";
+
+}
+
+<div class="container-fluid" ng-app="body">
+    <!-- Page Heading -->
+    <div class="row" ng-controller="header">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                Quản lý danh mục sản phẩm
+            </h1>
+        </div>
+    </div>
+    <!-- /.row -->
+    <!-- /.row -->
+    <!-- /.row -->
+    <div class="row" ng-controller="Index">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <i class="fa fa-bar-chart-o fa-fw"></i> Danh mục cấu hình web
+                        <span style="float: right">
+                            <a class="glyphicon glyphicon-plus-sign" data-toggle="modal" data-target="#myModal">
+                            </a>
+                        </span>
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    @using (Ajax.BeginForm("Index", "WebSetting",
+                        new AjaxOptions { UpdateTargetId = "grid-list", HttpMethod = "get", LoadingElementId = "loading", OnBegin = "beginPaging", OnSuccess = "successPaging", OnFailure = "failurePaging" },
+                        new { id = "frm-search" }))
+                    {
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group input-group">
+                                    <input type="text" value="@ViewData["key"]" class="form-control" id="appendedInputButton" name="key" placeholder="Nhập từ khóa tìm kiếm" style="width:80%">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="submit">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover table-striped" id="dataTables" aria-describedby="dataTables-example_info">
+                                <thead>
+                                    <tr role="row">
+                                        <th>
+                                            STT
+                                        </th>
+                                        <th>
+                                            Tiêu đề
+                                        </th>
+                                        <th>
+                                            Key
+                                        </th>
+
+                                        @*<th>
+                                               Value
+                                            </th>*@
+                                        <th>
+                                            Date create
+                                        </th>
+                                        <th style="width: auto">Chức năng</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{ var dem = 1;}
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @dem
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Title)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Key)
+                                            </td>
+
+                                            @*<td>
+                                                    @Html.DisplayFor(modelItem => item.Value)
+                                                </td>*@
+
+                                            <td>
+                                                @item.CreateDate.ToString("dd/MM/yyyy HH:mm:ss")
+                                            </td>
+
+                                            <td style="text-align: center">
+
+                                                <a href="javarscript:;" data-toggle="modal" data-target="#EditModal" data-ng-click="GetWebsettingByID(@item.Id)">
+                                                    <img src="~/img/IconMain/edit.ico" width="20" />  Edit
+                                                </a>|
+                                                @*@Html.ActionLink(" ", "" + "" + "DeleteCategory", new { id = item.Id }, new { @class = "glyphicon glyphicon-trash", onclick = "return confirm('Are you ready?');" })*@
+                                                <a href="#" class="glyphicon glyphicon-trash" data-ng-click="DeleteSettingByID(@item.Id)">Xóa</a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                            <div class="row">
+                                <div class="">
+                                    <div class="dataTables_info" id="dataTables-example_info" role="alert" aria-live="polite" aria-relevant="all">Hiển thị từ @Model.ItemStart đến @Model.ItemEnd của @Model.TotalItemCount bản ghi</div>
+                                </div>
+                                <div class="">
+                                    <div class="dataTables_paginate " id="dataTables-example_paginate">
+
+                                        @Html.Raw(Ajax.Pager(
+                                            new Options
+                                            {
+                                                PageSize = Model.PageSize,
+                                                TotalItemCount = Model.TotalItemCount,
+                                                CurrentPage = Model.PageNumber,
+                                                ItemTexts = new ItemTexts() { Next = "Next", Previous = "Previous", Page = "P" },
+                                                ItemIcon = new ItemIcon() { First = "icon-backward", Previous = "icon-chevron-left", Next = "icon-chevron-right", Last = "icon-forward" },
+                                                TooltipTitles = new TooltipTitles() { Next = "Next page", Previous = "Previous page", Page = "Page {0}." },
+                                                Size = Size.normal,
+                                                Alignment = Alignment.centered,
+                                                IsShowControls = true,
+                                                IsShowFirstLast = true,
+                                                CssClass = ""
+                                            },
+                                            new AjaxOptions
+                                            {
+                                                UpdateTargetId = "grid-list",
+                                                HttpMethod = "get",
+                                                LoadingElementId = "loading",
+                                                OnBegin = "beginPaging",
+                                                OnSuccess = "successPaging",
+                                                OnFailure = "failurePaging"
+                                            }, new { controller = "CategoryProduct", action = "Index", key = ViewData["key"] }))
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- /.row -->
+        <!-- /.row -->
+        @*Create*@
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                @using (Html.BeginForm("Create", "WebSetting", FormMethod.Post, new { enctype = "multipart/form-data", id = "CreateCate" }))
+                {
+                    @Html.ValidationSummary(true)
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Tạo cấu hình hệ thống</h4>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="row">
+                                <div class="form-group">
+                                    <label>Tiêu đề<span class="required">*</span></label><br />
+                                    <input class="form-control" autocomplete="off" maxlength="100" data-val-required="Mời nhập tên tiêu đề" required id="title" name="title" type="text">
+                                    <span class="field-validation-valid" data-valmsg-for="title" data-valmsg-replace="true"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label>Key<span class="required">*</span></label><br />
+                                    <input class="form-control" autocomplete="off" maxlength="100" data-val-required="Mời nhập key" required id="key" name="key" type="text">
+                                    <span class="field-validation-valid" data-valmsg-for="key" data-valmsg-replace="true"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label>Value<span class="required">*</span></label><br />
+                                    <input class="form-control" maxlength="200" id="valuesystem" name="valuesystem" />
+                                </div>
+                                <div class="form-group">
+                                    <label>Mô tả<span class="required">*</span></label><br />
+                                    <input class="form-control" maxlength="200" id="des" name="des" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Thêm mới</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        @*Endcreate*@
+
+        @*Edit Category*@
+        <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="EditModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Cập nhật hệ thống</h4>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" autocomplete="off" id="Id" name="Id" data-ng-model="emp.Id">
+
+                        <div class="row">
+                            <div class="form-group">
+                                <label>Tiêu đề<span class="required">*</span></label><br />
+                                <input class="form-control" autocomplete="off" maxlength="100" data-val-required="Mời nhập tên tiêu đề" required id="Title" name="Title" type="text" data-ng-model="emp.Title">
+                                <span class="field-validation-valid" data-valmsg-for="Title" data-valmsg-replace="true"></span>
+                            </div>
+                            <div class="form-group">
+                                <label>Key<span class="required">*</span></label><br />
+                                <input class="form-control" autocomplete="off" maxlength="100" data-val-required="Mời nhập key" disabled required id="Key" name="Key" type="text" data-ng-model="emp.Key">
+                                <span class="field-validation-valid" data-valmsg-for="key" data-valmsg-replace="true"></span>
+                            </div>
+                            <div class="form-group">
+                                <label>Value<span class="required">*</span></label><br />
+                                <input class="form-control" maxlength="200" id="Value" name="Value" data-ng-model="emp.Value" />
+                            </div>
+                            <div class="form-group">
+                                <label>Mô tả<span class="required">*</span></label><br />
+                                <input class="form-control" maxlength="200" id="des" name="DesCription" data-ng-model="emp.DesCription" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" ng-click="UpdateWebSetting()">cập nhật</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @*Kêt thúc cập nhật*@
+    </div>
+    @*End*@
+</div>
+<script>
+    function beginPaging(args) {
+        // Animatek
+        $('#grid-list').fadeOut('normal');
+    }
+
+    function successPaging() {
+        // Animate
+        $('#grid-list').fadeIn('normal');
+        $('a').tooltip();
+    }
+
+    function failurePaging() {
+        alert("Could not retrieve list.");
+    }
+</script>
+
+<script type="text/javascript">
+    $(function () {
+        $("#datepicker1").datepicker();
+        $("#dob").datepicker(
+
+            {
+                changeMonth: true,
+                changeYear: true,
+                showButtonPanel: true,
+                yearRange: "-0:+15"
+            });
+
+    });
+</script>
+<script type="text/javascript">
+    angular.module("body", []).controller("header", function ($scope) {
+        //   $scope.quanlyuser = "Câp nhật thái";
+    }).controller("Index", function ($scope) {
+
+        $scope.emp = {
+            Id: '',
+            Title: '',
+            Key: '',
+            Value: '',
+            DesCription: ''
+        };
+
+        $scope.GetWebsettingByID = function (id) {
+
+            $('#overbackgroud').show();
+
+            $.ajax({
+                type: 'GET',
+                data: {
+                    'id': id
+                },
+
+                contentType: 'application/json; charset=utf-8',
+                url: '@Url.Action("GetSettingByID", "Json")',
+                success: function (res) {
+
+                    $scope.emp.Id = res.Id;
+                    $scope.emp.Title = res.Title;
+                    $scope.emp.Key = res.Key;
+                    $scope.emp.Value = res.Value;
+                    $scope.emp.DesCription = res.DesCription;
+
+                    $scope.$apply();
+                    $('#overbackgroud').hide();
+                },
+                error: function () {
+
+                }
+            });
+
+        };
+        $scope.UpdateWebSetting = function () {
+            $('#overbackgroud').show();
+            $scope.emp.Id=
+            $.ajax({
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify($scope.emp),
+                url: '@Url.Action("UpdateWebSetting", "Json")',
+                success: function (data) {
+                    if (data == 1) {
+                        alert("Cập nhật thành công");
+                        window.location.href = "/Manage/WebSetting/Index";
+                        //     $scope.GetInfoUser();
+                    }
+
+                },
+                error: function (status) { }
+            });
+        };
+
+        $scope.DeleteSettingByID = function (id) {
+
+            $('#overbackgroud').show();
+
+            $.ajax({
+                 url: '@Url.Action("DeleteSettingByID", "Json")',
+                type: 'POST',
+                data: {
+                    'id': id
+                },
+                dataType: "json",
+                type: "POST",
+                traditional: true ,
+                success: function (data) {
+                    if (data == 1) {
+                        alert("Cập nhật thành công");
+                        window.location.href = "/Manage/WebSetting/Index";
+                        //     $scope.GetInfoUser();
+                    }
+
+                },
+                error: function () {
+
+                }
+            });
+
+        };
+    });
+</script>
+
+<style>
+    select {
+        width: 100%;
+    }
+</style>

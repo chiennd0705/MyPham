@@ -1,0 +1,79 @@
+
+a.logo {
+	background: url(//theme.hstatic.net/1000186358/1000470071/14/logo_mb.png?v=1527);
+	background-size: cover;
+	width: 197px;
+	height: 72px;
+	z-index: 99;
+}
+.logo-text {
+	color: #333333;
+	font-size: 0;
+}
+.order-summary-section.order-summary-section-total-lines:after {
+	content: 'DHC sẽ XÁC NHẬN đơn hàng bằng TIN NHẮN SMS hoặc GỌI ĐIỆN. Bạn vui lòng kiểm tra TIN NHẮN hoặc NGHE MÁY ngay khi đặt hàng thành công và CHỜ NHẬN HÀNG';
+	font-size: 14px;
+	font-weight: 400;
+	padding: 10px;
+	border: 1px solid #f77705;
+	line-height: 18px;
+	margin: 0;
+	margin-top: 30px;
+	display: inline-block;
+	width: 95%;
+}
+.content-box .radio-wrapper.content-box-row:nth-child(2) span, .content-box .radio-wrapper.content-box-row:nth-child(4) span{
+	margin-left: 100px;
+	display: block;
+	position: relative;
+}
+.content-box .radio-wrapper.content-box-row:nth-child(2) span:before {
+	content: '';
+	position: absolute;
+	background: url(' https://file.hstatic.net/1000186358/file/napas_df6c81d963a545cfb6002b152db89704.png') no-repeat;
+	height: 25px;
+	width: 65px;
+	background-size: 100%;
+	left: -70px;
+	top: -3px;
+}
+.content-box .radio-wrapper.content-box-row:nth-child(4) span:before{
+	content: '';
+	position: absolute;
+	background: url('https://file.hstatic.net/1000186358/file/ico_vnpay_cdd6f5e19f824ac3921cd5005d714ac1.jpg') no-repeat;
+	height: 25px;
+	width: 65px;
+	background-size: 100%;
+	left: -70px;
+	top: 0px;
+}
+.content-box .radio-wrapper.content-box-row:nth-child(5) span  {
+	margin-left: 70px;
+	display: block;
+	position: relative;
+}
+.content-box .radio-wrapper.content-box-row:nth-child(5) span:before {
+	content: '';
+	position: absolute;
+	background: url(' https://file.hstatic.net/1000186358/file/momo_b419ad13f34d499bba4314b9bdefb199.png') no-repeat;
+	height: 30px;
+	width: 30px;
+	background-size: 100%;
+	left: -40px;
+	top: -7px;
+}
+.radio-wrapper .radio-input, .checkbox-wrapper .checkbox-input {
+	display: initial !important;
+	padding-right: 0.75em;
+	white-space: initial !important;
+	float: left;
+}
+
+
+
+
+
+
+
+
+

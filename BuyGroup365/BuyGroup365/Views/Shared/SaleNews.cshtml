@@ -1,0 +1,30 @@
+﻿@using Common
+@using Business.ClassBusiness;
+@using DataAccess;
+@using Common;
+@using Business;
+@using Business.ClassBusiness;
+
+<div class="txtbanner">
+    <div style="float:left;width:73%;">
+        <span id="dot"><span class="ping"></span></span>
+
+        @{
+            //List<Common.News> listNew = new List<News>();
+            NewsBusiness newsBusiness3 = new NewsBusiness();
+            var listNew3 = newsBusiness3.ListByNewsIdNewsGroupActive(10027, 3);
+            foreach (var news in listNew3)
+            {
+                if (@news.Title.Length > 30)
+                { <a href="/@news.FriendlyUrl">@news.Title.Substring(0, 30)</a>}
+                else
+                {  <a href="/@news.FriendlyUrl">@news.Title</a>}
+
+            }
+        }
+    </div>
+    <div style="float:left;width:27%;">
+
+        @Html.Action("GetByCodeHtml", "Partial", new { Code = "HotlineMenu" })
+    </div>
+</div>

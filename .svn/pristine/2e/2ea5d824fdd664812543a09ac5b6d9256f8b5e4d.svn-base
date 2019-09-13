@@ -1,0 +1,85 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace FluentValidationTester.Models
+{
+    public class CustomerRepository
+    {
+        private List<Customer> CustomerData = new List<Customer> 
+        {             
+            new Customer { CustomerID = 1, CompanyName = "ABC", EmailAddress = "luis@abc.com", FirstName = "Luis", LastName = "Silverio", ModifiedDate = new DateTime(2011,1,1), Phone = "123" },
+            new Customer { CustomerID = 2, CompanyName = "DEF", EmailAddress = "costa@def.com", FirstName = "Pedro", LastName = "Costa", ModifiedDate = new DateTime(2012,4,8), Phone = "1233" },
+            new Customer { CustomerID = 3, CompanyName = "DEF", EmailAddress = "sousa@def.com", FirstName = "Rui", LastName = "Sousa", ModifiedDate = new DateTime(2012,4,10), Phone = "1233" },
+            new Customer { CustomerID = 4, CompanyName = "ABC", EmailAddress = "costa@abc.com", FirstName = "Rui", LastName = "Costa", ModifiedDate = new DateTime(2012,5,20), Phone = "217349000" },
+            new Customer { CustomerID = 5, CompanyName = "ABC", EmailAddress = "luis1@abc.com", FirstName = "Luis", LastName = "Silverio 1", ModifiedDate = new DateTime(2011,1,1), Phone = "123" },
+            new Customer { CustomerID = 6, CompanyName = "DEF", EmailAddress = "costa1@def.com", FirstName = "Pedro", LastName = "Costa 1", ModifiedDate = new DateTime(2012,4,8), Phone = "1233" },
+            new Customer { CustomerID = 7, CompanyName = "DEF", EmailAddress = "sousa1@def.com", FirstName = "Rui", LastName = "Sousa 1", ModifiedDate = new DateTime(2012,4,10), Phone = "1233" },
+            new Customer { CustomerID = 8, CompanyName = "ABC", EmailAddress = "luis2@abc.com", FirstName = "Luis", LastName = "Silverio 2", ModifiedDate = new DateTime(2011,1,1), Phone = "123" },
+            new Customer { CustomerID = 9, CompanyName = "DEF", EmailAddress = "costa2@def.com", FirstName = "Pedro", LastName = "Costa 2", ModifiedDate = new DateTime(2012,4,8), Phone = "1233" },
+            new Customer { CustomerID = 10, CompanyName = "DEF", EmailAddress = "sousa2@def.com", FirstName = "Rui", LastName = "Sousa 2", ModifiedDate = new DateTime(2012,4,10), Phone = "1233" },
+            new Customer { CustomerID = 11, CompanyName = "ABC", EmailAddress = "luis3@abc.com", FirstName = "Luis", LastName = "Silverio 3", ModifiedDate = new DateTime(2011,1,1), Phone = "123" },
+            new Customer { CustomerID = 12, CompanyName = "DEF", EmailAddress = "costa3@def.com", FirstName = "Pedro", LastName = "Costa 3", ModifiedDate = new DateTime(2012,4,8), Phone = "1233" },
+            new Customer { CustomerID = 13, CompanyName = "DEF", EmailAddress = "sousa3@def.com", FirstName = "Rui", LastName = "Sousa 3", ModifiedDate = new DateTime(2012,4,10), Phone = "1233" },
+        };
+
+        public CustomerRepository()
+        {
+        }
+
+        public List<Customer> List(string name, string company, string sortColumn, string sortOrder)
+        {
+            var q = from c in CustomerData
+                    select c;
+
+            if (!string.IsNullOrEmpty(name))
+            {
+                q = q.Where(c => c.FirstName.ToLower().Contains(name.ToLower()) || c.LastName.ToLower().Contains(name.ToLower())); 
+            }
+            if (!string.IsNullOrEmpty(company))
+            {
+                q = q.Where(c => c.CompanyName.ToLower().Contains(company.ToLower()) || c.CompanyName.ToLower().Contains(company.ToLower()));
+            }
+
+            switch (sortColumn)
+            {
+                case "CustomerId":
+                    q = (sortOrder == "desc") ? q.OrderByDescending(c => c.CustomerID) : q.OrderBy(c => c.CustomerID);
+                    break;
+                case "Name":
+                    q = (sortOrder == "desc") ? q.OrderByDescending(c => c.FirstName) : q.OrderBy(c => c.FirstName);
+                    break;
+                case "Company":
+                    q = (sortOrder == "desc") ? q.OrderByDescending(c => c.CompanyName) : q.OrderBy(c => c.CompanyName);
+                    break;
+                case "Email Address":
+                    q = (sortOrder == "desc") ? q.OrderByDescending(c => c.EmailAddress) : q.OrderBy(c => c.EmailAddress);
+                    break;
+                case "Last Modified":
+                    q = (sortOrder == "desc") ? q.OrderByDescending(c => c.ModifiedDate) : q.OrderBy(c => c.ModifiedDate);
+                    break;
+                case "Telephone":
+                    q = (sortOrder == "desc") ? q.OrderByDescending(c => c.Phone) : q.OrderBy(c => c.Phone);
+                    break;
+                default:
+                break;
+            }
+
+
+            return q.ToList();
+        }
+
+        internal Customer Get(int? id)
+        {
+            if (id.GetValueOrDefault(0) > 0)
+            {
+                return CustomerData[id.Value];
+            }
+            else
+            {
+                return null;
+            }
+        }
+    }
+}

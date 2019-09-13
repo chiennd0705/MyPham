@@ -1,0 +1,134 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="Default Description">
+    <meta name="keywords" content="Magento, Varien, E-commerce">
+    <meta name="robots" content="NOINDEX,NOFOLLOW">
+    <link rel="SHORTCUT ICON" href="/Content/Csspublic/images/favicon.ico" />
+
+    <link href="/Content/Csspublic/css/" rel="stylesheet" type="text/css">
+    <link href="~/Content/css/reset.css" rel="stylesheet" />
+    <link href="~/Content/css/root.css" rel="stylesheet" />
+    <link href="~/Content/css/paging.css" rel="stylesheet" />
+    <link href="~/Content/css/jquery-ui.css" rel="stylesheet" />
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/css/jquery.datetimepicker.css" rel="stylesheet" />
+    <link href="/Content/css/plugins/dataTables.bootstrap.css" rel="stylesheet">
+    <link href="~/Content/font-awesome-4.1.0/css/font-awesome.css" rel="stylesheet" />
+    <link href="~/Content/font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="/Content/Csspublic/css/bootstrap.min.css" media="all">
+    <link rel="stylesheet" type="text/css" href="/Content/Csspublic/css/styles.css" media="all">
+    <link rel="stylesheet" type="text/css" href="/Content/Csspublic/css/magicmenu.css" media="all">
+    <link rel="stylesheet" type="text/css" href="/Content/Csspublic/css/jquery.fancybox.css" media="all">
+    <link rel="stylesheet" type="text/css" href="/Content/Csspublic/css/ajaxcart.css" media="all">
+    <link rel="stylesheet" type="text/css" href="/Content/Csspublic/css/quickview.css" media="all">
+    <link href="~/Content/Csspublic/css/StyleExt.css" rel="stylesheet" />
+    <script type="text/javascript" src="/Content/Csspublic/js/prototype.js"></script>
+    <script type="text/javascript" src="/Content/Csspublic/js/validation.js"></script>
+
+    <script type="text/javascript" src="/Content/Csspublic/js/builder.js"></script>
+    <script type="text/javascript" src="/Content/Csspublic/js/effects.js"></script>
+    <script type="text/javascript" src="/Content/Csspublic/js/dragdrop.js"></script>
+    <script type="text/javascript" src="/Content/Csspublic/js/controls.js"></script>
+    <script type="text/javascript" src="/Content/Csspublic/js/slider.js"></script>
+    <script type="text/javascript" src="/Content/Csspublic/js/js.js"></script>
+    <script type="text/javascript" src="/Content/Csspublic/js/form.js"></script>
+    <script type="text/javascript" src="/Content/Csspublic/js/menu.js"></script>
+    @*<script src="~/Scripts/jquery-2.0.0.min.js"></script>*@
+
+    @*<script src="~/Scripts/jquery-ui-1.8.20.min.js"></script>
+    <script type="text/javascript" src="/Content/Csspublic/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/Content/Csspublic/js/jquery.min.js"></script>
+    <script src="~/Scripts/jquery.ui.slider.js"></script>
+    <script src="~/Scripts/jquery.ui.datepicker.js"></script>*@
+
+    <script src="~/Scripts/jquery-2.0.0.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.8.20.min.js"></script>
+    <script src="~/Scripts/jquery.min.js"></script>
+    <script type="text/javascript" src="/Content/Csspublic/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/Content/Csspublic/js/jquery.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.8.11.custom.min.js"></script>
+    <script src="~/Scripts/jquery.ui.slider.js"></script>
+    <script src="~/Scripts/jquery.ui.datepicker.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="/Content/Csspublic/css/responsive.css" media="all">
+    <script type="text/javascript" src="/Content/Csspublic/js/jquery.alothemes.js"></script>
+    <script type="text/javascript" src="/Content/Csspublic/js/magicproduct.js"></script>
+    <script type="text/javascript" src="/Content/Csspublic/js/jquery.meanmenu.hack.js"></script>
+    <script type="text/javascript" src="/Content/Csspublic/js/magicaccordion.js"></script>
+    <script type="text/javascript" src="/Content/Csspublic/js/magicmenu.js"></script>
+    <script type="text/javascript" src="/Content/Csspublic/js/jquery.fancybox.pack.js"></script>
+    <script type="text/javascript" src="/Content/Csspublic/js/quickview.js"></script>
+    <script type="text/javascript" src="/Content/Csspublic/js/ajaxcart.js"></script>
+    <script type="text/javascript" src="/Content/Csspublic/js/product.js"></script>
+    <script src="~/Content/css/ckeditor/ckeditor.js"></script>
+    <script src="~/Content/css/ckeditor/samples/js/sample.js"></script>
+
+    <!--[if lt IE 9]>
+        <script type="text/javascript" src="/Content/Csspublic/fix/html5shiv.js"></script>
+        <script type="text/javascript" src="/Content/Csspublic/fix/respond.min.js"></script>
+    <![endif]-->
+    <!--[if lt IE 7]>
+        <script type="text/javascript" src="/Content/Csspublic/fix/lte-ie7.js"></script>
+        <script type="text/javascript" src="/Content/Csspublic/fixds-sleight.js"></script>
+        <script type="text/javascript" src="/Content/Csspublic/fix/ie6.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+        <link rel="stylesheet" type="text/css" href="/Content/Csspublic/fix/styles-ie.css" media="all" />
+    <![endif]-->
+    <script type="text/javascript"> Themecfg = { "general": { "enabled": "1", "jquery": "1", "ajaxloading": "http:\/\/alothemes.com\/demo\/kuteshop\/skin\/frontend\/alokuteshop\/default\/images\/opc-ajax-loader.gif", "baseUrl": "http:\/\/alothemes.com\/demo\/kuteshop\/index.php\/" }, "home": "\n            ", "list": { "portrait": "2", "landscape": "2", "tablet": "3", "desktop": "2", "visibleItems": "3", "widthImages": "300", "heightImages": "366", "height_images": "250", "width_images": "200" }, "detail": { "imageWidth": "800", "zoomWidth": "500", "zoomHeight": "700", "zoomInner": "1", "lightBox": "1", "slide": "1", "vertical": "0", "auto": "0", "controls": "1", "pager": "0", "slideMargin": "20", "slideWidth": "100", "portrait": "3", "landscape": "3", "tablet": "3", "desktop": "3", "visibleItems": "3", "relatedSlide": "horizontal", "relatedLimit": "10", "upsellSlide": "horizontal", "upsellLimit": "10", "inforTabs": "1", "activeTab": "box-description", "showTitle": "1", "adjustX": "10", "adjustY": "0", "thumbWidth": "100", "thumbHeight": "122", "imageHeight": "", "thumbSlide": "horizontal", "speed": "1000", "pause": "100" }, "related": { "slide": "1", "vertical": "0", "auto": "0", "controls": "1", "pager": "0", "speed": "1000", "pause": "100", "slideMargin": "20", "slideWidth": "278", "portrait": "1", "landscape": "2", "tablet": "2", "desktop": "3", "visibleItems": "3" }, "upsell": { "slide": "1", "vertical": "0", "auto": "0", "controls": "1", "pager": "0", "speed": "1000", "pause": "100", "slideMargin": "20", "slideWidth": "278", "portrait": "1", "landscape": "2", "tablet": "2", "desktop": "3", "visibleItems": "3" }, "crosssell": { "slide": "1", "vertical": "0", "auto": "0", "controls": "1", "pager": "0", "speed": "1000", "pause": "100", "slideMargin": "20", "slideWidth": "278", "portrait": "1", "landscape": "2", "tablet": "3", "desktop": "4", "visibleItems": "4" }, "labels": { "newLabel": "1", "newText": "New", "saleLabel": "1", "saleText": "Sale", "salePercent": "1" }, "timer": { "enabled": "1", "titleColor": "", "timerColor": "", "caption": "1", "captionColor": "" }, "color": { "page_color": "#777777", "page_background": "#ffffff", "link_color": "#777777", "link_color_hover": "#ffa800", "link_color_active": "#ffa800", "button_color": "#ffffff", "button_color_hover": "#ffffff", "button_background": "#434343", "button_background_hover": "#ffa800", "labelnew_color": "#ffffff", "labelnew_background": "#ffa800", "labelsale_color": "#ffffff", "labelsale_background": "#ee3434" }, "newsletter": { "enabled": "1", "firstOnly": "0", "timeDelay": "5000", "autoClose": "0", "timeClose": "10000", "width": "800", "height": "500", "overlayColor": "#353535", "background_color": "#ffffff", "background_image": "default\/popup.jpg" }, "categorysearch": { "enabled": "1", "select_category_on_category_pages": "0", "show_subcategories": "1", "subcategories_level": "3", "indentation_text": "-" }, "checkout": { "crosssellsSlide": "1" } }</script>
+    <script type="text/javascript">
+        //<![CDATA[
+        if (typeof MC == 'undefined') MC = {};
+        MC.Quickview = { "dialogWidth": "800", "zoomWidth": "265", "zoomHeight": "265", "vertical": "1" };
+
+        jQuery(document).ready(function ($) {
+            jQuery(document).magiccart({ "url": "http:\/\/alothemes.com\/demo\/kuteshop\/index.php\/magicshop\/ajax\/index\/", "updateUrl": "http:\/\/alothemes.com\/demo\/kuteshop\/index.php\/checkout\/cart\/updatePost\/", "src_image_progress": "http:\/\/alothemes.com\/demo\/kuteshop\/skin\/frontend\/alokuteshop\/default\/magiccart\/magicshop\/images\/loading.gif", "error": " \u2191 This is a required field.", "isProductView": 0 });
+        });
+        //]]
+    </script>
+</head>
+<body class=" customer-account-login">
+    <div class="social-icons right" style="margin-top: 100px">
+    </div>
+
+    <div class="wrapper">
+
+        <div class="page">
+            @Html.Partial("_PartialHeader")
+
+            <div class="container" style="margin-top: 5px">
+                <div class="overbackgroud" id="overbackgroud" style="display: none;">
+                    <img src="/img/loading/6.gif" style="position: relative; top: 44%; left: 46%" />
+                </div>
+                <div class="bground pages-user">
+                    <div class="top-bg-user"></div>
+                    <div class="row" style="margin-top: 10px">
+                        @Html.Partial("_PartialMenuMemberleft")
+
+                        @RenderBody()
+                    </div>
+                </div>
+            </div>
+            <div class="footer-container footer-color color">
+                @Html.Partial("_PartialFooter")
+            </div>
+        </div>
+    </div>
+    @Html.Partial("_PartialAcount")
+    <style>
+        .breadcrumb a {
+            color: royalblue;
+        }
+    </style>
+    <script src="/Scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/Scripts/jquery.ui.datepicker.js"></script>
+    <script src="~/Scripts/jquery.dataTables.js"></script>
+    @*<script src="~/Scripts/calculFeeForGoods/VailidateImage.js"></script>*@
+</body>
+</html>

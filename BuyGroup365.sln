@@ -1,0 +1,67 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.168
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuyGroup365.Tests", "BuyGroup365\BuyGroup365.Tests\BuyGroup365.Tests.csproj", "{714A8295-50A5-4684-924B-E24E515EB158}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{1FD8DA22-8D0C-48E8-AAC2-D1FEB7497838}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Business", "Business\Business.csproj", "{26307A02-BE82-4E2C-A128-0735D353D2E6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{330D4EF8-64D2-4208-8696-A3F701C69375}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{7258E057-04BA-4EE4-883C-ED1C2F1739AF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentValidationTester", "..\..\FluentValidation-noexe\FluentValidation\FluentValidation\FluentValidationTester.csproj", "{5A0AA45C-F839-496E-AD0D-99D7D94C83B2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuyGroup365", "BuyGroup365\BuyGroup365\BuyGroup365.csproj", "{9099EBE2-502A-448A-BC7E-5B1B5E587342}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CEA3DF11-3160-4B46-8542-8ECA144A9077}"
+	ProjectSection(SolutionItems) = preProject
+		WebEssentials-Settings.json = WebEssentials-Settings.json
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{714A8295-50A5-4684-924B-E24E515EB158}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{714A8295-50A5-4684-924B-E24E515EB158}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{714A8295-50A5-4684-924B-E24E515EB158}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{714A8295-50A5-4684-924B-E24E515EB158}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26307A02-BE82-4E2C-A128-0735D353D2E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26307A02-BE82-4E2C-A128-0735D353D2E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26307A02-BE82-4E2C-A128-0735D353D2E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26307A02-BE82-4E2C-A128-0735D353D2E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{330D4EF8-64D2-4208-8696-A3F701C69375}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{330D4EF8-64D2-4208-8696-A3F701C69375}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{330D4EF8-64D2-4208-8696-A3F701C69375}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{330D4EF8-64D2-4208-8696-A3F701C69375}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7258E057-04BA-4EE4-883C-ED1C2F1739AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7258E057-04BA-4EE4-883C-ED1C2F1739AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7258E057-04BA-4EE4-883C-ED1C2F1739AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7258E057-04BA-4EE4-883C-ED1C2F1739AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A0AA45C-F839-496E-AD0D-99D7D94C83B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A0AA45C-F839-496E-AD0D-99D7D94C83B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A0AA45C-F839-496E-AD0D-99D7D94C83B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A0AA45C-F839-496E-AD0D-99D7D94C83B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9099EBE2-502A-448A-BC7E-5B1B5E587342}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9099EBE2-502A-448A-BC7E-5B1B5E587342}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9099EBE2-502A-448A-BC7E-5B1B5E587342}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9099EBE2-502A-448A-BC7E-5B1B5E587342}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AE093A20-0608-4D5C-87C8-2787125F602E}
+	EndGlobalSection
+EndGlobal

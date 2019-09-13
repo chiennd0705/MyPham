@@ -1,0 +1,1014 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="bhd_cinemaModelStoreContainer" CdmEntityContainer="bhd_cinemaEntities">
+    <EntitySetMapping Name="Distributor">
+      <EntityTypeMapping TypeName="bhd_cinemaModel.Distributor">
+        <MappingFragment StoreEntitySet="Distributor">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="CompanyMobile" ColumnName="CompanyMobile" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Fax" ColumnName="Fax" />
+          <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+          <ScalarProperty Name="ContactPhone" ColumnName="ContactPhone" />
+          <ScalarProperty Name="PostCode" ColumnName="PostCode" />
+          <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
+          <ScalarProperty Name="AccountName" ColumnName="AccountName" />
+          <ScalarProperty Name="DomainName" ColumnName="DomainName" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Film">
+      <EntityTypeMapping TypeName="bhd_cinemaModel.Film">
+        <MappingFragment StoreEntitySet="Film">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DistributorId" ColumnName="DistributorId" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="ShortTitle" ColumnName="ShortTitle" />
+          <ScalarProperty Name="Language" ColumnName="Language" />
+          <ScalarProperty Name="Duration" ColumnName="Duration" />
+          <ScalarProperty Name="Rating" ColumnName="Rating" />
+          <ScalarProperty Name="TotalNumber" ColumnName="TotalNumber" />
+          <ScalarProperty Name="SubTitle" ColumnName="SubTitle" />
+          <ScalarProperty Name="DateIn" ColumnName="DateIn" />
+          <ScalarProperty Name="DateOut" ColumnName="DateOut" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="ReleaseDate" ColumnName="ReleaseDate" />
+          <ScalarProperty Name="MainActor" ColumnName="MainActor" />
+          <ScalarProperty Name="Director" ColumnName="Director" />
+          <ScalarProperty Name="Avartar" ColumnName="Avartar" />
+          <ScalarProperty Name="TrailerIid" ColumnName="TrailerIid" />
+          <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Grossing" ColumnName="Grossing" />
+          <ScalarProperty Name="Policy" ColumnName="Policy" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="FilmGroupId" ColumnName="FilmGroupId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FilmGroup">
+      <EntityTypeMapping TypeName="bhd_cinemaModel.FilmGroup">
+        <MappingFragment StoreEntitySet="FilmGroup">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FilmSchedulePrice">
+      <EntityTypeMapping TypeName="bhd_cinemaModel.FilmSchedulePrice">
+        <MappingFragment StoreEntitySet="FilmSchedulePrice">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FilmScheduleId" ColumnName="FilmScheduleId" />
+          <ScalarProperty Name="TicketTypeId" ColumnName="TicketTypeId" />
+          <ScalarProperty Name="SeatTypeId" ColumnName="SeatTypeId" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FilmScheduleSeat">
+      <EntityTypeMapping TypeName="bhd_cinemaModel.FilmScheduleSeat">
+        <MappingFragment StoreEntitySet="FilmScheduleSeat">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="RoomId" ColumnName="RoomId" />
+          <ScalarProperty Name="FilmScheduleId" ColumnName="FilmScheduleId" />
+          <ScalarProperty Name="SeatId" ColumnName="SeatId" />
+          <ScalarProperty Name="SeatX" ColumnName="SeatX" />
+          <ScalarProperty Name="SeatY" ColumnName="SeatY" />
+          <ScalarProperty Name="PayMentOnlineStatus" ColumnName="PayMentOnlineStatus" />
+          <ScalarProperty Name="ReserveStatus" ColumnName="ReserveStatus" />
+          <ScalarProperty Name="SoldStatus" ColumnName="SoldStatus" />
+          <ScalarProperty Name="TicketId" ColumnName="TicketId" />
+          <ScalarProperty Name="SectionId" ColumnName="SectionId" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="SeatTypeId" ColumnName="SeatTypeId" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Descripsion" ColumnName="Descripsion" />
+          <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+          <ScalarProperty Name="GroupSeat" ColumnName="GroupSeat" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FilmType">
+      <EntityTypeMapping TypeName="bhd_cinemaModel.FilmType">
+        <MappingFragment StoreEntitySet="FilmType">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Location">
+      <EntityTypeMapping TypeName="bhd_cinemaModel.Location">
+        <MappingFragment StoreEntitySet="Location">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="LocName" ColumnName="LocName" />
+          <ScalarProperty Name="LocAddress" ColumnName="LocAddress" />
+          <ScalarProperty Name="LocPhone" ColumnName="LocPhone" />
+          <ScalarProperty Name="LocFax" ColumnName="LocFax" />
+          <ScalarProperty Name="LocMail" ColumnName="LocMail" />
+          <ScalarProperty Name="LocRepresentative" ColumnName="LocRepresentative" />
+          <ScalarProperty Name="LocBankName" ColumnName="LocBankName" />
+          <ScalarProperty Name="LocDomainName" ColumnName="LocDomainName" />
+          <ScalarProperty Name="LocAccountNumber" ColumnName="LocAccountNumber" />
+          <ScalarProperty Name="LocStatus" ColumnName="LocStatus" />
+          <ScalarProperty Name="LocLogo" ColumnName="LocLogo" />
+          <ScalarProperty Name="LocTotalSeat" ColumnName="LocTotalSeat" />
+          <ScalarProperty Name="LocDescription" ColumnName="LocDescription" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PaymentMenthod">
+      <EntityTypeMapping TypeName="bhd_cinemaModel.PaymentMenthod">
+        <MappingFragment StoreEntitySet="PaymentMenthod">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="PaymentCode" ColumnName="PaymentCode" />
+          <ScalarProperty Name="PaymentName" ColumnName="PaymentName" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PricePolicyConf">
+      <EntityTypeMapping TypeName="bhd_cinemaModel.PricePolicyConf">
+        <MappingFragment StoreEntitySet="PricePolicyConf">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="FilmTypeId" ColumnName="FilmTypeId" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="Priority" ColumnName="Priority" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="StartFilmTime" ColumnName="StartFilmTime" />
+          <ScalarProperty Name="EndFilmTime" ColumnName="EndFilmTime" />
+          <ScalarProperty Name="Day" ColumnName="Day" />
+          <ScalarProperty Name="CronExpression" ColumnName="CronExpression" />
+          <ScalarProperty Name="NextFireTime" ColumnName="NextFireTime" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PricePolicyConfDetail">
+      <EntityTypeMapping TypeName="bhd_cinemaModel.PricePolicyConfDetail">
+        <MappingFragment StoreEntitySet="PricePolicyConfDetail">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="PricePolicyConfId" ColumnName="PricePolicyConfId" />
+          <ScalarProperty Name="TicketTypeId" ColumnName="TicketTypeId" />
+          <ScalarProperty Name="SeatTypeId" ColumnName="SeatTypeId" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Promotion">
+      <EntityTypeMapping TypeName="bhd_cinemaModel.Promotion">
+        <MappingFragment StoreEntitySet="Promotion">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Method" ColumnName="Method" />
+          <ScalarProperty Name="Money" ColumnName="Money" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Room">
+      <EntityTypeMapping TypeName="bhd_cinemaModel.Room">
+        <MappingFragment StoreEntitySet="Room">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Area" ColumnName="Area" />
+          <ScalarProperty Name="SeatNumber" ColumnName="SeatNumber" />
+          <ScalarProperty Name="ValueScreen" ColumnName="ValueScreen" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="SeatMatrix" ColumnName="SeatMatrix" />
+          <ScalarProperty Name="ToalColum" ColumnName="ToalColum" />
+          <ScalarProperty Name="ToalRow" ColumnName="ToalRow" />
+          <ScalarProperty Name="WayColum" ColumnName="WayColum" />
+          <ScalarProperty Name="WayRow" ColumnName="WayRow" />
+          <ScalarProperty Name="DisableSeat" ColumnName="DisableSeat" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Seat">
+      <EntityTypeMapping TypeName="bhd_cinemaModel.Seat">
+        <MappingFragment StoreEntitySet="Seat">
+          <ScalarProperty Name="ReserveStatus" ColumnName="ReserveStatus" />
+          <ScalarProperty Name="PayMentOnlineStatus" ColumnName="PayMentOnlineStatus" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="RoomId" ColumnName="RoomId" />
+          <ScalarProperty Name="SeatX" ColumnName="SeatX" />
+          <ScalarProperty Name="SeatY" ColumnName="SeatY" />
+          <ScalarProperty Name="SectionId" ColumnName="SectionId" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="SeatTypeId" ColumnName="SeatTypeId" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Descripsion" ColumnName="Descripsion" />
+          <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+          <ScalarProperty Name="GroupSeat" ColumnName="GroupSeat" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Section">
+      <EntityTypeMapping TypeName="bhd_cinemaModel.Section">
+        <MappingFragment StoreEntitySet="Section">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="SectionNo" ColumnName="SectionNo" />
+          <ScalarProperty Name="KeySeat" ColumnName="KeySeat" />
+          <ScalarProperty Name="TotalRows" ColumnName="TotalRows" />
+          <ScalarProperty Name="TotalCols" ColumnName="TotalCols" />
+          <ScalarProperty Name="RoomId" ColumnName="RoomId" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ShiftSale">
+      <EntityTypeMapping TypeName="bhd_cinemaModel.ShiftSale">
+        <MappingFragment StoreEntitySet="ShiftSale">
+          <ScalarProperty Name="POS_NAME" ColumnName="POS_NAME" />
+          <ScalarProperty Name="ShiftUserFullName" ColumnName="ShiftUserFullName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ShiftNumber" ColumnName="ShiftNumber" />
+          <ScalarProperty Name="ShiftName" ColumnName="ShiftName" />
+          <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+          <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+          <ScalarProperty Name="ShiftUserid" ColumnName="ShiftUserid" />
+          <ScalarProperty Name="ShiftUserName" ColumnName="ShiftUserName" />
+          <ScalarProperty Name="ActiveUserId" ColumnName="ActiveUserId" />
+          <ScalarProperty Name="ActiveUserName" ColumnName="ActiveUserName" />
+          <ScalarProperty Name="ShiftDescription" ColumnName="ShiftDescription" />
+          <ScalarProperty Name="TotalInitMoney" ColumnName="TotalInitMoney" />
+          <ScalarProperty Name="TotalMoneyUserInput" ColumnName="TotalMoneyUserInput" />
+          <ScalarProperty Name="TotalMoneyReal" ColumnName="TotalMoneyReal" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="CashierUserId" ColumnName="CashierUserId" />
+          <ScalarProperty Name="CashierUserName" ColumnName="CashierUserName" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SoundSystem">
+      <EntityTypeMapping TypeName="bhd_cinemaModel.SoundSystem">
+        <MappingFragment StoreEntitySet="SoundSystem">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="RoomId" ColumnName="RoomId" />
+          <ScalarProperty Name="CompanyProviderId" ColumnName="CompanyProviderId" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="UseDate" ColumnName="UseDate" />
+          <ScalarProperty Name="WarrantyTime" ColumnName="WarrantyTime" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="bhd_cinemaModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TaxType">
+      <EntityTypeMapping TypeName="bhd_cinemaModel.TaxType">
+        <MappingFragment StoreEntitySet="TaxType">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Rate" ColumnName="Rate" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="ModifileDate" ColumnName="ModifileDate" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TemplateTicket">
+      <EntityTypeMapping TypeName="bhd_cinemaModel.TemplateTicket">
+        <MappingFragment StoreEntitySet="TemplateTicket">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ticket">
+      <EntityTypeMapping TypeName="bhd_cinemaModel.Ticket">
+        <MappingFragment StoreEntitySet="Ticket">
+          <ScalarProperty Name="ReserverType" ColumnName="ReserverType" />
+          <ScalarProperty Name="TicketTypeName" ColumnName="TicketTypeName" />
+          <ScalarProperty Name="TicketTypeCode" ColumnName="TicketTypeCode" />
+          <ScalarProperty Name="TicketTypeID" ColumnName="TicketTypeID" />
+          <ScalarProperty Name="SeatTypeName" ColumnName="SeatTypeName" />
+          <ScalarProperty Name="SeatTypeCode" ColumnName="SeatTypeCode" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FilmshiftId" ColumnName="FilmshiftId" />
+          <ScalarProperty Name="BookingId" ColumnName="BookingId" />
+          <ScalarProperty Name="SeatId" ColumnName="SeatId" />
+          <ScalarProperty Name="ScheduleFilmId" ColumnName="ScheduleFilmId" />
+          <ScalarProperty Name="XRow" ColumnName="XRow" />
+          <ScalarProperty Name="XColumn" ColumnName="XColumn" />
+          <ScalarProperty Name="SeatType" ColumnName="SeatType" />
+          <ScalarProperty Name="PriceType" ColumnName="PriceType" />
+          <ScalarProperty Name="StandardValue" ColumnName="StandardValue" />
+          <ScalarProperty Name="ChildValue" ColumnName="ChildValue" />
+          <ScalarProperty Name="DiscountAmount" ColumnName="DiscountAmount" />
+          <ScalarProperty Name="TaxAmount" ColumnName="TaxAmount" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+          <ScalarProperty Name="BookStatus" ColumnName="BookStatus" />
+          <ScalarProperty Name="RefundFlag" ColumnName="RefundFlag" />
+          <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+          <ScalarProperty Name="MemberUsername" ColumnName="MemberUsername" />
+          <ScalarProperty Name="SoldUserid" ColumnName="SoldUserid" />
+          <ScalarProperty Name="PrintedCount" ColumnName="PrintedCount" />
+          <ScalarProperty Name="DeletedUserId" ColumnName="DeletedUserId" />
+          <ScalarProperty Name="DiscountApprUserId" ColumnName="DiscountApprUserId" />
+          <ScalarProperty Name="PaymentMethod" ColumnName="PaymentMethod" />
+          <ScalarProperty Name="PromotionId" ColumnName="PromotionId" />
+          <ScalarProperty Name="TemplateTicketId" ColumnName="TemplateTicketId" />
+          <ScalarProperty Name="PaymentShiftId" ColumnName="PaymentShiftId" />
+          <ScalarProperty Name="ChekPrice" ColumnName="ChekPrice" />
+          <ScalarProperty Name="CheckStatus" ColumnName="CheckStatus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TicketType">
+      <EntityTypeMapping TypeName="bhd_cinemaModel.TicketType">
+        <MappingFragment StoreEntitySet="TicketType">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Trailer">
+      <EntityTypeMapping TypeName="bhd_cinemaModel.Trailer">
+        <MappingFragment StoreEntitySet="Trailer">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Link" ColumnName="Link" />
+          <ScalarProperty Name="Lengh" ColumnName="Lengh" />
+          <ScalarProperty Name="Size" ColumnName="Size" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WorkStation">
+      <EntityTypeMapping TypeName="bhd_cinemaModel.WorkStation">
+        <MappingFragment StoreEntitySet="WorkStation">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="View_Film">
+      <EntityTypeMapping TypeName="bhd_cinemaModel.View_Film">
+        <MappingFragment StoreEntitySet="View_Film">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="code" ColumnName="code" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="short_title" ColumnName="short_title" />
+          <ScalarProperty Name="language" ColumnName="language" />
+          <ScalarProperty Name="duration" ColumnName="duration" />
+          <ScalarProperty Name="rating" ColumnName="rating" />
+          <ScalarProperty Name="total_number" ColumnName="total_number" />
+          <ScalarProperty Name="subtitle" ColumnName="subtitle" />
+          <ScalarProperty Name="date_in" ColumnName="date_in" />
+          <ScalarProperty Name="date_out" ColumnName="date_out" />
+          <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+          <ScalarProperty Name="release_date" ColumnName="release_date" />
+          <ScalarProperty Name="main_actor" ColumnName="main_actor" />
+          <ScalarProperty Name="director" ColumnName="director" />
+          <ScalarProperty Name="avartar" ColumnName="avartar" />
+          <ScalarProperty Name="trailer_id" ColumnName="trailer_id" />
+          <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="grossing" ColumnName="grossing" />
+          <ScalarProperty Name="policy" ColumnName="policy" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="film_GroupID" ColumnName="film_GroupID" />
+          <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+          <ScalarProperty Name="FilmTypeName" ColumnName="FilmTypeName" />
+          <ScalarProperty Name="DistributorName" ColumnName="DistributorName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="View_FilmFilmSchedule">
+      <EntityTypeMapping TypeName="bhd_cinemaModel.View_FilmFilmSchedule">
+        <MappingFragment StoreEntitySet="View_FilmFilmSchedule">
+          <ScalarProperty Name="FilmId" ColumnName="FilmId" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Language" ColumnName="Language" />
+          <ScalarProperty Name="ShortTitle" ColumnName="ShortTitle" />
+          <ScalarProperty Name="Duration" ColumnName="Duration" />
+          <ScalarProperty Name="RoomId" ColumnName="RoomId" />
+          <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+          <ScalarProperty Name="StartFilmTime" ColumnName="StartFilmTime" />
+          <ScalarProperty Name="EndFilmTime" ColumnName="EndFilmTime" />
+          <ScalarProperty Name="BosOffline" ColumnName="BosOffline" />
+          <ScalarProperty Name="Cds" ColumnName="Cds" />
+          <ScalarProperty Name="PricePolicyConfId" ColumnName="PricePolicyConfId" />
+          <ScalarProperty Name="FilmScheduleId" ColumnName="FilmScheduleId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="View_PricePolicyConfFilmType">
+      <EntityTypeMapping TypeName="bhd_cinemaModel.View_PricePolicyConfFilmType">
+        <MappingFragment StoreEntitySet="View_PricePolicyConfFilmType">
+          <ScalarProperty Name="PricePolicyId" ColumnName="PricePolicyId" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="NameFilmType" ColumnName="NameFilmType" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="Priority" ColumnName="Priority" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="StartFilmTime" ColumnName="StartFilmTime" />
+          <ScalarProperty Name="EndFilmTime" ColumnName="EndFilmTime" />
+          <ScalarProperty Name="Day" ColumnName="Day" />
+          <ScalarProperty Name="CronExpression" ColumnName="CronExpression" />
+          <ScalarProperty Name="NextFireTime" ColumnName="NextFireTime" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+          <ScalarProperty Name="FilmTypeId" ColumnName="FilmTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="View_SeatPriceBySeatIdAndTicketTypeId">
+      <EntityTypeMapping TypeName="bhd_cinemaModel.View_SeatPriceBySeatIdAndTicketTypeId">
+        <MappingFragment StoreEntitySet="View_SeatPriceBySeatIdAndTicketTypeId">
+          <ScalarProperty Name="SeatId" ColumnName="SeatId" />
+          <ScalarProperty Name="TicketTypeId" ColumnName="TicketTypeId" />
+          <ScalarProperty Name="FilmScheduleId" ColumnName="FilmScheduleId" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="SeatTypeId" ColumnName="SeatTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ViewSeat_SeatType_Image">
+      <EntityTypeMapping TypeName="bhd_cinemaModel.ViewSeat_SeatType_Image">
+        <MappingFragment StoreEntitySet="ViewSeat_SeatType_Image">
+          <ScalarProperty Name="seatTypeId" ColumnName="seatTypeId" />
+          <ScalarProperty Name="location_id" ColumnName="location_id" />
+          <ScalarProperty Name="room_id" ColumnName="room_id" />
+          <ScalarProperty Name="section_id" ColumnName="section_id" />
+          <ScalarProperty Name="seat_x" ColumnName="seat_x" />
+          <ScalarProperty Name="seat_y" ColumnName="seat_y" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="descripsion" ColumnName="descripsion" />
+          <ScalarProperty Name="GroupSeat" ColumnName="GroupSeat" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="SeatTypeCode" ColumnName="SeatTypeCode" />
+          <ScalarProperty Name="SeatTypeName" ColumnName="SeatTypeName" />
+          <ScalarProperty Name="SeatId" ColumnName="SeatId" />
+          <ScalarProperty Name="Icon" ColumnName="Icon" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="SP_GetFilmScheduleByDate" FunctionName="bhd_cinemaModel.Store.SP_GetFilmScheduleByDate">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="bhd_cinemaModel.SP_GetFilmScheduleByDate_Result">
+          <ScalarProperty Name="FilmId" ColumnName="FilmId" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_GetListHourFilmByScheduleId" FunctionName="bhd_cinemaModel.Store.SP_GetListHourFilmByScheduleId">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="bhd_cinemaModel.SP_GetListHourFilmByScheduleId_Result">
+          <ScalarProperty Name="StartFilmTime" ColumnName="StartFilmTime" />
+          <ScalarProperty Name="EndFilmTime" ColumnName="EndFilmTime" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="RoomId" ColumnName="RoomId" />
+          <ScalarProperty Name="code" ColumnName="code" />
+          <ScalarProperty Name="RoomName" ColumnName="RoomName" />
+          <ScalarProperty Name="FilmId" ColumnName="FilmId" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_NameTicketAndTypePolicyConfDetail" FunctionName="bhd_cinemaModel.Store.SP_NameTicketAndTypePolicyConfDetail">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="bhd_cinemaModel.SP_NameTicketAndTypePolicyConfDetail_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="PricePolicyConfId" ColumnName="PricePolicyConfId" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="NameTicketType" ColumnName="NameTicketType" />
+          <ScalarProperty Name="NameSeatType" ColumnName="NameSeatType" />
+          <ScalarProperty Name="TicketTypeId" ColumnName="TicketTypeId" />
+          <ScalarProperty Name="SeatTypeId" ColumnName="SeatTypeId" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_GetInfoTicketBookingCode" FunctionName="bhd_cinemaModel.Store.SP_GetInfoTicketBookingCode">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="bhd_cinemaModel.SP_GetInfoTicketBookingCode_Result">
+          <ScalarProperty Name="BookingId" ColumnName="BookingId" />
+          <ScalarProperty Name="ScheduleFilmId" ColumnName="ScheduleFilmId" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+          <ScalarProperty Name="SoGhe" ColumnName="SoGhe" />
+          <ScalarProperty Name="RoomId" ColumnName="RoomId" />
+          <ScalarProperty Name="RoomName" ColumnName="RoomName" />
+          <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+          <ScalarProperty Name="StartFilmTime" ColumnName="StartFilmTime" />
+          <ScalarProperty Name="EndFilmTime" ColumnName="EndFilmTime" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Duration" ColumnName="Duration" />
+          <ScalarProperty Name="Rating" ColumnName="Rating" />
+          <ScalarProperty Name="MainActor" ColumnName="MainActor" />
+          <ScalarProperty Name="Director" ColumnName="Director" />
+          <ScalarProperty Name="SeatTypeId" ColumnName="SeatTypeId" />
+          <ScalarProperty Name="TotalSeat" ColumnName="TotalSeat" />
+          <ScalarProperty Name="TicketId" ColumnName="TicketId" />
+          <ScalarProperty Name="BookingCode" ColumnName="BookingCode" />
+          <ScalarProperty Name="SeatId" ColumnName="SeatId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_GetTicketByBooking" FunctionName="bhd_cinemaModel.Store.SP_GetTicketByBooking">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="bhd_cinemaModel.SP_GetTicketByBooking_Result">
+          <ScalarProperty Name="BookingId" ColumnName="BookingId" />
+          <ScalarProperty Name="ScheduleFilmId" ColumnName="ScheduleFilmId" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+          <ScalarProperty Name="SoGhe" ColumnName="SoGhe" />
+          <ScalarProperty Name="RoomId" ColumnName="RoomId" />
+          <ScalarProperty Name="SeatTypeId" ColumnName="SeatTypeId" />
+          <ScalarProperty Name="TicketId" ColumnName="TicketId" />
+          <ScalarProperty Name="BookingCode" ColumnName="BookingCode" />
+          <ScalarProperty Name="SeatId" ColumnName="SeatId" />
+          <ScalarProperty Name="TotalSeat" ColumnName="TotalSeat" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="RefundFlag" ColumnName="RefundFlag" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="BookingInfo">
+      <EntityTypeMapping TypeName="bhd_cinemaModel.BookingInfo">
+        <MappingFragment StoreEntitySet="BookingInfo">
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="CustomersName" ColumnName="CustomersName" />
+          <ScalarProperty Name="NumberPhone" ColumnName="NumberPhone" />
+          <ScalarProperty Name="BookingCode" ColumnName="BookingCode" />
+          <ScalarProperty Name="BookingId" ColumnName="BookingId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="SP_GetDetailBookingByReserve" FunctionName="bhd_cinemaModel.Store.SP_GetDetailBookingByReserve">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="bhd_cinemaModel.SP_GetDetailBookingByReserve_Result">
+          <ScalarProperty Name="BookingId" ColumnName="BookingId" />
+          <ScalarProperty Name="ScheduleFilmId" ColumnName="ScheduleFilmId" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+          <ScalarProperty Name="SoGhe" ColumnName="SoGhe" />
+          <ScalarProperty Name="RoomId" ColumnName="RoomId" />
+          <ScalarProperty Name="RoomName" ColumnName="RoomName" />
+          <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+          <ScalarProperty Name="StartFilmTime" ColumnName="StartFilmTime" />
+          <ScalarProperty Name="EndFilmTime" ColumnName="EndFilmTime" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Duration" ColumnName="Duration" />
+          <ScalarProperty Name="Rating" ColumnName="Rating" />
+          <ScalarProperty Name="MainActor" ColumnName="MainActor" />
+          <ScalarProperty Name="Director" ColumnName="Director" />
+          <ScalarProperty Name="SeatTypeId" ColumnName="SeatTypeId" />
+          <ScalarProperty Name="TotalSeat" ColumnName="TotalSeat" />
+          <ScalarProperty Name="TicketId" ColumnName="TicketId" />
+          <ScalarProperty Name="BookingCode" ColumnName="BookingCode" />
+          <ScalarProperty Name="SeatId" ColumnName="SeatId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="SeatX" ColumnName="SeatX" />
+          <ScalarProperty Name="SeatY" ColumnName="SeatY" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_GetDetailByBookingReserve" FunctionName="bhd_cinemaModel.Store.SP_GetDetailByBookingReserve">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="bhd_cinemaModel.SP_GetDetailByBookingReserve_Result">
+          <ScalarProperty Name="BookingId" ColumnName="BookingId" />
+          <ScalarProperty Name="ScheduleFilmId" ColumnName="ScheduleFilmId" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+          <ScalarProperty Name="SoGhe" ColumnName="SoGhe" />
+          <ScalarProperty Name="RoomId" ColumnName="RoomId" />
+          <ScalarProperty Name="RoomName" ColumnName="RoomName" />
+          <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+          <ScalarProperty Name="StartFilmTime" ColumnName="StartFilmTime" />
+          <ScalarProperty Name="EndFilmTime" ColumnName="EndFilmTime" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Duration" ColumnName="Duration" />
+          <ScalarProperty Name="Rating" ColumnName="Rating" />
+          <ScalarProperty Name="MainActor" ColumnName="MainActor" />
+          <ScalarProperty Name="Director" ColumnName="Director" />
+          <ScalarProperty Name="SeatTypeId" ColumnName="SeatTypeId" />
+          <ScalarProperty Name="TotalSeat" ColumnName="TotalSeat" />
+          <ScalarProperty Name="TicketId" ColumnName="TicketId" />
+          <ScalarProperty Name="BookingCode" ColumnName="BookingCode" />
+          <ScalarProperty Name="SeatId" ColumnName="SeatId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="SeatX" ColumnName="SeatX" />
+          <ScalarProperty Name="SeatY" ColumnName="SeatY" />
+          <ScalarProperty Name="GroupSeat" ColumnName="GroupSeat" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="SystemSetting">
+      <EntityTypeMapping TypeName="bhd_cinemaModel.SystemSetting">
+        <MappingFragment StoreEntitySet="SystemSetting">
+          <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="SettingValue" ColumnName="SettingValue" />
+          <ScalarProperty Name="SettingKey" ColumnName="SettingKey" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="SP_ListPacketByTicketType" FunctionName="bhd_cinemaModel.Store.SP_ListPacketByTicketType">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="bhd_cinemaModel.SP_ListPacketByTicketType_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CatalogId" ColumnName="CatalogId" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="ModifiDate" ColumnName="ModifiDate" />
+          <ScalarProperty Name="NameCatalog" ColumnName="NameCatalog" />
+          <ScalarProperty Name="TickTypeId" ColumnName="TickTypeId" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="PercentAmount" ColumnName="PercentAmount" />
+          <ScalarProperty Name="DiscountAmount" ColumnName="DiscountAmount" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="BookingPacketDetail">
+      <EntityTypeMapping TypeName="bhd_cinemaModel.BookingPacketDetail">
+        <MappingFragment StoreEntitySet="BookingPacketDetail">
+          <ScalarProperty Name="ModifiDate" ColumnName="ModifiDate" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="PacketPrice" ColumnName="PacketPrice" />
+          <ScalarProperty Name="PacketName" ColumnName="PacketName" />
+          <ScalarProperty Name="PacketId" ColumnName="PacketId" />
+          <ScalarProperty Name="BookingId" ColumnName="BookingId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Packet">
+      <EntityTypeMapping TypeName="bhd_cinemaModel.Packet">
+        <MappingFragment StoreEntitySet="Packet">
+          <ScalarProperty Name="ModifiDate" ColumnName="ModifiDate" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SeatType">
+      <EntityTypeMapping TypeName="bhd_cinemaModel.SeatType">
+        <MappingFragment StoreEntitySet="SeatType">
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="GalleryCode" ColumnName="GalleryCode" />
+          <ScalarProperty Name="Icon" ColumnName="Icon" />
+          <ScalarProperty Name="TotalSeat" ColumnName="TotalSeat" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SeatTypeImage">
+      <EntityTypeMapping TypeName="bhd_cinemaModel.SeatTypeImage">
+        <MappingFragment StoreEntitySet="SeatTypeImage">
+          <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="GalleryCode" ColumnName="GalleryCode" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="SeatTypeId" ColumnName="SeatTypeId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FilmScheduleTitle">
+      <EntityTypeMapping TypeName="bhd_cinemaModel.FilmScheduleTitle">
+        <MappingFragment StoreEntitySet="FilmScheduleTitle">
+          <ScalarProperty Name="NetPrice" ColumnName="NetPrice" />
+          <ScalarProperty Name="Tax" ColumnName="Tax" />
+          <ScalarProperty Name="Admit" ColumnName="Admit" />
+          <ScalarProperty Name="FillRate" ColumnName="FillRate" />
+          <ScalarProperty Name="GrossPrice" ColumnName="GrossPrice" />
+          <ScalarProperty Name="FilmGroupId" ColumnName="FilmGroupId" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Policy" ColumnName="Policy" />
+          <ScalarProperty Name="NameTypeId" ColumnName="NameTypeId" />
+          <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+          <ScalarProperty Name="TrailerIid" ColumnName="TrailerIid" />
+          <ScalarProperty Name="Director" ColumnName="Director" />
+          <ScalarProperty Name="MainActor" ColumnName="MainActor" />
+          <ScalarProperty Name="ReleaseDate" ColumnName="ReleaseDate" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="DateOut" ColumnName="DateOut" />
+          <ScalarProperty Name="DateIn" ColumnName="DateIn" />
+          <ScalarProperty Name="SubTitle" ColumnName="SubTitle" />
+          <ScalarProperty Name="Rating" ColumnName="Rating" />
+          <ScalarProperty Name="Duration" ColumnName="Duration" />
+          <ScalarProperty Name="Language" ColumnName="Language" />
+          <ScalarProperty Name="ShortTitle" ColumnName="ShortTitle" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="SeatTotal" ColumnName="SeatTotal" />
+          <ScalarProperty Name="SeatLeft" ColumnName="SeatLeft" />
+          <ScalarProperty Name="SeatSold" ColumnName="SeatSold" />
+          <ScalarProperty Name="FreeSeating" ColumnName="FreeSeating" />
+          <ScalarProperty Name="EndFilmTime" ColumnName="EndFilmTime" />
+          <ScalarProperty Name="StartFilmTime" ColumnName="StartFilmTime" />
+          <ScalarProperty Name="FilmName" ColumnName="FilmName" />
+          <ScalarProperty Name="FilmScheduleId" ColumnName="FilmScheduleId" />
+          <ScalarProperty Name="RoomId" ColumnName="RoomId" />
+          <ScalarProperty Name="NameDistrbutor" ColumnName="NameDistrbutor" />
+          <ScalarProperty Name="DistributorId" ColumnName="DistributorId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="View_BookingReserve">
+      <EntityTypeMapping TypeName="bhd_cinemaModel.View_BookingReserve">
+        <MappingFragment StoreEntitySet="View_BookingReserve">
+          <ScalarProperty Name="PricePolicyConfId" ColumnName="PricePolicyConfId" />
+          <ScalarProperty Name="GroupSeat" ColumnName="GroupSeat" />
+          <ScalarProperty Name="SeatY" ColumnName="SeatY" />
+          <ScalarProperty Name="SeatX" ColumnName="SeatX" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="SeatId" ColumnName="SeatId" />
+          <ScalarProperty Name="BookingCode" ColumnName="BookingCode" />
+          <ScalarProperty Name="TicketId" ColumnName="TicketId" />
+          <ScalarProperty Name="TotalSeat" ColumnName="TotalSeat" />
+          <ScalarProperty Name="SeatTypeId" ColumnName="SeatTypeId" />
+          <ScalarProperty Name="Director" ColumnName="Director" />
+          <ScalarProperty Name="MainActor" ColumnName="MainActor" />
+          <ScalarProperty Name="Rating" ColumnName="Rating" />
+          <ScalarProperty Name="Duration" ColumnName="Duration" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="FilmId" ColumnName="FilmId" />
+          <ScalarProperty Name="EndFilmTime" ColumnName="EndFilmTime" />
+          <ScalarProperty Name="StartFilmTime" ColumnName="StartFilmTime" />
+          <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+          <ScalarProperty Name="RoomName" ColumnName="RoomName" />
+          <ScalarProperty Name="RoomId" ColumnName="RoomId" />
+          <ScalarProperty Name="SoGhe" ColumnName="SoGhe" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+          <ScalarProperty Name="ScheduleFilmId" ColumnName="ScheduleFilmId" />
+          <ScalarProperty Name="BookingId" ColumnName="BookingId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FilmScheduleRoom">
+      <EntityTypeMapping TypeName="bhd_cinemaModel.FilmScheduleRoom">
+        <MappingFragment StoreEntitySet="FilmScheduleRoom">
+          <ScalarProperty Name="DisableSeat" ColumnName="DisableSeat" />
+          <ScalarProperty Name="WayRow" ColumnName="WayRow" />
+          <ScalarProperty Name="WayColum" ColumnName="WayColum" />
+          <ScalarProperty Name="ToalRow" ColumnName="ToalRow" />
+          <ScalarProperty Name="ToalColum" ColumnName="ToalColum" />
+          <ScalarProperty Name="SeatMatrix" ColumnName="SeatMatrix" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="ValueScreen" ColumnName="ValueScreen" />
+          <ScalarProperty Name="SeatNumber" ColumnName="SeatNumber" />
+          <ScalarProperty Name="Area" ColumnName="Area" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+          <ScalarProperty Name="RoomId" ColumnName="RoomId" />
+          <ScalarProperty Name="FilmScheduleId" ColumnName="FilmScheduleId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ImgGallery">
+      <EntityTypeMapping TypeName="bhd_cinemaModel.ImgGallery">
+        <MappingFragment StoreEntitySet="ImgGallery">
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="ModifiDate" ColumnName="ModifiDate" />
+          <ScalarProperty Name="ScrImg" ColumnName="ScrImg" />
+          <ScalarProperty Name="DataImg" ColumnName="DataImg" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BookingVoucher">
+      <EntityTypeMapping TypeName="bhd_cinemaModel.BookingVoucher">
+        <MappingFragment StoreEntitySet="BookingVoucher">
+          <ScalarProperty Name="StatusMessage" ColumnName="StatusMessage" />
+          <ScalarProperty Name="IsTotalDiscount" ColumnName="IsTotalDiscount" />
+          <ScalarProperty Name="LocationName" ColumnName="LocationName" />
+          <ScalarProperty Name="ProductCode" ColumnName="ProductCode" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="PriceCo" ColumnName="PriceCo" />
+          <ScalarProperty Name="PriceBo" ColumnName="PriceBo" />
+          <ScalarProperty Name="VoucherPercentBo" ColumnName="VoucherPercentBo" />
+          <ScalarProperty Name="VoucherPercentCo" ColumnName="VoucherPercentCo" />
+          <ScalarProperty Name="ApliedForBoCo" ColumnName="ApliedForBoCo" />
+          <ScalarProperty Name="FilmName" ColumnName="FilmName" />
+          <ScalarProperty Name="FilmID" ColumnName="FilmID" />
+          <ScalarProperty Name="Effect" ColumnName="Effect" />
+          <ScalarProperty Name="ValidateTo" ColumnName="ValidateTo" />
+          <ScalarProperty Name="ValidateFrom" ColumnName="ValidateFrom" />
+          <ScalarProperty Name="VoucherType" ColumnName="VoucherType" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="VoucherCode" ColumnName="VoucherCode" />
+          <ScalarProperty Name="BookingId" ColumnName="BookingId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FilmSchedule">
+      <EntityTypeMapping TypeName="bhd_cinemaModel.FilmSchedule">
+        <MappingFragment StoreEntitySet="FilmSchedule">
+          <ScalarProperty Name="Admit" ColumnName="Admit" />
+          <ScalarProperty Name="TotalSeat" ColumnName="TotalSeat" />
+          <ScalarProperty Name="FilmTitle" ColumnName="FilmTitle" />
+          <ScalarProperty Name="ApproveStatus" ColumnName="ApproveStatus" />
+          <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Cds" ColumnName="Cds" />
+          <ScalarProperty Name="BosOffline" ColumnName="BosOffline" />
+          <ScalarProperty Name="EndFilmTime" ColumnName="EndFilmTime" />
+          <ScalarProperty Name="StartFilmTime" ColumnName="StartFilmTime" />
+          <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="PricePolicyConfId" ColumnName="PricePolicyConfId" />
+          <ScalarProperty Name="RoomId" ColumnName="RoomId" />
+          <ScalarProperty Name="FilmId" ColumnName="FilmId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BookingCustomerLoyalty">
+      <EntityTypeMapping TypeName="bhd_cinemaModel.BookingCustomerLoyalty">
+        <MappingFragment StoreEntitySet="BookingCustomerLoyalty">
+          <ScalarProperty Name="ModifiDate" ColumnName="ModifiDate" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="AddUserName" ColumnName="AddUserName" />
+          <ScalarProperty Name="AddUserID" ColumnName="AddUserID" />
+          <ScalarProperty Name="ModuleName" ColumnName="ModuleName" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="TransCard" ColumnName="TransCard" />
+          <ScalarProperty Name="AddGold" ColumnName="AddGold" />
+          <ScalarProperty Name="PaymentAmount" ColumnName="PaymentAmount" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="CardInfo" ColumnName="CardInfo" />
+          <ScalarProperty Name="CardName" ColumnName="CardName" />
+          <ScalarProperty Name="CardNumber" ColumnName="CardNumber" />
+          <ScalarProperty Name="BookingId" ColumnName="BookingId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BookingPaymentMenthodDetail">
+      <EntityTypeMapping TypeName="bhd_cinemaModel.BookingPaymentMenthodDetail">
+        <MappingFragment StoreEntitySet="BookingPaymentMenthodDetail">
+          <ScalarProperty Name="ModifiDate" ColumnName="ModifiDate" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="PayMentDesciption" ColumnName="PayMentDesciption" />
+          <ScalarProperty Name="PayMentInfo" ColumnName="PayMentInfo" />
+          <ScalarProperty Name="TransCode" ColumnName="TransCode" />
+          <ScalarProperty Name="DiscountAmount" ColumnName="DiscountAmount" />
+          <ScalarProperty Name="CardNumber" ColumnName="CardNumber" />
+          <ScalarProperty Name="PayMentMenthodAmount" ColumnName="PayMentMenthodAmount" />
+          <ScalarProperty Name="PayMentMenthodCode" ColumnName="PayMentMenthodCode" />
+          <ScalarProperty Name="BookingId" ColumnName="BookingId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Booking">
+      <EntityTypeMapping TypeName="bhd_cinemaModel.Booking">
+        <MappingFragment StoreEntitySet="Booking">
+          <ScalarProperty Name="PaymentUserFullName" ColumnName="PaymentUserFullName" />
+          <ScalarProperty Name="PaymentUserName" ColumnName="PaymentUserName" />
+          <ScalarProperty Name="PaymentUserID" ColumnName="PaymentUserID" />
+          <ScalarProperty Name="PaymentShiftId" ColumnName="PaymentShiftId" />
+          <ScalarProperty Name="EmplBookingUserId" ColumnName="EmplBookingUserId" />
+          <ScalarProperty Name="DiscountApprUserId" ColumnName="DiscountApprUserId" />
+          <ScalarProperty Name="DeleteUserId" ColumnName="DeleteUserId" />
+          <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+          <ScalarProperty Name="TaxIds" ColumnName="TaxIds" />
+          <ScalarProperty Name="CommAmount" ColumnName="CommAmount" />
+          <ScalarProperty Name="DiscountAmount" ColumnName="DiscountAmount" />
+          <ScalarProperty Name="BookingNetAmount" ColumnName="BookingNetAmount" />
+          <ScalarProperty Name="BookingTaxAmount" ColumnName="BookingTaxAmount" />
+          <ScalarProperty Name="BookingGrosslAmount" ColumnName="BookingGrosslAmount" />
+          <ScalarProperty Name="TicketQuantity" ColumnName="TicketQuantity" />
+          <ScalarProperty Name="PaymentMethod" ColumnName="PaymentMethod" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="ExpiredDate" ColumnName="ExpiredDate" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="TicketCount" ColumnName="TicketCount" />
+          <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+          <ScalarProperty Name="FilmScheduleId" ColumnName="FilmScheduleId" />
+          <ScalarProperty Name="BookingType" ColumnName="BookingType" />
+          <ScalarProperty Name="BookingCode" ColumnName="BookingCode" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,918 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutIndex.cshtml";
+}
+<style>
+    .cms-index-index .vmagicmenu .block-vmagicmenu-content {
+        opacity: 1;
+        visibility: inherit;
+    }
+</style>
+<div class="home-slider">
+    <div class="alo-block-slide">
+        <div class="container-none">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-3 slider-left"><span class="hidden">hidden</span></div>
+                    <div class="col-sm-9 header-top-right">
+                        <div class="header-top-right-wapper">
+                            <div class="homeslider">
+
+                                <div class="magicslider">
+                                    <div class="bx-wrapper" style="max-width: 100%;">
+                                        <div class="bx-viewport" style="width: 100%; overflow: hidden; position: relative;">
+                                            <div id="qtwgitmfmg" style="width: 515%; position: relative; transition-dimages /slideuration: 0.8s; transform: translate3d(-1332px, 0px, 0px);">
+                                                <div class="item bx-clone" style="float: left; list-style: none; position: relative; width: 666px;">
+                                                    <a href="#">
+                                                        <img src="/Content/Csspublic/images/slide3_2.jpg" alt="magicslider">
+                                                    </a>
+                                                    <div class="bx-caption">
+                                                        <!--<div class="container">
+                                                        <div class="text-slide text-slide2">
+                                                        <h3 class="caption1">spring</h3>
+                                                        <h3 class="caption2">collection</h3>
+                                                        </div>
+                                                        </div>-->
+                                                    </div>
+                                                </div>
+                                                <div class="item" style="float: left; list-style: none; position: relative; width: 666px;">
+                                                    <a href="#">
+                                                        <img src="/Content/Csspublic/images/slide1.jpg" alt="Aloshop">
+                                                    </a>
+                                                    <div class="bx-caption start">
+                                                        <!--<div class="container">
+                                                        <div class="text-slide">
+                                                        <h3 class="caption1">new</h3>
+                                                        <h3 class="caption2">fashion</h3>
+                                                        <h3 class="caption3"><strong>&</strong>style</h3>
+                                                        </div>
+                                                        </div>-->
+                                                    </div>
+                                                </div>
+                                                <div class="item" style="float: left; list-style: none; position: relative; width: 666px;">
+                                                    <a href="#">
+                                                        <img src="/Content/Csspublic/images/slide2_1.jpg" alt="magicslider">
+                                                    </a>
+                                                    <div class="bx-caption  start play">
+                                                        <!--<div class="container">
+                                                        <div class="text-slide text-slide2">
+                                                        <h3 class="caption1">Lookbook</h3>
+                                                        <h3 class="caption2">real man</h3>
+                                                        </div>
+                                                        </div>-->
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <script type="text/javascript">
+                                    jQuery(document).ready(function ($) {
+                                        $('#qtwgitmfmg').bxSlider({
+                                            auto: true,
+                                            captions: true,
+                                            controls: 1, pager: 1, pause: 6000, speed: 800, onSlideBefore: function (el) {
+                                                el.siblings().find('.bx-caption').removeClass('play');
+                                                el.find('.bx-caption').addClass('play').addClass('start');
+                                            },
+                                        });
+                                    });
+                                </script>
+                            </div>
+                            <div class="header-banner banner-opacity">
+                                <a href="#">
+                                    <img class="img-responsive" alt="Banner" src="/Content/Csspublic/images/home1-1.jpg"></a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content_servives alo-servives">
+    <div class="service ">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-6 col-sm-3 service-item">
+                    <div class="icon">
+                        <img class="img-responsive" alt="services" src="/Content/Csspublic/images/s1.png">
+                    </div>
+                    <div class="info">
+                        <h3>Miễn phí vận chuyển</h3>
+                        <span>Cho đơn hàng trên một triệu</span>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-3 service-item">
+                    <div class="icon">
+                        <img class="img-responsive" alt="services" src="/Content/Csspublic/images/s2.png">
+                    </div>
+                    <div class="info">
+                        <h3>30 ngày trả hàng</h3>
+                        <span>Hoàn lại tiền 100%</span>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-3 service-item">
+                    <div class="icon">
+                        <img class="img-responsive" alt="services" src="/Content/Csspublic/images/s3.png">
+                    </div>
+                    <div class="info">
+                        <h3>Hỗ trợ 24/7</h3>
+                        <span>Tư vấn trực tuyến</span>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-3 service-item">
+                    <div class="icon">
+                        <img class="img-responsive" alt="services" src="/Content/Csspublic/images/s4.png">
+                    </div>
+                    <div class="info">
+                        <h3>Mua sắm an toàn</h3>
+                        <span>Đảm bảo an toàn</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="main">
+        <div class="row">
+            <div class="col-main col-lg-12">
+
+                <div class="std">
+
+
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-9 page-top-left">
+                            <div>
+                                <div class="luumtxpasg magicproduct">
+                                    <div class="block-title-tabs">
+                                        <ul class="magictabs" data-ajax="{&quot;limit&quot;:&quot;12&quot;,&quot;productDelay&quot;:null,&quot;widthImages&quot;:&quot;300&quot;,&quot;heightImages&quot;:&quot;366&quot;,&quot;timer&quot;:&quot;0&quot;,&quot;action&quot;:[&quot;cart&quot;,&quot;compare&quot;,&quot;wishlist&quot;,&quot;review&quot;]}">
+                                            <li class="item first" data-type="featured"><span class="title">Sản phẩm nổi bật</span></li>
+                                            <li class="item " data-type="newproduct"><span class="title">Sản phẩm mới</span></li>
+                                            <li class="item " data-type="saleproduct"><span class="title">Sản phẩm khuyễn mãi</span></li>
+                                        </ul>
+                                    </div>
+                                    <div class="ajax_loading" style="display: none" data-url="@System.Configuration.ConfigurationManager.AppSettings["HostUrl"]Ajax/GetProduct">
+                                        <img src="/Content/Csspublic/images/loading.gif" alt="Loading...">
+                                    </div>
+                                    <div class="content-products" data-margin="30" data-slider="{&quot;moveSlides&quot;:2,&quot;infiniteLoop&quot;:0,&quot;maxSlides&quot;:&quot;3&quot;,&quot;slideWidth&quot;:&quot;300&quot;,&quot;slideMargin&quot;:30,&quot;pager&quot;:0,&quot;controls&quot;:1,&quot;visibleItems&quot;:3,&quot;responsiveBreakpoints&quot;:{&quot;480&quot;:1,&quot;640&quot;:2,&quot;768&quot;:3,&quot;992&quot;:3}}" data-options="{&quot;480&quot;:&quot;1&quot;,&quot;640&quot;:&quot;2&quot;,&quot;768&quot;:&quot;3&quot;,&quot;992&quot;:&quot;3&quot;,&quot;993&quot;:&quot;3&quot;}">
+                                    </div>
+                                    <!-- MAP -->
+                                    <!-- MAP -->
+                                </div>
+                                <script type="text/javascript">
+                                    jQuery(document).ready(function () {
+                                        jQuery(".luumtxpasg").magicproduct({
+                                            selector: ".luumtxpasg", // Selector product grid
+                                        });
+                                    });
+                                </script>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-3 page-top-right">
+                            <div class="latest-deals">
+                                <h2 class="latest-deal-title">Sản phẩm HOT</h2>
+                                <div class="latest-deal-content">
+                                    <div>
+                                        <div class="zqdxibdlet magicproduct">
+                                            <div class="block-title-tabs">
+                                                <ul class="magictabs" data-ajax="">
+                                                    <li class="item single first" data-type="saleproduct"><span class="title">Sale Products</span></li>
+                                                </ul>
+                                            </div>
+                                            <div class="ajax_loading" style="display: none" data-url="@System.Configuration.ConfigurationManager.AppSettings["HostUrl"]Ajax/GetProduct">
+                                                <img src="/Content/Csspublic/images/loading.gif" alt="Loading...">
+                                            </div>
+                                            <div class="content-products" data-margin="30" data-slider="{&quot;moveSlides&quot;:2,&quot;infiniteLoop&quot;:0,&quot;maxSlides&quot;:&quot;3&quot;,&quot;slideWidth&quot;:&quot;268&quot;,&quot;slideMargin&quot;:30,&quot;pager&quot;:0,&quot;controls&quot;:1,&quot;speed&quot;:800,&quot;auto&quot;:1,&quot;visibleItems&quot;:1,&quot;responsiveBreakpoints&quot;:{&quot;480&quot;:1,&quot;640&quot;:2,&quot;768&quot;:3,&quot;992&quot;:3}}" data-options="{&quot;480&quot;:&quot;1&quot;,&quot;640&quot;:&quot;2&quot;,&quot;768&quot;:&quot;3&quot;,&quot;992&quot;:&quot;3&quot;,&quot;993&quot;:&quot;1&quot;}">
+                                            </div>
+                                            <!-- MAP -->
+                                            <!-- MAP -->
+                                        </div>
+                                        <script type="text/javascript">
+                                            jQuery(document).ready(function () {
+                                                jQuery(".zqdxibdlet").magicproduct({
+                                                    selector: ".zqdxibdlet", // Selector product grid
+                                                });
+                                            });
+                                        </script>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content_heading alo-content_heading">
+    <div class="container">
+        <div class="main">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="category-featured content_heading_fashion">
+                        <div class="vmobyvnspz megashop">
+                            <h3 class="title">Thời trang</h3>
+                            <span class="toggle-tab mobile" style="display: none"><i class="fa fa-bars"></i></span>
+                            <div class="block-title-tabs toggle-content">
+                                <ul class="magictabs" data-ajax="1">
+                                    <li class="item " data-type="featured"><span class="title">Nổi bật</span></li>
+                                    <li class="item first" data-type="newproduct"><span class="title">Mới cập nhật</span></li>
+                                    <li class="citem" data-type="5"><a href=""><span class="title">Nam</span></a></li>
+                                    <li class="citem" data-type="7"><a href=""><span class="title">Nữ</span></a></li>
+                                    <li class="citem" data-type="8"><a href=""><span class="title">Trẻ em</span></a></li>
+                                </ul>
+                                <div class="floor-elevator" id="elevator-0">
+                                    <a href="#elevator--1" class="btn-elevator up fa fa-angle-up disabled"></a>
+                                    <a href="#elevator-1" class="btn-elevator down fa fa-angle-down"></a>
+                                </div>
+                            </div>
+                            <div class="megashop-banner">
+                                <div class="col-sm-6 banner">
+                                    <a href="#">
+                                        <img src="/Content/Csspublic/images/home1-2.jpg" alt="promotions">
+                                    </a>
+                                </div>
+                                <div class="col-sm-6 banner">
+                                    <a href="#">
+                                        <img src="/Content/Csspublic/images/home1-3.jpg" alt="promotions">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="ajax_loading" style="display: none" data-url="@System.Configuration.ConfigurationManager.AppSettings["HostUrl"]Ajax/GetProduct">
+                                <img src="/Content/Csspublic/images/loading.gif" alt="Loading...">
+                            </div>
+                            <div class="product-featured clearfix">
+                                <div class="banner-featured">
+                                    <div class="promotion">
+                                        <div id="mnpnfvmvzk">
+                                            <div class="item">
+                                                <a href="#">
+                                                    <img src="/Content/Csspublic/images/f1_1.jpg" alt="promotions">
+                                                </a>
+                                                <div class="bx-caption play start">
+                                                    <div class="featured-text"><span>featured</span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="product-featured-content">
+                                    <div class="content-products" data-margin="0" data-slider="{&quot;moveSlides&quot;:2,&quot;infiniteLoop&quot;:0,&quot;maxSlides&quot;:&quot;4&quot;,&quot;slideWidth&quot;:&quot;300&quot;,&quot;pager&quot;:0,&quot;controls&quot;:1,&quot;speed&quot;:1000,&quot;visibleItems&quot;:4,&quot;responsiveBreakpoints&quot;:{&quot;480&quot;:1,&quot;640&quot;:2,&quot;768&quot;:3,&quot;992&quot;:3}}" data-options="{&quot;480&quot;:&quot;1&quot;,&quot;640&quot;:&quot;2&quot;,&quot;768&quot;:&quot;3&quot;,&quot;992&quot;:&quot;3&quot;,&quot;993&quot;:&quot;4&quot;}">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- MAP -->
+                            <!-- MAP -->
+                        </div>
+                        <script type="text/javascript">
+                            jQuery(document).ready(function () {
+                                jQuery(".vmobyvnspz").magicproduct({
+                                    selector: ".vmobyvnspz", // Selector product grid
+                                });
+                            });
+                        </script>
+                    </div>
+                    <div class="category-featured content_heading_sports">
+                        <div class="ebnqghmbue megashop">
+                            <h3 class="title">Thể thao</h3>
+                            <span class="toggle-tab mobile" style="display: none"><i class="fa fa-bars"></i></span>
+                            <div class="block-title-tabs toggle-content">
+                                <ul class="magictabs" data-ajax="936">
+                                    <li class="item first" data-type="featured"><span class="title">Nổi bật</span></li>
+                                    <li class="item " data-type="newproduct"><span class="title">Mới cập nhật</span></li>
+                                    <li class="citem" data-type="13"><a href="/giay-gang-tay-dm937"><span class="title">Giầy - Găng tay</span></a></li>
+                                    <li class="citem" data-type="14"><a href="/the-thao-ca-nhan-dm939"><span class="title">Cá nhân</span></a></li>
+                                    <li class="citem" data-type="15"><a href="/the-thao-dong-doi-dm940"><span class="title">Đồng đội</span></a></li>
+                                    <li class="citem" data-type="16"><a href="/the-thao-khac-dm942"><span class="title">Thể thao khacs</span></a></li>
+                                </ul>
+                                <div class="floor-elevator" id="elevator-1">
+                                    <a href="#elevator-0" class="btn-elevator up fa fa-angle-up"></a>
+                                    <a href="#elevator-2" class="btn-elevator down fa fa-angle-down"></a>
+                                </div>
+                            </div>
+                            <div class="megashop-banner">
+                                <div class="col-sm-6 banner">
+                                    <a href="#">
+                                        <img src="/Content/Csspublic/images/home1-4.jpg" alt="promotions">
+                                    </a>
+                                </div>
+                                <div class="col-sm-6 banner">
+                                    <a href="#">
+                                        <img src="/Content/Csspublic/images/home1-5.jpg" alt="promotions">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="ajax_loading" style="display: none" data-url="@System.Configuration.ConfigurationManager.AppSettings["HostUrl"]Ajax/GetProduct">
+                                <img src="/Content/Csspublic/images/loading.gif" alt="Loading...">
+                            </div>
+                            <div class="product-featured clearfix">
+                                <div class="banner-featured">
+                                    <div class="promotion">
+                                        <div id="cpqrromfhc">
+                                            <div class="item">
+                                                <a href="#">
+                                                    <img src="/Content/Csspublic/images/f2.jpg" alt="promotions">
+                                                </a>
+                                                <div class="bx-caption play start">
+                                                    <div class="featured-text"><span>featured</span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="product-featured-content">
+                                    <div class="content-products" data-margin="0" data-slider="{&quot;moveSlides&quot;:2,&quot;infiniteLoop&quot;:0,&quot;maxSlides&quot;:&quot;4&quot;,&quot;slideWidth&quot;:&quot;300&quot;,&quot;pager&quot;:0,&quot;controls&quot;:1,&quot;speed&quot;:800,&quot;visibleItems&quot;:4,&quot;responsiveBreakpoints&quot;:{&quot;480&quot;:1,&quot;640&quot;:2,&quot;768&quot;:3,&quot;992&quot;:3}}" data-options="{&quot;480&quot;:&quot;1&quot;,&quot;640&quot;:&quot;2&quot;,&quot;768&quot;:&quot;3&quot;,&quot;992&quot;:&quot;3&quot;,&quot;993&quot;:&quot;4&quot;}">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- MAP -->
+                            <!-- MAP -->
+                        </div>
+                        <script type="text/javascript">
+                            jQuery(document).ready(function () {
+                                jQuery(".ebnqghmbue").magicproduct({
+                                    selector: ".ebnqghmbue", // Selector product grid
+                                });
+                            });
+                        </script>
+                    </div>
+                    <div class="category-featured content_heading_electronics">
+                        <div class="fupuiuqvqq megashop">
+                            <h3 class="title">Điện tử</h3>
+                            <span class="toggle-tab mobile" style="display: none"><i class="fa fa-bars"></i></span>
+                            <div class="block-title-tabs toggle-content">
+                                <ul class="magictabs" data-ajax="848">
+                                    <li class="item first" data-type="featured"><span class="title">Nổi bật</span></li>
+                                    <li class="item " data-type="newproduct"><span class="title">Mới cập nhật</span></li>
+                                    <li class="citem" data-type="/tivi-dm849"><a href=""><span class="title">Tivi</span></a></li>
+                                    <li class="citem" data-type="/hinh-anh-phu-kien-dm850"><a href=""><span class="title">Hình ảnh</span></a></li>
+                                    <li class="citem" data-type="851"><a href="/am-thanh-dm851"><span class="title">Âm thanh</span></a></li>
+                                    <li class="citem" data-type="853"><a href="/thiet-bi-suoi-dm853"><span class="title">Thiết bị sưởi</span></a></li>
+                                </ul>
+                                <div class="floor-elevator" id="elevator-2">
+                                    <a href="#elevator-1" class="btn-elevator up fa fa-angle-up"></a>
+                                    <a href="#elevator-3" class="btn-elevator down fa fa-angle-down"></a>
+                                </div>
+                            </div>
+                            <div class="megashop-banner">
+                                <div class="col-sm-6 banner">
+                                    <a href="#">
+                                        <img src="/Content/Csspublic/images/home1-6.jpg" alt="promotions">
+                                    </a>
+                                </div>
+                                <div class="col-sm-6 banner">
+                                    <a href="#">
+                                        <img src="/Content/Csspublic/images/home1-7.jpg" alt="promotions">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="ajax_loading" style="display: none" data-url="@System.Configuration.ConfigurationManager.AppSettings["HostUrl"]Ajax/GetProduct">
+                                <img src="/Content/Csspublic/images/loading.gif" alt="Loading...">
+                            </div>
+                            <div class="product-featured clearfix">
+                                <div class="banner-featured">
+                                    <div class="promotion">
+                                        <div id="fvstlyaxzu">
+                                            <div class="item">
+                                                <a href="#">
+                                                    <img src="/Content/Csspublic/images/f3.jpg" alt="promotions">
+                                                </a>
+                                                <div class="bx-caption play start">
+                                                    <div class="featured-text"><span>featured</span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="product-featured-content">
+                                    <div class="content-products" data-margin="0" data-slider="{&quot;moveSlides&quot;:2,&quot;infiniteLoop&quot;:0,&quot;maxSlides&quot;:&quot;4&quot;,&quot;slideWidth&quot;:&quot;300&quot;,&quot;pager&quot;:0,&quot;controls&quot;:1,&quot;speed&quot;:800,&quot;visibleItems&quot;:4,&quot;responsiveBreakpoints&quot;:{&quot;480&quot;:1,&quot;640&quot;:2,&quot;768&quot;:3,&quot;992&quot;:3}}" data-options="{&quot;480&quot;:&quot;1&quot;,&quot;640&quot;:&quot;2&quot;,&quot;768&quot;:&quot;3&quot;,&quot;992&quot;:&quot;3&quot;,&quot;993&quot;:&quot;4&quot;}">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- MAP -->
+                            <!-- MAP -->
+                        </div>
+                        <script type="text/javascript">
+                            jQuery(document).ready(function () {
+                                jQuery(".fupuiuqvqq").magicproduct({
+                                    selector: ".fupuiuqvqq", // Selector product grid
+                                });
+                            });
+                        </script>
+                    </div>
+                    <div class="category-featured content_heading_digital">
+                        <div class="cckstchfhp megashop">
+                            <h3 class="title">Kỹ thuật số</h3>
+                            <span class="toggle-tab mobile" style="display: none"><i class="fa fa-bars"></i></span>
+                            <div class="block-title-tabs toggle-content">
+                                <ul class="magictabs" data-ajax="588">
+                                    <li class="item first" data-type="featured"><span class="title">Nổi bật</span></li>
+                                    <li class="item " data-type="newproduct"><span class="title">Mới cập nhật</span></li>
+
+                                    <li class="citem" data-type=""><a href="/"><span class="title">Điện thoại</span></a></li>
+                                    <li class="citem" data-type="28"><a href=""><span class="title">Máy tính bảng</span></a></li>
+                                    <li class="citem" data-type="29"><a href=""><span class="title">Máy tích xách tay</span></a></li>
+                                    <li class="citem" data-type="31"><a href=""><span class="title">Máy tính để bàn</span></a></li>
+                                </ul>
+                                <div class="floor-elevator" id="elevator-3">
+                                    <a href="#elevator-2" class="btn-elevator up fa fa-angle-up"></a>
+                                    <a href="#elevator-4" class="btn-elevator down fa fa-angle-down"></a>
+                                </div>
+                            </div>
+                            <div class="megashop-banner">
+                                <div class="col-sm-6 banner">
+                                    <a href="#">
+                                        <img src="/Content/Csspublic/images/home1-8.jpg" alt="promotions">
+                                    </a>
+                                </div>
+                                <div class="col-sm-6 banner">
+                                    <a href="#">
+                                        <img src="/Content/Csspublic/images/home1-9.jpg" alt="promotions">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="ajax_loading" style="display: none" data-url="@System.Configuration.ConfigurationManager.AppSettings["HostUrl"]Ajax/GetProduct">
+                                <img src="/Content/Csspublic/images/loading.gif" alt="Loading...">
+                            </div>
+                            <div class="product-featured clearfix">
+                                <div class="banner-featured">
+                                    <div class="promotion">
+                                        <div id="hmkwhsrxnh">
+                                            <div class="item">
+                                                <a href="#">
+                                                    <img src="/Content/Csspublic/images/f4.jpg" alt="promotions">
+                                                </a>
+                                                <div class="bx-caption play start">
+                                                    <div class="featured-text"><span>featured</span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="product-featured-content">
+                                    <div class="content-products" data-margin="0" data-slider="{&quot;moveSlides&quot;:2,&quot;infiniteLoop&quot;:0,&quot;maxSlides&quot;:&quot;4&quot;,&quot;slideWidth&quot;:&quot;300&quot;,&quot;pager&quot;:0,&quot;controls&quot;:1,&quot;speed&quot;:800,&quot;visibleItems&quot;:4,&quot;responsiveBreakpoints&quot;:{&quot;480&quot;:1,&quot;640&quot;:2,&quot;768&quot;:3,&quot;992&quot;:3}}" data-options="{&quot;480&quot;:&quot;1&quot;,&quot;640&quot;:&quot;2&quot;,&quot;768&quot;:&quot;3&quot;,&quot;992&quot;:&quot;3&quot;,&quot;993&quot;:&quot;4&quot;}">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- MAP -->
+                            <!-- MAP -->
+                        </div>
+                        <script type="text/javascript">
+                            jQuery(document).ready(function () {
+                                jQuery(".cckstchfhp").magicproduct({
+                                    selector: ".cckstchfhp", // Selector product grid
+                                });
+                            });
+                        </script>
+                    </div>
+                    <div class="category-featured content_heading_furniture">
+                        <div class="otdgmoemmd megashop">
+                            <h3 class="title">Đồ gia dụng </h3>
+                            <span class="toggle-tab mobile" style="display: none"><i class="fa fa-bars"></i></span>
+                            <div class="block-title-tabs toggle-content">
+                                <ul class="magictabs" data-ajax="{&quot;limit&quot;:&quot;12&quot;,&quot;productDelay&quot;:null,&quot;widthImages&quot;:&quot;300&quot;,&quot;heightImages&quot;:&quot;366&quot;,&quot;timer&quot;:&quot;0&quot;,&quot;action&quot;:[&quot;cart&quot;,&quot;compare&quot;,&quot;wishlist&quot;,&quot;review&quot;],&quot;category_id&quot;:&quot;11&quot;}">
+                                    <li class="item first" data-type="featured"><span class="title">Nổi bật</span></li>
+                                    <li class="item " data-type="newproduct"><span class="title">Mới cập nhật</span></li>
+
+                                    <li class="citem" data-type="32"><a href=""><span class="title">Đồ trang trí</span></a></li>
+                                    <li class="citem" data-type="33"><a href=""><span class="title">Nhà bếp</span></a></li>
+                                    <li class="citem" data-type="34"><a href=""><span class="title">Phòng ngủ</span></a></li>
+                                    <li class="citem" data-type="35"><a href=""><span class="title">Phòng tắm, phòng vệ sinh</span></a></li>
+                                </ul>
+                                <div class="floor-elevator" id="elevator-4">
+                                    <a href="#elevator-3" class="btn-elevator up fa fa-angle-up"></a>
+                                    <a href="#elevator-5" class="btn-elevator down fa fa-angle-down"></a>
+                                </div>
+                            </div>
+                            <div class="megashop-banner">
+                                <div class="col-sm-6 banner">
+                                    <a href="#">
+                                        <img src="/Content/Csspublic/images/home1-10.jpg" alt="promotions">
+                                    </a>
+                                </div>
+                                <div class="col-sm-6 banner">
+                                    <a href="#">
+                                        <img src="/Content/Csspublic/images/home1-11.jpg" alt="promotions">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="ajax_loading" style="display: none" data-url="@System.Configuration.ConfigurationManager.AppSettings["HostUrl"]Ajax/GetProduct">
+                                <img src="/Content/Csspublic/images/loading.gif" alt="Loading...">
+                            </div>
+                            <div class="product-featured clearfix">
+                                <div class="banner-featured">
+                                    <div class="promotion">
+                                        <div id="gofqhztpea">
+                                            <div class="item">
+                                                <a href="#">
+                                                    <img src="/Content/Csspublic/images/f5.jpg" alt="promotions">
+                                                </a>
+                                                <div class="bx-caption play start">
+                                                    <div class="featured-text"><span>featured</span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="product-featured-content">
+                                    <div class="content-products" data-margin="0" data-slider="{&quot;moveSlides&quot;:2,&quot;infiniteLoop&quot;:0,&quot;maxSlides&quot;:&quot;4&quot;,&quot;slideWidth&quot;:&quot;300&quot;,&quot;pager&quot;:0,&quot;controls&quot;:1,&quot;speed&quot;:800,&quot;visibleItems&quot;:4,&quot;responsiveBreakpoints&quot;:{&quot;480&quot;:1,&quot;640&quot;:2,&quot;768&quot;:3,&quot;992&quot;:3}}" data-options="{&quot;480&quot;:&quot;1&quot;,&quot;640&quot;:&quot;2&quot;,&quot;768&quot;:&quot;3&quot;,&quot;992&quot;:&quot;3&quot;,&quot;993&quot;:&quot;4&quot;}">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- MAP -->
+                            <!-- MAP -->
+                        </div>
+                        <script type="text/javascript">
+                            jQuery(document).ready(function () {
+                                jQuery(".otdgmoemmd").magicproduct({
+                                    selector: ".otdgmoemmd", // Selector product grid
+                                });
+                            });
+                        </script>
+                    </div>
+                    <div class="category-featured content_heading_jewelry">
+                        <div class="emnoiuhasu megashop">
+                            <h3 class="title">Mẹ - Bé</h3>
+                            <span class="toggle-tab mobile" style="display: none"><i class="fa fa-bars"></i></span>
+                            <div class="block-title-tabs toggle-content">
+                                <ul class="magictabs" data-ajax="{&quot;limit&quot;:&quot;12&quot;,&quot;productDelay&quot;:null,&quot;widthImages&quot;:&quot;300&quot;,&quot;heightImages&quot;:&quot;366&quot;,&quot;timer&quot;:&quot;0&quot;,&quot;action&quot;:[&quot;cart&quot;,&quot;compare&quot;,&quot;wishlist&quot;,&quot;review&quot;],&quot;category_id&quot;:&quot;12&quot;}">
+                                    <li class="item first" data-type="featured"><span class="title">Nổi bật</span></li>
+                                    <li class="item " data-type="newproduct"><span class="title">Mới cập nhật</span></li>
+
+                                    <li class="citem" data-type="36"><a href=""><span class="title">Cho bà bầu</span></a></li>
+                                    <li class="citem" data-type="37"><a href=""><span class="title">Cho mẹ sau sinh</span></a></li>
+                                    <li class="citem" data-type="38"><a href=""><span class="title">Bé ăn</span></a></li>
+                                    <li class="citem" data-type="39"><a href=""><span class="title">Bé ngủ</span></a></li>
+
+                                </ul>
+                                <div class="floor-elevator" id="elevator-5">
+                                    <a href="#elevator-4" class="btn-elevator up fa fa-angle-up"></a>
+                                    <a href="t#elevator-6" class="btn-elevator down fa fa-angle-down disabled"></a>
+                                </div>
+                            </div>
+                            <div class="megashop-banner">
+                                <div class="col-sm-6 banner">
+                                    <a href="#">
+                                        <img src="/Content/Csspublic/images/home1-12.jpg" alt="promotions">
+                                    </a>
+                                </div>
+                                <div class="col-sm-6 banner">
+                                    <a href="#">
+                                        <img src="/Content/Csspublic/images/home1-13.jpg" alt="promotions">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="ajax_loading" style="display: none" data-url="@System.Configuration.ConfigurationManager.AppSettings["HostUrl"]Ajax/GetProduct">
+                                <img src="/Content/Csspublic/images/loading.gif" alt="Loading...">
+                            </div>
+                            <div class="product-featured clearfix">
+                                <div class="banner-featured">
+                                    <div class="promotion">
+                                        <div id="ignlmaaqmm">
+                                            <div class="item">
+                                                <a href="#">
+                                                    <img src="/Content/Csspublic/images/f6.jpg" alt="promotions">
+                                                </a>
+                                                <div class="bx-caption play start">
+                                                    <div class="featured-text"><span>featured</span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="product-featured-content">
+                                    <div class="content-products" data-margin="0" data-slider="{&quot;moveSlides&quot;:2,&quot;infiniteLoop&quot;:0,&quot;maxSlides&quot;:&quot;4&quot;,&quot;slideWidth&quot;:&quot;300&quot;,&quot;pager&quot;:0,&quot;controls&quot;:1,&quot;speed&quot;:800,&quot;visibleItems&quot;:4,&quot;responsiveBreakpoints&quot;:{&quot;480&quot;:1,&quot;640&quot;:2,&quot;768&quot;:3,&quot;992&quot;:3}}" data-options="{&quot;480&quot;:&quot;1&quot;,&quot;640&quot;:&quot;2&quot;,&quot;768&quot;:&quot;3&quot;,&quot;992&quot;:&quot;3&quot;,&quot;993&quot;:&quot;4&quot;}">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- MAP -->
+                            <!-- MAP -->
+                        </div>
+                        <script type="text/javascript">
+                            jQuery(document).ready(function () {
+                                jQuery(".emnoiuhasu").magicproduct({
+                                    selector: ".emnoiuhasu", // Selector product grid
+                                });
+                            });
+                        </script>
+                    </div>
+                    <div class="row banner-bottom">
+                        <div class="col-sm-6">
+                            <div class="banner-boder-zoom">
+                                <a href="#">
+                                    <img class="img-responsive" alt="ads" src="/Content/Csspublic/images/home1-17.jpg"></a>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="banner-boder-zoom">
+                                <a href="#">
+                                    <img class="img-responsive" alt="ads" src="/Content/Csspublic/images/home1-18.jpg"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="alo-postblock">
+    <div class="container">
+        <div class="main">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="the-brands">
+                        <div class="utbakizdyd box-shopbrand">
+                            <div class="block-title-brands">
+                                <h2 class="title"><span>Thương hiệu</span></h2>
+                            </div>
+                            <div class="brand-shopbrand-box">
+                                <div class="bx-wrapper" style="max-width: 1175px; margin: 0px auto;">
+                                    <div class="bx-viewport" style="width: 100%; overflow: hidden; position: relative; height: 52px;">
+                                        <ul class="shopbrand magictabs" data-ajax="{&quot;limit&quot;:&quot;4&quot;,&quot;productDelay&quot;:&quot;500&quot;,&quot;widthImages&quot;:&quot;300&quot;,&quot;heightImages&quot;:&quot;336&quot;,&quot;timer&quot;:null,&quot;action&quot;:&quot;cart,review&quot;,&quot;rows&quot;:&quot;1&quot;}" style="width: 2015%; position: relative; transition-duration: 0s; transform: translate3d(0px, 0px, 0px);">
+                                            <li class="item first " data-type="1" style="float: left; list-style: none; position: relative; margin-right: 1px; width: 145.125px;">
+                                                <img class="brand img-responsive" src="/Content/Csspublic/images/band-logo.png" alt="The Brand 01" title="The Brand 01"></li>
+                                            <li class="item " data-type="2" style="float: left; list-style: none; position: relative; margin-right: 1px; width: 145.125px;">
+                                                <img class="brand img-responsive" src="/Content/Csspublic/images/band-logo_1.png" alt="The Brand 02" title="The Brand 02"></li>
+                                            <li class="item " data-type="3" style="float: left; list-style: none; position: relative; margin-right: 1px; width: 145.125px;">
+                                                <img class="brand img-responsive" src="/Content/Csspublic/images/band-logo_2.png" alt="The Brand 03" title="The Brand 03"></li>
+                                            <li class="item " data-type="4" style="float: left; list-style: none; position: relative; margin-right: 1px; width: 145.125px;">
+                                                <img class="brand img-responsive" src="/Content/Csspublic/images/band-logo_3.png" alt="The Brand 04" title="The Brand 04"></li>
+                                            <li class="item " data-type="5" style="float: left; list-style: none; position: relative; margin-right: 1px; width: 145.125px;">
+                                                <img class="brand img-responsive" src="/Content/Csspublic/images/band-logo_4.png" alt="The Brand 05" title="The Brand 05"></li>
+                                            <li class="item " data-type="6" style="float: left; list-style: none; position: relative; margin-right: 1px; width: 145.125px;">
+                                                <img class="brand img-responsive" src="/Content/Csspublic/images/band-logo_5.png" alt="The Brand 06" title="The Brand 06"></li>
+                                            <li class="item " data-type="7" style="float: left; list-style: none; position: relative; margin-right: 1px; width: 145.125px;">
+                                                <img class="brand img-responsive" src="/Content/Csspublic/images/band-logo_6.png" alt="The Brand 07" title="The Brand 07"></li>
+                                            <li class="item " data-type="8" style="float: left; list-style: none; position: relative; margin-right: 1px; width: 145.125px;">
+                                                <img class="brand img-responsive" src="/Content/Csspublic/images/band-logo_7.png" alt="The Brand 08" title="The Brand 08"></li>
+                                            <li class="item " data-type="9" style="float: left; list-style: none; position: relative; margin-right: 1px; width: 145.125px;">
+                                                <img class="brand img-responsive" src="/Content/Csspublic/images/band-logo_8.png" alt="The Brand 09" title="The Brand 09"></li>
+                                            <li class="item " data-type="10" style="float: left; list-style: none; position: relative; margin-right: 1px; width: 145.125px;">
+                                                <img class="brand img-responsive" src="/Content/Csspublic/images/band-logo_9.png" alt="The Brand 10" title="The Brand 10"></li>
+                                            <li class="item " data-type="11" style="float: left; list-style: none; position: relative; margin-right: 1px; width: 145.125px;">
+                                                <img class="brand img-responsive" src="/Content/Csspublic/images/band-logo_10.png" alt="The Brand 11" title="The Brand 11"></li>
+                                            <li class="item " data-type="12" style="float: left; list-style: none; position: relative; margin-right: 1px; width: 145.125px;">
+                                                <img class="brand img-responsive" src="/Content/Csspublic/images/band-logo_11.png" alt="The Brand 12" title="The Brand 12"></li>
+                                            <li class="item " data-type="13" style="float: left; list-style: none; position: relative; margin-right: 1px; width: 145.125px;">
+                                                <img class="brand img-responsive" src="/Content/Csspublic/images/band-logo_12.png" alt="The Brand 13" title="The Brand 13"></li>
+                                            <li class="item " data-type="14" style="float: left; list-style: none; position: relative; margin-right: 1px; width: 145.125px;">
+                                                <img class="brand img-responsive" src="/Content/Csspublic/images/band-logo_13.png" alt="The Brand 14" title="The Brand 14"></li>
+                                            <li class="item " data-type="15" style="float: left; list-style: none; position: relative; margin-right: 1px; width: 145.125px;">
+                                                <img class="brand img-responsive" src="/Content/Csspublic/images/band-logo_14.png" alt="The Brand 15" title="The Brand 15"></li>
+                                            <li class="item " data-type="16" style="float: left; list-style: none; position: relative; margin-right: 1px; width: 145.125px;">
+                                                <img class="brand img-responsive" src="/Content/Csspublic/images/band-logo_15.png" alt="The Brand 16" title="The Brand 16"></li>
+                                            <li class="item " data-type="17" style="float: left; list-style: none; position: relative; margin-right: 1px; width: 145.125px;">
+                                                <img class="brand img-responsive" src="/Content/Csspublic/images/band-logo_16.png" alt="The Brand 17" title="The Brand 17"></li>
+                                            <li class="item " data-type="18" style="float: left; list-style: none; position: relative; margin-right: 1px; width: 145.125px;">
+                                                <img class="brand img-responsive" src="/Content/Csspublic/images/band-logo_17.png" alt="The Brand 18" title="The Brand 18"></li>
+                                        </ul>
+                                    </div>
+                                    <div class="bx-controls bx-has-controls-direction">
+                                        <div class="bx-controls-direction"><a class="bx-prev" href=""><i class="fa fa-angle-left"></i></a><a class="bx-next" href=""><i class="fa fa-angle-right"></i></a></div>
+                                    </div>
+                                </div>
+
+                                <div class="ajax_loading" style="display: none" data-url="@System.Configuration.ConfigurationManager.AppSettings["HostUrl"]Ajax/GetBrandShowcase">
+                                    <img src="/Content/Csspublic/images/loading.gif" alt="Loading...">
+                                </div>
+                                <div class="content-products" data-margin="30" data-slider="null" data-options="{&quot;480&quot;:&quot;1&quot;,&quot;640&quot;:&quot;2&quot;,&quot;768&quot;:&quot;2&quot;,&quot;992&quot;:&quot;2&quot;,&quot;993&quot;:&quot;2&quot;}">
+                                </div>
+                                <!-- MAP -->
+                                <!-- MAP -->
+                            </div>
+                        </div>
+                        <script type="text/javascript">
+                            jQuery(document).ready(function ($) {
+                                jQuery(".utbakizdyd").magicproduct({
+                                    selector: ".utbakizdyd", // Selector product grid
+                                });
+                                (function (selector) {
+                                    var $content = $(selector);
+                                    var $slider = $('.shopbrand', $content);
+                                    $slider.bxSlider({
+                                        moveSlides: 1, infiniteLoop: false, auto: 0, speed: 500, controls: 1, pager: 0, slideWidth: 146, slideMargin: 1, visibleItems: 8, responsiveBreakpoints: { 480: 1, 640: 3, 768: 5, 992: 6, }, maxSlides: 8,
+                                    });
+
+                                })(".utbakizdyd");
+                            });
+                        </script>
+                    </div>
+                    <div class="content-wrap">
+                        <div class="container">
+                            <div id="hot-categories" class="row">
+                                <div class="col-sm-12 group-title-box">
+                                    <h2 class="group-title "><span>Danh mục nổi bật</span></h2>
+                                </div>
+                                <div class="col-sm-6  col-lg-3 cate-box">
+                                    <div class="cate-tit">
+                                        <div class="div-1" style="width: 46%;">
+                                            <div class="cate-name-wrap">
+                                                <p class="cate-name">Điện tử</p>
+                                            </div>
+                                            <a class="cate-link link-active" href="#"><span>Xem ngay</span></a>
+                                        </div>
+                                        <div class="div-2">
+                                            <a href="#">
+                                                <img class="img-responsive hot-cate-img" alt="Electronics" src="/Content/Csspublic/images/cate-product1.png">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="cate-content">
+                                        <ul>
+                                            <li><a href="#">Batteries &amp; Chargers</a></li>
+                                            <li><a href="#">Headphone, Headset</a></li>
+                                            <li><a href="#">Home Audio</a></li>
+                                            <li><a href="#">Mp3 Player Accessories</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- /.cate-box -->
+                                <div class="col-sm-6  col-lg-3 cate-box">
+                                    <div class="cate-tit">
+                                        <div class="div-1" style="width: 46%;">
+                                            <div class="cate-name-wrap">
+                                                <p class="cate-name">Thể thao</p>
+                                            </div>
+                                            <a class="cate-link" href="#"><span>Xem ngay</span></a>
+                                        </div>
+                                        <div class="div-2">
+                                            <a href="#">
+                                                <img class="img-responsive hot-cate-img" alt="Electronics" src="/Content/Csspublic/images/cate-product2.png">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="cate-content">
+                                        <ul>
+                                            <li><a href="#">Golf Supplies</a></li>
+                                            <li><a href="#">Outdoor &amp; Traveling Supplies</a></li>
+                                            <li><a href="#">Camping &amp; Hiking</a></li>
+                                            <li><a href="#">Fishing</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- /.cate-box -->
+                                <div class="col-sm-6  col-lg-3 cate-box">
+                                    <div class="cate-tit">
+                                        <div class="div-1" style="width: 46%;">
+                                            <div class="cate-name-wrap">
+                                                <p class="cate-name">Thời trang</p>
+                                            </div>
+                                            <a class="cate-link" href="#"><span>xem ngay</span></a>
+                                        </div>
+                                        <div class="div-2">
+                                            <a href="#">
+                                                <img class="img-responsive hot-cate-img" alt="Electronics" src="/Content/Csspublic/images/cate-product3.png">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="cate-content">
+                                        <ul>
+                                            <li><a href="#">Batteries &amp; Chargers</a></li>
+                                            <li><a href="#">Headphone, Headset</a></li>
+                                            <li><a href="#">Home Audio</a></li>
+                                            <li><a href="#">Mp3 Player Accessories</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- /.cate-box -->
+                                <div class="col-sm-6  col-lg-3 cate-box">
+                                    <div class="cate-tit">
+                                        <div class="div-1" style="width: 46%;">
+                                            <div class="cate-name-wrap">
+                                                <p class="cate-name">Kỹ thuật số</p>
+                                            </div>
+                                            <a class="cate-link" href="#"><span>Xem ngay</span></a>
+                                        </div>
+                                        <div class="div-2">
+                                            <a href="#">
+                                                <img class="img-responsive hot-cate-img" alt="Electronics" src="/Content/Csspublic/images/cate-product4.png">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="cate-content">
+                                        <ul>
+                                            <li><a href="#">Bath &amp; Body</a></li>
+                                            <li><a href="#">Shaving &amp; Hair Removal</a></li>
+                                            <li><a href="#">Fragrances</a></li>
+                                            <li><a href="#">Salon &amp; Spa Equipment</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- /.cate-box -->
+                                <div class="col-sm-6  col-lg-3 cate-box">
+                                    <div class="cate-tit">
+                                        <div class="div-1" style="width: 46%;">
+                                            <div class="cate-name-wrap">
+                                                <p class="cate-name">Jewelry &amp; Watches</p>
+                                            </div>
+                                            <a class="cate-link" href="#"><span>shop now</span></a>
+                                        </div>
+                                        <div class="div-2">
+                                            <a href="#">
+                                                <img class="img-responsive hot-cate-img" alt="Electronics" src="/Content/Csspublic/images/cate-product5.png">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="cate-content">
+                                        <ul>
+                                            <li><a href="#">Men Watches</a></li>
+                                            <li><a href="#">Wedding Rings</a></li>
+                                            <li><a href="#">Earring</a></li>
+                                            <li><a href="#">Necklaces</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- /.cate-box -->
+                                <div class="col-sm-6  col-lg-3 cate-box">
+                                    <div class="cate-tit">
+                                        <div class="div-1" style="width: 46%;">
+                                            <div class="cate-name-wrap">
+                                                <p class="cate-name">Kỹ thuật số</p>
+                                            </div>
+                                            <a class="cate-link" href="#"><span>Xem ngay</span></a>
+                                        </div>
+                                        <div class="div-2">
+                                            <a href="#">
+                                                <img class="img-responsive hot-cate-img" alt="Electronics" src="/Content/Csspublic/images/cate-product6.png">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="cate-content">
+                                        <ul>
+                                            <li><a href="#">Accessories for iPhone</a></li>
+                                            <li><a href="#">Accessories for iPad</a></li>
+                                            <li><a href="#">Accessories for Tablet PC</a></li>
+                                            <li><a href="#">Tablet PC</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- /.cate-box -->
+                                <div class="col-sm-6  col-lg-3 cate-box">
+                                    <div class="cate-tit">
+                                        <div class="div-1" style="width: 46%;">
+                                            <div class="cate-name-wrap">
+                                                <p class="cate-name">Nội thất</p>
+                                            </div>
+                                            <a class="cate-link" href="#"><span>Xem ngay</span></a>
+                                        </div>
+                                        <div class="div-2">
+                                            <a href="#">
+                                                <img class="img-responsive hot-cate-img" alt="Electronics" src="/Content/Csspublic/images/cate-product7.png">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="cate-content">
+                                        <ul>
+                                            <li><a href="#">Batteries &amp; Chargers</a></li>
+                                            <li><a href="#">Headphone, Headset</a></li>
+                                            <li><a href="#">Home Audio</a></li>
+                                            <li><a href="#">Mp3 Player Accessories</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- /.cate-box -->
+                                <div class="col-sm-6  col-lg-3 cate-box">
+                                    <div class="cate-tit">
+                                        <div class="div-1" style="width: 46%;">
+                                            <div class="cate-name-wrap">
+                                                <p class="cate-name">Đồ chơi</p>
+                                            </div>
+                                            <a class="cate-link" href="#"><span>Xem ngay</span></a>
+                                        </div>
+                                        <div class="div-2">
+                                            <a href="#">
+                                                <img class="img-responsive hot-cate-img" alt="Electronics" src="/Content/Csspublic/images/cate-product8.png">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="cate-content">
+                                        <ul>
+                                            <li><a href="#">Walkera</a></li>
+                                            <li><a href="#">Fpv System &amp; Parts</a></li>
+                                            <li><a href="#">RC Cars &amp; Parts</a></li>
+                                            <li><a href="#">Helicopters &amp; Part</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- /.cate-box -->
+                            </div>
+                            <!-- /#hot-categories -->
+                        </div>
+                        <!-- /.container -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

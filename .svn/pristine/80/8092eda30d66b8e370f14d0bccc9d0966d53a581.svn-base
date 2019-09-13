@@ -1,0 +1,23 @@
+﻿@using Business.ClassBusiness;
+
+@{
+    
+    var listNewsGroup = new NewsGroupBusiness().GetListNewsGroup();
+    int totalRecord = 0;
+    var listNews = new NewsBusiness().ListByNewsIdNewsGroup(1, ref totalRecord, 1, 50);
+}
+<div class="anav-container">
+    <div class="block block-anav">
+        <div class="block-title">
+            <strong><span>Hỗ trợ</span></strong>
+        </div>
+        <ul class="nav-accordion">
+            @foreach (var items in listNews)
+            {
+                <li class="level0 nav-1 first level-top parent"><a href="/help/@(Common.util.Function.ConvertUrlString(items.Title))-n@items.Id" class="level-top"><span>@items.Title</span></a><span class="collapse">collapse</span></li>
+            }
+        </ul>
+
+    </div>
+</div>
+

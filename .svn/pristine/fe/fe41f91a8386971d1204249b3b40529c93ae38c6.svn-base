@@ -1,0 +1,253 @@
+﻿@using Common.util
+<div class="header-container header-color color">
+    <div class="header_full">
+        <div class="header">
+            <div class="header-top">
+                <div class="container">
+                    <div class="row">
+                        <div class="top-left col-md-6 col-sm-6 col-xs-12">
+                            <div class="nav-top-links">
+                                <span class="first-item"><span class="fa fa-phone"><span class="hidden">hidden</span></span>+84-04-665-99999</span>
+                                <a href="/Contact" style="border: none"><span class="fa fa-envelope"><span class="hidden">hidden</span></span>Liên hệ chúng tôi hôm nay!</a>
+                            </div>
+
+
+
+                        </div>
+                        <div class="top-right col-md-6 col-sm-6 col-xs-12">
+                            <div class="header-setting">
+                                <div class="settting-switcher">
+                                    <div class="dropdown-toggle">
+                                        <div class="text-setting">Tài khoản của bạn</div>
+                                    </div>
+                                    <div class="dropdown-switcher">
+                                        <div class="top-links-alo">
+                                            <div class="header-top-link">
+                                                <ul class="links">
+                                                    @if (SessionUtility.GetSessionMember(Session) != null)
+                                                    {
+                                                        <li class="first"><a href="/Member/Profile" title="My Account">Xin chào @SessionUtility.GetSessionMember(Session).MemberProfile.FirstName</a></li>
+                                                    <li><a href="/" title="My Wishlist">My Wishlist</a></li>
+                                                    <li><a href="/" title="Testimonial">Testimonial</a></li>
+                                                    <li><a href="/Login/Logout" title="Checkout" class="top-link-checkout">Đăng xuất</a></li>
+                                                    }
+                                                    else
+                                                    {
+                                                          <li class=" last">
+
+                                                              <a data-toggle="modal" href="javarscipt:;" data-target="#myModal">Đăng nhập
+                                                              </a>
+
+                                                          </li>
+                                                    }                                                                                                                                              
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="support-link">
+                                    
+                                    <a href="/help">Trung tâm hỗ trợ</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="header-content">
+                <div class="container">
+                    <div class="row">
+                        <div class="content-logo col-sm-3 col-xs-12">
+                            <div class="header-logo">
+                                <a href="/" title="Buygroup365" class="logo"><strong>Buygroup365</strong><img height="65px" class="img-responsive" src="/Content/Csspublic/images/logo.png" alt="Buygroup365"></a>
+                            </div>
+                        </div>
+                        <div class="content-seach col-md-6 col-sm-6 col-xs-12">
+                            <div class="header-search">
+                                <div id="search_mini_form">
+                                    <div class="form-search clearfix">
+                                        <input id="catsearch" type="hidden" name="cat" value="">
+                                        <div id="cat" class="dd-container" style="width: 160px;">
+                                            <div class="dd-select" style="width: 160px; background: rgb(238, 238, 238);">
+                                                <select id="ddlListcatalog" class="sl-select" style="border: navajowhite; width: 100%; background: none; padding: 0 5px; height: 36px; font-size: 14px;">
+                                                    <option value="0">Tất cả danh mục</option>
+                                                    <option value="2">Thời trang, trang sức</option>
+                                                    <option value="2">Làm đẹp, sức khỏe</option>
+                                                    <option value="2">Mẹ và Bé</option>
+                                                    <option value="2">Nhà cửa, Đồ gia dụng</option>
+                                                    <option value="2">Điện thoại - Phụ kiện</option>
+                                                    <option value="2">Máy tính, Máy ảnh, Kỹ thuật số</option>
+                                                    <option value="2">Điện tử - Điện lạnh</option>
+                                                    <option value="1316">Thể thao, Văn hóa phẩm</option>
+                                                    <option value="3136">Thực phẩm, Đặc sản</option>
+                                                    <option value="96">Thủ công, mỹ nghệ, đồ cổ, đồ sưu tập</option>
+                                                </select>
+                                            </div>
+
+                                        </div>
+                                        <div class="form-imput-serach">
+                                            <input id="search" type="text" name="q" class="input-text" placeholder="Tìm kiếm, Ví dụ: iphone 6, ipad, ao so mi" autocomplete="off">
+                                        </div>
+                                        <button type="button" title="Search" class="button" id="btnSearch" onclick="search()"><span><span><i class="fa fa-search"></i></span></span></button>
+
+                                    </div>
+
+                                    <script type="text/javascript">
+                                        jQuery(document).ready(function () {
+                                            jQuery('#search').keypress(function (e) {
+                                                if (e.keyCode == 13)
+
+                                                    search();
+
+                                            });
+                                        });
+                                        function search() {
+                                            if (jQuery('#search').val().length > 2)
+                                                window.location.href = '/search-dm' + jQuery('#ddlListcatalog').val() + "?k=" + jQuery('#search').val();
+                                            else alert('Từ khóa tìm kiếm phải trên 2 ký tự');
+                                        }
+                                    </script>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="content-cart col-md-3 col-sm-6 col-xs-12">
+                            <div class="row">
+                            </div>
+                            <div class="tool-header row">
+
+                                <div class="miniCartWrap">
+                                    <div class="mini-maincart">
+                                        @Html.Partial("PartialCart")
+                                    </div>
+
+                                </div>
+
+
+
+                                <ul class="main-top-links">
+                                    <li class="login">@if (SessionUtility.GetSessionMember(Session) != null)
+                                            {
+                                                 <a class="top-links" href="/Login/logout" title="Đăng xuất">Đăng xuất	 </a>
+                                        }
+                                            else
+                                            {
+                                                @*<a class="top-links" href="/Login/Logout" title="Đăng nhập">Đăng nhập</a>*@
+    <a class="top-links" data-toggle="modal" href="javarscipt:;" data-target="#myModal">Đăng nhập
+    </a>
+                                        }
+                                           
+                                    </li>
+                                </ul>
+
+                                <a title="My wishlist" href="#" target="_blank" class="btn-heart">wishlist</a>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="header-content" style="display: none">
+                <div class="container">
+                    <div class="row">
+                        <div class="content-logo col-md-3 col-sm-3 col-xs-12">
+                            <div class="header-logo">
+                                <a href="/" title="Buygroup365" class="logo">
+                                    <img class="img-responsive" src="/Content/Csspublic/images/unnamed.png" alt="logo"></a>
+                            </div>
+                        </div>
+                        <div class="content-seach col-md-7 col-sm-7 col-xs-12">
+                            <div class="header-search">
+
+                                <div class="form-search clearfix">
+                                    <input id="catsearch" type="hidden" name="cat" value="">
+                                    <div id="cat" class="dd-container" style="width: 160px;">
+                                        <div class="dd-select" style="width: 160px; background: rgb(238, 238, 238);">
+                                            <select id="ddlListcatalog" class="sl-select" style="border: navajowhite; width: 100%; background: none; padding: 0 5px; height: 38px; font-size: 14px;">
+                                                <option value="0">Tất cả danh mục</option>
+                                                <option value="2">Thời trang, trang sức</option>
+                                                <option value="2">Làm đẹp, sức khỏe</option>
+                                                <option value="2">Mẹ và Bé</option>
+                                                <option value="2">Nhà cửa, Đồ gia dụng</option>
+                                                <option value="2">Điện thoại - Phụ kiện</option>
+                                                <option value="2">Máy tính, Máy ảnh, Kỹ thuật số</option>
+                                                <option value="2">Điện tử - Điện lạnh</option>
+                                                <option value="1316">Thể thao, Văn hóa phẩm</option>
+                                                <option value="3136">Thực phẩm, Đặc sản</option>
+                                                <option value="96">Thủ công, mỹ nghệ, đồ cổ, đồ sưu tập</option>
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                    <div class="form-imput-serach">
+                                        <input id="search" type="text" name="q" class="input-text" placeholder="Tìm kiếm, Ví dụ: iphone 6, ipad, ao so mi" autocomplete="off">
+                                    </div>
+                                    <button type="button" title="Search" class="button" id="btnSearch" onclick="search()"><span><span><i class="fa fa-search"></i></span></span></button>
+
+                                </div>
+
+                                <script type="text/javascript">
+                                    jQuery(document).ready(function () {
+                                        jQuery('#search').keypress(function (e) {
+                                            if (e.keyCode == 13)
+
+                                                search();
+
+                                        });
+                                    });
+                                    function search() {
+                                        if (jQuery('#search').val().length > 2)
+                                            window.location.href = '/search-dm' + jQuery('#ddlListcatalog').val() + "?k=" + jQuery('#search').val();
+                                        else alert('Từ khóa tìm kiếm phải trên 2 ký tự');
+                                    }
+                                </script>
+                            </div>
+                        </div>
+
+                        <div class="content-cart col-md-3 col-sm-6 col-xs-12">
+                            <div class="tool-header">
+                                <div class="miniCartWrap">
+                                    <div class="mini-maincart">
+                                        <div class="cartSummary">
+                                            <p class="mt-cart-title">cart</p>
+                                            <div class="crat-icon">
+                                                <span class="zero">0 </span>
+
+                                            </div>
+                                            <div class="cart-header">
+                                                <p class="cart-tolatl">
+                                                    <!--<span class="toltal"></span>-->
+                                                    <span class="zero">0 items - </span>
+                                                    <span><span class="price">$0.00</span></span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="mini-contentCart" style="display: none">
+                                            <div class="block-content">
+                                                <p class="empty">You have no items in your shopping cart.</p>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <ul class="main-top-links">
+                                    <li class="login">
+                                        <a class="top-links" href="http://alothemes.com/demo/kuteshop/index.php/customer/account/login/" title="Login">Login										  </a>
+                                    </li>
+                                </ul>
+                                <a title="My wishlist" href="http://alothemes.com/demo/kuteshop/index.php/wishlist/" target="_blank" class="btn-heart">wishlist</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @Html.Partial("_PartialHeaderbottom")
+        </div>
+    </div>
+
+</div>

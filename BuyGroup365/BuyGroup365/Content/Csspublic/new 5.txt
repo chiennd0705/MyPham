@@ -1,0 +1,202 @@
+Check luồng đăng ký TV/Shop
+- Khi đăng ký thành viên thì chỉ là thành viên (chỉ insert vào bảng Member/MemberProfile)
+- Và Trong trang thành viên khi ẩn các menu Bán hàng đi
+- Trong admin tại mục quản lý member có phần active shop, khi active sẽ nhẩy sang trang active, khi active có thể update các trường thông tin của shop
+
+Check Admin:
+- Giao diện admin bố trí như BHD ngày trước
+- chưa có logout
+- Phía trên góc phải hiển thị: xin chào... và các menu chức năng bố trí như BHD: chia làm 3 khu chính như phía dưới:
++ Các mục user admin và phân quyền (User & Phân quyền) gộp lại 1 hệ thốn menu
++ Các mục quản lý (cố định): Tỉnh thành, hãng sản xuất, danh mục, setting hệ thống, tin tức.... Đưa vào 1 hệ thống  menu riêng (Cấu hình hệ thống)
++ Các mục: quản lý member, quản lý shop, quản lý sp, quản lý đơn hàng vào 1 hệ thống menu riêng      (Quản trị nội dung)
+
+ 10
+  5
+1,5
+-----
+
+19,500
+
+ 3,5
+ 3
+ 2
+ 
+---------- 
+11
+5,5
+
+400
+
+
+Bảo hiểm:   2,200,000
+Nhà:        2,500,000
+
+15: 10
+40: 20
+65: 20
+99: 30 + 10 (lien hoan)
+
+Dầu hướng dương vàng
+
+16 Họp cổ đông
+
+-Các trạng thái của một đơn hàng
+
+0 Đơn hàng mới
+1 Đang giao dịch
+2 Đang chuyển hàng
+3 Đã hoàn tất
+4 Hủy giao dịch
+20,000 $
+Thêm 1 trường nữa: Paid (int Not NULL default 0) trạng thái đã thanh toán hay chưa: 0 chưa, 1 đã thanh toán
+
+Trường IdPayForm: lưu hình thức thanh toán từ bảng Porm: hiện tại có 2 hình thức: Giao hàng nhận tiền, Thanh Toán online
+
+
+-Hóa đơn bán hàng: 
++thông tin người mua view: Thông tin nhận hàng, và thông tin mua hàng, 
++Cột trạng thái: Bỏ nút xóa, nút cập nhật status chỉ hiện thị trạng thái hiện tại => vì phần này là no buygroup365 làm
++ bỏ tab: Thùng rác
+
+-Cập nhật thông tin cá nhân: Tên đầy đủ-> Fist name, last name
+
+-Khi đăng nhập: câu xin chào... hiển thị tên dầy đủ (last năm+fisrt name)
+
+-Đơn hàng của tôi:
++Thông tin người nhận-> Thông tin  (popup hiển thị thông tin người bán, thông tin người mua, thông tin người nhận)
++Trạng thái-> hiển thị Trạng thái đơn hàng (bỏ nút xóa)
++ bỏ tab: Thùng rác
+Quan tâm của tôi: chưa có
+
+-Cập nhật profile
+Ngày sinh: dùng đrop đown, Ngay-Thang-Năm
+
+
+
+Luồng Đăng ký Member & Active Shop
+Luồng Đăng SP và phê duyệt
+Luồnng Đơn hàng
+Thay lại email gửi
+
+-Trang chi tiết SP
++Chức năng yêu thích
++So sánh SP (để sau)
++Email cho bạn bè (để sau)
++Bin Thông số sản phẩm
++Bin Đánh giá
++Hết hàng không cho phép mua
++Giá=0 không cho phép mua và để là liên hệ (thay cho hiển thị 0đ)
+
+-Trang giỏ hàng
++Tích hợp giao nhận & Thanh Toán online (chờ)
++Trang checkout hiển thị Giỏ hàng trống(Giống trang Payment) khi giỏ hàng trống
+
+-Trang quên mật khẩu chưa có
+-Trang Đăng ký giao diện làm lại như trang đăng nhập (Tú làm)
+
+-Trang profile:
++Thay đổi mật khẩu phải nhập mật khẩu cũ
+
+-Trang quản lý Sản phẩm của TV
++Chưa xóa được sản phẩm
+
+-Trang /Payment: Không xóa được sp trong giỏ hàng
+
+-Lưu ý các chức năng sửa, xóa bất kể một thông tin gì của Member cần check xem item đó có phải là của thành viên đang login ko?
+
+
+Thêm, update sp:
+Cập nhật tags theo quy tắc: [tên sp bỏ dấu],[Tên danh mục],[Tên danh mục bỏ dẩu] 
+
+//admin 
+(Thái)
+-Phân quyền 
+-Quản lý sp ốp từ bộ của member có thêm lọc theo ID shop theo sp nổi bật, mới, hot..., thêm cột update status,
+-Quản lý đơn hàng ốp từ bộ của member có thêm bộ lọc theo ID shop, từ ngày-đến ngày, Order ID
+
+-Quản lý member:
+ +Chỉ list các thông tin cần thiết(ID, Tên đăng nhập, trạng thái tài khoản, ngày đăng ký... ), 
+ +Popup view all thông tin member, 
+ +Chức năng update toàn bộ profile(Thông tin cá nhận, reset mật khẩu, update Status của tài khoản)
+ +Bộ lọc theo username, trạng thái đăng ký từ ngày-đến ngày
+ +Có chức năng active shop (Active từ member)
+ 
+-Quản lý shop:
+  +List các thông tin cần thiết: tên shop, địa chỉ, trạng thái shop, ngày active..., 
+  +Popup view toàn bộ thông tin shop:
+  +Chức năng update toàn bộ thông tin của shop
+  +Bộ lọc theo ID shop, tên shop
+  +Hiển thị thống kê: như thống kê shop có bao nhiêu sp(link xem chi tiết), shop đã có bao nhiêu đơn hàng(link xem chi tiết...)
+  
+Không update được Trạng thái còn hàng/hết hàng: hiện tại sp nào cũng thấy hết hàng
+Thay đổi lại thông báo khi xác thực tài khoản, khi xác thực tài khoản thành công thì update lại chuỗi xác thực luôn
+
+Trang Đặt hàng: 
++Bước cuối khi không chọn hình thức thanh toán: Hiển thị biểu tượng xoay nhưng ko tự động tắt lên
++Tại bước cuối có nút " Chỉnh sửa thông tin giao hàng": chưa bin chức năng
+
+Đăng sản phẩm check thông tin chưa kỹ dẫn đến chưa nhập đầy đủ thông tin vẫn thêm được
+Check alert lần lượt như sau:
++Tên SP
++Model
++Danh mục
++Thương hiệu
++Tình trạng sp
++Ảnh đại diện
+	Ngân Lượng	OnePay	SmartLink
+Phí Setup	Free	- Đối với thẻ quốc tế: 6,300,000
+- Đối với thẻ nội địa: 2,100,000	- Thẻ quốc tế: 4,000,000
+- Thẻ Nội địa: 4,000,000
+Phí hàng tháng	Đăng ký gói Kim cương 10 triệu/năm	- Đối với thẻ quốc tế: 637,000
+- Đối với thẻ nội địa: Miễn phí	- Thẻ quốc tế: 700,000
+- Thẻ nội địa: 500,000
+Phí xử lý giao dịch	Free	Thu trên mọi giao dịch:
+- Đối với thẻ quốc tế: 6,500
+- Đối với thẻ nội địa: 1,600	Thu trên mọi giao dịch:
+- Đối với thẻ quốc tế: 6,300
+- Đối với thẻ nội địa: 1,600
+Phí thanh toán thẻ	- Đối với thẻ quốc tế: 500 đ + 1%
+- Đối với thẻ nội địa: Free	Thu trên giao dịch thành công:
+- Đối với thẻ quốc tế Visa, Master, Union Pay: 3.0 %
+
+- Đối với thẻ quốc tế JCB, AmEx: 3.5 %
+
+- Đối với thẻ nội địa: 1.0 %	-Visa, Master, JCB, Amex:
+3.0% /giá trị giao dịch
+
+- Đối với thẻ nội địa: 1.0 %
+			
+
+
+
+
+Đăng ký: khi check thông tin bị lỗi hiển thị thông báo cần bin lại thông tin user đã nhập tránh phải nhập lại từ đầu
+
+
+
+99 cặp
+100
+
+F1 9%
+F2 6
+F3 5
+F4 4
+F5 3
+F6 2
+F7 1
+-------
+
+Ấn định Lãi: 20%
+Chia cho các F theo tỉ lệ trên
+
+
+<img alt="" src="/Portals/_default/Skins/Skin/images/about.png" style="margin-bottom: 370px; width: 100%; margin-top: 10px;" />
+
+
+
+
+
+
+
+

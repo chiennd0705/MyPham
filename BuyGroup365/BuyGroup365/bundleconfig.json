@@ -1,0 +1,26 @@
+[
+  {
+    "outputFileName": "Content/Csspublic/css/ajaxcart.min.css",
+    "inputFiles": [
+      "Content/Csspublic/css/ajaxcart.css"
+    ]
+  },
+  {
+    "outputFileName": "Content/Vinaplaza/css/footer.min.css",
+    "inputFiles": [
+      "Content/Vinaplaza/css/footer.css"
+    ]
+  },
+  {
+    "outputFileName": "Content/Vinaplaza/css/header.min.css",
+    "inputFiles": [
+      "Content/Vinaplaza/css/header.css"
+    ]
+  },
+  {
+    "outputFileName": "Content/Vinaplaza/css/product-detail.min.css",
+    "inputFiles": [
+      "Content/Vinaplaza/css/product-detail.css"
+    ]
+  }
+]

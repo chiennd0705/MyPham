@@ -1,0 +1,8 @@
+﻿
+@{
+    ViewBag.Title = "UpdateCache";
+    Layout = "~/Areas/Manage/Views/Shared/_LayoutSetting.cshtml";
+}
+
+<h2>Cập nhật thành công</h2>
+

@@ -1,0 +1,74 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using Business.ClassBusiness;
+
+namespace BuyGroup365.Models.Member
+{
+    public class FuntionMember
+    {
+
+        #region Khai bao biến
+
+   //     readonly CatalogsBusiness _catalogsBusiness=new CatalogsBusiness();
+
+        #endregion
+
+        public static string HtmlBreadcrumb(long id)
+        {
+            var html = "";
+            return HtmlBreadcrumb(id, ref html);
+        }
+        public static string HtmlBreadcrumb(long id, ref string html)
+        {
+            var catalogsBusiness = new CatalogsBusiness();
+            var obj = catalogsBusiness.GetById(id);
+            html = "<li><a href=\"#\">"+obj.CatalogName+"</a></li>" + html;
+            if (obj.ParentId != -1)
+            {
+                HtmlBreadcrumb(obj.ParentId, ref html);
+            }
+            return html;
+        }
+
+        public static List<long> GetIdPrentById(long id,ref List<long>listParent )
+        {
+
+            var catalogsBusiness = new CatalogsBusiness();
+            var obj = catalogsBusiness.GetById(id);
+            if (obj != null)
+            {
+                if (obj.ParentId != -1)
+                {
+                    listParent.Add(obj.ParentId);
+                    GetIdPrentById(obj.ParentId, ref listParent);
+                }
+                
+            }
+           
+            return listParent;
+        }
+
+        public static string GetUrlImage(string url, string folder)
+        {
+            if (!string.IsNullOrEmpty(url))
+            {
+                var a = url.IndexOf('?');
+                if (a != -1)
+                {
+                    var split = url.Split('?');
+                    return split[0] + folder + "/" + split[1];
+                }
+                else
+                {
+                    return "/img/noimage.png";
+                }
+            }
+            else
+            {
+                return "/img/noimage.png";
+            }
+        }
+    }
+}

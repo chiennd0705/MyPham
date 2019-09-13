@@ -1,0 +1,23 @@
+﻿@using Common.util
+@using Common
+@using Business.ClassBusiness;
+
+
+
+<aside class="aside-item collection-category blog-category">
+    <div class="aside-title">
+        <h2 class="title-head margin-top-0 panel-box-title"><span>Danh mục sản phẩm</span></h2>
+    </div>
+    <div class="aside-content">
+        <nav class="nav-category  navbar-toggleable-md">
+            <ul class="nav navbar-pills">
+
+                @Html.Raw(ViewBag.MenuCatalog)
+
+
+
+            </ul>
+        </nav>
+    </div>
+</aside>
+

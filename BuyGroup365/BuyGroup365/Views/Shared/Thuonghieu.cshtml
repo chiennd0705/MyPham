@@ -1,0 +1,66 @@
+﻿@using Common
+@using Business.ClassBusiness;
+
+<div class="container">
+    <div class="row">
+        <div class="clearfix d_inline_b brands">
+            <button class="brands_carousel_prev nuttrai btn"><i class="fa fa-angle-left d_inline_m"></i></button>
+            <div class="owl-carousel" data-nav="brands_carousel_"
+                 data-owl-carousel-options='{
+								"stagePadding" : 15,
+								"margin" : 30,
+            "autoplay": true,
+
+								"responsive" : {
+										"0" : {
+											"items" : 2
+										},
+										"320" : {
+											"items" : 3
+										},
+										"550" : {
+											"items" : 4
+										},
+										"768" : {
+											"items" : 4
+										},
+										"992" : {
+											"items" : 5
+										},
+										"1200" : {
+											"items" : 6
+										}
+									}
+								}'>
+
+                @{
+
+                    Business.ClassBusiness.AlbumImagesBusiness albumImagesBusiness = new Business.ClassBusiness.AlbumImagesBusiness();
+                    List<Common.AlbumImage> listImages = albumImagesBusiness.GetListByAlbum("Thương hiệu").Take(8).ToList();
+                    foreach (Common.AlbumImage item in listImages)
+                    {
+
+                        <div class="item">
+                            <div class="pad15">
+                                <p class="lead"> <a href="@item.Link"><img src="/FileUpload/banner/@item.ImageSource"  /></a></p>
+                            </div>
+                        </div>
+
+                    }
+                }
+            </div>
+
+            <button class="brands_carousel_next nutphai btn"><i class="fa fa-angle-right d_inline_m"></i></button>
+        </div>
+    </div>
+</div>
+
+<style>
+    .thuonghieu-color {
+        background: #120a07;
+    }
+
+    .brands {
+        position: relative;
+    }
+</style>

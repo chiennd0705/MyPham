@@ -1,0 +1,389 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using DataAccess;
+using Common;
+using MvcPaging;
+using Business;
+using Business.ClassBusiness;
+namespace BuyGroup365.Controllers
+{
+    public class PartialController : Controller
+    {
+        //
+        // GET: /Home/
+        CatalogsBusiness catalogBusiness = new CatalogsBusiness();
+        long CatalogId1, CatalogId2, CatalogId3, CatalogId4;
+
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+
+
+
+        public ActionResult GetCategory(string type, string info)
+        {
+            long id = long.Parse(info);
+            if (id > 0)
+            {
+                Catalog temp = catalogBusiness.GetById(id);
+                string CatalogName;
+                if (temp.ParentId != -1)
+                {
+                    Catalog temp1 = catalogBusiness.GetById(temp.ParentId);
+
+                    if (temp1.ParentId != -1)
+                    {
+                        Catalog temp2 = catalogBusiness.GetById(temp1.ParentId);
+
+                        if (temp2.ParentId != -1)
+                        {
+                            Catalog temp3 = catalogBusiness.GetById(temp2.ParentId);
+                            CatalogId1 = temp3.Id;
+                            CatalogId2 = temp2.Id;
+                            CatalogId3 = temp1.Id;
+                            CatalogId4 = temp.Id;
+                            CatalogName = temp3.CatalogName;
+                        }
+                        else
+                        {
+                            CatalogId1 = temp2.Id;
+                            CatalogId2 = temp1.Id;
+                            CatalogId3 = temp.Id;
+                            CatalogName = temp2.CatalogName;
+                        }
+                    }
+                    else
+                    {
+                        CatalogId1 = temp1.Id;
+                        CatalogId2 = temp.Id;
+                        CatalogName = temp1.CatalogName;
+                    }
+                }
+                else
+                {
+                    CatalogId1 = temp.Id;
+                    CatalogName = temp.CatalogName;
+                }
+
+                ViewData["CatalogName"] = CatalogName;
+
+                string html = InitMenuCatalog(CatalogId1, 1);
+
+                ViewData["Item"] = html;
+            }
+            else
+            {
+                ViewData["CatalogName"] = "Danh mục";
+
+                string html = InitMenuCatalog(-1, 1);
+
+                ViewData["Item"] = html;
+            }
+            return PartialView();
+
+        }
+
+
+        public ActionResult GetFilter(string type, string info)
+        {
+            long id = 0, mid = 0;
+            double priceForm = 0, priceTo = 0;
+            string[] listInfo = info.Split(';');
+            id = long.Parse(listInfo[0]);
+            mid = long.Parse(listInfo[1]);
+
+
+            priceForm = double.Parse(listInfo[2].Split(':')[0]);
+            priceTo = double.Parse(listInfo[2].Split(':')[1]);
+
+            string catalogUrl = listInfo[3];
+
+
+            string urlParam = listInfo[4];
+            string k = listInfo[5];
+
+            string[] arrayParam = urlParam.Split('&');
+            string pramSql = "";
+            foreach (string item in arrayParam)
+            {
+                if (!string.IsNullOrEmpty(item))
+                    pramSql += string.Format("	AND (ProductProperties.[Key]='{0}' AND ProductProperties.ValueUrl='{1}') ", item.Split('=')[0], item.Split('=')[1]);
+            }
+
+            string strQuery = BuildQueryFilterByManufacturer(id, mid, priceForm, priceTo, pramSql, k);
+
+            BuyGroup365Entities entitis = new BuyGroup365Entities();
+            var result = entitis.Database.SqlQuery<ManuItem>(strQuery).ToList();
+            string html = "";
+
+            string paramsString = "";
+
+            if (!string.IsNullOrEmpty(urlParam))
+            {
+                paramsString += "" + urlParam;
+            }
+
+            if (mid == 0)
+            {
+                foreach (ManuItem re in result)
+                {
+                    html += "<li><a href=\"" + Common.util.Function.InitUrl(catalogUrl, id, re.ManufacturerId, priceForm, priceTo, paramsString) + "\">" + re.ManufacturerName + " </a> <span class=\"count\">(" + re.Total.ToString("N0") + ")</span></li>";
+                }
+            }
+            else
+            {
+                ManufacturersBusiness manuBusiness = new ManufacturersBusiness();
+                Manufacturer manufacturer = manuBusiness.GetById(mid);
+                html = "<li><a class=\"btn-remove\" href=\"/" + catalogUrl + "-dm" + id + "?" + paramsString + "\" title=\"Remove This Item\">Remove This Item</a><span class=\"value\" style=\"color:#ff3366\">" + manufacturer.ManufacturerName + "</span></li>";
+            }
+            ViewData["ItemMenuManufacturer"] = html;
+
+            ViewData["ItemMenuPrice"] = InitFilterPrice(catalogUrl, id, mid, priceForm, priceTo, paramsString);
+            ViewData["ItemMenuAttribute"] = InitFilterAttribute(catalogUrl, id, mid, priceForm, priceTo, pramSql, paramsString, k);
+
+            return PartialView();
+
+        }
+
+        protected string BuildQueryFilterByManufacturer(long? id, long? mid, double? priceFrom, double? priceTo, string param, string k)
+        {
+
+            string query = "", buildQuery = "";
+
+            if (id != 0)
+            {
+                query = @"BEGIN
+				            WITH temp(id)  
+			                as (  
+
+					                Select Id  
+					                From Catalogs  
+					                Where Id ={0}  
+					                Union All   
+					                Select b.Id
+					                From temp as a, Catalogs as b  
+					                Where a.Id = b.ParentId 
+			       
+			                ) 
+			                
+				                 SELECT ManufacturerId, Manufacturers.ManufacturerName, COUNT(Manufacturers.Id) AS Total FROM( select distinct Products.Id, ManufacturerId  from
+	                            temp JOIN Products on Products.CatalogId=temp.id
+	                            LEFT JOIN ProductProperties ON Products.Id=ProductProperties.ProductId 
+		                        WHERE (Status = 0 OR Status=1)
+				                AND ({1}=0 OR ManufacturerId = {1})
+				                AND ({2}=0 OR {2} <=Price)
+				                AND ({3}=0 OR {3} >=Price)
+                                AND (ProductName Like '%{5}%' OR Tags Like '%{5}%')  
+				               {4}
+                                ) as A JOIN Manufacturers on ManufacturerId = Manufacturers.Id 
+		
+                                       GROUP BY ManufacturerId, ManufacturerName
+			                 
+		                END";
+                //if (order == 1)//Mới nhất
+
+                buildQuery = string.Format(query, id, mid, priceFrom, priceTo, param, k);
+
+            }
+
+            return buildQuery;
+        }
+
+
+        protected string InitMenuCatalog(long ParentId, int depth)
+        {
+            List<Catalog> listCate = catalogBusiness.SearchCatalogByParentId(ParentId);
+            string html = string.Empty;
+
+            if (listCate.Count() > 0)
+            {
+                if (depth > 1) html = "<ul style=\"display: block;\">";
+                foreach (Catalog re in listCate)
+                {
+
+                    if (re.Id == CatalogId1 || re.Id == CatalogId2 || re.Id == CatalogId3 || re.Id == CatalogId4)
+                    {
+                        html += "<li class=\"level" + depth + " active  parent\"><a href=\"/" + re.FriendlyUrl + "-dm" + re.Id + "\"><span>" + re.CatalogName + "</span></a><span class=\"expand\">expand</span>";
+
+                        html += InitMenuCatalog(re.Id, depth + 1);
+                    }
+                    else
+                    {
+                        html += "<li class=\"level" + depth + "  parent\"><a  href=\"/" + re.FriendlyUrl + "-dm" + re.Id + "\"><span>" + re.CatalogName + "</span></a><span class=\"collapse\">collapse</span>";
+
+                    }
+
+                    html += "</li>";
+
+                }
+                if (depth > 1) html += "</ul>";
+            }
+            return html;
+        }
+
+
+        protected string InitFilterPrice(string catUrl, long id, long manuId, double priceFrom, double priceTo, string param)
+        {
+            //string[] listPriceValue = { "0-500000", "5000000-1000000", "1000000-2000000", "2000000-5000000", "5000000-1000000", "10000000-15000000", "15000000-0" };
+
+            string[] listPriceTile = { "≤ 500.000đ", "500.000 - 1.000.000đ", "1.000.000 - 2.000.000đ", "2.000.000 - 5.000.000đ", "5.000.000 - 10.000.000đ", "10.000.000 - 15.000.000đ", "≥ 15.000.000đ" };
+            double[] listPriceFrom = { 0, 500000, 1000000, 2000000, 5000000, 10000000, 15000000 };
+            double[] listPriceTo = { 500000, 1000000, 2000000, 5000000, 10000000, 15000000, 0 };
+
+            int i = 0;
+            string html = "";
+            if (priceFrom == 0 && priceTo == 0)
+            {
+                foreach (string s1 in listPriceTile)
+                {
+
+                    html += "<li><a href=\"" + Common.util.Function.InitUrl(catUrl, id, manuId, +listPriceFrom[i], listPriceTo[i], param) + "\"><span class=\"price\">" + s1 + "</span></a></li>";
+                    i++;
+                }
+            }
+            else
+            {
+                html = "<li><a class=\"btn-remove\" href=\"" + Common.util.Function.InitUrl(catUrl, id, manuId, 0, 0, param) + "\" title=\"Remove This Item\">Remove This Item</a><span class=\"value\" style=\"color:#ff3366\">" + priceFrom.ToString("N0") + " - " + priceTo.ToString("N0") + "đ</span></li>";
+
+
+            }
+            return html;
+
+        }
+
+        protected string InitFilterAttribute(string catUrl, long id, long manuId, double priceFrom, double priceTo, string paramSQL, string param, string k)
+        {
+            CatalogPropertiesBusiness catalogPropertiesBusiness = new CatalogPropertiesBusiness();
+            CatalogPropertiesValueBusiness catalogPropertiesValueBusiness = new CatalogPropertiesValueBusiness();
+
+            List<CatalogProperty> listProperty = catalogPropertiesBusiness.SearchPropertiesByCatalogId(id);
+
+            BuyGroup365Entities entitis = new BuyGroup365Entities();
+
+            string html = "";
+            foreach (CatalogProperty re in listProperty)
+            {
+                string strQuery = BuildQueryFilterByPropery(id, manuId, priceFrom, priceTo, paramSQL, re.Id, k);
+
+                var result = entitis.Database.SqlQuery<PropertyItem>(strQuery);
+
+                if (result != null && result.Count() > 0)
+                {
+                    html += "<dl class=\"narrow-by\"><dt class=\"odd\">" + re.Name + "</dt> <dt class=\"toggle-tab mobile last even\" style=\"display: block\"></dt><dd class=\"Size toggle-content visible  odd\"><ol class=\"\">";
+
+
+                    foreach (PropertyItem re1 in result)
+                    {
+                        string url = Common.util.Function.InitUrl(catUrl, id, manuId, priceFrom, priceTo, param);
+                        string itemUrl = re.Key + "=" + re1.ValueUrl;
+
+                        if (!param.Contains(itemUrl))
+                        {
+                            if (url.Contains("?")) url += "&" + itemUrl;
+                            else url += "?" + itemUrl;
+
+                            html += "<li><a href=\"" + url + "\">" + re1.Value + " </a> <span class=\"count\">(" + re1.Total.ToString("N0") + ")</span></li>";
+                        }
+                        else
+                        {
+                            html += "<li><a class=\"btn-remove\" href=\"" + url.Replace(itemUrl, "") + "\" title=\"Remove This Item\">Remove This Item</a><span class=\"value\" style=\"color:#ff3366\">" + re1.Value + "</span></li>";
+
+                        }
+
+
+                    }
+                    html += "</ol></dd></dl>";
+                }
+            }
+            return html;
+        }
+
+        protected string BuildQueryFilterByPropery(long? id, long? mid, double? priceFrom, double? priceTo, string param, long CatalogPropertyId, string k)
+        {
+
+            string query = "", buildQuery = "";
+
+            if (id != 0)
+            {
+                query = @"BEGIN
+				             SELECT Value, ValueUrl, COUNT(Value) AS Total FROM
+	                         Products JOIN ProductProperties ON Products.Id=ProductProperties.ProductId 
+		                     JOIN CatalogProperties ON CatalogProperties.Id=ProductProperties.CatalogPropertyId 
+		                        WHERE Products.CatalogId={0}
+                                AND (CatalogPropertyId={5}) 
+                                AND (Status = 0 OR Status=1)
+				                AND ({1}=0 OR ManufacturerId = {1})
+				                AND ({2}=0 OR {2} <=Price)
+				                AND ({3}=0 OR {3} >=Price)
+                                AND (ProductName Like '%{6}%' OR Tags Like '%{6}%')  
+				                {4}
+                              GROUP BY  Value, ValueUrl
+			                 
+		                END";
+                //if (order == 1)//Mới nhất
+
+                buildQuery = string.Format(query, id, mid, priceFrom, priceTo, param, CatalogPropertyId, k);
+
+            }
+
+            return buildQuery;
+        }
+
+
+        public ActionResult MenuCategory()
+        {
+            List<Catalog> listLevel1 = catalogBusiness.SearchCatalogByParentId(-1);
+            string html = string.Empty;
+            string htmlMobile = string.Empty;
+            foreach (Catalog item in listLevel1)
+            {
+                html += "<li class=\"level0 cat  hasChild\" data-options=\"{&quot;menu_id&quot;:&quot;2&quot;,&quot;cat_columns&quot;:&quot;3&quot;,&quot;cat_proportions&quot;:&quot;3&quot;,&quot;right_proportions&quot;:null,&quot;left_proportions&quot;:null}\">" +
+                        "<a class=\"level-top\" href=\"" + Common.util.Function.InitUrl(item.FriendlyUrl, item.Id, 0, 0, 0, string.Empty) + "\"><img class=\"img-responsive\" alt=\"" + item.CatalogName + "\" src=\"" + item.Icon + "\"><span>" + item.CatalogName + "</span><span class=\"boder-menu\"></span></a>";
+                html += "<div class=\"level-top-mega\"><div class=\"content-mega\"> <div class=\"content-mega-horizontal\"> <ul class=\"level0 mage-column cat-mega\" style=\"width: 100%;\">";
+
+                htmlMobile += "<li class=\"level0\"><a class=\"level-top\" href=\"" + Common.util.Function.InitUrl(item.FriendlyUrl, item.Id, 0, 0, 0, string.Empty) + "\"><span>" + item.CatalogName + "</span><span class=\"boder-menu\"></span></a><ul>";
+                List<Catalog> listLevel2 = catalogBusiness.SearchCatalogByParentId(item.Id).Take(6).ToList();
+                foreach (Catalog item1 in listLevel2)
+                {
+                    html += "  <li class=\"children level1\"> <a href=\"" + Common.util.Function.InitUrl(item1.FriendlyUrl, item1.Id, 0, 0, 0, string.Empty) + "\"><span>" + item1.CatalogName + "</span></a><ul class=\"level1\">";
+
+                    htmlMobile += " <li><a href=\"" + Common.util.Function.InitUrl(item1.FriendlyUrl, item1.Id, 0, 0, 0, string.Empty) + "\"><span>" + item1.CatalogName + "</span></a><ul class=\"level1\">";
+                    List<Catalog> listLevel3 = catalogBusiness.SearchCatalogByParentId(item1.Id).Take(6).ToList();
+                    foreach (Catalog item3 in listLevel3)
+                    {
+                        html += "<li class=\"level2\"> <a href=\"" + Common.util.Function.InitUrl(item3.FriendlyUrl, item3.Id, 0, 0, 0, string.Empty) + "\"><span>" + item3.CatalogName + "</span></a></li>";
+                        htmlMobile += "   <li class=\"level2 hasChild\"> <a href=\"" + Common.util.Function.InitUrl(item3.FriendlyUrl, item3.Id, 0, 0, 0, string.Empty) + "\"><span>" + item3.CatalogName + "</span></a></li>";
+                    }
+
+                    html += "</ul></li>";
+                    htmlMobile += "</ul></li>";
+                }
+
+                html += "</ul></div></div></div></li>";
+                htmlMobile += "</ul></li>";
+            }
+            ViewData["StrMenu"] = html;
+            ViewData["StrMenuMobile"] = htmlMobile;
+            return PartialView();
+        }
+
+        public class ManuItem
+        {
+            public long ManufacturerId { get; set; }
+            public string ManufacturerName { get; set; }
+            public int Total { get; set; }
+        }
+        public class PropertyItem
+        {
+            public string Value { get; set; }
+            public string ValueUrl { get; set; }
+            public int Total { get; set; }
+        }
+    }
+}

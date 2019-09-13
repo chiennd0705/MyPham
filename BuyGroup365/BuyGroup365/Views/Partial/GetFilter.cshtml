@@ -1,0 +1,7 @@
+﻿@if (Request.QueryString["k"] == null)
+{
+    <div class="filter">
+        @Html.Raw(ViewData["ItemMenuAttribute"])
+        <a href="#" class="see-all">Xem tất cả</a>
+    </div>
+}

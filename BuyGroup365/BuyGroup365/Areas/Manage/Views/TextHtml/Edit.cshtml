@@ -1,0 +1,71 @@
+﻿@using BuyGroup365.Areas.Manage.Models
+@using MvcPaging
+@model Common.TextHtml
+@{
+    ViewBag.Title = "Cập nhật TextHtml";
+    Layout = "~/Areas/Manage/Views/Shared/_LayoutAdmincshtml.cshtml";
+}
+
+<div class="container-fluid" ng-app="body">
+    @Html.Raw(AdminFunction.BindHeader("TextHtml", " Thêm mới", null, null, null))
+    <!-- /.row -->
+    <!-- /.row -->
+    <!-- /.row -->
+    <div class="row" ng-controller="Index">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                @using (Html.BeginForm("Edit", "TextHtml", FormMethod.Post, new { enctype = "multipart/form-data", id = "Edit" }))
+                {
+                    @*@Html.ValidationSummary(true)*@
+
+ <div class="modal-footer">
+<a type="button" class="btn btn-default" onclick="window.history.back();">Trở về</a>
+     <button type="submit" class="btn btn-primary">Cập nhật</button>
+ </div>
+
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <label>Tiêu đề<span class="required">*</span></label><br />
+                        <input class="form-control" autocomplete="off" maxlength="100" data-val-required="Mời nhập tiêu đề" id="Title" required id="Title" name="Title" type="text" value="@Model.Title" />
+                        <span class="field-validation-valid" data-valmsg-for="Title" data-valmsg-replace="true"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Code</label><br />
+                        <input type="text" class="form-control" maxlength="20" id="Code" name="Code" value="@Model.Code" />
+                        <span class="field-validation-valid" data-valmsg-for="Code" data-valmsg-replace="true"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Status<span class="required">*</span></label><br />
+                        <select class="form-control" name="Status" id="Status">
+                            <option value="1" @(Model.Status==1?"selected":"")>Phát hành</option>
+                            <option value="0" @(Model.Status==0?"selected":"")>Không phát hành</option>
+                        </select>
+                    </div>
+                   @* <div class="form-group">
+                        <label>Độ rộng Banner</label><br />
+                        <input type="text" class="form-control" maxlength="4" id="Attribute" name="Attribute" />
+                        <span class="field-validation-valid" data-valmsg-for="Code" data-valmsg-replace="true"></span>
+                    </div>*@
+                    <div class="form-group">
+                        <label>Nội dung</label><br />
+                        <textarea class="form-control" id="Content_add" name="Content" value="">@Model.Content</textarea>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+<a type="button" class="btn btn-default" onclick="window.history.back();">Trở về</a>
+                    <button type="submit" class="btn btn-primary">Cập nhật</button>
+                </div>
+
+                }
+            </div>
+        </div>
+        <script type="text/javascript">
+
+            var setVAL = CKEDITOR.replace('Content_add', { height: 500 });
+
+            setVAL.setData($('#Content_add').val());
+            CKFinder.setupCKEditor(setVAL, '/Content/css/ckfinder/');
+        </script>
+    </div>
+</div>

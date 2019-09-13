@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="stylesheet" type="text/css" href="/Content/Csspublic/font-awesome-4.4.0/css/font-awesome.min.css" media="all">
+    <link rel="stylesheet" type="text/css" href="/Content/Csspublic/css/simple-line-icons.css" media="all">
+    <link rel="stylesheet" type="text/css" href="/Content/Csspublic/css/elegantfont.css" media="all">
+    <link rel="stylesheet" type="text/css" href="/Content/Csspublic/css/bootstrap.min.css" media="all">
+    <link href="~/Content/Csspublic/css/StyleExt.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="/Content/Csspublic/css/styles.css" media="all">
+</head>
+<body class="" style="background-color: gray">
+   
+    <section>
+        <div id="page-wrapper" class="">
+            
+                    @RenderBody()
+                  
+           
+      
+        </div>
+    </section>
+    <script type="text/javascript" src="/Content/Csspublic/js/jquery.min.js"></script>
+
+    <script type="text/javascript" src="/Content/Csspublic/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Reflection;
+using Business.bases;
+using Common;
+using Common.exception;
+using DataAccess.DAO;
+using log4net;
+
+
+namespace Business.ClassBusiness
+{
+    public class NewsBusiness : AbstractBaseBusiness<News, long>
+    {
+        private readonly ILog _logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        /// <summary>
+        /// Hàm tạo
+        /// </summary>
+        public NewsBusiness()
+            : base(new NewsDao())
+        {
+            daoLayer.DataContext = DataContext;
+        }
+
+        public override void AddNew(News obj)
+        {
+            base.AddNew(obj);
+            DataContext.SaveChanges();
+        }
+
+        public override void Edit(News obj)
+        {
+            base.Edit(obj);
+            DataContext.SaveChanges();
+        }
+
+        public override void Remove(long id)
+        {
+            base.Remove(id);
+            DataContext.SaveChanges();
+        }
+
+        public List<Common.News> GetByKey(string key)
+        {
+            if (string.IsNullOrEmpty(key))
+            {
+                key = "";
+            }
+            IQueryable<Common.News> query = GetDynamicQuery();
+            return query.Where(p => p.Title.Contains(key) || p.Summary.Contains(key)).ToList();
+        }
+
+        public List<News> ListByNewsIdNewsGroup(long? newsGroupId, ref int totalRecord, int pageIndex = 1, int pageSize = 2)
+        {
+            IQueryable<Common.News> query = GetDynamicQuery();
+            var getListById = query.Where(x => x.NewsGroupId == newsGroupId);
+
+            totalRecord = getListById.Count();
+            var model = getListById.ToList();
+            model = model.OrderByDescending(x => x.CreateDate).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
+           
+            return model.ToList();
+        }
+
+    }
+}

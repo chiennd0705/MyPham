@@ -1,0 +1,184 @@
+﻿@using BuyGroup365.Models.Member
+@using Common.util
+@{
+    var listCart = NlCheckout.GetSessionCard(Session);
+    var sl = 0;
+    var totalPice = 0.0;
+    if (listCart != null)
+    {
+        foreach (var cartItem in listCart)
+        {
+            sl += cartItem.Quantity;
+            totalPice += cartItem.Quantity * cartItem.Product.Price;
+        }
+    }
+
+}
+
+@*<div class="header-setting">
+        <div class="settting-switcher">
+            <div class="dropdown-toggle">
+                <p class="mt-cart-title"> </p>
+                <div class="crat-icon">
+                    @if (NlCheckout.GetSessionCard(Session) != null)
+                    {
+
+                        <a href="/PayGoods/Payment"><span class="zero" id="numberProduct">@sl</span></a>
+                    }
+                    else
+                    {
+                        <a href="/PayGoods/Payment"><span class="zero" id="numberProduct">0</span></a>
+                    }
+                </div>
+            </div>
+            <div class="dropdown-switcher">
+                <div class="top-links-alo">
+                    <div class="header-top-link">
+                        <ul class="links" id="contentCart">
+                            @if (NlCheckout.GetSessionCard(Session) != null)
+                            {
+
+                                foreach (var cartItem in listCart)
+                                {
+                                    <li><span><i class="fa fa-angle-double-right"></i><span>@cartItem.Product.ProductName</span> <strong>(@cartItem.Quantity)</strong></span></li>
+                            }
+                            }
+                            else
+                            {
+
+                                <li><span><i class="fa fa-angle-double-right"></i><span style="color: blue">Giỏ hàng trống!</span></span></li>
+
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+*@
+<div class="crat-icon" id="numberProduct">
+    <div id="cart">
+
+        <div id="notify-box">
+
+            <ul>
+                <li class="cart-box">
+                    <a href="/PayGoods/CheckOut" class="link">
+                        Giỏ hàng
+                        @if (NlCheckout.GetSessionCard(Session) != null)
+                        {
+
+                            <span rel="car" class="notify-count" id="count_shopping_cart">@sl</span>
+                        }
+                        else
+                        {
+                            <span rel="car" class="notify-count" id="count_shopping_cart">0</span>
+
+                        }
+                    </a>
+                </li>
+                <li class="help-box">
+                    <a href="/huong-dan-su-dung-cn35" title="Hướng dẫn mua hàng">Hướng dẫn</a>
+                </li>
+                <li class="support-box">
+                    <a href="/chinh-sach-va-quy-dinh-cn34" title="Chính sách hỗ trợ">Hỗ trợ</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="cart-header">
+            <p class="cart-tolatl">
+                <!--<span class="toltal"></span>-->
+                <span class="zero">0 items - </span>
+                <span><span class="price">$0.00</span></span>
+            </p>
+        </div>
+    </div>
+    <div class="mini-contentCart" style="display: none;">
+        <div class="block-content">
+
+            @if (NlCheckout.GetSessionCard(Session) != null)
+            {
+            <p class="block-subtitle">Giỏ hàng của bạn</p>
+            <ol id="cart-sidebar" class="mini-products-list clearfix">
+                @foreach (var cartItem in listCart)
+                    {
+
+                        // <li><span><i class="fa fa-angle-double-right"></i><span>@cartItem.Product.ProductName</span> <strong>(@cartItem.Quantity)</strong></span></li>
+                    <li class="item clearfix odd" id="cartItem_@cartItem.Product.Id">
+                        <div class="cart-content-top">
+                            <a href="@Function.InitUrlDetaiProduct(cartItem.Product.FriendlyUrl,cartItem.Product.Id)" title="@cartItem.Product.ProductName" target="_blank" class="product-image">
+                                <img src="@FuntionMember.GetUrlImage(cartItem.Product.ProductImages.First(x=>x.IsAvatar==1).ImgSource,"Small")" width="60" height="77" alt="@cartItem.Product.ProductName">
+                            </a>
+                            <div class="product-details">
+                                <p class="product-name"><a target="_blank" href="@Function.InitUrlDetaiProduct(cartItem.Product.FriendlyUrl,cartItem.Product.Id)">@cartItem.Product.ProductName</a></p>
+                                <strong>@cartItem.Quantity.ToString("N0")</strong> x <span class="price"> @cartItem.Product.Price.ToString("N0") <sup class="u-price">đ</sup></span>
+                            </div>
+                        </div>
+                        <div class="cart-content-bottom">
+                            <div class="clearfix">
+                                <a href="#" title="Edit item" class="btn-edit"><i class="fa fa-pencil-square-o"></i></a>
+                                <a href="#" title="Remove" onclick="DeleteItemCart(@cartItem.Product.Id)" class="btn-remove btn-remove2"><i class="icon-close icons"></i></a>
+                            </div>
+                        </div>
+                    </li>
+                    }
+            </ol>
+            <p class="subtotal">
+                <span class="label">Tổng :</span> <span class="price" id="totalPice"> @totalPice.ToString("N0")  <sup class="u-price">đ</sup></span>
+            </p>
+            <div class="actions">
+                <a href="/PayGoods/CheckOut" class="view-cart">View cart                </a>
+                <a href="/PayGoods/CheckOut" class="checkout">Checkout                </a>
+            </div>
+            }
+            else
+            {
+
+            <p class="empty">Giỏ hàng trống.</p>
+
+            }
+        </div>
+    </div>
+</div>
+
+<script>
+
+    function DeleteItemCart(id) {
+        var r = confirm("Bạn có chắc là bạn muốn loại bỏ mặt hàng này ra khỏi giỏ hàng!");
+        if (r) {
+            $.ajax({
+                url: '@Url.Action("DeleteCart", "Ajax")',
+                data: {
+                    'id': id
+                },
+                Type: 'POST',
+                dataType: 'json',
+                success: function (data) {
+                    var elementId = "#cartItem_" + id;
+                    var html = "";
+                    var sl = 0;
+                    var total = 0;
+                    $.each(data, function (key, value) {
+                        sl += parseInt(value.Quantity);
+                        total += parseInt(value.Quantity) * parseFloat(value.Product.Price);
+                    });
+                    $('#numberProduct').html("");
+                    $('#numberProduct').append(" <span class=\"zero\">" + sl + " </span>");
+                    $('#totalPice').html("");
+                    $('#totalPice').append("" + formatNumber(total) + "  <sup class=\"u-price\">đ</sup>");
+
+                    $(elementId).remove();
+                },
+                error: function () {
+                    alert("lôi ròi");
+                }
+            });
+        } else {
+
+        }
+    }
+    function formatNumber(num) {
+        return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+    }
+</script>

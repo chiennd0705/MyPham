@@ -1,0 +1,94 @@
+﻿@model Common.News
+@using Common
+@using Business.ClassBusiness;
+@using BuyGroup365.Models.Common;
+@{
+
+    Layout = "~/Views/Shared/_LayoutIndex.cshtml";
+    var newsGroup = (Common.NewsGroups)ViewBag.NewsGroup;
+
+}
+<section class="sec-space-bottom page-article">
+    <div class="container">
+
+        <div class="row">
+            <section class="right-content col-md-9 col-xs-12">
+                <div class="aritcle-image">
+                    <div class="action-article" style="background:url(//file.hstatic.net/1000186358/article/image4_b9fa127455434ad19f9855d1f788bb2d_2b35e36fb4b14736bf94c5002c0b7403_1024x1024.jpg);background-size:cover;">
+                        <section class="breadcrumb-bg">
+                            <div class="theme-container container">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="site-breadcumb white-clr">
+                                            <ul class="breadcrumb breadcrumb-menubar" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                                                <li class="home">
+                                                    <a itemprop="url" href="/"><span itemprop="title">Trang chủ</span></a>
+                                                </li>
+                                                @Html.Raw(ViewData["Breadcrumbs"])
+                                               
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <div class="blog-media">
+                            <h1 class="fsz-20">@Model.Title</h1>
+                            <h4 class="sub-title-1"> Ngày đăng: @Model.CreateDate </h4>
+                        </div>
+                    </div>
+
+                </div>
+                <article class="article-main" itemscope="" itemtype="http://schema.org/Article">
+
+
+
+                   
+                 
+                    <div class="blog-single">
+                        <div class="content">
+
+                            <div class="article-content" itemprop="description">
+                                <div class="rte">
+                                    @Html.Raw(Model.Descriptions)
+                                </div>
+                            </div>
+
+                          
+
+                        </div>
+
+                    </div>
+
+
+                </article>
+
+            </section>
+            <aside class="left left-content col-md-3">
+
+                @Html.Action("MenuCategory", "Partial")
+
+
+                @Html.Action("IsBanchay", "Partial")
+
+
+
+
+                <div class="widget-wrap">
+
+                    @Html.Action("GetByCodeHtml", "Partial", new { Code = "XuHuongTimKiem" })
+
+
+                </div>
+
+
+
+
+                <div class="widget-wrap">
+                    @Html.Action("GetByCodeHtml", "Partial", new { Code = "FanPageFacebook" })
+
+                </div>
+            </aside>
+        </div>
+    </div>
+</section>

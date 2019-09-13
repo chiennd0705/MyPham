@@ -1,0 +1,572 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="BHD_InventorModelStoreContainer" CdmEntityContainer="BHD_InventorEntities">
+    <EntitySetMapping Name="Data_Balance">
+      <EntityTypeMapping TypeName="BHD_InventorModel.Data_Balance">
+        <MappingFragment StoreEntitySet="Data_Balance">
+          <ScalarProperty Name="confirmed" ColumnName="confirmed" />
+          <ScalarProperty Name="noted" ColumnName="noted" />
+          <ScalarProperty Name="inventory_code" ColumnName="inventory_code" />
+          <ScalarProperty Name="balance_user" ColumnName="balance_user" />
+          <ScalarProperty Name="balance_date" ColumnName="balance_date" />
+          <ScalarProperty Name="modified_user" ColumnName="modified_user" />
+          <ScalarProperty Name="create_user" ColumnName="create_user" />
+          <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+          <ScalarProperty Name="create_date" ColumnName="create_date" />
+          <ScalarProperty Name="deleted" ColumnName="deleted" />
+          <ScalarProperty Name="code" ColumnName="code" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Data_Balance_Detail">
+      <EntityTypeMapping TypeName="BHD_InventorModel.Data_Balance_Detail">
+        <MappingFragment StoreEntitySet="Data_Balance_Detail">
+          <ScalarProperty Name="barcode" ColumnName="barcode" />
+          <ScalarProperty Name="shipment_code" ColumnName="shipment_code" />
+          <ScalarProperty Name="notes_detail" ColumnName="notes_detail" />
+          <ScalarProperty Name="quantity_balance" ColumnName="quantity_balance" />
+          <ScalarProperty Name="quantity_real" ColumnName="quantity_real" />
+          <ScalarProperty Name="quantity_system" ColumnName="quantity_system" />
+          <ScalarProperty Name="expiry_date" ColumnName="expiry_date" />
+          <ScalarProperty Name="receipt_code" ColumnName="receipt_code" />
+          <ScalarProperty Name="goods_code" ColumnName="goods_code" />
+          <ScalarProperty Name="balance_code" ColumnName="balance_code" />
+          <ScalarProperty Name="modified_user" ColumnName="modified_user" />
+          <ScalarProperty Name="create_user" ColumnName="create_user" />
+          <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+          <ScalarProperty Name="create_date" ColumnName="create_date" />
+          <ScalarProperty Name="deleted" ColumnName="deleted" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Data_Barcode">
+      <EntityTypeMapping TypeName="BHD_InventorModel.Data_Barcode">
+        <MappingFragment StoreEntitySet="Data_Barcode">
+          <ScalarProperty Name="expiry_date" ColumnName="expiry_date" />
+          <ScalarProperty Name="receipt_code" ColumnName="receipt_code" />
+          <ScalarProperty Name="goods_code" ColumnName="goods_code" />
+          <ScalarProperty Name="modified_user" ColumnName="modified_user" />
+          <ScalarProperty Name="create_user" ColumnName="create_user" />
+          <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+          <ScalarProperty Name="create_date" ColumnName="create_date" />
+          <ScalarProperty Name="deleted" ColumnName="deleted" />
+          <ScalarProperty Name="barcode" ColumnName="barcode" />
+          <ScalarProperty Name="shipment_code" ColumnName="shipment_code" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Data_Deliver">
+      <EntityTypeMapping TypeName="BHD_InventorModel.Data_Deliver">
+        <MappingFragment StoreEntitySet="Data_Deliver">
+          <ScalarProperty Name="require_code" ColumnName="require_code" />
+          <ScalarProperty Name="confirmed" ColumnName="confirmed" />
+          <ScalarProperty Name="noted" ColumnName="noted" />
+          <ScalarProperty Name="type_code" ColumnName="type_code" />
+          <ScalarProperty Name="branch_code" ColumnName="branch_code" />
+          <ScalarProperty Name="inventory_code" ColumnName="inventory_code" />
+          <ScalarProperty Name="deliver_user" ColumnName="deliver_user" />
+          <ScalarProperty Name="deliver_date" ColumnName="deliver_date" />
+          <ScalarProperty Name="modified_user" ColumnName="modified_user" />
+          <ScalarProperty Name="create_user" ColumnName="create_user" />
+          <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+          <ScalarProperty Name="create_date" ColumnName="create_date" />
+          <ScalarProperty Name="deleted" ColumnName="deleted" />
+          <ScalarProperty Name="code" ColumnName="code" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Data_Deliver_Detail">
+      <EntityTypeMapping TypeName="BHD_InventorModel.Data_Deliver_Detail">
+        <MappingFragment StoreEntitySet="Data_Deliver_Detail">
+          <ScalarProperty Name="shipment_code" ColumnName="shipment_code" />
+          <ScalarProperty Name="notes_detail" ColumnName="notes_detail" />
+          <ScalarProperty Name="quantity_before" ColumnName="quantity_before" />
+          <ScalarProperty Name="expiry_date" ColumnName="expiry_date" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="receipt_code" ColumnName="receipt_code" />
+          <ScalarProperty Name="goods_code" ColumnName="goods_code" />
+          <ScalarProperty Name="deliver_code" ColumnName="deliver_code" />
+          <ScalarProperty Name="modified_user" ColumnName="modified_user" />
+          <ScalarProperty Name="create_user" ColumnName="create_user" />
+          <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+          <ScalarProperty Name="create_date" ColumnName="create_date" />
+          <ScalarProperty Name="deleted" ColumnName="deleted" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Data_Internal">
+      <EntityTypeMapping TypeName="BHD_InventorModel.Data_Internal">
+        <MappingFragment StoreEntitySet="Data_Internal">
+          <ScalarProperty Name="confirmed" ColumnName="confirmed" />
+          <ScalarProperty Name="noted" ColumnName="noted" />
+          <ScalarProperty Name="deliver_user" ColumnName="deliver_user" />
+          <ScalarProperty Name="receipt_user" ColumnName="receipt_user" />
+          <ScalarProperty Name="type_code" ColumnName="type_code" />
+          <ScalarProperty Name="to_inventory_code" ColumnName="to_inventory_code" />
+          <ScalarProperty Name="from_inventory_code" ColumnName="from_inventory_code" />
+          <ScalarProperty Name="internal_user" ColumnName="internal_user" />
+          <ScalarProperty Name="internal_date" ColumnName="internal_date" />
+          <ScalarProperty Name="modified_user" ColumnName="modified_user" />
+          <ScalarProperty Name="create_user" ColumnName="create_user" />
+          <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+          <ScalarProperty Name="create_date" ColumnName="create_date" />
+          <ScalarProperty Name="deleted" ColumnName="deleted" />
+          <ScalarProperty Name="code" ColumnName="code" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Data_Internal_Detail">
+      <EntityTypeMapping TypeName="BHD_InventorModel.Data_Internal_Detail">
+        <MappingFragment StoreEntitySet="Data_Internal_Detail">
+          <ScalarProperty Name="shipment_code" ColumnName="shipment_code" />
+          <ScalarProperty Name="notes_detail" ColumnName="notes_detail" />
+          <ScalarProperty Name="quantity_before" ColumnName="quantity_before" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="expiry_date" ColumnName="expiry_date" />
+          <ScalarProperty Name="receipt_code" ColumnName="receipt_code" />
+          <ScalarProperty Name="goods_code" ColumnName="goods_code" />
+          <ScalarProperty Name="internal_code" ColumnName="internal_code" />
+          <ScalarProperty Name="modified_user" ColumnName="modified_user" />
+          <ScalarProperty Name="create_user" ColumnName="create_user" />
+          <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+          <ScalarProperty Name="create_date" ColumnName="create_date" />
+          <ScalarProperty Name="deleted" ColumnName="deleted" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Data_Order">
+      <EntityTypeMapping TypeName="BHD_InventorModel.Data_Order">
+        <MappingFragment StoreEntitySet="Data_Order">
+          <ScalarProperty Name="noted" ColumnName="noted" />
+          <ScalarProperty Name="inventory_code" ColumnName="inventory_code" />
+          <ScalarProperty Name="vendor_code" ColumnName="vendor_code" />
+          <ScalarProperty Name="order_date" ColumnName="order_date" />
+          <ScalarProperty Name="code" ColumnName="code" />
+          <ScalarProperty Name="deleted" ColumnName="deleted" />
+          <ScalarProperty Name="modified_user" ColumnName="modified_user" />
+          <ScalarProperty Name="create_user" ColumnName="create_user" />
+          <ScalarProperty Name="modifield_date" ColumnName="modifield_date" />
+          <ScalarProperty Name="create_date" ColumnName="create_date" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Data_Order_Detail">
+      <EntityTypeMapping TypeName="BHD_InventorModel.Data_Order_Detail">
+        <MappingFragment StoreEntitySet="Data_Order_Detail">
+          <ScalarProperty Name="notes_detail" ColumnName="notes_detail" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="goods_code" ColumnName="goods_code" />
+          <ScalarProperty Name="order_code" ColumnName="order_code" />
+          <ScalarProperty Name="deleted" ColumnName="deleted" />
+          <ScalarProperty Name="modified_user" ColumnName="modified_user" />
+          <ScalarProperty Name="create_user" ColumnName="create_user" />
+          <ScalarProperty Name="modifield_date" ColumnName="modifield_date" />
+          <ScalarProperty Name="create_date" ColumnName="create_date" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Data_Receipt">
+      <EntityTypeMapping TypeName="BHD_InventorModel.Data_Receipt">
+        <MappingFragment StoreEntitySet="Data_Receipt">
+          <ScalarProperty Name="branch_code" ColumnName="branch_code" />
+          <ScalarProperty Name="deliver_code" ColumnName="deliver_code" />
+          <ScalarProperty Name="confirmed" ColumnName="confirmed" />
+          <ScalarProperty Name="noted" ColumnName="noted" />
+          <ScalarProperty Name="type_code" ColumnName="type_code" />
+          <ScalarProperty Name="vendor_code" ColumnName="vendor_code" />
+          <ScalarProperty Name="inventory_code" ColumnName="inventory_code" />
+          <ScalarProperty Name="receipt_user" ColumnName="receipt_user" />
+          <ScalarProperty Name="receipt_date" ColumnName="receipt_date" />
+          <ScalarProperty Name="modified_user" ColumnName="modified_user" />
+          <ScalarProperty Name="create_user" ColumnName="create_user" />
+          <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+          <ScalarProperty Name="create_date" ColumnName="create_date" />
+          <ScalarProperty Name="deleted" ColumnName="deleted" />
+          <ScalarProperty Name="code" ColumnName="code" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Data_Receipt_Detail">
+      <EntityTypeMapping TypeName="BHD_InventorModel.Data_Receipt_Detail">
+        <MappingFragment StoreEntitySet="Data_Receipt_Detail">
+          <ScalarProperty Name="shipment_code" ColumnName="shipment_code" />
+          <ScalarProperty Name="notes_detail" ColumnName="notes_detail" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="expiry_date" ColumnName="expiry_date" />
+          <ScalarProperty Name="goods_code" ColumnName="goods_code" />
+          <ScalarProperty Name="receipt_code" ColumnName="receipt_code" />
+          <ScalarProperty Name="modified_user" ColumnName="modified_user" />
+          <ScalarProperty Name="create_user" ColumnName="create_user" />
+          <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+          <ScalarProperty Name="create_date" ColumnName="create_date" />
+          <ScalarProperty Name="deleted" ColumnName="deleted" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Data_Require">
+      <EntityTypeMapping TypeName="BHD_InventorModel.Data_Require">
+        <MappingFragment StoreEntitySet="Data_Require">
+          <ScalarProperty Name="confirmed" ColumnName="confirmed" />
+          <ScalarProperty Name="noted" ColumnName="noted" />
+          <ScalarProperty Name="require_inventory" ColumnName="require_inventory" />
+          <ScalarProperty Name="require_user" ColumnName="require_user" />
+          <ScalarProperty Name="require_date" ColumnName="require_date" />
+          <ScalarProperty Name="modified_user" ColumnName="modified_user" />
+          <ScalarProperty Name="create_user" ColumnName="create_user" />
+          <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+          <ScalarProperty Name="create_date" ColumnName="create_date" />
+          <ScalarProperty Name="deleted" ColumnName="deleted" />
+          <ScalarProperty Name="code" ColumnName="code" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Data_Require_Detail">
+      <EntityTypeMapping TypeName="BHD_InventorModel.Data_Require_Detail">
+        <MappingFragment StoreEntitySet="Data_Require_Detail">
+          <ScalarProperty Name="notes_detail" ColumnName="notes_detail" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="goods_code" ColumnName="goods_code" />
+          <ScalarProperty Name="require_code" ColumnName="require_code" />
+          <ScalarProperty Name="modified_user" ColumnName="modified_user" />
+          <ScalarProperty Name="create_user" ColumnName="create_user" />
+          <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+          <ScalarProperty Name="create_date" ColumnName="create_date" />
+          <ScalarProperty Name="deleted" ColumnName="deleted" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Data_Suggest">
+      <EntityTypeMapping TypeName="BHD_InventorModel.Data_Suggest">
+        <MappingFragment StoreEntitySet="Data_Suggest">
+          <ScalarProperty Name="confirmed" ColumnName="confirmed" />
+          <ScalarProperty Name="noted" ColumnName="noted" />
+          <ScalarProperty Name="suggest_user" ColumnName="suggest_user" />
+          <ScalarProperty Name="suggest_date" ColumnName="suggest_date" />
+          <ScalarProperty Name="modified_user" ColumnName="modified_user" />
+          <ScalarProperty Name="create_user" ColumnName="create_user" />
+          <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+          <ScalarProperty Name="create_date" ColumnName="create_date" />
+          <ScalarProperty Name="deleted" ColumnName="deleted" />
+          <ScalarProperty Name="code" ColumnName="code" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Data_Suggest_Detail">
+      <EntityTypeMapping TypeName="BHD_InventorModel.Data_Suggest_Detail">
+        <MappingFragment StoreEntitySet="Data_Suggest_Detail">
+          <ScalarProperty Name="notes_detail" ColumnName="notes_detail" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="goods_code" ColumnName="goods_code" />
+          <ScalarProperty Name="suggest_code" ColumnName="suggest_code" />
+          <ScalarProperty Name="modified_user" ColumnName="modified_user" />
+          <ScalarProperty Name="create_user" ColumnName="create_user" />
+          <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+          <ScalarProperty Name="create_date" ColumnName="create_date" />
+          <ScalarProperty Name="deleted" ColumnName="deleted" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="List_Branch">
+      <EntityTypeMapping TypeName="BHD_InventorModel.List_Branch">
+        <MappingFragment StoreEntitySet="List_Branch">
+          <ScalarProperty Name="modified_user" ColumnName="modified_user" />
+          <ScalarProperty Name="create_user" ColumnName="create_user" />
+          <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+          <ScalarProperty Name="create_date" ColumnName="create_date" />
+          <ScalarProperty Name="deleted" ColumnName="deleted" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="code" ColumnName="code" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="List_Combo_Detail">
+      <EntityTypeMapping TypeName="BHD_InventorModel.List_Combo_Detail">
+        <MappingFragment StoreEntitySet="List_Combo_Detail">
+          <ScalarProperty Name="modified_user" ColumnName="modified_user" />
+          <ScalarProperty Name="create_user" ColumnName="create_user" />
+          <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+          <ScalarProperty Name="create_date" ColumnName="create_date" />
+          <ScalarProperty Name="deleted" ColumnName="deleted" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="goods_code" ColumnName="goods_code" />
+          <ScalarProperty Name="combo_code" ColumnName="combo_code" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="List_Employee">
+      <EntityTypeMapping TypeName="BHD_InventorModel.List_Employee">
+        <MappingFragment StoreEntitySet="List_Employee">
+          <ScalarProperty Name="inventory_code" ColumnName="inventory_code" />
+          <ScalarProperty Name="modified_user" ColumnName="modified_user" />
+          <ScalarProperty Name="create_user" ColumnName="create_user" />
+          <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+          <ScalarProperty Name="create_date" ColumnName="create_date" />
+          <ScalarProperty Name="deleted" ColumnName="deleted" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="code" ColumnName="code" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="List_Goods">
+      <EntityTypeMapping TypeName="BHD_InventorModel.List_Goods">
+        <MappingFragment StoreEntitySet="List_Goods">
+          <ScalarProperty Name="output_price" ColumnName="output_price" />
+          <ScalarProperty Name="input_price" ColumnName="input_price" />
+          <ScalarProperty Name="is_combo" ColumnName="is_combo" />
+          <ScalarProperty Name="print_barcode" ColumnName="print_barcode" />
+          <ScalarProperty Name="manage_expiry" ColumnName="manage_expiry" />
+          <ScalarProperty Name="warn_before" ColumnName="warn_before" />
+          <ScalarProperty Name="max_quantity" ColumnName="max_quantity" />
+          <ScalarProperty Name="min_quantity" ColumnName="min_quantity" />
+          <ScalarProperty Name="group_code" ColumnName="group_code" />
+          <ScalarProperty Name="unit_code" ColumnName="unit_code" />
+          <ScalarProperty Name="modified_user" ColumnName="modified_user" />
+          <ScalarProperty Name="create_user" ColumnName="create_user" />
+          <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+          <ScalarProperty Name="create_date" ColumnName="create_date" />
+          <ScalarProperty Name="deleted" ColumnName="deleted" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="code" ColumnName="code" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="List_Group_Goods">
+      <EntityTypeMapping TypeName="BHD_InventorModel.List_Group_Goods">
+        <MappingFragment StoreEntitySet="List_Group_Goods">
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="parent_code" ColumnName="parent_code" />
+          <ScalarProperty Name="modified_user" ColumnName="modified_user" />
+          <ScalarProperty Name="create_user" ColumnName="create_user" />
+          <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+          <ScalarProperty Name="create_date" ColumnName="create_date" />
+          <ScalarProperty Name="deleted" ColumnName="deleted" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="code" ColumnName="code" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="List_Inventory">
+      <EntityTypeMapping TypeName="BHD_InventorModel.List_Inventory">
+        <MappingFragment StoreEntitySet="List_Inventory">
+          <ScalarProperty Name="branch_code" ColumnName="branch_code" />
+          <ScalarProperty Name="modified_user" ColumnName="modified_user" />
+          <ScalarProperty Name="create_user" ColumnName="create_user" />
+          <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+          <ScalarProperty Name="create_date" ColumnName="create_date" />
+          <ScalarProperty Name="deleted" ColumnName="deleted" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="code" ColumnName="code" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="List_Type">
+      <EntityTypeMapping TypeName="BHD_InventorModel.List_Type">
+        <MappingFragment StoreEntitySet="List_Type">
+          <ScalarProperty Name="modified_user" ColumnName="modified_user" />
+          <ScalarProperty Name="create_user" ColumnName="create_user" />
+          <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+          <ScalarProperty Name="create_date" ColumnName="create_date" />
+          <ScalarProperty Name="deleted" ColumnName="deleted" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="code" ColumnName="code" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="List_Unit">
+      <EntityTypeMapping TypeName="BHD_InventorModel.List_Unit">
+        <MappingFragment StoreEntitySet="List_Unit">
+          <ScalarProperty Name="modified_user" ColumnName="modified_user" />
+          <ScalarProperty Name="create_user" ColumnName="create_user" />
+          <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+          <ScalarProperty Name="create_date" ColumnName="create_date" />
+          <ScalarProperty Name="deleted" ColumnName="deleted" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="code" ColumnName="code" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="List_Vendor">
+      <EntityTypeMapping TypeName="BHD_InventorModel.List_Vendor">
+        <MappingFragment StoreEntitySet="List_Vendor">
+          <ScalarProperty Name="modified_user" ColumnName="modified_user" />
+          <ScalarProperty Name="create_user" ColumnName="create_user" />
+          <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+          <ScalarProperty Name="create_date" ColumnName="create_date" />
+          <ScalarProperty Name="deleted" ColumnName="deleted" />
+          <ScalarProperty Name="phone_number" ColumnName="phone_number" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="code" ColumnName="code" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="System_Function">
+      <EntityTypeMapping TypeName="BHD_InventorModel.System_Function">
+        <MappingFragment StoreEntitySet="System_Function">
+          <ScalarProperty Name="modified_user" ColumnName="modified_user" />
+          <ScalarProperty Name="create_user" ColumnName="create_user" />
+          <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+          <ScalarProperty Name="create_date" ColumnName="create_date" />
+          <ScalarProperty Name="deleted" ColumnName="deleted" />
+          <ScalarProperty Name="find_code" ColumnName="find_code" />
+          <ScalarProperty Name="column_value" ColumnName="column_value" />
+          <ScalarProperty Name="column_display" ColumnName="column_display" />
+          <ScalarProperty Name="form_display" ColumnName="form_display" />
+          <ScalarProperty Name="sub_fkey" ColumnName="sub_fkey" />
+          <ScalarProperty Name="sub_sql" ColumnName="sub_sql" />
+          <ScalarProperty Name="sub_table" ColumnName="sub_table" />
+          <ScalarProperty Name="main_key" ColumnName="main_key" />
+          <ScalarProperty Name="main_sql" ColumnName="main_sql" />
+          <ScalarProperty Name="main_table" ColumnName="main_table" />
+          <ScalarProperty Name="locked" ColumnName="locked" />
+          <ScalarProperty Name="visible" ColumnName="visible" />
+          <ScalarProperty Name="key_structure" ColumnName="key_structure" />
+          <ScalarProperty Name="group_id" ColumnName="group_id" />
+          <ScalarProperty Name="report_code" ColumnName="report_code" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="code" ColumnName="code" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="System_Function_Detail">
+      <EntityTypeMapping TypeName="BHD_InventorModel.System_Function_Detail">
+        <MappingFragment StoreEntitySet="System_Function_Detail">
+          <ScalarProperty Name="modified_user" ColumnName="modified_user" />
+          <ScalarProperty Name="create_user" ColumnName="create_user" />
+          <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+          <ScalarProperty Name="create_date" ColumnName="create_date" />
+          <ScalarProperty Name="deleted" ColumnName="deleted" />
+          <ScalarProperty Name="readonly" ColumnName="readonly" />
+          <ScalarProperty Name="hide_grid" ColumnName="hide_grid" />
+          <ScalarProperty Name="default_value" ColumnName="default_value" />
+          <ScalarProperty Name="hide" ColumnName="hide" />
+          <ScalarProperty Name="input_required" ColumnName="input_required" />
+          <ScalarProperty Name="position" ColumnName="position" />
+          <ScalarProperty Name="find_code" ColumnName="find_code" />
+          <ScalarProperty Name="format" ColumnName="format" />
+          <ScalarProperty Name="length" ColumnName="length" />
+          <ScalarProperty Name="data_type" ColumnName="data_type" />
+          <ScalarProperty Name="display_name" ColumnName="display_name" />
+          <ScalarProperty Name="column_name" ColumnName="column_name" />
+          <ScalarProperty Name="function_code" ColumnName="function_code" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="System_Info">
+      <EntityTypeMapping TypeName="BHD_InventorModel.System_Info">
+        <MappingFragment StoreEntitySet="System_Info">
+          <ScalarProperty Name="modified_user" ColumnName="modified_user" />
+          <ScalarProperty Name="create_user" ColumnName="create_user" />
+          <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+          <ScalarProperty Name="create_date" ColumnName="create_date" />
+          <ScalarProperty Name="deleted" ColumnName="deleted" />
+          <ScalarProperty Name="value" ColumnName="value" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="code" ColumnName="code" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="System_Report">
+      <EntityTypeMapping TypeName="BHD_InventorModel.System_Report">
+        <MappingFragment StoreEntitySet="System_Report">
+          <ScalarProperty Name="modified_user" ColumnName="modified_user" />
+          <ScalarProperty Name="create_user" ColumnName="create_user" />
+          <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+          <ScalarProperty Name="create_date" ColumnName="create_date" />
+          <ScalarProperty Name="deleted" ColumnName="deleted" />
+          <ScalarProperty Name="display_sql" ColumnName="display_sql" />
+          <ScalarProperty Name="group_report_code" ColumnName="group_report_code" />
+          <ScalarProperty Name="report_file" ColumnName="report_file" />
+          <ScalarProperty Name="function_code" ColumnName="function_code" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="code" ColumnName="code" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="System_Report_Detail">
+      <EntityTypeMapping TypeName="BHD_InventorModel.System_Report_Detail">
+        <MappingFragment StoreEntitySet="System_Report_Detail">
+          <ScalarProperty Name="modified_user" ColumnName="modified_user" />
+          <ScalarProperty Name="create_user" ColumnName="create_user" />
+          <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+          <ScalarProperty Name="create_date" ColumnName="create_date" />
+          <ScalarProperty Name="deleted" ColumnName="deleted" />
+          <ScalarProperty Name="input_required" ColumnName="input_required" />
+          <ScalarProperty Name="position" ColumnName="position" />
+          <ScalarProperty Name="find_code" ColumnName="find_code" />
+          <ScalarProperty Name="parameter_type" ColumnName="parameter_type" />
+          <ScalarProperty Name="parameter_display" ColumnName="parameter_display" />
+          <ScalarProperty Name="parameter_name" ColumnName="parameter_name" />
+          <ScalarProperty Name="report_code" ColumnName="report_code" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="System_Rule">
+      <EntityTypeMapping TypeName="BHD_InventorModel.System_Rule">
+        <MappingFragment StoreEntitySet="System_Rule">
+          <ScalarProperty Name="modified_user" ColumnName="modified_user" />
+          <ScalarProperty Name="create_user" ColumnName="create_user" />
+          <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+          <ScalarProperty Name="create_date" ColumnName="create_date" />
+          <ScalarProperty Name="deleted" ColumnName="deleted" />
+          <ScalarProperty Name="allow_export" ColumnName="allow_export" />
+          <ScalarProperty Name="allow_import" ColumnName="allow_import" />
+          <ScalarProperty Name="allow_print" ColumnName="allow_print" />
+          <ScalarProperty Name="allow_view" ColumnName="allow_view" />
+          <ScalarProperty Name="allow_remove" ColumnName="allow_remove" />
+          <ScalarProperty Name="allow_edit" ColumnName="allow_edit" />
+          <ScalarProperty Name="allow_add" ColumnName="allow_add" />
+          <ScalarProperty Name="function_code" ColumnName="function_code" />
+          <ScalarProperty Name="group_code" ColumnName="group_code" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="System_User">
+      <EntityTypeMapping TypeName="BHD_InventorModel.System_User">
+        <MappingFragment StoreEntitySet="System_User">
+          <ScalarProperty Name="modified_user" ColumnName="modified_user" />
+          <ScalarProperty Name="create_user" ColumnName="create_user" />
+          <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+          <ScalarProperty Name="create_date" ColumnName="create_date" />
+          <ScalarProperty Name="deleted" ColumnName="deleted" />
+          <ScalarProperty Name="locked" ColumnName="locked" />
+          <ScalarProperty Name="group_code" ColumnName="group_code" />
+          <ScalarProperty Name="employee_code" ColumnName="employee_code" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

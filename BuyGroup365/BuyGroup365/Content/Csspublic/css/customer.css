@@ -1,0 +1,24 @@
+.vmagicmenu .block-vmagicmenu-content {
+    visibility: hidden !important;
+    opacity: 0 !important;
+}
+
+.vmagicmenu:hover .block-vmagicmenu-content {
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+.category-products .products-grid .category-products-grid {
+}
+
+    .category-products .products-grid .category-products-grid:hover {
+    }
+
+products-textlink {
+    padding: 0;
+}
+
+.load-area {
+    position: relative;
+    margin-bottom:10px;
+}

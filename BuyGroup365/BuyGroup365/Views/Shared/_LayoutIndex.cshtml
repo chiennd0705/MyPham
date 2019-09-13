@@ -1,0 +1,1569 @@
+﻿@using System.Web.Optimization
+@using BuyGroup365.Models.Common;
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>@Html.Raw(@ViewBag.Title)</title>
+    <meta property="og:locale" content="vi_VN">
+    <meta name="description" content="@Html.Raw(@ViewBag.Description)">
+    <meta name="keywords" content="@Html.Raw(@ViewBag.Keywords)">
+    <meta property="og:title" content="@Html.Raw(@ViewBag.ShareTitle)" />
+    <meta property="og:description" content="@Html.Raw(@ViewBag.ShareDescription)" />
+    <meta property="og:keyword" content="@Html.Raw(@ViewBag.ShareKeyword)" />
+    <meta property="og:url" content="@Util.ReturnLinkFull(@Request.RawUrl)" />
+    <meta property="og:site_name" content="vinaplaza.vn" />
+    <meta property="og:image" content="@Util.ReturnLinkCDN(@ViewBag.image,Request.Browser.IsMobileDevice)" />
+    <meta property="og:image:secure_url" content="@Util.ReturnLinkCDN(@ViewBag.image,Request.Browser.IsMobileDevice)" />
+    <meta property="og:image:alt" content="@Html.Raw(@ViewBag.Title)" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:description" content="@Html.Raw(@ViewBag.ShareDescription)" />
+    <meta name="twitter:title" content="@Html.Raw(@ViewBag.ShareTitle)" />
+    <meta name="twitter:image" content="@Util.ReturnLinkCDN(@ViewBag.image,Request.Browser.IsMobileDevice)" />
+    <meta name="author" content="@ViewBag.author" />
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+    <link rel="canonical" href="@Util.ReturnLinkFull(@Request.RawUrl)" />
+    <link rel="dns-prefetch" href="https://cdn.vinaplaza.vn/">
+    <link rel="dns-prefetch" href="https://ajax.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+
+    @*@Scripts.RenderFormat(SiteKeys.ScriptNoDeferVersion, "~/bundles/jqueryui")*@
+    @Styles.RenderFormat(SiteKeys.StyleVersion, "~/bundles/headercss")
+    @*@Scripts.RenderFormat(SiteKeys.ScriptVersion, "~/bundles/jqueryheader")*@
+
+
+
+    <link href="/Content/Mypham/css/mypham2.css" rel="stylesheet" type="text/css" media="all">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="/Content/Mypham/css/owl.carousel.min.css" rel="stylesheet" type="text/css" media="all">
+    <!-- Build Main CSS -->
+    <link href="/Content/Mypham/css/base.scss.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/Content/Mypham/css/style.scss.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/Content/Mypham/css/update.scss.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/Content/Mypham/css/module.scss.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/Content/Mypham/css/responsive.scss.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/Content/Mypham/css/bootstrap-select.min.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/Content/Mypham/css/animate.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/Content/Mypham/css/modal-cart.scss.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/Content/Mypham/css/ant-my-pham.scss.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/Content/Mypham/css/reponsive.scss.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/Content/Mypham/css/check_out.css" rel="stylesheet" type="text/css" media="all">
+    <!-- Header JS -->
+    <script type="text/javascript" async="" src="/content/Mypham/images/f.txt"></script>
+    <script type="text/javascript" async="" src="/content/Mypham/images/js"></script>
+    <script type="text/javascript" async="" src="/Content/Mypham/js/ega_sales_countdown_exec_v1_1_2_0e0fa7acd499412cbcac10c6d358548d.js"></script>
+    <script type="text/javascript" async="" src="/Content/Mypham/js/tracker.js"></script>
+    <script type="text/javascript" async="" src="/Content/Mypham/js/script_tag_production.js"></script>
+    <script type="text/javascript" async="" src="/Content/Mypham/js/widgets.js"></script>
+    <script type="text/javascript" async="" src="/Content/Mypham/js/windowpopup.js"></script>
+    <script type="text/javascript" async="" src="/Content/Mypham/js/haravan_dhcshop_tracking.js"></script>
+    <script type="text/javascript" async="" src="/Content/Mypham/js/noname_4213484e-56a9-4fa4-62eb-a9e03670842f.js"></script>
+    <script type="text/javascript" async="" src="/Content/Mypham/js/aewishlist.js"></script>
+    <script type="text/javascript" async="" src="/Content/Mypham/js/productreviews.js"></script>
+    <script id="hrfwidget-core" src="/Content/Mypham/js/widget.js"></script>
+    <script src="/Content/Mypham/js/inferredEvents.js" async=""></script>
+    <script src="/Content/Mypham/js/335864760700645" async=""></script>
+    <script src="/Content/Mypham/js/identity.js" async=""></script>
+    <script async="" src="/Content/Mypham/js/fbevents.js"></script>
+    <script async="" src="/Content/Mypham/js/analytics.js"></script>
+    <script src="/Content/Mypham/js/jquery-2.2.3.min.js" type="text/javascript"></script>
+
+    <script>
+        //<![CDATA[
+        (function () { function asyncLoad() { var urls = ["https://inapp.haravan.com/productreviews/content/scripts/productreviews.js", "//apollotran.com/app/haravan/apwishlist/app/webroot/js/aewishlist.js?v=1.2", "//hstatic.net/358/1000186358/20/2017/7-11/noname_4213484e-56a9-4fa4-62eb-a9e03670842f.js", "https://partner.accesstrade.vn/static/js/haravan_dhcshop_tracking.js", "https://onapp.haravan.com/windowpopup/embed/asset/frontend/windowpopup.js?shop=dhcshop.myharavan.com&ver=1544521247145", "https://onapp.haravan.com/loyalty/assets/widgets.js?shop=dhcshop.myharavan.com", "https://combo.haravan.com/js/script_tag_production.js", "https://c.o-s.io/55457/tracker.js", "https://file.hstatic.net/1000300983/file/ega_sales_countdown_exec_v1_1_2_0e0fa7acd499412cbcac10c6d358548d.js"]; for (var i = 0; i < urls.length; i++) { var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = urls[i]; var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x); } } window.attachEvent ? window.attachEvent('onload', asyncLoad) : window.addEventListener('load', asyncLoad, false); })();
+        //]]>
+    </script>
+    <script type="text/javascript">
+        window.HaravanAnalytics = window.HaravanAnalytics || {};
+        window.HaravanAnalytics.meta = window.HaravanAnalytics.meta || {};
+        window.HaravanAnalytics.meta.currency = 'VND';
+        var meta = { "page": { "pageType": "home" } };
+        for (var attr in meta) {
+            window.HaravanAnalytics.meta[attr] = meta[attr];
+        }
+    </script>
+    <script async="" src="/Content/Mypham/js/haravan-analytics.min.js" type="text/javascript"></script>
+
+
+    <script src="/content/Mypham/js/option_selection.js" type="text/javascript"></script>
+
+    <script src="/content/Mypham/js/hogan-3.0.1.js" type="text/javascript"></script>
+    <script src="/content/Mypham/js/haravan.plugin.1.0.js"></script>
+    <!-- harafunnel -->
+    <script src="/content/Mypham/js/1152083771590803.js" async="async">
+    </script>
+    <script src="/content/Mypham/js/app-combo.js" type="text/javascript"></script>
+    <script src="/content/Mypham/js/lastviewproduct.js" type="text/javascript"></script>
+    <!-- end of harafunnel -->
+    <!-- Ecomobi -->
+    <script src="/content/Mypham/js/eco_tracking_all_order.js" type="text/javascript"></script>
+    <!-- End of Ecomobi -->
+    <meta name="google-site-verification" content="lFc1722uKWDyXpYwhXL4G9v9od1AR28qeVhMmHPrkeQ">
+    <meta name="google-site-verification" content="6HYs3zyZMI2q8_seZ87IT1Vvr4G90x6J0a9LIAyPhT8">
+    <script>if (typeof (_sokShops) === "undefined") { _sokShops = {}; } _sokShops.getNumber = function (val) { val = val.replace(/,/g, ""); var reg = /\d+(\.\d{1,2})?/; if (val.length && val.match(reg).length) { return parseFloat(val.match(reg)[0]); } else { return 0; } }; _sokShops.cart = { product_imageurl: ["https:images/dhc_olive_sube_sube_mini_set_5b3e76d3dbb74c5482a008f1ce4723bc_master.jpg",], sku_id: ["1037293649",], product_names: ["",], sku_url: ["/products/bo-olive-sube-sube-mini-set-ss",], product_prices: [_sokShops.getNumber("360,000₫"),], product_quantities: [1,], cart_amount: _sokShops.getNumber("360,000₫"), currency: "VND" };</script>
+
+    <script type="text/javascript" src="/content/Mypham/images/graviti.min.js"></script>
+
+
+    <script type="text/javascript" async="" src="/content/Mypham/images/tracker.js(1)"></script>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <link rel="stylesheet" href="./DHC - Nhà phân phối Mỹ phẩm Nhật Bản chính hãng tại Việt Nam _ DHC_files/css">
+    <link type="text/css" rel="stylesheet" href="/Content/Mypham/css/style.min.css">
+
+    <link href="/Content/Mypham/css/mypham1.css" rel="stylesheet" type="text/css" media="all">
+    <script type="text/javascript" src="https://dhcvietnam.com.vn/"></script>
+    <link rel="stylesheet" type="text/css" href="/Content/Mypham/css/widgets-main.css">
+    <link href="/Content/Mypham/css/dsalespopup.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="/Content/Mypham/css/productreviews.css" media="all">
+    <link rel="stylesheet" type="text/css" href="/Content/Mypham/css/jquery.raty.css" media="all">
+    <script src="/content/Mypham/js/f(1).txt"></script>
+</head>
+<body id="home" class="wide" style="">
+ 
+
+
+    <script>
+        var lastViewProducts = new LastViewProducts({
+            max: 6
+        });
+    </script>
+    <div id="box-wrapper">
+        <main class="wrapper home-wrap">
+            <!-- Main content -->
+            @Html.Partial("_PartialHeader")
+            <script>
+                $(document).ready(function () {
+                    $(".button-menu").click(function () {
+                        $(".primary-navbar.off").hide();
+                        $(".fix-menumobile.on").show();
+                    });
+                    $(".button-menu.off").click(function () {
+                        $(".fix-menumobile.on").hide();
+                        $(".primary-navbar.off").show();
+                    });
+                    $(".ovlow-nav").click(function () {
+                        $(".fix-menumobile.on").hide();
+                        $(".primary-navbar.off").show();
+                    });
+
+                });
+
+            </script>
+
+
+            @RenderBody()
+
+
+            @Html.Partial("_PartialFooter")
+
+
+
+
+            <!-- /FOOTER -->
+            <div id="to-top-mb" class="to-top mb"> <i class="fa fa-arrow-circle-o-up"></i> </div>
+
+        </main>
+    </div>
+    <!-- Plugin JS -->
+    <script src="/content/Mypham/js/api.jquery.js" type="text/javascript"></script>
+    <script src="/content/Mypham/js/owl.carousel.min.js" type="text/javascript"></script>
+    <script src="/content/Mypham/js/timber.js" type="text/javascript"></script>
+    <script src="/content/Mypham/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="/content/Mypham/js/jquery.form-validator.min.js" type="text/javascript"></script>
+    <script>$.validate({});</script>
+    <!-- Add to cart -->
+    <div class="ajax-load">
+        <span class="loading-icon">
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px" height="30px" viewBox="0 0 24 30" style="enable-background:new 0 0 50 50;" xml:space="preserve">
+            <rect x="0" y="6.46642" width="4" height="17.0672" fill="#333" opacity="0.2">
+            <animate attributeName="opacity" attributeType="XML" values="0.2; 1; .2" begin="0s" dur="0.6s" repeatCount="indefinite"></animate>
+            <animate attributeName="height" attributeType="XML" values="10; 20; 10" begin="0s" dur="0.6s" repeatCount="indefinite"></animate>
+            <animate attributeName="y" attributeType="XML" values="10; 5; 10" begin="0s" dur="0.6s" repeatCount="indefinite"></animate>
+			</rect>
+            <rect x="8" y="6.03358" width="4" height="17.9328" fill="#333" opacity="0.2">
+            <animate attributeName="opacity" attributeType="XML" values="0.2; 1; .2" begin="0.15s" dur="0.6s" repeatCount="indefinite"></animate>
+            <animate attributeName="height" attributeType="XML" values="10; 20; 10" begin="0.15s" dur="0.6s" repeatCount="indefinite"></animate>
+            <animate attributeName="y" attributeType="XML" values="10; 5; 10" begin="0.15s" dur="0.6s" repeatCount="indefinite"></animate>
+			</rect>
+            <rect x="16" y="8.53358" width="4" height="12.9328" fill="#333" opacity="0.2">
+            <animate attributeName="opacity" attributeType="XML" values="0.2; 1; .2" begin="0.3s" dur="0.6s" repeatCount="indefinite"></animate>
+            <animate attributeName="height" attributeType="XML" values="10; 20; 10" begin="0.3s" dur="0.6s" repeatCount="indefinite"></animate>
+            <animate attributeName="y" attributeType="XML" values="10; 5; 10" begin="0.3s" dur="0.6s" repeatCount="indefinite"></animate>
+			</rect>
+		</svg>
+        </span>
+    </div>
+    <div class="loading awe-popup">
+        <div class="overlay"></div>
+        <div class="loader" title="2">
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px" height="30px" viewBox="0 0 24 30" style="enable-background:new 0 0 50 50;" xml:space="preserve">
+            <rect x="0" y="6.46642" width="4" height="17.0672" fill="#333" opacity="0.2">
+            <animate attributeName="opacity" attributeType="XML" values="0.2; 1; .2" begin="0s" dur="0.6s" repeatCount="indefinite"></animate>
+            <animate attributeName="height" attributeType="XML" values="10; 20; 10" begin="0s" dur="0.6s" repeatCount="indefinite"></animate>
+            <animate attributeName="y" attributeType="XML" values="10; 5; 10" begin="0s" dur="0.6s" repeatCount="indefinite"></animate>
+			</rect>
+            <rect x="8" y="6.03358" width="4" height="17.9328" fill="#333" opacity="0.2">
+            <animate attributeName="opacity" attributeType="XML" values="0.2; 1; .2" begin="0.15s" dur="0.6s" repeatCount="indefinite"></animate>
+            <animate attributeName="height" attributeType="XML" values="10; 20; 10" begin="0.15s" dur="0.6s" repeatCount="indefinite"></animate>
+            <animate attributeName="y" attributeType="XML" values="10; 5; 10" begin="0.15s" dur="0.6s" repeatCount="indefinite"></animate>
+			</rect>
+            <rect x="16" y="8.53358" width="4" height="12.9328" fill="#333" opacity="0.2">
+            <animate attributeName="opacity" attributeType="XML" values="0.2; 1; .2" begin="0.3s" dur="0.6s" repeatCount="indefinite"></animate>
+            <animate attributeName="height" attributeType="XML" values="10; 20; 10" begin="0.3s" dur="0.6s" repeatCount="indefinite"></animate>
+            <animate attributeName="y" attributeType="XML" values="10; 5; 10" begin="0.3s" dur="0.6s" repeatCount="indefinite"></animate>
+			</rect>
+		</svg>
+        </div>
+    </div>
+    <div class="addcart-popup product-popup awe-popup">
+        <div class="overlay no-background"></div>
+        <div class="content">
+            <div class="row row-noGutter">
+                <div class="col-xl-6 col-xs-12">
+                    <div class="btn btn-full btn-primary a-left popup-title">
+                        <i class="fa fa-check"></i>Thêm vào giỏ hàng thành công
+                    </div>
+                    <a href="javascript:void(0)" class="close-window close-popup"><i class="fa fa-close"></i></a>
+                    <div class="info clearfix">
+                        <div class="product-image margin-top-5">
+                            <img alt="popup" src="/content/Mypham/images/logo.png" style="max-width:150px; height:auto">
+                        </div>
+                        <div class="product-info">
+                            <p class="product-name"></p>
+                            <p class="quantity color-main"><span>Số lượng: </span></p>
+                            <p class="total-money color-main"><span>Tổng tiền: </span></p>
+                        </div>
+                        <div class="actions">
+                            <button class="btn  btn-primary  margin-top-5 btn-continue">Tiếp tục mua hàng</button>
+                            <button class="btn btn-gray margin-top-5" onclick="window.location=&#39;/cart&#39;">Kiểm tra giỏ hàng</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="error-popup awe-popup">
+        <div class="overlay no-background"></div>
+        <div class="popup-inner content">
+            <div class="error-message"></div>
+        </div>
+    </div>
+
+    <script>
+$(document).on('click', ".remove-item-cart", function () {
+	var variantId = $(this).attr('data-id');
+	removeItemCart(variantId);
+});
+$(document).on('click', ".items-count", function () {
+	$(this).parent().children('.items-count').prop('disabled', true);
+	var thisBtn = $(this);
+	var variantId = $(this).parent().find('.variantID').val();
+	var qty =  $(this).parent().children('.number-sidebar').val();
+	updateQuantity(qty, variantId);
+});
+$(document).on('change', ".number-sidebar", function () {
+	var variantId = $(this).parent().children('.variantID').val();
+	var qty =  $(this).val();
+	updateQuantity(qty, variantId);
+});
+function updateQuantity (qty, variantId){
+	var variantIdUpdate = variantId;
+	$.ajax({
+		type: "POST",
+		url: '/cart/change.js',
+		data:  'quantity='+qty+'&id='+variantId,
+		dataType: "json",
+		success: function (cart, variantId) {
+			Haravan.onCartUpdateClick(cart, variantIdUpdate);
+		},
+		error: function (qty, variantId) {
+			Haravan.onError(qty, variantId)
+		}
+	})
+}
+function removeItemCart (variantId){
+	var variantIdRemove = variantId;
+	$.ajax({
+		type: "POST",
+		url: "/cart/change.js",
+		data:  'quantity=0&id='+variantId,
+		dataType: "json",
+		success: function (cart, variantId) {
+			Haravan.onCartRemoveClick(cart, variantIdRemove);
+			$('.productid-'+variantIdRemove).remove();
+			if($('.list-item-cart>li').length == '0' ){
+				$('.mini-products-list').html('<div class="no-item"><p>Không có sản phẩm nào trong giỏ hàng.</p></div>');
+			}
+			if($('.cart-tbody>div').length == '0' ){
+				$('.bg-cart-page').remove();
+				$('.bg-cart-page-mobile').remove();
+				jQuery('<div class="bg-cart-page" style="min-height: auto"><p>Không có sản phẩm nào trong giỏ hàng. Quay lại <a href="/">cửa hàng</a> để tiếp tục mua sắm.</p></div>').appendTo('.cart');
+			}
+		},
+		error: function (variantId, r) {
+			Haravan.onError(variantId, r)
+		}
+	})
+}
+Haravan.resizeImage = function (t, r) {
+	return t;
+}
+
+Haravan.onError = function (XMLHttpRequest, textStatus) {
+	var data = eval("(" + XMLHttpRequest.responseText + ")");
+	alert(data.message ? data.message + "(" + data.status + "): " + data.description : "Error : " + Haravan.fullMessagesFromErrors(data).join("; ") + ".")
+}, Haravan.fullMessagesFromErrors = function (t) {
+	var r = [];
+	return jQuery.each(t, function (t, e) {
+		jQuery.each(e, function (e, o) {
+			r.push(t + " " + o)
+		})
+	}), r
+}
+Haravan.updateCartFromForm = function(cart, cart_summary_id, cart_count_id) {
+		if ((typeof cart_summary_id) === 'string') {
+			var cart_summary = jQuery(cart_summary_id);
+			if (cart_summary.length) {
+				// Start from scratch.
+				cart_summary.empty();
+				// Pull it all out.
+				jQuery.each(cart, function(key, value) {
+					if (key === 'items') {
+
+						var table = jQuery(cart_summary_id);
+						if (value.length) {
+							jQuery('<ul class="list-item-cart"></ul>').appendTo(table);
+							jQuery.each(value, function(i, item) {
+
+								var src = item.image;
+								if(src == null){
+									src = "http://bizweb.dktcdn.net/thumb/large/assets/themes_support/noimage.gif";
+								}
+								var buttonQty = "";
+								if(item.quantity == '1'){
+									buttonQty = 'disabled';
+								}else{
+									buttonQty = '';
+								}
+								jQuery('<li class="item productid-' + item.variant_id +'"><a class="product-image" href="' + item.url + '" title="' + item.name + '">'
+									   + '<img alt="'+  item.title  + '" src="' + src +  '"width="'+ '80' +'"\></a>'
+									   + '<div class="detail-item"><div class="product-details"> <a href="javascript:;" data-id="'+ item.variant_id +'" title="Xóa" class="remove-item-cart fa fa-remove">&nbsp;</a>'
+									   + '<p class="product-name"> <a href="' + item.url + '" title="' + item.title + '">' + item.title + '</a></p></div>'
+									   + '<div class="product-details-bottom"><span class="price">' + Haravan.formatMoney(item.price, "{{amount}}₫") + '</span>'
+									   + '<div class="quantity-select"><input class="variantID" type="hidden" name="variantId" value="'+ item.variant_id +'"><button onClick="var result = document.getElementById(\'qty'+ item.variant_id +'\'); var qty'+ item.variant_id +' = result.value; if( !isNaN( qty'+ item.variant_id +' ) &amp;&amp; qty'+ item.variant_id +' &gt; 1 ) result.value--;return false;" class="reduced items-count btn-minus" ' + buttonQty + ' type="button">–</button><input type="text" maxlength="12" min="0" class="input-text number-sidebar qty'+ item.variant_id +'" id="qty'+ item.variant_id +'" name="Lines" id="updates_'+ item.variant_id +'" size="4" value="'+ item.quantity +'"><button onClick="var result = document.getElementById(\'qty'+ item.variant_id +'\'); var qty'+ item.variant_id +' = result.value; if( !isNaN( qty'+ item.variant_id +' )) result.value++;return false;" class="increase items-count btn-plus" type="button">+</button></div></div></li>').appendTo(table.children('.list-item-cart'));
+							});
+							jQuery('<div><div class="top-subtotal">Tổng cộng: <span class="price">' + Haravan.formatMoney(cart.total_price, "{{amount}}₫") + '</span></div></div>').appendTo(table);
+							jQuery('<div><div class="actions"><a href="/checkout" class="btn btn-pink btn-checkout btn-width"><span><i class="fa fa-spinner"></i> Thanh toán</span></a><a href="/cart" class="view-cart btn btn-pink margin-left-5 btn-width pull-right"><span><i class="fa fa-shopping-bag"></i> Giỏ hàng</span></a></div></div>').appendTo(table);
+						}
+						else {
+							jQuery('<div class="no-item"><p>Không có sản phẩm nào trong giỏ hàng.</p></div>').appendTo(table);
+
+						}
+					}
+				});
+			}
+		}
+		updateCartDesc(cart);
+		var numInput = document.querySelector('#cart-sidebar input.input-text');
+		if (numInput != null){
+			// Listen for input event on numInput.
+			numInput.addEventListener('input', function(){
+				// Let's match only digits.
+				var num = this.value.match(/^\d+$/);
+				if (num == 0) {
+					// If we have no match, value will be empty.
+					this.value = 1;
+				}
+				if (num === null) {
+					// If we have no match, value will be empty.
+					this.value = "";
+				}
+			}, false)
+		}
+	}
+Haravan.updateCartPopupForm = function(cart, cart_summary_id, cart_count_id) {
+		 updateCartDesc(cart);
+		 }
+Haravan.updateCartPageForm = function(cart, cart_summary_id, cart_count_id) {
+	if ((typeof cart_summary_id) === 'string') {
+		var cart_summary = jQuery(cart_summary_id);
+		if (cart_summary.length) {
+			// Start from scratch.
+			cart_summary.empty();
+			// Pull it all out.
+			jQuery.each(cart, function(key, value) {
+				if (key === 'items') {
+					var table = jQuery(cart_summary_id);
+					if (value.length) {
+
+						var pageCart = '<div class="cart page_cart hidden-xs">'
+						+ '<form action="/cart" method="post" novalidate class="margin-bottom-0"><div class="bg-scroll"><div class="cart-thead">'
+						+ '<div style="width: 17%">Ảnh sản phẩm</div><div style="width: 25%"><span class="nobr">Tên sản phẩm</span></div><div style="width: 15%" class="a-center"><span class="nobr">Đơn giá</span></div><div style="width: 22%" class="a-center">Số lượng</div><div style="width: 15%" class="a-center">Thành tiền</div><div style="width: 6%">Xoá</div></div>'
+						+ '<div class="cart-tbody"></div></div></form></div>';
+						var pageCartCheckout = '<div class="cart-collaterals cart_submit row"><div class="totals col-sm-12 col-md-12 col-xs-12"><div class="totals"><div class="inner">'
+						+ '<table class="table shopping-cart-table-total margin-bottom-0" id="shopping-cart-totals-table"><colgroup><col><col></colgroup>'
+						+ '<tfoot><tr><td colspan="20" class="a-right"></td><td class="a-right"><span style="margin-right:5px">Tổng đơn hàng: </span><strong><span class="totals_price price">' + Haravan.formatMoney(cart.total_price, "{{amount}}₫") + '</span></strong></td></tr></tfoot></table>'
+						+ '<ul class="checkout"><li class="clearfix"><button class="btn btn-primary button btn-proceed-checkout f-right" title="Tiến hành đặt hàng" type="button" onclick="window.location.href=\'/checkout\'"><span>Tiến hành đặt hàng</span></button><button class="btn btn-white f-right" title="Tiếp tục mua hàng" type="button" onclick="window.location.href=\'/collections/all\'"><span>Tiếp tục mua hàng</span></button></li>'
+						+ '</ul></div></div></div></div>';
+						jQuery(pageCart).appendTo(table);
+						jQuery.each(value, function(i, item) {
+							var buttonQty = "";
+							if(item.quantity == '1'){
+								buttonQty = 'disabled';
+							}else{
+								buttonQty = '';
+							}
+							var link_img1 = Haravan.resizeImage(item.image, 'compact');
+							if(link_img1=="null" || link_img1 =='' || link_img1 ==null){
+								link_img1 = 'https://bizweb.dktcdn.net/thumb/large/assets/themes_support/noimage.gif';
+							}
+							var pageCartItem = '<div class="item-cart productid-' + item.variant_id +'"><div style="width: 17%" class="image"><a class="product-image" title="' + item.name + '" href="' + item.url + '"><img width="75" height="auto" alt="' + item.name + '" src="' + link_img1 +  '"></a></div>'
+							+ '<div style="width: 25%" class="a-center"><h2 class="product-name"> <a href="' + item.url + '" title="'+ item.title +'">' + item.title + '</a> </h2><span class="variant-title">' + item.variant_title + '</span></div><div style="width: 15%" class="a-center"><span class="item-price"> <span class="price">' + Haravan.formatMoney(item.price, "{{amount}}₫") + '</span></span></div>'
+							+ '<div style="width: 22%" class="a-center"><div class="input_qty_pr"><input class="variantID" type="hidden" name="variantId" value="'+ item.variant_id +'"><button onClick="var result = document.getElementById(\'qtyItem'+ item.variant_id +'\'); var qtyItem'+ item.variant_id +' = result.value; if( !isNaN( qtyItem'+ item.variant_id +' ) &amp;&amp; qtyItem'+ item.variant_id +' &gt; 1 ) result.value--;return false;" ' + buttonQty + ' class="reduced_pop items-count btn-minus" type="button">–</button><input type="text" maxlength="12" min="0" class="input-text number-sidebar input_pop input_pop qtyItem'+ item.variant_id +'" id="qtyItem'+ item.variant_id +'" name="Lines" id="updates_'+ item.variant_id +'" size="4" value="'+ item.quantity +'"><button onClick="var result = document.getElementById(\'qtyItem'+ item.variant_id +'\'); var qtyItem'+ item.variant_id +' = result.value; if( !isNaN( qtyItem'+ item.variant_id +' )) result.value++;return false;" class="increase_pop items-count btn-plus" type="button">+</button></div></div>'
+							+ '<div style="width: 15%" class="a-center"><span class="cart-price"> <span class="price">'+ Haravan.formatMoney(item.price * item.quantity, "{{amount}}₫") +'</span> </span></div>'
+							+ '<div style="width: 6%"><a class="button remove-item-cart" title="Xóa" href="javascript:;" data-id="'+ item.variant_id +'"><i class="fa fa-times" aria-hidden="true"></i></a></div></div>';
+							jQuery(pageCartItem).appendTo(table.find('.cart-tbody'));
+							if(item.variant_title == 'Default Title'){
+								$('.variant-title').hide();
+							}
+						});
+						jQuery(pageCartCheckout).appendTo(table.children('.cart'));
+					}else {
+						jQuery('<p class="hidden-xs-down">Không có sản phẩm nào trong giỏ hàng. Quay lại <a href="/" style="color:;">cửa hàng</a> để tiếp tục mua sắm.</p>').appendTo(table);
+						jQuery('.cart_desktop_page').css('min-height', 'auto');
+					}
+				}
+			});
+		}
+	}
+	updateCartDesc(cart);
+	jQuery('#wait').hide();
+}
+
+Haravan.updateCartPopupForm = function(cart, cart_summary_id, cart_count_id) {
+
+	if ((typeof cart_summary_id) === 'string') {
+		var cart_summary = jQuery(cart_summary_id);
+		if (cart_summary.length) {
+			// Start from scratch.
+			cart_summary.empty();
+			// Pull it all out.
+			jQuery.each(cart, function(key, value) {
+				if (key === 'items') {
+					var table = jQuery(cart_summary_id);
+					if (value.length) {
+						jQuery.each(value, function(i, item) {
+							var src = item.image;
+							if(src == null){
+								src = "http://bizweb.dktcdn.net/thumb/large/assets/themes_support/noimage.gif";
+							}
+							var buttonQty = "";
+							if(item.quantity == '1'){
+								buttonQty = 'disabled';
+							}else{
+								buttonQty = '';
+							}
+							var pageCartItem = '<div class="item-popup productid-' + item.variant_id +'"><div style="width: 55%;" class="text-left"><div class="item-image">'
+							+ '<a class="product-image" href="' + item.url + '" title="' + item.name + '"><img alt="'+  item.name  + '" src="' + src +  '"width="'+ '80' +'"\></a>'
+							+ '</div><div class="item-info"><p class="item-name"><a href="' + item.url + '" title="' + item.name + '">' + item.title + '</a></p>'
+							+ '<p class="variant-title-popup">' + item.variant_title + '</span>'
+							+ '<p class="item-remove"><a href="javascript:;" class="remove-item-cart" title="Xóa" data-id="'+ item.variant_id +'"><i class="fa fa-close"></i> Bỏ sản phẩm</a></p><p class="addpass" style="color:#fff;">'+ item.variant_id +'</p></div></div>'
+							+ '<div style="width: 15%;" class="text-right"><div class="item-price"><span class="price">' + Haravan.formatMoney(item.price, "{{amount}}₫") + '</span>'
+							+ '</div></div><div style="width: 15%;" class="text-center"><input class="variantID" type="hidden" name="variantId" value="'+ item.variant_id +'">'
+							+ '<button onClick="var result = document.getElementById(\'qtyItem'+ item.variant_id +'\'); var qtyItem'+ item.variant_id +' = result.value; if( !isNaN( qtyItem'+ item.variant_id +' ) &amp;&amp; qtyItem'+ item.variant_id +' &gt; 1 ) result.value--;return false;" ' + buttonQty + ' class="reduced items-count btn-minus" type="button">–</button>'
+							+ '<input type="text" maxlength="12" min="0" class="input-text number-sidebar qtyItem'+ item.variant_id +'" id="qtyItem'+ item.variant_id +'" name="Lines" id="updates_'+ item.variant_id +'" size="4" value="'+ item.quantity +'">'
+							+ '<button onClick="var result = document.getElementById(\'qtyItem'+ item.variant_id +'\'); var qtyItem'+ item.variant_id +' = result.value; if( !isNaN( qtyItem'+ item.variant_id +' )) result.value++;return false;" class="increase items-count btn-plus" type="button">+</button></div>'
+							+ '<div style="width: 15%;" class="text-right"><span class="cart-price"> <span class="price">'+ Haravan.formatMoney(item.price * item.quantity, "{{amount}}₫") +'</span> </span></div></div>';
+							jQuery(pageCartItem).appendTo(table);
+							if(item.variant_title == 'Default Title'){
+								$('.variant-title-popup').hide();
+							}
+							$('.link_product').text();
+						});
+					}
+				}
+			});
+		}
+	}
+	jQuery('.total-price').html(Haravan.formatMoney(cart.total_price, "{{amount}}₫"));
+	updateCartDesc(cart);
+}
+
+Haravan.updateCartPageFormMobile = function(cart, cart_summary_id, cart_count_id) {
+	if ((typeof cart_summary_id) === 'string') {
+		var cart_summary = jQuery(cart_summary_id);
+		if (cart_summary.length) {
+			// Start from scratch.
+			cart_summary.empty();
+			// Pull it all out.
+			jQuery.each(cart, function(key, value) {
+				if (key === 'items') {
+
+					var table = jQuery(cart_summary_id);
+					if (value.length) {
+						jQuery('<div class="cart_page_mobile content-product-list"></div>').appendTo(table);
+						jQuery.each(value, function(i, item) {
+							if( item.image != null){
+								var src = Haravan.resizeImage(item.image, 'small');
+							}else{
+								var src = "https://bizweb.dktcdn.net/thumb/large/assets/themes_support/noimage.gif";
+							}
+							jQuery('<div class="item-product item productid-' + item.variant_id +' "><div class="item-product-cart-mobile"><a href="' + item.url + '">	<a class="product-images1" href=""  title="' + item.title + '"><img width="80" height="150" alt="" src="' + src +  '" alt="' + item.title + '"></a></a></div>'
+										 + '<div class="title-product-cart-mobile"><h3><a href="' + item.url + '" title="' + item.title + '">' + item.title + '</a></h3><p>Giá: <span>' + Haravan.formatMoney(item.price, "{{amount}}₫") + '</span></p></div>'
+										 + '<div class="select-item-qty-mobile"><div class="txt_center">'
+										 + '<input class="variantID" type="hidden" name="variantId" value="'+ item.variant_id +'"><button onClick="var result = document.getElementById(\'qtyMobile'+ item.variant_id +'\'); var qtyMobile'+ item.variant_id +' = result.value; if( !isNaN( qtyMobile'+ item.variant_id +' ) &amp;&amp; qtyMobile'+ item.variant_id +' &gt; 1 ) result.value--;return false;" class="reduced items-count btn-minus" type="button">–</button><input type="text" maxlength="12" min="0" class="input-text number-sidebar qtyMobile'+ item.variant_id +'" id="qtyMobile'+ item.variant_id +'" name="Lines" id="updates_'+ item.variant_id +'" size="4" value="'+ item.quantity +'"><button onClick="var result = document.getElementById(\'qtyMobile'+ item.variant_id +'\'); var qtyMobile'+ item.variant_id +' = result.value; if( !isNaN( qtyMobile'+ item.variant_id +' )) result.value++;return false;" class="increase items-count btn-plus" type="button">+</button></div>'
+										 + '<a class="button remove-item remove-item-cart" href="javascript:;" data-id="'+ item.variant_id +'">Xoá</a></div>').appendTo(table.children('.content-product-list'));
+
+						});
+
+						jQuery('<div class="header-cart-price" style=""><div class="title-cart "><h3 class="text-xs-left">Tổng tiền</h3><a class="text-xs-right totals_price_mobile">' + Haravan.formatMoney(cart.total_price, "{{amount}}₫") + '</a></div>'
+									 + '<div class="checkout"><button class="btn-proceed-checkout-mobile" title="Đặt hàng ngay - giao tận nơi" type="button" onclick="window.location.href=\'/checkout\'">'
+									 + '<span>Đặt hàng ngay - giao tận nơi</span></button><a href="collections/all" class="btn-semore-mobile" title="Mua thêm sản phẩm khác">'
+									 + '<span><i class="fa fa-caret-left"></i> Mua thêm sản phẩm khác</span></a><a href="javascript:;" class="btn-semore-mobile" title="Xoá toàn bộ giỏ hàng" onclick="Haravan.clear(function(){});">'
+									 + '<span>Xoá toàn bộ giỏ hàng</span></a></div></div>').appendTo(table);
+					}
+
+				}
+			});
+		}
+	}
+	updateCartDesc(cart);
+}
+
+
+
+function updateCartDesc(data){
+	var $cartPrice = Haravan.formatMoney(data.total_price, "{{amount}}₫"),
+			$cartMobile = $('#header .cart-mobile .quantity-product, .count_item_pr'),
+			$cartDesktop = $('.count_item_pr'),
+			$cartDesktopList = $('.cart-counter-list'),
+			$cartPopup = $('.cart-popup-count, .count_item_pr');
+
+	switch(data.item_count){
+		case 0:
+			$cartMobile.text('0');
+			$cartDesktop.text('0');
+			$cartDesktopList.text('0');
+			break;
+		case 1:
+			$cartMobile.text('1');
+			$cartDesktop.text('1');
+			$cartDesktopList.text('1');
+
+			break;
+		default:
+			$cartMobile.text(data.item_count);
+			$cartDesktop.text(data.item_count);
+			$cartDesktopList.text(data.item_count);
+			break;
+	}
+	$('.top-cart-content .top-subtotal .price, aside.sidebar .block-cart .subtotal .price, .popup-total .total-price').html($cartPrice);
+	$('.popup-total .total-price').html($cartPrice);
+	$('.shopping-cart-table-total .totals_price').html($cartPrice);
+	$('.header-cart-price .totals_price_mobile').html($cartPrice);
+	$('.count_item_pr').html(data.item_count);
+}
+
+Haravan.onCartUpdate = function(cart) {
+
+	 };
+	 Haravan.onCartUpdateClick = function(cart, variantId) {
+		 jQuery.each(cart, function(key, value) {
+			 if (key === 'items') {
+				 jQuery.each(value, function(i, item) {
+					 if(item.variant_id == variantId){
+						 $('.productid-'+variantId).find('.cart-price span.price').html(Haravan.formatMoney(item.price * item.quantity, "{{amount}}₫"));
+						 $('.productid-'+variantId).find('.items-count').prop("disabled", false);
+						 $('.productid-'+variantId).find('.number-sidebar').prop("disabled", false);
+						 $('.productid-'+variantId +' .number-sidebar').val(item.quantity);
+						 if(item.quantity == '1'){
+							 $('.productid-'+variantId).find('.items-count.btn-minus').prop("disabled", true);
+						 }
+					 }
+				 });
+			 }
+		 });
+		 updateCartDesc(cart);
+	 }
+	 Haravan.onCartRemoveClick = function(cart, variantId) {
+		 jQuery.each(cart, function(key, value) {
+			 if (key === 'items') {
+				 jQuery.each(value, function(i, item) {
+					 if(item.variant_id == variantId){
+						 $('.productid-'+variantId).remove();
+					 }
+				 });
+			 }
+		 });
+		 updateCartDesc(cart);
+	 }
+	 $(window).ready(function(){
+		 $.ajax({
+			 type: 'GET',
+			 url: '/cart.js',
+			 async: false,
+			 cache: false,
+			 dataType: 'json',
+			 success: function (cart){
+ Haravan.updateCartFromForm(cart, '.mini-products-list');
+						  Haravan.updateCartPopupForm(cart, '#popup-cart-desktop .tbody-popup');
+
+					}
+				 });
+			 });
+
+    </script>
+    <div class="backdrop__body-backdrop___1rvky"></div>
+
+    <div id="menu-mobile">
+        <div class="clearfix">
+            <div class="account_mobile" style="">
+                <div class="main-logo">
+                    <a href="https://dhcvietnam.com.vn/">
+
+                        <img src="/content/Mypham/images/logo.png" alt="" class="img-responsive center-block">
+
+                    </a>
+                </div>
+            </div>
+            <ul class="menu-mobile menu-left no-bullets">
+                <li>
+                    <a href="https://dhcvietnam.com.vn/">
+                        <img src="/content/Mypham/images/home.png" alt="Trang chủ">
+                        Trang chủ
+                    </a>
+                </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <li>
+                    <a href="https://dhcvietnam.com.vn/collections/san-pham-hot">
+                        <img src="/content/Mypham/images/megamenu_mb_item_icon1.png" alt="TOP SẢN PHẨM MUA NHIỀU ">
+                        TOP SẢN PHẨM MUA NHIỀU
+                    </a>
+                </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <li>
+                    <a href="https://dhcvietnam.com.vn/collections/tpcn">
+                        <img src="/content/Mypham/images/megamenu_mb_item_icon2.png" alt="Thực phẩm chức năng ">
+                        Thực phẩm chức năng
+                    </a>
+                </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <li>
+                    <a class="submenu-level1-children-a" href="https://dhcvietnam.com.vn/collections/duong-da">
+                        <img src="/content/Mypham/images/megamenu_mb_item_icon3.png" alt="Dưỡng da ">
+                        Dưỡng da
+                    </a>
+                    <ul class="dropdown-menu submenu-level1-children" role="menu">
+                        <div class="account_mobile" style="">
+                            <i class="fa fa-angle-left"></i>
+                            <div class="main-logo">
+                                <a href="https://dhcvietnam.com.vn/">
+
+                                    <img src="/content/Mypham/images/logo.png" alt="" class="img-responsive center-block">
+
+                                </a>
+                            </div>
+                        </div>
+                        <li class="title">
+                            <a class="submenu-level1-children-a" href="https://dhcvietnam.com.vn/collections/duong-da">
+                                <img src="/content/Mypham/images/megamenu_mb_item_icon3.png" alt="Dưỡng da ">
+                                Dưỡng da
+                            </a>
+                        </li>
+
+
+                        <li class="dropdown-menu--lv2">
+                            <a class="submenu-level2-children-a" href="https://dhcvietnam.com.vn/collections/cham-soc-da-mat">
+                                Chăm sóc da mặt
+
+                            </a>
+
+                        </li>
+
+                        <li class="dropdown-menu--lv2">
+                            <a class="submenu-level2-children-a" href="https://dhcvietnam.com.vn/collections/cham-soc-co-the">
+                                Chăm sóc cơ thể
+
+                            </a>
+
+                        </li>
+
+                        <li class="dropdown-menu--lv2">
+                            <a class="submenu-level2-children-a" href="https://dhcvietnam.com.vn/collections/cac-van-de-ve-da">
+                                Các vấn đề về da
+
+                            </a>
+
+                        </li>
+
+                    </ul>
+                </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <li>
+                    <a class="submenu-level1-children-a" href="https://dhcvietnam.com.vn/collections/trang-diem-makeup">
+                        <img src="/content/Mypham/images/megamenu_mb_item_icon4.png" alt="Trang điểm ">
+                        Trang điểm
+                    </a>
+                    <ul class="dropdown-menu submenu-level1-children" role="menu">
+                        <div class="account_mobile" style="">
+                            <i class="fa fa-angle-left"></i>
+                            <div class="main-logo">
+                                <a href="https://dhcvietnam.com.vn/">
+
+                                    <img src="/content/Mypham/images/logo.png" alt="" class="img-responsive center-block">
+
+                                </a>
+                            </div>
+                        </div>
+                        <li class="title">
+                            <a class="submenu-level1-children-a" href="https://dhcvietnam.com.vn/collections/trang-diem-makeup">
+                                <img src="/content/Mypham/images/megamenu_mb_item_icon4.png" alt="Trang điểm ">
+                                Trang điểm
+                            </a>
+                        </li>
+
+
+                        <li class="dropdown-menu--lv2">
+                            <a class="submenu-level2-children-a" href="https://dhcvietnam.com.vn/collections/trang-diem-mat">
+                                Trang điểm mắt
+
+                            </a>
+
+                        </li>
+
+                        <li class="dropdown-menu--lv2">
+                            <a class="submenu-level2-children-a" href="https://dhcvietnam.com.vn/collections/phan-ma">
+                                Phấn má
+
+                            </a>
+
+                        </li>
+
+                        <li class="dropdown-menu--lv2">
+                            <a class="submenu-level2-children-a" href="https://dhcvietnam.com.vn/collections/kem-nen-phan-phu">
+                                Kem nền - Phấn phủ
+
+                            </a>
+
+                        </li>
+
+                        <li class="dropdown-menu--lv2">
+                            <a class="submenu-level2-children-a" href="https://dhcvietnam.com.vn/collections/son-duong">
+                                Son dưỡng
+
+                            </a>
+
+                        </li>
+
+                        <li class="dropdown-menu--lv2">
+                            <a class="submenu-level2-children-a" href="https://dhcvietnam.com.vn/collections/phu-kien">
+                                Phụ kiện
+
+                            </a>
+
+                        </li>
+
+                    </ul>
+                </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <li>
+                    <a class="submenu-level1-children-a" href="https://dhcvietnam.com.vn/#">
+                        <img src="/content/Mypham/images/megamenu_mb_item_icon5.png" alt="Theo dòng sản phẩm ">
+                        Theo dòng sản phẩm
+                    </a>
+                    <ul class="dropdown-menu submenu-level1-children" role="menu">
+                        <div class="account_mobile" style="">
+                            <i class="fa fa-angle-left"></i>
+                            <div class="main-logo">
+                                <a href="https://dhcvietnam.com.vn/">
+
+                                    <img src="/content/Mypham/images/logo.png" alt="" class="img-responsive center-block">
+
+                                </a>
+                            </div>
+                        </div>
+                        <li class="title">
+                            <a class="submenu-level1-children-a" href="https://dhcvietnam.com.vn/#">
+                                <img src="/content/Mypham/images/megamenu_mb_item_icon5.png" alt="Theo dòng sản phẩm ">
+                                Theo dòng sản phẩm
+                            </a>
+                        </li>
+
+
+                        <li class="dropdown-menu--lv2">
+                            <a class="submenu-level2-children-a" href="https://dhcvietnam.com.vn/collections/dong-chong-nang">
+                                Chống nắng
+
+                            </a>
+
+                        </li>
+
+                        <li class="dropdown-menu--lv2">
+                            <a class="submenu-level2-children-a" href="https://dhcvietnam.com.vn/collections/dong-tri-mun">
+                                Trị mụn - Acne control
+
+                            </a>
+
+                        </li>
+
+                        <li class="dropdown-menu--lv2">
+                            <a class="submenu-level2-children-a" href="https://dhcvietnam.com.vn/collections/dong-collagen">
+                                Trẻ hóa da - Collagen
+
+                            </a>
+
+                        </li>
+
+                        <li class="dropdown-menu--lv2">
+                            <a class="submenu-level2-children-a" href="https://dhcvietnam.com.vn/collections/dong-urumai">
+                                Tinh chất gạo - Urumai
+
+                            </a>
+
+                        </li>
+
+                        <li class="dropdown-menu--lv2">
+                            <a class="submenu-level2-children-a" href="https://dhcvietnam.com.vn/collections/dong-q">
+                                Dòng Q
+
+                            </a>
+
+                        </li>
+
+                        <li class="dropdown-menu--lv2">
+                            <a class="submenu-level2-children-a" href="https://dhcvietnam.com.vn/collections/dong-olive">
+                                Dòng Olive
+
+                            </a>
+
+                        </li>
+
+                        <li class="dropdown-menu--lv2">
+                            <a class="submenu-level2-children-a" href="https://dhcvietnam.com.vn/collections/dong-vitamin-c">
+                                Dòng Vitamin C
+
+                            </a>
+
+                        </li>
+
+                    </ul>
+                </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            </ul>
+        </div>
+    </div>
+    <script src="/content/Mypham/js/bootstrap-select.min.js" type="text/javascript"></script>
+    <script src="/content/Mypham/js/jquery.plugin.min.js" type="text/javascript"></script>
+
+    <!-- Main JS -->
+    <script src="/content/Mypham/js/main.js" type="text/javascript"></script>
+    <!-- Product detail JS,CSS -->
+
+    <ul class="the-article-tools scroll-to-fixed-fixed">
+
+        <li class="btnHotline"><a href="tel:1800 8003" title="Hotline"><span class="fa fa-phone"></span></a><span class="label">Hotline 1800 8003 </span></li>
+
+        <li class="btnZalo"><a href="https://dhcvietnam.com.vn/" title="Youtube" target="_blank"><span class="fa fa-youtube-play"></span></a><span class="label">Youtube</span></li>
+        <li class="btnViber"><a href="https://dhcvietnam.com.vn/#" title="Facebook" target="_blank"><span class="fa fa-facebook"></span></a><span class="label">Facebook</span></li>
+    </ul>
+    <div class="float-right-icon">
+        <ul>
+            <li>
+                <div class="cart-float-right medium-down--hide animated off fadeOutRight">
+                    <a href="https://dhcvietnam.com.vn/cart" class="site-scroller__cart-toggle-link js-drawer-open-right" title="Giỏ hàng">
+                        <div class="site-scroller__cart-toggle">
+                            <div class="site-scroller__cart-toggle-image">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="36px" height="26px" viewBox="0 0 36 26" version="1.1" class="inline-svg replaced-svg">
+                                    <!-- Generator: Sketch 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
+                                    <g transform="translate(-1318.000000, -666.000000)">
+                                        <g transform="translate(1304.000000, 646.000000)">
+                                            <g id="scroll-cart" transform="translate(14.000000, 20.000000)" fill-rule="evenodd" fill="#FFFFFF">
+                                                <path d="M23.7938961,18.6533877 L5.67428227,18.6533877 C5.32156367,18.6533877 5.04867635,18.4577228 4.93023386,18.1050042 L0.42994102,4.91823308 C0.272887322,4.52690326 0.507685209,4.05782926 0.899015021,3.93990855 C1.29034483,3.78285485 1.75889706,4.01713096 1.87733955,4.40846077 L6.18196748,17.0880685 L23.1656813,17.0880685 L28.3714114,0.886492467 C28.4898538,0.572906845 28.7627412,0.338108957 29.1154598,0.338108957 L34.8283533,0.338108957 C35.2582943,0.338108957 35.6110129,0.690827561 35.6110129,1.12076858 C35.6110129,1.55123137 35.2582943,1.9034282 34.8283533,1.9034282 L29.7410657,1.9034282 L24.5353357,18.1050042 C24.419502,18.4191116 24.1053946,18.6533877 23.7938961,18.6533877 L23.7938961,18.6533877 Z" id="Fill-1"></path>
+                                                <path d="M22.3830217,25.2287721 C20.9361449,25.2287721 19.7214572,24.0547826 19.7214572,22.5666858 C19.7214572,21.078589 20.8954466,19.9045996 22.3830217,19.9045996 C23.8711185,19.9045996 25.045108,21.078589 25.045108,22.5666858 C25.045108,24.0526956 23.8711185,25.2287721 22.3830217,25.2287721 L22.3830217,25.2287721 Z M22.3830217,21.4699188 C21.796027,21.4699188 21.2867764,21.9389928 21.2867764,22.5666858 C21.2867764,23.1922917 21.7553287,23.6634528 22.3830217,23.6634528 C23.0091494,23.6634528 23.4797887,23.1536805 23.4797887,22.5666858 C23.4797887,21.9796911 23.0112365,21.4699188 22.3830217,21.4699188 L22.3830217,21.4699188 Z" id="Fill-2"></path>
+                                                <path d="M7.12115903,25.2287721 C5.67428227,25.2287721 4.45959454,24.0547826 4.45959454,22.5666858 C4.45959454,21.078589 5.63358397,19.9045996 7.12115903,19.9045996 C8.60925586,19.9045996 9.7832453,21.078589 9.7832453,22.5666858 C9.7832453,24.0526956 8.60925586,25.2287721 7.12115903,25.2287721 L7.12115903,25.2287721 Z M7.12115903,21.4699188 C6.53416431,21.4699188 6.02491378,21.9389928 6.02491378,22.5666858 C6.02491378,23.1922917 6.49346601,23.6634528 7.12115903,23.6634528 C7.74728673,23.6634528 8.21792605,23.1536805 8.21792605,22.5666858 C8.21792605,21.9796911 7.74937382,21.4699188 7.12115903,21.4699188 L7.12115903,21.4699188 Z" id="Fill-3"></path>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </div>
+                            <span id="ScrollerCartCount" class="cart-count count_item_pr">1</span>
+                        </div>
+                    </a>
+                </div>
+            </li>
+            <li>
+                <div id="scroll-to-top" data-toggle="" data-placement="left" title="Đầu trang" class="animated off fadeOutRight">
+                    <div class="site-scroller__scroll-up">
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="21px" height="18px" viewBox="0 0 21 18" version="1.1" class="inline-svg replaced-svg">
+                            <g transform="translate(-1324.000000, -742.000000)">
+                                <g transform="translate(1304.000000, 646.000000)">
+                                    <polygon fill="#FFFFFF" fill-rule="evenodd" id="scroll-up" points="40.6911849 106.338126 31.7224899 97.3816128 31.7256335 97.3768974 30.3503079 96 30.3455925 96.0062872 30.3408771 96 28.9655514 97.3768974 28.968695 97.3816128 20 106.338126 21.3753256 107.714631 29.3663606 99.7345986 29.3679324 113.277627 31.3142147 113.277627 31.3110711 99.7208453 39.3158593 107.714631"></polygon>
+                                </g>
+                            </g>
+                        </svg>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+
+    <div id="myCart" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalLabel">Giỏ hàng</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <i class="fa fa-times"></i>
+                    </button>
+                </div>
+                <form action="https://dhcvietnam.com.vn/cart" method="post" id="cartform" style="display: block;">
+                    <div class="modal-body">
+                        <table style="width:100%;" id="cart-table">
+                            <tbody>
+                                <tr>
+                                    <th>Sản phẩm</th>
+                                    <th></th>
+                                    <th>Đơn hàng</th>
+                                    <th>Số lượng</th>
+                                    <th>Giá tiền</th>
+                                    <th></th>
+                                </tr>
+                                <tr class="line-item original">
+                                    <td class="item-image"></td>
+                                    <td class="item-title">
+                                        <a></a>
+                                        <span class="item-delete"></span>
+                                    </td>
+                                    <td class="item-prices"></td>
+                                    <td class="item-quantity"></td>
+                                    <td class="item-price"></td>
+                                </tr>
+                                <tr class="line-item">
+                                    <td class="item-image"><img src="/content/Mypham/images/dhc_olive_sube_sube_mini_set_5b3e76d3dbb74c5482a008f1ce4723bc.jpg"></td>
+                                    <td class="item-title">
+                                        <a href="https://dhcvietnam.com.vn/products/bo-olive-sube-sube-mini-set-ss">Bộ Olive Sube Sube Mini Set SS<br></a>
+                                        <span class="item-delete"><a href="javascript:void(0);" onclick="deleteCart(1037293649)"><i class="fa fa-trash-o"></i> Bỏ sản phẩm</a></span>
+                                    </td>
+                                    <td class="item-prices">360,000</td>
+                                    <td class="item-quantity"><input id="quantity1" name="updates[]" min="1" type="number" value="1" class=""></td>
+                                    <td class="item-price">360,000</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="modal-note">
+                                    <textarea placeholder="Viết ghi chú" id="note" name="note" rows="5"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="total-price-modal">
+                                    Tổng cộng : <span class="item-total">360,000</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top:10px;">
+                            <div class="col-lg-6">
+                                <div class="comeback">
+                                    <a href="https://dhcvietnam.com.vn/collections/all">
+                                        Mua thêm sản phẩm khác <i class="fa fa-angle-double-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 text-right">
+                                <div class="buttons btn-modal-cart">
+                                    <button type="submit" class="button-default " id="checkout" name="checkout">
+                                        Tiến hành thanh toán
+                                    </button>
+                                </div>
+                                <div class="buttons btn-modal-cart hidden">
+                                    <button type="submit" class="button-default" id="update-cart-modal" name="">
+                                        Cập nhật
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+
+        $(document).on('change', '#quantity1', function () {
+            clearTimeout(200);
+            typingTimer = setTimeout(doneTyping, 200);
+        });
+
+
+        function doneTyping() {
+            $('#update-cart-modal').trigger("click");
+        }
+
+        // Ẩn modal cart khi click vào tiếp tục mua hàng
+        $(".comeback a").click(function () {
+
+        });
+
+        $(document).ready(function () {
+            $(".bnt-freeship").click(function () {
+                alert("Freeship toàn quốc với đơn hàng trên 500k.");
+
+            });
+
+        });
+    </script>
+    <style>
+
+        input[type=number] {
+            /*for absolutely positioning spinners*/
+            position: relative;
+            padding: 5px;
+            padding-right: 25px;
+        }
+
+            input[type=number]::-webkit-inner-spin-button,
+            input[type=number]::-webkit-outer-spin-button {
+                opacity: 0;
+            }
+
+            input[type=number]:hover::-webkit-inner-spin-button,
+            input[type=number]:hover::-webkit-outer-spin-button {
+                opacity: 1;
+            }
+
+            input[type=number]::-webkit-outer-spin-button,
+            input[type=number]::-webkit-inner-spin-button {
+                -webkit-appearance: inner-spin-button !important;
+                width: 25px;
+                position: absolute;
+                top: 0;
+                right: 0;
+                height: 100%;
+            }
+    </style>
+
+
+
+    <section class="modal modalWindow" id="popupOne">
+        <section class="modalWrapper">
+            <div class="row">
+                <div class="col-sm-8 col-xs-12 text-left">
+                    <div class="left">
+                        <div id="CustomerLoginForm" class="form-vertical">
+                            <form accept-charset="UTF-8" action="https://dhcvietnam.com.vn/account/login" id="customer_login" method="post">
+                                <input name="form_type" type="hidden" value="customer_login">
+                                <input name="utf8" type="hidden" value="✓">
+
+                                <h2>Đăng nhập tài khoản</h2>
+
+                                <label for="CustomerEmail" class="hidden-label">Email:</label>
+                                <input type="email" name="customer[email]" id="CustomerEmail" class="input-full" placeholder="Vui long nhập Email" autocorrect="off" autocapitalize="off" autofocus="">
+
+                                <label for="CustomerPassword" class="hidden-label">Mật khẩu:</label>
+                                <input type="password" value="" name="customer[password]" id="CustomerPassword" class="input-full" placeholder="Vui lòng nhập mật khẩu">
+
+                                <script src="/content/Mypham/js/dhcshop.js"></script><iframe src="/content/Mypham/images/login.html" width="300" height="160" style="border:none;"></iframe>
+                                <p>
+                                    <input type="submit" class="btn btn--full" value="Đăng nhập">
+                                </p>
+
+                                <p class="reset"><a href="javascript:void(0)" id="RecoverPassword">Quên mật khẩu?</a></p>
+
+                            </form>
+                        </div>
+                        <div id="RecoverPasswordForm" style="display: none;">
+                            <h2>Cài đặt lại mật khẩu</h2>
+                            <p>Mật khẩu mới sẽ được gửi về email của bạn.</p>
+                            <div class="form-vertical">
+                                <form accept-charset="UTF-8" action="https://dhcvietnam.com.vn/account/recover" method="post">
+                                    <input name="form_type" type="hidden" value="recover_customer_password">
+                                    <input name="utf8" type="hidden" value="✓">
+
+
+
+
+                                    <label for="RecoverEmail" class="hidden-label">Email</label>
+                                    <input type="email" value="" name="email" id="RecoverEmail" class="input-full" placeholder="Email của bạn" autocorrect="off" autocapitalize="off">
+                                    <p>
+                                        <input type="submit" class="btn btn--full" value="Gửi">
+                                    </p>
+                                    <button type="button" id="HideRecoverPasswordLink" class="text-link">Bỏ qua</button>
+                                </form>
+                            </div>
+                        </div>
+                        <div id="CustomerRegisterForm" style="display: none;">
+                            <h2>Đăng ký tài khoản</h2>
+                            <button id="reset_login">
+                                <i class="fa fa-arrow-left"></i> Đăng nhập
+                            </button>
+                            <div class="form-vertical">
+                                <form accept-charset="UTF-8" action="https://dhcvietnam.com.vn/account" id="create_customer" method="post">
+                                    <input name="form_type" type="hidden" value="create_customer">
+                                    <input name="utf8" type="hidden" value="✓">
+
+
+                                    <label for="FirstName" class="label">Họ: <span style="color:red;">*</span></label>
+                                    <input type="text" name="customer[first_name]" id="FirstName" class="input-full" autocapitalize="words" autofocus="">
+                                    <label for="LastName" class="label">Tên: <span style="color:red;">*</span></label>
+                                    <input type="text" name="customer[last_name]" id="LastName" class="input-full" autocapitalize="words">
+                                    <label for="Email" class="label">Email: <span style="color:red;">*</span></label>
+                                    <input type="email" name="customer[email]" id="Email" class="input-full" autocorrect="off" autocapitalize="off">
+                                    <label for="CreatePassword" class="label">Mật khẩu: <span style="color:red;">*</span></label>
+                                    <input type="password" name="customer[password]" id="CreatePassword" class="input-full">
+                                    <p>
+                                        <input type="submit" value="Đăng ký" class="btn btn--full">
+                                    </p>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-xs-12 text-left">
+                    <div class="right">
+                        <div class="right_fix">
+                            <!-- start content -->
+                            <div class="content">
+                                <h3>Quyền lợi khi đăng ký thành viên tại DHC Vietnam Official</h3>
+                                <hr>
+                                <div>
+                                    <p>1. Tích điểm nâng hạng để trở thành khách hàng Vip của DHC Vietnam</p>
+                                </div>
+                                <div style="padding-left: 10px;">
+                                    <p>
+                                        ✔ Chính sách Ưu đãi đặc biệt khi mua hàng tại chuỗi Showroom DHC Vietnam
+                                    </p>
+                                    <p>
+                                        ✔ Các ưu đãi dành riêng cho thành viên nhân này sinh nhật(Tuỳ theo thứ hàng thành viên)
+                                    </p>
+                                </div>
+                                <div>
+                                    <p>
+                                        2. Thuận tiện khi mua hàng và thanh toán
+                                    </p>
+                                </div>
+                                <div>
+                                    <p>
+                                        3. Giao hàng siêu tốc trong 24h
+                                    </p>
+                                </div>
+                            </div>
+                            <!-- end content -->
+                            <div class="btn">
+                                <button id="bnt_fordk">Đăng ký</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <a class="closeBtn">X</a>
+    </section>
+    <section class="modal overlay"></section>
+    <style>
+
+        section.modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 998;
+        }
+
+        section.modalWindow {
+            overflow: initial;
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 999 !important;
+            width: 1000px;
+            min-height: 200px;
+            background: #FFF;
+            cursor: default;
+            bottom: auto;
+        }
+
+        section.modal.overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            min-height: 100%;
+            background: rgba(0, 0, 0, 0.1);
+            z-index: 997;
+            cursor: pointer;
+        }
+
+        section.modalWindow section.modalWrapper {
+            text-align: left;
+            line-height: 20px !important;
+        }
+
+        section.modal .left {
+            padding: 30px 35px 30px 50px;
+        }
+
+            section.modal .left h2 {
+                font-size: 25px;
+                font-weight: 600;
+                margin: 0 0 25px;
+            }
+
+            section.modal .left label {
+                text-transform: uppercase;
+                color: #333;
+            }
+
+            section.modal .left input {
+                border-radius: 5px !important;
+                overflow: hidden;
+            }
+
+                section.modal .left input.btn.btn--full {
+                    color: #fff;
+                    text-transform: uppercase;
+                    background: #15408e;
+                    font-weight: 700;
+                }
+
+            section.modal .left p.reset {
+                text-align: right;
+                margin-bottom: 8px;
+            }
+
+        div#CustomerRegisterForm h2 {
+            margin-bottom: 0;
+        }
+
+        div#CustomerRegisterForm button {
+            background: none;
+            border: 0;
+            color: #000;
+            margin-bottom: 15px;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+            div#CustomerRegisterForm button:hover {
+                color: #15408e;
+            }
+
+        section.modal .left p a {
+            color: #e603c0;
+        }
+
+        .closeBtn {
+            position: absolute;
+            right: 0px;
+            top: 6px;
+            cursor: pointer;
+        }
+
+        button#HideRecoverPasswordLink {
+            border: 0;
+            color: #333;
+        }
+        /*.content h3 {
+            font-size: 16px;
+            color: #fff;
+            font-weight: 600;
+            margin: 0;
+            margin-top: 10px;
+            }*/
+        hr {
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+
+        .right {
+            top: 0;
+            right: 0;
+            background-color: #BBBBBB
+        }
+
+            .right .content {
+                color: #FFFFFF;
+            }
+
+            .right .right_fix {
+                width: 100%;
+                margin: 0px;
+                padding: 61px 15px;
+            }
+
+        section.modalWrapper .btn {
+            width: 100%;
+            padding: 0;
+            display: inline-block;
+        }
+
+        .right button {
+            width: 100%;
+            background: #FFFFFF;
+            color: #565656;
+            cursor: pointer;
+            font-weight: bold;
+            border: none;
+        }
+
+            .right button:hover {
+                opacity: 0.8;
+            }
+
+        .closeBtn {
+            position: absolute;
+            right: -15px;
+            top: -15px;
+            font-weight: bold;
+            border-radius: 50%;
+            background-color: #ffffff;
+            z-index: 999999;
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+        }
+
+        .close:hover,
+        .close:focus {
+            background-color: red;
+            color: #FFFFFF;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        settings = {
+            //Model Popup
+            objModalPopupBtn: ".modalButton",
+            objModalCloseBtn: ".overlay, .closeBtn",
+            objModalDataAttr: "data-popup"
+        }
+        $(settings.objModalPopupBtn).bind("click", function () {
+            if ($(this).attr(settings.objModalDataAttr)) {
+
+                var strDataPopupName = $(this).attr(settings.objModalDataAttr);
+
+
+                //Fade In Modal Pop Up
+                $(".overlay, #" + strDataPopupName).fadeIn();
+
+            }
+        });
+
+        //On clicking the modal background
+        $(settings.objModalCloseBtn).bind("click", function () {
+            $(".modal").fadeOut();
+        });
+
+
+        $(document).ready(function () {
+            $("#RecoverPassword").click(function () {
+                $("#CustomerLoginForm").hide();
+                $("#CustomerRegisterForm").hide();
+                $("#RecoverPasswordForm").show();
+
+            });
+            $("#HideRecoverPasswordLink").click(function () {
+                $("#RecoverPasswordForm").hide();
+                $("#CustomerRegisterForm").hide();
+                $("#CustomerLoginForm").show();
+            });
+            $("#bnt_fordk").click(function () {
+                $("#CustomerLoginForm").hide();
+                $("#RecoverPasswordForm").hide();
+                $("#CustomerRegisterForm").show();
+                $("#CustomerRegisterForm").show();
+
+            });
+            $("#reset_login").click(function () {
+                $("#CustomerLoginForm").show();
+                $("#CustomerRegisterForm").hide();
+                $("#RecoverPasswordForm").hide();
+            });
+        });
+
+    </script>
+
+
+    <script src="/content/Mypham/js/script.js" type="text/javascript"></script>
+
+    <script src="/content/Mypham/js/dsalespopup.js"></script>
+    <div id="fb-root" class=" fb_reset"><div style="position: absolute; top: -10000px; width: 0px; height: 0px;"><div><iframe name="fb_xdm_frame_https" id="fb_xdm_frame_https" aria-hidden="true" title="Facebook Cross Domain Communication Frame" tabindex="-1" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" allow="encrypted-media" src="/content/Mypham/images/xd_arbiter.html" style="border: none;"></iframe></div><div></div></div><div class="fb-customerchat fb_invisible_flow fb_iframe_widget" page_id="1152083771590803" greeting_dialog_display="show" logged_in_greeting="Các chuyên gia của DHC Việt Nam đang sẵn sàng hỗ trợ bạn. Chat ngay!!!!!" logged_out_greeting="Các chuyên gia của DHC Việt Nam đang sẵn sàng hỗ trợ bạn. Chat ngay!!!!!" ref="__hrf_w_361048" fb-xfbml-state="rendered" fb-iframe-plugin-query="app_id=363772567412181&amp;container_width=0&amp;greeting_dialog_display=show&amp;locale=vi_VN&amp;logged_in_greeting=C%C3%A1c%20chuy%C3%AAn%20gia%20c%E1%BB%A7a%20DHC%20Vi%E1%BB%87t%20Nam%20%C4%91ang%20s%E1%BA%B5n%20s%C3%A0ng%20h%E1%BB%97%20tr%E1%BB%A3%20b%E1%BA%A1n.%20Chat%20ngay!!!!!&amp;logged_out_greeting=C%C3%A1c%20chuy%C3%AAn%20gia%20c%E1%BB%A7a%20DHC%20Vi%E1%BB%87t%20Nam%20%C4%91ang%20s%E1%BA%B5n%20s%C3%A0ng%20h%E1%BB%97%20tr%E1%BB%A3%20b%E1%BA%A1n.%20Chat%20ngay!!!!!&amp;page_id=1152083771590803&amp;ref=__hrf_w_361048&amp;sdk=joey"><span style="vertical-align: bottom; width: 1000px; height: 0px;"><iframe name="fe4ba0a3360e24" width="1000px" height="1000px" title="" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" allow="encrypted-media" src="/content/Mypham/images/customerchat.html" style="border: none; visibility: visible; width: 288pt; height: 211px; border-radius: 9pt; bottom: 63pt; padding: 0px; position: fixed; right: 9pt; top: auto; z-index: 2147483647; max-height: 0px;" class="" data-testid="dialog_iframe"></iframe></span></div><div class="fb_dialog  fb_dialog_advanced fb_customer_chat_bubble_animated_no_badge fb_customer_chat_bubble_pop_in" style="background: none; border-radius: 50%; bottom: 18pt; display: inline; height: 45pt; padding: 0px; position: fixed; right: 18pt; top: auto; width: 45pt; z-index: 2147483646;"><div class="fb_dialog_content" style="background: none;"><iframe name="blank_fe4ba0a3360e24" width="60px" tabindex="-1" data-testid="bubble_iframe" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" allow="encrypted-media" src="/content/Mypham/images/bubble.html" style="border: none;"></iframe></div></div></div><img src="/content/Mypham/images/saved_resource">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="dwrapper__popup_30d2cef8e404b5f72b817c406efdaf52" class="dwrapper__popup dwrapper__popup--bottom dwrapper__popup--left dwrapper__popup--show_desktop dwrapper__popup--show_mobile dwrapper__theme-template-rounded dwrapper__theme-light dwrapper__popup--active">
+        <div class="dwrapper__theme">
+            <div class="dclose__popup">
+                <svg viewport="0 0 12 12" version="1.1" xmlns="http://www.w3.org/2000/svg"><line x1="1" y1="11" x2="11" y2="1" stroke-width="1"></line><line x1="1" y1="1" x2="11" y2="11" stroke-width="1"></line></svg>
+            </div>
+            <div class="dpopup__title">Long Phan ÄĂŹnh Minh vừa mua</div>
+            <div class="dpopup__product-image">
+                <img src="/content/Mypham/images/velvetskincoat_small.png" alt="">
+            </div>
+            <div class="dpopup__body">
+                <a target="_blank" href="https://dhcvietnam.com.vn/products/kem-lot-kiem-dau-dhc-velvet-skin-coat-1" product_id="5d3ebec4dea9f83f7f7c5eb9">Kem lót kiềm dầu DHC Velvet Skin Coat</a>
+                <p class="dpopup__save"></p>
+            </div>
+            <div class="dpopup__time">12 giờ 12 phút trước.</div>
+            <a class="dpowered_by" href="https://doke.vn/" target="_blank" style="display: block !important;"><img width="13" src="/content/Mypham/images/doke-logo.png" alt="DOKE.vn"> by DOKE</a>
+        </div>
+    </div>
+
+    <script>
+        var dsales_popup = new dsalesPopup({
+            delay_time: 10 * 1000,
+            display_time: 15 * 1000,
+            limit_per_page: 5
+        });
+    </script>
+    <style>
+
+        .dwrapper__popup {
+            position: fixed !important;
+        }
+    </style>
+    <iframe src="/content/Mypham/images/pixel.html" style="display: none;"></iframe>
+    <style>
+        .tb_button {
+            padding: 1px;
+            cursor: pointer;
+            border-right: 1px solid #8b8b8b;
+            border-left: 1px solid #FFF;
+            border-bottom: 1px solid #fff;
+        }
+
+            .tb_button.hover {
+                borer: 2px outset #def;
+                background-color: #f8f8f8 !important;
+            }
+
+        .ws_toolbar {
+            z-index: 100000
+        }
+
+            .ws_toolbar .ws_tb_btn {
+                cursor: pointer;
+                border: 1px solid #555;
+                padding: 3px
+            }
+
+        .tb_highlight {
+            background-color: yellow
+        }
+
+        .tb_hide {
+            visibility: hidden
+        }
+
+        .ws_toolbar img {
+            padding: 2px;
+            margin: 0px
+        }
+    </style>
+</body>
+</html>

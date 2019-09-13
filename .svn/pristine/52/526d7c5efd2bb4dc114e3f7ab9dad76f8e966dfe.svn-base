@@ -1,0 +1,258 @@
+﻿@using Business.ClassBusiness
+@using BuyGroup365.Models.Member
+@using Common
+@using Common.util
+@model global::Common.Order
+@{
+    ViewBag.Title = "Đơn hàng";
+    //Layout = null;
+
+   
+}
+<link href="/Content/css/bootstrap.min.css" rel="stylesheet" />
+<script src="/Scripts/bootstrap.min.js"></script>
+<body>
+    <div class="container">
+        <div class="panel panel-success ">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+
+
+                    <span><span class="glyphicon glyphicon-home"></span><a href="/"> Trang chủ</a></span>
+                    <span class="active"><i class="fa fa-angle-double-right"></i>Giỏ hàng của bạn</span>
+
+                </h4>
+            </div>
+            <div class="panel-body">
+     
+                    <form action="Payment" method="post" id="formPost">
+                        <div class="" id="scrollHere">
+                            <div>
+                                <div class="bground">
+                                    <div class="bg-white">
+                                        <div class="checkout">
+
+
+                                            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+                                            <div class="row" style="background: #fff8c9; padding: 10px">
+                                                <div class="col-lg-7">
+                                                    <span>Sản phẩm</span>
+
+                                                </div>
+                                                <div class="col-lg-5"><span>Thông tin người bán</span></div>
+                                            </div>
+                                            <div>
+
+                                                    <div class="row" id="">
+                                                        <div class="col-lg-7">
+
+                                                            <div class="table-responsive table-checkoutlist panel panel-default">
+                                                                <table class="table">
+                                                                
+                                                                    <tbody>
+                                                                        @foreach (var item1 in Model.OrderDetails)
+                                                                        {
+                                                                            <tr id="orderItem">
+                                                                                <td class="col1">
+                                                                                    <div class="row">
+
+                                                                                        <div class="col-sm-4">
+                                                                                            <span class="icon-bar" @*onclick="order.removeItemCart('835809352705', '503430698302');" *@></span>
+                                                                                            <img src="@FuntionMember.GetUrlImage(item1.PathImage,"Small")" alt="@item1.NameProduct" width="100" />
+                                                                                        </div>
+
+                                                                                        <div class="col-sm-8">
+                                                                                            <div class="g-row">
+                                                                                                <a class="g-title" target="_blank" href="/Home/ProductDetail/@item1.IdProduct" title="@item1.NameProduct">
+                                                                                                    @item1.NameProduct
+                                                                                                </a>
+                                                                                            </div>
+                                                                                            <div class="g-row">
+                                                                                                <strong>@item1.Quantity x </strong>
+                                                                                            </div>
+
+                                                                                            <div class="g-row">
+                                                                                                <strong>Phí vận chuyển:</strong>
+                                                                                                <span id="shipchung">Linh hoạt theo địa chỉ người mua</span>
+                                                                                            </div>
+                                                                                        </div>
+
+                                                                                    </div>
+                                                                                </td>
+                                                                                <td class="col2">
+                                                                                    <div class="text-spell">
+                                                                                        <input type="number" min="1" class="txtQuantity" style="width: 80px" data-id="@item1.IdProduct" value="@item1.Quantity" />
+                                                                                    </div>
+                                                                                </td>
+                                                                                <td class="col3">
+                                                                                    @{var pice=(decimal)(item1.Price);}
+                                                                                    <b>@pice.ToString("N0")<sup class="price">đ</sup></b>
+                                                                                </td>
+                                                                                <td>
+                                                                                  
+                                                                                </td>
+                                                                            </tr>
+
+                                                                        }
+                                                                        <tr colspan="2">
+                                                                            @{
+                                                                                var total = (decimal)Model.OrderDetails.Sum(x => x.Price);
+                                                                                
+                                                                            }
+                                                                            <td>Tổng:</td>
+                                                                            <td>@total.ToString("N0") <sup class="price">đ</sup></td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div><!-- table-responsive -->
+
+                                                        </div>
+                                                        <div class="col-lg-5">
+                                                            @{
+                                                                var shopbusiness = new ShopsBusiness();
+                                                                var shop = shopbusiness.GetById(Model.IdShop);
+                                                            }
+                                                            <h6>Shop: @shop.ShopName</h6>
+                                                      
+                                                                <h6>Shop support name: @shop.ShopSupport.SupportName</h6>
+                                                        
+                                                          <h6>Shop Phone: @shop.Phone</h6>
+                                                         
+                                                    
+                                                                <h6>Shop name support: @shop.ShopSupport.Skype</h6>
+                                                            }
+                                                          
+                                                            @{
+                                                                LocationsBusiness locationbussines = new LocationsBusiness();
+
+
+                                                            }
+                                                            @*<h6>Shop name address: @locationbussines.SearchAddress(shop.LocationId)</h6>*@
+                                                          
+
+                                                        </div>
+                                                        <hr />
+                                                    </div>
+
+         
+                                            </div>
+
+                                    
+                                            <br /><br /><br /><br />
+                                      
+                                                <div class="row" style=" ">
+                                                    <div class="col-sm-6" id="inforBuyer">
+                                                        <div class="fieldset">
+                                                            <h2 class="legend">Thông tin người mua:</h2>
+                                                        
+                                                                <ul class="form-list">
+                                                                    <li class="">
+                                                                        <div class="customer-name-middlename">
+                                                                            <div class="field name-firstname">
+                                                                                <label for="firstname" class="required"><em>*</em>Họ và Tên</label>
+                                                                                <div class="input-box">
+                                                                                    <input id="buyerName" type="text" class="input-text required-entry" name="buyerName" value="@Model.OrderBuyer.Name" tabindex="0" data-toggle="popover" data-container="body" data-placement="top" data-trigger="focus" title="Nhập tên người mua" data-content="Họ tên là bắt buộc, vui lòng nhập họ tên" required />
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="field name-lastname">
+                                                                                <label for="lastname" class="required"><em>*</em>Số điện thoại</label>
+                                                                                <div class="input-box">
+                                                                                    <input id="buyerPhone" type="text" class="input-text required-entry" name="buyerPhone" value="@Model.OrderBuyer.PhoneNumber" tabindex="0" data-toggle="popover" data-container="body" data-placement="top" data-trigger="focus" title="Nhập số điện thoại" data-content="Số điện thoại là bắt buộc" required />
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li>
+                                                                        <label for="email_address" class="required"><em>*</em>Hộp thư</label>
+                                                                        <div class="input-box">
+
+                                                                            <input id="buyerEmail" type="text" class="input-text validate-email required-entry" name="buyerEmail" value="@Model.OrderBuyer.Email" tabindex="0" data-toggle="popover" data-container="body" data-placement="top" data-trigger="focus" title="Nhập Email" data-content="Email là bắt buộc, giao dịch của bạn sẽ được thông báo qua Email" required />
+                                                                        </div>
+                                                                    </li>
+                                                                    <li>
+                                                                        <label for="email_address" class="required"><em>*</em>Địa chỉ</label>
+                                                                        <div class="input-box">
+                                                                            <input id="buyerAddress" type="text" class="input-text" name="buyerAddress" value="@Model.OrderBuyer.Address" tabindex="0" data-toggle="popover" data-container="body" data-placement="top" data-trigger="focus" title="Nhập địa chỉ" data-content="Địa chỉ là bắt buộc, vui lòng nhập địa chỉ" required />
+                                                                        </div>
+                                                                    </li>
+
+                                                                </ul>
+                                                 
+                                                        </div>
+                                                    </div><!-- col-sm-6 -->
+                                                    <div class="col-sm-6" id="inforReciver">
+
+                                                        <div class="fieldset">
+                                                            <h2 class="legend">Thông tin người nhận:</h2>
+                                                            <ul class="form-list">
+                                                                <li class="">
+                                                                    <div class="customer-name-middlename">
+                                                                        <div class="field name-firstname">
+                                                                            <label for="firstname" class="required"><em>*</em>Họ và Tên</label>
+                                                                            <div class="input-box">
+                                                                                <input id="receiverName" type="text" class="input-text required-entry" name="receiverName" value="@Model.OrderReciver.Name" tabindex="0" data-toggle="popover" data-container="body" data-placement="top" data-trigger="focus" title="Nhập tên người Nhận" data-content="Họ tên là bắt buộc, vui lòng nhập họ tên" required />
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="field name-lastname">
+                                                                            <label for="lastname" class="required"><em>*</em>Số điện thoại</label>
+                                                                            <div class="input-box">
+                                                                                <input id="receiverPhone" type="text" class="input-text required-entry" name="receiverPhone" value="@Model.OrderReciver.PhoneNumber" tabindex="0" data-toggle="popover" data-container="body" data-placement="top" data-trigger="focus" title="Số điện thoại" data-content="Số điện thoại là bắt buộc, để giao hàng được đúng người vui lòng nhập đúng số điện thoai" required />
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </li>
+                                                                <li>
+                                                                    <label for="email_address" class="required"><em>*</em>Hộp thư</label>
+                                                                    <div class="input-box">
+
+                                                                        <input id="receiverEmail" type="text" class="input-text required-entry" name="receiverEmail" value="@Model.OrderReciver.Email" tabindex="0" data-toggle="popover" data-container="body" data-placement="top" data-trigger="focus" title="Nhập Email" data-content="Email người nhận là không bắt buộc, nếu người nhận có Email vui lòng nhập." required />
+                                                                    </div>
+                                                                </li>
+                                                                @*<li>
+                                                                        <label for="email_address" class="required"><em>*</em>Địa chỉ</label>
+                                                                        <div class="input-box">
+                                                                            <input id="receiverAddress" type="text" class="input-text required-entry" name="receiverAddress" value="" tabindex="0" data-toggle="popover" data-container="body" data-placement="bottom" data-trigger="focus" title="Nhập địa chỉ người nhận" data-content="Địa chỉ là bắt buộc, vui lòng nhập đúng địa chỉ người nhận để hàng có thể đến đúng nơi bạn yêu cầu" required />
+                                                                        </div>
+                                                                    </li>*@
+                                                                <li>
+                                                                    <label for="email_address" class="required"><em>*</em>Địa chỉ</label>
+                                                                    <div class="input-box">
+                                                                        
+                                                                        <input type="" id="receiverAddress" value="@Model.OrderReciver.Address" />
+                                                                    </div>
+                                                                </li>
+                                                  
+                                                            </ul>
+                                                        </div>
+
+                                                    </div><!-- col-sm-6 -->
+                                                </div><!-- row -->
+                                      
+                                        </div><!-- checkout -->
+                                    </div><!-- bg-white -->
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+      
+         
+            </div>
+        </div>
+    </div>
+
+
+
+    <style>
+        .breadcrumb {
+            background-color: initial !important;
+        }
+    </style>
+
+    <script src="/Scripts/controllerJS/paymentController.js"></script>
+    <script src="/Scripts/calculFeeForGoods/calculFeeForGoods.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+  
+</body>

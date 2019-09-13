@@ -1,0 +1,271 @@
+﻿using Business.ClassBusiness;
+using BuyGroup365.Models.Member;
+using Common;
+using Common.util;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.ServiceModel;
+using System.Web;
+using MvcPaging;
+using System.Web.Mvc;
+using BuyGroup365.Models.Member;
+using Common;
+using BuyGroup365.Areas.Manage.Models;
+
+namespace BuyGroup365.Areas.Manage.Controllers
+{
+    public class ShopController : BaseController
+    {
+        #region Khai báo business        
+        readonly ShopsBusiness _shopsBusiness = new ShopsBusiness();
+        readonly ShopSettingsBusiness _shopSettingsBusiness = new ShopSettingsBusiness();
+        readonly ShopCatalogsBusiness _shopCatalogsBusiness = new ShopCatalogsBusiness();
+        readonly ShopPolicysBusiness _shopPolicysBusiness = new ShopPolicysBusiness();
+        readonly ShopSupportsBusiness _shopSupportsBusiness = new ShopSupportsBusiness();
+        readonly ShopNewsBusiness _shopNewsBusiness = new ShopNewsBusiness();
+        readonly ShopNewsGroupsBusiness _shopNewsGroupsBusiness = new ShopNewsGroupsBusiness();
+
+        readonly ProductsBusiness _productsBusiness = new ProductsBusiness();
+        readonly OrdersBusiness _ordersBusiness = new OrdersBusiness();
+
+        #endregion
+        //protected override void Initialize(System.Web.Routing.RequestContext rc)
+        //{
+        //    base.Initialize(rc);
+
+        //    if (!SessionUtility.CheckLogin(Session))
+        //        Response.Redirect("/Login?returnUrl=" + rc.HttpContext.Request.Url.PathAndQuery);
+        //    else
+        //    {
+
+        //        if (!SessionUtility.CheckPermission(Session, rc.HttpContext.Request.Url.PathAndQuery))
+        //        {
+        //            Response.Redirect("/Error/NotPermissionAdmin");
+        //        }
+        //    }
+
+        //}
+
+        //
+        // GET: /Login/
+        //
+        // GET: /Manage/Shop/
+        public ActionResult Index(string key, int? page)
+        {
+            try
+            {
+                ViewData["status"] = true;
+                ViewData["key"] = key;
+                int currentPageIndex = page.HasValue ? page.Value : 1;
+
+                var list = _shopsBusiness.GetByKey(key).ToPagedList(currentPageIndex, 20);
+
+                return View(list);
+            }
+            catch (FaultException ex)
+            {
+                var exep = Function.GetExeption(ex);
+                var codeExp = exep[1];
+                string url = "Error/ErrorFunction/" + codeExp;
+                return RedirectToActionPermanent(url);
+            }
+        }
+
+        #region EditShop (AllShop: shopSetting, shopPolicy, shopSupport )
+
+        [HttpGet]
+        public ActionResult EditAllInforAboutShop(long id)
+        {
+            var objShop = _shopsBusiness.GetById(id);
+
+            if (objShop != null)
+            {
+                LoadDropdown loadDropdown = new LoadDropdown();
+                ViewBag.Location = loadDropdown.SearchLocationParenId(1, objShop.LocationId);
+
+                LoadCombo loadDropStatus = new LoadCombo();
+                ViewBag.StatusShop = loadDropStatus.LoadStatus();
+
+
+                return View(objShop);
+            }
+
+            return RedirectToAction("Index");
+        }
+     
+        [ValidateInput(false)]
+        [HttpPost]
+        public ActionResult EditAllInforAboutShop(Shop objShop, int statusShop, long receiverPhuong, HttpPostedFileBase iconShop)
+        {
+            ShopsBusiness shopBusiness = new ShopsBusiness();
+            ShopSettingsBusiness shopSettingBusiness = new ShopSettingsBusiness();
+
+            LoadDropdown loadDropdown = new LoadDropdown();
+            ViewBag.Location = loadDropdown.SearchLocationParenId(1, objShop.LocationId);
+
+            if (ModelState.IsValid && objShop != null)
+            {
+                var objShopDB = shopBusiness.GetById(objShop.Id);
+
+                objShopDB.ShopName = objShop.ShopName;
+                objShopDB.Address = objShop.Address;
+                objShopDB.Phone = objShop.Phone;
+                objShopDB.Status = statusShop;
+
+                ////temp, sửa lại là dropdown
+                //objShopDB.Type = objShop.Type;
+                //objShopDB.Status = objShop.Status;
+                objShopDB.LocationId = receiverPhuong;
+                //objShopDB.ActiveDate = DateTime.ParseExact(datepicker1, "dd/MM/yyyy", null);
+
+
+                if (iconShop != null && iconShop.ContentLength > 0)
+                {
+                    string randomImage = Guid.NewGuid().ToString();
+                    string pathImage = HttpContext.Server.MapPath("~/FileUpload");
+                    string strurlimage = Function.ResizeImageNew(iconShop, 300, 300, pathImage, randomImage);
+                    Function.ResizeImageNew(iconShop, 500, 500, pathImage, randomImage);
+                    Function.ResizeImageNew(iconShop, 1000, 1000, pathImage, randomImage);
+                    objShopDB.Icon = strurlimage;
+                }
+
+                shopBusiness.Edit(objShopDB);
+
+                ////cập nhật shopSetting
+                //var objShopSettingDB = shopSettingBusiness.GetDynamicQuery().Where(x => x.ShopId == objShop.Id).FirstOrDefault();
+                //if(objShopSettingDB != null)
+                //{
+                //    objShopSettingDB.Key = keyShopSetting;
+                //    objShopSettingDB.Value = valueShopSetting;
+
+                //    shopSettingBusiness.Edit(objShopSettingDB);
+                //}
+                //else
+                //{
+                //    ShopSetting objShopSetting = new ShopSetting();
+                //    objShopSetting.ShopId = objShop.Id;
+                //    objShopSetting.Key = keyShopSetting;
+                //    objShopSetting.Value = valueShopSetting;
+
+                //    shopSettingBusiness.AddNew(objShopSetting);
+                //}
+            }
+            return View();
+        }
+        public ActionResult ListProductOfShop(long id)
+        {
+            var listProduct = _productsBusiness.GetDynamicQuery().Where(x => x.MemberId == id).ToList();
+            if (listProduct != null)
+            {
+                return View(listProduct);
+            }
+            return View();
+        }
+
+        public ActionResult ListOrderOfShop(long id)
+        {
+            var listOrder = _ordersBusiness.GetDynamicQuery().Where(x => x.IdShop == id).ToList();
+            if (listOrder != null)
+            {
+                return View(listOrder);
+            }
+            return View();       
+        }
+        #endregion
+
+        #region Create shop
+        public ActionResult CreateShop()
+        {
+            LoadDropdown loadDropdown = new LoadDropdown();
+            ViewBag.Location = loadDropdown.SearchLocationParenId(1, null);
+            return View();
+        }
+        [HttpPost]
+        public ActionResult CreateShop(Shop obj, long receiverPhuong, string acount)
+        {
+            ViewBag.Mes = "";
+            LoadDropdown loadDropdown = new LoadDropdown();
+            ViewBag.Location = loadDropdown.SearchLocationParenId(1, null);
+            var check = new MembersBusiness().CheckDuplicate(acount);
+            if (!check)
+            {
+                ViewBag.Mes =
+                    "Thành viên này chưa phải là một thành viên của hệ thống, vui lòng đăng ký thành viên viên trước khi mở shop";
+                return View();
+            }
+            else
+            {
+                var idshop =
+                    new MembersBusiness().GetDynamicQuery()
+                        .First(x => x.UserName == acount || x.MemberProfile.Emaill == acount)
+                        .Id;
+                var checkshop = new ShopsBusiness().GetDynamicQuery().Where(x => x.Id == idshop);
+                if (checkshop.Any())
+                {
+                    ViewBag.Mes = "Shop này đã được active trước đó!";
+                    return View(obj);
+                }
+                else
+                {
+                    obj.Id = idshop;
+                    obj.LocationId = receiverPhuong;
+                    obj.ActiveDate = DateTime.Now;
+                    obj.BeginDate = DateTime.Now;
+                    obj.EndDate = DateTime.Now.AddYears(10);
+                    obj.ShopSupport.Id = idshop;
+                    if (obj.ShopSupport.Facebook == null)
+                    {
+                        obj.ShopSupport.Facebook = string.Empty;
+                    }
+                    if (obj.ShopSupport.Yahoo == null)
+                    {
+                        obj.ShopSupport.Yahoo = string.Empty;
+                    }
+                    var shopPolicy = new ShopPolicy
+                    {
+                        PaymentPolicy = string.Empty,
+                        Id = idshop,
+                        SalesPolicy = string.Empty,
+                        About = string.Empty,
+                        PrivacyPolicy = string.Empty
+                    };
+                    obj.ShopPolicy = shopPolicy;
+                    _shopsBusiness.AddNew(obj);
+                    ViewBag.Mes = "Active thành công!";
+                    return View(obj);
+                }
+               
+
+
+            }
+
+          
+        }
+        #endregion
+
+        #region Delete Shop
+        public ActionResult DeleteShop(long id = 0)
+        {
+            try
+            {
+                if (id > 0)
+                {
+                    _shopsBusiness.Remove(id);
+
+                }
+                return RedirectToAction("Index");
+            }
+            catch (FaultException ex)
+            {
+                var exep = Function.GetExeption(ex);
+                var codeExp = exep[1];
+                string url = "Error/ErrorFunction/" + codeExp;
+                return RedirectToActionPermanent(url);
+            }
+
+        }
+        #endregion
+      
+	}
+}

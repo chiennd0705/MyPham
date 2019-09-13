@@ -1,0 +1,86 @@
+html, body, div, span, applet, object, iframe, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    text-decoration: none;
+}
+
+body {
+    line-height: 1;
+}
+
+ol, ul {
+    list-style: none;
+}
+
+blockquote, q {
+    quotes: none;
+}
+
+/* focus style */
+:focus, a:focus, a:active {
+    outline: 0;
+}
+
+ins {
+    text-decoration: none;
+}
+
+del {
+    text-decoration: line-through;
+}
+
+/* table */
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/* clear */
+.clear {
+    clear: both;
+}
+
+.clear-l {
+    clear: left;
+}
+
+.clear-r {
+    clear: right;
+}
+
+.nav .glyphicon, .nav .fa {
+    margin-right: 5px;
+}
+
+label {
+    font-weight: bold !important;
+    margin-top: 10px;
+}
+
+.css-treeview label {
+    font-weight: normal !important;
+}
+
+.tht-con label {
+    font-weight: normal !important;
+    vertical-align: initial;
+    padding-bottom: 5px;
+    width: 24%;
+}
+.tab-content .radio-inline + .radio-inline, .tab-content .checkbox-inline + .checkbox-inline {
+    margin-top: 10px !important;
+
+    font-weight:normal !important;
+}
+.radio-inline, .checkbox-inline {
+    font-weight: normal !important;
+}
+.tht-con .radio-inline + .radio-inline, .tht-con .checkbox-inline + .checkbox-inline {
+    margin-left: 0;
+}
+
+.nav-tabs > li > a {
+    font-weight: bold;
+}

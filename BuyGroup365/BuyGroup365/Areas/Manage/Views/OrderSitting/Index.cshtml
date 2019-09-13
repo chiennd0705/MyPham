@@ -1,0 +1,175 @@
+﻿@using BuyGroup365.Areas.Manage.Models
+@using MvcPaging
+@model MvcPaging.IPagedList<Common.OrderSitting>
+@using Common
+@using Business.ClassBusiness;
+@{
+    ViewBag.Title = "Cập nhật OrderSitting";
+    Layout = "~/Areas/Manage/Views/Shared/_LayoutAdmincshtml.cshtml";
+}
+
+<div class="container-fluid" ng-app="body">
+    @Html.Raw(AdminFunction.BindHeader("OrderSitting", " Thêm mới", null, null, null))
+    <!-- /.row -->
+    <!-- /.row -->
+    <!-- /.row -->
+    <div class="row" ng-controller="Index">
+
+        <div class="col-lg-6">
+            @{
+                OrderSitting orderSitting;
+                long id = 0;
+                if (Request.QueryString["id"] != null)
+                {
+                    id = long.Parse(Request.QueryString["id"].ToString());
+                    orderSitting = new OrderSittingBusiness().GetById(id);
+                }
+                else
+                {
+                    orderSitting = new OrderSitting();
+                }
+
+            }
+            @using (Html.BeginForm("Update", "OrderSitting", FormMethod.Post, new { enctype = "multipart/form-data", id = "Update" }))
+            {
+                <input type="hidden" value="@orderSitting.Id" id="Id" name="id" />
+
+                @Html.ValidationSummary(true)
+
+                <div class="form-group">
+                    <label>Tên người mua hàng:<span class="required">*</span></label><br />
+                    <input class="form-control" autocomplete="off" maxlength="200" data-val-required="Mời nhập họ tên" required id="FullName" name="FullName" type="text" value="@orderSitting.FullName" />
+                </div>
+                <div class="form-group">
+                    <label>Số điện thoại:</label><br />
+                    <input class="form-control" autocomplete="off" maxlength="200" data-val-required="Mời nhập số điện thoại" id="TagUrl" name="SDT" type="text" value="@orderSitting.SDT" />
+                </div>
+                <div class="form-group">
+                    <label>Thời gian mua:</label><br />
+                    <input class="form-control" autocomplete="off" maxlength="200" data-val-required="Mời nhập thời gian" id="TimeNote" name="TimeNote" type="text" value="@orderSitting.TimeNote" />
+                </div>
+
+                <div class="form-group">
+                    <label>Thành phố:</label><br />
+                    <input class="form-control" autocomplete="off" maxlength="200" data-val-required="Mời nhập thành phố" id="City" name="City" type="text" value="@orderSitting.City" />
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary" name="btnSubmit" value="Thêm">Thêm</button>
+
+                    @if (Request.QueryString["id"] != null)
+                    {
+                        <button type="submit" class="btn btn-primary" name="btnSubmit" value="Cập nhật">Cập nhật</button>
+                    }
+                </div>
+            }
+        </div>
+        <div class="col-lg-6">
+            @using (Ajax.BeginForm("Index", "OrderSitting",
+                        new AjaxOptions { UpdateTargetId = "grid-list", HttpMethod = "get", LoadingElementId = "loading", OnBegin = "beginPaging", OnSuccess = "successPaging", OnFailure = "failurePaging" },
+                        new { id = "frm-search" }))
+            {
+                <div class="form-group input-group">
+                    <input type="text" value="@ViewData["key"]" class="form-control" id="key" name="key" placeholder="Nhập từ khóa tìm kiếm">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="submit">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </span>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover table-striped" id="dataTables" aria-describedby="dataTables-example_info">
+                        <thead>
+                            <tr role="row">
+                                <th style="width:80px">
+                                    STT
+                                </th>
+                                <th>
+                                    Họ tên
+                                </th>
+                                <th>
+                                    Số điện thoại
+                                </th>
+                                <th>
+                                    Thành phố
+                                </th>
+                                <th>
+                                    Thời gian
+                                </th>
+
+                                <th style="width: 120px;">Chức Năng</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                int i = Model.ItemStart;
+                            }
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td style="text-align:center">
+                                        @(i)
+                                    </td>
+                                    <td>
+                                        @item.FullName
+                                    </td>
+                                    <td>
+                                        @item.SDT
+                                    </td>
+                                    <td>
+                                        @item.City
+                                    </td>
+                                    <td>
+                                        @item.TimeNote
+                                    </td>
+
+                                    <td style="text-align: center">
+
+                                        <a href="/Manage/OrderSitting/Index/?id=@item.Id">
+                                            <img src="~/img/IconMain/edit.png" width="19" title="Sửa" />
+                                        </a>
+                                        <a href="/Manage/OrderSitting/Delete/@item.Id" title="Xóa" onclick="return confirm('Bạn có chắc chắn?');">
+                                            <img src="~/img/IconMain/remove.png" width="19" title="Xóa" />
+                                        </a>
+                                    </td>
+                                </tr>
+                                i++;
+                            }
+                        </tbody>
+                    </table>
+                    <div class="">
+                        <div class="dataTables_info" id="dataTables-example_info" role="alert" aria-live="polite" aria-relevant="all">Hiển thị từ @Model.ItemStart đến @Model.ItemEnd của @Model.TotalItemCount bản ghi</div>
+                    </div>
+                    <div class="">
+                        <div class="dataTables_paginate " id="dataTables-example_paginate">
+
+                            @Html.Raw(Ajax.Pager(
+                                            new Options
+                                            {
+                                                PageSize = Model.PageSize,
+                                                TotalItemCount = Model.TotalItemCount,
+                                                CurrentPage = Model.PageNumber,
+                                                ItemTexts = new ItemTexts() { Next = "Next", Previous = "Previous", Page = "P" },
+                                                ItemIcon = new ItemIcon() { First = "icon-backward", Previous = "icon-chevron-left", Next = "icon-chevron-right", Last = "icon-forward" },
+                                                TooltipTitles = new TooltipTitles() { Next = "Next page", Previous = "Previous page", Page = "Page {0}." },
+                                                Size = Size.normal,
+                                                Alignment = Alignment.centered,
+                                                IsShowControls = true,
+                                                IsShowFirstLast = true,
+                                                CssClass = ""
+                                            },
+                                            new AjaxOptions
+                                            {
+                                                UpdateTargetId = "grid-list",
+                                                HttpMethod = "get",
+                                                LoadingElementId = "loading",
+                                                OnBegin = "beginPaging",
+                                                OnSuccess = "successPaging",
+                                                OnFailure = "failurePaging"
+                                            }, new { controller = "OrderSitting", action = "Index", name = ViewBag.TagName }))
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>

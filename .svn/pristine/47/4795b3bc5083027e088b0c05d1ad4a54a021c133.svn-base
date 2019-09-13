@@ -1,0 +1,135 @@
+﻿@{
+   
+   
+}
+@model Common.Product
+<div class="quickview-main" style="width: 800px;">
+    <script type="text/javascript">
+        var optionsPrice = new Product.OptionsPrice([]);
+    </script>
+    <div id="messages_product_view"></div>
+    <div class="wrap_quickview">
+        <div class="product-view product-quickview">
+            <div class="product-essential">
+               
+                   
+                    <div class="container container-quickview">
+                        <div class="row">
+                            <div class="product-img-box col-lg-5 col-md-5 col-sm-5">
+                                <div class="product-image product-image-zoom zoom-available">
+                                    <div class="product-image-gallery">
+                                        <img id="image-main" class="gallery-image visible img-responsive" src="@ViewData["ImgMain"]" data-zoom-image="@ViewData["ImgMainBig"]" alt="@ViewData["ProductName"]" title="@ViewData["ProductName"]">
+                                 @Html.Raw(@ViewData["Img1"])
+                                           </div>
+                                </div>
+
+                                <div class="more-views">
+                                    <h2>More Views</h2>
+                                    <div class="bx-wrapper">
+                                        <div class="bx-viewport">
+                                            <ul class="product-image-thumbs">
+                                                
+                                               @Html.Raw(@ViewData["Img2"])
+                                               
+                                            </ul>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="product-shop col-lg-7 col-md-7 col-sm-7">
+                                <div class="product-name">
+                                    <h1>@ViewData["ProductName"]</h1>
+                                </div>
+                                <div class="ratings">
+                                    <div class="rating-box">
+                                        @Html.Raw(@ViewData["rating"])
+                                        
+                                    </div>
+                                    <p class="rating-links">
+                                        <a href="">@ViewData["count"] Đánh giá</a>
+                                        <span class="separator">|</span>
+                                        <a href="@Common.util.Function.InitUrlDetaiProduct(Model.FriendlyUrl, Model.Id)/#review-form">Đánh giá sản phẩm này</a>
+                                    </p>
+                                </div>
+
+                                <div class="product-type-data">
+
+
+
+                                    <div class="price-box">
+
+                                        <p class="old-price">
+                                            <span class="price-label">Regular Price:</span>
+                                            <span class="price" id="old-price-1">@Html.Raw(@ViewData["OldPrice"])</span>
+                                        </p>
+
+                                        <p class="special-price">
+                                            <span class="price-label">Special Price</span>
+                                            <span class="price" itemprop="price" id="product-price-1">@Html.Raw(@ViewData["Price"])</span>
+                                        </p>
+
+
+                                    </div>
+
+                                    <p class="availability in-stock">
+                                        <link itemprop="availability" href="http://schema.org/InStock">
+                                        Tình trạng: <span>@ViewData["State"]</span>
+                                    </p>
+                                </div>
+
+
+                                <div class="short-description">
+                                    @Html.Raw(@ViewData["Summary"])
+                                </div>
+
+                                <div class="add-to-box">
+                                  
+                                    <div class="">
+                                        @*<button type="button" title="Add to Cart" class="button btn-cart">
+                                            <span>
+                                                <span class="view-cart">Xem chi tiết sản phẩm</span>
+                                            </span>
+                                        </button>*@
+                                        <a href="@Common.util.Function.InitUrlDetaiProduct(Model.FriendlyUrl, Model.Id)" class="QickView">Xem chi tiết</a>
+                                    </div>
+                                </div>
+
+                                @*" + Common.util.Function.InitUrlDetaiProduct(item.FriendlyUrl, item.Id) + "*@
+
+                            </div>
+                        </div>
+                    </div>
+               
+                
+            </div>
+        </div>
+    </div>
+
+
+    <script type="text/javascript">
+        var lifetime = 3600;
+        var expireAt = Mage.Cookies.expires;
+        if (lifetime > 0) {
+            expireAt = new Date();
+            expireAt.setTime(expireAt.getTime() + lifetime * 1000);
+        }
+        Mage.Cookies.set('external_no_cache', 1, expireAt);
+    </script>
+    <style>
+        .QickView {
+            float: none;
+            padding-left: 30px;
+            display: block !important;
+            border: 0px solid #dadada;
+            background-color: #ff3366;
+            background-position: 15px 50%;
+            background-repeat: no-repeat;
+            padding: 3px;
+            width: 24%;
+            text-align: center;
+            color: white;
+        }
+    </style>
+</div>

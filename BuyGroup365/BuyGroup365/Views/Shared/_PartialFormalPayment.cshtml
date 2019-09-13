@@ -1,0 +1,19 @@
+﻿@using Common
+@using Business.ClassBusiness;
+@using DataAccess;
+@using Common;
+@using Business;
+@using Business.ClassBusiness;
+
+
+
+
+@{
+    TextHtmlBusiness textHtmlBusiness = new TextHtmlBusiness();
+
+
+    TextHtml ThanhToanHome = textHtmlBusiness.GetByCode("ThanhToanHome");
+}
+
+ @Html.Raw(ThanhToanHome.Content)
+

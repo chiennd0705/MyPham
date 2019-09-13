@@ -1,0 +1,342 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="THACHSANHModelStoreContainer" CdmEntityContainer="THACHSANHEntities">
+    <EntitySetMapping Name="Locations">
+      <EntityTypeMapping TypeName="THACHSANHModel.Location">
+        <MappingFragment StoreEntitySet="Locations">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Icon" ColumnName="Icon" />
+          <ScalarProperty Name="Order" ColumnName="Order" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MemberInsertTemps">
+      <EntityTypeMapping TypeName="THACHSANHModel.MemberInsertTemp">
+        <MappingFragment StoreEntitySet="MemberInsertTemp">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="MemberParentId" ColumnName="MemberParentId" />
+          <ScalarProperty Name="MemberAboutId" ColumnName="MemberAboutId" />
+          <ScalarProperty Name="DateCreate" ColumnName="DateCreate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MemberLevels">
+      <EntityTypeMapping TypeName="THACHSANHModel.MemberLevel">
+        <MappingFragment StoreEntitySet="MemberLevel">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Money" ColumnName="Money" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MemberProfiles">
+      <EntityTypeMapping TypeName="THACHSANHModel.MemberProfile">
+        <MappingFragment StoreEntitySet="MemberProfile">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Emaill" ColumnName="Emaill" />
+          <ScalarProperty Name="Dob" ColumnName="Dob" />
+          <ScalarProperty Name="Sex" ColumnName="Sex" />
+          <ScalarProperty Name="Pid" ColumnName="Pid" />
+          <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Members">
+      <EntityTypeMapping TypeName="THACHSANHModel.Member">
+        <MappingFragment StoreEntitySet="Members">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="PasswordTransaction" ColumnName="PasswordTransaction" />
+          <ScalarProperty Name="PasswordEncrypted" ColumnName="PasswordEncrypted" />
+          <ScalarProperty Name="PasswordModifyDate" ColumnName="PasswordModifyDate" />
+          <ScalarProperty Name="PasswordEncryptedMethod" ColumnName="PasswordEncryptedMethod" />
+          <ScalarProperty Name="LoginDate" ColumnName="LoginDate" />
+          <ScalarProperty Name="LastFailedLoginDate" ColumnName="LastFailedLoginDate" />
+          <ScalarProperty Name="Loutout" ColumnName="Loutout" />
+          <ScalarProperty Name="LockoutDate" ColumnName="LockoutDate" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+          <ScalarProperty Name="ActiveDate" ColumnName="ActiveDate" />
+          <ScalarProperty Name="Question" ColumnName="Question" />
+          <ScalarProperty Name="Answer" ColumnName="Answer" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MemberSendRequests">
+      <EntityTypeMapping TypeName="THACHSANHModel.MemberSendRequest">
+        <MappingFragment StoreEntitySet="MemberSendRequest">
+          <ScalarProperty Name="AdminId" ColumnName="AdminId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+          <ScalarProperty Name="Content" ColumnName="Content" />
+          <ScalarProperty Name="Money" ColumnName="Money" />
+          <ScalarProperty Name="DateCreate" ColumnName="DateCreate" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="modules">
+      <EntityTypeMapping TypeName="THACHSANHModel.module">
+        <MappingFragment StoreEntitySet="module">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="code" ColumnName="code" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="ws_method" ColumnName="ws_method" />
+          <ScalarProperty Name="web_method" ColumnName="web_method" />
+          <ScalarProperty Name="order" ColumnName="order" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="roles">
+      <EntityTypeMapping TypeName="THACHSANHModel.role">
+        <MappingFragment StoreEntitySet="role">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="code" ColumnName="code" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="create_date" ColumnName="create_date" />
+          <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+          <ScalarProperty Name="description" ColumnName="description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="role_module">
+      <EntityTypeMapping TypeName="THACHSANHModel.role_module">
+        <MappingFragment StoreEntitySet="role_module">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="role_id" ColumnName="role_id" />
+          <ScalarProperty Name="module_id" ColumnName="module_id" />
+          <ScalarProperty Name="status" ColumnName="status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Settings">
+      <EntityTypeMapping TypeName="THACHSANHModel.Setting">
+        <MappingFragment StoreEntitySet="Settings">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Key" ColumnName="Key" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TransactionLogs">
+      <EntityTypeMapping TypeName="THACHSANHModel.TransactionLog">
+        <MappingFragment StoreEntitySet="TransactionLogs">
+          <ScalarProperty Name="AdminUserName" ColumnName="AdminUserName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Money" ColumnName="Money" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="DateCreate" ColumnName="DateCreate" />
+          <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+          <ScalarProperty Name="AdminId" ColumnName="AdminId" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="users">
+      <EntityTypeMapping TypeName="THACHSANHModel.user">
+        <MappingFragment StoreEntitySet="user">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="company_id" ColumnName="company_id" />
+          <ScalarProperty Name="is_super_user" ColumnName="is_super_user" />
+          <ScalarProperty Name="create_date" ColumnName="create_date" />
+          <ScalarProperty Name="modify_date" ColumnName="modify_date" />
+          <ScalarProperty Name="expired_date" ColumnName="expired_date" />
+          <ScalarProperty Name="password_encrypted" ColumnName="password_encrypted" />
+          <ScalarProperty Name="password_modify_date" ColumnName="password_modify_date" />
+          <ScalarProperty Name="password_encrypted_method" ColumnName="password_encrypted_method" />
+          <ScalarProperty Name="screenname" ColumnName="screenname" />
+          <ScalarProperty Name="login_date" ColumnName="login_date" />
+          <ScalarProperty Name="last_failed_login_date" ColumnName="last_failed_login_date" />
+          <ScalarProperty Name="failed_login_attemp" ColumnName="failed_login_attemp" />
+          <ScalarProperty Name="lockout" ColumnName="lockout" />
+          <ScalarProperty Name="lockout_date" ColumnName="lockout_date" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="discount_percent" ColumnName="discount_percent" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="user_group">
+      <EntityTypeMapping TypeName="THACHSANHModel.user_group">
+        <MappingFragment StoreEntitySet="user_group">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="code" ColumnName="code" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="create_date" ColumnName="create_date" />
+          <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+          <ScalarProperty Name="status" ColumnName="status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="user_group_role">
+      <EntityTypeMapping TypeName="THACHSANHModel.user_group_role">
+        <MappingFragment StoreEntitySet="user_group_role">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="user_group_id" ColumnName="user_group_id" />
+          <ScalarProperty Name="role_id" ColumnName="role_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="user_profile">
+      <EntityTypeMapping TypeName="THACHSANHModel.user_profile">
+        <MappingFragment StoreEntitySet="user_profile">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="department_id" ColumnName="department_id" />
+          <ScalarProperty Name="code" ColumnName="code" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="create_date" ColumnName="create_date" />
+          <ScalarProperty Name="dob" ColumnName="dob" />
+          <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+          <ScalarProperty Name="description" ColumnName="description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="user_usergroup">
+      <EntityTypeMapping TypeName="THACHSANHModel.user_usergroup">
+        <MappingFragment StoreEntitySet="user_usergroup">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="user_usergroup1" ColumnName="user_usergroup" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="GetAllModuleByUserId" FunctionName="THACHSANHModel.Store.GetAllModuleByUserId">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="THACHSANHModel.GetAllModuleByUserId_Result">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="code" ColumnName="code" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="web_method" ColumnName="web_method" />
+          <ScalarProperty Name="ws_method" ColumnName="ws_method" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetAllRolesByUserId" FunctionName="THACHSANHModel.Store.GetAllRolesByUserId">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="THACHSANHModel.GetAllRolesByUserId_Result">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="code" ColumnName="code" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetUserByUserName" FunctionName="THACHSANHModel.Store.GetUserByUserName">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="THACHSANHModel.GetUserByUserName_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="company_id" ColumnName="company_id" />
+          <ScalarProperty Name="is_super_user" ColumnName="is_super_user" />
+          <ScalarProperty Name="create_date" ColumnName="create_date" />
+          <ScalarProperty Name="modify_date" ColumnName="modify_date" />
+          <ScalarProperty Name="expired_date" ColumnName="expired_date" />
+          <ScalarProperty Name="password_encrypted" ColumnName="password_encrypted" />
+          <ScalarProperty Name="password_modify_date" ColumnName="password_modify_date" />
+          <ScalarProperty Name="password_encrypted_method" ColumnName="password_encrypted_method" />
+          <ScalarProperty Name="screenname" ColumnName="screenname" />
+          <ScalarProperty Name="login_date" ColumnName="login_date" />
+          <ScalarProperty Name="last_failed_login_date" ColumnName="last_failed_login_date" />
+          <ScalarProperty Name="failed_login_attemp" ColumnName="failed_login_attemp" />
+          <ScalarProperty Name="lockout" ColumnName="lockout" />
+          <ScalarProperty Name="lockout_date" ColumnName="lockout_date" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="discount_percent" ColumnName="discount_percent" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetUserByUserNameAndPassword" FunctionName="THACHSANHModel.Store.GetUserByUserNameAndPassword">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="THACHSANHModel.GetUserByUserNameAndPassword_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="company_id" ColumnName="company_id" />
+          <ScalarProperty Name="is_super_user" ColumnName="is_super_user" />
+          <ScalarProperty Name="create_date" ColumnName="create_date" />
+          <ScalarProperty Name="modify_date" ColumnName="modify_date" />
+          <ScalarProperty Name="expired_date" ColumnName="expired_date" />
+          <ScalarProperty Name="password_encrypted" ColumnName="password_encrypted" />
+          <ScalarProperty Name="password_modify_date" ColumnName="password_modify_date" />
+          <ScalarProperty Name="password_encrypted_method" ColumnName="password_encrypted_method" />
+          <ScalarProperty Name="screenname" ColumnName="screenname" />
+          <ScalarProperty Name="login_date" ColumnName="login_date" />
+          <ScalarProperty Name="last_failed_login_date" ColumnName="last_failed_login_date" />
+          <ScalarProperty Name="failed_login_attemp" ColumnName="failed_login_attemp" />
+          <ScalarProperty Name="lockout" ColumnName="lockout" />
+          <ScalarProperty Name="lockout_date" ColumnName="lockout_date" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="discount_percent" ColumnName="discount_percent" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="MemberInfoes">
+      <EntityTypeMapping TypeName="THACHSANHModel.MemberInfo">
+        <MappingFragment StoreEntitySet="MemberInfo">
+          <ScalarProperty Name="CC7" ColumnName="CC7" />
+          <ScalarProperty Name="CC6" ColumnName="CC6" />
+          <ScalarProperty Name="CC5" ColumnName="CC5" />
+          <ScalarProperty Name="CC4" ColumnName="CC4" />
+          <ScalarProperty Name="CC3" ColumnName="CC3" />
+          <ScalarProperty Name="CC2" ColumnName="CC2" />
+          <ScalarProperty Name="CC1" ColumnName="CC1" />
+          <ScalarProperty Name="TotalMoney" ColumnName="TotalMoney" />
+          <ScalarProperty Name="ComStock" ColumnName="ComStock" />
+          <ScalarProperty Name="ComIncentive" ColumnName="ComIncentive" />
+          <ScalarProperty Name="ComBalancedPaird" ColumnName="ComBalancedPaird" />
+          <ScalarProperty Name="ComDirect" ColumnName="ComDirect" />
+          <ScalarProperty Name="BalancedPairsReceivedFloors" ColumnName="BalancedPairsReceivedFloors" />
+          <ScalarProperty Name="TotalNumberBalancedPairsReceived" ColumnName="TotalNumberBalancedPairsReceived" />
+          <ScalarProperty Name="TotalNumberBalancedInMonth" ColumnName="TotalNumberBalancedInMonth" />
+          <ScalarProperty Name="TotalComInDay" ColumnName="TotalComInDay" />
+          <ScalarProperty Name="TotalNumberBalancedPairsed" ColumnName="TotalNumberBalancedPairsed" />
+          <ScalarProperty Name="TotalNum2" ColumnName="TotalNum2" />
+          <ScalarProperty Name="TotalNum1" ColumnName="TotalNum1" />
+          <ScalarProperty Name="MemIdTree2" ColumnName="MemIdTree2" />
+          <ScalarProperty Name="MemIdTree1" ColumnName="MemIdTree1" />
+          <ScalarProperty Name="MemberAboutId" ColumnName="MemberAboutId" />
+          <ScalarProperty Name="MemberParentId" ColumnName="MemberParentId" />
+          <ScalarProperty Name="LevelId" ColumnName="LevelId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CommissionLogs">
+      <EntityTypeMapping TypeName="THACHSANHModel.CommissionLog">
+        <MappingFragment StoreEntitySet="CommissionLogs">
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="AdminId" ColumnName="AdminId" />
+          <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+          <ScalarProperty Name="DateCreate" ColumnName="DateCreate" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Money" ColumnName="Money" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

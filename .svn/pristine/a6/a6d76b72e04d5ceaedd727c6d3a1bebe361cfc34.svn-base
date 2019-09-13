@@ -1,0 +1,799 @@
+﻿@*@{
+        ViewBag.Title = "EditProduct";
+
+    }
+    <div class="field name-firstname">
+        <label for="firstname" class="">Trạng thái sản phẩm</label>
+        <div class="input-box">
+
+            @Html.DropDownList("stateProduct", null, new { @style = "width: 80%", @class = "input-text required-entry" })
+        </div>
+    </div>*@
+
+@using BuyGroup365.Models.Member
+@using Common.util
+@model global::Common.Product
+
+@{
+    ViewBag.Title = "Cập nhật sản phẩm";
+    Layout = "~/Views/Shared/_LayoutMember.cshtml";
+}
+
+<link href="~/Content/css/StyleTree.css" rel="stylesheet" />
+<div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 ">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+
+                <ol class="breadcrumb">
+                    <li><span class="glyphicon glyphicon-home"></span><a href="/"> Trang chủ</a></li>
+                    <li>
+                        <a href="/Member/Profile">
+                            @SessionUtility.GetSessionMember(Session).UserName
+                        </a>
+                    </li>
+                    <li class="active">Tài khoản</li>
+                </ol>
+            </h4>
+        </div>
+        <div id="collapseOne0" class="panel-collapse collapse in" style="height: auto;">
+            <div>
+                <span>@ViewBag.Mes </span>
+                @using (Html.BeginForm("EditProduct", "Member", FormMethod.Post, new { enctype = "multipart/form-data", id = "Postsale" }))
+                {
+                    @Html.ValidationSummary(true)
+                    @Html.HiddenFor(x=>x.Id)
+                    @Html.HiddenFor(x=>x.CreateDate)
+                    <div class="modal-contentSale">
+
+                        <div class="modal-body">
+                            <input id="categoryproduct" name="categoryproduct" type="hidden" value="@Model.CatalogId"/>
+                            <input id="manufacetureid" name="manufaceproduct" value="@Model.ManufacturerId" type="hidden" />
+                            <div role="tabpanel">
+
+                                <!-- Nav tabs -->
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li role="presentation" class="active"><a href="#Infomation" aria-controls="Infomation" role="tab" data-toggle="tab">Thông tổng quát</a></li>
+                                    <li role="presentation"><a href="#Des" aria-controls="Des" role="tab" data-toggle="tab">Thông tin chi tiết</a></li>
+                                    <li role="presentation"><a href="#Image" aria-controls="Image" role="tab" data-toggle="tab">Hình ảnh</a></li>
+
+                                </ul>
+
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <div role="tabpanel" class="tab-pane active" id="Infomation">
+                                        <div class="field name-firstname">
+                                            <label for="firstname" class="">Tên sản phẩm</label>
+                                            <div class="input-box">
+                                                @Html.TextBoxFor(model => model.ProductName, new { @class = "input-text required-entry", @autocomplete = "off", @maxlength = "150", @style = "width: 100%", @size = "25", @placeholder = "Hộp thư" })
+                                                @Html.ValidationMessageFor(model => model.ProductName)
+                                            </div>
+                                        </div>
+                                        <div class="field name-firstname">
+                                            <label for="firstname" class="">Model</label>
+                                            <div class="input-box">
+                                                @Html.TextBoxFor(model => model.Model, new { @class = "input-text required-entry", @autocomplete = "off", @maxlength = "50", @style = "width: 50%", @size = "25", @placeholder = "Hộp thư" })
+                                                @Html.ValidationMessageFor(model => model.Model)
+                                            </div>
+                                        </div>
+                                      
+                                        <div class="row" style="margin-top: 10px">
+                                            <div class="col-lg-7">
+                                                <label>Danh mục sản phẩm</label><br />
+                                                @*<div class="">
+                                                    @Html.DropDownListFor(model => model.CatalogId, (IEnumerable<SelectListItem>)ViewBag.stateProduct, new { @class = "form-control", @size = "25", @height = "270px" })
+                                                    @Html.ValidationMessageFor(model => model.CatalogId)
+                                                </div>*@
+                                                <div class="css-treeview">
+                                                    @Html.Raw(ViewBag.htmlCate)
+                                           
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-5">
+                                                <label>Nhãn hiệu</label><br />
+                                                <div class="">
+                                                    @*@Html.DropDownListFor(model => model.ManufacturerId, (IEnumerable<SelectListItem>)ViewBag.Manufaceture, new { @class = "uniform", @size = "25", @height = "270px" ,@style="width: 100%"})
+                                                    @Html.ValidationMessageFor(model => model.ManufacturerId)*@
+                                                    <select size="18" style="width: 100%; height: 270px;" id="manufaceture" name="manufaceture" onclick="GetManufaceture()">
+                                                        @Html.Raw(ViewBag.Manufaceture)
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <script>
+                                            function GetManufaceture() {
+
+                                            }
+                                        </script>
+                                        <div class="form-group">
+                                            <label>Thuộc tính khác của sản phẩm<span class="required">*</span></label><br />
+                                            <div id="propertybyCate"></div>
+
+                                        </div>
+
+                                        <div role="tabpanel">
+                                            <ul class="nav nav-tabs" role="tablist" id="tablist">
+                                                @{ var index = 1;}
+                                                @foreach (var item in Model.Catalog.CatalogProperties)
+                                                {
+                                                    var str = "#Pro" + index;
+                                                    var ariacontrols = "Pro" + index;
+                                                    if (index == 1)
+                                                    {
+
+                                                        <li role="presentation" class="active"><a href="@str" aria-controls="Pro1" role="@ariacontrols" data-toggle="tab">@item.Name </a></li>
+                                                    }
+                                                    else
+                                                    {
+
+                                                        <li role="presentation"><a href="@str" aria-controls="Pro2" role="@ariacontrols" data-toggle="tab">@item.Name </a></li>
+                                                    }
+                                                    index++;
+                                                }
+                              
+                                            </ul>
+                                            <div class="tab-content" id="tabcontent">
+
+                                                @{ var index2 = 1;}
+                                                @foreach (var item in Model.Catalog.CatalogProperties)
+                                                {
+                                                    var str2 = "#Pro" + index2;
+                                                    var property = "proprerty"+item.Id;
+                                                    string strvale = item.Id.ToString();
+                                                    var ariacontrols2 = "Pro" + index2;
+                                                    if (index2 == 1)
+                                                    {
+                                                        <div role="tabpanel" class="tab-pane active " id="@ariacontrols2">
+                                                            
+                                                            @* truong hơp check box *@
+                                                            @if (item.Type == 2)  
+                                                            {
+                                                                foreach (var item1 in item.CatalogPropertiesValues)
+                                                                {
+                                                                    var id = "optionsRadiosInline" + item1.Id;
+                                                                    if (Model.ProductProperties.Select(x => x.CatalogPropertyValueId).Contains(item1.Id))
+                                                                    {
+                                                                    
+                                                                        strvale = strvale + "|"+item1.Id +"#"+ item1.Value;
+                                                                        <label class="checkbox-inline">
+                                                                            <input value="@item1.Value" onclick="SetvaluProperty(@item1.Id,@item.Id) " type="checkbox" id="@id" checked="">@item1.Value
+                                                                        </label>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        //  strvale = strvale + "|" + item1.Id + "#" + item1.Value;
+                                                                        <label class="checkbox-inline">
+                                                                            <input value="@item1.Value" onclick="SetvaluProperty(@item1.Id,@item.Id)" type="checkbox" id="@id">@item1.Value
+                                                                        </label>
+                                                                    }
+                                                            
+                                                                }
+                                                            }
+                                                         
+                                                            else
+                                                            {
+                                                             
+                                                                foreach (var item1 in item.CatalogPropertiesValues)
+                                                                {
+                                                                    var id = "optionsRadiosInline" + item1.Id;
+                                                                    if (Model.ProductProperties.Select(x => x.CatalogPropertyValueId).Contains(item1.Id))
+                                                                    {
+                                                                    
+                                                                        strvale = strvale + "|"+item1.Id +"#"+ item1.Value;
+                                                                        <label class="checkbox-inline">
+                                                                            <input value="@item1.Value" onclick="SetvaluProperty(@item1.Id,@item.Id) " type="radio" id="@id" name="@id" checked="">@item1.Value
+                                                                        </label>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        //  strvale = strvale + "|" + item1.Id + "#" + item1.Value;
+                                                                        <label class="checkbox-inline">
+                                                                            <input value="@item1.Value" onclick="SetvaluProperty(@item1.Id,@item.Id)" type="radio" id="@id" name="@id">@item1.Value
+                                                                        </label>
+                                                                    }
+                                                            
+                                                                }
+                                                            }
+                                                           
+                                                            <input id="@property" type="hidden" value="@strvale" name="proprertyvalue">
+                                                        </div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <div role="tabpanel" class="tab-pane  " id="@ariacontrols2">
+                                                            @if (item.Type == 2)
+                                                            {
+                                                                foreach (var item1 in item.CatalogPropertiesValues)
+                                                            {
+                                                                var id = "optionsRadiosInline" + item1.Id;
+                                                                if (Model.ProductProperties.Select(x => x.Value).Contains(item1.Value))
+                                                                {
+                                                                    strvale = strvale + "|" + item1.Id + "#" + item1.Value;
+                                                                    <label class="checkbox-inline">
+                                                                        <input value="@item1.Value" onclick="SetvaluProperty(@item1.Id,@item.Id) " type="checkbox" id="@id" checked="">@item1.Value
+                                                                    </label>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <label class="checkbox-inline">   <input value="@item1.Value" onclick="SetvaluProperty(@item1.Id,@item.Id)" type="checkbox" id="@id">@item1.Value</label>
+                                                                }
+                                                            }
+                                                            }
+                                                            else
+                                                            {
+                                                                foreach (var item1 in item.CatalogPropertiesValues)
+                                                            {
+                                                                var id = "optionsRadiosInline" + item1.Id;
+                                                                if (Model.ProductProperties.Select(x => x.Value).Contains(item1.Value))
+                                                                {
+                                                                    strvale = strvale + "|" + item1.Id + "#" + item1.Value;
+                                                                    <label class="checkbox-inline">
+                                                                        <input value="@item1.Value" onclick="SetvaluProperty(@item1.Id,@item.Id) " type="radio" id="@id" name="@id" checked="">@item1.Value
+                                                                    </label>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <label class="checkbox-inline">   <input value="@item1.Value" onclick="SetvaluProperty(@item1.Id,@item.Id)" type="radio" id="@id" name="@id">@item1.Value</label>
+                                                                }
+                                                            }
+                                                            }
+                                                            
+                                                            <input id="@property" type="hidden" value="@strvale" name="proprertyvalue">
+                                                        </div>
+                                                    }
+                                                    index2++;
+                                                }
+
+
+                                            </div>
+                                        </div>
+                                      
+
+                                        <style>
+                                            .suggestions-list-category {
+                                                /* height: 155px; */
+                                                overflow: hidden;
+                                            }
+                                        </style>
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane" id="Des">
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="field name-firstname">
+                                                    <label for="firstname" class="">Giá bán</label>
+                                                    <div class="input-box">
+                                                        @Html.TextBoxFor(model => model.Price, new { @class = "input-text required-entry", @autocomplete = "off", @maxlength = "50", @style = "width: 80%", @size = "25", @placeholder = "Hộp thư" })
+                                                        @Html.ValidationMessageFor(model => model.Price)
+                                                    </div>
+                                                </div>
+                                                <div class="field name-firstname">
+                                                    <label for="firstname" class="">Giá thị trường</label>
+                                                    <div class="input-box">
+                                                        @Html.TextBoxFor(model => model.Cost, new { @class = "input-text required-entry", @autocomplete = "off", @maxlength = "50", @style = "width: 80%", @size = "25", @placeholder = "Hộp thư" })
+                                                        @Html.ValidationMessageFor(model => model.Cost)
+                                                    </div>
+                                                </div>
+                                                <div class="field name-firstname">
+                                                    <label for="firstname" class="">Cân nặng</label>
+                                                    <div class="input-box">
+                                                        @Html.TextBoxFor(model => model.Weight, new { @class = "input-text required-entry", @autocomplete = "off", @maxlength = "50", @style = "width: 80%", @size = "25", @placeholder = "Hộp thư" })
+                                                        @Html.ValidationMessageFor(model => model.Weight)
+<div><i style="color: red; font-size: 12px;">Đơn vị tính bằng gram</i></div>
+                                                    </div>
+                                                </div>
+
+
+                                               @* <div class="field name-firstname">
+                                                    <label for="firstname" class="">Đơn vị tiền tệ</label>
+                                                    <div class="input-box">
+                                                        @Html.TextBoxFor(model => model.TypeOfCurrency, new { @class = "input-text required-entry", @autocomplete = "off", @maxlength = "50", @style = "width: 80%", @size = "25", @placeholder = "Hộp thư" })
+                                                        @Html.ValidationMessageFor(model => model.TypeOfCurrency)
+                                                    </div>
+                                                </div>*@
+                                               
+
+                                            </div>
+                                            <div class="col-lg-6">
+                                                    <div class="field name-firstname">
+                                                    <label for="firstname" class="">Tình trạng sản phẩm</label>
+                                                    <div class="input-box">
+                                                        @Html.DropDownListFor(model => model.CatalogId, (IEnumerable<SelectListItem>)ViewBag.stateProducttwo, new { @class = "input-text required-entry", @height = "100px", @style = "width: 80%" })
+                                                    </div>
+                                                </div>
+
+                                            @*     <div class="field name-firstname">
+                                                    <label for="firstname" class="">Tags</label>
+                                                    <div class="input-box">
+                                                        @Html.TextBoxFor(model => model.Tags, new { @class = "input-text required-entry", @autocomplete = "off", @maxlength = "50", @style = "width: 80%", @size = "25", @placeholder = "Tags" })
+                                                        @Html.ValidationMessageFor(model => model.Tags)
+                                                    </div>
+                                                </div>*@
+                                          
+                                                <div class="field name-firstname">
+                                                    <label for="firstname" class="">Ảnh đại diện</label>
+                                                    <div class="input-box">
+                                                        @{
+                                                            var obj = Model.ProductImages.Where(x => x.IsAvatar == 1);
+                                                        }
+                                                        <img  src="@FuntionMember.GetUrlImage(obj.First().ImgSource,"Large")" width="300"/>
+                                                        <br />
+                                                            <input type="file" name="avatar" class="" autocomplete="off" maxlength="50" style="width: 80%"  />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="form-group">
+                                                <label>Mô tả ngắn</label><br />
+                                                <textarea class="form-control"  id="summary" name="summary">@Model.Summary</textarea>
+
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Mô tả chi tiết</label><br />
+                                                <textarea class="form-control"  id="description" name="description">@Model.Description</textarea>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane" id="Image">
+                                        <link rel="stylesheet" href="/Content/fancybox/css/fancybox/jquery.fancybox-buttons.css">
+                                        <link rel="stylesheet" href="/Content/fancybox/css/fancybox/jquery.fancybox-thumbs.css">
+                                        <link rel="stylesheet" href="/Content/fancybox/css/fancybox/jquery.fancybox.css">
+
+                                        @*<link rel="stylesheet" href="/Content/fancybox/demo/demo.css">*@<!-- DELETE -->
+                                        <script src="/Content/fancybox/js/fancybox/jquery.fancybox.js"></script>
+                                        <script src="/Content/fancybox/js/fancybox/jquery.fancybox-buttons.js"></script>
+                                        <script src="/Content/fancybox/js/fancybox/jquery.fancybox-thumbs.js"></script>
+
+
+                                        <script type="text/javascript">
+                                            $(document).ready(function () {
+                                                $(".fancybox").fancybox();
+                                            });
+                                        </script>
+
+                                        <div style="width: 100%;margin: auto">
+                                       
+                                            <div class="row">
+
+                                                <div id="content">
+
+
+
+                                                    <div class="gal">
+                                                        @foreach (var item in Model.ProductImages)
+                                                        {
+                                                            if (item.IsAvatar == 1)
+                                                            {
+                                                                 var id = "img"+item.Id;
+                                                            <div class="col-lg-3" id="@id">
+                                                                <a class="fancybox" rel="group" href="@FuntionMember.GetUrlImage(item.ImgSource, "Large")" title="@item.Product.ProductName!">
+                                                                    <img src="@FuntionMember.GetUrlImage(item.ImgSource,"Large")" width="100%" />
+                                                                </a><br />
+
+                                                            </div>
+                                                            }
+                                                            else
+                                                            {
+                                                                 var id = "img"+item.Id;
+                                                            <div class="col-lg-3" id="@id">
+                                                                <span style="position: absolute"><a class="btn btn-danger" href="javarscript:;" onclick="DeleteImg(@item.Id)"><span class="glyphicon glyphicon-trash"></span></a></span>
+                                                                <a class="fancybox" rel="group" href="@FuntionMember.GetUrlImage(item.ImgSource, "Large")" title="@item.Product.ProductName!">
+                                                                    <img src="@FuntionMember.GetUrlImage(item.ImgSource,"Large")" width="100%" />
+                                                                </a><br />
+
+                                                            </div>
+                                                            }
+                                                           
+                                                        }
+
+
+                                                        <script>
+                                                            function DeleteImg(id) {
+                                                                alert(id);
+                                                                var idd ="img"+id;
+                                                                $('#' + idd).remove();
+                                                                $.ajax({
+                                                                    url: '@Url.Action("DeleteImage", "Member")',
+                                                                    data: {
+                                                                        'id': id
+                                                                    },
+                                                                    dataType: 'json',
+                                                                    Type: 'POST',
+                                                                    traditional: true,
+                                                                    success: function(data) {
+                                                                        if (data == 1) {
+                                                                            alert("Xóa thành công!");
+                                                                        }
+                                                                    },
+                                                                    error: function() {
+
+                                                                    }                                                                    
+                                                                });
+                                                            }
+                                                        </script>
+
+                                                    </div>
+                                                    <!--/demo-->
+
+
+
+
+                                                </div>
+
+                                            </div>
+                                            <div id="imageform" class="row" style="margin-top: 20px">
+                                                <div class="form-group">
+                                                    <input type="file" name="file">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <span><a class="btn btn-primary btn-sm" onclick="addImage()">Thêm </a></span>
+                                                <script>
+                                                    function addImage() {
+                                                        //      alert("thai");
+                                                        var html = "<div class='form-group'><input type='file' name='file'> </div>";
+                                                        $("#imageform").append(html);
+                                                    }
+                                                </script>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="button" title="Login" name="send" id="send2"><span><span>Cập nhật</span></span></button>
+                        </div>
+                    </div>
+                }
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<script type="text/javascript">
+    var cont = "";
+    function GetManuface(manufaceid) {
+
+        $('#manufacetureid').val(manufaceid);
+    }
+    function GetValueManuface(mnuid) {
+        //$('#overbackgroud').show();
+        //    var cat = $('#Category').val();
+        //var mnuid = $("#categoryproduct option:selected").val();
+        //alert(mnuid);
+        $('#categoryproduct').val(mnuid);
+        $.ajax({
+            url: '@Url.Action("GetManufaceByCategory","Product")',
+            data: {
+                'cate': mnuid
+            },
+            dataType: "json",
+            type: "POST",
+            traditional: true,
+            success: function (data, status) {
+                if (data == "0") {
+                    alert("Lỗi");
+                    $('#overbackgroud').hide();
+                }
+                else {
+                    $('label').removeClass("selectcate");
+                    $('#label-' + mnuid).addClass("selectcate");
+                    // alert(data);
+                    $('#manufaceture').html("");
+                    $('#manufaceture').append(data.HtmlManuface);
+                    var htm = "";
+                    var testli = "";
+                    var contentli = "";
+                    var input = "";
+                    $.each(data.JsonProperties, function (key, value) {
+                        input += value.HtmlInputHidden;
+                        if (key == 0) {
+                            testli += "<li  role=\"presentation\" class=\"active\"><a  href=\"#Pro" + value.Id + "\" aria-controls=\"Pro" + value.Id + "\" role=\"tab\" data-toggle=\"tab\">" + value.Name + " </a></li>";
+                            contentli += "<div role=\"tabpanel\" class=\"tab-pane active \" id=\"Pro" + value.Id + "\">";
+                            contentli += value.HtmlType;
+                            contentli += "</div>";
+
+                        } else {
+                            testli += "<li  role=\"presentation\"><a   href=\"#Pro" + value.Id + "\" aria-controls=\"Pro" + value.Id + "\" role=\"tab\" data-toggle=\"tab\">" + value.Name + " </a></li>";
+                            contentli += "<div role=\"tabpanel\" class=\"tab-pane \" id=\"Pro" + value.Id + "\">";
+                            contentli += value.HtmlType;
+                            contentli += "</div>";
+
+                        }
+                    });
+                    //  alert(htm);
+                    $("#tablist").html("");
+                    $("#tabcontent").html("");
+                    $("#tablist").append(testli);
+
+                    $("#tabcontent").append(contentli);
+                    $("#tabcontent").append(input);
+                    $("#propertybyCate").html("");
+                    $("#propertybyCate").append(htm);
+                    $('#overbackgroud').hide();
+                }
+            },
+            error: function () {
+
+            }
+
+        });
+
+    }
+    function GetProperty(id) {
+        alert(id);
+
+        $.ajax({
+            url: '@Url.Action("GetPropertyValueByProId","Product")',
+            data: {
+                'proId': id
+            },
+            dataType: "json",
+            type: "POST",
+            traditional: true,
+            success: function (data, status) {
+                if (data == "0") {
+                    alert("Lỗi");
+                    $('#overbackgroud').hide();
+                }
+                else {
+                    console.log(data);
+                    //$('#catelog').html("");
+                    $('#contentProperty').html("");
+                    $('#contentProperty').append(data);
+                    //$("#Pro" + id).html("");
+                    //$("#Pro" + id).append(data);
+                    $('#overbackgroud').hide();
+                }
+            },
+            error: function () {
+
+            }
+
+        });
+    }
+    function GetValueParent(id) {
+        $('#overbackgroud').show();
+
+        $.ajax({
+            url: '@Url.Action("GetCatetagoryByParent","Product")',
+            data: {
+                'cate': id
+            },
+            dataType: "json",
+            type: "POST",
+            traditional: true,
+            success: function (data, status) {
+                if (data == "0") {
+                    alert("Lỗi");
+                    $('#overbackgroud').hide();
+                }
+                else {
+                    console.log(data);
+                    //$('#catelog').html("");
+                    if (data.HtmlCategory != "") {
+                        $('#catelog').append(data.HtmlCategory);
+                    }
+
+                    $('#overbackgroud').hide();
+                }
+            },
+            error: function () {
+
+            }
+
+        });
+
+    }
+    function GetValueEditManuface(id) {
+        $.ajax({
+            url: '@Url.Action("GetManufaceByCategory","Product")',
+            data: {
+                'cate': id
+            },
+            dataType: "json",
+            type: "POST",
+            traditional: true,
+            success: function (data, status) {
+                if (data == "0") {
+                    alert("Lỗi");
+                    $('#overbackgroud').hide();
+                }
+                else {
+                    $('#ManufacturerId').html("");
+                    $('#ManufacturerId').append(data);
+                    $('#overbackgroud').hide();
+                }
+            },
+            error: function () {
+
+            }
+
+        });
+
+    }
+    // gọi khi thêm sưa xoa ơ danh phân add nhà sản xuât vào danh mục
+    function loadtabl(id) {
+        $.ajax({
+            url: '@Url.Action("GetManuface", "CategoryProduct")',
+            data: {
+                'id': id
+            },
+            dataType: "json",
+            type: "POST",
+            traditional: true,
+            success: function (data2, status2) {
+                if (data2 == "0") {
+                    alert("Hệ thống đang cập nhật");
+                    $('#overbackgroud').hide();
+                }
+                else if (data2 == 2) {
+
+                    $('#catemanuface').html("");
+                    $('#catemanuface').append("<tr><td>0</td><td>Not results!</td><td></td></tr>");
+                    $('#overbackgroud').hide();
+                }
+                else {
+                    $('#catemanuface').html("");
+                    $('#catemanuface').append(data2);
+                    $('#overbackgroud').hide();
+                }
+            },
+            error: function () {
+
+            }
+        });
+    }
+    function DeleteInbox() {
+        $('#overbackgroud').show();
+        var cat = $('#hidecate').val();
+        var yourArray = new Array();
+
+        $("input:checkbox[name=inbox]:checked").each(function () {
+            yourArray.push($(this).val());
+        });
+        if (yourArray.count < 0) {
+            alert('Vui lòng chọn thư cần xóa !');
+        } else {
+            $.ajax({
+                url: '@Url.Action("DeleteCateManu", "CategoryProduct")',
+                data: {
+                    'array': yourArray
+                },
+                dataType: "json",
+                type: "POST",
+                traditional: true,
+
+                success: function(data) {
+                    if (data == 0) {
+                        alert("Hệ thống đang cập nhật");
+                        $('#overbackgroud').hide();
+                    } else if (data == 2) {
+                        alert("Vui lòng tích chọn");
+                        $('#overbackgroud').hide();
+                    } else {
+                        loadtabl(cat);
+                        $('#overbackgroud').hide();
+                    }
+                },
+                error: function() {
+                    alert("Xin lỗi ! Hệ thống đang cập nhật vui long thực hiện lại sau.");
+                    $('#overbackgroud').hide();
+                }
+            });
+        }
+
+    }
+
+    $(document).ready(function() {
+        var id = $('#categoryproduct').val();
+        $.ajax({
+            url: '@Url.Action("GetListParent", "Member")',
+            data: {
+                'id': id                
+            },
+            dataType: 'json',
+            Type: 'POST',
+            traditional: true,
+            success: function(data) {
+                $.each(data, function (key, value) {
+                    var idd = "item-" + value;
+                    //   alert(idd);
+                    $("#" + idd + "").attr("checked", "checked");
+                });
+            },
+            error: function(data) {
+
+            }
+        });
+    });
+    function SetvaluProperty(idvale,idproperty) {
+      
+        if ($('#optionsRadiosInline' + idvale).is(":checked")) {
+     
+            
+            var str = $('#proprerty' + idproperty).val();
+            var vl = $('#optionsRadiosInline' + idvale).val();
+            vl = idvale + "#" + vl;
+            str = str + "|" + vl;
+            $('#proprerty' + idproperty).val(str);
+        }
+        else if ($('#optionsRadiosInline' + idvale).is(":not(:checked)")) {
+            var str1 = $('#proprerty' + idproperty).val();
+            //alert(str1);
+            var vl1 = "|" + $('#optionsRadiosInline' + idvale).val();
+            vl1 = idvale + "#" + vl1;
+            str1 = str1.replace(vl1, "");
+            $('#proprerty' + idproperty).val(str1);
+        }
+    }
+    function beginPaging(args) {
+        // Animatek
+        $('#grid-list').fadeOut('normal');
+    }
+
+    function successPaging() {
+        // Animate
+        $('#grid-list').fadeIn('normal');
+        $('a').tooltip();
+    }
+
+    function failurePaging() {
+        alert("Could not retrieve list.");
+    }
+
+</script>
+<style>
+    .tab-content {
+        margin-bottom: 23px;
+        margin-top: 12px;
+    }
+
+    .selectcate {
+        color: blue;
+    }
+
+   
+</style>
+<script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+<script>
+    tinymce.init({
+        menubar: false,
+        statusbar: false,
+        selector: '#summary',
+        height: 200,
+        plugins: [
+          'advlist autolink lists link image charmap print preview anchor',
+          'searchreplace visualblocks code fullscreen',
+          'insertdatetime media table contextmenu paste code'
+        ],
+        toolbar: 'alignleft aligncenter alignright alignjustify | bullist numlist outdent indent',
+        content_css: [
+          '//fast.fonts.net/cssapi/e6dc9b99-64fe-4292-ad98-6974f93cd2a2.css',
+          '//www.tinymce.com/css/codepen.min.css'
+        ]
+    });
+    tinymce.init({
+        selector: '#description',
+        height: 500,
+        plugins: [
+          'advlist autolink lists link image charmap print preview anchor',
+          'searchreplace visualblocks code fullscreen',
+          'insertdatetime media table contextmenu paste code'
+        ],
+        toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+        content_css: [
+          '//fast.fonts.net/cssapi/e6dc9b99-64fe-4292-ad98-6974f93cd2a2.css',
+          '//www.tinymce.com/css/codepen.min.css'
+        ]
+    });
+</script>

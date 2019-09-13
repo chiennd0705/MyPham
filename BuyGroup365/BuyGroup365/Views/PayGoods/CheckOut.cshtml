@@ -1,0 +1,332 @@
+﻿@using Business.ClassBusiness
+@using BuyGroup365.Models.Member
+@using BuyGroup365.Models.Common
+@using Common.util
+@model ShopCartItem
+@{
+    /**/
+
+    ViewBag.Title = "Thanh toán đơn hàng";
+    //Layout = null;
+
+    Layout = Request.Browser.IsMobileDevice ? "~/Views/Shared/_MobileLayoutProduct.cshtml"
+                   : "~/Views/Shared/_LayoutPayment.cshtml";
+    var totalMoneyOfGoods = ViewBag.TotalMoney;
+    var totalGramGoods = ViewBag.TotalGram;
+    var sp = Request.QueryString["sp"];
+
+    Double total = 0;
+    int tongsp = 0;
+}
+
+<script src="~/Content/Csspublic/js/cart.min.v201807251610.js"></script>
+<script src="~/Scripts/calculFeeForGoods/CountMoney.js"></script>
+
+<input type="hidden" name="distance" id="distanceRoad" readonly="readonly" value="1" />
+<input type="hidden" name="distance" id="locationshop" readonly="readonly" value="@ViewBag.ShopLocation" />
+<input type="hidden" name="ShopLocationId" id="ShopLocationId" readonly="readonly" value="@ViewBag.ShopLocationId" />
+<input type="hidden" name="shopid" id="shopid" value="@ViewBag.Shop" readonly="readonly" />
+<input type="hidden" name="totalgramshop" id="totalgramshop" value="@ViewBag.TotalGram" readonly="readonly" />
+<input type="hidden" name="Transportfee" id="Transportfee" value="@ViewBag.Transportfee" readonly="readonly" />
+<script src="http://maps.google.com/maps?file=api&v=2&key=ABQIAAAA7j_Q-rshuWkc8HyFI4V2HxQYPm-xtd00hTQOC0OXpAMO40FHAxT29dNBGfxqMPq5zwdeiDSHEPL89A" type="text/javascript"></script>
+<script language="javascript">
+    var geocoder, location1, location2;
+    function initialize() {
+        geocoder = new GClientGeocoder();
+    }
+</script>
+
+<input type="hidden" id="km" value="0">
+
+<script>
+
+    function Onbind() {
+        var vat = $('#km').val();
+        var tienvat = formatNumber(vat) + " đ";
+        $('#vatTransport').html("");
+        $('#vatTransport').append(tienvat);
+        var total = $("#totamoney").val();
+        var totalpay = parseFloat(vat) + parseFloat(total);
+
+        var tien = formatNumber(totalpay) + " đ";
+        $('#totalmoneypay').html("");
+        $('#totalmoneypay').append(tien);
+    }
+
+    function SetVat(type) {
+        //var text = "";
+        //if (type == '1') {
+        //    text = $("#Location option:selected").text();
+        //}
+        //else  if (type == '2') {
+        //    text =$("#receiverTown option:selected").text()+"-"+ $("#Location option:selected").text();
+        //} else {
+        //    text =$("#receiverPhuong option:selected").text()+"-"+ $("#receiverTown option:selected").text()+"-"+ $("#Location option:selected").text();
+        //}
+        var text = "";
+        if (type == '1') {
+            text = $("#Location option:selected").val();
+        }
+        else if (type == '2') {
+            text = $("#receiverTown option:selected").val();
+        } else {
+            text = $("#receiverPhuong option:selected").val();
+        }
+        var shopadress = $('#ShopLocationId').val();
+
+        var gram = $('#totalgramshop').val();// trong lượng của 1 đơn hàng
+
+        setTimeout("Onbind()", 1000);
+    }
+    function LoadChild(level) {
+        var int = parseInt(level);
+        var parent = 0;
+        if (int == 1) {
+            parent = $("#Location").val();
+            SetVat(1);
+
+            // alert(a);
+
+        } else {
+            parent = $("#receiverTown").val();
+            SetVat(2);
+        }
+
+        $.ajax({
+            url: '@Url.Action("GetLocationByParent","PayGoods")',
+            data: {
+                'parentId': parent
+            },
+            Type: 'POST',
+            dataType: 'json',
+            success: function (data) {
+
+                if (int == 1) {
+                    $('#receiverTown').html("");
+                    $('#receiverTown').append(data);
+                } else {
+                    $('#receiverPhuong').html("");
+                    $('#receiverPhuong').append(data);
+
+                }
+            },
+            error: function () {
+
+            }
+        });
+    }
+    function DeleteItem(id) {
+
+        $.ajax({
+            url: '@Url.Action("DeleteCart", "PayGoods")',
+            data: {
+                'id': id,
+                'tp': "1"
+            },
+            Type: 'POST',
+            dataType: 'json',
+            success: function (data) {
+
+                if (data == 1) {
+                    window.location.href = "/gio-hang";
+                } else {
+                    window.location.href = "/gio-hang";
+                }
+            },
+            error: function () {
+
+            }
+        });
+    }
+</script>
+
+<style>
+    .error {
+        color: red;
+    }
+
+    .valid {
+        color: green;
+    }
+</style>
+<script>
+
+    $(".title").click(function () {
+        $(this).hide();
+        $(".KMAll").css("display", "block");
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        var a = $('#totamoney').val();
+        a = a.replace(',', '');
+        var fee = $('#Transportfee').val();
+        var c = parseFloat(a) + parseFloat(fee);
+        var tien = formatNumber(c) + " đ";
+        $('#totalmoneypay').html("");
+        $('#totalmoneypay').append(tien);
+    });
+</script>
+
+<div class="wapper">
+    <div class="container cart-page">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="action-cart">
+                    <a href="/" class="product-diff">< Mua thêm sản phẩm khác</a>
+                    <p class="text">Giỏ hàng của bạn</p>
+                </div>
+                <div class="cart-info">
+                    @foreach (var item1 in Model.ListCartItems)
+                    {
+                        total += item1.Product.Price * item1.Quantity;
+                        var totalpro = item1.Product.Price * item1.Quantity;
+                        <div class="product-choose">
+                            <div class="img-cart">
+                                <a href="@Util.ReturnLinkFull(item1.Product.FriendlyUrl)"><img src="@Util.ReturnLinkCDN(item1.Product.ProductImages.FirstOrDefault().ImgSource,Request.Browser.IsMobileDevice)" alt="@item1.Product.ProductName"></a>
+                            </div>
+                            <div class="content-cart">
+                                <h4 class="title">@item1.Product.ProductName</h4>
+                                <label class="hand">
+                                    <img data-src="@Util.ReturnLinkCDN("/Images/img/Vector-Smart-Object-copy-8.png",Request.Browser.IsMobileDevice)" class="lazyload"> Chính hãng
+                                </label>
+                                <div class="r-price">
+                                    <div class="price">
+                                        <strong>@item1.Product.Price.ToString("N0")<span class="under">đ</span></strong>
+                                    </div>
+                                    <div class="number-product ">
+                                        <div class="input-group plus-minus-input ">
+                                            <div class="input-group-btn choosenumber">
+                                                <button class="btn btn-default" data-quantity="minus" data-field="quantity">
+                                                    <i class="fa fa-minus"></i>
+                                                </button>
+                                                <span class="giatru" style="display:none;">@item1.Product.Price</span>
+                                                <span class="tongtiencutru" style="display:none;">@totalpro</span>
+                                            </div>
+                                            <input class="form-control input-group-field" type="text" name="quantity" value="@item1.Quantity">
+                                            <div class="input-group-btn choosenumber">
+                                                <button class="btn btn-default" data-quantity="plus" data-field="quantity">
+                                                    <i class="fa fa-plus"></i>
+                                                </button>
+                                                <span class="giacong" style="display:none;">@item1.Product.Price</span>
+                                                <span class="tongtiencucong" style="display:none;">@totalpro</span>
+                                            </div>
+                                            <input id="ProductsQuantity_@item1.Product.Id" name="@item1.Quantity" type="hidden" value="@item1.Quantity">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    <div class="price-total">
+                        <table class="total-table table">
+                            <tr>
+                                <td>Tổng tiền</td>
+                                <td>
+                                    <span id="totalmoneypay">@total.ToString("N0") đ</span>
+                                    <input type="hidden" id="totamoney" value="@total" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="required">Cần thanh toán</td>
+                                <td class="final-price">
+                                    <span id="totalmoneypay1">@total.ToString("N0") đ</span>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="form-cart">
+                        <div class="col-md-12 center">
+                            <div class="sex">
+                                <ul class="sex-ul">
+                                    <li>
+                                        <input type="radio" name="input-sex" id="male" class="form-radio"> <label for="male">Nam</label>
+                                    </li>
+                                    <li>
+                                        <input type="radio" name="input-sex" id="female" class="form-radio"> <label for="female">Nữ</label>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-4 left">
+                            <div class="input-cart">
+                                <input type="text" id="FullName" name="FullName" placeholder="Họ và tên">
+                            </div>
+                        </div>
+                        <div class="col-md-4 right">
+                            <div class="input-cart">
+                                <input type="number" id="Mobile" name="Mobile" placeholder="Số điện thoại">
+                            </div>
+                        </div>
+                        <div class="col-md-4 right">
+                            <div class="input-cart">
+                                <input type="text" id="Email" name="Email" placeholder="Email">
+                            </div>
+                        </div>
+                        <div class="col-md-12 center">
+                            <div class="input-cart">
+                                <input type="text" id="NoteByCustomerShipping" name="NoteByCustomerShipping" placeholder="Yêu cầu khác(không bắt buộc)">
+                            </div>
+                        </div>
+                        <h6 class="address-title">
+                            Địa chỉ giao hàng
+                        </h6>
+                        <div class="box-address">
+                            <div class="col-md-6 left">
+                                <div class="input-cart">
+                                    @Html.DropDownList("Location", null, new { @width = "100%", @class = "input", @onchange = "LoadChild(1)" })
+                                </div>
+                            </div>
+                            <div class="col-md-6 right">
+                                <div class="input-cart">
+                                    <select id="receiverTown" class="input" name="receiverTown" onchange="LoadChild(2)">
+                                        <option value="-1">--Chọn--</option>
+                                    </select>
+                                    <label id="dis-error" class="texterror" style="display: none;"></label>
+                                </div>
+                            </div>
+                            <div class="col-md-12 center">
+                                <div class="input-cart">
+                                    <input type="text" id="DeliveryAddressName" name="DeliveryAddressName" placeholder="Số nhà, tên đường, phường / xã">
+                                </div>
+                            </div>
+                            @*<h6 class="detail-address">
+                Đia chỉ giao hàng
+            </h6>
+            <div class="col-md-6 left">
+                <div class="input-cart">
+                    <select name="" id="" class="form-select">
+                        <option value="">Hôm nay 05/03</option>
+                        <option value="">Hôm nay 06/03</option>
+                        <option value="">Hôm nay 07/03</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6 right">
+                <div class="input-cart">
+                    <select name="" id="" class="form-select">
+                        <option value="">Giao hàng trong 1 giờ</option>
+                        <option value="">Giao hàng trong 2 giờ</option>
+                        <option value="">Giao hàng trong 3 giờ</option>
+                    </select>
+                </div>
+            </div>*@
+                        </div>
+                        <div class="cart-btn">
+                            <button class="btn-send" onclick="Onpay()">thanh toán khi nhận hàng</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="required-allow">
+                    <p class="text">Bằng cách đặt hàng, bạn đồng ý với Điều khoản sử dụng của VINAPLAZA</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="list-page">
+                    @Html.Action("GetByCodeHtml", "Partial", new { Code = "LeftMenuCart" })
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

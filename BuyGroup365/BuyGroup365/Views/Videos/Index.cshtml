@@ -1,0 +1,110 @@
+﻿@model List<Common.Videos>
+@using Business.ClassBusiness;
+@using BuyGroup365.Models.Home
+@using Common
+@{
+    Layout = "~/Views/Shared/_LayoutProduct.cshtml";
+}
+
+<div class="row category-page-row">
+
+    <div class="col large-12">
+        <div class="breadcrumbs" style="margin-top:10px;">
+            <div class="container">
+                <nav class="woocommerce-breadcrumb breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <a href="/" title="" itemprop="url">Trang chủ</a><span class="divider"><i class="fa fa-angle-double-right"></i></span><a href="/videos/index">Video</a>
+                </nav>
+            </div>
+        </div>
+
+        <div class="shop-container">
+
+            <div class="woocommerce-notices-wrapper"></div>
+
+            <div class="products row row-small large-columns-4 medium-columns-3 small-columns-2 has-shadow row-box-shadow-1 row-box-shadow-2-hover" itemprop="hasOfferCatalog" itemscope="" itemtype="http://schema.org/OfferCatalog">
+
+                @foreach (var item in Model)
+                {
+                    <div class="product-small col has-hover post-1544 product type-product status-publish has-post-thumbnail product_cat-do-gia-dung product_cat-may-danh-giay product_cat-may-danh-giay-gia-dinh product_cat-may-danh-giay-quang-minh product_cat-may-danh-giay-van-phong first instock sale shipping-taxable purchasable product-type-simple" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/OfferCatalog">
+                        <div class="col-inner">
+
+                            <div class="product-small box ">
+                                <div class="box-image">
+                                    <div class="image-zoom">
+                                        @Html.Raw(item.VideoLink)
+                                    </div>
+                                    <div class="image-tools is-small top right show-on-hover"></div>
+                                    <div class="image-tools is-small hide-for-small bottom left show-on-hover"></div>
+                                    <div class="image-tools grid-tools text-center hide-for-small bottom hover-slide-in show-on-hover"></div>
+                                </div>
+                                <div class="box-text box-text-products">
+                                    <div class="title-wrapper">
+                                        <p class="name product-title" itemprop="name">
+                                            @item.VideoName
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <div class="toolbar-bottom">
+                <div class="toolbar">
+                    <div class="sorter" id="_Phantrang">
+
+                        <nav class="text-center">
+
+                            @if (ViewBag.TotalPage > 1)
+                            {
+                                var pageDisplay = (int)ViewBag.MaxPage;
+                                int totalPage = (int)ViewBag.TotalPage;
+                                int currentPage = ((int)ViewBag.Page);
+
+                                // Create numeric links
+                                var startPageIndex = Math.Max(1, currentPage - pageDisplay / 2);
+                                var endPageIndex = Math.Min(totalPage, currentPage + pageDisplay / 2);
+
+                                var link = "/videos/index";
+
+                                <ul class="page-numbers nav-pagination links text-center">
+                                    @if (currentPage > ViewBag.First)
+                                    {
+                                        <li><a href="@link?page=@ViewBag.First" title="Trang đầu" class="first"><i class="fa fa-angle-double-left"></i></a></li>
+                                        <li>
+                                            <a href="@link?page=@ViewBag.Prev" title="Trang trước" class="prev"><i class="fa fa-angle-left"></i></a>
+                                        </li>
+
+                                    }
+                                    @for (int i = startPageIndex; i <= endPageIndex; i++)
+                                    {
+                                        if (currentPage == i)
+                                        {
+
+                                            <li> <a href="@link?page=@i" class="page-number current" title="Trang @i">@i</a></li>
+                                        }
+                                        else
+                                        {
+                                            <li><a href="@link?page=@i" title="Trang @i" class="page-number">@i</a></li>
+                                        }
+                                    }
+                                    @if (currentPage < totalPage)
+                                    {
+                                        <li><a href="@link?page=@ViewBag.Next" class="next" title="Trang sau"><i class="fa fa-angle-right"></i></a></li>
+                                        <li> <a href="@link?page=@ViewBag.Last" class="last" title="Trang cuối"><i class="fa fa-angle-double-right"></i></a></li>
+                                    }
+                                </ul>
+
+                            }
+                            else
+                            {
+                                @*<span>Không có bản ghi nào</span>*@
+                            }
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

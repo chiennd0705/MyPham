@@ -1,0 +1,59 @@
+﻿@using BuyGroup365.Models.Member
+@using Common.util
+@{
+    var listCart = NlCheckout.GetSessionCard(Session);
+    var sl = 0;
+    if (listCart != null)
+    {
+        foreach (var cartItem in listCart)
+        {
+            sl += cartItem.Quantity;
+        }
+    }
+   
+}
+<div class="header-setting">
+    <div class="settting-switcher">
+        <div class="dropdown-toggle">
+            <p class="mt-cart-title"></p>
+            <div class="crat-icon">
+                @if (NlCheckout.GetSessionCard(Session) != null)
+                {
+                    
+                    <a href="/PayGoods/Payment"><span class="zero" id="numberProduct">@sl</span></a>
+                }
+                else
+                {
+                    <a href="/PayGoods/Payment"><span class="zero" id="numberProduct">0</span></a>
+                }
+              
+
+            </div>
+        </div>
+        <div class="dropdown-switcher">
+            <div class="top-links-alo">
+                <div class="header-top-link">
+                    <ul class="links" id="contentCart">
+                        @if (NlCheckout.GetSessionCard(Session) != null)
+                        {
+
+                            foreach (var cartItem in listCart)
+                            {
+                                <li><span><i class="fa fa-angle-double-right"></i><span> @cartItem.Product.ProductName</span> <strong>(@cartItem.Quantity)</strong></span></li>
+                            }
+                        }
+                        else
+                        {
+
+                         
+                            <li><span><i class="fa fa-angle-double-right"></i><span style="color:blue"> Giỏ hàng trống!</span></span></li>
+
+
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

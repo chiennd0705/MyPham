@@ -1,0 +1,175 @@
+﻿@using BuyGroup365.Areas.Manage.Models
+@using MvcPaging
+@model MvcPaging.IPagedList<Common.CatalogDownloads>
+@using Common
+@using Business.ClassBusiness;
+@{
+    ViewBag.Title = "Cập nhật Download";
+    Layout = "~/Areas/Manage/Views/Shared/_LayoutAdmincshtml.cshtml";
+}
+<script>
+    function BrowseServer() {
+        var finder = new CKFinder();
+        finder.BasePath = '/Content/css/ckfinder/';
+        finder.selectActionFunction = SetFileFiled;
+        // finder.SelectActionFunction = SetFileFiled;
+        //   finder.SelectFunction = SetFileFiled;
+        //   finder.SelectFunctionData = SetFileFiled;
+        finder.popup();
+    }
+    function SetFileFiled(FileUrl) {
+        document.getElementById('Icon').value = FileUrl;
+    }
+</script>
+<div class="container-fluid" ng-app="body">
+    @Html.Raw(AdminFunction.BindHeader("Downloads", " Thêm mới", "/Manage/Downloads/IndexCatalogDownloads", null, null))
+    <!-- /.row -->
+    <!-- /.row -->
+    <!-- /.row -->
+    <div class="row" ng-controller="Index">
+
+        <div class="col-lg-6">
+            @{
+                CatalogDownloads CatalogDownloads;
+                long id = 0;
+                if (Request.QueryString["id"] != null)
+                {
+                    id = long.Parse(Request.QueryString["id"].ToString());
+                    CatalogDownloads = new CatalogDownloadsBusiness().GetById(id);
+                }
+                else
+                {
+                    CatalogDownloads = new CatalogDownloads();
+                }
+
+            }
+            @using (Html.BeginForm("UpdateCatalogDownloads", "Downloads", FormMethod.Post, new { enctype = "multipart/form-data", id = "UpdateCatalogDownloads" }))
+            {
+                <input type="hidden" value="@CatalogDownloads.Id" id="Id" name="id" />
+
+                @*@Html.ValidationSummary(true)*@
+
+                <div class="form-group">
+                    <label>Tên Catalog:<span class="required">*</span></label><br />
+                    <input class="form-control" autocomplete="off" maxlength="200" data-val-required="Mời nhập tên catalog" id="CatalogDownloadName" name="CatalogDownloadName" type="text" value="@CatalogDownloads.CatalogDownloadName" />
+                </div>
+                <div class="form-group" style="display:none;">
+                    <label>File:<span class="required">*</span></label><br />
+
+                    <input id="Icon" name="Icon" type="text" class="input-block-level" value="@CatalogDownloads.Icon" />
+                    <input type="button" value="Browse Server" onclick="BrowseServer();" class="controls" />
+                </div>
+
+                <div class="form-group">
+                    <label>Mô tả</label><br />
+                    <textarea class="form-control" id="Description" name="Description" style="height:100px">@CatalogDownloads.Description</textarea>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary" name="btnSubmit" value="Thêm">Thêm</button>
+
+                    @if (Request.QueryString["id"] != null)
+                    {
+                        <button type="submit" class="btn btn-primary" name="btnSubmit" value="Cập nhật">Cập nhật</button>
+                    }
+                </div>
+            }
+
+            <script type="text/javascript">
+
+                var setVAL = CKEDITOR.replace('Description', { height: 300 });
+
+                setVAL.CKFinder.setupCKEditor(setVAL, '/Content/css/ckfinder/');
+            </script>
+        </div>
+        <div class="col-lg-6">
+            @using (Ajax.BeginForm("Index", "Downloads",
+            new AjaxOptions { UpdateTargetId = "grid-list", HttpMethod = "get", LoadingElementId = "loading", OnBegin = "beginPaging", OnSuccess = "successPaging", OnFailure = "failurePaging" },
+            new { id = "frm-search" }))
+            {
+                <div class="form-group input-group">
+                    <input type="text" value="@ViewData[" key"]" class="form-control" id="key" name="key" placeholder="Nhập từ khóa tìm kiếm">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="submit">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </span>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover table-striped" id="dataTables" aria-describedby="dataTables-example_info">
+                        <thead>
+                            <tr role="row">
+                                <th style="width:80px">
+                                    STT
+                                </th>
+                                <th>
+                                    Tiêu đề CatalogDownloads
+                                </th>
+
+                                <th style="width: 120px;">Chức Năng</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                int i = Model.ItemStart;
+                            }
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td style="text-align:center">
+                                        @(i)
+                                    </td>
+                                    <td>
+                                        @item.CatalogDownloadName
+                                    </td>
+
+                                    <td style="text-align: center">
+
+                                        <a href="/Manage/Downloads/UpdateCatalogDownloads/?id=@item.Id">
+                                            <img src="~/img/IconMain/edit.png" width="19" title="Sửa" />
+                                        </a>
+                                        <a href="/Manage/Downloads/DeleteCatalogDownloads/@item.Id" title="Xóa" onclick="return confirm('Bạn có chắc chắn?');">
+                                            <img src="~/img/IconMain/remove.png" width="19" title="Xóa" />
+                                        </a>
+                                    </td>
+                                </tr>
+                                i++;
+                            }
+                        </tbody>
+                    </table>
+                    <div class="">
+                        <div class="dataTables_info" id="dataTables-example_info" role="alert" aria-live="polite" aria-relevant="all">Hiển thị từ @Model.ItemStart đến @Model.ItemEnd của @Model.TotalItemCount bản ghi</div>
+                    </div>
+                    <div class="">
+                        <div class="dataTables_paginate " id="dataTables-example_paginate">
+
+                            @Html.Raw(Ajax.Pager(
+                            new Options
+                            {
+                            PageSize = Model.PageSize,
+                            TotalItemCount = Model.TotalItemCount,
+                            CurrentPage = Model.PageNumber,
+                            ItemTexts = new ItemTexts() { Next = "Next", Previous = "Previous", Page = "P" },
+                            ItemIcon = new ItemIcon() { First = "icon-backward", Previous = "icon-chevron-left", Next = "icon-chevron-right", Last = "icon-forward" },
+                            TooltipTitles = new TooltipTitles() { Next = "Next page", Previous = "Previous page", Page = "Page {0}." },
+                            Size = Size.normal,
+                            Alignment = Alignment.centered,
+                            IsShowControls = true,
+                            IsShowFirstLast = true,
+                            CssClass = ""
+                            },
+                            new AjaxOptions
+                            {
+                            UpdateTargetId = "grid-list",
+                            HttpMethod = "get",
+                            LoadingElementId = "loading",
+                            OnBegin = "beginPaging",
+                            OnSuccess = "successPaging",
+                            OnFailure = "failurePaging"
+                            }, new { controller = "IndexCatalogDownload", action = "Index", name = ViewBag.DownloadName}))
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>

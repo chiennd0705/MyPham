@@ -1,0 +1,211 @@
+﻿var cal = {
+    //thuoc tinh km chuyen hang cua cal
+    'kmRoadToTranspot': 0,
+    'totalMoneyHang': 0,
+    'gramHang': 0,
+    'feeTranspotGood': 0,
+    'selectionGramGood': 2,
+};
+function checkLocation (reciverAddress) {
+    if (reciverAddress == "Hà Nội") {
+        return "Nội thành HN";
+    }
+    return "Liên tỉnh";
+}
+function calFee (kmRoad, gramGoods, location) {
+
+    if (location == "Nội thành HN") {
+        if (gramGoods <= 5000) {
+            return 15000;
+        }
+        else if (gramGoods > 5000) {
+            return ((gramGoods - 5000) / 500) * 5 + 15;
+        }
+    }
+    else if (location == "Nội thành HCM") {
+        if (gramGoods < 2000) {
+            return 20000;
+        }
+        else if (gramGoods > 5000) {
+            return ((gramGoods - 5000) / 500) * 5 + 20;
+        }
+    }
+        //Tinh phi chuyen hang lien tinh
+    else {
+        if (gramGoods <= 250) {
+            if (kmRoad < 100) {
+                return 21780;
+            }
+            else if (kmRoad >= 100 && kmRoad < 300) {
+                return 24024;
+            }
+            else {
+                return 30360;
+            }
+        }
+        else if (gramGoods > 250 && gramGoods <= 500) {
+            if (kmRoad < 100) {
+                return 31548;
+            }
+            else if (kmRoad >= 100 && kmRoad < 300) {
+                return 33396;
+            }
+            else {
+                return 39468;
+            }
+        }
+        else if (gramGoods > 500 && gramGoods <= 1000) {
+            if (kmRoad < 100) {
+                return 43824;
+            }
+            else if (kmRoad >= 100 && kmRoad < 300) {
+                return 44880;
+            }
+            else {
+                return 57684;
+            }
+        }
+        else if (gramGoods > 1000 && gramGoods <= 1500) {
+            if (kmRoad < 100) {
+                return 52.800;
+            }
+            else if (kmRoad >= 100 && kmRoad < 300) {
+                return 55176;
+            }
+            else {
+                return 74448;
+            }
+        }
+        else if (gramGoods > 1500 && gramGoods <= 2000) {
+            if (kmRoad < 100) {
+                return 63888;
+            }
+            else if (kmRoad >= 100 && kmRoad < 300) {
+                return 68244;
+            }
+            else {
+                return 90420;
+            }
+        }
+        else if (gramGoods > 2000 && gramGoods <= 5000) {
+            return 0;
+        }
+        else  {
+            if (kmRoad < 100) {
+                return 63888 + ((gramGoods - 5000) / 500) * 4620;
+            }
+            else if (kmRoad >= 100 && kmRoad < 300) {
+                return 68244 + ((gramGoods - 5000) / 500) * 5676;
+            }
+            else {
+                return 90420 + ((gramGoods - 5000) / 500) * 11220;
+            }
+        }
+    }
+}
+
+function showLocation(loc1, loc2) {
+
+    geocoder.getLocations(loc1, function (response) {
+        if (!response || response.Status.code != 200) {
+            alert("Sorry, we were unable to geocode the first address");
+        }
+        else {
+            location1 = { lat: response.Placemark[0].Point.coordinates[1], lon: response.Placemark[0].Point.coordinates[0], address: response.Placemark[0].address };
+            geocoder.getLocations(loc2, function (response) {
+                if (!response || response.Status.code != 200) {
+                    alert("Sorry, we were unable to geocode the second address");
+                }
+                else {
+                    location2 = { lat: response.Placemark[0].Point.coordinates[1], lon: response.Placemark[0].Point.coordinates[0], address: response.Placemark[0].address };
+                    calculateDistance();
+
+                }
+            });
+        }
+    });
+}
+
+function calculateDistance() {
+    try {
+        var glatlng1 = new GLatLng(location1.lat, location1.lon);
+        var glatlng2 = new GLatLng(location2.lat, location2.lon);
+        var miledistance = glatlng1.distanceFrom(glatlng2, 3959).toFixed(1);
+        var kmdistance = (miledistance * 1.609344).toFixed(1);
+
+        var a = '<strong>Địa chỉ 1: </strong>' + location1.address + '<br /><strong>Địa chỉ 2: </strong>' + location2.address + '<br /><strong>Khoảng cánh: </strong>' + miledistance + ' miles (or ' + kmdistance + ' km)';
+     //   $('#results').append(a);
+        $('#distanceRoad').val(kmdistance);
+    }
+    catch (error) {
+        alert(error);
+    }
+}
+function formatNumber(num) {
+    return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+}
+function Onpay() {
+    $('#overbackgroud1').show();
+    var recieveOrder = [];
+    var buyerOrder = [];
+    var km = "0";
+    var shopid = "0";
+    var payFrom = "-1";
+    var note = $('#NoteByCustomerShipping').val();
+    if ($('#IsDeliveryAddress').val() == "1") {
+      //  recieveOrder.push($('#shopid').val());
+        recieveOrder.push($('#DeliveryFullName').val());
+        recieveOrder.push($('#DeliveryMobile').val());
+        recieveOrder.push($('#DeliveryEmail').val());
+        recieveOrder.push($('#receiverAddress').val());
+        var detailadress = $('#DeliveryAddressName').val() + "-" + $('#DeliveryAddressSolr').val() + "-" + $("#receiverPhuong option:selected").text() + "-" + $("#receiverTown option:selected").text();
+        recieveOrder.push(detailadress);
+ 
+    } else {
+        recieveOrder.push($('#DeliveryFullName').val());
+        recieveOrder.push($('#DeliveryMobile').val());
+        recieveOrder.push($('#DeliveryEmail').val());
+        recieveOrder.push($('#receiverAddress').val()); 
+        var detailadress1 = $('#DeliveryAddressName').val() + "-" + $('#DeliveryAddressSolr').val() + "-" + $("#receiverPhuong option:selected").text() + "-" + $("#receiverTown option:selected").text();
+        recieveOrder.push(detailadress1);
+        buyerOrder.push($('#FullName').val());
+        buyerOrder.push($('#Mobile').val());
+        buyerOrder.push($('#Email').val());
+        var adress = $('#AddressName').val() + "-" + $('#AddressSolr').val();
+        buyerOrder.push(adress);
+
+    }
+     
+
+    km = $("#distanceRoad").val();
+    shopid = $("#shopid").val();
+    payFrom = $("#form_payment_method").find(":checked").val();
+  
+    $.ajax({
+        url: '/PayGoods/PaymentCheckOut',
+        data: {
+            'recieveOrder': JSON.stringify(recieveOrder),
+            'buyerOrder': JSON.stringify(buyerOrder),
+            'km': km,
+            'note': note,
+            'shopid':shopid,
+            'payfrom':payFrom
+        },
+        Type: 'POST',
+        dataType: 'json', contentType: 'application/json; charset=utf-8',
+        success: function (data) {
+            $('#overbackgroud1').hide();
+            alert("Chúng tôi đã gửi đơn hàng vào email " + recieveOrder[2] + "");
+            if (data == 1) {
+                window.location.href = "/PayGoods/Payment";
+            } else {
+                window.location.href = "/";
+            }
+        },
+        error: function() {
+            alert('Lỗi bà cố rồi');
+        }
+        
+    });
+}
+//recieveOrder, List<string> buyerOrder, float km, string note, long shopid,long payfrom

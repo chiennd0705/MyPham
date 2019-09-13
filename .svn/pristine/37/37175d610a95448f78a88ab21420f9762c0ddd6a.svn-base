@@ -1,0 +1,708 @@
+﻿@using Business.ClassBusiness
+@using BuyGroup365.Models.Member
+@using Common.util
+@model  List<ShopCartItem>
+@{
+    ViewBag.Title = "Đơn hàng";
+    //Layout = null;
+    Layout = "~/Views/Shared/_LayoutPayment.cshtml";
+    var totalMoneyOfGoods = ViewBag.TotalMoney;
+    var totalGramGoods = ViewBag.TotalGram;
+    var sp = Request.QueryString["sp"];
+
+    Double total = 0;
+}
+
+<style>
+    .checkout {
+        border: 1px solid #ddd;
+        margin-bottom: 30px;
+    }
+
+    .box-product {
+        border-right: 1px solid #ddd;
+    }
+
+    .cart-item {
+        border-bottom: 1px solid #ddd;
+        margin-bottom: 30px;
+    }
+
+    .table-responsive {
+        margin-right: -15px;
+    }
+
+    .cart-padding {
+        padding-top: 24px !important;
+        font-size: 16px !important;
+    }
+</style>
+<div class="container">
+    <div class="row checkout-process">
+        <div class="col-main col-lg-12">
+
+            <div class="page-title title-buttons" id="titlecart">
+                <h1>Giỏ hàng của bạn</h1>
+
+
+            </div>
+        
+            <div class="" id="contentPaymentCart">
+                @if (Model.Count > 0)
+                {
+                    <form action="Payment" method="post" id="formPost">
+                        <div class="" id="scrollHere">
+                            <div>
+                                <div class="bground">
+                                    <div class="bg-white">
+                                        <div class="checkout">
+
+
+                                            <div style="background: #f7f7f7; border-bottom: 1px solid #ddd;padding: 10px; text-align:center;">
+                                                <div class="col-lg-7">
+                                                    <span>Sản phẩm</span>
+
+                                                </div>
+                                                <div class="col-lg-5"><span>Thông tin người bán</span></div>
+                                                <div style="clear:both"></div>
+                                            </div>
+                                            <div id="contenproductCart">
+
+
+
+                                                @foreach (var item in Model)
+                                                {
+                                                  
+                                                    <div class="cart-item">
+                                                        <div class="row row_cus" id="shop_@item.ShopCart.Id ">
+                                                            <div class="col-lg-7 box-product">
+
+                                                                <div class="table-responsive">
+                                                                    <table class="table">
+                                                                        <tbody>
+                                                                            @{ var totalashop = 0.0;}
+                                                                            @foreach (var item1 in item.ListCartItems)
+                                                                            {
+                                                                                total += item1.Product.Price * item1.Quantity;
+                                                                                 totalashop+= item1.Product.Price * item1.Quantity; ;
+                                                                                <tr id="orderItem">
+                                                                                    <td class="col1">
+                                                                                        <div class="row">
+
+                                                                                            <div class="col-sm-4">
+                                                                                                <span class="icon-bar" @*onclick="order.removeItemCart('835809352705', '503430698302');" *@></span>
+                                                                                                <img src="@FuntionMember.GetUrlImage(item1.Product.ProductImages.FirstOrDefault().ImgSource,"Small")" alt="@item1.Product.ProductName" width="100" />
+                                                                                            </div>
+
+                                                                                            <div class="col-sm-8">
+                                                                                                <div class="g-row">
+                                                                                                    <a class="g-title" target="_blank" href="/Home/ProductDetail/@item1.Product.Id" title="@item1.Product.ProductName">
+                                                                                                        @item1.Product.ProductName
+                                                                                                    </a>
+                                                                                                </div>
+                                                                                                <div class="g-row">
+                                                                                                    <strong>@item1.Quantity x </strong>
+                                                                                                </div>
+
+                                                                                                <div class="g-row">
+                                                                                                    <strong>Phí vận chuyển:</strong>
+                                                                                                    <span id="shipchung">Linh hoạt theo địa chỉ người mua (@(item1.Product.Weight * item1.Quantity)<sub>gram</sub>)</span>
+                                                                                                </div>
+                                                                                            </div>
+
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td class="col2">
+                                                                                        <div class="text-spell">
+                                                                                            <input type="number" min="1" class="txtQuantity" style="width: 80px" data-id="@item1.Product.Id" data-shop="@item.ShopCart.Id" value="@item1.Quantity" />
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td class="col3">
+                                                                                        <p class="special-price"><span class="price" itemprop="price">@item1.Product.Price.ToString("N0")<sup class="u-price">đ</sup></span></p>
+
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <a href="javarscript:void()" onclick="DeleteItem(@item1.Product.Id)"><i class="fa fa-trash-o"></i></a>
+
+                                                                                    </td>
+                                                                                </tr>
+
+                                                                            }
+                                                                            <tr>
+                                                                                <td class="cart-padding">Tổng cộng:</td>
+                                                                                <td class="cart-padding" style="font-weight:bold" colspan="3">
+                                                                                    <p class="special-price"><span class="price" itemprop="price" style="font-size: 16px;"> @totalashop.ToString("N0") <sup class="u-price">đ</sup></span></p>
+
+
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div><!-- table-responsive -->
+
+                                                            </div>
+                                                            <div class="col-lg-5">
+                                                                <div style="margin-right:30px">
+                                                                    <h6>Shop: <a>@item.ShopCart.ShopName</a></h6>
+
+                                                                    @if (!string.IsNullOrEmpty(item.ShopCart.Phone))
+                                                                    {
+                                                                        <h6>Điện thoại: @item.ShopCart.Phone</h6>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <h6>Điện thoại: Chưa xác định</h6>
+                                                                    }
+                                                                    @if (!string.IsNullOrEmpty(item.ShopCart.ShopSupport.Skype))
+                                                                    {
+                                                                        <h6>Skype: @item.ShopCart.ShopSupport.Skype</h6>
+                                                                    }
+                                                                    else
+                                                                    {
+
+                                                                        <h6>Skype: Chưa xác định</h6>
+                                                                    }
+                                                                    @{
+                                                    LocationsBusiness locationbussines = new LocationsBusiness();
+
+
+                                                                    }
+                                                                    <h6>Địa chỉ: @locationbussines.SearchAddress(item.ShopCart.LocationId)</h6>
+                                                                    @if ((int)ViewBag.TotalMoney <= 0)
+                                                                    {
+                                                                        <span><a class="btn btn-primary btn-sm" style="position: absolute;right: 30px;top: 20px;" onclick="SendFromPay(@item.ShopCart.Id)" href="/PayGoods/CheckOut?shopId=@item.ShopCart.Id">Thanh toán</a></span>
+                                                                    }
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+
+                                            </div>
+
+                                            <div class="col-sm-5">
+                                                <a class="btn btn-primary" href="/">Tiếp tục mua hàng</a>
+                                                <a class="btn btn-primary" id="btnUpdate" href="/">Cập nhật giỏ hàng</a>
+                                                <a class="btn btn-primary" id="btnDeleteCart" href="/" onclick="DeleteAllCart()">Xoá giỏ hàng</a>
+                                                @*<button id="btnUpdate" class="btn btn-primary">Cập nhật giỏ hàng</button>*@
+                                                @*<button id="btnAll" class="btn btn-primary">Xoá giỏ hàng</button>*@
+                                            </div>
+                                            <br /><br /><br /><br />
+                                            @if ((int)ViewBag.TotalMoney > 0)
+                                            {
+                                                <div class="row" style="margin:0 ">
+                                                    <div class="col-sm-6" id="inforBuyer">
+                                                        <div class="fieldset">
+                                                            <h2 class="legend">Thông tin người mua:</h2>
+                                                            @{var sesion = SessionUtility.GetSessionMember(Session);}
+                                                            @if (sesion != null)
+                                                            {
+                                                                <ul class="form-list">
+                                                                    <li class="">
+                                                                        <div class="customer-name-middlename">
+                                                                            <div class="field name-firstname">
+                                                                                <label for="firstname" class="required"><em>*</em>Họ và Tên</label>
+                                                                                <div class="input-box">
+                                                                                    <input id="buyerName" type="text" class="input-text required-entry" name="buyerName" value="@sesion.MemberProfile.LastName @sesion.MemberProfile.FirstName" tabindex="0" data-toggle="popover" data-container="body" data-placement="top" data-trigger="focus" title="Nhập tên người mua" data-content="Họ tên là bắt buộc, vui lòng nhập họ tên" required />
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="field name-lastname">
+                                                                                <label for="lastname" class="required"><em>*</em>Số điện thoại</label>
+                                                                                <div class="input-box">
+                                                                                    <input id="buyerPhone" type="text" class="input-text required-entry" name="buyerPhone" value="@sesion.MemberProfile.Phone" tabindex="0" data-toggle="popover" data-container="body" data-placement="top" data-trigger="focus" title="Nhập số điện thoại" data-content="Số điện thoại là bắt buộc" required />
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li>
+                                                                        <label for="email_address" class="required"><em>*</em>Hộp thư</label>
+                                                                        <div class="input-box">
+
+                                                                            <input id="buyerEmail" type="text" class="input-text validate-email required-entry" name="buyerEmail" value="@sesion.MemberProfile.Emaill" tabindex="0" data-toggle="popover" data-container="body" data-placement="top" data-trigger="focus" title="Nhập Email" data-content="Email là bắt buộc, giao dịch của bạn sẽ được thông báo qua Email" required />
+                                                                        </div>
+                                                                    </li>
+                                                                    <li>
+                                                                        <label for="email_address" class="required"><em>*</em>Địa chỉ</label>
+                                                                        <div class="input-box">
+                                                                            <input id="buyerAddress" type="text" class="input-text" name="buyerAddress" value="@sesion.MemberProfile.Address" tabindex="0" data-toggle="popover" data-container="body" data-placement="top" data-trigger="focus" title="Nhập địa chỉ" data-content="Địa chỉ là bắt buộc, vui lòng nhập địa chỉ" required />
+                                                                        </div>
+                                                                    </li>
+
+                                                                </ul>
+                                                            }
+                                                            else
+                                                            {
+                                                                <ul class="form-list">
+                                                                    <li class="">
+                                                                        <div class="customer-name-middlename">
+                                                                            <div class="field name-firstname">
+                                                                                <label for="firstname" class="required"><em>*</em>Họ và Tên</label>
+                                                                                <div class="input-box">
+                                                                                    <input id="buyerName" type="text" class="input-text required-entry" name="buyerName" value="" tabindex="0" data-toggle="popover" data-container="body" data-placement="top" data-trigger="focus" title="Nhập tên người mua" data-content="Họ tên là bắt buộc, vui lòng nhập họ tên" required />
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="field name-lastname">
+                                                                                <label for="lastname" class="required"><em>*</em>Số điện thoại</label>
+                                                                                <div class="input-box">
+                                                                                    <input id="buyerPhone" type="text" class="input-text required-entry" name="buyerPhone" value="" tabindex="0" data-toggle="popover" data-container="body" data-placement="top" data-trigger="focus" title="Nhập số điện thoại" data-content="Số điện thoại là bắt buộc" required />
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li>
+                                                                        <label for="email_address" class="required"><em>*</em>Hộp thư</label>
+                                                                        <div class="input-box">
+
+                                                                            <input id="buyerEmail" type="text" class="input-text validate-email required-entry" name="buyerEmail" value="" tabindex="0" data-toggle="popover" data-container="body" data-placement="top" data-trigger="focus" title="Nhập Email" data-content="Email là bắt buộc, giao dịch của bạn sẽ được thông báo qua Email" required />
+                                                                        </div>
+                                                                    </li>
+                                                                    <li>
+                                                                        <label for="email_address" class="required"><em>*</em>Địa chỉ</label>
+                                                                        <div class="input-box">
+                                                                            <input id="buyerAddress" type="text" class="input-text" name="buyerAddress" value="" tabindex="0" data-toggle="popover" data-container="body" data-placement="top" data-trigger="focus" title="Nhập địa chỉ" data-content="Địa chỉ là bắt buộc, vui lòng nhập địa chỉ" required />
+                                                                        </div>
+                                                                    </li>
+
+                                                                </ul>
+                                                            }
+
+                                                        </div>
+                                                    </div><!-- col-sm-6 -->
+                                                    <div class="col-sm-6" id="inforReciver">
+
+                                                        <div class="fieldset">
+                                                            <h2 class="legend">Thông tin người nhận:</h2>
+                                                            <ul class="form-list">
+                                                                <li class="">
+                                                                    <div class="customer-name-middlename">
+                                                                        <div class="field name-firstname">
+                                                                            <label for="firstname" class="required"><em>*</em>Họ và Tên</label>
+                                                                            <div class="input-box">
+                                                                                <input id="receiverName" type="text" class="input-text required-entry" name="receiverName" value="" tabindex="0" data-toggle="popover" data-container="body" data-placement="top" data-trigger="focus" title="Nhập tên người Nhận" data-content="Họ tên là bắt buộc, vui lòng nhập họ tên" required />
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="field name-lastname">
+                                                                            <label for="lastname" class="required"><em>*</em>Số điện thoại</label>
+                                                                            <div class="input-box">
+                                                                                <input id="receiverPhone" type="text" class="input-text required-entry" name="receiverPhone" value="" tabindex="0" data-toggle="popover" data-container="body" data-placement="top" data-trigger="focus" title="Số điện thoại" data-content="Số điện thoại là bắt buộc, để giao hàng được đúng người vui lòng nhập đúng số điện thoai" required />
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </li>
+                                                                <li>
+                                                                    <label for="email_address" class="required"><em>*</em>Hộp thư</label>
+                                                                    <div class="input-box">
+
+                                                                        <input id="receiverEmail" type="text" class="input-text required-entry" name="receiverEmail" value="" tabindex="0" data-toggle="popover" data-container="body" data-placement="top" data-trigger="focus" title="Nhập Email" data-content="Email người nhận là không bắt buộc, nếu người nhận có Email vui lòng nhập." required />
+                                                                    </div>
+                                                                </li>
+                                                                @*<li>
+                                                                        <label for="email_address" class="required"><em>*</em>Địa chỉ</label>
+                                                                        <div class="input-box">
+                                                                            <input id="receiverAddress" type="text" class="input-text required-entry" name="receiverAddress" value="" tabindex="0" data-toggle="popover" data-container="body" data-placement="bottom" data-trigger="focus" title="Nhập địa chỉ người nhận" data-content="Địa chỉ là bắt buộc, vui lòng nhập đúng địa chỉ người nhận để hàng có thể đến đúng nơi bạn yêu cầu" required />
+                                                                        </div>
+                                                                    </li>*@
+                                                                <li>
+                                                                    <label for="email_address" class="required"><em>*</em>Tĩnh thành</label>
+                                                                    <div class="input-box">
+                                                                        @Html.DropDownList("Location", null, new { @width = "100%", @onchange = "LoadChild(1)" })
+                                                                        <input type="hidden" id="receiverAddress" />
+                                                                    </div>
+                                                                </li>
+                                                                <li>
+                                                                    <label for="email_address" class="required"><em>*</em>Quận huyện</label>
+                                                                    <div class="input-box">
+                                                                        <select style="width: 100%" id="receiverTown" name="receiverTown" onchange="LoadChild(2)">
+                                                                            <option value="-1">--Chọn--</option>
+                                                                        </select>
+
+                                                                    </div>
+                                                                </li>
+                                                                <li>
+                                                                    <label for="email_address" class="required"><em>*</em>Phường xã</label>
+                                                                    <div class="input-box">
+                                                                        <select style="width: 100%" id="receiverPhuong" name="receiverPhuong">
+                                                                            <option value="-1">--Chọn--</option>
+                                                                        </select>
+
+                                                                    </div>
+                                                                </li>
+                                                                <input id="shopid" type="hidden" value="@sp" />
+                                                            </ul>
+                                                        </div>
+
+                                                    </div><!-- col-sm-6 -->
+                                                </div><!-- row -->
+                                                <div class="form form-inline form-rdtrans panel panel-default">
+
+                                                    <table class="table">
+                                                        <thead>
+                                                            <tr class="well well-sm">
+                                                                <th class="col1">
+                                                                    <i class="fa fa-truck"></i>  Chọn hình thức vận chuyển:
+                                                                </th>
+
+                                                            </tr>
+                                                        </thead>
+                                                    </table>
+                                                    <br />
+
+                                                    <div class="col-lg-8">
+                                                        <div class="form-group">
+                                                            <b>Chọn hình thức vận chuyển:</b>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <select class="form-control" id="formTranspot">
+                                                                <option value="2">--Chọn hình thức vận chuyển--</option>
+                                                                <option value="@totalGramGoods">Mặc định của hệ thống</option>
+                                                                <option value="1">Thương lượng với người bán</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <p id="courierMoney"></p>
+                                                    </div>
+                                                    <p></p>
+                                                    <br />
+                                                </div><!-- form-trans -->
+                                                <div class="table-trans panel panel-default">
+                                                    <table class="table">
+                                                        <thead class="well well-sm">
+                                                            <tr>
+                                                                <th>
+                                                                    <b><i class="fa fa-cc-paypal fa-3"></i> Chọn hình thức thanh toán:</b>
+                                                                    <span class="text-danger">(Miễn phí)</span>
+                                                                    <span class="text-danger pull-right"></span>
+                                                                </th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>
+                                                                    <div class="row">
+                                                                        <div class="col-md-6 r-padding-right">
+                                                                            <br />
+                                                                            <ul class="ul-trans">
+                                                                                <li class="form-group" id="formPays">
+                                                                                    <h4>Chọn hình thức thanh toán</h4>
+                                                                                    @*<select class="form-control" id="formPay">
+                                                                                            <option value="0">--Chọn hình thức Thanh toán--</option>
+                                                                                            <option value="1">Thanh toán qua Ngân lượng</option>
+                                                                                            <option value="2">Thanh toán qua thẻ nội địa</option>
+                                                                                            <option value="3">Tự thương lượng giá cả</option>
+                                                                                        </select>*@
+
+                                                                                    <input type="radio" name="formPay" value="0"> Thanh toán qua ngân lượng<br />
+                                                                                    <input type="radio" name="formPay" value="1"> Thanh toán qua bảo kim<br />
+                                                                                    <input type="radio" name="formPay" value="2"> Người mua và bán tự thương lượng giá cả
+
+                                                                                </li>
+                                                                            </ul>
+
+                                                                        </div><!-- col-md-7 -->
+                                                                        <div class="col-md-6 trans-left-border ">
+                                                                            <div class="form form-horizontal form-totalcheckout">
+                                                                                <div class="form-group">
+                                                                                    <label class="col-sm-6 control-label"><b>Tổng tiền hàng:</b></label>
+                                                                                    <div class="col-sm-3 tt2">
+                                                                                        <p class="form-control-static text-right" id="totalPrice"><b>@totalMoneyOfGoods.ToString("N0")<sup class="price">đ</sup></b></p>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label class="col-sm-6 control-label" style="display: none"><b>Tiền vận chuyển:</b></label>
+                                                                                    <div class="col-sm-3 tt2" style="display: none">
+                                                                                        <p class="form-control-static text-right" id="totalPrice"><b><sup class="price">đ</sup></b></p><input type="hidden" id="tMoney" value="@(totalMoneyOfGoods)" />
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="form-group" id="couponShow">
+                                                                                    <label class="col-sm-6 control-label">Coupon giảm giá (nếu có):</label>
+                                                                                    <div class="col-sm-3 tt2">
+                                                                                        <input name="couponId" type="text" class="form-control" placeholder="Nhập mã">
+                                                                                    </div>
+                                                                                    <div class="col-sm-3">
+                                                                                        <button class="btn btn-primary btn-coupon">Sử dụng</button>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <!--chính sách phí cod-->
+                                                                                <div class="form-group" style="display: none">
+                                                                                    <label class="col-sm-6 control-label">Phí COD: </label>
+                                                                                    <div class="col-sm-3 tt2">
+                                                                                        <p class="form-control-static text-right" id="policycod">0 đ</p>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label class="col-sm-6 control-label"><b>TỔNG PHẢI THANH TOÁN:</b></label>
+                                                                                    <div class="col-sm-3 tt2">
+                                                                                        <p class="form-control-static text-right f15" id="finalPrice"><b id="totalMP">0,000<sup class="price">đ</sup><b></b></b></p>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <div class="col-sm-12">
+                                                                                        <textarea name="note" rows="4" id="note" class="form-control" placeholder="Ghi chú"></textarea>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <input name="calculateShipment" type="hidden" class="form-control" value="0">
+                                                                                    <input name="shipmentType" type="hidden" class="form-control" value="false">
+                                                                                    <input name="vimoType" type="hidden" class="form-control" value="false">
+                                                                                    <div class="col-sm-9">
+                                                                                        <input type="checkbox" name="lincense" id="checkLincense" checked>Tôi đồng ý với <a target="_blank" href="#">điều khoản sử dụng và giao dịch </a>của sàn
+                                                                                    </div>
+                                                                                    <div class="col-sm-3 text-right">
+                                                                                        <button type="button" id="btnConfirm" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal">Xác nhận</button>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div><!-- form -->
+
+                                                                        </div><!-- col-md-5 -->
+                                                                    </div><!-- row -->
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div><!-- table-trans -->
+                                            }
+                                        </div><!-- checkout -->
+                                    </div><!-- bg-white -->
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <input type="hidden" name="distance" id="distanceRoad" readonly="readonly" value="1" />
+        <!-- Modal -->
+                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">Thông tin Đơn hàng đã mua</h4>
+                                </div>
+                                <div class="modal-body" id="addhtml">
+                                    <h3>Hệ thống đang tính...</h3>
+                                </div>
+                                <div class="modal-footer" id="addBtnPayGoods">
+                                    @*<button type="button" class="btn btn-default" data-dismiss="modal" id="payNganLuong">Thanh toán</button>*@
+                                    @*<button type="button" class="btn btn-primary">Save changes</button>*@
+                                    @*<a target="_blank" data-dismiss="modal" href="https://www.nganluong.vn/button_payment.php?receiver=(Email chính tài khoản nhận tiền)&product_name=(Mã đơn đặt hàng)&price=(Tổng giá trị)&return_url=(URL thanh toán thành công)&comments=(Ghi chú về đơn hàng)"><img src="https://www.nganluong.vn/data/images/buttons/11.gif" border="0" /></a>*@
+                                    <h4>Đang xử lý thanh toán...</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                }
+                else
+                {
+                    <style>
+                        .cart-error .icon-cart {
+                            border-radius: 50%;
+                            margin-left: auto;
+                            margin-right: auto;
+                            margin-bottom: 10px;
+                            background-image: url(/Content/Csspublic/images/cart-empty.png);
+                            background-repeat: no-repeat;
+                            display: block;
+                            width: 70px;
+                            height: 70px;
+                        }
+
+                        .cart-body {
+                            text-align: center;
+                            margin: 50px 0;
+                        }
+
+                        .cart-error h2 {
+                            font-size: 18px;
+                            font-family: sans-serif;
+                            margin-top: 0;
+                            margin-bottom: 3px;
+                        }
+
+                        .cart-error p {
+                            margin-bottom: 30px;
+                        }
+
+                        .cart-error img {
+                            vertical-align: middle;
+                        }
+                    </style>
+                    <div class="cart-body">
+                        <div class="cart-error">
+                            <i class="icon-cart"></i>
+                            <h2>Giỏ hàng của bạn hiện đang trống</h2>
+                            <p>Hãy nhanh tay sở hữu những sản phẩm yêu thích của bạn</p>
+                            <a class="btn btn-primary" href="/">Tiếp tục mua hàng &nbsp; <img src="/Content/Csspublic/images/nav-right.png" alt=""></a>
+                        </div>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<style>
+    .breadcrumb {
+        background-color: initial !important;
+    }
+</style>
+
+
+<script src="~/Scripts/controllerJS/paymentController.js"></script>
+<script src="/Scripts/calculFeeForGoods/calculFeeForGoods.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+<script>
+
+    function LoadChild(level) {
+        var int = parseInt(level);
+        var parent = 0;
+        if (int == 1) {
+            parent = $("#Location").val();
+            var text = $("#Location option:selected").text();
+            $('#receiverAddress').html("");
+            $('#receiverAddress').val(text);
+        } else {
+            parent = $("#receiverTown").val();
+        }
+
+        $.ajax({
+            url: '@Url.Action("GetLocationByParent","PayGoods")',
+            data: {
+                'parentId': parent
+            },
+            Type: 'POST',
+            dataType: 'json',
+            success: function (data) {
+
+                if (int == 1) {
+                    $('#receiverTown').html("");
+                    $('#receiverTown').append(data);
+                } else {
+                    $('#receiverPhuong').html("");
+                    $('#receiverPhuong').append(data);
+
+                }
+            },
+            error: function () {
+
+            }
+        });
+    }
+   
+    function DeleteItem(id) {
+        alert(id);
+        $.ajax({
+            url: '@Url.Action("DeleteCart", "PayGoods")',
+            data: {
+                ' id ': id,
+                'tp': 1
+            },
+            Type: 'POST',
+            dataType: 'json',
+            success: function (data) {
+                alert(data);
+                if (data == 1) {
+                    window.location.href = "/PayGoods/Payment";
+                } else {
+                    window.location.href = "/";
+                }
+            },
+            error: function () {
+
+            }
+        });
+    }
+    function DeleteAllCart() {
+        $.ajax({            
+            url: '@Url.Action("DeleteCart", "PayGoods")',
+            data:
+            {
+                'id': 0,
+                'tp':2
+            },
+            Type: 'POST',
+            dataType: 'json',
+            success: function(data) {
+                $('#contentPaymentCart').empty();
+                $('#titlecart').html("");
+                $('#titlecart').append('<h1>Chưa có sản phẩm trong giỏ hàng</h1>');
+                updatecart(id);
+            },
+            error: function() {
+                alert('Không thể xóa giỏ hàng');
+            }
+        });
+    }
+    
+    function updatecart(id) {
+        //  alert(id);
+        var sl = $('#qty').val();
+
+        //    alert(sl);
+        $.ajax({
+            url: '@Url.Action("ViewCart", "Ajax")',
+            data: {
+                'id': id,
+                'sl': sl
+            },
+            dataType: 'json',
+            Type: 'POST',
+            success: function (data) {
+                //  var count = $.map(data, function(n, i) { return i; }).length;
+                var html = "";
+                var total = 0;
+                var sl1 = 0;
+                $.each(data, function (key, value) {
+                    //alert(value.FriendlyUrl);
+                    var strurl = "/" + value.FriendlyUrl + "-ct" + value.Id;
+                    //   var url =string.Format("/{0}-ct{1}", url, id);
+                    //        html += "  <li><i class=\"fa fa-angle-double-right\"></i><span> " + value.ProductName + "</span> <strong>(" + value.Quantity + ")</strong></li>";
+                    sl1 += parseInt(value.Quantity); //    alert( key + ": " + value );
+                    total += parseInt(value.Quantity) * parseFloat(value.Price);
+                    var thanhtien = parseInt(value.Quantity) * parseFloat(value.Price);
+                    html += " <li class=\"item clearfix odd\" id=\"cartItem_" + value.Id + "\">" + "<div class=\"cart-content-top\">" + "<a href=\"" + strurl + "\" title=\"" + value.ProductName + "\" target=\"_blank\" class=\"product-image\">" +
+                        "<img src=\"" + value.AvatarUrl + "\" width=\"60\" height=\"77\" alt=\"" + value.ProductName + "\">   </a>" +
+                        "<div class=\"product-details\">" +
+                        "<p class=\"product-name\"><a target=\"_blank\" href=\"" + strurl + "\">" + value.ProductName + "</a></p>" +
+                        "<strong>" + formatNumber(value.Quantity) + "</strong> x <span class=\"price\"> " + formatNumber(value.Price) + " <sup class=\"u-price\">đ</sup></span>  </div></div>" +
+                        "<div class=\"cart-content-bottom\">" +
+                        "<div class=\"clearfix\">" +
+                        "<a href=\"#\" title=\"Edit item\" class=\"btn-edit\"><i class=\"fa fa-pencil-square-o\"></i></a>" +
+                        "<a href=\"#\" title=\"Remove\" onclick=\"DeleteItemCart(" + value.Id + ")\" class=\"btn-remove btn-remove2\"><i class=\"icon-close icons\"></i></a></div></div></li>";
+
+                
+                });
+
+                var htmcontent = " <div class=\"block-content\">" +
+                    "<p class=\"block-subtitle\">Giỏ hàng của bạn</p>" +
+                    "<ol id=\"cart-sidebar\" class=\"mini-products-list clearfix\">" + html +
+                    "</ol>" +
+                    "<p class=\"subtotal\">" +
+                    "<span class=\"label\">Tổng :</span> <span class=\"price\" id=\"totalPice\">" + formatNumber(total) + "<sup class=\"u-price\">đ</sup></span>" +
+                    +"</p>" +
+                    "<div class=\"actions\">" +
+                    "<a href=\"/PayGoods/Payment\" class=\"view-cart\">View cart </a><a href=\"/PayGoods/Payment\" class=\"checkout\">Checkout   </a>  </div></div>";
+                $('#numberProduct').html("");
+                $('#numberProduct').append(" <span class=\"zero\">" + sl1 + " </span>");
+                $('.mini-contentCart').html("");
+                $('.mini-contentCart').append(htmcontent);
+                //alert("Đã thêm " + sl + " sản phẩm vào giỏ hàng!");
+
+            },
+            error: function () {
+
+            }
+        });
+    }
+    function formatNumber(num) {
+        return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+    }
+</script>
+
+
+  

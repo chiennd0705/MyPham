@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="Default Description">
+    <meta name="keywords" content="Magento, Varien, E-commerce">
+    <meta name="robots" content="NOINDEX,NOFOLLOW">
+    <link rel="SHORTCUT ICON" href="/Content/Csspublic/images/favicon.ico" />
+
+    @Styles.Render("~/bundles/headercss")
+
+    @Scripts.Render("~/bundles/jqueryheader")
+    <script src='http://code.jquery.com/jquery-2.1.3.js'></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,500%7CRoboto:regular,regular%7CRoboto:regular,regular%7CDancing+Script" media="all">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" type="text/css" href="/Content/Csspublic/css/ajaxcart.css" media="all">
+</head>
+
+<body class="home page-template-default page page-id-2 woocommerce-js lightbox lazy-icons" style="user-select: auto;">
+
+    @Html.Action("GetByCodeHtml", "Partial", new { Code = "FooterHotline" })
+    <div id="wrapper">
+        @Html.Partial("_PartialHeader")
+        <main id="main" class="">
+            <div id="content" class="content-area page-wrapper" role="main">
+                <div class="row row-large ">
+                    <div class="large-12 col">
+                        @RenderBody()
+                    </div>
+                </div>
+            </div>
+        </main>
+        @Html.Partial("_PartialFooter")
+    </div>
+    @Html.Action("MenuTopMobile", "Partial")
+
+    @Scripts.Render("~/bundles/jqueryfooter")
+    <script src="chrome-extension://lmnganadkecefnhncokdlaohlkneihio/enable.js"></script>
+</body>
+</html>

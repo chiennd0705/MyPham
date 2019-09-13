@@ -1,0 +1,257 @@
+#myCart {
+  background-color: rgba(0, 0, 0, 0.31);
+  z-index: 99999;
+  font-family: 'Roboto', sans-serif; }
+
+#myCart .modal-dialog {
+  margin: 50px auto; }
+
+#myCart .modal-header {
+  padding: 20px 0px;
+  text-align: center;
+  position: relative;
+  background: #28303e;
+  border-bottom: none;
+  padding-bottom: 0;
+  height: 70px; }
+
+#myCart .modal-header a {
+  position: absolute;
+  top: 17px;
+  padding: 7px 6px;
+  right: 7px;
+  line-height: 0px;
+  text-align: center;
+  border-radius: 50%; }
+
+#myCart .modal-title {
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 13px; }
+
+#myCart .modal-body {
+  padding: 0 15px;
+  max-height: 375px;
+  overflow: auto;
+  width: 100%; }
+
+#myCart .modal-body th {
+  font-size: 15px;
+  color: #1C1C1C;
+  font-weight: 600;
+  text-align: left; }
+
+#cart-table tr td:first-child, #cart-table tr th:first-child {
+  padding-left: 0px; }
+
+#cart-table th {
+  padding-bottom: 7px;
+  padding-top: 7px; }
+
+#cart-table .original {
+  display: none; }
+
+#cart-table tr.line-item:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.1); }
+
+#cart-table tr.line-item:nth-child(odd) {
+  background-color: #f8f8f8; }
+
+#cart-table .item-image, #cart-table .item-quantity1, #cart-table .item-delete {
+  padding-top: 5px;
+  padding-bottom: 5px; }
+
+#cart-table td.item-image {
+  width: 170px;
+  text-align: center; }
+
+#cart-table tr td {
+  border-top: 0; }
+
+#cart-table .item-title {
+  width: 35%;
+  color: #3399cc;
+  font-size: 14px;
+  max-width: 200px !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 10px; }
+
+#cart-table .item-quantity input {
+  width: 64px;
+  text-align: center;
+  height: 23px;
+  font-size: 14px;
+  color: #808080;
+  border: 1px solid #ccc;
+  outline: none; }
+
+#cart-table .item-price {
+  font-size: 14px; }
+
+#cart-table .item-delete {
+  position: relative;
+  width: 40px; }
+
+#myCart .modal-footer {
+  border-top: 1px solid #DDD; }
+
+#myCart .modal-footer .modal-note textarea {
+  outline: none;
+  border: 1px #D8D8D8 solid;
+  padding-left: 10px;
+  height: 70px;
+  padding-top: 5px;
+  width: 100%; }
+
+#myCart .modal-footer .total-price-modal {
+  text-align: right;
+  font-size: 20px;
+  margin-top: 20px;
+  color: #333;
+  font-size: 15px; }
+
+#myCart .modal-footer .total-price-modal span {
+  font-size: 20px;
+  color: #303030;
+  vertical-align: middle; }
+
+#myCart .modal-footer .comeback {
+  text-align: left;
+  margin-top: 10px;
+  background: #17469e;
+  display: inline-block;
+  float: left;
+  padding: 11px 20px;
+  border-radius: 3px; }
+
+#myCart .modal-footer .comeback a {
+  color: #28303e;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 22px; }
+
+#myCart .modal-footer .comeback img {
+  margin-right: 5px;
+  float: left; }
+
+#myCart .modal-footer .button-default {
+  background: #28303e;
+  border: none;
+  padding: 0 20px;
+  color: #fff;
+  font-size: 16px;
+  border-radius: 3px;
+  float: right;
+  height: 45px;
+  line-height: 45px;
+  position: relative;
+  cursor: pointer;
+  margin: 7px; }
+
+#myCart .modal-footer #checkout {
+  float: right;
+  margin-left: 15px; }
+
+span.item-delete.text-center a {
+  color: #1791d0;
+  font-size: 13px; }
+
+span.item-delete.text-center a i.fa {
+  color: #b9b8b8;
+  font-size: 20px;
+  font-weight: 100; }
+
+td.item-title > a {
+  color: #333;
+  font-size: 14px;
+  line-height: 18px; }
+
+td.item-price1 {
+  color: #333; }
+
+#myCart .modal-body th {
+  font-size: 12px;
+  font-weight: 300;
+  text-transform: uppercase;
+  background: #f6f6f6; }
+
+#cart-table tr.line-item:nth-child(odd) {
+  background-color: #fff; }
+
+#myCart .modal-header {
+  background: #fff; }
+
+#myCart .modal-title {
+  color: #333;
+  font-size: 24px;
+  font-weight: 300;
+  text-transform: none;
+  text-align: left;
+  padding-left: 15px; }
+
+#cart-table tr th:first-child {
+  padding-left: 10px; }
+
+#cart-table .line-item {
+  padding-left: 0px;
+  border-bottom: 1px dashed; }
+
+#myCart .modal-footer .button-default {
+  background: #17479e; }
+
+#myCart .modal-footer .button-default:before {
+  border-left: 0; }
+
+#myCart .modal-footer .total-price-modal span {
+  font-size: 16px;
+  color: #ec1d24;
+  font-weight: 400; }
+
+#myCart .modal-footer {
+  background: #f6f6f6; }
+
+#myCart .modal-body::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #d8d8d8; }
+
+#myCart .modal-body::-webkit-scrollbar {
+  width: 5px;
+  background-color: #d8d8d8; }
+
+#myCart .modal-body::-webkit-scrollbar-thumb {
+  background-color: #9e1719; }
+
+#myCart .modal-body {
+  max-height: 335px; }
+
+#myCart .modal-footer .comeback a {
+  color: #fff;
+  font-size: 15px;
+  font-weight: normal; }
+
+.modal-header .close {
+  margin-top: -2px;
+  display: inline-block;
+  width: 27px;
+  height: 27px;
+  position: relative;
+  top: -65px;
+  left: 14px;
+  background: #fff;
+  opacity: .9;
+  border-radius: 50%; }
+
+form#cartform th, form#cartform td {
+  border: 0; }
+
+#cart-table .item-delete a {
+  color: #3399cc; }
+
+#cart-table .item-delete a .fa {
+  color: #999; }
+
+@media (max-width: 480px) {
+  .modal-header .close {
+    top: -100px;
+    left: 8px; } }

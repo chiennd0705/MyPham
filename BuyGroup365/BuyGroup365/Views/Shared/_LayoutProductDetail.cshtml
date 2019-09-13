@@ -1,0 +1,173 @@
+﻿@using System.Web.Optimization
+@using BuyGroup365.Models.Common;
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>@Html.Raw(@ViewBag.Title)</title>
+    <meta property="og:locale" content="vi_VN">
+    <meta name="description" content="@Html.Raw(@ViewBag.Description)">
+    <meta name="keywords" content="@Html.Raw(@ViewBag.Keywords)">
+    <meta property="og:title" content="@Html.Raw(@ViewBag.ShareTitle)" />
+    <meta property="og:description" content="@Html.Raw(@ViewBag.ShareDescription)" />
+    <meta property="og:keyword" content="@Html.Raw(@ViewBag.ShareKeyword)" />
+    <meta property="og:url" content="@Util.ReturnLinkFull(@Request.RawUrl)" />
+    <meta property="og:site_name" content="vinaplaza.vn" />
+    <meta property="og:image" content="@Util.ReturnLinkCDN(@ViewBag.image,Request.Browser.IsMobileDevice)" />
+    <meta property="og:image:secure_url" content="@Util.ReturnLinkCDN(@ViewBag.image,Request.Browser.IsMobileDevice)" />
+    <meta property="og:image:alt" content="@Html.Raw(@ViewBag.Title)" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:description" content="@Html.Raw(@ViewBag.ShareDescription)" />
+    <meta name="twitter:title" content="@Html.Raw(@ViewBag.ShareTitle)" />
+    <meta name="twitter:image" content="@Util.ReturnLinkCDN(@ViewBag.image,Request.Browser.IsMobileDevice)" />
+    <meta name="author" content="@ViewBag.author" />
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+    <link rel="canonical" href="@Util.ReturnLinkFull(@Request.RawUrl)" />
+    <link rel="dns-prefetch" href="https://cdn.vinaplaza.vn/">
+    <link rel="dns-prefetch" href="https://ajax.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+
+    @Scripts.RenderFormat(SiteKeys.ScriptNoDeferVersion, "~/bundles/jqueryui")
+    @Styles.RenderFormat(SiteKeys.StyleVersion, "~/bundles/ProductDetailCss")
+    @Scripts.RenderFormat(SiteKeys.ScriptVersion, "~/bundles/ProductDetailjs")
+</head>
+<body>
+    @Html.Partial("_PartialHeader")
+
+    <!--menu-->
+
+    @RenderBody()
+
+    @Html.Partial("_PartialFooter")
+    @Html.Action("GetByCodeHtml", "Partial", new { Code = "F_Home_Fix" })
+
+    <!-- Nếu có class active thì sẽ hiện lên ở customer buy, ko thì sẽ ko hiện lên. Mỗi lần có khách mua chỉ cần thêm class active -->
+    <div style="display: block;" class="fade-in fade-out customized" id="someone-purchased">
+        <div style="display: block;">
+
+            <a href="/">
+                <img src="https://cdn.vinaplaza.vn/Images/img/custom-buy.png" alt="order">
+                <p>Khách hàng <span class="people">Anh Dũng</span> số điện thoại: <span class="phone-order">092342xxx</span><br><font>tại <span class="country">Hà Nội</span> vừa đặt hàng cách đây <span class="timeAgo">10 giây trước</span></font></p>
+            </a>
+
+        </div>
+        <div style="display: none;">
+            <a href="/">
+                <img src="https://cdn.vinaplaza.vn/Images/img/custom-buy.png" alt="order">
+                <p>Khách hàng <span class="people">Anh Dũng</span> số điện thoại: <span class="phone-order">092342xxx</span><br><font>tại <span class="country">Hải Phòng</span> vừa đặt hàng cách đây <span class="timeAgo">5 phút  trước</span></font></p>
+            </a>
+        </div>
+    </div>
+
+
+    <script>
+        window.addEventListener('DOMContentLoaded', function () {
+            (function ($) {
+                var sync1 = $("#sync1"); var sync2 = $("#sync2"); var slideowl = $(".slide-owl"); var promotionSlider = $(".promotion-slider"); $('.slide-owl').owlCarousel({ items: 1, lazyLoad: !0, autoPlay: !1, pagination: !0, navigation: !1, })
+                $('.sync1').owlCarousel({ singleItem: !0, slideSpeed: 500, lazyLoad: !0, autoPlay: 7000, pagination: !1, afterAction: syncPosition, responsiveRefreshRate: 200, })
+                $('.sync2').owlCarousel({ items: 4, pagination: !1, navigation: !0, navigationText: ['‹', '›'], responsiveRefreshRate: 400, itemsDesktop: [1199, 4], itemsTablet: [768, 4], itemsMobile: [479, 3], afterInit: function (el) { el.find(".owl-item").eq(0).addClass("synced") }, })
+                $('.promotion-slider').owlCarousel({ items: 5, lazyLoad: !0, autoPlay: 3000, pagination: !1, navigation: !0, navigationText: ['‹', '›'], })
+                $('.sync-menu').owlCarousel({ items: 1, lazyLoad: !0, autoPlay: 5000, pagination: !1, navigation: !0, navigationText: ['‹', '›'], })
+                function syncPosition(el) {
+                    var current = this.currentItem; $("#sync2").find(".owl-item").removeClass("synced").eq(current).addClass("synced")
+                    if ($("#sync2").data("owlCarousel") !== undefined) { center(current) }
+                }
+                $("#sync2").on("click", ".owl-item", function (e) { e.preventDefault(); var number = $(this).data("owlItem"); sync1.trigger("owl.goTo", number) }); function center(number) {
+                    var sync2visible = sync2.data("owlCarousel").owl.visibleItems; var num = number; var found = !1; for (var i in sync2visible) { if (num === sync2visible[i]) { var found = !0 } }
+                    if (found === !1) {
+                        if (num > sync2visible[sync2visible.length - 1]) { sync2.trigger("owl.goTo", num - sync2visible.length + 2) } else {
+                            if (num - 1 === -1) { num = 0 }
+                            sync2.trigger("owl.goTo", num)
+                        }
+                    } else if (num === sync2visible[sync2visible.length - 1]) { sync2.trigger("owl.goTo", sync2visible[1]) } else if (num === sync2visible[0]) { sync2.trigger("owl.goTo", num - 1) }
+                }
+                $('.read-more-content').addClass('hide')
+                $('.read-more-show, .read-more-hide').removeClass('hide')
+                $('.read-more-show').on('click', function (e) { $('.read-more-content').removeClass('hide'); $(this).addClass('hide'); e.preventDefault() }); $('.popup-gallery').lightGallery({ selector: '.item', thumbnail: !0 })
+                $('#stars li').on('mouseover', function () {
+                    var onStar = parseInt($(this).data('value'), 10); // The star currently mouse on
+
+                    // Now highlight all the stars that's not after the current hovered star
+                    $(this).parent().children('li.star').each(function (e) {
+                        if (e < onStar) {
+                            $(this).addClass('hover');
+                        }
+                        else {
+                            $(this).removeClass('hover');
+                        }
+                    });
+
+                }).on('mouseout', function () {
+                    $(this).parent().children('li.star').each(function (e) {
+                        $(this).removeClass('hover');
+                    });
+                });
+
+                /* 2. Action to perform on click */
+                $('#stars li').on('click', function () {
+                    var onStar = parseInt($(this).data('value'), 10); // The star currently selected
+                    var stars = $(this).parent().children('li.star');
+
+                    for (i = 0; i < stars.length; i++) {
+                        $(stars[i]).removeClass('selected');
+                    }
+
+                    for (i = 0; i < onStar; i++) {
+                        $(stars[i]).addClass('selected');
+                    }
+
+                    // JUST RESPONSE (Not needed)
+                    var ratingValue = parseInt($('#stars li.selected').last().data('value'), 10);
+                    var msg = "";
+                    if (ratingValue > 1) {
+
+                        document.getElementById('starValue').value = ratingValue;
+                    }
+                    else {
+
+                        document.getElementById('starValue').value = ratingValue;
+                    }
+
+                });
+                 @Html.Raw(Util.JSSitting());
+
+                $(window).scroll(function () {
+                    if ($(window).scrollTop() > 130) {
+                        $("#right-float").addClass('tab_fixed');
+                    } else {
+                        $("#right-float").removeClass('tab_fixed');
+                    }
+
+
+
+                });
+
+                $(window).scroll(function () {
+                    var _top_tab_view = $("#quangcao").offset().top;
+
+                    var _bottom_tab_view = $(".footer").offset().top - 600;
+                    if ($(window).scrollTop() > _top_tab_view && $(window).scrollTop() < _bottom_tab_view) {
+                        $("#right-float").addClass('fixed_xemthem');
+                    } else {
+                        $("#right-float").removeClass('fixed_xemthem');
+                    }
+                });
+            })(jQuery)
+        })
+    </script>
+    <script src="/Content/Vinaplaza/js/Controller/BaseController.js"></script>
+    <script type="text/javascript">
+        WebFontConfig = {
+            google: { families: ['Roboto:100,300,400,700'] }
+        };
+        (function () {
+            var wf = document.createElement('script');
+            wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+            wf.type = 'text/javascript';
+            wf.async = 'true';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(wf, s);
+        })();</script>
+</body>
+</html>

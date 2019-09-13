@@ -1,0 +1,374 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="HModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="HEntities" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="Catalogs" EntityType="HModel.Catalog" />
+    <EntitySet Name="modules" EntityType="HModel.module" />
+    <EntitySet Name="Products" EntityType="HModel.Product" />
+    <EntitySet Name="ProductInfoes" EntityType="HModel.ProductInfo" />
+    <EntitySet Name="roles" EntityType="HModel.role" />
+    <EntitySet Name="role_module" EntityType="HModel.role_module" />
+    <EntitySet Name="users" EntityType="HModel.user" />
+    <EntitySet Name="user_group" EntityType="HModel.user_group" />
+    <EntitySet Name="user_group_role" EntityType="HModel.user_group_role" />
+    <EntitySet Name="user_profile" EntityType="HModel.user_profile" />
+    <EntitySet Name="user_usergroup" EntityType="HModel.user_usergroup" />
+    <AssociationSet Name="FK_Product_Catalog" Association="HModel.FK_Product_Catalog">
+      <End Role="Catalog" EntitySet="Catalogs" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_role_module_module" Association="HModel.FK_role_module_module">
+      <End Role="module" EntitySet="modules" />
+      <End Role="role_module" EntitySet="role_module" />
+    </AssociationSet>
+    <AssociationSet Name="FK_role_module_role" Association="HModel.FK_role_module_role">
+      <End Role="role" EntitySet="roles" />
+      <End Role="role_module" EntitySet="role_module" />
+    </AssociationSet>
+    <AssociationSet Name="FK_user_group_role_role" Association="HModel.FK_user_group_role_role">
+      <End Role="role" EntitySet="roles" />
+      <End Role="user_group_role" EntitySet="user_group_role" />
+    </AssociationSet>
+    <AssociationSet Name="FK_user_profile_user" Association="HModel.FK_user_profile_user">
+      <End Role="user" EntitySet="users" />
+      <End Role="user_profile" EntitySet="user_profile" />
+    </AssociationSet>
+    <AssociationSet Name="FK_user_usergroup_user" Association="HModel.FK_user_usergroup_user">
+      <End Role="user" EntitySet="users" />
+      <End Role="user_usergroup" EntitySet="user_usergroup" />
+    </AssociationSet>
+    <AssociationSet Name="FK_user_group_role_user_group" Association="HModel.FK_user_group_role_user_group">
+      <End Role="user_group" EntitySet="user_group" />
+      <End Role="user_group_role" EntitySet="user_group_role" />
+    </AssociationSet>
+    <AssociationSet Name="FK_user_usergroup_user_group" Association="HModel.FK_user_usergroup_user_group">
+      <End Role="user_group" EntitySet="user_group" />
+      <End Role="user_usergroup" EntitySet="user_usergroup" />
+    </AssociationSet>
+    <FunctionImport Name="GetAllModuleByUserId" ReturnType="Collection(HModel.GetAllModuleByUserId_Result)">
+      <Parameter Name="UserId" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="GetAllRolesByUserId" ReturnType="Collection(HModel.GetAllRolesByUserId_Result)">
+      <Parameter Name="UserId" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="GetUserByUserName" ReturnType="Collection(HModel.GetUserByUserName_Result)">
+      <Parameter Name="UserName" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="GetUserByUserNameAndPassword" ReturnType="Collection(HModel.GetUserByUserNameAndPassword_Result)">
+      <Parameter Name="UserName" Mode="In" Type="String" />
+      <Parameter Name="Password" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SearchVoucherByKey">
+      <Parameter Name="key" Mode="In" Type="String" />
+      <Parameter Name="voucher_type" Mode="In" Type="Int64" />
+      <Parameter Name="location" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="SearchVoucherByKey1">
+      <Parameter Name="key" Mode="In" Type="String" />
+      <Parameter Name="voucher_type" Mode="In" Type="Int64" />
+      <Parameter Name="location" Mode="In" Type="Int64" />
+    </FunctionImport>
+  </EntityContainer>
+  <EntityType Name="Catalog">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Image" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Products" Relationship="HModel.FK_Product_Catalog" FromRole="Catalog" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="module">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="code" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="name" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+    <Property Name="ws_method" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+    <Property Name="web_method" Type="String" MaxLength="4000" Unicode="true" FixedLength="false" />
+    <Property Name="order" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="role_module" Relationship="HModel.FK_role_module_module" FromRole="module" ToRole="role_module" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="CatalogId" Type="Int64" Nullable="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Status" Type="Boolean" />
+    <NavigationProperty Name="Catalog" Relationship="HModel.FK_Product_Catalog" FromRole="Product" ToRole="Catalog" />
+  </EntityType>
+  <EntityType Name="ProductInfo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="ProductId" Type="Int32" Nullable="false" />
+    <Property Name="Image" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="500" Unicode="true" FixedLength="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="role">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="code" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="150" Unicode="true" FixedLength="false" />
+    <Property Name="title" Type="String" Nullable="false" MaxLength="200" Unicode="true" FixedLength="false" />
+    <Property Name="status" Type="Int32" Nullable="false" />
+    <Property Name="type" Type="Int32" />
+    <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="modified_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="description" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="role_module" Relationship="HModel.FK_role_module_role" FromRole="role" ToRole="role_module" />
+    <NavigationProperty Name="user_group_role" Relationship="HModel.FK_user_group_role_role" FromRole="role" ToRole="user_group_role" />
+  </EntityType>
+  <EntityType Name="role_module">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="role_Id" Type="Int64" Nullable="false" />
+    <Property Name="module_Id" Type="Int64" Nullable="false" />
+    <Property Name="status" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="module" Relationship="HModel.FK_role_module_module" FromRole="role_module" ToRole="module" />
+    <NavigationProperty Name="role" Relationship="HModel.FK_role_module_role" FromRole="role_module" ToRole="role" />
+  </EntityType>
+  <EntityType Name="user">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="username" Type="String" Nullable="false" MaxLength="75" Unicode="true" FixedLength="false" />
+    <Property Name="password" Type="String" Nullable="false" MaxLength="75" Unicode="true" FixedLength="false" />
+    <Property Name="company_Id" Type="Int64" Nullable="false" />
+    <Property Name="is_super_user" Type="Boolean" Nullable="false" />
+    <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="modify_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="expired_date" Type="DateTime" Precision="3" />
+    <Property Name="password_encrypted" Type="Boolean" Nullable="false" />
+    <Property Name="password_modify_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="password_encrypted_method" Type="String" Nullable="false" MaxLength="30" Unicode="true" FixedLength="false" />
+    <Property Name="screenname" Type="String" Nullable="false" MaxLength="75" Unicode="true" FixedLength="false" />
+    <Property Name="login_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="last_failed_login_date" Type="DateTime" Precision="3" />
+    <Property Name="failed_login_attemp" Type="Int32" Nullable="false" />
+    <Property Name="lockout" Type="Boolean" Nullable="false" />
+    <Property Name="lockout_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="status" Type="Int32" Nullable="false" />
+    <Property Name="description" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+    <Property Name="discount_percent" Type="Double" Nullable="false" />
+    <NavigationProperty Name="user_profile" Relationship="HModel.FK_user_profile_user" FromRole="user" ToRole="user_profile" />
+    <NavigationProperty Name="user_usergroup" Relationship="HModel.FK_user_usergroup_user" FromRole="user" ToRole="user_usergroup" />
+  </EntityType>
+  <EntityType Name="user_group">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="code" Type="String" Nullable="false" MaxLength="150" Unicode="true" FixedLength="false" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="150" Unicode="true" FixedLength="false" />
+    <Property Name="description" Type="String" MaxLength="150" Unicode="true" FixedLength="false" />
+    <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="modified_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="status" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="user_group_role" Relationship="HModel.FK_user_group_role_user_group" FromRole="user_group" ToRole="user_group_role" />
+    <NavigationProperty Name="user_usergroup" Relationship="HModel.FK_user_usergroup_user_group" FromRole="user_group" ToRole="user_usergroup" />
+  </EntityType>
+  <EntityType Name="user_group_role">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="user_group_Id" Type="Int64" Nullable="false" />
+    <Property Name="role_Id" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="role" Relationship="HModel.FK_user_group_role_role" FromRole="user_group_role" ToRole="role" />
+    <NavigationProperty Name="user_group" Relationship="HModel.FK_user_group_role_user_group" FromRole="user_group_role" ToRole="user_group" />
+  </EntityType>
+  <EntityType Name="user_profile">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="User_Id" Type="Int64" />
+    <Property Name="code" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="phone" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+    <Property Name="address" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+    <Property Name="email" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="dob" Type="DateTime" Precision="0" />
+    <Property Name="modified_date" Type="DateTime" Precision="3" />
+    <Property Name="description" Type="String" MaxLength="150" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="user" Relationship="HModel.FK_user_profile_user" FromRole="user_profile" ToRole="user" />
+  </EntityType>
+  <EntityType Name="user_usergroup">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="user_Id" Type="Int64" Nullable="false" />
+    <Property Name="user_usergroup1" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="user" Relationship="HModel.FK_user_usergroup_user" FromRole="user_usergroup" ToRole="user" />
+    <NavigationProperty Name="user_group" Relationship="HModel.FK_user_usergroup_user_group" FromRole="user_usergroup" ToRole="user_group" />
+  </EntityType>
+  <Association Name="FK_Product_Catalog">
+    <End Role="Catalog" Type="HModel.Catalog" Multiplicity="1" />
+    <End Role="Product" Type="HModel.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Catalog">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="CatalogId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_role_module_module">
+    <End Role="module" Type="HModel.module" Multiplicity="1" />
+    <End Role="role_module" Type="HModel.role_module" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="module">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="role_module">
+        <PropertyRef Name="module_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_role_module_role">
+    <End Role="role" Type="HModel.role" Multiplicity="1" />
+    <End Role="role_module" Type="HModel.role_module" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="role">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="role_module">
+        <PropertyRef Name="role_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_user_group_role_role">
+    <End Role="role" Type="HModel.role" Multiplicity="1" />
+    <End Role="user_group_role" Type="HModel.user_group_role" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="role">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="user_group_role">
+        <PropertyRef Name="role_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_user_profile_user">
+    <End Role="user" Type="HModel.user" Multiplicity="0..1" />
+    <End Role="user_profile" Type="HModel.user_profile" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="user_profile">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_user_usergroup_user">
+    <End Role="user" Type="HModel.user" Multiplicity="1" />
+    <End Role="user_usergroup" Type="HModel.user_usergroup" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="user_usergroup">
+        <PropertyRef Name="user_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_user_group_role_user_group">
+    <End Role="user_group" Type="HModel.user_group" Multiplicity="1" />
+    <End Role="user_group_role" Type="HModel.user_group_role" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user_group">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="user_group_role">
+        <PropertyRef Name="user_group_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_user_usergroup_user_group">
+    <End Role="user_group" Type="HModel.user_group" Multiplicity="1" />
+    <End Role="user_usergroup" Type="HModel.user_usergroup" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user_group">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="user_usergroup">
+        <PropertyRef Name="user_usergroup1" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="GetAllModuleByUserId_Result">
+    <Property Type="Int64" Name="id" Nullable="false" />
+    <Property Type="String" Name="code" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="name" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="web_method" Nullable="true" MaxLength="4000" />
+    <Property Type="String" Name="ws_method" Nullable="true" MaxLength="500" />
+  </ComplexType>
+  <ComplexType Name="GetAllRolesByUserId_Result">
+    <Property Type="Int64" Name="id" Nullable="false" />
+    <Property Type="String" Name="code" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="name" Nullable="false" MaxLength="150" />
+  </ComplexType>
+  <ComplexType Name="GetUserByUserName_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="String" Name="username" Nullable="false" MaxLength="75" />
+    <Property Type="String" Name="password" Nullable="false" MaxLength="75" />
+    <Property Type="Int64" Name="company_Id" Nullable="false" />
+    <Property Type="Boolean" Name="is_super_user" Nullable="false" />
+    <Property Type="DateTime" Name="create_date" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="modify_date" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="expired_date" Nullable="true" Precision="23" />
+    <Property Type="Boolean" Name="password_encrypted" Nullable="false" />
+    <Property Type="DateTime" Name="password_modify_date" Nullable="false" Precision="23" />
+    <Property Type="String" Name="password_encrypted_method" Nullable="false" MaxLength="30" />
+    <Property Type="String" Name="screenname" Nullable="false" MaxLength="75" />
+    <Property Type="DateTime" Name="login_date" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="last_failed_login_date" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="failed_login_attemp" Nullable="false" />
+    <Property Type="Boolean" Name="lockout" Nullable="false" />
+    <Property Type="DateTime" Name="lockout_date" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="status" Nullable="false" />
+    <Property Type="String" Name="description" Nullable="true" MaxLength="200" />
+    <Property Type="Double" Name="discount_percent" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="GetUserByUserNameAndPassword_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="String" Name="username" Nullable="false" MaxLength="75" />
+    <Property Type="String" Name="password" Nullable="false" MaxLength="75" />
+    <Property Type="Int64" Name="company_Id" Nullable="false" />
+    <Property Type="Boolean" Name="is_super_user" Nullable="false" />
+    <Property Type="DateTime" Name="create_date" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="modify_date" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="expired_date" Nullable="true" Precision="23" />
+    <Property Type="Boolean" Name="password_encrypted" Nullable="false" />
+    <Property Type="DateTime" Name="password_modify_date" Nullable="false" Precision="23" />
+    <Property Type="String" Name="password_encrypted_method" Nullable="false" MaxLength="30" />
+    <Property Type="String" Name="screenname" Nullable="false" MaxLength="75" />
+    <Property Type="DateTime" Name="login_date" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="last_failed_login_date" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="failed_login_attemp" Nullable="false" />
+    <Property Type="Boolean" Name="lockout" Nullable="false" />
+    <Property Type="DateTime" Name="lockout_date" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="status" Nullable="false" />
+    <Property Type="String" Name="description" Nullable="true" MaxLength="200" />
+    <Property Type="Double" Name="discount_percent" Nullable="false" />
+  </ComplexType>
+</Schema>

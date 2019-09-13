@@ -1,0 +1,55 @@
+﻿@using Common.util
+@using Common;
+@using Business;
+@using Business.ClassBusiness;
+
+<div class="header-container header-color color">
+    <div class="header_full">
+        <div class="header">
+            <div class="col-lg-2 col-md-1 col-sm-1 col-xs-2 logo">
+
+                @Html.Action("GetByCodeHtml", "Partial", new { Code = "LogoMobile" })
+            </div>
+            <div class="col-lg-2 col-md-1 col-sm-1 col-xs-9">
+                <input id="catsearch" type="hidden" name="cat" value="">
+
+                <div class="form-imput-serach" style="float:left;">
+                    <input id="txtKeyword" type="text" name="keyword" class="input-text  clSearch" placeholder="Nhập từ khóa tìm kiếm" autocomplete="off">
+                    <button type="button" title="Search" class="button" id="btnSearch" onclick="search()"></button>
+                    @*<input type="text" id="txtKeyword" name="keyword" placeholder="Gõ từ khoá"><input type="submit" value="">*@
+                </div>
+
+                <script type="text/javascript">
+                    //$("#txtKeyword").keydown(function (event) {
+                    //    $('#txtKeyword').keypress(function (e) {
+                    //        if (e.keyCode == 13) {
+                    //            event.preventDefault();
+                    //            search();
+                    //        }
+
+                    //    });
+                    //});
+                    function search() {
+                        //   if (jQuery('#txtKeyword').val().length > 2)
+                        window.location.href = '/search.html' + "?k=" + jQuery('#txtKeyword').val();
+                        //  else alert('Từ khóa tìm kiếm phải trên 2 ký tự');
+                    }
+                </script>
+            </div>
+
+            <div class="col-lg-2 col-md-1 col-sm-1 col-xs-1">
+                <div class="btn-hamburger js-slideout-toggle" style="z-index: 99999">
+                    <i class="fa fa-bars" style="color: black; font-size: 35px;"></i>
+                </div>
+            </div>
+        </div>
+        <div class="Main_contentcss">
+
+            <div class="container">
+                <div class="row">
+                    @Html.Partial("SliderHome")
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

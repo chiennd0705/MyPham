@@ -1,0 +1,351 @@
+﻿@using BuyGroup365.Areas.Manage.Models
+@using MvcPaging
+@model IPagedList<Common.SystemSetting>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Manage/Views/Shared/_LayoutSetting.cshtml";
+
+}
+<script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+<script>
+    
+    tinymce.init({
+        selector: '#des',
+        height: 300,
+        plugins: [
+          'advlist autolink lists link image charmap print preview anchor',
+          'searchreplace visualblocks code fullscreen',
+          'insertdatetime media table contextmenu paste code'
+        ],
+        toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+        content_css: [
+          '//fast.fonts.net/cssapi/e6dc9b99-64fe-4292-ad98-6974f93cd2a2.css',
+          '//www.tinymce.com/css/codepen.min.css'
+        ]
+    });
+</script>
+<div class="container-fluid" ng-app="body">
+    <!-- Page Heading -->
+    <div class="row" ng-controller="header">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                Quản lý danh mục sản phẩm
+            </h1>
+        </div>
+    </div>
+    <!-- /.row -->
+    <!-- /.row -->
+    <!-- /.row -->
+    <div class="row" ng-controller="Index">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <i class="fa fa-bar-chart-o fa-fw"></i> Danh mục cấu hình web
+                        <span style="float: right">
+                            <a class="glyphicon glyphicon-plus-sign" data-toggle="modal" data-target="#myModal">
+
+                            </a>
+                        </span>
+
+
+                    </h3>
+
+                </div>
+                <div class="panel-body">
+                    @using (Ajax.BeginForm("Index", "WebSetting",
+                        new AjaxOptions { UpdateTargetId = "grid-list", HttpMethod = "get", LoadingElementId = "loading", OnBegin = "beginPaging", OnSuccess = "successPaging", OnFailure = "failurePaging" },
+                        new { id = "frm-search" }))
+                    {
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group input-group">
+                                    <input type="text" value="@ViewData["key"]" class="form-control" id="appendedInputButton" name="key" placeholder="Nhập từ khóa tìm kiếm" style="width:80%">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="submit">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+
+                                    </span>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover table-striped" id="dataTables" aria-describedby="dataTables-example_info">
+                                <thead>
+                                    <tr role="row">
+                                        <th>
+                                            STT
+                                        </th>
+                                        <th>
+                                           Tiêu đề
+                                        </th>
+                                        <th>
+                                            Key
+                                        </th>
+
+                                        @*<th>
+                                           Value
+                                        </th>*@
+                                        <th>
+                                            Date create
+                                        </th>
+                                        <th style="width: auto">Chức năng</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{ var dem = 1;}
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @dem
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Title)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Key)
+                                            </td>
+
+                                            @*<td>
+                                                @Html.DisplayFor(modelItem => item.Value)
+                                            </td>*@
+                                      
+                                            <td>
+                                                @item.CreateDate.ToString("dd/MM/yyyy HH:mm:ss")
+                                            </td>
+
+                                            <td style="text-align: center">
+                                                <a class="" href="javarscript:;" data-toggle="modal" data-target="#Manufacture" data-ng-click="ManageManuface(@item.Id)">
+                                                    <img src="~/img/IconMain/manufacture.png" width="20" />  Update
+                                                </a>|
+                                                <a class="" href="javarscript:;" data-toggle="modal" data-target="#Properties" data-ng-click="ManageProperties(@item.Id)">
+                                                    <img src="~/img/IconMain/properties.ico" width="20" /> Properties
+                                                </a>|
+                                                <a href="javarscript:;" data-toggle="modal" data-target="#EditModal" data-ng-click="GetInforCategory(@item.Id)">
+                                                    <img src="~/img/IconMain/edit.ico" width="20" />  Edit
+                                                </a>|
+                                                @*@Html.ActionLink(" ", "" + "" + "DeleteCategory", new { id = item.Id }, new { @class = "glyphicon glyphicon-trash", onclick = "return confirm('Are you ready?');" })*@
+                                                <a href="#" class="glyphicon glyphicon-trash" data-ng-click="ChangeStatusCategory(@item.Id)">Xóa</a>
+                                            </td>
+                                        </tr>
+                                    }
+
+                                </tbody>
+                            </table>
+                            <div class="row">
+                                <div class="">
+                                    <div class="dataTables_info" id="dataTables-example_info" role="alert" aria-live="polite" aria-relevant="all">Hiển thị từ @Model.ItemStart đến @Model.ItemEnd của @Model.TotalItemCount bản ghi</div>
+                                </div>
+                                <div class="">
+                                    <div class="dataTables_paginate " id="dataTables-example_paginate">
+
+                                        @Html.Raw(Ajax.Pager(
+                                            new Options
+                                            {
+                                                PageSize = Model.PageSize,
+                                                TotalItemCount = Model.TotalItemCount,
+                                                CurrentPage = Model.PageNumber,
+                                                ItemTexts = new ItemTexts() { Next = "Next", Previous = "Previous", Page = "P" },
+                                                ItemIcon = new ItemIcon() { First = "icon-backward", Previous = "icon-chevron-left", Next = "icon-chevron-right", Last = "icon-forward" },
+                                                TooltipTitles = new TooltipTitles() { Next = "Next page", Previous = "Previous page", Page = "Page {0}." },
+                                                Size = Size.normal,
+                                                Alignment = Alignment.centered,
+                                                IsShowControls = true,
+                                                IsShowFirstLast = true,
+                                                CssClass = ""
+                                            },
+                                            new AjaxOptions
+                                            {
+                                                UpdateTargetId = "grid-list",
+                                                HttpMethod = "get",
+                                                LoadingElementId = "loading",
+                                                OnBegin = "beginPaging",
+                                                OnSuccess = "successPaging",
+                                                OnFailure = "failurePaging"
+                                            }, new { controller = "CategoryProduct", action = "Index", key = ViewData["key"] }))
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- /.row -->
+        <!-- /.row -->
+        @*Create*@
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                @using (Html.BeginForm("Create", "WebSetting", FormMethod.Post, new { enctype = "multipart/form-data", id = "CreateCate" }))
+                {
+                    @Html.ValidationSummary(true)
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Tạo cấu hình hệ thống</h4>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="row">
+                                    <div class="form-group">
+                                        <label>Tiêu đề<span class="required">*</span></label><br />
+                                        <input class="form-control" autocomplete="off" maxlength="100" data-val-required="Mời nhập tên tiêu đề" required id="title" name="title" type="text" >
+                                        <span class="field-validation-valid" data-valmsg-for="title" data-valmsg-replace="true"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Key<span class="required">*</span></label><br />
+                                        <input class="form-control" autocomplete="off" maxlength="100" data-val-required="Mời nhập key" required id="key" name="key" type="text" >
+                                        <span class="field-validation-valid" data-valmsg-for="key" data-valmsg-replace="true"></span>
+                                    </div>
+                                <div class="form-group">
+                                    <label>Value<span class="required">*</span></label><br />
+                                    <input class="form-control"  maxlength="200"  id="valuesystem" name="valuesystem" />
+                                
+                                </div>
+                                <div class="form-group">
+                                    <label>Mô tả<span class="required">*</span></label><br />
+                                    <input class="form-control" maxlength="200" id="des" name="des" />
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Thêm mới</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        @*Endcreate*@
+
+
+        @*Edit Category*@
+        <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="EditModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Cập nhật Danh mục</h4>
+                    </div>
+                    <div class="modal-body">
+
+
+                      
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" ng-click="UpdateChange()">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @*Kêt thúc cập nhật*@
+
+        @*manage Manuface*@
+
+        <div class="modal fade" id="Manufacture" tabindex="-1" role="dialog" aria-labelledby="ManufactureModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">
+                            <img src="~/img/IconMain/manufacture.png" width="20" /> Manage Manufacture
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        @*Kêt thúc cập nhật*@
+        @*Properties*@
+
+        <div class="modal fade" id="Properties" tabindex="-1" role="dialog" aria-labelledby="PropertiesModalLabel" aria-hidden="true" style="overflow-y: scroll">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">
+                            <img src="~/img/IconMain/properties.ico" width="20" /> Manage Properties
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <input id="hidecateProperty" type="hidden" />
+                        <div class="row" id="oldcontentproperty">
+
+                        </div>
+                        <div class="row" id="contentproperty">
+
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <a class="btn btn-default" data-toggle="modal" data-target="#AddProperties" onclick="OnfowadId()">
+                            Add Properties
+                        </a>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+   
+     
+   
+    </div>
+    @*End*@
+</div>
+<script>
+    function beginPaging(args) {
+        // Animatek
+        $('#grid-list').fadeOut('normal');
+    }
+
+    function successPaging() {
+        // Animate
+        $('#grid-list').fadeIn('normal');
+        $('a').tooltip();
+    }
+
+    function failurePaging() {
+        alert("Could not retrieve list.");
+    }
+
+</script>
+
+<script type="text/javascript">
+    $(function () {
+        $("#datepicker1").datepicker();
+        $("#dob").datepicker(
+
+            {
+                changeMonth: true,
+                changeYear: true,
+                showButtonPanel: true,
+                yearRange: "-0:+15"
+            });
+
+    });
+</script>
+<style>
+    select {
+        width: 100%;
+    }
+</style>

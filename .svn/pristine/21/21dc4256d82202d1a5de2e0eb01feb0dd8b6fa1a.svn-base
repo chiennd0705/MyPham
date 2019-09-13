@@ -1,0 +1,29 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using System.Web.Routing;
+
+namespace BuyGroup365
+{
+    public class RouteConfig
+    {
+        public static void RegisterRoutes(RouteCollection routes)
+        {
+            routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            routes.MapRoute(name: "Catalog", url: "{Content}-dm{id}", defaults: new { controller = "Home", action = "Category", id = UrlParameter.Optional, });
+            //routes.MapRoute(name: "Manufacturer", url: "{Content}-m{id}", defaults: new { controller = "Home", action = "Manufacturer", id = UrlParameter.Optional, slug = "" });
+            routes.MapRoute(name: "ProductDetail", url: "{Content}-ct{id}", defaults: new { controller = "Home", action = "ProductDetail", id = UrlParameter.Optional, });
+            routes.MapRoute(name: "NewsDetail", url: "help/{Content}-n{nid}", defaults: new { controller = "News", action = "Detail", nid = UrlParameter.Optional, },
+                   namespaces: new string[] { "BuyGroup365.Controllers" });
+
+            routes.MapRoute(
+                name: "Default",
+                url: "{controller}/{action}/{id}",
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
+                   namespaces: new string[] { "BuyGroup365.Controllers" }
+            );
+        }
+    }
+}

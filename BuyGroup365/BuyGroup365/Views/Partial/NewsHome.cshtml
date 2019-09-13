@@ -1,0 +1,35 @@
+﻿@using Common
+@using Business.ClassBusiness;
+@using BuyGroup365.Models.Common;
+@using BuyGroup365.Models.Home
+
+<div class="ads">
+    @Html.Action("GetByCodeHtml", "Partial", new { Code = "BannerHome" })
+</div>
+
+<div class="new-homepage">
+    <div class="title">
+        <h4 class="title-text">Tin tức sức khỏe nổi bật</h4>
+        <a href="#"><span class="see-more">Xem thêm</span></a>
+    </div>
+    @{
+        try
+        {
+            Business.ClassBusiness.NewsBusiness newsBusiness = new Business.ClassBusiness.NewsBusiness();
+            List<Common.News>
+            listNews = newsBusiness.ListByNewsActive(2);
+
+            foreach (Common.News item in listNews)
+            {
+                <div class="list">
+                    <a href="@Util.ReturnLinkFull(item.FriendlyUrl)">
+                        <img class="img-news" src="@Util.ReturnLinkCDN(item.ImageSource,Request.Browser.IsMobileDevice)" alt="">
+                        <h4 class="text-news">@item.Title</h4>
+                    </a>
+                </div>
+            }
+        }
+        catch { }
+    }
+
+</div>

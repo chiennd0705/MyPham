@@ -1,0 +1,1158 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BuyGroup365Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="CatalogProperty">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CatalogId" Type="Int64" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Key" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Type" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Catalog" Relationship="Self.FK_CatalogProperties_Catalogs" FromRole="CatalogProperties" ToRole="Catalogs" />
+    <NavigationProperty Name="CatalogPropertiesValues" Relationship="Self.FK_CatalogPropertiesValue_CatalogProperties" FromRole="CatalogProperties" ToRole="CatalogPropertiesValue" />
+  </EntityType>
+  <EntityType Name="CatalogPropertiesValue">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CatalogPropertieId" Type="Int64" Nullable="false" />
+    <Property Name="Value" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="CatalogProperty" Relationship="Self.FK_CatalogPropertiesValue_CatalogProperties" FromRole="CatalogPropertiesValue" ToRole="CatalogProperties" />
+  </EntityType>
+  <EntityType Name="Catalog">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ParentId" Type="Int64" Nullable="false" />
+    <Property Name="Code" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="CatalogName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="FriendlyUrl" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Icon" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Order" Type="Int32" Nullable="false" />
+    <Property Name="Status" Type="Int32" Nullable="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifyDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="IsLast" Type="Int32" Nullable="false" />
+    <Property Name="SeoTitle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SeoKeyword" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SeoDescription" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="CatalogProperties" Relationship="Self.FK_CatalogProperties_Catalogs" FromRole="Catalogs" ToRole="CatalogProperties" />
+    <NavigationProperty Name="Catalogs_Manufacturers" Relationship="Self.FK_Catalogs_Manufacturers_Catalogs" FromRole="Catalogs" ToRole="Catalogs_Manufacturers" />
+    <NavigationProperty Name="Products" Relationship="Self.FK_Products_Catalogs" FromRole="Catalogs" ToRole="Products" />
+  </EntityType>
+  <EntityType Name="Catalogs_Manufacturers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CatalogId" Type="Int64" Nullable="false" />
+    <Property Name="ManufacturerId" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="Catalog" Relationship="Self.FK_Catalogs_Manufacturers_Catalogs" FromRole="Catalogs_Manufacturers" ToRole="Catalogs" />
+    <NavigationProperty Name="Manufacturer" Relationship="Self.FK_Catalogs_Manufacturers_Manufacturers" FromRole="Catalogs_Manufacturers" ToRole="Manufacturers" />
+  </EntityType>
+  <EntityType Name="Comment">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ParentId" Type="Int64" Nullable="false" />
+    <Property Name="ProductId" Type="Int64" Nullable="false" />
+    <Property Name="ShopId" Type="Int64" Nullable="false" />
+    <Property Name="MemberId" Type="Int64" Nullable="false" />
+    <Property Name="Rate" Type="Int32" Nullable="false" />
+    <Property Name="Content" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Status" Type="Int32" Nullable="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="MofifyDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Product" Relationship="Self.FK_Comments_Products" FromRole="Comments" ToRole="Products" />
+  </EntityType>
+  <EntityType Name="Manufacturer">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ManufacturerName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Code" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Icon" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="Order" Type="Int32" Nullable="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifyDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Catalogs_Manufacturers" Relationship="Self.FK_Catalogs_Manufacturers_Manufacturers" FromRole="Manufacturers" ToRole="Catalogs_Manufacturers" />
+    <NavigationProperty Name="Products" Relationship="Self.FK_Products_Manufacturers" FromRole="Manufacturers" ToRole="Products" />
+  </EntityType>
+  <EntityType Name="MemberProfile">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" />
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LocationId" Type="Int64" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Emaill" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Dob" Type="DateTime" Precision="3" />
+    <Property Name="Sex" Type="Int32" Nullable="false" />
+    <Property Name="Pid" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ZipCode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Photo" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Member" Relationship="Self.FK_MemberProfile_Members" FromRole="MemberProfile" ToRole="Members" />
+  </EntityType>
+  <EntityType Name="Member">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PasswordTransaction" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PasswordEncrypted" Type="Int64" Nullable="false" />
+    <Property Name="PasswordModifyDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="PasswordEncryptedMethod" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LoginDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="LastFailedLoginDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Loutout" Type="Boolean" Nullable="false" />
+    <Property Name="LockoutDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Verify" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Status" Type="Int32" Nullable="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifyDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ActiveDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Question" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="Answer" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="MemberProfile" Relationship="Self.FK_MemberProfile_Members" FromRole="Members" ToRole="MemberProfile" />
+    <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_Members" FromRole="Members" ToRole="Orders" />
+    <NavigationProperty Name="ShopNewsGroups" Relationship="Self.FK_ShopNewsGroups_Members" FromRole="Members" ToRole="ShopNewsGroups" />
+    <NavigationProperty Name="Shop" Relationship="Self.FK_Shops_Members" FromRole="Members" ToRole="Shops" />
+    <NavigationProperty Name="ShopSettings" Relationship="BuyGroup365Model.FK_ShopSettings_Members" FromRole="Member" ToRole="ShopSetting" />
+  </EntityType>
+  <EntityType Name="Module">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="WsMethod" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="WebMethod" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+    <Property Name="Order" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="RoleModules" Relationship="Self.FK_role_module_module" FromRole="Module" ToRole="RoleModule" />
+  </EntityType>
+  <EntityType Name="OrderBuyer">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LocationId" Type="Int64" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ModifyDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifyBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="NoteAboutBuyer" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="IdMember" Type="Int64" />
+    <NavigationProperty Name="Order" Relationship="Self.FK_OrderBuyer_Order" FromRole="OrderBuyer" ToRole="Orders" />
+  </EntityType>
+  <EntityType Name="OrderDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdOrder" Type="Int64" Nullable="false" />
+    <Property Name="IdProduct" Type="Int64" Nullable="false" />
+    <Property Name="NameProduct" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Price" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PathImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Status" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Order" Relationship="Self.FK_OrderDetail_Order" FromRole="OrderDetail" ToRole="Orders" />
+  </EntityType>
+  <EntityType Name="OrderReciver">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ModifyDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifyBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="NoteAboutReciver" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Order" Relationship="Self.FK_OrderReciver_Order" FromRole="OrderReciver" ToRole="Orders" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ModifyDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifyBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DateDeliver" Type="DateTime" Precision="3" />
+    <Property Name="Status" Type="Int32" />
+    <Property Name="KmRoad" Type="Double" Nullable="false" />
+    <Property Name="NoteAboutOrder" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="GramGood" Type="Double" Nullable="false" />
+    <Property Name="IdPayForm" Type="Int64" />
+    <Property Name="IdShop" Type="Int64" Nullable="false" />
+    <Property Name="TotalMoney" Type="Double" />
+    <Property Name="FeeOfTranspot" Type="Double" />
+    <Property Name="UrlBtnPayNL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Member" Relationship="Self.FK_Orders_Members" FromRole="Orders" ToRole="Members" />
+    <NavigationProperty Name="OrderBuyer" Relationship="Self.FK_OrderBuyer_Order" FromRole="Orders" ToRole="OrderBuyer" />
+    <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetail_Order" FromRole="Orders" ToRole="OrderDetail" />
+    <NavigationProperty Name="OrderReciver" Relationship="Self.FK_OrderReciver_Order" FromRole="Orders" ToRole="OrderReciver" />
+  </EntityType>
+  <EntityType Name="PayForm">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ModifyDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifyBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="ProductImage">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProductId" Type="Int64" Nullable="false" />
+    <Property Name="ImgSource" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IsAvatar" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="Product" Relationship="Self.FK_ProductImages_Products" FromRole="ProductImages" ToRole="Products" />
+  </EntityType>
+  <EntityType Name="ProductProperty">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProductId" Type="Int64" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Key" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Value" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Product" Relationship="Self.FK_ProductProperties_Products" FromRole="ProductProperties" ToRole="Products" />
+    <Property Name="CatalogPropertyId" Type="Int64" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CatalogId" Type="Int64" Nullable="false" />
+    <Property Name="ManufacturerId" Type="Int64" />
+    <Property Name="Model" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="MemberId" Type="Int64" Nullable="false" />
+    <Property Name="ShopCatalogId" Type="Int64" />
+    <Property Name="ProductName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="FriendlyUrl" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Summary" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Price" Type="Double" Nullable="false" />
+    <Property Name="Cost" Type="Double" Nullable="false" />
+    <Property Name="Weight" Type="Double" Nullable="false" />
+    <Property Name="TypeOfCurrency" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
+    <Property Name="State" Type="Int32" Nullable="false" />
+    <Property Name="Tags" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="IsNew" Type="Boolean" Nullable="false" />
+    <Property Name="IsAttractive" Type="Boolean" Nullable="false" />
+    <Property Name="IsVip" Type="Boolean" Nullable="false" />
+    <Property Name="TotalView" Type="Int32" Nullable="false" />
+    <Property Name="Status" Type="Int32" Nullable="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifyDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="AdminIDApproval" Type="Int64" Nullable="false" />
+    <Property Name="SeoTitle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SeoKeyword" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SeoDescription" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Catalog" Relationship="Self.FK_Products_Catalogs" FromRole="Products" ToRole="Catalogs" />
+    <NavigationProperty Name="Comments" Relationship="Self.FK_Comments_Products" FromRole="Products" ToRole="Comments" />
+    <NavigationProperty Name="Manufacturer" Relationship="Self.FK_Products_Manufacturers" FromRole="Products" ToRole="Manufacturers" />
+    <NavigationProperty Name="ProductImages" Relationship="Self.FK_ProductImages_Products" FromRole="Products" ToRole="ProductImages" />
+    <NavigationProperty Name="ProductProperties" Relationship="Self.FK_ProductProperties_Products" FromRole="Products" ToRole="ProductProperties" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Title" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Status" Type="Int32" Nullable="false" />
+    <Property Name="Type" Type="Int32" />
+    <Property Name="Createdate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Modifieddate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="RoleModules" Relationship="Self.FK_role_module_role" FromRole="Role" ToRole="RoleModule" />
+    <NavigationProperty Name="UserGroupRoles" Relationship="Self.FK_user_group_role_role" FromRole="Role" ToRole="UserGroupRole" />
+  </EntityType>
+  <EntityType Name="RoleModule">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleId" Type="Int64" Nullable="false" />
+    <Property Name="ModuleId" Type="Int64" Nullable="false" />
+    <Property Name="Status" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Module" Relationship="Self.FK_role_module_module" FromRole="RoleModule" ToRole="Module" />
+    <NavigationProperty Name="Role" Relationship="Self.FK_role_module_role" FromRole="RoleModule" ToRole="Role" />
+  </EntityType>
+  <EntityType Name="ShopCatalog">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ShopId" Type="Int64" Nullable="false" />
+    <Property Name="ParentId" Type="Int64" Nullable="false" />
+    <Property Name="Code" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="CatalogName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="FriendlyUrl" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Icon" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Order" Type="Int32" Nullable="false" />
+    <Property Name="Status" Type="Int32" Nullable="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifyDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="IsLast" Type="Boolean" Nullable="false" />
+    <Property Name="SeoTitle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SeoKeyword" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SeoDescription" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ShopNew">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MemberId" Type="Int64" Nullable="false" />
+    <Property Name="NewsGroupId" Type="Int64" Nullable="false" />
+    <Property Name="Title" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ImageSource" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Summary" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Descriptions" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Status" Type="Int32" Nullable="false" />
+    <Property Name="isPublic" Type="Boolean" Nullable="false" />
+    <Property Name="TotalView" Type="Int32" Nullable="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifyDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="AdminIDApproval" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="ShopNewsGroup" Relationship="Self.FK_ShopNews_ShopNewsGroups" FromRole="ShopNews" ToRole="ShopNewsGroups" />
+  </EntityType>
+  <EntityType Name="ShopNewsGroup">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MemberId" Type="Int64" Nullable="false" />
+    <Property Name="NewsGroupName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="isPublic" Type="Boolean" Nullable="false" />
+    <Property Name="Status" Type="Int32" Nullable="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifyDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="AdminIDApproval" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="Member" Relationship="Self.FK_ShopNewsGroups_Members" FromRole="ShopNewsGroups" ToRole="Members" />
+    <NavigationProperty Name="ShopNews" Relationship="Self.FK_ShopNews_ShopNewsGroups" FromRole="ShopNewsGroups" ToRole="ShopNews" />
+  </EntityType>
+  <EntityType Name="ShopPolicy">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" />
+    <Property Name="About" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PrivacyPolicy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SalesPolicy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PaymentPolicy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Shop" Relationship="Self.FK_ShopPolicys_Shops" FromRole="ShopPolicys" ToRole="Shops" />
+  </EntityType>
+  <EntityType Name="Shop">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" />
+    <Property Name="ShopName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Icon" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="LocationId" Type="Int64" Nullable="false" />
+    <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Rate" Type="Int32" Nullable="false" />
+    <Property Name="TotalView" Type="Int32" Nullable="false" />
+    <Property Name="Type" Type="Int32" Nullable="false" />
+    <Property Name="Status" Type="Int32" Nullable="false" />
+    <Property Name="BeginDate" Type="DateTime" Precision="3" />
+    <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ActiveDate" Type="DateTime" Precision="3" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifyDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Member" Relationship="Self.FK_Shops_Members" FromRole="Shops" ToRole="Members" />
+    <NavigationProperty Name="ShopPolicy" Relationship="Self.FK_ShopPolicys_Shops" FromRole="Shops" ToRole="ShopPolicys" />
+    <NavigationProperty Name="ShopSupport" Relationship="Self.FK_ShopSupports_Shops" FromRole="Shops" ToRole="ShopSupports" />
+  </EntityType>
+  <EntityType Name="ShopSupport">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" />
+    <Property Name="SupportName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Mobile" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Skype" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Facebook" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Yahoo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Shop" Relationship="Self.FK_ShopSupports_Shops" FromRole="ShopSupports" ToRole="Shops" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Username" Type="String" MaxLength="75" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="75" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CompanyId" Type="Int64" />
+    <Property Name="IsSuperUser" Type="Boolean" Nullable="false" />
+    <Property Name="Createdate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Modifydate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Expireddate" Type="DateTime" Precision="3" />
+    <Property Name="PasswordEncrypted" Type="Boolean" Nullable="false" />
+    <Property Name="PasswordModify_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="PasswordEncryptedMethod" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Screenname" Type="String" MaxLength="75" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Logindate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="LastFailedLoginDate" Type="DateTime" Precision="3" />
+    <Property Name="FailedLoginAttemp" Type="Int32" Nullable="false" />
+    <Property Name="Lockout" Type="Boolean" Nullable="false" />
+    <Property Name="LockoutDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Status" Type="Int32" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="DiscountPercent" Type="Double" />
+    <NavigationProperty Name="UserProfile" Relationship="Self.FK_user_profile_user1" FromRole="User" ToRole="UserProfile" />
+    <NavigationProperty Name="UserUsergroups" Relationship="Self.FK_user_usergroup_user" FromRole="User" ToRole="UserUsergroup" />
+  </EntityType>
+  <EntityType Name="UserGroup">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Code" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Createdate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Modifieddate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Status" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="UserUsergroups" Relationship="Self.FK_user_usergroup_user_group" FromRole="UserGroup" ToRole="UserUsergroup" />
+  </EntityType>
+  <EntityType Name="UserGroupRole">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserGroupId" Type="Int64" Nullable="false" />
+    <Property Name="RoleId" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="Role" Relationship="Self.FK_user_group_role_role" FromRole="UserGroupRole" ToRole="Role" />
+  </EntityType>
+  <EntityType Name="UserProfile">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" />
+    <Property Name="DepartmentId" Type="Int64" />
+    <Property Name="Code" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Createdate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Dob" Type="DateTime" Precision="0" />
+    <Property Name="Modifieddate" Type="DateTime" Precision="3" />
+    <Property Name="Description" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="User" Relationship="Self.FK_user_profile_user1" FromRole="UserProfile" ToRole="User" />
+  </EntityType>
+  <EntityType Name="UserUsergroup">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int64" Nullable="false" />
+    <Property Name="UserUsergroup1" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="User" Relationship="Self.FK_user_usergroup_user" FromRole="UserUsergroup" ToRole="User" />
+    <NavigationProperty Name="UserGroup" Relationship="Self.FK_user_usergroup_user_group" FromRole="UserUsergroup" ToRole="UserGroup" />
+  </EntityType>
+  <Association Name="FK_CatalogProperties_Catalogs">
+    <End Role="Catalogs" Type="Self.Catalog" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="CatalogProperties" Type="Self.CatalogProperty" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Catalogs">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CatalogProperties">
+        <PropertyRef Name="CatalogId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CatalogPropertiesValue_CatalogProperties">
+    <End Role="CatalogProperties" Type="Self.CatalogProperty" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="CatalogPropertiesValue" Type="Self.CatalogPropertiesValue" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CatalogProperties">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CatalogPropertiesValue">
+        <PropertyRef Name="CatalogPropertieId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Catalogs_Manufacturers_Catalogs">
+    <End Role="Catalogs" Type="Self.Catalog" Multiplicity="1" />
+    <End Role="Catalogs_Manufacturers" Type="Self.Catalogs_Manufacturers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Catalogs">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Catalogs_Manufacturers">
+        <PropertyRef Name="CatalogId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Products_Catalogs">
+    <End Role="Catalogs" Type="Self.Catalog" Multiplicity="1" />
+    <End Role="Products" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Catalogs">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Products">
+        <PropertyRef Name="CatalogId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Catalogs_Manufacturers_Manufacturers">
+    <End Role="Manufacturers" Type="Self.Manufacturer" Multiplicity="1" />
+    <End Role="Catalogs_Manufacturers" Type="Self.Catalogs_Manufacturers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Manufacturers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Catalogs_Manufacturers">
+        <PropertyRef Name="ManufacturerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Comments_Products">
+    <End Role="Products" Type="Self.Product" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Comments" Type="Self.Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Comments">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Products_Manufacturers">
+    <End Role="Manufacturers" Type="Self.Manufacturer" Multiplicity="0..1" />
+    <End Role="Products" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Manufacturers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Products">
+        <PropertyRef Name="ManufacturerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MemberProfile_Members">
+    <End Role="Members" Type="Self.Member" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="MemberProfile" Type="Self.MemberProfile" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Members">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MemberProfile">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Orders_Members">
+    <End Role="Members" Type="Self.Member" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Members">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="IdShop" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ShopNewsGroups_Members">
+    <End Role="Members" Type="Self.Member" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ShopNewsGroups" Type="Self.ShopNewsGroup" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Members">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ShopNewsGroups">
+        <PropertyRef Name="MemberId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Shops_Members">
+    <End Role="Members" Type="Self.Member" Multiplicity="1" />
+    <End Role="Shops" Type="Self.Shop" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Members">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Shops">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_role_module_module">
+    <End Role="Module" Type="Self.Module" Multiplicity="1" />
+    <End Role="RoleModule" Type="Self.RoleModule" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Module">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RoleModule">
+        <PropertyRef Name="ModuleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderBuyer_Order">
+    <End Role="Orders" Type="Self.Order" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="OrderBuyer" Type="Self.OrderBuyer" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Orders">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrderBuyer">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderDetail_Order">
+    <End Role="Orders" Type="Self.Order" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Orders">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrderDetail">
+        <PropertyRef Name="IdOrder" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderReciver_Order">
+    <End Role="Orders" Type="Self.Order" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="OrderReciver" Type="Self.OrderReciver" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Orders">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrderReciver">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductImages_Products">
+    <End Role="Products" Type="Self.Product" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ProductImages" Type="Self.ProductImage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ProductImages">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductProperties_Products">
+    <End Role="Products" Type="Self.Product" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ProductProperties" Type="Self.ProductProperty" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ProductProperties">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_role_module_role">
+    <End Role="Role" Type="Self.Role" Multiplicity="1" />
+    <End Role="RoleModule" Type="Self.RoleModule" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RoleModule">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_user_group_role_role">
+    <End Role="Role" Type="Self.Role" Multiplicity="1" />
+    <End Role="UserGroupRole" Type="Self.UserGroupRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserGroupRole">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ShopNews_ShopNewsGroups">
+    <End Role="ShopNewsGroups" Type="Self.ShopNewsGroup" Multiplicity="1" />
+    <End Role="ShopNews" Type="Self.ShopNew" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ShopNewsGroups">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ShopNews">
+        <PropertyRef Name="NewsGroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ShopPolicys_Shops">
+    <End Role="Shops" Type="Self.Shop" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ShopPolicys" Type="Self.ShopPolicy" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Shops">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ShopPolicys">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ShopSupports_Shops">
+    <End Role="Shops" Type="Self.Shop" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ShopSupports" Type="Self.ShopSupport" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Shops">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ShopSupports">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_user_profile_user1">
+    <End Role="User" Type="Self.User" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserProfile">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_user_usergroup_user">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="UserUsergroup" Type="Self.UserUsergroup" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserUsergroup">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_user_usergroup_user_group">
+    <End Role="UserGroup" Type="Self.UserGroup" Multiplicity="1" />
+    <End Role="UserUsergroup" Type="Self.UserUsergroup" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserGroup">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserUsergroup">
+        <PropertyRef Name="UserUsergroup1" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BuyGroup365Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="CatalogProperties" EntityType="Self.CatalogProperty" />
+    <EntitySet Name="CatalogPropertiesValues" EntityType="Self.CatalogPropertiesValue" />
+    <EntitySet Name="Catalogs" EntityType="Self.Catalog" />
+    <EntitySet Name="Catalogs_Manufacturers" EntityType="Self.Catalogs_Manufacturers" />
+    <EntitySet Name="Comments" EntityType="Self.Comment" />
+    <EntitySet Name="Manufacturers" EntityType="Self.Manufacturer" />
+    <EntitySet Name="MemberProfiles" EntityType="Self.MemberProfile" />
+    <EntitySet Name="Members" EntityType="Self.Member" />
+    <EntitySet Name="Modules" EntityType="Self.Module" />
+    <EntitySet Name="OrderBuyers" EntityType="Self.OrderBuyer" />
+    <EntitySet Name="OrderDetails" EntityType="Self.OrderDetail" />
+    <EntitySet Name="OrderRecivers" EntityType="Self.OrderReciver" />
+    <EntitySet Name="Orders" EntityType="Self.Order" />
+    <EntitySet Name="PayForms" EntityType="Self.PayForm" />
+    <EntitySet Name="ProductImages" EntityType="Self.ProductImage" />
+    <EntitySet Name="ProductProperties" EntityType="Self.ProductProperty" />
+    <EntitySet Name="Products" EntityType="Self.Product" />
+    <EntitySet Name="Roles" EntityType="Self.Role" />
+    <EntitySet Name="RoleModules" EntityType="Self.RoleModule" />
+    <EntitySet Name="ShopCatalogs" EntityType="Self.ShopCatalog" />
+    <EntitySet Name="ShopNews" EntityType="Self.ShopNew" />
+    <EntitySet Name="ShopNewsGroups" EntityType="Self.ShopNewsGroup" />
+    <EntitySet Name="ShopPolicys" EntityType="Self.ShopPolicy" />
+    <EntitySet Name="Shops" EntityType="Self.Shop" />
+    <EntitySet Name="ShopSupports" EntityType="Self.ShopSupport" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <EntitySet Name="UserGroups" EntityType="Self.UserGroup" />
+    <EntitySet Name="UserGroupRoles" EntityType="Self.UserGroupRole" />
+    <EntitySet Name="UserProfiles" EntityType="Self.UserProfile" />
+    <EntitySet Name="UserUsergroups" EntityType="Self.UserUsergroup" />
+    <AssociationSet Name="FK_CatalogProperties_Catalogs" Association="Self.FK_CatalogProperties_Catalogs">
+      <End Role="Catalogs" EntitySet="Catalogs" />
+      <End Role="CatalogProperties" EntitySet="CatalogProperties" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CatalogPropertiesValue_CatalogProperties" Association="Self.FK_CatalogPropertiesValue_CatalogProperties">
+      <End Role="CatalogProperties" EntitySet="CatalogProperties" />
+      <End Role="CatalogPropertiesValue" EntitySet="CatalogPropertiesValues" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Catalogs_Manufacturers_Catalogs" Association="Self.FK_Catalogs_Manufacturers_Catalogs">
+      <End Role="Catalogs" EntitySet="Catalogs" />
+      <End Role="Catalogs_Manufacturers" EntitySet="Catalogs_Manufacturers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Products_Catalogs" Association="Self.FK_Products_Catalogs">
+      <End Role="Catalogs" EntitySet="Catalogs" />
+      <End Role="Products" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Catalogs_Manufacturers_Manufacturers" Association="Self.FK_Catalogs_Manufacturers_Manufacturers">
+      <End Role="Manufacturers" EntitySet="Manufacturers" />
+      <End Role="Catalogs_Manufacturers" EntitySet="Catalogs_Manufacturers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Comments_Products" Association="Self.FK_Comments_Products">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="Comments" EntitySet="Comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Products_Manufacturers" Association="Self.FK_Products_Manufacturers">
+      <End Role="Manufacturers" EntitySet="Manufacturers" />
+      <End Role="Products" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MemberProfile_Members" Association="Self.FK_MemberProfile_Members">
+      <End Role="Members" EntitySet="Members" />
+      <End Role="MemberProfile" EntitySet="MemberProfiles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Orders_Members" Association="Self.FK_Orders_Members">
+      <End Role="Members" EntitySet="Members" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ShopNewsGroups_Members" Association="Self.FK_ShopNewsGroups_Members">
+      <End Role="Members" EntitySet="Members" />
+      <End Role="ShopNewsGroups" EntitySet="ShopNewsGroups" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Shops_Members" Association="Self.FK_Shops_Members">
+      <End Role="Members" EntitySet="Members" />
+      <End Role="Shops" EntitySet="Shops" />
+    </AssociationSet>
+    <AssociationSet Name="FK_role_module_module" Association="Self.FK_role_module_module">
+      <End Role="Module" EntitySet="Modules" />
+      <End Role="RoleModule" EntitySet="RoleModules" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderBuyer_Order" Association="Self.FK_OrderBuyer_Order">
+      <End Role="Orders" EntitySet="Orders" />
+      <End Role="OrderBuyer" EntitySet="OrderBuyers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderDetail_Order" Association="Self.FK_OrderDetail_Order">
+      <End Role="Orders" EntitySet="Orders" />
+      <End Role="OrderDetail" EntitySet="OrderDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderReciver_Order" Association="Self.FK_OrderReciver_Order">
+      <End Role="Orders" EntitySet="Orders" />
+      <End Role="OrderReciver" EntitySet="OrderRecivers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductImages_Products" Association="Self.FK_ProductImages_Products">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="ProductImages" EntitySet="ProductImages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductProperties_Products" Association="Self.FK_ProductProperties_Products">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="ProductProperties" EntitySet="ProductProperties" />
+    </AssociationSet>
+    <AssociationSet Name="FK_role_module_role" Association="Self.FK_role_module_role">
+      <End Role="Role" EntitySet="Roles" />
+      <End Role="RoleModule" EntitySet="RoleModules" />
+    </AssociationSet>
+    <AssociationSet Name="FK_user_group_role_role" Association="Self.FK_user_group_role_role">
+      <End Role="Role" EntitySet="Roles" />
+      <End Role="UserGroupRole" EntitySet="UserGroupRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ShopNews_ShopNewsGroups" Association="Self.FK_ShopNews_ShopNewsGroups">
+      <End Role="ShopNewsGroups" EntitySet="ShopNewsGroups" />
+      <End Role="ShopNews" EntitySet="ShopNews" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ShopPolicys_Shops" Association="Self.FK_ShopPolicys_Shops">
+      <End Role="Shops" EntitySet="Shops" />
+      <End Role="ShopPolicys" EntitySet="ShopPolicys" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ShopSupports_Shops" Association="Self.FK_ShopSupports_Shops">
+      <End Role="Shops" EntitySet="Shops" />
+      <End Role="ShopSupports" EntitySet="ShopSupports" />
+    </AssociationSet>
+    <AssociationSet Name="FK_user_profile_user1" Association="Self.FK_user_profile_user1">
+      <End Role="User" EntitySet="Users" />
+      <End Role="UserProfile" EntitySet="UserProfiles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_user_usergroup_user" Association="Self.FK_user_usergroup_user">
+      <End Role="User" EntitySet="Users" />
+      <End Role="UserUsergroup" EntitySet="UserUsergroups" />
+    </AssociationSet>
+    <AssociationSet Name="FK_user_usergroup_user_group" Association="Self.FK_user_usergroup_user_group">
+      <End Role="UserGroup" EntitySet="UserGroups" />
+      <End Role="UserUsergroup" EntitySet="UserUsergroups" />
+    </AssociationSet>
+    <FunctionImport Name="GetAllModuleByUserId" ReturnType="Collection(BuyGroup365Model.GetAllModuleByUserId_Result)">
+      <Parameter Name="UserId" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="GetAllRolesByUserId" ReturnType="Collection(BuyGroup365Model.GetAllRolesByUserId_Result)">
+      <Parameter Name="UserId" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="GetUserByUserName" ReturnType="Collection(BuyGroup365Model.GetUserByUserName_Result)">
+      <Parameter Name="UserName" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="GetUserByUserNameAndPassword" ReturnType="Collection(BuyGroup365Model.GetUserByUserNameAndPassword_Result)">
+      <Parameter Name="UserName" Mode="In" Type="String" />
+      <Parameter Name="Password" Mode="In" Type="String" />
+    </FunctionImport>
+    <EntitySet Name="Locations" EntityType="BuyGroup365Model.Location" />
+    <EntitySet Name="ShopSettings" EntityType="BuyGroup365Model.ShopSetting" />
+    <AssociationSet Name="FK_ShopSettings_Members" Association="BuyGroup365Model.FK_ShopSettings_Members">
+      <End Role="Member" EntitySet="Members" />
+      <End Role="ShopSetting" EntitySet="ShopSettings" />
+    </AssociationSet>
+    <EntitySet Name="News" EntityType="BuyGroup365Model.News" />
+    <EntitySet Name="NewsGroups" EntityType="BuyGroup365Model.NewsGroup" />
+    <AssociationSet Name="FK_News_NewsGroups" Association="BuyGroup365Model.FK_News_NewsGroups">
+      <End Role="NewsGroup" EntitySet="NewsGroups" />
+      <End Role="News" EntitySet="News" />
+    </AssociationSet>
+    <FunctionImport Name="SearchProductByBrand" ReturnType="Collection(BuyGroup365Model.SearchProductByBrand_Result)">
+      <Parameter Name="id" Mode="In" Type="Int64" />
+      <Parameter Name="PageNum" Mode="In" Type="Int32" />
+      <Parameter Name="PageSize" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="SearchProductByType" ReturnType="Collection(BuyGroup365Model.SearchProductByType_Result)">
+      <Parameter Name="type" Mode="In" Type="Int64" />
+      <Parameter Name="id" Mode="In" Type="Int64" />
+      <Parameter Name="PageNum" Mode="In" Type="Int32" />
+      <Parameter Name="PageSize" Mode="In" Type="Int32" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="GetAllModuleByUserId_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Code" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Name" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="WsMethod" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="WebMethod" Nullable="true" MaxLength="4000" />
+  </ComplexType>
+  <ComplexType Name="GetAllRolesByUserId_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Code" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="150" />
+  </ComplexType>
+  <ComplexType Name="GetUserByUserName_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Username" Nullable="false" MaxLength="75" />
+    <Property Type="String" Name="Password" Nullable="false" MaxLength="75" />
+    <Property Type="Int64" Name="CompanyId" Nullable="true" />
+    <Property Type="Boolean" Name="IsSuperUser" Nullable="false" />
+    <Property Type="DateTime" Name="Createdate" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="Modifydate" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="Expireddate" Nullable="true" Precision="23" />
+    <Property Type="Boolean" Name="PasswordEncrypted" Nullable="false" />
+    <Property Type="DateTime" Name="PasswordModify_date" Nullable="false" Precision="23" />
+    <Property Type="String" Name="PasswordEncryptedMethod" Nullable="false" MaxLength="30" />
+    <Property Type="String" Name="Screenname" Nullable="false" MaxLength="75" />
+    <Property Type="DateTime" Name="Logindate" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="LastFailedLoginDate" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="FailedLoginAttemp" Nullable="false" />
+    <Property Type="Boolean" Name="Lockout" Nullable="false" />
+    <Property Type="DateTime" Name="LockoutDate" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="Status" Nullable="false" />
+    <Property Type="String" Name="Description" Nullable="true" MaxLength="200" />
+    <Property Type="Double" Name="DiscountPercent" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="GetUserByUserNameAndPassword_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Username" Nullable="false" MaxLength="75" />
+    <Property Type="String" Name="Password" Nullable="false" MaxLength="75" />
+    <Property Type="Int64" Name="CompanyId" Nullable="true" />
+    <Property Type="Boolean" Name="IsSuperUser" Nullable="false" />
+    <Property Type="DateTime" Name="Createdate" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="Modifydate" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="Expireddate" Nullable="true" Precision="23" />
+    <Property Type="Boolean" Name="PasswordEncrypted" Nullable="false" />
+    <Property Type="DateTime" Name="PasswordModify_date" Nullable="false" Precision="23" />
+    <Property Type="String" Name="PasswordEncryptedMethod" Nullable="false" MaxLength="30" />
+    <Property Type="String" Name="Screenname" Nullable="false" MaxLength="75" />
+    <Property Type="DateTime" Name="Logindate" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="LastFailedLoginDate" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="FailedLoginAttemp" Nullable="false" />
+    <Property Type="Boolean" Name="Lockout" Nullable="false" />
+    <Property Type="DateTime" Name="LockoutDate" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="Status" Nullable="false" />
+    <Property Type="String" Name="Description" Nullable="true" MaxLength="200" />
+    <Property Type="Double" Name="DiscountPercent" Nullable="true" />
+  </ComplexType>
+  <EntityType Name="Location">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ParentId" Type="Int64" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Icon" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Order" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ShopSetting">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ShopId" Type="Int64" Nullable="false" />
+    <Property Name="Key" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Value" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifyDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Member" Relationship="BuyGroup365Model.FK_ShopSettings_Members" FromRole="ShopSetting" ToRole="Member" />
+  </EntityType>
+  <Association Name="FK_ShopSettings_Members">
+    <End Type="BuyGroup365Model.Member" Role="Member" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="BuyGroup365Model.ShopSetting" Role="ShopSetting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Member">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ShopSetting">
+        <PropertyRef Name="ShopId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="News">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NewsGroupId" Type="Int64" Nullable="false" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="ImageSource" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Summary" Type="String" Nullable="false" MaxLength="2000" FixedLength="false" Unicode="true" />
+    <Property Name="Descriptions" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Int32" Nullable="false" />
+    <Property Name="isPublic" Type="Boolean" Nullable="false" />
+    <Property Name="TotalView" Type="Int32" Nullable="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifyDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="AdminIDApproval" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="NewsGroup" Relationship="BuyGroup365Model.FK_News_NewsGroups" FromRole="News" ToRole="NewsGroup" />
+  </EntityType>
+  <EntityType Name="NewsGroup">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ParentId" Type="Int64" Nullable="false" />
+    <Property Name="NewsGroupName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="isPublic" Type="Boolean" Nullable="false" />
+    <Property Name="Status" Type="Int32" Nullable="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifyDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="AdminIDApproval" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="News" Relationship="BuyGroup365Model.FK_News_NewsGroups" FromRole="NewsGroup" ToRole="News" />
+  </EntityType>
+  <Association Name="FK_News_NewsGroups">
+    <End Type="BuyGroup365Model.NewsGroup" Role="NewsGroup" Multiplicity="1" />
+    <End Type="BuyGroup365Model.News" Role="News" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NewsGroup">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="News">
+        <PropertyRef Name="NewsGroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="SearchProductByBrand_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="String" Name="ProductName" Nullable="false" MaxLength="200" />
+    <Property Type="String" Name="FriendlyUrl" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="ImgSource" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="Code" Nullable="true" MaxLength="50" />
+    <Property Type="Double" Name="Price" Nullable="false" />
+    <Property Type="Double" Name="Cost" Nullable="false" />
+    <Property Type="Boolean" Name="IsNew" Nullable="false" />
+    <Property Type="Boolean" Name="IsAttractive" Nullable="false" />
+    <Property Type="Boolean" Name="IsVip" Nullable="false" />
+    <Property Type="Int32" Name="TotalView" Nullable="false" />
+    <Property Type="Double" Name="Rate" Nullable="true" />
+    <Property Type="Int64" Name="RN" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="SearchProductByType_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="String" Name="ProductName" Nullable="false" MaxLength="200" />
+    <Property Type="String" Name="FriendlyUrl" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="ImgSource" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="Code" Nullable="true" MaxLength="50" />
+    <Property Type="Double" Name="Price" Nullable="false" />
+    <Property Type="Double" Name="Cost" Nullable="false" />
+    <Property Type="Boolean" Name="IsNew" Nullable="false" />
+    <Property Type="Boolean" Name="IsAttractive" Nullable="false" />
+    <Property Type="Boolean" Name="IsVip" Nullable="false" />
+    <Property Type="Int32" Name="TotalView" Nullable="false" />
+    <Property Type="Double" Name="Rate" Nullable="true" />
+    <Property Type="Int64" Name="RN" Nullable="true" />
+  </ComplexType>
+</Schema>

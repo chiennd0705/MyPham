@@ -1,0 +1,12 @@
+$('.navbar-nav .has-child').click(function (e) { $(this).find('.nav-mega-menu').toggleClass("active"); $(this).toggleClass("active"); e.stopPropagation() }); $('.nav-main-menu .menu-child').click(function (e) { $('.nav-main-menu .menu-child').removeClass("active"); $('.nav-main-menu .sub-menu').removeClass("active"); $(this).find('.sub-menu').toggleClass("active"); $(this).toggleClass("active"); e.stopPropagation() }); $(".nav-mega-menu,.sub-menu").click(function (e) { e.stopPropagation() }); $(document).click(function () { $(".nav-mega-menu").removeClass("active"); $(".navbar-nav .has-child").removeClass("active") }); $('.search-mobile').click(function () { $(".logo-bar").toggleClass("active"); $(".header-mobile").removeClass("active"); $(".navbar-toggle").removeClass("active"); $(".header-sub").removeClass("active") }); $('.navbar-toggle').click(function () { $(this).toggleClass("active"); $(".logo-bar").removeClass("active"); $(".header-mobile").toggleClass("active"); if ($(".header-sub").hasClass("active")) { $(".header-sub").removeClass("active"); $(".header-mobile").removeClass("active") } }); $(".list-main li a").click(function () { $(".header-mobile").removeClass("active"); $(".header-sub").removeClass("active"); $(".header-sub" + $(this).data('target')).toggleClass("active") }); $('.send-feedback').click(function () { $(".send-feedback").fadeOut(function () { $(".send-feedback").text(($(".send-feedback").text() == 'Gửi đánh giá của bạn') ? 'Đóng lại' : 'Gửi đánh giá của bạn').fadeIn() }); $(this).toggleClass("active"); $(".feedback-form").toggle() }); $(document).ready(function () {
+    $('#stars li').on('mouseover', function () {
+        var onStar = parseInt($(this).data('value'), 10); $(this).parent().children('li.star').each(function (e) {
+            if (e < onStar) { $(this).addClass('hover') }
+            else { $(this).removeClass('hover') }
+        })
+    }).on('mouseout', function () { $(this).parent().children('li.star').each(function (e) { $(this).removeClass('hover') }) }); $('#stars li').on('click', function () {
+        var onStar = parseInt($(this).data('value'), 10); var stars = $(this).parent().children('li.star'); for (i = 0; i < stars.length; i++) { $(stars[i]).removeClass('selected') }
+        for (i = 0; i < onStar; i++) { $(stars[i]).addClass('selected') }
+    }); if ($(window).width() < 1024) { $('.phone-fix,.customer-buy,.menu-mobile').hide() }
+    if ($(window).width() > 1024) { $('.header-mobile,.header-sub').hide() }
+})

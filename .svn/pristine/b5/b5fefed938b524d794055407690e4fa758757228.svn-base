@@ -1,0 +1,694 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.ServiceModel;
+using System.ServiceModel.Syndication;
+using System.Web;
+using System.Web.Mvc;
+using Business.ClassBusiness;
+using BuyGroup365.Areas.Manage.Models;
+using BuyGroup365.Controllers;
+using Common;
+using Common.util;
+using MvcPaging;
+using BuyGroup365.Models.Member;
+using System.Transactions;
+
+namespace BuyGroup365.Areas.Manage.Controllers
+{
+    public class ProductController : BaseController
+    {
+        
+        #region Khai bao biến
+        ProductsBusiness _productsBusiness=new ProductsBusiness();
+        ProductImagesBusiness _productImagesBusiness=new ProductImagesBusiness();
+        ProductPropertiesBusiness _productPropertiesBusiness=new ProductPropertiesBusiness();
+        Catalogs_ManufacturersBusiness _catalogsManufacturersBusiness=new Catalogs_ManufacturersBusiness();
+        CatalogsBusiness _catalogsBusiness=new CatalogsBusiness();
+        CatalogPropertiesBusiness _catalogPropertiesBusiness=new CatalogPropertiesBusiness();
+        CatalogPropertiesValueBusiness _catalogPropertiesValueBusiness=new CatalogPropertiesValueBusiness();
+        readonly LoadCombo _loadCombo=new LoadCombo();
+       
+      //  public static List<Catalog> List = null; 
+        #endregion
+        //
+        // GET: /Manage/Product/
+        public ProductController()
+        {
+            if (CategoryProductController.ListCate == null)
+            {
+                CategoryProductController.ListCate = _catalogsBusiness.GetDynamicQuery().ToList();
+
+            }
+            if (MemberController.ListCatalogsManufacturerses == null)
+            {
+                MemberController.ListCatalogsManufacturerses = _catalogsManufacturersBusiness.GetDynamicQuery().ToList();
+            }
+            if (MemberController.List == null)
+            {
+                MemberController.List = _catalogsBusiness.GetDynamicQuery().ToList();
+            }
+        }
+
+        public ActionResult Index(string key, int? page, long? shop = -1, int? statusProduct = -1, int? isOfProduct = -1)
+        {
+            try
+            {
+                var obj = HtmlCate(-1);
+                ViewBag.htmlCate = obj;
+                ViewBag.categoryproduct = _loadCombo.InitDropCategorys(1);
+                ViewBag.categoryproductedit = _loadCombo.InitDropCategorys(1);
+                ViewBag.categoryproductParent = _loadCombo.InitDropCategorysParent();
+                ViewBag.statusProduct = _loadCombo.InitSelectListItemStatus();
+                ViewBag.stateProduct = _loadCombo.InitSelectListItemState(null);
+                ViewData["status"] = true;
+                ViewData["key"] = key;
+                ViewBag.shop = new BuyGroup365.Models.Common.Util().LoadComBoShop();
+                //cap nhat trang thai don hang
+                ViewBag.statusOfProduct = InitSelectListItemStatusProduct();
+                ViewBag.isOfProduct = InitSelectListItemIsOfProduct();
+
+                int currentPageIndex = page.HasValue ? page.Value : 1;
+
+                var list = _productsBusiness.GetByKey(key, statusProduct, isOfProduct, shop).ToPagedList(currentPageIndex, 20);
+
+                return View(list);
+            }
+            catch (FaultException ex)
+            {
+                var exep = Function.GetExeption(ex);
+                var codeExp = exep[1];
+                string url = "Error/ErrorFunction/" + codeExp;
+                return RedirectToActionPermanent(url);
+            }
+        }
+
+        public List<SelectListItem> InitSelectListItemStatusProduct()
+        {
+            var listItemStatus = new List<SelectListItem>();
+            listItemStatus.Add(new SelectListItem { Text = "--Chọn trạng thái--", Value = "-1" });
+            listItemStatus.Add(new SelectListItem { Text = "Sản phẩm chưa được duyệt", Value = "1" });
+            listItemStatus.Add(new SelectListItem { Text = "Sản phẩm đang bán(đã được duyệt)", Value = "2" });
+            listItemStatus.Add(new SelectListItem { Text = "Sản phẩm đã hết hạn", Value = "3" });
+            listItemStatus.Add(new SelectListItem { Text = "Sản phẩm đã hết hàng", Value = "4" });
+            listItemStatus.Add(new SelectListItem { Text = "Sản phẩm chờ bán(bị tạm khóa)", Value = "5" });
+
+            return listItemStatus;
+        }
+
+
+        public List<SelectListItem> InitSelectListItemIsOfProduct()
+        {
+            var listItemStatus = new List<SelectListItem>();
+            listItemStatus.Add(new SelectListItem { Text = "--Chọn trạng thái--", Value = "-1" });
+            listItemStatus.Add(new SelectListItem { Text = "IsNew", Value = "1" });
+            listItemStatus.Add(new SelectListItem { Text = "IsAttactive", Value = "2" });
+            listItemStatus.Add(new SelectListItem { Text = "IsVip", Value = "3" });
+
+            return listItemStatus;
+        }
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult Create(string name, string model, string friendlyurl, long categoryproduct,
+            long manufaceproduct, float pice, float cost, float weight, string typeofcurrency, string tags, int statusProduct, int isnew, int isattactive, int isvip,
+            HttpPostedFileBase avatar, int stateProduct, string summary, string description, HttpPostedFileBase[] file, string[] proprertyvalue)
+        {
+            try
+            {
+                var objproduct = new Product();
+                objproduct.ProductName = name;
+                objproduct.Code = "ccc";
+                objproduct.Model = model;
+                objproduct.Cost = cost;
+                objproduct.CatalogId = categoryproduct;
+                objproduct.Description = description;
+                objproduct.FriendlyUrl = friendlyurl;
+                objproduct.Tags = Function.ConvertFileNameSpace(name) + ", " +
+                                  new CatalogsBusiness().GetById(categoryproduct).CatalogName + ", " +
+                                  Function.ConvertFileNameSpace(new CatalogsBusiness().GetById(categoryproduct).CatalogName);
+                objproduct.Summary = summary;
+                if (isnew == 1)
+                {
+                    objproduct.IsNew = true;
+                }
+                if (isattactive == 1)
+                {
+                    objproduct.IsAttractive = true;
+                }
+                if (isvip == 1)
+                {
+                    objproduct.IsVip = true;
+                }
+                objproduct.ManufacturerId = manufaceproduct;
+                objproduct.MemberId = 0;//Fix
+                objproduct.Price = pice;
+                objproduct.State = stateProduct;
+                objproduct.Status = statusProduct;
+                objproduct.TypeOfCurrency = typeofcurrency;
+                objproduct.Weight = weight;
+                #region Property
+               var  productProperties=new List<ProductProperty>();
+                var listobjproperty = proprertyvalue.ToList();
+                foreach (var item in listobjproperty)
+                {
+                    var splitobj = item.Split('|');
+                    var cateproperty = _catalogPropertiesBusiness.GetById(long.Parse(splitobj[0]));
+                    for (int i = 1; i <splitobj.Count(); i++)
+                    {
+                        var productProperty = new ProductProperty();
+                        productProperty.Name = cateproperty.Name;
+                        productProperty.Key = cateproperty.Key;
+                        productProperty.Value = splitobj[i];
+                        productProperties.Add(productProperty);
+                    }
+                }
+                //for (int i = 1; i <= index; i++)
+                //{
+                //  var  productProperty=new ProductProperty();
+                //    var namepro = formCollections["nameproperty"+i];
+                //    var keypro = formCollections["keyproperty"+i];
+                //    var valpro = formCollections["valeproperty"+i];
+                //    productProperty.Name = namepro;
+                //    productProperty.Key = keypro;
+                //    productProperty.Value = valpro;
+                //    productProperties.Add(productProperty);
+                //}
+                #endregion
+                #region image
+               List<ProductImage> productImages=new List<ProductImage>();
+                if (file != null)
+                {
+                    foreach (var item in file)
+                    {
+
+                        if (item != null && item.ContentLength > 0)
+                        {
+                            ProductImage productImage=new ProductImage();
+                            // TourInfo entity=new TourInfo();
+                            //Random rdImage = new Random();
+                            string randomImage = Guid.NewGuid().ToString();
+                            string fileNameImage = Common.util.Function.ConvertFileName(item.FileName);
+                            string pathImage = HttpContext.Server.MapPath("~/FileUpload");
+                            var strurlimage = Common.util.Function.ResizeImageNew(item, 300, 300, pathImage, randomImage);
+                            Common.util.Function.ResizeImageNew(item, 500, 500, pathImage, randomImage);
+                            Common.util.Function.ResizeImageNew(item, 1000, 1000, pathImage, randomImage);
+                            productImage.ImgSource = strurlimage;
+                            productImages.Add(productImage);
+                        }
+                    }
+                }
+                if (avatar != null && avatar.ContentLength>0)
+                {
+                    ProductImage productImage = new ProductImage();
+                    // TourInfo entity=new TourInfo();
+                    //Random rdImage = new Random();
+                    string randomImage = Guid.NewGuid().ToString();
+                    string fileNameImage = Common.util.Function.ConvertFileName(avatar.FileName);
+                    string pathImage = HttpContext.Server.MapPath("~/FileUpload");
+                    var strurlimage = Common.util.Function.ResizeImageNew(avatar, 300, 300, pathImage, randomImage);
+                    Common.util.Function.ResizeImageNew(avatar, 500, 500, pathImage, randomImage);
+                    Common.util.Function.ResizeImageNew(avatar, 1000, 1000, pathImage, randomImage);
+                    productImage.ImgSource = randomImage + "_" + fileNameImage;
+                    productImage.IsAvatar = 1;
+                    productImages.Add(productImage);
+                }
+                #endregion
+
+                objproduct.SeoKeyword = objproduct.Code;//Fix code
+                objproduct.SeoTitle = objproduct.ProductName;//fix code
+                objproduct.SeoDescription = objproduct.Description;//fix code
+                objproduct.ProductProperties = productProperties;
+                objproduct.ProductImages = productImages;
+                _productsBusiness.AddNew(objproduct);
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                //Write log
+                throw;
+            }
+        }
+        [HttpGet]
+        public ActionResult Edit(long id)
+        {
+            try
+            {
+              
+            
+                    var loadDropdown = new LoadDropdown();
+                    var listDropdowCate = new List<LoadDropdown.DropdowCate>();
+                    ViewBag.stateProduct = loadDropdown.SearchCategoryByName(ref listDropdowCate);
+
+                    Product obj = _productsBusiness.GetById(id);
+                    ViewBag.stateProducttwo = _loadCombo.InitSelectListItemState(obj.State);
+                    ViewBag.Manufaceture = loadDropdown.LoadComBoManufaceture(obj.CatalogId, obj.ManufacturerId);
+                    string html =new BuyGroup365.Models.Common.Util().HtmlCate(-1, obj.CatalogId);
+                    ViewBag.htmlCate = html;
+                    return View(obj);
+                
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        
+
+        [ValidateInput(false)]
+        [HttpPost]
+        public ActionResult Edit(Product obj, long categoryproduct,
+            long manufaceproduct, HttpPostedFileBase avatar, string description, HttpPostedFileBase[] file,string[] proprertyvalue)
+        {
+            try
+            {
+                using (var ts = new TransactionScope())
+                {
+                    Product entity = _productsBusiness.GetById(obj.Id);
+                    entity.CatalogId = categoryproduct;
+                    entity.ManufacturerId = manufaceproduct;
+                    entity.ProductProperties = obj.ProductProperties;
+                    entity.ProductName = obj.ProductName;
+                    entity.Tags = Function.ConvertFileNameSpace(obj.ProductName) + " ," +
+                                  new CatalogsBusiness().GetById(categoryproduct).CatalogName + " ," +
+                                  Function.ConvertFileNameSpace(
+                                      new CatalogsBusiness().GetById(categoryproduct).CatalogName);
+                    entity.Model = obj.Model;
+                    entity.Price = obj.Price;
+                    entity.Summary = obj.Summary;
+                    entity.Description = Server.HtmlDecode(description);
+                    entity.Cost = obj.Cost;
+                    entity.Weight = obj.Weight;
+                    entity.TypeOfCurrency = obj.TypeOfCurrency;
+                    entity.SeoTitle = !string.IsNullOrEmpty(obj.SeoTitle) ? obj.SeoTitle : obj.ProductName;
+                    entity.SeoKeyword = !string.IsNullOrEmpty(obj.SeoKeyword) ? obj.SeoKeyword : obj.ProductName;
+                    entity.SeoDescription = !string.IsNullOrEmpty(obj.SeoDescription) ? obj.SeoDescription : obj.ProductName;
+                    entity.State = obj.State; // Check lỗi này
+                    //TODDO
+                    entity.Tags = obj.Tags;
+                    List<ProductImage> productImages = entity.ProductImages.ToList();
+                    if (avatar != null && avatar.ContentLength > 0)
+                    {
+                        ProductImage productImage = entity.ProductImages.First(x => x.IsAvatar == 1);
+                        string randomImage = Guid.NewGuid().ToString();
+                        string pathImage = HttpContext.Server.MapPath("~/FileUpload");
+                        string strurlimage = Function.ResizeImageNew(avatar, 300, 300, pathImage, randomImage);
+                        Function.ResizeImageNew(avatar, 500, 500, pathImage, randomImage);
+                        Function.ResizeImageNew(avatar, 1000, 1000, pathImage, randomImage);
+                        productImage.ImgSource = strurlimage;
+                        productImages.Add(productImage);
+                    }
+                    if (file != null)
+                    {
+                        foreach (HttpPostedFileBase item in file)
+                        {
+                            if (item != null && item.ContentLength > 0)
+                            {
+                                var productImage = new ProductImage();
+                                string randomImage = Guid.NewGuid().ToString();
+                                string pathImage = HttpContext.Server.MapPath("~/FileUpload");
+                                string strurlimage = Function.ResizeImageNew(avatar, 300, 300, pathImage, randomImage);
+                                Function.ResizeImageNew(avatar, 500, 500, pathImage, randomImage);
+                                Function.ResizeImageNew(avatar, 1000, 1000, pathImage, randomImage);
+                                productImage.ImgSource = strurlimage;
+                                productImages.Add(productImage);
+                            }
+                        }
+                    }
+                    entity.ProductImages = productImages;
+
+                    #region Property
+
+                    ICollection<ProductProperty> listproduc = entity.ProductProperties;
+                    foreach (ProductProperty productProperty in listproduc)
+                    {
+                        _productPropertiesBusiness.Remove(productProperty.Id);
+                    }
+                    var productProperties = new List<ProductProperty>();
+
+                    if (proprertyvalue != null)
+                    {
+                        List<string> listobjproperty = proprertyvalue.ToList();
+                        foreach (string item in listobjproperty)
+                        {
+                            string[] splitobj = item.Split('|');
+                            CatalogProperty cateproperty = _catalogPropertiesBusiness.GetById(long.Parse(splitobj[0]));
+                            for (int i = 1; i < splitobj.Count(); i++)
+                            {
+                                var valuepro = splitobj[i].Split('#');
+                                var productProperty = new ProductProperty
+                                {
+                                    Name = cateproperty.Name,
+                                    Key = cateproperty.Key,
+                                    Value = valuepro[1],
+                                    CatalogPropertyValueId = long.Parse(valuepro[0]),
+                                    ProductId = entity.Id
+                                };
+                                productProperties.Add(productProperty);
+                            }
+                        }
+                    }
+
+                    #endregion
+
+                    _productPropertiesBusiness.AddRange(productProperties);
+                    _productsBusiness.Edit(entity);
+                    ts.Complete();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (Exception ex)
+            {
+                //Write log
+                throw;
+            }
+        }
+
+        public ActionResult Delete(long id)
+        {
+            try
+            {
+                _productsBusiness.Remove(id);
+                return RedirectToAction("Index");
+            }
+            catch (Exception)
+            {
+                //Write log
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Hàm gọi json đê bind dữ liêu vào dropdown
+        /// </summary>
+        /// <param name="cate"></param>
+        /// <returns></returns>
+        public JsonResult GetManufaceByCategory(long cate)
+        {
+            try
+            {
+                ObjGetPropertyAndManuByCate objGetPropertyAndManuByCate=new ObjGetPropertyAndManuByCate();
+                var htm = "";
+                var listobj = _catalogsManufacturersBusiness.GetDynamicQuery().Where(x => x.CatalogId == cate);
+                if (listobj.Any())
+                {
+               
+                    foreach (var item in listobj)
+                    {
+                        htm += " <option value=\"" + item.ManufacturerId + "\" onclick=\"GetManuface("+item.ManufacturerId+")\">" + item.Manufacturer.ManufacturerName +
+                               "</option>";
+                    }
+                   
+                    //return Json(htm);
+                }
+                else
+                {
+                    htm += " <option value=\"" + -1 + "\" onclick=\"GetManuface(" + -1+ ")\">Not found Manuface</option>";
+                }
+                objGetPropertyAndManuByCate.HtmlManuface = htm;
+                var listproperty = _catalogPropertiesBusiness.GetDynamicQuery().Where(x => x.CatalogId == cate).ToList();
+                var listjJsonProperties=new List<JsonProperty>();
+                if (listproperty.Any())
+                {
+                    foreach (var item in listproperty)
+                    {
+                        JsonProperty entity=new JsonProperty();
+                        entity.Id = item.Id;
+                        entity.Name = item.Name;
+                        entity.HtmlType = HtmlTypeProperty(item.Id);
+                        entity.HtmlInputHidden = "<input  type=\"hidden\" id=\"proprerty" + item.Id + "\" name=\"proprertyvalue\" value=\""+item.Id+"\"/>";
+                        listjJsonProperties.Add(entity);
+                    }
+                    objGetPropertyAndManuByCate.JsonProperties = listjJsonProperties;
+                }
+                else
+                {
+
+                    objGetPropertyAndManuByCate.JsonProperties = listjJsonProperties;
+                }
+                return Json(objGetPropertyAndManuByCate);
+            }
+            catch (Exception)
+            {
+                return Json(0);// Lỗi rồi e
+
+                //Write log
+                throw;
+            }
+        }
+
+        public JsonResult GetCategory(long productId)
+        {
+            try
+            {
+                  var obj = _productsBusiness.GetById(productId);
+                HtmlDropdown html=new HtmlDropdown();
+                var listcate = _loadCombo.InitDropCategorys(1);
+                var htmlcate = "";
+                var htmlmanu = "";
+                foreach (var item in listcate)
+                {
+                    if (item.Value == obj.CatalogId.ToString())
+                    {
+                        htmlcate += "<option value='" + item.Value + "' selected='selected'>" + item.Text + "</option>";
+                    }
+                    else
+                    {
+                        htmlcate += "<option value='" + item.Value + "' >" + item.Text + "</option>";
+                    }
+                         
+                }
+                var objectlist =
+                    _catalogsManufacturersBusiness.GetDynamicQuery().Where(x => x.CatalogId == obj.CatalogId);
+                foreach (var item in objectlist)
+                {
+                    if (item.ManufacturerId == obj.ManufacturerId)
+                    {
+                        htmlmanu += "<option value='" + item.ManufacturerId + "' selected='selected'>" + item.Manufacturer.ManufacturerName + "</option>";
+                    }
+                    else
+                    {
+                        htmlmanu += "<option value='" + item.ManufacturerId + "' >" + item.Manufacturer.ManufacturerName + "</option>";
+                    }
+                         
+                }
+                html.HtmlCategory = htmlcate;
+                html.HtmlManuface = htmlmanu;
+                return Json(html);
+            }
+            catch (Exception)
+            {
+                return Json(0);
+                //write log
+                throw;
+            }
+        }
+        public string HtmlTypeProperty(long proId)
+        {
+            var htm = "";
+            try
+            {
+                var listObj = _catalogPropertiesValueBusiness.GetDynamicQuery()
+                    .Where(x => x.CatalogPropertieId == proId).ToList();
+                if (listObj.Any())
+                {
+                    var objproperty = _catalogPropertiesBusiness.GetById(proId);
+               
+                    if (objproperty.Type == 1)
+                    {
+                        foreach (var item in listObj)
+                        {
+                            htm += "<label class='radio-inline'> <input onclick='SetvaluProperty(" + item.Id + "," + proId + ")' type='radio' name='optionsRadiosInline" + proId + "' id='optionsRadiosInline" + item.Id + "'  value='" + item.Value + "' >" + item.Value + "</label>";
+                        }
+                    }
+                    else
+                    {
+                        foreach (var item in listObj)
+                        {
+                            htm += "<label class='checkbox-inline'>   <input  value='" + item.Value + "' onclick='SetvaluProperty(" + item.Id + "," + proId + ")'  type='checkbox'  id='optionsRadiosInline" + item.Id + "'>" + item.Value + "</label>";
+                        }
+
+                        //multiple
+                    }
+                    return htm;
+                }
+                else
+                {
+                    return "Not results value property!";
+                }
+            }
+            catch (Exception)
+            {
+                //write log
+                return "Not results value property!";
+            }
+        }
+        public JsonResult GetPropertyValueByProId(long proId)
+        {
+            try
+            {
+                var listObj = _catalogPropertiesValueBusiness.GetDynamicQuery()
+                    .Where(x => x.CatalogPropertieId == proId).ToList();
+                if (listObj.Any())
+                {
+                    var objproperty = _catalogPropertiesBusiness.GetById(proId);
+                    var htm = "";
+                    if (objproperty.Type == 1)
+                    {
+                        foreach (var item in listObj)
+                        {
+                            htm+="<label class='radio-inline'> <input onclick='SetvaluProperty("+item.Id+")' type='radio' name='optionsRadiosInline' id='optionsRadiosInline"+item.Id+"'  value='"+item.Id+"' >"+item.Value+"</label>";
+                        }
+                    }
+                    else
+                    {
+                        foreach (var item in listObj)
+                        {
+                            htm += "<label class='checkbox-inline'>   <input  value='" + item.Id + "'  type='checkbox'  id='optionsRadiosInline" + item.Id + "'>" + item.Value + "</label>";
+                        }
+               
+                        //multiple
+                    }
+                    return Json(htm);
+                }
+                else
+                {
+                    return Json("Not results value property!");
+                }
+            }
+            catch (Exception)
+            {
+                //write log
+                return Json(0);
+                throw;
+            }
+        }
+        public class HtmlDropdown
+        {
+            public string HtmlCategory { get; set; }
+            public string HtmlManuface { get; set; }
+        }
+
+        public class ObjGetPropertyAndManuByCate
+        {
+            public string HtmlManuface { get; set; }
+            public List<JsonProperty> JsonProperties { get; set; }
+        }
+
+        public class JsonProperty
+        {
+            public long Id { get; set; }
+            public string Name { get; set; }
+            public string HtmlType { get; set; }
+            public string HtmlInputHidden { get; set; }
+        }
+        public string HtmlCate(long prentid)
+        {
+            var i = 0;
+            var j = 0;
+            var html = "<ul>";
+       //     var listobj = _catalogsBusiness.GetDynamicQuery().Where(x => x.ParentId == prentid).ToList();
+            var listobj = CategoryProductController.ListCate.Where(x => x.ParentId == prentid).ToList();
+          
+            
+                foreach (var item in listobj)
+                {
+
+                    html += "<li><input type=\"checkbox\" id=\"item-" + i + "\"   onclick=\"GetValueManuface(" + item.Id + ")\" /><label for=\"item-" + i + "\"  onclick=\"GetValueManuface(" + item.Id + ")\" >" + item.CatalogName + "</label>";
+
+                    i++;
+                    var str = HtmlbyCate(item.Id,ref i);
+                        html += str;
+                
+                    html += "</li>";
+                }
+             html += "</ul>";
+            return html;
+        }
+
+        public string HtmlbyCate(long cateId, ref int i)
+        {
+          //  var i = 1;
+            var j = 0;
+            var html = "";
+             html = "<ul>";
+            //var listobj = _catalogsBusiness.GetDynamicQuery().Where(x => x.ParentId == cateId).ToList();
+             var listobj = CategoryProductController.ListCate.Where(x => x.ParentId == cateId).ToList();
+            if (listobj.Any())
+            {
+                foreach (var item in listobj)
+                {
+                    html += "<li><input type=\"checkbox\" id=\"item-" + i + "\" onclick=\"GetValueManuface(" + item.Id + ")\" /><label for=\"item-" + i + "\"   onclick=\"GetValueManuface(" + item.Id + ")\" >" + item.CatalogName + "</label>";
+                    i++;
+                    var str = HtmlbyCate(item.Id,ref i);
+                    html += str;
+                    html += "</li>";
+                }
+            }
+                
+            
+            html += "</ul>";
+            return html;
+        }
+        public JsonResult GetCatetagoryByParent(long cate)
+        {
+            try
+            {
+                HtmlDropdown htmlDropdown=new HtmlDropdown();
+                var htm = "";
+                var manuface = "";
+                var listobj = _catalogsBusiness.GetDynamicQuery().Where(x => x.ParentId == cate).ToList();
+                if (listobj.Any())
+                {
+                    htm +=
+                        "<div class=\"box-oveflow\" id=\"box"+cate+"\"><ul class=\"list-category-suggestions\" >";
+                    foreach (var catalog in listobj)
+                    {
+                    
+                        htm += "<li><a href=\"javascript:;\"  onclick=\"GetValueParent(" + catalog.Id + ")\">" +
+                               catalog.CatalogName + "</a></li>";
+                     
+                    }
+                    htm += "</ul></div>";
+                }
+                else
+                {
+                    var listmanuface =
+                        _catalogsManufacturersBusiness.GetDynamicQuery().Where(x => x.CatalogId == cate).ToList();
+                    if (listmanuface.Any())
+                    {
+                        manuface +=
+                            "<div class=\"box-oveflow\"><ul class=\"list-category-suggestions\" >";
+                        foreach (var manu in listmanuface)
+                        {
+
+                            manuface += "<li><a href=\"javascript:;\"  onclick=\"GetManuface(" + manu.ManufacturerId + ")\">" +
+                                   manu.Manufacturer.ManufacturerName + "</a></li>";
+
+                        }
+                        manuface += "</ul></div>";
+                    }
+                    else
+                    {
+                        manuface +=
+                           "<div class=\"box-oveflow\"><ul class=\"list-category-suggestions\" >";
+                        manuface += "<li><a href=\"javascript:;\"  onclick=\"GetManuface(0)\">" +
+                                   "Not results</a></li>";
+
+                            manuface += "</ul></div>";
+                    }
+                }
+                htmlDropdown.HtmlCategory = htm;
+                htmlDropdown.HtmlManuface = manuface;
+                return Json(htmlDropdown);
+            }
+
+            catch (Exception)
+            {
+                //write log
+                return Json(0);
+                throw;
+            }
+        }
+	}
+}

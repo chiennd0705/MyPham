@@ -1,0 +1,241 @@
+﻿@using Common.util
+@model global::Common.Shop
+
+@{
+    ViewBag.Title = "Cấu hình Shop";
+    Layout = "~/Views/Shared/_LayoutMember.cshtml";
+}
+<div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 ">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+
+                <ol class="breadcrumb">
+                    <li><span class="glyphicon glyphicon-home"></span><a href="/">Trang chủ</a></li>
+                    <li>
+                        <a href="/Member/Profile">@SessionUtility.GetSessionMember(Session).UserName
+                        </a>
+                    </li>
+                    <li class="active">Shop</li>
+                </ol>
+            </h4>
+        </div>
+
+        <div class="panel-body">
+            <div class="table-responsive">
+
+                <div class="col-main col-lg-12">
+                    <div class="account-create">
+                        @Html.Raw(Function.MessengerBox("success-msg", ViewBag.Mes))
+                                                <form method="post" id="shop-form" action="/Member/Shop">
+                                                    @Html.HiddenFor(x => x.Id)
+
+                                                    <div class="fieldset">
+                                                        <input type="hidden" name="success_url" value="">
+                                                        <input type="hidden" name="error_url" value="">
+                                                        <h2 class="legend">Thông tin shop</h2>
+                                                        <div class="row">
+                                                            <div class="col-sm-6">
+                                                                <ul class="form-list">
+                                                                    <li class="">
+                                                                        <div class="customer-name-middlename">
+                                                                            <div class="field name-firstname">
+                                                                                <label for="firstname" class="required"><em>*</em>Tên shop</label>
+                                                                                <div class="input-box">
+                                                                                    @Html.TextBoxFor(model => model.ShopName, new { @class = "input-text required-entry", @autocomplete = "off", @maxlength = "200", @size = "25", @placeholder = "Tên shop"})
+                                                                                    @Html.ValidationMessageFor(model => model.ShopName)
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="field name-lastname">
+                                                                                <label for="lastname" class="required"><em>*</em>Số điện thoại</label>
+                                                                                <div class="input-box">
+                                                                                    @Html.TextBoxFor(model => model.Phone, new { @class = "input-text required-entry", @autocomplete = "off", @maxlength = "20", @size = "25" })
+                                                                                    @Html.ValidationMessageFor(model => model.Phone)
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <ul class="form-list">
+                                                                    <li class="">
+                                                                        <div class="customer-name-middlename">
+                                                                            <div class="field name-firstname">
+                                                                                <label for="firstname" class="required"><em>*</em>Tỉnh thành</label>
+                                                                                <div class="input-box">
+                                                                                    @Html.DropDownList("Location", null, new { @width = "100%", @class = "input-text required-entry", @onchange = "LoadChild(1)" })
+                                                                                    <input type="hidden" id="receiverAddress" />
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="field name-firstname">
+                                                                                <label for="firstname" class="required"><em>*</em>Quận huyện </label>
+                                                                                <div class="input-box">
+                                                                                    <select id="receiverTown" class="input input-text required-entry" name="receiverTown" onchange="LoadChild(2)">
+                                                                                        <option value="-1">--Chọn--</option>
+                                                                                    </select>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="field name-firstname">
+                                                                                <label for="firstname" class="required"><em>*</em>Phường xã </label>
+                                                                                <div class="input-box">
+                                                                                    <select class="input-text required-entry" id="receiverPhuong" name="receiverPhuong">
+                                                                                        <option value="-1">--Chọn--</option>
+                                                                                    </select>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="field name-firstname">
+                                                                                <label for="firstname" class="required"><em>*</em>Địa chỉ chi tiết:  </label>
+                                                                                <div class="input-box">
+                                                                                    @Html.TextBoxFor(model => model.Address, new { @class = "input-text required-entry", @maxlength = "500", @style = "width: 100%", @required = "required", @placeholder = "Ví dụ: số 10, Ngõ 50, Ngách 100, Hẻm 22, Đường Nguyễn A" })
+                                                                                    @Html.ValidationMessageFor(model => model.Address)
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="fieldset">
+                                                        <h2 class="legend">Liên hệ shop</h2>
+                                                        <div class="row">
+                                                            <ul class="form-list">
+                                                                <li class="fields">
+                                                                    <div class="col-sm-6">
+                                                                        <div class="field">
+                                                                            <label for="password" class="required">Tên hổ trợ</label>
+                                                                            <div class="input-box">
+                                                                                @Html.TextBoxFor(model => model.ShopSupport.SupportName, new { @class = "input-text required-entry", @autocomplete = "off", @maxlength = "200", @style = "width: 100%", @size = "25" })
+                                                                            @Html.ValidationMessageFor(model => model.ShopSupport.SupportName)
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="field">
+                                                                            <label for="password" class="required">Email</label>
+                                                                            <div class="input-box">
+                                                                                @Html.TextBoxFor(model => model.ShopSupport.Email, new { @class = "input-text required-entry", @autocomplete = "off", @maxlength = "100", @style = "width: 100%", @size = "25" })
+                                                                            @Html.ValidationMessageFor(model => model.ShopSupport.Email)
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="field">
+                                                                            <label for="confirmation" class="required">Số điện thoai</label>
+                                                                            <div class="input-box">
+                                                                                @Html.TextBoxFor(model => model.ShopSupport.Phone, new { @class = "input-text required-entry", @autocomplete = "off", @maxlength = "20", @style = "width: 100%", @size = "25" })
+                                                                            @Html.ValidationMessageFor(model => model.ShopSupport.Phone)
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="field">
+                                                                            <label for="confirmation" class="required">Di động</label>
+                                                                            <div class="input-box">
+                                                                                @Html.TextBoxFor(model => model.ShopSupport.Mobile, new { @class = "input-text required-entry", @autocomplete = "off", @maxlength = "20", @style = "width: 100%", @size = "25" })
+                                                                            @Html.ValidationMessageFor(model => model.ShopSupport.Mobile)
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-sm-6">
+
+                                                                        <div class="field">
+                                                                            <label for="confirmation" class="required">Skype</label>
+                                                                            <div class="input-box">
+                                                                                @Html.TextBoxFor(model => model.ShopSupport.Skype, new { @class = "input-text required-entry", @autocomplete = "off", @maxlength = "100", @style = "width: 100%", @size = "25" })
+                                                                            @Html.ValidationMessageFor(model => model.ShopSupport.Skype)
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="field">
+                                                                            <label for="confirmation" class="required">Facebook</label>
+                                                                            <div class="input-box">
+                                                                                @Html.TextBoxFor(model => model.ShopSupport.Facebook, new { @class = "input-text required-entry", @autocomplete = "off", @maxlength = "100", @style = "width: 100%", @size = "25" })
+                                                                            @Html.ValidationMessageFor(model => model.ShopSupport.Facebook)
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="field">
+                                                                            <label for="confirmation" class="require">Yahoo</label>
+                                                                            <div class="input-box">
+                                                                                @Html.TextBoxFor(model => model.ShopSupport.Yahoo, new { @class = "input-text required-entry", @autocomplete = "off", @maxlength = "100", @style = "width: 100%", @size = "25" })
+                                                                            @Html.ValidationMessageFor(model => model.ShopSupport.Yahoo)
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div class="buttons-set">
+                                                        <button type="submit" title="Submit" class="button" onclick="register()"><span><span>Cập nhật</span></span></button>
+                                                    </div>
+                                                </form>
+                        <script type="text/javascript">
+                            //<![CDATA[
+                            var dataForm = new VarienForm('login-form', true);
+                            //]]>
+                            function register() {
+                                $('#login-form').submit();
+                            }
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function LoadChild(level) {
+        var int = parseInt(level);
+        var parent = 0;
+        if (int == 1) {
+            parent = $("#Location").val();
+            var text = $("#Location option:selected").text();
+
+            // alert(a);
+            $('#receiverAddress').html("");
+            $('#receiverAddress').val(text);
+        } else {
+            parent = $("#receiverTown").val();
+        }
+
+        $.ajax({
+            url: '@Url.Action("GetLocationByParent","PayGoods")',
+            data: {
+                'parentId': parent
+            },
+            Type: 'POST',
+            dataType: 'json',
+            success: function (data) {
+
+                if (int == 1) {
+                    $('#receiverTown').html("");
+                    $('#receiverTown').append(data);
+                } else {
+                    $('#receiverPhuong').html("");
+                    $('#receiverPhuong').append(data);
+
+                }
+            },
+            error: function () {
+
+            }
+        });
+    }
+    $(document).ready(function () {
+        $.ajax({
+            url: '@Url.Action("LoadLocation","Member")',
+            data:
+            {
+                'type': 'sp'
+            },
+            Type: 'POST',
+            dataType: 'json',
+            success: function (data) {
+                $('#receiverPhuong').html("");
+                $('#receiverPhuong').append(data.ListItems1);
+                $('#receiverTown').html("");
+                $('#receiverTown').append(data.ListItems2);
+                $('#Location').html("");
+                $('#Location').append(data.ListItems3);
+            },
+            error: function () {
+
+            }
+        });
+    });
+</script>

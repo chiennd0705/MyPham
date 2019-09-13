@@ -1,0 +1,201 @@
+﻿@using BuyGroup365.Areas.Manage.Models
+@using MvcPaging
+@model Common.Album
+@using Common
+@using Business.ClassBusiness;
+@{
+    ViewBag.Title = "Cập nhật Album";
+    Layout = "~/Areas/Manage/Views/Shared/_LayoutAdmincshtml.cshtml";
+}
+<script>
+    function BrowseServer() {
+        var finder = new CKFinder();
+        finder.BasePath = '/Content/css/ckfinder/';
+        finder.selectActionFunction = SetFileFiled;
+        // finder.SelectActionFunction = SetFileFiled;
+        //   finder.SelectFunction = SetFileFiled;
+        //   finder.SelectFunctionData = SetFileFiled;
+        finder.popup();
+    }
+    function SetFileFiled(FileUrl) {
+        document.getElementById('file').value = FileUrl;
+    }
+</script>
+<div class="container-fluid" ng-app="body">
+    @Html.Raw(AdminFunction.BindHeader("Albums", " Thêm mới", null, null, null))
+    <!-- /.row -->
+    <!-- /.row -->
+    <!-- /.row -->
+    <div class="row" ng-controller="Index">
+        <div class="col-lg-6">
+            <div class="panel panel-default">
+                @using (Html.BeginForm("Edit", "Albums", FormMethod.Post, new { enctype = "multipart/form-data", id = "Edit" }))
+                {
+                    @Html.ValidationSummary(true)
+
+ <div class="modal-footer">
+<a type="button" class="btn btn-default" onclick="window.history.back();">Trở về</a>
+     <button type="submit" class="btn btn-primary">Cập nhật</button>
+ </div>
+
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <label>Tiêu đề<span class="required">*</span></label><br />
+                        <input class="form-control" autocomplete="off" maxlength="100" data-val-required="Mời nhập tiêu đề" id="Title" required id="Title" name="Title" type="text" value="@Model.Title" />
+                    </div>
+                    <div class="form-group">
+                        <label>Code</label><br />
+                        <input type="text" class="form-control" maxlength="20" id="Code" name="Code" value="@Model.Code" />
+                        <span class="field-validation-valid" data-valmsg-for="Code" data-valmsg-replace="true"></span>
+                    </div>
+<div class="form-group">
+                        <label>Sắp xếp</label><br />
+                        <input type="text" class="form-control" maxlength="5" id="Order" name="Order"  value="@Model.Order" />
+
+                  <span class="field-validation-valid" data-valmsg-for="Code" data-valmsg-replace="true"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Status<span class="required">*</span></label><br />
+                        <select class="form-control" name="Status" id="Status">
+                            <option value="1" @(Model.Status==1?"selected":"")>Phát hành</option>
+                            <option value="0" @(Model.Status==0?"selected":"")>Không phát hành</option>
+                        </select>
+                    </div>
+                   <div class="form-group">
+                        <label>Độ rộng Banner</label><br />
+                        <input type="text" class="form-control" maxlength="4" id="Attribute" name="Attribute" value="@Model.Attribute" />
+                        <span class="field-validation-valid" data-valmsg-for="Code" data-valmsg-replace="true"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Mô tả</label><br />
+                        <textarea class="form-control" id="Content_add" name="Description" style="height:200px">@Model.Description</textarea>
+                    </div>
+                </div>
+
+              @*  <div class="modal-footer">
+<a type="button" class="btn btn-default" onclick="window.history.back();">Trở về</a>
+                    <button type="submit" class="btn btn-primary">Cập nhật</button>
+                </div>*@
+
+                }
+               <div style="clear:both"> </div>
+            </div>
+        </div>
+<div class="col-lg-6">
+@{
+    AlbumImage albImage;
+ long imgId=0;
+if(Request.QueryString["imgid"]!=null)
+{
+     imgId = long.Parse(Request.QueryString["imgid"].ToString());
+albImage = new AlbumImagesBusiness().GetById(imgId);
+}else{
+ albImage = new AlbumImage();
+}
+
+}
+  @using (Html.BeginForm("UpdateImages", "Albums", FormMethod.Post, new { enctype = "multipart/form-data", id = "UpdateImages" }))
+                {
+                <input type="hidden" value="@Model.Id" id="Id" name="Id" />
+
+ <input type="hidden" value="@imgId" id="imgId" name="imgId" />
+
+                    @Html.ValidationSummary(true)
+
+ <div class="form-group">
+                        <label>Tiêu đề<span class="required">*</span></label><br />
+                        <input class="form-control" autocomplete="off" maxlength="200" data-val-required="Mời nhập tiêu đề" id="Title" required id="Title" name="Title" type="text" value="@albImage.Title" />
+                    </div>
+ <div class="form-group">
+     <label>Ảnh</label><br />
+
+     <input id="file" name="file" required data-val-required="Trường là bắt buộc" type="text" class="input-block-level" />
+     <input type="button" value="Browse Server" onclick="BrowseServer();" class="controls" />
+ </div>
+                    <div class="form-group">
+                        <label>Link</label><br />
+                        <input type="text" class="form-control" maxlength="200" id="Link" name="Link"  value="@albImage.Link" />
+                        <span class="field-validation-valid" data-valmsg-for="Code" data-valmsg-replace="true"></span>
+                    </div>
+ <div class="form-group">
+                        <label>Kiểu mở liên kết</label><br />
+                        <select class="form-control" name="Target" id="Target">
+                            <option value="_self" @(albImage.Target=="_self"?"selected":"")>Mở Tab hiện tại</option>
+                            <option value="_blank" @(albImage.Target=="_blank"?"selected":"")>Sang Tab mới</option>
+                        </select>
+                    </div>
+<div class="form-group">
+                        <label>Sắp xếp</label><br />
+                        <input type="text" class="form-control" maxlength="5" id="Order" name="Order"  value="@albImage.Order" />
+                        <span class="field-validation-valid" data-valmsg-for="Code" data-valmsg-replace="true"></span>
+                    </div>
+ <div class="form-group">
+                        <label>Mô tả</label><br />
+                        <textarea class="form-control" id="Desctiption" name="Desctiption" style="height:100px">@albImage.Desctiption</textarea>
+                    </div>
+ <div class="form-group">
+                         <button type="submit" class="btn btn-primary" name="btnSubmit" value="Thêm ảnh">Thêm ảnh</button>
+
+@if(Request.QueryString["imgid"]!=null)
+{
+ <button type="submit" class="btn btn-primary" name="btnSubmit" value="Cập nhật ảnh">Cập nhật ảnh</button>
+}
+                    </div>
+}
+ <div class="table-responsive">
+                            <table class="table table-bordered table-hover table-striped" id="dataTables" aria-describedby="dataTables-example_info">
+                                <thead>
+                                    <tr role="row">
+                                        <th style="width:80px">
+                                            STT
+                                        </th>
+                                        <th>
+                                            Tiêu đề ảnh
+                                        </th>
+                                       <th>
+                                            Ảnh
+                                        </th>
+
+                                        <th style="width: 120px;">Chức Năng</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+@{int i=-1;
+}
+                                    @foreach (var item in Model.AlbumImages)
+                                    {i++;
+                                        <tr>
+                                            <td style="text-align:center">
+                                                @(i)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Title)
+                                            </td>
+
+                                            <td style="text-align:center">
+                                               <img src="@item.ImageSource"  width="100px" />
+                                            </td>
+
+                                            <td style="text-align: center">
+
+                                                <a href="/Manage/Albums/Edit/?id=@Model.Id&imgid=@item.Id">
+                                                    <img src="~/img/IconMain/edit.png" width="19" title="Sửa" />
+                                                </a>
+                                                 <a href="/Manage/Albums/DeleteImage/?id=@Model.Id&imgid=@item.Id" title="Xóa" onclick = "return confirm('Bạn có chắc chắn?');">
+                                                    <img src="~/img/IconMain/remove.png" width="19" title="Xóa" />
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+             </div>
+        <script type="text/javascript">
+
+            //var setVAL = CKEDITOR.replace('Content_add', { height: 500 });
+
+            //setVAL.setData($('#Content_add').val());
+            //.CKFinder.setupCKEditor(setVAL, '/Content/css/ckfinder/');
+        </script>
+    </div>
+</div>

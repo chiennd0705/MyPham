@@ -1,0 +1,699 @@
+﻿@using Business.ClassBusiness
+@using BuyGroup365.Models.Member
+@using Common.util
+@model  List<shopcartitem>
+@{
+    ViewBag.Title = "Đơn hàng";
+    //Layout = null;
+    Layout = "~/Views/Shared/_LayoutPayment.cshtml";
+    var totalMoneyOfGoods = ViewBag.TotalMoney;
+    var totalGramGoods = ViewBag.TotalGram;
+    var sp = Request.QueryString["sp"];
+
+    Double total = 0;
+}
+
+
+<div class="container">
+    <div class="row checkout-process">
+            <div class="col-main col-lg-12">
+          <div class="cart">
+                                    <link href="/Content/Csspublic/css-order/plugin.css" rel="stylesheet">
+
+                                    <link href="/Content/Csspublic/css-order/default.css" rel="stylesheet">
+
+                                    <div id="checkoutPage" style="display: block;">
+                                        <div id="page_wrapper" class="checkout-process">
+
+                                            <!--Begin Content-->
+                                            <div class="vin-content-body checkout-4-step">
+                                                <img style="width: 1px; height: 1px; display: none" src="">
+                                                <div name="SubmitForm" id="SubmitForm" ng-submit="Submit(SubmitForm)">
+                                                    <div class="container_12" id="checkout">
+                                                        <div class="vin-box-content">
+                                                            <div class="checkout-process" id="myWizard ">
+                                                                <!--new layout-->
+                                                                <div id="main">
+                                                                    <div id="main_container" class="container">
+                                                                        <div id="top_navigation">
+                                                                            <ul class="steps text-center">
+                                                                                <li class="active current checkout-1">
+                                                                                    <a href="#checkout1" data-toggle="tab"><span class="bullet-checkout"><span class="number">1</span> </span>Đăng nhập</a>
+                                                                                </li>
+                                                                                <li class="checkout-2">
+                                                                                    <a href="#checkout2" data-toggle="tab" class="disabled"><span class="bullet-checkout"><span class="number">2</span> </span>Thông tin giao hàng </a>
+                                                                                </li>
+                                                                                <li class="checkout-3">
+                                                                                    <a href="#checkout3" data-toggle="tab" class="disabled"><span class="bullet-checkout"><span class="number">3</span> </span>Hình thức thanh toán </a>
+                                                                                </li>
+                                                                            </ul>
+                                                                        </div>
+                                                                        <div id="main_left_section" class="col-lg-7">
+                                                                            <div class="tab-content ">
+                                                                                <!--checkout step 1-->
+                                                                                <div class="tab-pane active" id="checkout1">
+                                                                                    <div class="login-page">
+
+                                                                                        <div class="form_login_authen">
+
+
+                                                                                            <form action="" class="adr-oms form" method="post" onsubmit="return validateForm()" role="form">
+                                                                                                <div id="divErrors" class="validation-summary-errors" style="margin-bottom: 0px;"></div>
+                                                                                                <div class="validation-summary-valid" data-valmsg-summary="true">
+                                                                                                    <ul>
+                                                                                                        <li style="display: none"></li>
+                                                                                                    </ul>
+                                                                                                </div>
+                                                                                                <label>Vui lòng điền Tên đăng nhập/email của bạn:</label>
+                                                                                                <div class="group">
+                                                                                                    <input class="adr-oms input" data-val="true" data-val-required="Địa chỉ Email/Số điện thoại không được để trống!" id="username" name="username" placeholder="UserName/Email" tabindex="1" type="text" uifocus="focus">
+                                                                                                </div>
+
+                                                                                                <div class="group">
+                                                                                                    <input class="adr-oms input" data-val="true" data-val-required="Mật khẩu không được để trống!" id="password" name="password" placeholder="Mật khẩu của tôi" tabindex="4" type="password">
+                                                                                                </div>
+                                                                                                <div class="group">
+                                                                                                    <a href="#" target="blank" tabindex="5">Quên mật khẩu?</a>
+                                                                                                </div>
+                                                                                                <input type="hidden" value="f9a12147987d4a1d2c510809a0bd1b4d" name="oauth_token" id="oauth_token">
+                                                                                                <div class="group" id="divOmsLogin">
+                                                                                                    <button class="btn button" style="width: 100%" type="submit" tabindex="6" onclick="return checkInputLogin();">
+                                                                                                        <span><span>Đăng nhập &amp; đặt hàng » </span></span>
+
+                                                                                                    </button>
+                                                                                                </div>
+                                                                                            </form>
+                                                                                            <p style="font-size: 13px;">
+                                                                                                Hoặc nếu bạn chưa có tài khoản
+                                                                                            </p>
+                                                                                            <div class="group" id="divOmsCallback">
+                                                                                                <button class="btn button" style="width: 100%" id="btnOmsCallback" href="javascript:;" tabindex="6">
+                                                                                                    <span><span>Tiếp tục thanh toán</span></span>
+                                                                                                </button>
+                                                                                            </div>
+                                                                                            <script>
+
+                                                                                                function checkInputLogin() {
+                                                                                                    if (jQuery("#username").val() == '') {
+                                                                                                        alert('Bạn phải nhập tên đăng nhập hoặc địa chỉ email!');
+                                                                                                        jQuery("#username").focus();
+                                                                                                        return false;
+                                                                                                    }
+                                                                                                    if (jQuery("#password").val() == '') {
+                                                                                                        alert('Bạn phải nhập mật khẩu đăng nhập!');
+                                                                                                        jQuery("#password").focus();
+                                                                                                        return false;
+                                                                                                    }
+                                                                                                    return true;
+                                                                                                }
+
+</script>
+
+                                                                                        </div>
+
+
+                                                                                        <div id="step1"></div>
+                                                                                    </div>
+                                                                                </div>
+
+
+
+                                                                                <!--End checkout step 1-->
+                                                                                <!--checkout step 2-->
+                                                                                <div class="tab-pane" id="checkout2" style="display: block; visibility: visible">
+                                                                                    <div>
+
+                                                                                        <div class="panel-checkout">
+                                                                                            <div id="delivery-address" class="delivery-address">
+                                                                                                <div class="adr-oms panel" id="panel_buyer_info">
+                                                                                                    <div class="header">
+
+                                                                                                        <h2 class="title">
+                                                                                                            <i class="adr-oms huge icon location"></i>Địa chỉ nhận hàng
+                    </h2>
+                                                                                                    </div>
+                                                                                                    <div class="body">
+
+                                                                                                        <div class="addresses-list">
+                                                                                                            <div id="userAddress"></div>
+
+                                                                                                            <div class="adr-oms radio radio-new hidden">
+                                                                                                                <input type="radio" id="newAddress" name="UserAddresss" value="0">
+                                                                                                                <label for="newAddress">
+                                                                                                                    <div class="description">
+                                                                                                                        <div class="text-black font-family-medium">Thêm địa chỉ giao hàng khác</div>
+                                                                                                                    </div>
+                                                                                                                </label>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                        <form class="adr-oms horizontal form" name="form_address_info" id="form_address_info" style="" novalidate="novalidate">
+                                                                                                            <div class="group">
+                                                                                                                <div class="column first-child">
+                                                                                                                    <label for="">Họ tên:</label>
+                                                                                                                </div>
+                                                                                                                <!-- end .column -->
+                                                                                                                <div class="column last-child">
+                                                                                                                    <input class="input" autofocus="autofocus" maxlength="50" name="DeliveryFullName" id="DeliveryFullName" type="text" placeholder="Ví dụ: Nguyễn Văn A">
+                                                                                                                </div>
+                                                                                                                <!-- end .column -->
+                                                                                                            </div>
+                                                                                                            <!-- end .group -->
+                                                                                                            <div class="group">
+                                                                                                                <div class="column first-child">
+                                                                                                                    <label for="">Điện thoại: </label>
+                                                                                                                </div>
+                                                                                                                <!-- end .column -->
+                                                                                                                <div class="column last-child">
+                                                                                                                    <div class="column two-column">
+                                                                                                                        <div class="sub-column">
+                                                                                                                            <input type="text" id="DeliveryMobile" onkeyup=" oms.resetValid(this) " name="DeliveryMobile" maxlength="13" class="input valid-mobile" placeholder="Ví dụ: 0921308381">
+                                                                                                                            <i class="adr-oms small icon checked circle green check-mobile"></i>
+                                                                                                                        </div>
+                                                                                                                        <!-- end .column -->
+                                                                                                                        <span class="pull-left space-input"></span>
+                                                                                                                        <div class="sub-column text-muted small">
+                                                                                                                            <span>Nhân viên giao nhận sẽ liên hệ với SĐT này.</span>
+                                                                                                                        </div>
+                                                                                                                        <!-- end .column -->
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                                <!-- end .column -->
+                                                                                                            </div>
+                                                                                                            <!-- end .group -->
+                                                                                                            <div class="group">
+                                                                                                                <div class="column first-child">
+                                                                                                                    <label for="">Email: <span class="text-muted no-required">(không bắt buộc)</span></label>
+                                                                                                                </div>
+                                                                                                                <!-- end .column -->
+                                                                                                                <div class="column last-child">
+                                                                                                                    <input type="text" id="DeliveryEmail" maxlength="50" name="DeliveryEmail" class="input" placeholder="Ví dụ: support@Buygroup365.com">
+                                                                                                                </div>
+                                                                                                                <!-- end .column -->
+                                                                                                            </div>
+                                                                                                            <!-- end .group -->
+                                                                                                            <div class="group group-hr">
+                                                                                                                <div class="column first-child">
+                                                                                                                    <label for=""></label>
+                                                                                                                </div>
+                                                                                                                <!-- end .column -->
+                                                                                                                <div class="column last-child">
+                                                                                                                    <hr>
+                                                                                                                </div>
+                                                                                                                <!-- end .column -->
+                                                                                                            </div>
+                                                                                                            <!-- end .group -->
+
+
+
+                                                                                                            <div class="group">
+                                                                                                                <div class="column first-child">
+                                                                                                                    <label for="">Tên đường phố:</label>
+                                                                                                                </div>
+                                                                                                                <!-- end .column -->
+                                                                                                                <div class="column last-child">
+                                                                                                                    <input class="input ui-autocomplete-input" autofocus="autofocus" maxlength="300" name="DeliveryAddressSolr" id="DeliveryAddressSolr" type="text" placeholder="Ví dụ: Minh khai" autocomplete="off">
+                                                                                                                    <div class="results-address"></div>
+                                                                                                                </div>
+                                                                                                                <!-- end .column -->
+                                                                                                            </div>
+                                                                                                            <!-- end .group -->
+
+                                                                                                            <div class="group">
+                                                                                                                <div class="column first-child">
+                                                                                                                    <label for="">Địa chỉ chi tiết: </label>
+                                                                                                                </div>
+                                                                                                                <!-- end .column -->
+                                                                                                                <div class="column last-child">
+                                                                                                                    <input class="input" id="DeliveryAddressName" maxlength="300" name="DeliveryAddressName" type="text" placeholder="Ví dụ: số 10, Ngõ 50, Ngách 100, Hẻm 22">
+                                                                                                                </div>
+                                                                                                                <!-- end .column -->
+                                                                                                            </div>
+                                                                                                            <!-- end .group -->
+                                                                                                        </form>
+                                                                                                        <!-- end form#form_address_info -->
+                                                                                                        <div id="vinmartAddress"></div>
+                                                                                                        <div class="note-by-customer  adr-oms form" id="note-by-customer-shipping">
+                                                                                                            <div class="group">
+                                                                                                                <div class="column first-child">
+                                                                                                                    <label for="">Lời nhắn: <span class="text-muted no-required">(không bắt buộc)</span></label>
+                                                                                                                </div>
+                                                                                                                <!-- end .column -->
+                                                                                                                <div class="column last-child">
+                                                                                                                    <textarea id="NoteByCustomerShipping" maxlength="500" name="NoteByCustomerShipping" rows="3" class="adr-oms textarea" placeholder="Ví dụ: Chuyển hàng ngoài giờ hành chính"></textarea>
+
+                                                                                                                </div>
+                                                                                                                <!-- end .column -->
+                                                                                                            </div>
+                                                                                                            <!-- end .group -->
+                                                                                                        </div>
+
+                                                                                                        <hr>
+                                                                                                        <div id="new-buyer-address" class="box-buyer-address" style="">
+
+                                                                                                            <div class="adr-oms checkbox mtop-10" id="BoxIsDeliveryAddress">
+                                                                                                                <input type="checkbox" id="IsDeliveryAddress" value="1" name="same_info_as_buyer_toggle" checked="checked"  onclick="OpenFrmShipping();">
+                                                                                                                <label for="IsDeliveryAddress">
+                                                                                                                    Thông tin người mua hàng giống như trên
+                               
+                                                                                                                </label>
+                                                                                                            </div>
+                                                                                                            <script>
+                                                                                                                function OpenFrmShipping() {
+                                                                                                                    jQuery('#frm-shipping').toggle();
+                                                                                                                }
+
+                                                                                                            </script>
+                                                                                                            <form id="frm-shipping" name="frm-shipping" class="adr-oms horizontal form" style="display: none" novalidate="novalidate">
+                                                                                                                <div class="group">
+                                                                                                                    <div class="column first-child">
+                                                                                                                        <label for="">Họ tên: </label>
+                                                                                                                    </div>
+                                                                                                                    <!-- end .column -->
+                                                                                                                    <div class="column last-child">
+                                                                                                                        <input type="text" id="FullName" maxlength="50" autofocus="autofocus" name="FullName" class="input" placeholder="Ví dụ: Nguyễn Văn A" autocomplete="off">
+                                                                                                                    </div>
+                                                                                                                    <!-- end .column -->
+                                                                                                                </div>
+                                                                                                                <!-- end .group -->
+
+                                                                                                                <div class="group">
+                                                                                                                    <div class="column first-child">
+                                                                                                                        <label for="">Điện thoại: </label>
+                                                                                                                    </div>
+                                                                                                                    <!-- end .column -->
+                                                                                                                    <div class="column last-child">
+                                                                                                                        <div class="column two-column">
+                                                                                                                            <div class="sub-column">
+                                                                                                                                <input type="text" id="Mobile" name="Mobile" onkeyup=" oms.resetValid(this) " maxlength="13" class="input valid-mobile" placeholder="Ví dụ: 0921308381">
+                                                                                                                                <i class="adr-oms small icon checked circle green check-mobile"></i>
+                                                                                                                            </div>
+                                                                                                                            <!-- end .column -->
+                                                                                                                            <span class="pull-left space-input"></span>
+                                                                                                                            <div class="sub-column text-muted small">
+                                                                                                                                <span>Buygroup365 sẽ liên hệ đến SĐT này để xác nhận đơn hàng.</span>
+                                                                                                                            </div>
+                                                                                                                            <!-- end .column -->
+                                                                                                                        </div>
+
+                                                                                                                    </div>
+                                                                                                                    <!-- end .column -->
+                                                                                                                </div>
+                                                                                                                <!-- end .group -->
+                                                                                                                <div class="group" id="BuyerEmail">
+                                                                                                                    <div class="column first-child">
+                                                                                                                        <label for="">Email: <span class="text-muted no-required">(không bắt buộc)</span></label>
+                                                                                                                    </div>
+                                                                                                                    <!-- end .column -->
+                                                                                                                    <div class="column last-child">
+                                                                                                                        <input type="text" id="Email" name="Email" maxlength="50" class="input" placeholder="Ví dụ: support@Buygroup365.com">
+                                                                                                                    </div>
+                                                                                                                    <!-- end .column -->
+                                                                                                                </div>
+                                                                                                                <!-- end .group -->
+                                                                                                                <div class="group group-hr">
+                                                                                                                    <div class="column first-child">
+                                                                                                                        <label for=""></label>
+                                                                                                                    </div>
+                                                                                                                    <!-- end .column -->
+                                                                                                                    <div class="column last-child">
+                                                                                                                        <hr>
+                                                                                                                    </div>
+                                                                                                                    <!-- end .column -->
+                                                                                                                </div>
+                                                                                                                <!-- end .group -->
+
+
+                                                                                                                <div class="group">
+                                                                                                                    <div class="column first-child">
+                                                                                                                        <label for="">Tên đường phố:</label>
+                                                                                                                    </div>
+                                                                                                                    <!-- end .column -->
+                                                                                                                    <div class="column last-child">
+                                                                                                                        <input class="input ui-autocomplete-input" autofocus="autofocus" maxlength="300" name="AddressSolr" id="AddressSolr" type="text" placeholder="Ví dụ: Minh khai" autocomplete="off">
+                                                                                                                        <div class="results-address"></div>
+                                                                                                                    </div>
+                                                                                                                    <!-- end .column -->
+                                                                                                                </div>
+                                                                                                                <!-- end .group -->
+
+                                                                                                                <div class="group">
+                                                                                                                    <div class="column first-child">
+                                                                                                                        <label for="">Địa chỉ chi tiết: </label>
+                                                                                                                    </div>
+                                                                                                                    <!-- end .column -->
+                                                                                                                    <div class="column last-child">
+                                                                                                                        <input class="input" id="AddressName" maxlength="300" name="AddressName" type="text" placeholder="Ví dụ: số 10, Ngõ 50, Ngách 100, Hẻm 22">
+                                                                                                                    </div>
+                                                                                                                    <!-- end .column -->
+                                                                                                                </div>
+                                                                                                                <!-- end .group -->
+                                                                                                            </form>
+                                                                                                            <!-- end form#form_buyer_info -->
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+
+                                                                                            <!--Form Buyer-->
+                                                                                            <div class="adr-oms panel box-buyer-address" id="panel_address_info" style="display: none">
+                                                                                                <div class="header">
+                                                                                                    <div class="tools mtop-10">
+                                                                                                        <a href="javascript:void(0)" class="mr-10" title="Thay đổi thông tin người đặt hàng" onclick=" oms.changeAddressBuyerInfo(this) ">Thay đổi</a>
+                                                                                                    </div>
+                                                                                                    <h2 class="title">
+                                                                                                        <i class="adr-oms huge icon buyer"></i><span>Thông tin người đặt hàng</span>
+                                                                                                    </h2>
+                                                                                                </div>
+                                                                                                <div class="body">
+                                                                                                    <div id="addressBuyer"></div>
+                                                                                                    <div id="buyerForm"></div>
+                                                                                                </div>
+                                                                                            </div>
+
+                                                                                            <div class="adr-oms panel" id="panel_business_VAT_info" style="display: none">
+                                                                                                <div class="header">
+                                                                                                    <h2 class="title">
+                                                                                                        <div class="adr-oms checkbox">
+                                                                                                            <input type="checkbox" id="TakeVAT" name="TakeVAT">
+                                                                                                            <label for="TakeVAT">
+                                                                                                                Yêu cầu xuất hóa đơn GTGT cho đơn hàng này
+                                   
+                                                                                                            </label>
+                                                                                                        </div>
+                                                                                                    </h2>
+                                                                                                </div>
+                                                                                                <div class="body">
+                                                                                                    <form class="adr-oms horizontal form" id="form-vat" name="form-vat" style="display: none" novalidate="novalidate">
+                                                                                                        <div class="group">
+                                                                                                            Vui lòng điền đầy đủ thông tin công ty để nhận hóa đơn GTGT.
+                               
+                                                                                                        </div>
+                                                                                                        <div class="group">
+                                                                                                            <div class="column first-child">
+                                                                                                                <label for="">Mã số thuế:</label>
+                                                                                                            </div>
+                                                                                                            <div class="column last-child">
+                                                                                                                <input type="text" id="InvoiceTaxCode" name="InvoiceTaxCode" maxlength="40" class="input" placeholder="Ví dụ: 398473094385">
+                                                                                                            </div>
+                                                                                                        </div>
+
+                                                                                                        <div class="group">
+                                                                                                            <div class="column first-child">
+                                                                                                                <label for="">Tên công ty:</label>
+                                                                                                            </div>
+                                                                                                            <div class="column last-child">
+                                                                                                                <input type="text" id="InvoiceName" name="InvoiceName" maxlength="200" class="input" placeholder="Ví dụ: Vinecom">
+                                                                                                            </div>
+                                                                                                        </div>
+
+                                                                                                        <div class="group">
+                                                                                                            <div class="column first-child">
+                                                                                                                <label for="">Địa chỉ công ty:</label>
+                                                                                                            </div>
+                                                                                                            <div class="column last-child">
+                                                                                                                <input type="text" id="BillingAddress" name="BillingAddress" maxlength="1000" class="input" placeholder="Ví dụ: 458 Minh khai, Vĩnh Tuy, Hà Nội">
+                                                                                                            </div>
+                                                                                                        </div>
+
+                                                                                                    </form>
+                                                                                                </div>
+                                                                                            </div>
+
+                                                                                            <!-- end .adr-oms.panel -->
+                                                                                            <div class="main_left_section-actions">
+                                                                                                <div class="text-right">
+                                                                                                    <p class="color-red messageValidateStep"></p>
+                                                                                                </div>
+                                                                                                <div class="pull-right">
+                                                                                                    <button class="adr large button bg-red" id="validateStep2" type="button" onclick=" oms.validateShippingAddress(this) ">Tiếp tục <i class="adr-oms icon right arrow-right"></i></button>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+
+
+                                                                                <div class="clear"></div>
+                                                                            </div>
+
+                                                                            <!--End checkout step 2-->
+                                                                            <!--checkout step 3-->
+                                                                            <div class="tab-pane clearfix" id="checkout3" ng-form="step3" style="display: block; visibility: visible">
+                                                                                <div>
+
+                                                                                    <div class="panel-checkout step-payment">
+                                                                                        <!--Thanh toan sử dụng kết hợp hình thức khác-->
+                                                                                        <div class="adr-oms panel" id="panel_payment_method">
+                                                                                            <div class="header">
+                                                                                                <h2 class="title">
+                                                                                                    <i class="adr-oms icon"></i>
+                                                                                                    Phương thức thanh toán
+                       
+                                                                        <!-- <div class="adr-oms checkbox">
+                            <input type="checkbox" id="checkbox_payment_method_toggle" name="payment_method_toggle" value="0" checked/>
+                            <label for="checkbox_payment_method_toggle">Phương thức thanh toán</label>
+                        </div> -->
+                                                                                                </h2>
+                                                                                            </div>
+                                                                                            <div class="body">
+                                                                                                <div class="adr-oms horizontal form" id="form_payment_method">
+                                                                                                    <div class="group">
+                                                                                                        <div class="adr-oms radio payment-method-1 select-method">
+                                                                                                            <input type="radio" id="payment-method-29" onchange=" oms.changePaymentMethod(this) " name="PaymentMethod" data-type="4" data-code="1" value="29">
+                                                                                                            <label for="payment-method-29">
+                                                                                                                <div class="adr-oms payment-method">
+                                                                                                                    <div class="thumbnail">
+                                                                                                                        <img alt="" src="/Content/Csspublic/css-order/72703_130716703681632259.png">
+                                                                                                                    </div>
+                                                                                                                    <div class="description">
+                                                                                                                        <div class="title">Thanh toán khi nhận hàng                      </div>
+                                                                                                                        <div class="subtitle">Quý khách sẽ thanh toán bằng tiền mặt hoặc thẻ khi Buygroup365 giao hàng cho quý khách                     </div>
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                            </label>
+                                                                                                            <div id="paymentGateway_29" class="message-paymentgateway"></div>
+                                                                                                            <div class="disabled-cod" style="display: none">
+                                                                                                                <div class="disabled-cod-body">
+                                                                                                                    <div class="alert alert-danger clearfix one-line">
+                                                                                                                        <i class="sprites icon-info-danger"></i>
+                                                                                                                        <div class="alert-content"><span>Quý khách không thể sử dụng hình thức này</span>                     </div>
+                                                                                                                    </div>
+                                                                                                                    <div class="disabled-cod-content"></div>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                    <div class="group">
+                                                                                                        <div class="adr-oms radio payment-method-4 select-method">
+                                                                                                            <input type="radio" id="payment-method-27" onchange=" oms.changePaymentMethod(this) " name="PaymentMethod" data-type="1" data-code="4" value="27">
+                                                                                                            <label for="payment-method-27">
+                                                                                                                <div class="adr-oms payment-method">
+                                                                                                                    <div class="thumbnail">
+                                                                                                                        <img alt="" src="/Content/Csspublic/css-order/57859_130716703533037365.png">
+                                                                                                                    </div>
+                                                                                                                    <div class="description">
+                                                                                                                        <div class="title">Thanh toán bằng thẻ ATM                      </div>
+                                                                                                                        <div class="subtitle">
+                                                                                                                            Thẻ ATM của bạn cần đăng ký sử dụng dịch vụ Internet Banking.
+                                                                                                <br>
+                                                                                                                            <span>Bạn sẽ được chuyển tới OnePay để thanh toán.</span>
+                                                                                                                        </div>
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                            </label>
+                                                                                                            <div id="paymentGateway_27" class="message-paymentgateway"></div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                    <div class="group">
+                                                                                                        <div class="adr-oms radio payment-method-6 select-method">
+                                                                                                            <input type="radio" id="payment-method-28" onchange=" oms.changePaymentMethod(this) " name="PaymentMethod" data-type="1" data-code="6" value="28">
+                                                                                                            <label for="payment-method-28">
+                                                                                                                <div class="adr-oms payment-method">
+                                                                                                                    <div class="thumbnail">
+                                                                                                                        <img alt="" src="/Content/Csspublic/css-order/66532_130716703619913036.png">
+                                                                                                                    </div>
+                                                                                                                    <div class="description">
+                                                                                                                        <div class="title">Thanh toán bằng thẻ thanh toán quốc tế                      </div>
+                                                                                                                        <div class="subtitle">
+                                                                                                                            Hỗ trợ Credit và Debit.
+                                                                                                <br>
+                                                                                                                            <span>Bạn sẽ được chuyển tới OnePay để thanh toán.</span>
+                                                                                                                        </div>
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                            </label>
+                                                                                                            <div id="paymentGateway_28" class="message-paymentgateway"></div>
+                                                                                                        </div>
+                                                                                                    </div>
+
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+
+
+
+
+                                                                                        <!-- end .adr-oms.panel -->
+                                                                                        <div class="main_left_section-actions">
+                                                                                            <div class="text-right">
+                                                                                                <p class="color-red messageValidateStep"></p>
+                                                                                            </div>
+                                                                                            <div class="pull-left">
+                                                                                                <a onclick=" oms.goTab(&#39;checkout2&#39;) " class="">« Chỉnh sửa thông tin giao hàng</a>
+                                                                                            </div>
+                                                                                            <div class="pull-right text-right">
+                                                                                                <button class="nextStep adr large button bg-red btn-summit" type="button" onclick=" oms.submit(this) " id="btn_submit"><span>Thanh toán</span> </button>
+                                                                                                <p class="note-confirm">
+                                                                                                    Bằng việc ấn nút Thanh Toán trên, Quý khách xác nhận đã kiểm tra kỹ đơn hàng
+                                                                        <br>
+                                                                                                    và đồng ý với <a target="_blank" href="/help/dieu-kien-va-dieu-khoan-giao-dich-n2">Điều khoản &amp; điều kiện </a>giao dịch của Buygroup365.
+                   
+                                                                                                </p>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <script>
+                                                                                function reCapcha() {
+                                                                                    $("#cap").attr('src', '/Home/CaptchaImage?' + new Date().getTime());
+                                                                                }
+</script>
+                                                                            <!--checkout step 3-->
+                                                                                <!--End checkout step 4-->
+
+                                                                                <!--End checkout step 4-->
+                                                                            </div>
+                                                                        </div>
+                                                                        <!-- end #main_left_section -->
+                                                                        <div id="main_right_section" class="col-lg-5">
+                                                                            <div id="selectedAddress" class="hidden"></div>
+                                                                            <div class="adr-oms panel" id="panel_order">
+
+                                                                                <div class="header">
+                                                                                    <h3 class="title">
+                                                                                        <div class="pull-right">
+                                                                                        </div>
+                                                                                        Đơn hàng 
+                                                                                    </h3>
+                                                                                </div>
+                                                                                <div class="body">
+                                                                                    <!-- end table_order_header -->
+                                                                                    <table class="adr-oms table table_order_items">
+                                                                                        <tbody id="orderItem">
+                                                                                            <tr class="group-type-1  item-child-0">
+                                                                                                <td>
+                                                                                                    <div class="table_order_items-cell-thumbnail">
+                                                                                                        <div class="thumbnail">
+                                                                                                            <img src="/Content/Csspublic/css-order/1446615341049_7185970.jpg" alt="" width="84">
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                    <div class="table_order_items-cell-detail">
+                                                                                                        <div class="table_order_items-cell-title">
+                                                                                                            <div class="table_order_items_product_name">
+                                                                                                                <span>
+                                                                                                                    <input type="hidden" class="hidden warehouseCode" value="0">
+                                                                                                                    <span class="title">Samsung Galaxy Core Prime SM-G361 8GB Trắng (Hàng chính hãng) (Màu sắc: Trắng)</span>                         </span><i class="adr-oms icon icon-product-reject" onclick=" oms.removeRejectOrderItem(this, false,2317,515806,1,1,4,&#39;group-type-1&#39;) "></i>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                        <div class="table_order_items-cell-price">
+                                                                                                            <div class="tt-price">2.539.000đ                     </div>
+                                                                                                            <div class="quantity">x1                     </div>
+                                                                                                            <div class="tt-price">2.539.000đ                     </div>
+                                                                                                        </div>
+                                                                                                        <div class="clear"></div>
+                                                                                                    </div>
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                            <!-- end row -->
+                                                                                            <tr class="group-type-1  item-child-1">
+                                                                                                <td>
+                                                                                                    <div class="table_order_items-cell-thumbnail">
+                                                                                                        <div class="thumbnail">
+                                                                                                            <img src="/Content/Csspublic/css-order/1450320605711_2822525.jpg" alt="" width="84">
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                    <div class="table_order_items-cell-detail">
+                                                                                                        <div class="table_order_items-cell-title">
+                                                                                                            <div class="table_order_items_product_name">
+                                                                                                                <span>
+                                                                                                                    <input type="hidden" class="hidden warehouseCode" value="0">
+                                                                                                                    <span class="title">Apple iPhone 6S 16GB Rose Gold (Hàng chính hãng) (Màu sắc: Hồng, Bộ nhớ trong: 16GB)</span>                         </span>
+                                                                                                                <div class="adr-coupon">
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                        <div class="table_order_items-cell-price">
+                                                                                                            <div class="tt-price">17.875.000đ                     </div>
+                                                                                                            <div class="quantity">x1                     </div>
+                                                                                                            <div class="tt-price">17.875.000đ                     </div>
+                                                                                                        </div>
+                                                                                                        <div class="clear"></div>
+                                                                                                    </div>
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                            <!-- end row -->
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                </div>
+
+                                                                                <div class="footer">
+                                                                                    <table class="adr-oms table" id="table_order_footer">
+                                                                                        <tfoot id="orderSummary">
+                                                                                            <tr id="row_total_amount">
+                                                                                                <td id="cell_total_amount_label">Tổng tiền</td>
+                                                                                                <td id="cell_total_amount_value" class="text-right"><strong>20.414.000đ</strong></td>
+                                                                                            </tr>
+                                                                                            <tr id="row_delivery_fee">
+                                                                                                <td id="cell_delivery_fee_label">Phí vận chuyển </td>
+                                                                                                <td id="cell_delivery_fee_value" class="text-right"><strong class="text-underline">MIỄN PHÍ             </strong></td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td colspan="3"></td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td colspan="3"></td>
+                                                                                            </tr>
+                                                                                            <tr id="row_total_purchase">
+                                                                                                <td id="cell_total_purchase_label">Số tiền còn lại cần thanh toán</td>
+                                                                                                <td id="cell_total_purchase_value" class="text-right"><strong>20.414.000đ</strong></td>
+                                                                                            </tr>
+                                                                                        </tfoot>
+                                                                                    </table>
+                                                                                </div>
+                                                                            </div>
+
+                                                                        </div>
+                                                                        <!-- end #main_right_section -->
+                                                                    </div>
+                                                                </div>
+                                                                <!--end new layout-->
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div id="dialog-confirm" title="Thông báo" style="display: none">
+                                                    <div id="msgConfirm"></div>
+                                                </div>
+                                                <div id="dialog-help" class="help" style="display: none">
+                                                    <div id="msgHelp">
+                                                    </div>
+                                                </div>
+                                                <div id="dialog-validate-shipping" class="help" style="display: none">
+                                                    <div id="orderReject"></div>
+                                                </div>
+
+
+                                            </div>
+
+                                            <div id="changeLocation"></div>
+
+
+                                        </div>
+                                    </div></div>
+            </div>
+
+    </div>
+
+</div>

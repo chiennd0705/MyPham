@@ -1,0 +1,147 @@
+﻿@model List<BuyGroup365.Models.Member.CartItem>
+<div class="quickview-main" style="width: 800px;">
+    <div style="max-height: 550px; overflow-y: scroll; overflow-x: hidden">
+        <div class="page-title title-buttons" style="border-bottom: none; padding: 0 10px; margin: 15px 0;">
+            <h2 style="font-size: 16px; font-weight: bold;">Giỏ hàng của bạn</h2>
+        </div>
+        <fieldset>
+            <table id="shopping-cart-table" class="data-table cart-table">
+                <colgroup>
+                    <col width="1">
+                    <col>
+                    <col width="1">
+                    <col width="1">
+                    <col width="1">
+                    <col width="1">
+                    <col width="1">
+                </colgroup>
+                <thead class="hidden-phone">
+                    <tr class="first last">
+                        <th rowspan="1"><span class="nobr" style="border-right: none;">Ảnh</span></th>
+                        <th rowspan="1"><span class="nobr">Tên sản phẩm</span></th>
+
+                        <th class="a-center" colspan="1"><span class="nobr">Giá</span></th>
+                        <th rowspan="1" class="a-center">Số lượng</th>
+                        <th class="a-center" colspan="1">Thành tiền</th>
+                        <th rowspan="1" class="a-center last">Xóa</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr class="first last">
+                        <td colspan="50" class="a-right last">
+                            <button type="button" title="Continue Shopping" class="button btn-continue" onclick="setLocation('http://alothemes.com/demo/kuteshop/index.php/')"><span><span>Tiếp tục mua hàng</span></span></button>
+                            <button type="submit" name="update_cart_action" value="update_qty" title="Update Shopping Cart" class="button btn-update"><span><span>Tiến hành thanh toán</span></span></button>
+                        </td>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    @{ var index = 1;}
+                    @if(obj!=null && obj.Any())
+                    {
+                      foreach (var item in obj)
+                    {
+                        if (index%2 == 0)
+                        {
+                            <tr class="first odd">
+                        <td><a href="#" title="Perfect Dress" class="product-image" style="border-right: none;">
+                                <img src="@FuntionMember.GetUrlImage(item.Product.ProductImages.First(x=>x.IsAvatar==1).ImgSource, "Small")" width="120" height="120" alt="Perfect Dress"></a></td>
+                        <td style="border-right: none;">
+                            <h2 class="product-name">
+                                <a href="@Common.util.Function.InitUrlDetaiProduct(item.Product.FriendlyUrl, item.Product.Id)">Perfect Dress</a>
+                            </h2>
+                        </td>
+
+                        <td class="a-right" style="border-right: none;">
+                            <span class="cart-price">
+                                <span class="price">@item.Product.Price.ToString("N0")</span>
+                            </span>
+                        </td>
+                        <!-- inclusive price starts here -->
+                        <td class="a-center" style="border-right: none;">
+                            <div class="custom-qty clearfix">
+                                <a class="alo_qty alo_qty_dec" href="javascript:void(0)"><i class="fa fa-caret-down"></i></a>
+                                <input name="cart[1362][qty]" value="1" size="4" title="Qty" class="input-text qty" maxlength="12">
+                                <a class="alo_qty alo_qty_inc" href="javascript:void(0)"><i class="fa fa-caret-up"></i></a>
+                            </div>
+                        </td>
+
+                        <!--Sub total starts here -->
+                        <td class="a-right a-subtotal" style="border-right: none;">
+                            <span class="cart-price">
+                                <span class="price">@item.Product.Price.ToString("N0")</span>
+                            </span>
+                        </td>
+                        <td class="a-center last"><a href="#" title="Remove item" class="btn-remove btn-remove2"><i class="fa fa-times-circle icons"></i></a></td>
+                    </tr>
+                        }
+                        else
+                        {
+                            <tr class="first even">
+                                <td>
+                                    <a href="#" title="Perfect Dress" class="product-image" style="border-right: none;">
+                                        <img src="@FuntionMember.GetUrlImage(item.Product.ProductImages.First(x=>x.IsAvatar==1).ImgSource, "Small")" width="120" height="120" alt="Perfect Dress">
+                                    </a>
+                                </td>
+                                <td style="border-right: none;">
+                                    <h2 class="product-name">
+                                        <a href="@Common.util.Function.InitUrlDetaiProduct(item.Product.FriendlyUrl, item.Product.Id)">Perfect Dress</a>
+                                    </h2>
+                                </td>
+
+                                <td class="a-right" style="border-right: none;">
+                                    <span class="cart-price">
+                                        <span class="price">@item.Product.Price.ToString("N0")</span>
+                                    </span>
+                                </td>
+                                <!-- inclusive price starts here -->
+                                <td class="a-center" style="border-right: none;">
+                                    <div class="custom-qty clearfix">
+                                        <a class="alo_qty alo_qty_dec" href="javascript:void(0)"><i class="fa fa-caret-down"></i></a>
+                                        <input name="cart[1362][qty]" value="1" size="4" title="Qty" class="input-text qty" maxlength="12">
+                                        <a class="alo_qty alo_qty_inc" href="javascript:void(0)"><i class="fa fa-caret-up"></i></a>
+                                    </div>
+                                </td>
+
+                                <!--Sub total starts here -->
+                                <td class="a-right a-subtotal" style="border-right: none;">
+                                    <span class="cart-price">
+                                        <span class="price">@item.Product.Price.ToString("N0")</span>
+                                    </span>
+                                </td>
+                                <td class="a-center last"><a href="#" title="Remove item" class="btn-remove btn-remove2"><i class="fa fa-times-circle icons"></i></a></td>
+                            </tr>
+                        }
+                        index++;
+                    }
+                    }
+                </tbody>
+            </table>
+            <script type="text/javascript">decorateTable('shopping-cart-table')</script>
+        </fieldset>
+    </div>
+</div>
+<style>
+    .product-image img {
+        max-width: inherit;
+    }
+
+    .fancybox-opened .fancybox-skin {
+        border-radius: 5px;
+    }
+
+    .cart-table td {
+        padding: 5px;
+        border: none !important;
+        border-bottom: 1px dotted #ccc !important;
+    }
+
+    .data-table thead th {
+        border-top: none;
+        border-bottom: none;
+        border-right: 1px solid #FFF !important;
+    }
+
+    .data-table thead th {
+        padding: 5px 8px;
+    }
+</style>

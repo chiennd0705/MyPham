@@ -1,0 +1,439 @@
+﻿@using Business.ClassBusiness
+@using BuyGroup365.Models.Member
+@using Common.util
+@model IPagedList<global::Common.Order>
+
+@{
+    ViewBag.Title = " Đơn hàng của tôi";
+    Layout = "~/Views/Shared/_LayoutMember.cshtml";
+}
+
+<div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 ">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+
+                <ol class="breadcrumb">
+                    <li><span class="glyphicon glyphicon-home"></span><a href="/"> Trang chủ</a></li>
+                    <li>
+                        <a href="/Member/Profile">
+                            @SessionUtility.GetSessionMember(Session).UserName
+                        </a>
+                    </li>
+                    <li class="active">Danh sách đơn hàng</li>
+                </ol>
+            </h4>
+        </div>
+        <div id="collapseOne0" class="panel-collapse collapse in" style="height: auto;">
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <div id="dataTables-example_wrapper" class="dataTables_wrapper form-inline" role="grid">
+
+                        <div class="luumtxpasg magicproduct">
+                            <div class="row">
+                                <div class="col-sm-5"><strong>Tổng cộng: <strong id="totalmoney"></strong></strong></div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+
+                                        <input name="timeForm" type="hidden">
+                                        <input name="timeTo" type="hidden">
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="input-group">
+                                        <input name="keyword" type="text" class="form-control" value="" placeholder="Tìm kiếm">
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <button class="button" type="submit" value="Search"><span><span>Search</span></span></button>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="order">
+
+                                <!-- Nav tabs -->
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li role="presentation" class="active"><a href="#all" aria-controls="home" onclick="loadtable(-1)" role="tab" data-toggle="tab">Tất cả <span id="countall"></span></a></li>
+                                    <li role="presentation"><a onclick="loadtable(0)" href="#notpay" aria-controls="notpay" role="tab" data-toggle="tab">Đơn hàng mới<span id="countnotpay"></span> </a></li>
+                                    <li role="presentation"><a onclick="loadtable(1)" href=" #payed" aria-controls="payed" role="tab" data-toggle="tab">Đơn hàng chờ giao dịch <span id="countpay"></span></a></li>
+                                    <li role="presentation"><a onclick="loadtable(2)" href="#notget" aria-controls="notget" role="tab" data-toggle="tab">Đơn hàng chờ chuyển hàng<span id="countnotgetproduct"></span></a></li>
+                                    <li role="presentation"><a onclick="loadtable(3)" href="#geted" aria-controls="geted" role="tab" data-toggle="tab">Đã hòa tất<span id="countgetproduct"></span></a></li>
+                                    <li role="presentation"><a onclick="loadtable(4)" href="#recy" aria-controls="recy" role="tab" data-toggle="tab">Đơn hàng bị hủy<span id="countrecy"></span></a></li>
+                                </ul>
+                                <div class="" id="overbackgroud1" style="display: none;">
+                                    <img src="/img/loading/6.gif" style="position: relative; top: 44%; left: 46%" />
+                                </div>
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <div role="tabpanel" class="tab-pane active" id="all">
+                                        @if (Model != null)
+                                        {
+                                            <table class="table table-striped table-bordered table-hover dataTable no-footer list-product">
+
+                                                <thead>
+                                                    <tr style="background-color: ghostwhite;">
+                                                        <th>Thông tin đơn hàng</th>
+                                                        <th>Thông tin người mua</th>
+                                                        <th>Trạng thái</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach (var item in Model)
+                                                    {
+
+                                                        var id = "tr" + item.Id;
+
+                                                        <tr id="@id">
+                                                            <td style="padding: 0px">
+                                                                <table class="table  table-condensed" style="width: 100%; margin-bottom: 0">
+
+                                                                    <tr style="background-color: ghostwhite;">
+                                                                        <td colspan="3">
+                                                                            <strong>Mã đơn hàng: #@item.Id</strong>
+                                                                        </td>
+
+                                                                    </tr>
+                                                                    @foreach (var item1 in item.OrderDetails)
+                                                                    {
+
+                                                                        <tr>
+                                                                            <td><img src="@FuntionMember.GetUrlImage(item1.PathImage, "Small")" width="70" /></td>
+                                                                            <td>@item1.NameProduct</td>
+                                                                            <td class="list-price">
+                                                                                @{
+                                                                        var pi = (Double)item1.Price;
+                                                                                }
+                                                                                @pi.ToString("N0") <sup class="u-price">đ</sup>
+                                                                            </td>
+                                                                        </tr>
+
+                                                                    }
+                                                                    <tr>
+                                                                        <td colspan="3" style="padding: 10px;">
+                                                                            @{
+                                                                    var tatol = (Double)item.OrderDetails.Sum(x => x.Price) + (Double)item.FeeOfTranspot;
+                                                                    var fee = (Double)item.FeeOfTranspot;
+                                                                            }
+                                                                            <strong style="float: right;">Phí vận chuyển: <span class="" style="font-size: 15px;color: red">@fee.ToString("N0") đ</span></strong><br />
+                                                                            <strong style="float: right;">Tổng đơn hàng: <span class="" style="font-size: 15px; color: red">@tatol.ToString("N0") đ</span></strong>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+
+                                                            </td>
+                                                            <td style="text-align: center">
+
+                                                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" onclick="GetInforBuyer(@item.Id) " data-target="#OderBuyer">
+                                                                    Chi tiết
+                                                                </button>
+                                                            </td>
+                                                            <td style="text-align: center">
+                                                                @{
+                                                                    var paymentmethod = new PayFormBusiness().GetById((long)item.IdPayForm);
+                                                                    var namepayment = "Chưa xác định hình thức thanh toán";
+                                                                    if (paymentmethod != null)
+                                                                    {
+                                                                        namepayment = paymentmethod.Name;
+                                                                    }
+                                                                }
+                                                                <p>@namepayment</p>
+                                                                <hr />
+                                                                @if (item.Paid == 0)
+                                                                {
+                                                                    <p>Đơn hàng chưa thanh toán</p>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <p>Đơn hàng đã thanh toán</p>
+                                                                }
+                                                                <hr />
+                                                                @if (item.Status == 0)
+                                                                {
+                                                                    <span> Đơn hàng mới</span>
+                                                                }
+                                                                else if (item.Status == 1)
+                                                                {
+                                                                    <span>Đang chờ giao dịch</span>
+                                                                }
+                                                                else if (item.Status == 2)
+                                                                {
+                                                                    <span> Đang chờ chuyển hàng</span>
+                                                                }
+                                                                else if (item.Status == 3)
+                                                                {
+                                                                    <span> Đã hoàn tất</span>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <span> Đã hủy</span>
+                                                                }
+                                                            </td>
+                                                            @*<script>
+                                                                    function Sendvalue(id) {
+                                                                        $('#valueinvoice').val(id);
+                                                                    }
+                                                                </script>*@
+                                                        </tr>
+                                                    }
+
+
+                                                </tbody>
+
+                                            </table>
+                                            <div class="">
+                                                <div class="">
+                                                    <div class="dataTables_info" id="dataTables-example_info" role="alert" aria-live="polite" aria-relevant="all">Display from @Model.ItemStart to @Model.ItemEnd of @Model.TotalItemCount records</div>
+                                                </div>
+                                                <div class="">
+                                                    <div class="dataTables_paginate paging_simple_numbers" id="dataTables-example_paginate">
+
+                                                        @Html.Raw(Ajax.Pager(
+                                                            new Options
+                                                            {
+                                                                PageSize = Model.PageSize,
+                                                                TotalItemCount = Model.TotalItemCount,
+                                                                CurrentPage = Model.PageNumber,
+                                                                ItemTexts = new ItemTexts() { Next = "Next", Previous = "Previous", Page = "P" },
+                                                                ItemIcon = new ItemIcon() { First = "icon-backward", Previous = "icon-chevron-left", Next = "icon-chevron-right", Last = "icon-forward" },
+                                                                TooltipTitles = new TooltipTitles() { Next = "Next page", Previous = "Previous page", Page = "Page {0}." },
+                                                                Size = Size.normal,
+                                                                Alignment = Alignment.centered,
+                                                                IsShowControls = true,
+                                                                IsShowFirstLast = true,
+                                                                CssClass = ""
+                                                            },
+                                                            new AjaxOptions
+                                                            {
+                                                                UpdateTargetId = "grid-list",
+                                                                HttpMethod = "get",
+                                                                LoadingElementId = "loading",
+                                                                OnBegin = "beginPaging",
+                                                                OnSuccess = "successPaging",
+                                                                OnFailure = "failurePaging"
+                                                            }, new { controller = "Member", action = "OderProduct", key = ViewData["key"], st = ViewBag.Id, grade_card = ViewData["grade_card"] }))
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            @Html.Raw(Function.MessengerBox("success-msg", ViewBag.Mes))
+                                        }
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane" id="notpay">
+
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane" id="payed">
+
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane" id="notget">
+
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane" id="geted">
+
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane" id="recy">
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<div class="modal fade" id="OderBuyer" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" style="left: 0px;width:65%">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <img class="img-responsive" src="/Content/Csspublic/images/logo.png" alt="Buygroup365" style="height: 35px">
+            </div>
+            <div class="modal-body" id="buyerContent">
+                <div class="" id="overbackgroudinfo" style="display: block;">
+                    <img src="/img/loading/6.gif" style="position: absolute; top: 44%; left: 46%" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .magictabs .item, .magictabs .citem {
+        line-height: none !important;
+    }
+
+    .item {
+        width: auto !important;
+    }
+</style>
+<script>
+    function loadtable(id) {
+        $('#overbackgroud1').show();
+        $('#overbackgroud1').fadeIn(3000);
+        var elementid = "";
+        if (id == -1) {
+            elementid = "#all";
+        }
+        else if (id == 0) {
+            elementid = "#notpay";
+        }
+        else if (id == 1) {
+            elementid = "#payed";
+        }
+        else if (id == 2) {
+            elementid = "#notget";
+        } else if (id == 3) {
+            elementid = "#geted";
+        } else {
+            elementid = "#recy";
+        }
+        $.ajax({
+            url: '@Url.Action("ContentOder", "Member")',
+            data: {
+                'st': id
+            },
+            dataType: 'json',
+            Type: 'POST',
+            success: function (data) {
+                //    alert(data);
+                //var string = JSON.stringify(data);
+                $('' + elementid + '').html("");
+                $('' + elementid + '').append(data);
+                $('#overbackgroud1').hide();
+            },
+            error: function () {
+
+            }
+        });
+    }
+    function Delete(id) {
+        $.ajax({
+            url: '@Url.Action("DeleteOder", "Member")',
+            data: {
+                'id': id
+            },
+            dataType: 'json',
+            Type: 'POST',
+            success: function (data) {
+                if (data == 1) {
+
+                    var elementid = "#tr" + id;
+                    $(elementid).hide();
+                    alert("Xóa thành công");
+                    loadCount();
+                    // $('#overbackgroud1').hide();
+                    // window.location.href="/Member/Inco"
+                } else {
+                    alert("Hệ thống đang cập nhật");
+                    $('#overbackgroud1').hide();
+                }
+
+            },
+            error: function () {
+
+            }
+        });
+    }
+    function loadCount() {
+        $('#overbackgroud1').show();
+        $.ajax({
+            url: '@Url.Action("CountOder", "Member")',
+            data: {
+
+            },
+            dataType: 'json',
+            Type: 'POST',
+            success: function (data) {
+
+
+                $('#totalmoney').html("");
+
+                $('#totalmoney').append("(" + data.TotalMoney + ")");
+
+                $('#countrecy').html("");
+                $('#countrecy').append("(" + data.CountRecy + ")");
+
+                $('#countall').html("");
+                $('#countall').append("(" + data.CountAll + ")");
+
+                $('#countnotpay').html("");
+                $('#countnotpay').append("(" + data.CountNotPay + ")");
+                $('#countpay').html("");
+                $('#countpay').append("(" + data.CountPay + ")");
+
+                $('#countnotgetproduct').html("");
+                $('#countnotgetproduct').append("(" + data.CountNotGetProduct + ")");
+                $('#countgetproduct').html("");
+                $('#countgetproduct').append("(" + data.CountGetProduct + ")");
+
+                $('#countrecy').html("");
+                $('#countrecy').append("(" + data.CountRecy + ")");
+                $('#overbackgroud1').hide();
+            },
+            error: function () {
+
+            }
+        });
+    }
+    $(document).ready(function () {
+        loadCount();
+    });
+    function GetInforBuyer(id) {
+        $.ajax({
+            url: '@Url.Action("GetInForBuyer", "Member")',
+            data:
+            {
+                'id': id,
+            },
+            Type: 'POST',
+            dataType: 'json',
+            success: function (data) {
+                $('#buyerContent').html("");
+                $('#buyerContent').append(data);
+            },
+            error: function () {
+
+                alert('Hệ thống đang cập nhật!');
+            }
+
+        });
+    }
+    function SaveChangeOder() {
+        var oderId = $('#valueinvoice').val();
+        var state = $('#stateinvoice option:selected').val();
+        if (state == "-1") {
+            alert("Vui lòng chọn trạng thái đơn hàng");
+        } else {
+
+            $.ajax({
+                url: '@Url.Action("UpdateStateOrder", "Member")',
+                data:
+                {
+                    'orderid': oderId,
+                    'state': state
+                },
+                Type: 'POST',
+                dataType: 'json',
+                success: function (data) {
+                    window.location.href = "/Member/Invoice";
+                },
+                error: function () {
+                    alert('Hệ thống đang cập nhật!');
+                }
+
+            });
+        }
+
+    }
+</script>
