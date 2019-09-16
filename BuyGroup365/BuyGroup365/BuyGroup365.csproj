@@ -47,10 +47,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Business\bin\Debug\Business.dll</HintPath>
     </Reference>
-    <Reference Include="Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Common\bin\Debug\Common.dll</HintPath>
-    </Reference>
     <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\log4net.dll</HintPath>
@@ -1231,6 +1227,8 @@
     <Content Include="Content\Mypham\js\bootstrap-select.min.js" />
     <Content Include="Content\Mypham\js\bootstrap.min.js" />
     <Content Include="Content\Mypham\js\cJsv_1-qftI.js" />
+    <Content Include="Content\Mypham\js\Controller\AdminController.js" />
+    <Content Include="Content\Mypham\js\Controller\BaseController.js" />
     <Content Include="Content\Mypham\js\dhcshop.js" />
     <Content Include="Content\Mypham\js\dsalespopup.js" />
     <Content Include="Content\Mypham\js\eco_tracking_all_order.js" />
@@ -1399,6 +1397,8 @@
     <Content Include="Content\Vinaplaza\img\Vector-Smart-Object9.png" />
     <Content Include="Content\Vinaplaza\index.html" />
     <Content Include="Content\Vinaplaza\js\bootstrap.min.js" />
+    <Content Include="Content\Vinaplaza\js\Controller\AdminController.js" />
+    <Content Include="Content\Vinaplaza\js\Controller\BaseController.js" />
     <Content Include="Content\Vinaplaza\js\custom.js" />
     <Content Include="Content\Vinaplaza\js\jquery-3.3.1.min.js" />
     <Content Include="Content\Vinaplaza\js\jquery.magnific-popup.min.js" />
@@ -1736,7 +1736,6 @@
     <Content Include="Views\PayGoods\PartialProductDetailCart.cshtml" />
     <Content Include="Views\Home\Sitemap.cshtml" />
     <Content Include="Views\Home\Tags.cshtml" />
-    <Content Include="Views\Partial\NewsFooter.cshtml" />
     <Content Include="Views\Shared\SaleNews.cshtml" />
     <Content Include="Views\Shared\NewsAttractive.cshtml" />
     <Content Include="Views\Shared\Thuonghieu.cshtml" />
@@ -1799,6 +1798,12 @@
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\Common.csproj">
+      <Project>{330d4ef8-64d2-4208-8696-a3f701c69375}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

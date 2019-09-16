@@ -49,11 +49,15 @@ namespace Business.ClassBusiness
             return query.Where(p => p.MenuName.Contains(key)).OrderByDescending(p => p.Order).ToList();
         }
 
-        public List<Menus> GetList(string key)
+        public List<Menus> GetList(string key, long typeMenu)
         {
             IQueryable<Menus> query = GetDynamicQuery();
-            var temp = query.Where(p => p.MenuName.Contains(key)).OrderByDescending(p => p.Order);
-            return temp.ToList();
+            List<Menus> temp =new List<Menus>();
+            if (typeMenu != -1)
+                temp = query.Where(p => p.MenuName.Contains(key) && p.TypeMenu == typeMenu).OrderByDescending(p => p.Order).ToList();
+            else
+                temp = query.Where(p => p.MenuName.Contains(key)).OrderByDescending(p => p.Order).ToList();
+            return temp;
         }
 
         public List<Menus> GetList()
@@ -75,6 +79,13 @@ namespace Business.ClassBusiness
         {
             IQueryable<Menus> query = GetDynamicQuery();
             List<Menus> list = query.Where(x => x.ParentId == Id && x.TypeMenu == typemenu).OrderByDescending(p => p.Order).ToList();
+
+            return list;
+        }
+        public List<Menus> SearchMenusByParentId(long Id, int typemenu,int size)
+        {
+            IQueryable<Menus> query = GetDynamicQuery();
+            List<Menus> list = query.Where(x => x.ParentId == Id && x.TypeMenu == typemenu).OrderByDescending(p => p.Order).Take(size).ToList();
 
             return list;
         }

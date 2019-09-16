@@ -415,18 +415,18 @@ var ProductReviews = function () {
 
     return {
         init: function () {
-            GUI.LoadProductReviewCSS();
+         GUI.LoadProductReviewCSS();
             GUI.LoadRatingCSS();
-            GUI.CreateDivSummary();
-            GUI.CreateSubmitForm();
+            //GUI.CreateDivSummary();
+           // GUI.CreateSubmitForm();
             Act.ToogleSubmitForm();
-            Act.ValidateSubmitForm();
-            Act.ApplyLayoutSetting();
-            Act.GetMoreReview();
+           Act.ValidateSubmitForm();
+           Act.ApplyLayoutSetting();
+           Act.GetMoreReview();
             Act.LoadNoReview();
-            Act.LoadStar();
-            Act.LoadDefaultStar();
-            Act.LoadPagingTool();
+           Act.LoadStar();
+          Act.LoadDefaultStar();
+          Act.LoadPagingTool();
         },
         LoadStar: function () {
             Act.LoadStar();

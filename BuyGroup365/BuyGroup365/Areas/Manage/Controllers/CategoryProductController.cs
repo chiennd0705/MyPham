@@ -53,7 +53,7 @@ namespace BuyGroup365.Areas.Manage.Controllers
             try
             {
                 ViewBag.statusCatg = _loadCombo.InitSelectListItemStatusCreateCategory();
-                ViewBag.PromotionListID = _loadCombo.InitSelectListPromotionList(null);
+                ViewBag.PromotionListID = _loadCombo.InitSelectListItemStatusNewsGroup();
                 List<LoadDropdown.DropdowCate> listDropdowCate = new List<LoadDropdown.DropdowCate>();
                 ViewBag.parent = _loadCombo.SearchCategoryByName(ref listDropdowCate);
 
@@ -131,7 +131,7 @@ namespace BuyGroup365.Areas.Manage.Controllers
                     obj.ShareKeyword = ShareKeyword;
                     obj.ShareDescription = ShareDescription;
                     obj.Description = description;
-                    //  obj.PromotionID = PromotionListID;
+                    //obj.PromotionID = PromotionListID;
 
                     long Catalogid;
                     _catalogsBusiness.AddNew(obj);
@@ -643,7 +643,7 @@ namespace BuyGroup365.Areas.Manage.Controllers
             List<LoadDropdown.DropdowCate> listDropdowCates = new List<LoadDropdown.DropdowCate>();
             ViewBag.parent = _loadCombo.SearchCategoryByName(ref listDropdowCates, obj.ParentId);
             ViewBag.statusProduct = _loadCombo.InitSelectListItemStatusCreateCategory();
-            ViewBag.PromotionListID = _loadCombo.InitSelectListPromotionList(obj.PromotionID);
+            ViewBag.PromotionListID = _loadCombo.InitSelectListItemStatusNewsGroup(obj.PromotionID);
 
             Common.Catalog objentity = new Common.Catalog();
             objentity.Id = obj.Id;
@@ -666,7 +666,7 @@ namespace BuyGroup365.Areas.Manage.Controllers
             objentity.ShareTitle = obj.ShareTitle;
             objentity.ShareKeyword = obj.ShareKeyword;
             objentity.ShareDescription = obj.ShareDescription;
-            //objentity.PromotionID = obj.PromotionID;
+            objentity.PromotionID = obj.PromotionID;
             return View(objentity);
         }
 

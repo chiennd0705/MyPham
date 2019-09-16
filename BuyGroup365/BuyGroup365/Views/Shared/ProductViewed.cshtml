@@ -18,6 +18,8 @@
 
                             List<long> ListProductViewed = BuyGroup365.Models.Member.NlCheckout.GetSessionProductViewed(Session).Take(3).ToList();
                             ProductsBusiness productBusiness = new ProductsBusiness();
+                            ProductImagesBusiness productImageBusiness = new ProductImagesBusiness();
+
                             int count = 0;
                             string col = "";
                             string img = "";
@@ -27,6 +29,7 @@
                                 try
                                 {
                                     Product item = productBusiness.GetById(re);
+                                    var listImg = productImageBusiness.FindProductId(re);
                                     count++;
 
                                     img = "Small";
@@ -35,8 +38,14 @@
                                     string imgPro = "";
                                     try
                                     {
+                                        foreach (ProductImage img1 in listImg)
+                                        {
+                                            if (img1.IsAvatar == 1)
+                                            {
+                                                imgPro = img1.ImgSource;
+                                            }
+                                        }
 
-                                        // imgPro = item.ProductImages.;
                                     }
                                     catch { }
                                     int phantramKM = 0;
@@ -51,7 +60,7 @@
                                             <div class="product-img view view-third product-media">
                                                 <a href="@Util.ReturnLinkFull(@item.FriendlyUrl)" title="@item.ProductName">
                                                     <div class="mask">
-                                                        <img src="@Util.ReturnLinkCDN(imgPro,Request.Browser.IsMobileDevice)" data-handle="@item.ProductName" alt="@item.ProductName">
+                                                        <img src="/Content/Mypham/images/quick-look.png" data-handle="@item.ProductName" alt="@item.ProductName">
                                                     </div>
                                                     <img alt="Bộ Olive chăm sóc da DHC Olive Skin Care Set" src="@Util.ReturnLinkCDN(imgPro,Request.Browser.IsMobileDevice)">
                                                     <span class="prod-tag tag-1">phantramKM%</span>
@@ -79,7 +88,8 @@
                     </div>
 
                 </div>
-            </div><div class="owl-nav disabled"><div class="owl-prev disabled">prev</div><div class="owl-next disabled">next</div></div><div class="owl-dots disabled"></div>
+            </div>
+            
         </div>
 
 

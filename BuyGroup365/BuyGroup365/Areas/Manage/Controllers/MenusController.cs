@@ -27,17 +27,18 @@ namespace BuyGroup365.Areas.Manage.Controllers
 
         #region Category
 
-        public ActionResult Index(string key, int? page)
+        public ActionResult Index(string key, string TypeMenuSeach, int? page)
         {
             try
             {
                 ViewData["status"] = true;
                 if (string.IsNullOrEmpty(key))
                     key = string.Empty;
+                if (string.IsNullOrEmpty(TypeMenuSeach))
+                    TypeMenuSeach = "-1";
                 ViewData["key"] = key;
                 int currentPageIndex = page.HasValue ? page.Value : 1;
-
-                var list = menusBusiness.GetList(key).ToPagedList(currentPageIndex, 20);
+                var list = menusBusiness.GetList(key, long.Parse(TypeMenuSeach)).ToPagedList(currentPageIndex, 20);
 
                 return View(list);
             }
@@ -52,7 +53,7 @@ namespace BuyGroup365.Areas.Manage.Controllers
 
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult Update(long id, string btnSubmit, string MenuName, string Link, int TypeMenu, int Status, int Order, int ParentId, string BackGround, Boolean IsBackGround)
+        public ActionResult Update(long id, string btnSubmit, string MenuName, string Link, int TypeMenu, int Status, int Order, int ParentId, string BackGround, Boolean IsBackGround, int NewGroupID)
         {
             try
             {
@@ -69,7 +70,7 @@ namespace BuyGroup365.Areas.Manage.Controllers
                     menus.CreateDate = DateTime.Now;
                     menus.ParentId = ParentId;
                     menus.IsBackGround = IsBackGround;
-
+                    menus.NewGroupID = NewGroupID;
                     if (BackGround != "")
                     {
                         menus.BackGround = BackGround;
@@ -93,6 +94,7 @@ namespace BuyGroup365.Areas.Manage.Controllers
                     menus.CreateDate = DateTime.Now;
                     menus.ParentId = ParentId;
                     menus.IsBackGround = IsBackGround;
+                    menus.NewGroupID = NewGroupID;
                     if (BackGround != "")
                     {
                         menus.BackGround = BackGround;

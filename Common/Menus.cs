@@ -24,5 +24,6 @@ namespace Common
         public int TypeMenu { get; set; }
         public string BackGround { get; set; }
         public Nullable<bool> IsBackGround { get; set; }
+        public Nullable<long> NewGroupID { get; set; }
     }
 }

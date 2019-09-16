@@ -1262,9 +1262,12 @@ a.banner-right {
           position: relative;
           width: 140px; }
         .megamenu .menu-left .sub-menu .blog-menu p {
-          line-height: 22px;
-          font-size: 14px;
-          margin-bottom: 0; }
+            line-height: 22px;
+            font-size: 14px;
+            margin-bottom: 0;
+            height: 40px;
+            overflow: hidden;
+        }
       .megamenu .menu-left .sub-menu > ul {
         width: 250px;
         display: inline-block;

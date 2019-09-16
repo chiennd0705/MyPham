@@ -1,89 +1,67 @@
 ﻿@using BuyGroup365.Models.Common;
 @using Common;
 @using Business.ClassBusiness;
-<div class="container-fluid header-mobile">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="list-menu">
-                    <ul class="list-main list-mobile">
-                        @{
-                            MenusBusiness menubussiness = new MenusBusiness();
-                            List<Common.Menus> ListMenu = new List<Common.Menus>();
-                            List<Common.Menus> ListMenu1 = new List<Common.Menus>();
-                            ListMenu = menubussiness.SearchMenusByParentId(-1, 3);
-                            foreach (var re in ListMenu)
-                            {
-                                ListMenu1 = menubussiness.SearchMenusByParentId(re.Id);
-                                if (ListMenu1.Count > 0)
-                                {
-                                    <li>
-                                        <a data-target="#@re.Id">@re.MenuName</a>
-                                    </li>
-                                }
-                                else
-                                {
-                                    <li><a href="@Util.ReturnLinkFull(re.Link)">@re.MenuName</a></li>
-                                }
-                            }
-                        }
-                    </ul>
 
-                    @Html.Action("GetByCodeHtml", "Partial", new { Code = "Text_MenuMobile" })
-                </div>
+
+
+
+
+<div id="menu-mobile">
+    <div class="clearfix">
+        <div class="account_mobile" style="">
+            <div class="main-logo">
+                @Html.Action("GetByCodeHtml", "Partial", new { Code = "Logo" })
             </div>
         </div>
+        <ul class="menu-mobile menu-left no-bullets">
+            @{
+                MenusBusiness menubussiness = new MenusBusiness();
+                List<Common.Menus> ListMenu = new List<Common.Menus>();
+                List<Common.Menus> ListMenu1 = new List<Common.Menus>();
+                ListMenu = menubussiness.SearchMenusByParentId(-1, 3);
+                foreach (var re in ListMenu)
+                {
+                    ListMenu1 = menubussiness.SearchMenusByParentId(re.Id);
+                    if (ListMenu1.Count > 0)
+                    {
+                        <li>
+                            <a class="submenu-level1-children-a" href="@Util.ReturnLinkFull(re.Link)">
+                                <img src="@re.BackGround" alt=" @re.MenuName ">
+                                @re.MenuName
+                            </a>
+                            <ul class="dropdown-menu submenu-level1-children" role="menu">
+                                <div class="account_mobile" style="">
+                                    <i class="fa fa-angle-left"></i>
+                                    <div class="main-logo">
+                                        @Html.Action("GetByCodeHtml", "Partial", new { Code = "Logo" })
+                                    </div>
+                                </div>
+                                @foreach (var re1 in ListMenu1)
+                                {
+                                    <li class="title">
+                                        <a class="submenu-level1-children-a" href="@Util.ReturnLinkFull(re1.Link)">
+                                            <img src="@re1.BackGround" alt=" @re1.MenuName">
+                                            @re1.MenuName
+                                        </a>
+                                    </li>
+                                }
+                            </ul>
+                        </li>
+                    }
+                    else
+                    {
+                        <li>
+                            <a href="@Util.ReturnLinkFull(re.Link)">
+                                <img src="@re.BackGround" alt=" @re.MenuName">
+                                @re.MenuName
+                            </a>
+                        </li>
+                    }
+
+                }
+            }
+
+
+        </ul>
     </div>
 </div>
-
-@{
-    MenusBusiness menuSubbussiness = new MenusBusiness();
-    List<Common.Menus> ListSubMenu = new List<Common.Menus>();
-    List<Common.Menus> ListSubMenu1 = new List<Common.Menus>();
-    ListSubMenu = menuSubbussiness.SearchMenusByParentId(-1, 3);
-    foreach (var re in ListSubMenu)
-    {
-        ListSubMenu1 = menubussiness.SearchMenusByParentId(re.Id);
-        if (ListSubMenu1.Count > 0)
-        {
-            <div class="container-fluid header-sub" id="@re.Id">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="slider-menu">
-                            <div id="sync-menu" class="sync-menu owl-carousel owl-theme">
-                                @{
-                                    Business.ClassBusiness.AlbumImagesBusiness albumImagesBusiness = new Business.ClassBusiness.AlbumImagesBusiness();
-                                    List<Common.AlbumImage> listImages = albumImagesBusiness.GetListByAlbum("slider_mobile");
-                                    foreach (Common.AlbumImage item in listImages)
-                                    {
-                                        <div class="item">
-                                            <a href="@Util.ReturnLinkFull(item.Link)">
-                                                <img data-src='@Util.ReturnLinkCDN(item.ImageSource,Request.Browser.IsMobileDevice)' class="lazyload" border='0' alt="@item.Title" />
-                                            </a>
-                                        </div>
-                                    }
-                                }
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="list-menu">
-                                <ul class="list-main list-mobile">
-                                    @foreach (var re1 in ListSubMenu1)
-                                    {
-                                        <li>
-                                            <a href="@Util.ReturnLinkFull(re1.Link)">@re1.MenuName</a>
-                                        </li>
-                                    }
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        }
-    }
-}

@@ -287,7 +287,7 @@ namespace BuyGroup365.Areas.Manage.Models
         public List<SelectListItem> InitSelectListItemStatusNewsGroup()
         {
             var listItemStatus = new List<SelectListItem>();
-            listItemStatus.Add(new SelectListItem { Text = "--Chọn trạng thái--", Value = "-1" });
+            listItemStatus.Add(new SelectListItem { Text = "--Chọn--", Value = "-1" });
 
             var listNewsGroup = _newsGroupBusiness.GetListNewsGroup();
             foreach (NewsGroups item in listNewsGroup)
@@ -297,7 +297,28 @@ namespace BuyGroup365.Areas.Manage.Models
 
             return listItemStatus;
         }
+        public List<SelectListItem> InitSelectListItemStatusNewsGroup(long? id)
+        {
+            var listItemStatus = new List<SelectListItem>();         
+            if (id == null)
+            {
+                listItemStatus.Add(new SelectListItem { Text = "-Chọn-", Value = "-1", Selected = true });
+            }
+            else
+            {
+                listItemStatus.Add(new SelectListItem { Text = "-Chọn-", Value = "-1" });
+            }
+            var listNewsGroup = _newsGroupBusiness.GetListNewsGroup();
+            foreach (NewsGroups item in listNewsGroup)
+            {
+                if (item.Id == id)
+                    listItemStatus.Add(new SelectListItem { Text = item.NewsGroupName, Value = item.Id + "", Selected=true });
+                else
+                    listItemStatus.Add(new SelectListItem { Text = item.NewsGroupName, Value = item.Id + ""});
+            }
 
+            return listItemStatus;
+        }
         public List<SelectListItem> IsPublicForNewsGroup()
         {
             var listItemStatus = new List<SelectListItem>();

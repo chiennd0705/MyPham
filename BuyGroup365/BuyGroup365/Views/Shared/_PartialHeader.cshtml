@@ -6,8 +6,9 @@
 
 
 
-                @*@Html.Action("MenuTop", "Partial")
-      
+
+@*@Html.Action("MenuTop", "Partial")
+
 
     @Html.Action("MenuTopMobile", "Partial")*@
 
@@ -22,30 +23,28 @@
                 <div class="row">
                     <div class="col-sm-3">
                         <div class="main-logo">
-                          
+
                             @Html.Action("GetByCodeHtml", "Partial", new { Code = "Logo" })
                         </div>
                     </div>
                     <div class="col-sm-4 search-top">
 
-                        <form id="searchauto" action="https://dhcvietnam.com.vn/search" class="input-group search-bar search_form searchform-categoris ultimate-search has-validation-callback">
+                        <div id="searchauto" action="https://dhcvietnam.com.vn/search" class="input-group search-bar search_form searchform-categoris ultimate-search has-validation-callback">
                             <div class="wpo-search">
                                 <div class="wpo-search-inner">
                                     <div class="input-group">
-                                        <input type="hidden" name="type" value="product">
+                                        
                                         <input id="searchtext" name="q" maxlength="40" class="input-group-field st-default-search-input search-text form-control input-search" type="text" size="20" placeholder="Tìm kiếm..." autocomplete="off">
                                         <span class="input-group-addon input-group-btn">
-                                            <button type="submit" id="searchsubmit" class="btn">
+                                            <button type="submit" id="searchsubmit" class="btn"  onclick="search()">
                                                 <img width="22" src="/content/Mypham/images/search.png" alt="Tìm kiếm">
                                             </button>
                                         </span>
                                     </div>
                                 </div>
-                                <input type="hidden" class="collection_id" value="(collectionid:product&gt;=0)">
-                                <input type="hidden" class="collection_handle" value="all">
-                                <input type="hidden" class="collection_name" value="all">
+
                             </div>
-                        </form>
+                        </div>
 
 
 
@@ -122,420 +121,14 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 responsive-menu">
-                        <nav class="fix-navbar" id="primary-navigation">
-                            <div class="row">
-                                <div class="col-sm-4">
-                                    <div class="megamenu">
-                                        <div class="megamenu-head text-center">
-                                            <span><i class="fa fa-list"></i> DHC Store <i class="fa fa-angle-down"></i></span>
-                                        </div>
-                                        <ul class="menu-left no-bullets">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            <li>
-                                                <a href="https://dhcvietnam.com.vn/collections/san-pham-hot"><!--<img src="//theme.hstatic.net/1000186358/1000470071/14/megamenu_item_icon1.png?v=1538" alt="TOP SẢN PHẨM MUA NHIỀU" />-->TOP SẢN PHẨM MUA NHIỀU</a>
-                                            </li>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            <li>
-                                                <a href="https://dhcvietnam.com.vn/collections/tpcn"><!--<img src="//theme.hstatic.net/1000186358/1000470071/14/megamenu_item_icon2.png?v=1538" alt="Thực phẩm chức năng" />-->Thực phẩm chức năng</a>
-                                            </li>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            <li>
-                                                <a href="https://dhcvietnam.com.vn/collections/duong-da"><!--<img src="//theme.hstatic.net/1000186358/1000470071/14/megamenu_item_icon3.png?v=1538" alt="Dưỡng da" />-->Dưỡng da <i class="fa fa-angle-right" aria-hidden="true"></i></a>
-                                                <div class="sub-menu width_blog ">
-                                                    <ul class="no-bullets">
-
-
-                                                        <li class="dropdown-menu--lv2">
-                                                            <a href="https://dhcvietnam.com.vn/collections/cham-soc-da-mat">
-                                                                Chăm sóc da mặt
-                                                            </a>
-
-                                                        </li>
-
-                                                        <li class="dropdown-menu--lv2">
-                                                            <a href="https://dhcvietnam.com.vn/collections/cham-soc-co-the">
-                                                                Chăm sóc cơ thể
-                                                            </a>
-
-                                                        </li>
-
-                                                        <li class="dropdown-menu--lv2">
-                                                            <a href="https://dhcvietnam.com.vn/collections/cac-van-de-ve-da">
-                                                                Các vấn đề về da
-                                                            </a>
-
-                                                        </li>
-
-                                                    </ul>
-
-                                                    <div class="blog-menu">
-
-
-                                                        <div class="news-item">
-                                                            <div class="news-img">
-                                                                <a href="https://dhcvietnam.com.vn/blogs/lam-dep-cung-dhc/review-chi-tiet-kem-duong-da-chan-dhc-urea-cream">
-
-                                                                    <img src="/content/Mypham/images/69719873_1617372605060816_3306658036579303424_n_506d3bf7742840c3b1dcb63de0c64f04_compact.jpg" alt="Review chi tiết kem dưỡng da chân DHC UREA Cream">
-
-                                                                </a>
-                                                            </div>
-                                                            <div class="news-caption">
-                                                                <h4 class="sub-title-1"> Ngày đăng: 08/09/2019 </h4>
-                                                                <h3 class="title-2"><a href="https://dhcvietnam.com.vn/blogs/lam-dep-cung-dhc/review-chi-tiet-kem-duong-da-chan-dhc-urea-cream">Review chi tiết kem dưỡng da chân DHC UREA Cream</a></h3>
-                                                                <p>Đôi chân là vị trí thường bị chị em bỏ qua và ít quan tâm chăm sóc. Rất...</p>
-                                                                <a href="https://dhcvietnam.com.vn/blogs/lam-dep-cung-dhc/review-chi-tiet-kem-duong-da-chan-dhc-urea-cream" class="fsz-12"> CHI TIẾT <i class="fa fa-long-arrow-right"></i> </a>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="news-item">
-                                                            <div class="news-img">
-                                                                <a href="https://dhcvietnam.com.vn/blogs/lam-dep-cung-dhc/kem-duong-vung-mat-dhc-eye-bright-cho-nang-vung-mat-sang">
-
-                                                                    <img src="/content/Mypham/images/image1_562f4de21ffb41eda13868bab57587f0_9d012377a98e4a49853a5f2e574f86ca_compact.jpg" alt="Kem dưỡng vùng mắt DHC Eye Bright cho nàng vùng mắt sáng">
-
-                                                                </a>
-                                                            </div>
-                                                            <div class="news-caption">
-                                                                <h4 class="sub-title-1"> Ngày đăng: 07/09/2019 </h4>
-                                                                <h3 class="title-2"><a href="https://dhcvietnam.com.vn/blogs/lam-dep-cung-dhc/kem-duong-vung-mat-dhc-eye-bright-cho-nang-vung-mat-sang">Kem dưỡng vùng mắt DHC Eye Bright cho nàng vùng...</a></h3>
-                                                                <p>Vùng mắt là một trong những điểm thu hút trên gương mặt, khi xuất hiện quầng thâm và...</p>
-                                                                <a href="https://dhcvietnam.com.vn/blogs/lam-dep-cung-dhc/kem-duong-vung-mat-dhc-eye-bright-cho-nang-vung-mat-sang" class="fsz-12"> CHI TIẾT <i class="fa fa-long-arrow-right"></i> </a>
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <a href="https://dhcvietnam.com.vn/collections/trang-diem-makeup"><!--<img src="//theme.hstatic.net/1000186358/1000470071/14/megamenu_item_icon4.png?v=1538" alt="Trang điểm" />-->Trang điểm <i class="fa fa-angle-right" aria-hidden="true"></i></a>
-                                                <div class="sub-menu width_blog ">
-                                                    <ul class="no-bullets">
-
-
-                                                        <li class="dropdown-menu--lv2">
-                                                            <a href="https://dhcvietnam.com.vn/collections/trang-diem-mat">
-                                                                Trang điểm mắt
-                                                            </a>
-
-                                                        </li>
-
-                                                        <li class="dropdown-menu--lv2">
-                                                            <a href="https://dhcvietnam.com.vn/collections/phan-ma">
-                                                                Phấn má
-                                                            </a>
-
-                                                        </li>
-
-                                                        <li class="dropdown-menu--lv2">
-                                                            <a href="https://dhcvietnam.com.vn/collections/kem-nen-phan-phu">
-                                                                Kem nền - Phấn phủ
-                                                            </a>
-
-                                                        </li>
-
-                                                        <li class="dropdown-menu--lv2">
-                                                            <a href="https://dhcvietnam.com.vn/collections/son-duong">
-                                                                Son dưỡng
-                                                            </a>
-
-                                                        </li>
-
-                                                        <li class="dropdown-menu--lv2">
-                                                            <a href="https://dhcvietnam.com.vn/collections/phu-kien">
-                                                                Phụ kiện
-                                                            </a>
-
-                                                        </li>
-
-                                                    </ul>
-
-                                                    <div class="blog-menu">
-
-
-                                                        <div class="news-item">
-                                                            <div class="news-img">
-                                                                <a href="https://dhcvietnam.com.vn/blogs/meo-lam-dep/cac-loai-sua-rua-mat-cho-da-dau-khong-gay-kho-rat-da">
-
-                                                                    <img src="/content/Mypham/images/image1_18660aafd57048a0ac26acf5e997a4f0_ee65eff6ab184fdf94ea4f9eb456cb36_compact.jpg" alt="Các loại sữa rửa mặt cho da dầu không gây khô rát da">
-
-                                                                </a>
-                                                            </div>
-                                                            <div class="news-caption">
-                                                                <h4 class="sub-title-1"> Ngày đăng: 09/09/2019 </h4>
-                                                                <h3 class="title-2"><a href="https://dhcvietnam.com.vn/blogs/meo-lam-dep/cac-loai-sua-rua-mat-cho-da-dau-khong-gay-kho-rat-da">Các loại sữa rửa mặt cho da dầu không gây...</a></h3>
-                                                                <p>Dù da bạn có thừa dầu hay không, nếu chọn sai sữa rửa mặt da vẫn dễ khô...</p>
-                                                                <a href="https://dhcvietnam.com.vn/blogs/meo-lam-dep/cac-loai-sua-rua-mat-cho-da-dau-khong-gay-kho-rat-da" class="fsz-12"> CHI TIẾT <i class="fa fa-long-arrow-right"></i> </a>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="news-item">
-                                                            <div class="news-img">
-                                                                <a href="https://dhcvietnam.com.vn/blogs/meo-lam-dep/cac-loai-sua-rua-mat-cho-da-dau-co-kha-nang-duong-am-tot-cho-da">
-
-                                                                    <img src="/content/Mypham/images/image2_36425f954f544b2783e583899b21ec7f_b11f2f8ee0624c1cb32fb59949da4b15_compact.jpg" alt="Các loại sữa rửa mặt cho da dầu có khả năng dưỡng ẩm tốt cho da">
-
-                                                                </a>
-                                                            </div>
-                                                            <div class="news-caption">
-                                                                <h4 class="sub-title-1"> Ngày đăng: 09/09/2019 </h4>
-                                                                <h3 class="title-2"><a href="https://dhcvietnam.com.vn/blogs/meo-lam-dep/cac-loai-sua-rua-mat-cho-da-dau-co-kha-nang-duong-am-tot-cho-da">Các loại sữa rửa mặt cho da dầu có khả...</a></h3>
-                                                                <p>Các nàng da dầu thường tìm đến những sữa rửa mặt có thể tạo thật nhiều bọt để...</p>
-                                                                <a href="https://dhcvietnam.com.vn/blogs/meo-lam-dep/cac-loai-sua-rua-mat-cho-da-dau-co-kha-nang-duong-am-tot-cho-da" class="fsz-12"> CHI TIẾT <i class="fa fa-long-arrow-right"></i> </a>
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <a href="https://dhcvietnam.com.vn/#"><!--<img src="//theme.hstatic.net/1000186358/1000470071/14/megamenu_item_icon5.png?v=1538" alt="Theo dòng sản phẩm" />-->Theo dòng sản phẩm <i class="fa fa-angle-right" aria-hidden="true"></i></a>
-                                                <div class="sub-menu width_blog ">
-                                                    <ul class="no-bullets">
-
-
-                                                        <li class="dropdown-menu--lv2">
-                                                            <a href="https://dhcvietnam.com.vn/collections/dong-chong-nang">
-                                                                Chống nắng
-                                                            </a>
-
-                                                        </li>
-
-                                                        <li class="dropdown-menu--lv2">
-                                                            <a href="https://dhcvietnam.com.vn/collections/dong-tri-mun">
-                                                                Trị mụn - Acne control
-                                                            </a>
-
-                                                        </li>
-
-                                                        <li class="dropdown-menu--lv2">
-                                                            <a href="https://dhcvietnam.com.vn/collections/dong-collagen">
-                                                                Trẻ hóa da - Collagen
-                                                            </a>
-
-                                                        </li>
-
-                                                        <li class="dropdown-menu--lv2">
-                                                            <a href="https://dhcvietnam.com.vn/collections/dong-urumai">
-                                                                Tinh chất gạo - Urumai
-                                                            </a>
-
-                                                        </li>
-
-                                                        <li class="dropdown-menu--lv2">
-                                                            <a href="https://dhcvietnam.com.vn/collections/dong-q">
-                                                                Dòng Q
-                                                            </a>
-
-                                                        </li>
-
-                                                        <li class="dropdown-menu--lv2">
-                                                            <a href="https://dhcvietnam.com.vn/collections/dong-olive">
-                                                                Dòng Olive
-                                                            </a>
-
-                                                        </li>
-
-                                                        <li class="dropdown-menu--lv2">
-                                                            <a href="https://dhcvietnam.com.vn/collections/dong-vitamin-c">
-                                                                Dòng Vitamin C
-                                                            </a>
-
-                                                        </li>
-
-                                                    </ul>
-
-                                                    <div class="blog-menu">
-
-
-                                                        <div class="news-item">
-                                                            <div class="news-img">
-                                                                <a href="https://dhcvietnam.com.vn/blogs/lam-dep-cung-dhc/review-chi-tiet-kem-duong-da-chan-dhc-urea-cream">
-
-                                                                    <img src="/content/Mypham/images/69719873_1617372605060816_3306658036579303424_n_506d3bf7742840c3b1dcb63de0c64f04_compact.jpg" alt="Review chi tiết kem dưỡng da chân DHC UREA Cream">
-
-                                                                </a>
-                                                            </div>
-                                                            <div class="news-caption">
-                                                                <h4 class="sub-title-1"> Ngày đăng: 08/09/2019 </h4>
-                                                                <h3 class="title-2"><a href="https://dhcvietnam.com.vn/blogs/lam-dep-cung-dhc/review-chi-tiet-kem-duong-da-chan-dhc-urea-cream">Review chi tiết kem dưỡng da chân DHC UREA Cream</a></h3>
-                                                                <p>Đôi chân là vị trí thường bị chị em bỏ qua và ít quan tâm chăm sóc. Rất...</p>
-                                                                <a href="https://dhcvietnam.com.vn/blogs/lam-dep-cung-dhc/review-chi-tiet-kem-duong-da-chan-dhc-urea-cream" class="fsz-12"> CHI TIẾT <i class="fa fa-long-arrow-right"></i> </a>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="news-item">
-                                                            <div class="news-img">
-                                                                <a href="https://dhcvietnam.com.vn/blogs/lam-dep-cung-dhc/kem-duong-vung-mat-dhc-eye-bright-cho-nang-vung-mat-sang">
-
-                                                                    <img src="/content/Mypham/images/image1_562f4de21ffb41eda13868bab57587f0_9d012377a98e4a49853a5f2e574f86ca_compact.jpg" alt="Kem dưỡng vùng mắt DHC Eye Bright cho nàng vùng mắt sáng">
-
-                                                                </a>
-                                                            </div>
-                                                            <div class="news-caption">
-                                                                <h4 class="sub-title-1"> Ngày đăng: 07/09/2019 </h4>
-                                                                <h3 class="title-2"><a href="https://dhcvietnam.com.vn/blogs/lam-dep-cung-dhc/kem-duong-vung-mat-dhc-eye-bright-cho-nang-vung-mat-sang">Kem dưỡng vùng mắt DHC Eye Bright cho nàng vùng...</a></h3>
-                                                                <p>Vùng mắt là một trong những điểm thu hút trên gương mặt, khi xuất hiện quầng thâm và...</p>
-                                                                <a href="https://dhcvietnam.com.vn/blogs/lam-dep-cung-dhc/kem-duong-vung-mat-dhc-eye-bright-cho-nang-vung-mat-sang" class="fsz-12"> CHI TIẾT <i class="fa fa-long-arrow-right"></i> </a>
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-
-                                </div>
-                                <div class="col-sm-8">
-                                    <ul class="primary-navbar">
-
-
-
-                                        <li class="">
-                                            <a href="https://dhcvietnam.com.vn/collections/dhc-sale-off-chuong-trinh-giam-gia-dhc">Khuyến mại</a>
-                                        </li>
-
-
-
-
-                                        <li class="nav-item dropdown dropdown1">
-                                            <a href="https://dhcvietnam.com.vn/blogs/all" class="dropdown-toggle"><!--<img src="//theme.hstatic.net/1000186358/1000470071/14/menu_icon_2.png?v=1538" width="20" alt=""/>--> Tin làm đẹp</a>
-                                            <ul class="dropdown-menu dropdown-level1">
-
-
-                                                <li><a href="https://dhcvietnam.com.vn/blogs/news">DHC News</a></li>
-
-
-
-                                                <li><a href="https://dhcvietnam.com.vn/blogs/lam-dep-cung-dhc">Làm đẹp cùng DHC</a></li>
-
-
-
-                                                <li><a href="https://dhcvietnam.com.vn/blogs/meo-lam-dep">Mẹo làm đẹp</a></li>
-
-
-
-                                                <li><a href="https://dhcvietnam.com.vn/blogs/khuyen-mai">Tin khuyến mại</a></li>
-
-
-                                            </ul>
-                                        </li>
-
-
-
-
-                                        <li class="nav-item dropdown dropdown1">
-                                            <a href="https://dhcvietnam.com.vn/pages/dhc-olive-story" class="dropdown-toggle"><!--<img src="//theme.hstatic.net/1000186358/1000470071/14/menu_icon_3.png?v=1538" width="20" alt=""/>--> Về DHC</a>
-                                            <ul class="dropdown-menu dropdown-level1">
-
-
-                                                <li><a href="https://dhcvietnam.com.vn/pages/dhc-olive-story">DHC Olive Story</a></li>
-
-
-
-                                                <li><a href="https://dhcvietnam.com.vn/pages/gioi-thieu-ve-dhc-nhat-ban">Về DHC Corporation</a></li>
-
-
-
-                                                <li><a href="https://dhcvietnam.com.vn/pages/dia-chi-cua-hang-dhc">Hệ thống cửa hàng DHC</a></li>
-
-
-                                            </ul>
-                                        </li>
-
-
-
-
-                                        <li class="">
-                                            <a href="http://affiliate.dhcvietnam.com.vn/">CTV</a>
-                                        </li>
-
-
-
-
-                                        <li class="">
-                                            <a href="https://dhcvietnam.com.vn/pages/dia-chi-cua-hang-dhc">Tìm đại lý</a>
-                                        </li>
-
-
-
-
-                                        <li class="">
-                                            <a href="https://dhcvietnam.com.vn/blogs/co-hoi-viec-lam">Tuyển dụng</a>
-                                        </li>
-
-
-                                    </ul>
-                                </div>
-                            </div>
-
-                        </nav>
+                        @Html.Action("MenuTop", "Partial")
                     </div>
                     <div class="col-lg-2 col-md-2 hidden-sm hidden-xs cart-megamenu">
 
                         <div id="top-cart" class="cart-info cart-hover top-cart-block">
-                            <a id="top-cart-trigger" href="javascript:void(0)" title="Giỏ hàng"><img src="/content/Mypham/images/cart.png" alt="Giỏ hàng"> Giỏ hàng <span class="cnt crl-bg count_item_pr">1</span></a>
+                            <a id="top-cart-trigger" href="javascript:void(0)" title="Giỏ hàng">
+                                <img src="/content/Mypham/images/cart.png" alt="Giỏ hàng"> Giỏ hàng <span class="cnt crl-bg count_item_pr">1</span>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -545,15 +138,15 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <form class="input-group search-bar search_form has-validation-callback" action="https://dhcvietnam.com.vn/search" method="get" role="search">
-                            <input type="search" name="q" value="" placeholder="Tìm kiếm sản phẩm... " class="input-group-field st-default-search-input search-text" autocomplete="off">
-                            <input type="hidden" name="type" value="product">
+                        <div class="input-group search-bar search_form has-validation-callback" method="get" role="search">
+                            <input type="search" id="searchtext" name="q" value="" placeholder="Tìm kiếm sản phẩm... " class="input-group-field st-default-search-input search-text" autocomplete="off">
+                           
                             <span class="input-group-btn">
-                                <button class="btn icon-fallback-text">
+                                <button class="btn icon-fallback-text"  onclick="search()">
                                     <i class="fa fa-search"></i>
                                 </button>
                             </span>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -576,11 +169,7 @@
                 </div>
                 <div class="col-xs-5">
                     <div class="main-logo">
-                        <a href="https://dhcvietnam.com.vn/">
-
-                            <img src="/content/Mypham/images/logo_mb.png" alt="" class="img-responsive center-block">
-
-                        </a>
+                        @Html.Action("GetByCodeHtml", "Partial", new { Code = "Logo" })
                     </div>
                 </div>
                 <div class="col-xs-4">
@@ -619,24 +208,22 @@
                 <div class="col-xs-12">
                     <div class="search-header" style="display:none;">
 
-                        <form id="searchauto" action="https://dhcvietnam.com.vn/search" class="input-group search-bar search_form searchform-categoris ultimate-search has-validation-callback">
+                        <div id="searchauto" class="input-group search-bar search_form searchform-categoris ultimate-search has-validation-callback">
                             <div class="wpo-search">
                                 <div class="wpo-search-inner">
                                     <div class="input-group">
-                                        <input type="hidden" name="type" value="product">
-                                        <input id="searchtext" name="q" maxlength="40" class="input-group-field st-default-search-input search-text form-control input-search" type="text" size="20" placeholder="Tìm kiếm..." autocomplete="off">
+
+                                        <input id="txtKeyword" name="q" maxlength="40" class="input-group-field st-default-search-input search-text form-control input-search" type="text" size="20" placeholder="Tìm kiếm..." autocomplete="off">
                                         <span class="input-group-addon input-group-btn">
-                                            <button type="submit" id="searchsubmit" class="btn">
+                                            <button type="submit" id="searchsubmit" class="btn" onclick="search()">
                                                 <img width="22" src="/content/Mypham/images/search.png" alt="Tìm kiếm">
                                             </button>
                                         </span>
                                     </div>
                                 </div>
-                                <input type="hidden" class="collection_id" value="(collectionid:product&gt;=0)">
-                                <input type="hidden" class="collection_handle" value="all">
-                                <input type="hidden" class="collection_name" value="all">
+
                             </div>
-                        </form>
+                        </div>
 
 
                         <script>
@@ -872,7 +459,22 @@
 
 
                         </script>
+                        <script type="text/javascript">
+                            $("#txtKeyword").keydown(function (event) {
+                                $('#txtKeyword').keypress(function (e) {
+                                    if (e.keyCode == 13) {
+                                        event.preventDefault();
+                                        search();
+                                    }
 
+                                });
+                            });
+                            function search() {
+                                //   if (jQuery('#txtKeyword').val().length > 2)
+                                window.location.href = '/search.html' + "?k=" + jQuery('#txtKeyword').val();
+                                //  else alert('Từ khóa tìm kiếm phải trên 2 ký tự');
+                            }
+                        </script>
                         <style>
 
 
@@ -938,25 +540,20 @@
         <div class="nav-mobile">
             <ul class="primary-navbar off">
 
+                @{
+                    MenusBusiness menubussiness = new MenusBusiness();
+                    List<Menus> ListMenu = new List<Menus>();
 
+                    ListMenu = menubussiness.SearchMenusByParentId(-1, 4, 3);
 
-                <li class="">
-                    <a href="https://dhcvietnam.com.vn/collections/dhc-sale-off-chuong-trinh-giam-gia-dhc"><img src="/content/Mypham/images/menu_icon_mb_1.png" width="20" alt=""> Khuyến mại</a>
-                </li>
+                    foreach (var re in ListMenu)
+                    {
+                        <li class="">
+                            <a href="@Util.ReturnLinkFull(re.Link)"><img src="@re.BackGround" width="20" alt=""> @re.MenuName</a>
+                        </li>
+                    }
+                }
 
-
-
-
-                <li class="">
-                    <a href="https://dhcvietnam.com.vn/blogs/all"><img src="/content/Mypham/images/menu_icon_mb_2.png" width="20" alt=""> Làm đẹp</a>
-                </li>
-
-
-
-
-                <li class="">
-                    <a href="https://dhcvietnam.com.vn/pages/gioi-thieu-ve-dhc-nhat-ban"><img src="/content/Mypham/images/menu_icon_mb_3.png" width="20" alt=""> Về DHC</a>
-                </li>
 
 
                 <li class="button-menu">
@@ -966,51 +563,22 @@
             <div class="fix-menumobile on" style="display:none;">
                 <ul class="primary-navbar">
 
+                    @{
+                        MenusBusiness menubussiness1 = new MenusBusiness();
+                        List<Menus> ListMenu1 = new List<Menus>();
+
+                        ListMenu1 = menubussiness.SearchMenusByParentId(-1, 4);
+                        foreach (var re in ListMenu1)
+                        {
 
 
-                    <li class="">
-                        <a href="https://dhcvietnam.com.vn/collections/dhc-sale-off-chuong-trinh-giam-gia-dhc"><img src="/content/Mypham/images/menu_icon_mb_1.png" width="20" alt=""> Khuyến mại</a>
-                    </li>
+                            <li class="">
+                                <a href="@Util.ReturnLinkFull(re.Link)"><img src="@re.BackGround" width="20" alt=""> @re.MenuName</a>
+                            </li>
 
+                        }
+                    }
 
-
-
-                    <li class="">
-                        <a href="https://dhcvietnam.com.vn/blogs/all"><img src="/content/Mypham/images/menu_icon_mb_2.png" width="20" alt=""> Làm đẹp</a>
-                    </li>
-
-
-
-
-                    <li class="">
-                        <a href="https://dhcvietnam.com.vn/pages/gioi-thieu-ve-dhc-nhat-ban"><img src="/content/Mypham/images/menu_icon_mb_3.png" width="20" alt=""> Về DHC</a>
-                    </li>
-
-
-
-
-                    <li class="">
-                        <a href="https://dhcvietnam.com.vn/blogs/co-hoi-viec-lam"><img src="/content/Mypham/images/menu_icon_mb_4.png" width="20" alt=""> Tuyển dụng</a>
-                    </li>
-
-
-
-
-                    <li class="">
-                        <a href="http://affiliate.dhcvietnam.com.vn/"><img src="/content/Mypham/images/menu_icon_mb_5.png" width="20" alt=""> Cộng tác viên</a>
-                    </li>
-
-
-
-
-                    <li class="">
-                        <a href="https://dhcvietnam.com.vn/pages/tim-dai-ly"><img src="/content/Mypham/images/menu_icon_mb_6.png" width="20" alt=""> Tìm đại lý</a>
-                    </li>
-
-
-                    <li class="">
-                        <a href="https://dhcvietnam.com.vn/account/login"><img src="/content/Mypham/images/menu_icon_mb_6.png" width="20" alt=""> Đăng nhập</a>
-                    </li>
                     <li class="button-menu off">
                         <i class="fa fa-angle-double-up"></i>
                     </li>

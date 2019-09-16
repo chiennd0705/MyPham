@@ -300,6 +300,7 @@
           <Property Name="TypeMenu" Type="int" Nullable="false" />
           <Property Name="BackGround" Type="nvarchar" MaxLength="300" />
           <Property Name="IsBackGround" Type="bit" />
+          <Property Name="NewGroupID" Type="bigint" />
         </EntityType>
         <EntityType Name="Module">
           <Key>
@@ -1069,6 +1070,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Orders_Members">
+          <End Role="Members" Type="Self.Members" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="IdShop" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ProductAttributes_Products">
           <End Role="Products" Type="Self.Products" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -1483,6 +1498,10 @@
             <End Role="Orders" EntitySet="Orders" />
             <End Role="OrderReciver" EntitySet="OrderReciver" />
           </AssociationSet>
+          <AssociationSet Name="FK_Orders_Members" Association="Self.FK_Orders_Members">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
           <AssociationSet Name="FK_ProductAttributes_Products" Association="Self.FK_ProductAttributes_Products">
             <End Role="Products" EntitySet="Products" />
             <End Role="ProductAttributes" EntitySet="ProductAttributes" />
@@ -1703,11 +1722,11 @@
           <Parameter Name="UserName" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GetUserByUserNameAndPassword" ReturnType="Collection(BuyGroup365Model.GetUserByUserNameAndPassword_Result)">
-            <Parameter Name="UserName" Mode="In" Type="String" />
+          <Parameter Name="UserName" Mode="In" Type="String" />
             <Parameter Name="Password" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SearchProductByBrand" ReturnType="Collection(BuyGroup365Model.SearchProductByBrand_Result)">
-            <Parameter Name="id" Mode="In" Type="Int64" />
+          <Parameter Name="id" Mode="In" Type="Int64" />
             <Parameter Name="PageNum" Mode="In" Type="Int32" />
             <Parameter Name="PageSize" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -1797,7 +1816,7 @@
             <End Role="OrderDetail" EntitySet="OrderDetails" />
           </AssociationSet>
           <FunctionImport Name="SearchProductByType" ReturnType="Collection(BuyGroup365Model.SearchProductByType_Result)">
-            <Parameter Name="type" Mode="In" Type="Int64" />
+          <Parameter Name="type" Mode="In" Type="Int64" />
             <Parameter Name="id" Mode="In" Type="Int64" />
             <Parameter Name="PageNum" Mode="In" Type="Int32" />
             <Parameter Name="PageSize" Mode="In" Type="Int32" />
@@ -1806,7 +1825,7 @@
           <Parameter Name="Name" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SearchNewByGroupID" ReturnType="Collection(BuyGroup365Model.SearchNewByGroupID_Result)">
-            <Parameter Name="id" Mode="In" Type="Int64" />
+          <Parameter Name="id" Mode="In" Type="Int64" />
             <Parameter Name="PageNum" Mode="In" Type="Int32" />
             <Parameter Name="PageSize" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -3002,16 +3021,17 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MenuName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="ParentId" Type="Int64" Nullable="false" />
-          <Property Name="Status" Type="Int32" Nullable="false" />
-          <Property Name="Order" Type="Int32" Nullable="false" />
-          <Property Name="Link" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="TypeMenu" Type="Int32" Nullable="false" />
-          <Property Name="BackGround" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int64" />
+          <Property Name="MenuName" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="ParentId" Nullable="false" Type="Int64" />
+          <Property Name="Status" Nullable="false" Type="Int32" />
+          <Property Name="Order" Nullable="false" Type="Int32" />
+          <Property Name="Link" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="CreateDate" Nullable="false" Precision="3" Type="DateTime" />
+          <Property Name="TypeMenu" Nullable="false" Type="Int32" />
+          <Property Name="BackGround" MaxLength="300" FixedLength="false" Unicode="true" Type="String" />
           <Property Name="IsBackGround" Type="Boolean" />
+          <Property Name="NewGroupID" Type="Int64" />
         </EntityType>
         <EntityType Name="CatalogProducts">
           <Key>
@@ -4244,6 +4264,7 @@
           <EntitySetMapping Name="Menus">
             <EntityTypeMapping TypeName="BuyGroup365Model.Menus">
               <MappingFragment StoreEntitySet="Menus">
+                <ScalarProperty Name="NewGroupID" ColumnName="NewGroupID" />
                 <ScalarProperty Name="IsBackGround" ColumnName="IsBackGround" />
                 <ScalarProperty Name="BackGround" ColumnName="BackGround" />
                 <ScalarProperty Name="TypeMenu" ColumnName="TypeMenu" />

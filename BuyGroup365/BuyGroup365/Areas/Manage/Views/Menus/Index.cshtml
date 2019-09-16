@@ -31,6 +31,7 @@
         <div class="col-lg-6">
             @{
                 Menus menu;
+
                 LoadCombo _loadCombo = new LoadCombo();
                 long id = 0;
 
@@ -40,16 +41,17 @@
                     menu = new MenusBusiness().GetById(id);
                     List<LoadCombo.DropdowMenus> listDropdowMenus = new List<LoadCombo.DropdowMenus>();
                     ViewBag.ParentId = _loadCombo.SearchMenusByName(ref listDropdowMenus, menu.ParentId);
-
+                    ViewBag.NewGroupID = _loadCombo.InitSelectListItemStatusNewsGroup(menu.NewGroupID);
                 }
                 else
                 {
                     menu = new Menus();
                     List<LoadCombo.DropdowMenus> listDropdowMenus = new List<LoadCombo.DropdowMenus>();
                     ViewBag.ParentId = _loadCombo.SearchMenusByName(ref listDropdowMenus);
+                    ViewBag.NewGroupID = _loadCombo.InitSelectListItemStatusNewsGroup();
                     menu.IsBackGround = false;
                 }
-
+             
             }
             @using (Html.BeginForm("Update", "Menus", FormMethod.Post, new { enctype = "multipart/form-data", id = "Update" }))
             {
@@ -85,11 +87,12 @@
                 </div>
                 <div class="form-group">
                     <label>Kiểu menu</label><br />
-                    <select class="form-control" name="TypeMenu" id="TypeMenu">
-                        <option value="1" @(menu.TypeMenu == 1 ? "selected" : "")>Menu dọc</option>
-                        <option value="2" @(menu.TypeMenu == 2 ? "selected" : "")>Menu ngang</option>
-                        <option value="3" @(menu.TypeMenu == 3 ? "selected" : "")>Menu mobile</option>
-                    </select>
+                                            <select class="form-control" name="TypeMenu" id="TypeMenu">
+                                                <option value="1" @(menu.TypeMenu == 1 ? "selected" : "")>Menu dọc</option>
+                                                <option value="2" @(menu.TypeMenu == 2 ? "selected" : "")>Menu ngang</option>
+                                                <option value="3" @(menu.TypeMenu == 3 ? "selected" : "")>Menu mobile</option>
+                                                <option value="4" @(menu.TypeMenu == 4 ? "selected" : "")>Menu ngang mobile</option>
+                                            </select>
                 </div>
                 <div class="form-group">
                     <label>Phát hành</label><br />
@@ -98,6 +101,10 @@
                         <option value="2" @(menu.Status == 2 ? "selected" : "")>Không hiển thị</option>
                     </select>
                 </div>
+                <div class="form-group">
+                <label>Danh mục tin<span class="required">*</span></label><br />
+                @Html.DropDownList("NewGroupID", null, new { @width = "100%" })
+            </div>
                 <div class="form-group">
                     <label>Thứ tự</label><br />
                     <input class="form-control" autocomplete="off" maxlength="200" id="Order" name="Order" type="text" value="@menu.Order" />
@@ -118,14 +125,21 @@
            new AjaxOptions { UpdateTargetId = "grid-list", HttpMethod = "get", LoadingElementId = "loading", OnBegin = "beginPaging", OnSuccess = "successPaging", OnFailure = "failurePaging" },
            new { id = "frm-search" }))
             {
-                <div class="form-group input-group">
-                    <input type="text" value="@ViewData["key"]" class="form-control" id="key" name="key" placeholder="Nhập từ khóa tìm kiếm">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default" type="submit">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </span>
-                </div>
+            <div class="form-group input-group">
+                <input type="text" value="@ViewData["key"]" class="form-control" id="key" name="key" placeholder="Nhập từ khóa tìm kiếm">
+                <select class="form-control" name="TypeMenuSeach" id="TypeMenuSeach">
+                    <option value="-1" selected>--Tất cả--</option>
+                    <option value="1">Menu dọc</option>
+                    <option value="2">Menu ngang</option>
+                    <option value="3">Menu mobile</option>
+                    <option value="4">Menu ngang mobile</option>
+                </select>
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </span>
+            </div>
                 <div class="table-responsive">
                     <table class="table table-bordered table-hover table-striped" id="dataTables" aria-describedby="dataTables-example_info">
                         <thead>
@@ -171,6 +185,10 @@
                                         @if (item.TypeMenu == 3)
                                         {
                                             <span>Menu mobile</span>
+                                        }
+                                        @if (item.TypeMenu == 4)
+                                        {
+                                            <span>Menu ngang mobile</span>
                                         }
                                     </td>
                                     <td>

@@ -78,7 +78,7 @@
         <AssociationConnector Association="BuyGroup365Model.FK_ProductProperties_Products" />
         <AssociationConnector Association="BuyGroup365Model.FK_Products_Manufacturers" />
         <EntityTypeShape EntityType="BuyGroup365Model.FriendlyUrl" Width="1.5" PointX="6.375" PointY="13.75" />
-        <EntityTypeShape EntityType="BuyGroup365Model.Menus" Width="1.5" PointX="3.375" PointY="0.75" />
+        <EntityTypeShape EntityType="BuyGroup365Model.Menus" PointX="3.375" PointY="0.75" Width="1.5" />
         <EntityTypeShape EntityType="BuyGroup365Model.CatalogProducts" Width="1.5" PointX="15.25" PointY="8.75" />
         <AssociationConnector Association="BuyGroup365Model.FK_CatalogProduct_Catalogs" />
         <AssociationConnector Association="BuyGroup365Model.FK_CatalogProduct_Products" />
