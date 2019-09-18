@@ -232,24 +232,25 @@ namespace BuyGroup365.Controllers
                 //  var idShop = entity.Id;
                 //Order
 
-                #region Xoa san phâm trong sesion
+                //#region Xoa san phâm trong sesion
 
+
+                //foreach (var item in sesion)
+                //{
+                //    if (item.Product.MemberId != shopid)
+                //    {
+                //        listCartItems.Add(item);
+                //    }
+                //    else
+                //    {
+                //    }
+                //}
+                //ordersBusiness.AddNew(order);
+                //NlCheckout.SetSessionCard(listCartItems, Session);
+
+                //#endregion Xoa san phâm trong sesion
                 List<CartItem> listCartItems = new List<CartItem>();
-                foreach (var item in sesion)
-                {
-                    if (item.Product.MemberId != shopid)
-                    {
-                        listCartItems.Add(item);
-                    }
-                    else
-                    {
-                    }
-                }
-                ordersBusiness.AddNew(order);
-                NlCheckout.SetSessionCard(listCartItems, Session);
-
-                #endregion Xoa san phâm trong sesion
-
+                listCartItems = NlCheckout.GetSessionCard(Session);
                 string body = ControllerExtensions.RenderRazorViewToString(this, "DetailCart", order);
 
                 Function.ObjMailSend objmail = new Function.ObjMailSend();

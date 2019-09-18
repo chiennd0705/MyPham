@@ -84,11 +84,19 @@ namespace BuyGroup365.Areas.Manage.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    CatalogsBusiness catalogsBusiness = new CatalogsBusiness();
                     string friendly = "";
                     Random rd = new Random();
                     Catalog obj = new Catalog();
                     // obj.FriendlyUrl = Function.ConvertFileName(categoryname);
-                    friendly = Function.ConvertFileName(categoryname) + duoilink;
+                    string friendlyCata = "";
+                    if (parent != -1)
+                    {
+                        var dbCatalogSub = catalogsBusiness.GetById(parent);
+                        friendlyCata = dbCatalogSub.FriendlyUrl.Replace(".html","") + "/";
+
+                    }
+                    friendly = friendlyCata+ Function.ConvertFileName(categoryname) + duoilink;
                     obj.FriendlyUrl = friendly;
                     obj.ParentId = parent;
                     obj.Status = statusCatg;
@@ -682,8 +690,15 @@ namespace BuyGroup365.Areas.Manage.Controllers
                 dbCatalog.ParentId = parent;
                 dbCatalog.Code = viewCatalog.Code;
                 dbCatalog.CatalogName = viewCatalog.CatalogName;
-
-                friendly = Function.ConvertFileName(viewCatalog.CatalogName) + duoilink;
+             
+                string friendlyCata = "";
+                if (dbCatalog.ParentId != -1)
+                {
+                    var dbCatalogSub = catalogsBusiness.GetById(dbCatalog.ParentId);
+                    friendlyCata = dbCatalogSub.FriendlyUrl.Replace(".html", "") + "/";
+                  
+                }
+                friendly = friendlyCata+ Function.ConvertFileName(viewCatalog.CatalogName) + duoilink;
 
                 dbCatalog.FriendlyUrl = friendly;
                 if (Icon != null && Icon.ContentLength > 0)

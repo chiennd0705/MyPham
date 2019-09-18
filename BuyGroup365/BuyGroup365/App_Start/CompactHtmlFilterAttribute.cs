@@ -24,14 +24,14 @@ public class CompactHtmlFilterAttribute : ActionFilterAttribute
 
     public override void OnActionExecuting(ActionExecutingContext filterContext)
     {
-#if DEBUG
-        base.OnActionExecuting(filterContext);
-#else
-                        try
-                        {
-                            filterContext.HttpContext.Response.Filter = new WhitespaceFilter(filterContext.HttpContext.Response);
-                        }
-                        catch (Exception) { }
-#endif
+//#if DEBUG
+//        base.OnActionExecuting(filterContext);
+//#else
+//                        try
+//                        {
+//                            filterContext.HttpContext.Response.Filter = new WhitespaceFilter(filterContext.HttpContext.Response);
+//                        }
+//                        catch (Exception) { }
+//#endif
     }
 }

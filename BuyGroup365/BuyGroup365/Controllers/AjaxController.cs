@@ -221,6 +221,7 @@ namespace BuyGroup365.Controllers
                 productCart.AvatarUrl = item.AvatarUrl;
                 listpProductCarts.Add(productCart);
             }
+            Session["SLSanPham"] = listpProductCarts.Count;
             return Json(listpProductCarts, JsonRequestBehavior.AllowGet);
         }
 

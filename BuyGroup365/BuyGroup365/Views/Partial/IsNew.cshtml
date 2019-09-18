@@ -79,19 +79,16 @@
 
 
                                                             </div>
-                                                            <div class="prod-action">
-                                                                <button type="button" onclick="add_item_show_modalCart(1037293649)" class="hidden-sm hidden-lg hidden-md btn buy-nows">Mua Ngay</button>
-                                                            </div>
                                                             <div class="prod-icons ababababa">
-                                                                <form action="https://dhcvietnam.com.vn/cart/add" method="post" class="variants form-nut-grid has-validation-callback" data-id="product-actions-1018820719" enctype="multipart/form-data">
+                                                                <div class="variants form-nut-grid has-validation-callback">
 
 
-                                                                    <input type="hidden" name="id" value="1037293649">
-                                                                    <a class="fa fa-shopping-basket" onclick="add_item_show_modalCart(1037293649)" title="Cho vào giỏ hàng"></a>
+
+                                                                    <a class="fa fa-shopping-basket" onclick="updatecartquick(@item.Id,1)" data-toggle="modal" data-target="#myCart" title="Cho vào giỏ hàng"></a>
 
 
-                                                                    <a href="https://dhcvietnam.com.vn/products/bo-olive-sube-sube-mini-set-ss" class="fa fa-expand quick-view"></a>
-                                                                </form>
+                                                                    <a href="/gio-hang" class="fa fa-expand quick-view"></a>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -104,11 +101,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="seemore">
+                    @*<div class="seemore">
                         <a href="https://dhcvietnam.com.vn/collections/new-arrival">
                             Xem tất cả các <span>SẢN PHẨM MỚI</span>
                         </a>
-                    </div>
+                    </div>*@
                 </div>
             </div>
         </div>

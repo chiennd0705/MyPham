@@ -16,7 +16,7 @@
                     <div class="content-product-list products-view-owl owl-carousel not-dqowl owl-loaded owl-drag">
                         @{
 
-                            List<long> ListProductViewed = BuyGroup365.Models.Member.NlCheckout.GetSessionProductViewed(Session).Take(3).ToList();
+                            List<long> ListProductViewed = BuyGroup365.Models.Member.NlCheckout.GetSessionProductViewed(Session);
                             ProductsBusiness productBusiness = new ProductsBusiness();
                             ProductImagesBusiness productImageBusiness = new ProductImagesBusiness();
 
@@ -24,63 +24,69 @@
                             string col = "";
                             string img = "";
                             string height = "", display = "";
-                            foreach (var re in ListProductViewed)
+                            if (ListProductViewed != null)
                             {
-                                try
+                                foreach (var re in ListProductViewed)
                                 {
-                                    Product item = productBusiness.GetById(re);
-                                    var listImg = productImageBusiness.FindProductId(re);
-                                    count++;
-
-                                    img = "Small";
-                                    col = "4";
-                                    height = ""; display = "";
-                                    string imgPro = "";
                                     try
                                     {
-                                        foreach (ProductImage img1 in listImg)
+                                        Product item = productBusiness.GetById(re);
+                                        var listImg = productImageBusiness.FindProductId(re);
+                                        count++;
+
+                                        img = "Small";
+                                        col = "4";
+                                        height = ""; display = "";
+                                        string imgPro = "";
+                                        try
                                         {
-                                            if (img1.IsAvatar == 1)
+                                            foreach (ProductImage img1 in listImg)
                                             {
-                                                imgPro = img1.ImgSource;
+                                                if (img1.IsAvatar == 1)
+                                                {
+                                                    imgPro = img1.ImgSource;
+                                                }
                                             }
+
                                         }
+                                        catch { }
+                                        int phantramKM = 0;
+                                        try
+                                        {
+                                            phantramKM = Convert.ToInt32((item.Cost - item.Price) / item.Cost * 100);
+                                        }
+                                        catch { }
 
-                                    }
-                                    catch { }
-                                    int phantramKM = 0;
-                                    try
-                                    {
-                                        phantramKM = Convert.ToInt32((item.Cost - item.Price) / item.Cost * 100);
-                                    }
-                                    catch { }
+                                        <div class="product-box pro-loop item">
+                                            <div class="product-block product-resize">
+                                                <div class="product-img view view-third product-media">
+                                                    <a href="@Util.ReturnLinkFull(@item.FriendlyUrl)" title="@item.ProductName">
+                                                        <div class="mask">
+                                                            <img src="/Content/Mypham/images/quick-look.png" data-handle="@item.ProductName" alt="@item.ProductName">
+                                                        </div>
+                                                        <img alt="Bộ Olive chăm sóc da DHC Olive Skin Care Set" src="@Util.ReturnLinkCDN(imgPro,Request.Browser.IsMobileDevice)">
+                                                        <span class="prod-tag tag-1">phantramKM%</span>
+                                                    </a>
 
-                                    <div class="product-box pro-loop item">
-                                        <div class="product-block product-resize">
-                                            <div class="product-img view view-third product-media">
-                                                <a href="@Util.ReturnLinkFull(@item.FriendlyUrl)" title="@item.ProductName">
-                                                    <div class="mask">
-                                                        <img src="/Content/Mypham/images/quick-look.png" data-handle="@item.ProductName" alt="@item.ProductName">
+                                                </div>
+
+                                                <div class="product-detail clearfix product-caption">
+                                                    <h3 class="pro-name product-title"><a href="@Util.ReturnLinkFull(@item.FriendlyUrl)" title="@item.ProductName">@item.ProductName</a></h3>
+                                                    <div class="price">
+                                                        <strong class="pro-price clr-txt">@(String.Format("{0:#,###}", item.Price))₫</strong>
+
                                                     </div>
-                                                    <img alt="Bộ Olive chăm sóc da DHC Olive Skin Care Set" src="@Util.ReturnLinkCDN(imgPro,Request.Browser.IsMobileDevice)">
-                                                    <span class="prod-tag tag-1">phantramKM%</span>
-                                                </a>
-
-                                            </div>
-
-                                            <div class="product-detail clearfix product-caption">
-                                                <h3 class="pro-name product-title"><a href="@Util.ReturnLinkFull(@item.FriendlyUrl)" title="@item.ProductName">@item.ProductName</a></h3>
-                                                <div class="price">
-                                                    <strong class="pro-price clr-txt">@(String.Format("{0:#,###}", item.Price))₫</strong>
-
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
 
+                                    }
+                                    catch { }
                                 }
-                                catch { }
                             }
+
+
+
 
                         }
 
@@ -89,7 +95,7 @@
 
                 </div>
             </div>
-            
+
         </div>
 
 

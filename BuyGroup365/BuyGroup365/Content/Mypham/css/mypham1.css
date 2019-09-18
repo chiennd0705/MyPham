@@ -483,3 +483,162 @@ body.fb_hidden {
         transform: scale(1, 1)
     }
 }
+
+
+#someone-purchased {
+    background: #fff;
+    border: 0;
+    display: none;
+    border-radius: 0;
+    left: 20px;
+    right: auto !important;
+    bottom: 20px;
+    top: auto !important;
+    padding: 0;
+    position: fixed;
+    text-align: left;
+    width: auto;
+    z-index: 99999;
+    font-family: Raleway, sans-serif;
+    -webkit-box-shadow: 0 0 4px 0 rgba(0,0,0,0.4);
+    -moz-box-shadow: 0 0 4px 0 rgba(0,0,0,0.4);
+    box-shadow: 0 0 4px 0 rgba(0,0,0,0.4);
+    
+}
+
+    #someone-purchased div img {
+        max-width: 85px;
+        max-height: 100%;
+        border-radius: 3px;
+        background-clip: padding-box;
+    }
+
+  
+
+    #someone-purchased div p {
+        color: #666;
+        float: left;
+        font-size: 13px;
+        margin: 0 0 0 13px;
+        width: auto;
+        padding: 10px 10px 0 0;
+        font-family: Arial;
+        line-height: 24px;
+    }
+
+        #someone-purchased div p font {
+        }
+
+        #someone-purchased div p span {
+            font-family: Arial;
+            font-size: 13px;
+            font-weight: bold
+        }
+
+        #someone-purchased div p small {
+            text-align: right;
+            display: block;
+            font-size: 10px;
+            margin-bottom: 8px
+        }
+
+@media screen and (max-width: 767px) {
+    .infomobile {
+        display: block;
+    }
+
+    #someone-purchased {
+        bottom: 0 !important;
+        left: 0 !important;
+        top: auto !important;
+        width: 100%;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        max-width: auto !important
+    }
+
+        #someone-purchased div img {
+            max-width: 15%;
+            max-height: auto
+        }
+
+        #someone-purchased div p {
+            font-size: 11px;
+            width: 80%
+        }
+
+            #someone-purchased div p span {
+                font-size: 11px;
+            }
+
+            #someone-purchased div p small {
+                text-align: left
+            }
+}
+
+@keyframes nFadeIn {
+    from {
+        opacity: 0;
+        transform: translate3d(0, 100%, 0)
+    }
+
+    to {
+        opacity: 1;
+        transform: none
+    }
+}
+
+#someone-purchased.fade-in {
+    opacity: 0;
+    animation-name: nFadeIn;
+    animation-duration: 1s;
+    animation-fill-mode: both
+}
+
+@media screen and (max-width: 767px) {
+    @keyframes nFadeIn {
+        from {
+            opacity: 0;
+            transform: translate3d(0, 100%, 0)
+        }
+
+        to {
+            opacity: 1;
+            transform: none
+        }
+    }
+}
+
+@keyframes nFadeOut {
+    from {
+        opacity: 1
+    }
+
+    to {
+        opacity: 0;
+        transform: translate3d(0, 100%, 0);
+        bottom: 0
+    }
+}
+
+#someone-purchased.fade-out {
+    opacity: 0;
+    animation-name: nFadeOut;
+    animation-duration: 1s;
+    animation-fill-mode: both
+}
+
+@media screen and (max-width: 767px) {
+    @keyframes nFadeOut {
+        from {
+            opacity: 1
+        }
+
+        to {
+            opacity: 0;
+            transform: translate3d(0, 100%, 0);
+            bottom: 0
+        }
+    }
+}

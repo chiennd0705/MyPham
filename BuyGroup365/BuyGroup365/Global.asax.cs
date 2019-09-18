@@ -22,7 +22,7 @@ namespace BuyGroup365
             //ViewEngines.Engines.Add(new RazorViewEngine());
             // ConfigurationLogging();
             //  Session.Timeout = 20;
-
+            
             #region SQL Cache Dependency
 
             try
@@ -40,7 +40,8 @@ namespace BuyGroup365
         protected void Application_BeginRequest(object sender, EventArgs e)
         {
             // if(System.Web.Caching.SqlCacheDependencyAdmin.GetTablesEnabledForNotifications.indexOf("turtles")
-
+         
+            
             CheckUrlRedirect();
         }
         [OutputCache(CacheProfile = "ConfigRedirectUrl")]

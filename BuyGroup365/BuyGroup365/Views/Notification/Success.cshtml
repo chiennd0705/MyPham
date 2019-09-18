@@ -2,78 +2,317 @@
 @using BuyGroup365.Models.Member;
 @using Common;
 @using Common.util;
+@model ShopCartItem
 @{
     ViewBag.Title = "Success";
 
-    Layout = "~/Views/Shared/_LayoutCartSuccess.cshtml";
+    Layout = "~/Views/Shared/_LayoutPayment.cshtml";
     OrderReciver orderReciver = new OrderReciver();
     orderReciver = SessionUtility.GetSessionOrderReciver(Session);
 
 
     List<OrderDetail> listCartItems = new List<OrderDetail>();
     listCartItems = NlCheckout.GetSessionOrderDetail(Session);
+    var totalMoneyOfGoods = ViewBag.TotalMoney;
+    var totalGramGoods = ViewBag.TotalGram;
+    var sp = Request.QueryString["sp"];
+
+    double total = 0;
+    int tongsp = 0;
 }
 
-<div class="wapper">
-    <div class="container cart-success">
-        <div class="row">
-            <div class="col-md-8">
-                <div class="success-content">
-                    <div class="head">
-                        <h6 class="title"><i class="fa fa-check" aria-hidden="true"></i> đặt hàng thành công</h6>
-                    </div>
-                    @Html.Action("GetByCodeHtml", "Partial", new { Code = "Cart_Success" })
+<body style="">
 
-                    <div class="info-customer">
-                        <h6 class="title-box">Thông tin đặt hàng mã đơn hàng:#@Session["Madonhang"]</h6>
-                        @{
-                            <ul class="add-ul">
-                                <li>Tên người nhận: <strong>@orderReciver.Name</strong></li>
-                                <li>Địa chỉ nhận hàng: <span class="color">@orderReciver.Address</span></li>
-                                <li>Số điện thoại nhận hàng: <span class="color">@orderReciver.PhoneNumber</span></li>
-                                <li><strong>Thanh toán trực tiếp tại cửa hàng.</strong></li>
-                                <li>Tổng tiền: <span class="price">@Decimal.Parse(@Session["TotalMoney"].ToString()).ToString("N0")<span class="under"> đ</span></span></li>
-                            </ul>
-                        }
 
-                        <h6 class="title-box">SẢN PHẨM ĐÃ MUA</h6>
-                        <div class="product-list">
-                            @foreach (var item1 in listCartItems)
-                            {
-                                <div class="img-product">
-                                    <a href="@Function.ConvertFileName(item1.NameProduct)"><img data-src="@Util.ReturnLinkCDN(item1.PathImage,Request.Browser.IsMobileDevice)" class="lazyload" alt=""></a>
-                                </div>
-                                <div class="product-info">
-                                    <div class="name-number">
-                                        <div class="name-product">
-                                            <h6 class="title">@item1.NameProduct</h6>
-                                        </div>
-                                        <div class="number-product">
-                                            <p class="price">@item1.Price.Value.ToString("N0")<span class="under"> đ</span></p>
-                                            <p class="number">Số lượng: @item1.Quantity</p>
-                                        </div>
-                                    </div>
-                                    <div class="info">
-                                        @Html.Raw(item1.Description)
-                                    </div>
-                                </div>
-                            }
-                        </div>
-                        <div class="send-final">
-                            <button class="btn-send">thanh toán khi nhận hàng</button>
-                        </div>
-                    </div>
+    <input id="reloadValue" type="hidden" name="reloadValue" value="">
+    <input id="is_vietnam" type="hidden" value="false">
+    <input id="is_vietnam_location" type="hidden" value="false">
+    <div class="banner">
+        <div class="wrap">
+            @Html.Action("GetByCodeHtml", "Partial", new { Code = "Logo" })
+        </div>
+    </div>
+    <button class="order-summary-toggle order-summary-toggle-hide">
+        <div class="wrap">
+            <div class="order-summary-toggle-inner">
+                <div class="order-summary-toggle-icon-wrapper">
+                    <svg width="20" height="19" xmlns="http://www.w3.org/2000/svg" class="order-summary-toggle-icon"><path d="M17.178 13.088H5.453c-.454 0-.91-.364-.91-.818L3.727 1.818H0V0h4.544c.455 0 .91.364.91.818l.09 1.272h13.45c.274 0 .547.09.73.364.18.182.27.454.18.727l-1.817 9.18c-.09.455-.455.728-.91.728zM6.27 11.27h10.09l1.454-7.362H5.634l.637 7.362zm.092 7.715c1.004 0 1.818-.813 1.818-1.817s-.814-1.818-1.818-1.818-1.818.814-1.818 1.818.814 1.817 1.818 1.817zm9.18 0c1.004 0 1.817-.813 1.817-1.817s-.814-1.818-1.818-1.818-1.818.814-1.818 1.818.814 1.817 1.818 1.817z"></path></svg>
                 </div>
-                <div class="required-allow">
-                    <p class="text">Bằng cách đặt hàng, bạn đồng ý với Điều khoản sử dụng của Vinaplaza</p>
+                <div class="order-summary-toggle-text order-summary-toggle-text-show">
+                    <span>Hiển thị thông tin đơn hàng</span>
+                    <svg width="11" height="6" xmlns="http://www.w3.org/2000/svg" class="order-summary-toggle-dropdown" fill="#000"><path d="M.504 1.813l4.358 3.845.496.438.496-.438 4.642-4.096L9.504.438 4.862 4.534h.992L1.496.69.504 1.812z"></path></svg>
+                </div>
+                <div class="order-summary-toggle-text order-summary-toggle-text-hide">
+                    <span>Ẩn thông tin đơn hàng</span>
+                    <svg width="11" height="7" xmlns="http://www.w3.org/2000/svg" class="order-summary-toggle-dropdown" fill="#000"><path d="M6.138.876L5.642.438l-.496.438L.504 4.972l.992 1.124L6.138 2l-.496.436 3.862 3.408.992-1.122L6.138.876z"></path></svg>
+                </div>
+                <div class="order-summary-toggle-total-recap" data-checkout-payment-due-target="1376250000">
+                    <span class="total-recap-final-price">13,762,500₫</span>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="list-page">
+        </div>
+    </button>
+    <div class="content content-second">
+        <div class="wrap">
+            <div class="sidebar sidebar-second">
+                <div class="sidebar-content">
+                    <div class="order-summary">
+                        <div class="order-summary-sections">
 
-                    @Html.Action("GetByCodeHtml", "Partial", new { Code = "LeftMenuCart" })
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+    <div class="content">
+
+        <div class="wrap">
+            <div class="sidebar">
+                <div class="sidebar-content">
+                    <div class="order-summary order-summary-is-collapsed">
+                        <h2 class="visually-hidden">Thông tin đơn hàng</h2>
+                        <div class="order-summary-sections">
+                            <div class="order-summary-section order-summary-section-product-list" data-order-summary-section="line-items">
+                                <table class="product-table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col"><span class="visually-hidden">Hình ảnh</span></th>
+                                            <th scope="col"><span class="visually-hidden">Mô tả</span></th>
+                                            <th scope="col"><span class="visually-hidden">Số lượng</span></th>
+                                            <th scope="col"><span class="visually-hidden">Giá</span></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item1 in Model.ListCartItems)
+                                        {
+                                            total += item1.Product.Price * item1.Quantity;
+                                            var totalpro = item1.Product.Price * item1.Quantity;
+                                            <tr class="product" data-product-id="1006212106" data-variant-id="1014741935">
+                                                <td class="product-image">
+                                                    <div class="product-thumbnail">
+                                                        <div class="product-thumbnail-wrapper">
+                                                           <img class="product-thumbnail-image" src="@Util.ReturnLinkCDN(item1.Product.ProductImages.FirstOrDefault().ImgSource,Request.Browser.IsMobileDevice)" alt="@item1.Product.ProductName">
+                                                        </div>
+                                                        <span class="product-thumbnail-quantity" aria-hidden="true">@item1.Quantity</span>
+                                                    </div>
+                                                </td>
+                                                <td class="product-description">
+                                                    <span class="product-description-name order-summary-emphasis">@item1.Product.ProductName</span>
+
+
+
+                                                </td>
+                                                <td class="product-quantity visually-hidden">@item1.Quantity</td>
+                                                <td class="product-price">
+                                                    <span class="order-summary-emphasis">@item1.Product.Price₫</span>
+                                                </td>
+                                            </tr>
+
+                                        }
+
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="order-summary-section order-summary-section-total-lines" data-order-summary-section="payment-lines">
+                                <table class="total-line-table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col"><span class="visually-hidden">Mô tả</span></th>
+                                            <th scope="col"><span class="visually-hidden">Giá</span></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="total-line total-line-subtotal">
+                                            <td class="total-line-name">Tạm tính</td>
+                                            <td class="total-line-price">
+                                                <span class="order-summary-emphasis" data-checkout-subtotal-price-target="1376250000">
+                                                    @total.ToString("N0")₫
+                                                </span>
+                                            </td>
+                                        </tr>
+
+                                        <tr class="total-line total-line-shipping">
+                                            <td class="total-line-name">Phí vận chuyển</td>
+                                            <td class="total-line-price">
+                                                <span class="order-summary-emphasis" data-checkout-total-shipping-target="0">
+
+
+
+                                                    Miễn phí
+
+
+
+                                                </span>
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                    <tfoot class="total-line-table-footer">
+                                        <tr class="total-line">
+                                            <td class="total-line-name payment-due-label">
+                                                <span class="payment-due-label-total">Tổng cộng</span>
+                                            </td>
+                                            <td class="total-line-name payment-due">
+                                                <span class="payment-due-currency">VND</span>
+                                                <span class="payment-due-price" data-checkout-payment-due-target="1376250000">
+                                                    @total.ToString("N0")₫
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="main">
+                <div class="main-header">
+                    <a href="/" class="logo">
+                        <h1 class="logo-text">DHC</h1>
+                    </a>
+
+                </div>
+                <div class="main-content">
+
+
+                    <div>
+                        <div class="section">
+                            <div class="section-header os-header">
+
+                                <svg width="50" height="50" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#000" stroke-width="2" class="hanging-icon checkmark"><path class="checkmark_circle" d="M25 49c13.255 0 24-10.745 24-24S38.255 1 25 1 1 11.745 1 25s10.745 24 24 24z"></path><path class="checkmark_check" d="M15 24.51l7.307 7.308L35.125 19"></path></svg>
+
+                                <div class="os-header-heading">
+                                    <h2 class="os-header-title">
+
+                                        Đặt hàng thành công
+
+                                    </h2>
+                                    <span class="os-order-number">
+                                        Mã đơn hàng #@Session["Madonhang"]
+                                    </span>
+
+                                    <span class="os-description">
+                                        Cám ơn bạn đã mua hàng!
+                                    </span>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="thank-you-additional-content">
+
+
+
+                        </div>
+
+                        <div class="section thank-you-checkout-info">
+                            <div class="section-content">
+                                <div class="content-box">
+                                    <div class="content-box-row content-box-row-padding content-box-row-no-border">
+                                        <h2>Thông tin đơn hàng</h2>
+                                    </div>
+                                    <div class="content-box-row content-box-row-padding">
+                                        <div class="section-content">
+                                            <div class="section-content-column">
+
+                                                <h3>Thông tin giao hàng</h3>
+                                                <p>
+
+                                                    @orderReciver.Name
+                                                    <br>
+
+
+                                                    @orderReciver.Address
+
+
+                                                    <br>
+
+
+                                                    @orderReciver.PhoneNumber
+                                                    <br>
+
+                                                </p>
+
+
+
+                                                <h3>Phương thức thanh toán</h3>
+                                                <p>
+
+                                                    Thanh toán khi giao hàng (COD)
+
+                                                </p>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="step-footer">
+
+                            <a href="/" class="step-footer-continue-btn btn">
+                                <span class="btn-content">Tiếp tục mua hàng</span>
+                            </a>
+
+                            <p class="step-footer-info">
+                                <i class="icon icon-os-question"></i>
+                                <span>
+
+
+                                    Cần hỗ trợ? <a href="/">Liên hệ chúng tôi</a>
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="main-footer">
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+     <style>
+        .tb_button {
+            padding: 1px;
+            cursor: pointer;
+            border-right: 1px solid #8b8b8b;
+            border-left: 1px solid #FFF;
+            border-bottom: 1px solid #fff;
+        }
+
+            .tb_button.hover {
+                borer: 2px outset #def;
+                background-color: #f8f8f8 !important;
+            }
+
+        .ws_toolbar {
+            z-index: 100000
+        }
+
+            .ws_toolbar .ws_tb_btn {
+                cursor: pointer;
+                border: 1px solid #555;
+                padding: 3px
+            }
+
+        .tb_highlight {
+            background-color: yellow
+        }
+
+        .tb_hide {
+            visibility: hidden
+        }
+
+        .ws_toolbar img {
+            padding: 2px;
+            margin: 0px
+        }
+    </style>
+</body>

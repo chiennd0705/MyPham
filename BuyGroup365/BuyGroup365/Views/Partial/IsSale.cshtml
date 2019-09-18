@@ -75,19 +75,16 @@
 
 
                                                 </div>
-                                                <div class="prod-action">
-                                                    <button type="button" onclick="add_item_show_modalCart(1022352640)" class="hidden-sm hidden-lg hidden-md btn buy-nows">Mua Ngay</button>
-                                                </div>
                                                 <div class="prod-icons ababababa">
-                                                    <form action="/cart/add" method="post" class="variants form-nut-grid has-validation-callback" data-id="product-actions-1011594218" enctype="multipart/form-data">
+                                                    <div class="variants form-nut-grid has-validation-callback">
 
 
-                                                        <input type="hidden" name="id" value="1022352640">
-                                                        <a class="fa fa-shopping-basket" onclick="add_item_show_modalCart(1022352640)" title="Cho vào giỏ hàng"></a>
+
+                                                        <a class="fa fa-shopping-basket" onclick="updatecartquick(@item.Id,1)" data-toggle="modal" data-target="#myCart" title="Cho vào giỏ hàng"></a>
 
 
-                                                        <a href="/products/bo-duong-trang-dhc-age-defying-whitening" class="fa fa-expand quick-view"></a>
-                                                    </form>
+                                                        <a href="/gio-hang" class="fa fa-expand quick-view"></a>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -101,11 +98,11 @@
                             <div class="owl-dots disabled"></div>*@
                         </div>
                     </div>
-                    <div class="seemore">
+                    @*<div class="seemore">
                         <a href="/collections/dhc-sale-off-chuong-trinh-giam-gia-dhc">
                             Mời bạn <strong>xem thêm các sản phẩm</strong> đang <span>sale HOT</span> khác
                         </a>
-                    </div>
+                    </div>*@
                 </div>
             </div>
         </div>

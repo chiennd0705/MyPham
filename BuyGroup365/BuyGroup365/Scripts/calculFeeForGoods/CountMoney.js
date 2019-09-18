@@ -145,8 +145,8 @@ function formatNumber(num) {
     return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
 }
 function Onpay() {
-    if (!ValidilationFrom())
-        return false;
+    //if (!ValidilationFrom())
+    //    return false;
     $('#overbackgroud').show();
     var recieveOrder = [];
     var buyerOrder = [];

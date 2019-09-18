@@ -1623,6 +1623,7 @@
     <None Include="Properties\PublishProfiles\Linhseo.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\calculFeeForGoods\calculFeeForGoods.js" />
+    <Content Include="Scripts\calculFeeForGoods\CountMoney.js" />
     <Content Include="Scripts\controllerJS\jquery-1.11.3.min.js" />
     <Content Include="Scripts\controllerJS\paymentController.js" />
     <Content Include="Scripts\jqBootstrapValidation.js" />
