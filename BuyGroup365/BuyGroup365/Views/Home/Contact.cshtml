@@ -1,13 +1,11 @@
 ﻿@{
-    ViewBag.Title = HttpUtility.HtmlDecode("PlazaVietHan.com - Cửa hàng An cung ngưu, nhân sâm, sản phẩm sức khỏe");
-    ViewBag.Description = "Hệ thông phân phối sản phẩm chăm sóc sức khỏe an cung ngưu, nhân sâm Hàn Quốc, Yến khánh hòa, quà biếu tặng, uy tín chấn lượng tư vấn sức khỏe miễn phí";
-    ViewBag.Keywords = "Plaza Việt Hàn, An cung ngưu, nhân sâm Hàn Quốc, Yến khánh hòa, sản phẩm sức khỏe, tin tức chăm sóc sức khỏe, quà biếu tặng, thiết bị chăm sóc sức khỏe";
+
     Layout = "~/Views/Shared/_LayoutIndex.cshtml";
 }
 @using Common.util
 @using Common
 @using Business.ClassBusiness;
-<div class="contacts-index-index">
+@*<div class="contacts-index-index">
     <div class="breadcrumbs">
         <div class="container">
             <ul>
@@ -108,5 +106,36 @@
             //]]>
         </script>
     </div>
-</div>
-@Html.Partial("NewsFooter")
+</div>*@
+
+
+
+
+<section class="page account-page ptb-50">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+
+                <div id="layout-page">
+                    <span class="header-page clearfix">
+                        <h1>Thông tin liên hệ</h1>
+                    </span>
+
+                    <div class="content-page row">
+
+                        <div class="col-sm-12 col-xs-12" id="maps_maker">
+                            <div class="address-lists-maps">
+                                <div class="item-position-maps" id="address_1">
+                                    @Html.Action("GetByCodeHtml", "Partial", new { Code = "Contact" })
+                                </div>
+                                
+                            </div>
+
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

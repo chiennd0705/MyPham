@@ -9,7 +9,7 @@
         try
         {
             Business.ClassBusiness.NewsBusiness newsBusiness = new Business.ClassBusiness.NewsBusiness();
-            List<Common.News> listNews = newsBusiness.ListByNews(5);
+            List<Common.News> listNews = newsBusiness.ListByNewsActive(5);
             foreach (Common.News item in listNews)
             {
                 <div class="blog-item">

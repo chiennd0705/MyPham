@@ -290,7 +290,7 @@
                                     </g>
                                 </svg>
                             </div>
-                            <span id="ScrollerCartCount" class="cart-count count_item_pr">@Session["SLSanPham"]</span>
+                            <span id="ScrollerCartCount" class="cart-count count_item_pr">0</span>
                         </div>
                     </a>
                 </div>
@@ -671,10 +671,10 @@
                 var total = 0;
                 var sl1 = 0;
                 var htmlpoup = "<table style=\"width: 100%; \" id=\"cart-table\"><tbody> <tr><th>Sản phẩm</th> <th></th> <th>Đơn hàng</th> <th>Số lượng</th> <th>Giá tiền</th><th></th> </tr> <tr class=\"line-item original\"> <td class=\"item-image\"></td> <td class=\"item-title\">      <a></a>  <span class=\"item-delete\"></span> </td>  <td class=\"item-prices\"></td> <td class=\"item-quantity\"></td>  <td class=\"item-price\"></td> </tr>";
-
+                var i = 0;
 
                 $.each(data, function (key, value) {
-
+                    i++;
                     var strurl = "/" + value.FriendlyUrl + "-ct" + value.Id;
 
                     sl1 += parseInt(value.Quantity);
@@ -697,8 +697,10 @@
                 $('#contentCart').append(htmlpoup);
                 $('#TotalCart').html("");  
                 $('#TotalCart').append(htmcontent); 
-
-
+                $('#ScrollerCartCount').html(i); 
+                $('#Giohangheader').html("Giỏ hàng của bạn( " + i + " sản phẩm)"); 
+                $('#MyCart').html(i); 
+                
             },
             error: function () {
 

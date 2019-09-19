@@ -126,8 +126,8 @@
                     <div class="col-lg-2 col-md-2 hidden-sm hidden-xs cart-megamenu">
 
                         <div id="top-cart" class="cart-info cart-hover top-cart-block">
-                            <a id="top-cart-trigger" href="javascript:void(0)" data-toggle="modal" data-target="#myCart" title="Giỏ hàng">
-                                <img src="/content/Mypham/images/cart.png" alt="Giỏ hàng"> Giỏ hàng <span class="cnt crl-bg count_item_pr">@Session["SLSanPham"]</span>
+                            <a id="top-cart-trigger" href="/gio-hang"  title="Giỏ hàng">
+                                <img src="/content/Mypham/images/cart.png" alt="Giỏ hàng"> Giỏ hàng <span class="cnt crl-bg count_item_pr" id="MyCart">0</span>
                             </a>
                         </div>
                     </div>
@@ -187,7 +187,7 @@
                             <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h4 class="modal-title" id="exampleModalLabel">Giỏ hàng của bạn (@Session["SLSanPham"] sản phẩm)</h4>
+                                        <h4 class="modal-title" id="Giohangheader">Giỏ hàng của bạn (0 sản phẩm)</h4>
                                     </div>
                                     <div class="comeback">
                                         <a href="https://dhcvietnam.com.vn/collections/all">

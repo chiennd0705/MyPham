@@ -116,8 +116,8 @@
                                                     <div class="form-group">
                                                         <label for="firstname" class="">Tên sản phẩm ngắn:<span class="required">*</span></label>
                                                         <div class="input-box">
-                                                            @Html.TextBoxFor(model => model.ProductNameShort, new { @class = "form-control", @autocomplete = "off", @maxlength = "150", @required = "required" })
-                                                            @Html.ValidationMessageFor(model => model.ProductNameShort)
+                                                            @Html.TextBoxFor(model => model.ProductNameShort, new { @class = "form-control", @autocomplete = "off", @maxlength = "150"})
+                                                            @*@Html.ValidationMessageFor(model => model.ProductNameShort)*@
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-12">
